@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "yukicoder 한국어 번역",
+  "version": "0.1.0",
+  "description": "yukicoder의 고정 UI 문구를 한국어로 번역합니다.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "yukicoder-ko@local"
+    }
+  },
+  "host_permissions": [
+    "https://yukicoder.me/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://yukicoder.me/*"
+      ],
+      "js": [
+        "src/content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "translations/*.json"
+      ],
+      "matches": [
+        "https://yukicoder.me/*"
+      ]
+    }
+  ]
+}

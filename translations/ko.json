@@ -1,0 +1,82 @@
+{
+  "$schema": "./translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#sidelinks > a[href='/']",
+      "source": "トップページ",
+      "target": "메인 페이지"
+    },
+    {
+      "selector": "#sidelinks > a[href='/problems']",
+      "source": "問題一覧",
+      "target": "문제 목록"
+    },
+    {
+      "selector": "#sidelinks > a[href='/submissions']",
+      "source": "提出一覧",
+      "target": "제출 목록"
+    },
+    {
+      "selector": "#sidelinks > a[href='/contests']",
+      "source": "コンテスト一覧",
+      "target": "대회 목록"
+    },
+    {
+      "selector": "#sidelinks > a[href='/clarifications']",
+      "source": "質問一覧",
+      "target": "질문 목록"
+    },
+    {
+      "selector": "#sidelinks > a[href='/ranking']",
+      "source": "ランキング",
+      "target": "랭킹"
+    },
+    {
+      "selector": "#sidelinks > a[href='/wiki']",
+      "source": "Wiki",
+      "target": "위키"
+    },
+    {
+      "selector": "#sidelinks > a[href='/statistics']",
+      "source": "統計/タグ一覧",
+      "target": "통계/태그 목록"
+    },
+    {
+      "selector": "#sidelinks > a[href='/supporter']",
+      "source": "サポーター👑",
+      "target": "서포터👑"
+    },
+    {
+      "selector": "#sidelinks > a[href='/offer']",
+      "source": "ワンデーサポーター",
+      "target": "일일 서포터"
+    },
+    {
+      "selector": "#sidelinks > a[href='/problemsets']",
+      "source": "問題集",
+      "target": "문제 모음"
+    },
+    {
+      "selector": "#sidelinks > a[href='/wiki/guide']",
+      "source": "初めての方へ",
+      "target": "처음 오신 분께"
+    },
+    {
+      "selector": "#sidelinks > a[href='/run']",
+      "source": "オンライン実行",
+      "target": "온라인 실행"
+    },
+    {
+      "selector": "#sidelinks > a[href='/help']",
+      "source": "ヘルプ",
+      "target": "도움말"
+    },
+    {
+      "selector": "#sidelinks > a[href='/tester_problems']",
+      "source": "テスター募集問題",
+      "target": "테스터 모집 문제"
+    }
+  ]
+}
