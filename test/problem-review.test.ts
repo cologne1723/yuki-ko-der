@@ -1,5 +1,6 @@
 import { strict as assert } from "node:assert";
-import { mkdtemp, mkdir, readFile, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { mkdtemp, mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import test from "node:test";
@@ -28,17 +29,39 @@ async function fixtureRoot(): Promise<string> {
     mkdir(translationDirectory, { recursive: true }),
     mkdir(join(root, ".review-dist"), { recursive: true }),
   ]);
-  const [japanese, korean] = await Promise.all([
-    readFile("tmp/problems-source/1.html", "utf8"),
-    readFile("problem-translations/ko/problems/1.mdx", "utf8"),
-  ]);
+  // Review-state tests must work without the ignored downloaded corpus.
+  const japanese =
+    '<div class="block"><h4>Fixture</h4><p>Example source.</p><pre>3\n100\n</pre></div>';
+  const hash = createHash("sha256").update(japanese).digest("hex");
+  const korean = [
+    "---",
+    "schemaVersion: 1",
+    "locale: ko",
+    "problemNo: 1",
+    "problemId: 17",
+    'sourceTitle: "Fixture"',
+    `sourceHtmlSha256: ${hash}`,
+    "reviewStatus: machine",
+    'title: "길의 지름길"',
+    "---",
+    "",
+    "## Fixture",
+    "",
+    "마을에는",
+    "",
+    "```text",
+    "3",
+    "100",
+    "```",
+    "",
+  ].join("\n");
   await Promise.all([
     writeFile(join(sourceDirectory, "1.html"), japanese),
     writeFile(join(translationDirectory, "1.mdx"), korean),
     writeFile(
       join(sourceDirectory, "index.json"),
       JSON.stringify({
-        problems: [{ No: 1, ProblemId: 17, Title: "道のショートカット" }],
+        problems: [{ No: 1, ProblemId: 17, Title: "Fixture" }],
       }),
     ),
     writeFile(
