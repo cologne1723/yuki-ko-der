@@ -1,0 +1,70 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 600
+problemId: 1172
+sourceTitle: "かい文回"
+sourceHtmlSha256: "e926e41d43ad0eb3eb3bec4efa36ecd58a3ced552df04010468385e88963405d"
+reviewStatus: unreviewed
+title: "회문 분해 만들기"
+---
+
+## 문제
+
+“수돗물”은 회문, 그럼 회문인가!
+
+문자열 S를 k개(k ≥ 1)의 비어 있지 않은 부분 문자열 T1,T2,…,Tk로 분해한다고 합시다.
+
+S = T1 + T2 + … + Tk이고 |Ti| ≥ 1입니다.
+
+모든 i (1 ≤ i ≤ k)에 대해 Ti = T(k−i+1)이면 T=[T1,T2,…,Tk]를 문자열 S의 회문 분해라고 합니다.
+
+회문 분해가 N가지인 문자열 S를 출력하세요.
+
+단, 판정 편의를 위해 S는 길이 1 이상 200 이하이고 소문자 영문자 a-z로만 이루어져야 합니다.
+
+## 입력
+
+```text
+N
+```
+
+N은 정수이며 1 ≤ N ≤ 10^9입니다.
+
+## 출력
+
+회문 분해가 N가지인 문자열 S를 출력하세요.
+
+S는 길이 1 이상 200 이하이고 소문자 영문자 a-z로만 이루어져야 합니다.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+2
+```
+
+출력:
+
+```text
+suidousui
+```
+
+S의 한 예입니다. “aa” 등 다른 정답도 가능합니다.
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+3
+```
+
+출력:
+
+```text
+shinbunshi
+```

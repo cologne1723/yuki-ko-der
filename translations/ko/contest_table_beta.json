@@ -1,0 +1,89 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#content h4",
+      "source": "{contest} 順位表 (Beta)",
+      "target": "📝 {contest} 순위표(Beta)",
+      "variables": { "contest": ".+" }
+    },
+    {
+      "selector": "#content label",
+      "source": "自動更新",
+      "target": "📝 자동 갱신"
+    },
+    {
+      "selector": "#replay-container h5",
+      "source": "順位表リプレイ",
+      "target": "📝 순위표 리플레이"
+    },
+    {
+      "selector": "#replay-container a",
+      "source": "最新10件",
+      "target": "📝 최근 10건"
+    },
+    {
+      "selector": "#replay-container p",
+      "source": "※この機能はシミュレーションです。コンテスト終了時点の最終提出を元に、",
+      "target": "📝 ※ 이 기능은 시뮬레이션입니다. 대회 종료 시점의 최종 제출을 바탕으로 "
+    },
+    {
+      "selector": "#replay-container p",
+      "source": "コンテスト経過を再現しています。WAなどは再現していません。",
+      "target": "📝 대회 진행 과정을 재현합니다. WA 등은 재현하지 않습니다."
+    },
+    {
+      "selector": "#replay-container button",
+      "source": "一時停止",
+      "target": "📝 일시 정지"
+    },
+    {
+      "selector": "#replay-controls label",
+      "source": "最新に追従",
+      "target": "📝 최신 상태 따라가기"
+    },
+    {
+      "selector": "#replay-controls label",
+      "source": "変化がある人を追従する",
+      "target": "📝 변화가 있는 사람 따라가기"
+    },
+    {
+      "selector": "#replay-container div",
+      "source": "参加人数",
+      "target": "📝 참가 인원"
+    },
+    {
+      "selector": "#replay-container span",
+      "source": "全完者 {people}人 ({value})",
+      "target": "📝 전 문제 해결자 {people}명 ({value})",
+      "variables": { "people": "\\d+", "value": "\\d+" }
+    },
+    {
+      "selector": "#latest-submissions-popup h4",
+      "source": "最新10件",
+      "target": "📝 최근 10건"
+    },
+    {
+      "selector": "#latest-submissions-table th",
+      "source": "順位",
+      "target": "📝 순위"
+    },
+    {
+      "selector": "#latest-submissions-table th",
+      "source": "ユーザー",
+      "target": "📝 사용자"
+    },
+    {
+      "selector": "#latest-submissions-table th",
+      "source": "問題",
+      "target": "📝 문제"
+    },
+    {
+      "selector": "#latest-submissions-table th",
+      "source": "時間",
+      "target": "📝 시간"
+    }
+  ]
+}

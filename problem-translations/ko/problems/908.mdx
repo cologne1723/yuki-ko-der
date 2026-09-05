@@ -1,0 +1,46 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 908
+problemId: 3364
+sourceTitle: "うしたぷにきあくん文字列"
+sourceHtmlSha256: "24eb023b6076cf33693a568233e8d08509db9ab73ab0132b49cd0aae4c56264c"
+reviewStatus: unreviewed
+title: "조건부 수열"
+---
+
+## 문제
+
+처음에 빈 배열 $A$가 있습니다. $L$번 연산하여 길이 $L$인 배열을 만듭니다. 매번 1 이상 $N$ 이하의 정수를 골라 배열 끝에 추가합니다.
+
+완성된 배열은 $\gcd(A_1,A_2,\dots,A_L)\equiv0\pmod L$을 만족해야 합니다. 단, $\gcd(x)=x$입니다. $1\leq L\leq N$인 모든 $L$에 대해 이렇게 만들 수 있는 조건 만족 배열의 종류 수를 $998244353$으로 나눈 나머지를 구하세요.
+
+## 제약
+
+- $1\leq N\leq10^{11}$
+
+## 입력
+
+~~~text
+N
+~~~
+
+## 출력
+
+답을 $998244353$으로 나눈 나머지를 출력하세요.
+
+## 샘플
+
+### 입력 1 {file="stdin"}
+
+~~~text
+2
+~~~
+
+### 출력 1 {file="stdout"}
+
+~~~text
+3
+~~~
+
+조건을 만족하는 배열은 $(1),(2),(2,2)$입니다.

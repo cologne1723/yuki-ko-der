@@ -1,0 +1,67 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 872
+problemId: 3128
+sourceTitle: "All Tree Path"
+sourceHtmlSha256: "04cba2976dee069c34c952d5f34fa35b521c7f72000d16228458521cfc1a56a8"
+reviewStatus: unreviewed
+title: "모든 트리 경로"
+---
+
+## 문제
+
+길이 $N$인 수열 $A=(A_1,A_2,\cdots,A_N)$가 주어집니다. 다음 조건을 만족하는 정수 삼중항 $(i,j,k)$의 개수를 구하세요.
+
+- $1\leq i\lt j\lt k\leq N$
+- 변의 길이가 각각 $A_i,A_j,A_k$인 비퇴화 이등변삼각형이 존재합니다.
+
+비퇴화 삼각형은 세 꼭짓점이 한 직선 위에 놓이지 않는 삼각형입니다.
+
+## 제약
+
+- $3\leq N\leq3\times10^5$
+- $1\leq A_i\leq10^9$
+
+## 입력
+
+~~~text
+N
+A_1 A_2 ... A_N
+~~~
+
+## 출력
+
+조건을 만족하는 삼중항의 개수를 출력하세요.
+
+## 샘플
+
+### 입력 1 {file="stdin"}
+
+~~~text
+5
+2 2 3 5 5
+~~~
+
+### 출력 1 {file="stdout"}
+
+~~~text
+4
+~~~
+
+조건을 만족하는 삼중항은 $(1,2,3),(1,4,5),(2,4,5),(3,4,5)$입니다. $(1,2,5)$의 변은 $2,2,5$이므로 비퇴화 이등변삼각형을 만들 수 없습니다.
+
+### 입력 2 {file="stdin"}
+
+~~~text
+3
+10 10 10
+~~~
+
+### 출력 2 {file="stdout"}
+
+~~~text
+0
+~~~
+
+정삼각형은 제외합니다.

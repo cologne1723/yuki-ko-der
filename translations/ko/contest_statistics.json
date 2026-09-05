@@ -1,0 +1,13 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#content h4",
+      "source": "{contest} 統計",
+      "target": "📝 {contest} 통계",
+      "variables": { "contest": ".+" }
+    }
+  ]
+}

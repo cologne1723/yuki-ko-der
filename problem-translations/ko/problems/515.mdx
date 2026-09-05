@@ -1,0 +1,118 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 515
+problemId: 1408
+sourceTitle: "典型LCP"
+sourceHtmlSha256: "052197244bc3a772b0ba93283c16f3fbf49fe720b08dd836ea899075cf0488b8"
+reviewStatus: unreviewed
+title: "전형적인 LCP"
+---
+
+## 문제
+
+문자열로 이루어진 배열 s1, …, sN이 있습니다.
+
+다음 M개의 쿼리에 답하세요.
+
+“1 ≤ i < j ≤ N을 만족하는 정수 i,j에 대해 문자열 si,sj의 최장 공통 접두사의 길이를 구하세요.”
+
+M개의 쿼리는 시드 x,d로 다음 방법에 따라 생성됩니다. 주의 깊게 읽고 구현하세요.
+
+```text
+for k in 1 .. M
+  i[k] = (x / (n - 1)) + 1
+  j[k] = (x % (n - 1)) + 1
+  if (i[k] > j[k])
+    swap(i[k], j[k])
+  else
+    j[k] = j[k] + 1
+  end
+  x = (x + d) % (n * (n - 1))
+end
+```
+
+계산은 다배정밀도 정수를 사용하며, 나눗셈 “/”는 실수로 보았을 때의 몫의 정수 부분을 반환한다고 합니다.
+
+## 입력
+
+```text
+N
+s1
+…
+sN
+M x d
+```
+
+2017/5/5 22:46 수정: N의 최솟값을 1에서 2로 변경했습니다.
+
+2 ≤ N ≤ 100000 = 10^5
+
+모든 1 ≤ i ≤ N에 대해 |si| ≥ 1
+
+sum |si| ≤ 800000 = 8 × 10^5
+
+각 si는 라틴 소문자('a'부터 'z')로 이루어집니다.
+
+1 ≤ M ≤ 3000000 = 3 × 10^6
+
+0 ≤ x < N(N − 1)
+
+0 ≤ d < N(N − 1)
+
+x,d는 정수입니다.
+
+## 출력
+
+각 k에 대해 si_k와 sj_k의 최장 공통 접두사 길이를 계산하고, 그 합을 줄바꿈하여 한 줄에 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+4
+kinesis
+koba
+variance
+kobushu
+3 1 2
+```
+
+출력:
+
+```text
+4
+```
+
+첫 번째 쿼리에서는 x = 1이므로 i = 1, j = 3이고, “kinesis”와 “variance”의 LCP는 빈 문자열이므로 길이는 0입니다.
+
+두 번째에서는 x = 3이므로 i = 1, j = 2이고, “kinesis”와 “koba”의 LCP는 “k”이므로 길이는 1입니다.
+
+세 번째에서는 x = 5이므로 i = 2, j = 4이고, “koba”와 “kobushu”의 LCP는 “kob”이므로 길이는 3입니다.
+
+최종 출력은 이들의 합인 4입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+5
+aaaaa
+dadad
+aaaab
+abcbc
+aaaac
+4 1 1
+```
+
+출력:
+
+```text
+9
+```
+
+각 쿼리의 결과는 4, 1, 4, 0이므로 합은 9입니다.

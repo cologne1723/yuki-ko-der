@@ -1,0 +1,127 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 464
+problemId: 1447
+sourceTitle: "PPAP"
+sourceHtmlSha256: "adb2a45e6c58ab27d50c301902dbf7603b44010c593959527d375fe42514e924"
+reviewStatus: unreviewed
+title: "PPAP"
+---
+
+## 문제
+
+이 문제는 Advent Calendar Contest 2016의 15일 차 문제입니다.
+
+예상 풀이가 C++14, PyPy3, PyPy2, Java8(테스터가 작성한 코드)에서 AC되는 것이 확인되었지만, 순수 Python에서는 시간 초과가 발생합니다. 양해 바랍니다.
+
+$P_1,P_2,P_3$를 길이가 1 이상인 임의의 회문, $A$를 길이가 1 이상인 임의의 문자열이라고 합니다.
+
+문자열 $S$가 입력으로 주어집니다.
+
+$P_1,P_2,A,P_3$를 이 순서대로 이어 붙여 만든 문자열을 $PPAP$라고 할 때, $PPAP=S$가 되는 $(P_1,P_2,A,P_3)$의 조합은 몇 가지인가요?
+
+## 입력
+
+```text
+S
+```
+
+첫 번째 줄에 문자열 $S$가 주어집니다.
+
+$4\leq|S|\leq5000$
+
+$S$는 반각 영소문자만으로 이루어집니다.
+
+## 출력
+
+답을 나타내는 정수를 한 줄에 출력하세요.
+
+마지막에 줄바꿈을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+abcd
+```
+
+출력:
+
+```text
+1
+```
+
+$(a,b,c,d)$의 1가지입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+ababababa
+```
+
+출력:
+
+```text
+10
+```
+
+다음 10가지입니다.
+
+```text
+(a, b, ab, ababa)
+(a, b, abab, aba)
+(a, b, ababab, a)
+(a, bab, ab, aba)
+(a, bab, abab, a)
+(a, babab, ab, a)
+(aba, b, ab, aba)
+(aba, b, abab, a)
+(aba, bab, ab, a)
+(ababa, b, ab, a)
+```
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+penpineappleapplepen
+```
+
+출력:
+
+```text
+1
+```
+
+$(p,e,npineappleapplepe,n)$의 1가지입니다.
+
+### 샘플 4 {file="sample4.in"}
+
+입력:
+
+```text
+mississippi
+```
+
+출력:
+
+```text
+5
+```
+
+다음 5가지입니다.
+
+```text
+(m, i, ssiss, ippi)
+(m, i, ssissipp, i)
+(m, issi, ss, ippi)
+(m, issi, ssipp, i)
+(m, ississi, pp, i)
+```

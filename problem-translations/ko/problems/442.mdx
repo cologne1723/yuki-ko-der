@@ -1,0 +1,78 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 442
+problemId: 1228
+sourceTitle: "和と積"
+sourceHtmlSha256: "48d34e99581b103fcbde5c38d39d15adb9557fcd3f1e8bc1b9097a7b3f60d808"
+reviewStatus: unreviewed
+title: "합과 곱"
+---
+
+## 문제
+
+두 양의 정수 $A, B$가 주어집니다. 합 $A+B$와 곱 $A\times B$의 최대공약수를 구하세요.
+
+## 입력
+
+```text
+$A$ $B$
+```
+
+$1\leq A\leq 10^{18}, 1\leq B\leq 10^{18}$
+
+## 출력
+
+```text
+$G$
+```
+
+$A+B$와 $A\times B$의 최대공약수를 출력하세요. 마지막에 줄바꿈을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+2 4
+```
+
+출력:
+
+```text
+2
+```
+
+$\gcd(2+4,2\times4)=2$입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+7 15
+```
+
+출력:
+
+```text
+1
+```
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+2986298742152912 5785953812921267
+```
+
+출력:
+
+```text
+186643671384557
+```
+
+입력은 32비트 정수에 들어가지 않을 수 있습니다.

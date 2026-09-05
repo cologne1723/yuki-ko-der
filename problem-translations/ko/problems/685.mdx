@@ -1,0 +1,78 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 685
+problemId: 1783
+sourceTitle: "Logical Operations"
+sourceHtmlSha256: "fe9f176b7e791ac555b0d32b67eae160151a6fdd17afad51f8c152530d321e17"
+reviewStatus: unreviewed
+title: "논리 연산"
+---
+
+## 문제
+
+비음이 아닌 정수 $N$이 주어집니다. $0\le x\le y\le N$이고
+
+$$x\mathbin{\mathrm{AND}}y\lt x\mathbin{\mathrm{XOR}}y\lt x\mathbin{\mathrm{OR}}y$$
+
+를 만족하는 $(x,y)$의 개수를 $10^9+7$로 나눈 나머지를 구하세요. AND, XOR, OR은 각각 비트별 논리곱, 배타적 논리합, 논리합입니다.
+
+## 입력
+
+```text
+N
+```
+
+$0\le N\le10^{18}$
+
+## 출력
+
+조건을 만족하는 쌍의 개수를 나머지로 출력하세요. 마지막에 개행을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+10
+```
+
+출력:
+
+```text
+16
+```
+
+예를 들어 $(3,5)$에서는 $(x\mathrm{AND}y,x\mathrm{XOR}y,x\mathrm{OR}y)=(1,6,7)$이고, $(7,9)$에서는 $(1,14,15)$입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+0
+```
+
+출력:
+
+```text
+0
+```
+
+$N$은 비음이 아닌 정수입니다.
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+1000
+```
+
+출력:
+
+```text
+308344
+```

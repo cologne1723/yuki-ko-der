@@ -1,0 +1,112 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 430
+problemId: 1013
+sourceTitle: "文字列検索"
+sourceHtmlSha256: "a8ae8ad356e7d34a8d26fdfe0897ad5ff41aed9d7b2a47f4d1ce6b67326c961c"
+reviewStatus: unreviewed
+title: "문자열 검색"
+---
+
+## 문제
+
+대문자 알파벳으로 이루어진 문자열 S가 하나 주어집니다. 이어서 서로 다른 M개의 문자열 Cᵢ (i = 0, 1, ..., M − 1)가 주어집니다.
+
+문자열 S 안에 문자열 Cᵢ가 부분 문자열로 각각 몇 번 포함되는지 세어 그 합을 출력하세요.
+
+## 입력
+
+```text
+S
+M
+C₀
+C₁
+⋮
+Cₘ₋₁
+```
+
+- S는 대문자 알파벳만으로 이루어집니다.
+- 1 ≤ |S| ≤ 50000 = 5 × 10^4
+- 1 ≤ M ≤ 5000 = 5 × 10^3
+- Cᵢ는 대문자 알파벳만으로 이루어집니다.
+- 1 ≤ |Cᵢ| ≤ 10
+- Cᵢ는 서로 모두 다른 문자열입니다.
+
+## 출력
+
+모든 부분 문자열의 개수 합을 출력하세요. 마지막에 개행을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+```text
+ABCDABCD
+3
+A
+DA
+ABCDABCD
+```
+
+### 샘플 1 출력 {file="sample1.out"}
+
+```text
+4
+```
+
+문자열 `ABCDABCD` 안에 `A`는 2개, `DA`는 1개, `ABCDABCD`는 1개 포함됩니다. 따라서 답은 2 + 1 + 1 = 4입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+```text
+YUKICODER
+2
+X
+ABCDEFGHIJ
+```
+
+### 샘플 2 출력 {file="sample2.out"}
+
+```text
+0
+```
+
+하나도 포함되지 않는 경우도 있습니다.
+
+### 샘플 3 {file="sample3.in"}
+
+```text
+AAAA
+4
+A
+AA
+AAA
+AAAA
+```
+
+### 샘플 3 출력 {file="sample3.out"}
+
+```text
+10
+```
+
+### 샘플 4 {file="sample4.in"}
+
+```text
+ABAACABCAACBABABACBBAC
+7
+A
+C
+AA
+ABB
+ABA
+BA
+CBBAC
+```
+
+### 샘플 4 출력 {file="sample4.out"}
+
+```text
+26
+```

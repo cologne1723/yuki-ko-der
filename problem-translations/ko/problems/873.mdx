@@ -1,0 +1,62 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 873
+problemId: 2743
+sourceTitle: "バイナリ、ヤバいなり！ｗ"
+sourceHtmlSha256: "7841b2d6d909ec66e7ef63e5fbc3ca6a22a8717f9ed7147fdd9da11c26cf0fbc"
+reviewStatus: unreviewed
+title: "바이너리, 위험해!"
+---
+
+## 문제
+
+세로 $H$, 가로 $W$인 격자가 있습니다. 위에서 $i$번째, 왼쪽에서 $j$번째 칸을 $(i,j)$라 합니다. 세로로 인접한 칸은 시간 1에 왕복할 수 있고, 같은 행에서 가로로 인접한 칸 $(i,j),(i,j+1)$은 시간 $i$에 왕복할 수 있습니다.
+
+격자에 $N$개의 출구가 있으며 출구 $i$는 $(A_i,B_i)$에 있습니다. 각 $x=1,2,\ldots,N$에 대해 출구 $x$에서 출발하여 다른 출구까지 이동하는 시간의 최솟값을 구하세요.
+
+## 제약
+
+- $1\leq H,W\leq10^9$
+- $2\leq H\times W$
+- $2\leq N\leq2\times10^5$
+- $1\leq A_i\leq H$, $1\leq B_i\leq W$
+- 출구 위치는 서로 다릅니다.
+
+## 입력
+
+~~~text
+H W N
+A_1 B_1
+⋮
+A_N B_N
+~~~
+
+## 출력
+
+$i$번째 줄에 출구 $i$에서의 답을 출력하세요.
+
+## 샘플
+
+### 입력 1 {file="stdin"}
+
+~~~text
+10 10 6
+1 2
+2 3
+3 3
+10 7
+8 2
+3 5
+~~~
+
+### 출력 1 {file="stdout"}
+
+~~~text
+2
+1
+1
+13
+7
+5
+~~~

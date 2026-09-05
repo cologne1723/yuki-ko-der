@@ -1,0 +1,74 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 613
+problemId: 2019
+sourceTitle: "Solitude by the window"
+sourceHtmlSha256: "9f988492db0dfb85abf1786deee4f25c959780b7cc41b3ac0e2ef166db550ff6"
+reviewStatus: unreviewed
+title: "창가의 고독"
+---
+
+## 문제
+
+처음에 돌이 2개 있습니다. 이 돌들은 1초가 지날 때마다 각각 그 시점의 돌 개수에 4개를 더한 개수로 동시에 분열합니다. 시작 1초 후에는 $2\times(2+4)=12$개, 다시 1초 후에는 $12\times(12+4)=192$개의 돌이 있습니다.
+
+$N$초 후 돌의 개수를 $M$으로 나눈 나머지를 구하세요. $M$은 소수입니다.
+
+## 입력
+
+```text
+N M
+```
+
+$N$은 정수이고 $1\le N\le10^{18}$입니다. $M$은 소수이고 $2\le M\le1.1\times10^9$입니다.
+
+## 출력
+
+답을 출력하고 마지막에 개행하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+2 10007
+```
+
+출력:
+
+```text
+192
+```
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+100000000 5
+```
+
+출력:
+
+```text
+2
+```
+
+$n$초 후 돌의 개수를 $a_n$이라 하면 모든 음이 아닌 정수 $n$에 대해 $a_n\equiv2\pmod 5$입니다.
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+1000000000000000000 1000000007
+```
+
+출력:
+
+```text
+688982865
+```

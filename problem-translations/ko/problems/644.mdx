@@ -1,0 +1,95 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 644
+problemId: 1665
+sourceTitle: "G L C C D M"
+sourceHtmlSha256: "07d4b8fd5c1fa188698b44b6bd04afb4cc2d3b75daed51325da3e6de64d72442"
+reviewStatus: unreviewed
+title: "G L C C D M"
+---
+
+## 문제
+
+순열 $A$가 주어졌을 때 다음 조건을 만족하는 $(1,2,\ldots,N)$의 순열 개수를 $1{,}000{,}000{,}007$로 나눈 나머지로 구하세요.
+
+조건: $A$에 다음 연산을 $N-1$번 수행한 뒤 $A_1=M$입니다. 연산 후 수열을 $B$라 하면, 길이가 1 줄어들고 모든 $i$에 대해
+
+$$B_i=\begin{cases}\gcd(A_i,A_{i+1})&(i\text{가 홀수})\\\operatorname{lcm}(A_i,A_{i+1})&(i\text{가 짝수})\end{cases}$$
+
+입니다.
+
+## 입력
+
+```text
+N M
+```
+
+- $2\le N\le10^5$
+- $1\le M\le10^9$
+
+## 출력
+
+조건을 만족하는 순열의 개수를 나머지로 출력하세요. 마지막에 개행을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+3 1
+```
+
+출력:
+
+```text
+6
+```
+
+$(1,2,3)$의 모든 순열이 조건을 만족합니다. 예를 들어 $(3,1,2)$는 첫 연산 후 $(\gcd(3,1),\operatorname{lcm}(1,2))=(1,2)$, 둘째 연산 후 $(1)$이 됩니다.
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+2 1
+```
+
+출력:
+
+```text
+2
+```
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+3 100
+```
+
+출력:
+
+```text
+0
+```
+
+두 번 연산하면 항상 $A_1=1$이므로 조건을 만족하는 순열은 없습니다.
+
+### 샘플 4 {file="sample4.in"}
+
+입력:
+
+```text
+100 30
+```
+
+출력:
+
+```text
+945719957
+```

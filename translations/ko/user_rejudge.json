@@ -1,0 +1,17 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#content div",
+      "source": "さんのリジャッジ問題一覧（本人以外の場合は空欄になります）",
+      "target": "📝 님의 재채점 문제 목록입니다(본인이 아니면 빈칸으로 표시됩니다)"
+    },
+    {
+      "selector": "#content th",
+      "source": "対象提出",
+      "target": "📝 대상 제출"
+    }
+  ]
+}

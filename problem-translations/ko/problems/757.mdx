@@ -1,0 +1,62 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 757
+problemId: 1916
+sourceTitle: "チャンパーノウン定数 (2)"
+sourceHtmlSha256: "d6ecc2b7c6dc967776597b40aa9d6bce6bee19f2d7cc7444368644c34fb0dbcf"
+reviewStatus: unreviewed
+title: "샹퍼노운 상수 (2)"
+---
+
+## 문제
+
+$B$진법의 샹퍼노운 상수 $C_B$는 $0.$ 뒤에 1 이상의 모든 정수를 $B$진법으로 나타내 오름차순 연결한 수입니다. $C_B$의 소수점 이하 $D$번째 숫자를 구하세요.
+
+## 입력
+
+~~~text
+$B$
+$D$
+~~~
+
+$2\leq B\leq10$이며, $D$는 $B$진법으로 표시된 정수이고 $1\leq D\leq B^{100000}$입니다.
+
+## 출력
+
+$C_B$의 소수점 이하 $D$번째 숫자를 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+#### 입력
+
+~~~text
+5
+12
+~~~
+
+#### 출력
+
+~~~text
+1
+~~~
+
+$C_5=(0.1234101\ldots)_5$이므로 $(12)_5$번째 숫자는 1입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+#### 입력
+
+~~~text
+7
+41402021
+~~~
+
+#### 출력
+
+~~~text
+2
+~~~
+

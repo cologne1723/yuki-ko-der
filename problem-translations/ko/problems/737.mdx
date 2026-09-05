@@ -1,0 +1,81 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 737
+problemId: 2075
+sourceTitle: "PopCount"
+sourceHtmlSha256: "da7ebcf3d7338294ce89695c44f61e73b3aa88a25461a5d1029a625850d0abdd"
+reviewStatus: unreviewed
+title: "PopCount"
+---
+
+## 문제
+
+1을 매우 좋아하는 M 씨는 자연수 $x$의 아름다움 $V(x)$를 다음과 같이 정의했습니다.
+
+$V(x)=x\times popcount(x)$
+
+$popcount(x)$는 $x$를 2진법으로 나타냈을 때 등장하는 1의 개수입니다. 예를 들어 $23$은 2진법으로 $10111$이므로 $popcount(23)=4$입니다.
+
+자연수 $N$이 주어질 때 $\sum_{i=1}^{N}V(i)$를 $10^9+7$로 나눈 나머지를 구하세요.
+
+## 입력
+
+~~~text
+$N$
+~~~
+
+$1\leq N\leq10^{18}$인 자연수 $N$이 주어집니다.
+
+## 출력
+
+정답을 1줄에 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+#### 입력
+
+~~~text
+5
+~~~
+
+#### 출력
+
+~~~text
+23
+~~~
+
+$popcount(1)=1$, $popcount(2)=1$, $popcount(3)=2$, $popcount(4)=1$, $popcount(5)=2$이므로 $(1\times1)+(2\times1)+(3\times2)+(4\times1)+(5\times2)=23$입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+#### 입력
+
+~~~text
+30
+~~~
+
+#### 출력
+
+~~~text
+1333
+~~~
+
+### 샘플 3 {file="sample3.in"}
+
+#### 입력
+
+~~~text
+23072602871
+~~~
+
+#### 출력
+
+~~~text
+123456789
+~~~
+
+$N$이 32비트 정수에 들어가지 않을 수 있고, 답을 $10^9+7$로 나눈 나머지로 출력해야 한다는 점에 주의하세요.
+

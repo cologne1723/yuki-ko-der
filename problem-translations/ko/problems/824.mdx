@@ -1,0 +1,76 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 824
+problemId: 2449
+sourceTitle: "Many Shifts Hard"
+sourceHtmlSha256: "b1618b07c4d7d631eca4adbeabadc1369d5b982ce6e169bac227ef5baee33373"
+reviewStatus: unreviewed
+title: "많은 이동 Hard"
+---
+
+## 문제
+
+가로로 늘어선 $N+1$개 칸에 왼쪽부터 0,1,\ldots,N번이 붙어 있고, 1번부터 $N$번 칸에 말이 하나씩 있습니다.
+
+길이 $K$의 정수열 $A$의 점수를 다음 조작 후 말이 하나 이상 있는 칸 번호의 합으로 정의합니다. $i=1,2,\ldots,K$ 순서로 $A_i$번 칸의 모든 말을 $A_i-1$번 칸으로 옮깁니다. 가능한 수열은 $N^K$개입니다.
+
+모든 수열의 점수 합을 $10^9+7$로 나눈 나머지를 구하세요.
+
+## 입력
+
+~~~text
+$N\ K$
+~~~
+
+$1\leq N\leq10^5$, $1\leq K\leq300$
+
+## 출력
+
+모든 수열의 점수 합을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+#### 입력
+
+~~~text
+6 4
+~~~
+
+#### 출력
+
+~~~text
+15110
+~~~
+
+$A=(6,6,5,1)$이면 최종적으로 0,2,3,4번 칸에 말이 있어 점수는 9입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+#### 입력
+
+~~~text
+1 1
+~~~
+
+#### 출력
+
+~~~text
+0
+~~~
+
+### 샘플 3 {file="sample3.in"}
+
+#### 입력
+
+~~~text
+1000 100
+~~~
+
+#### 출력
+
+~~~text
+489487189
+~~~

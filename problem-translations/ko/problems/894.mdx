@@ -1,0 +1,49 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 894
+problemId: 1692
+sourceTitle: "二種類のバス"
+sourceHtmlSha256: "f01152dd2bd0b5591572fb39a4d2638ee157eff71f076505991c42bc9e92db2c"
+reviewStatus: unreviewed
+title: "두 종류의 버스"
+---
+
+## 문제
+
+$N$명이 참가하는 게임이 있습니다. $1$ 이상 $M$ 이하의 정수 중 $N$개를 골라 각 사람에게 하나씩 나누어 줍니다.
+
+사람 $i$가 가진 정수가 $A_i$라는 예측이 있을 때, 실제로 맞는 예측 개수의 최댓값과 최솟값을 구하세요. 한 정수는 한 번만 사용됩니다.
+
+## 제약
+
+- $1\leq N\leq M\leq2\times10^5$
+- $1\leq A_i\leq M$
+
+## 입력
+
+~~~text
+N M
+A_1 ... A_N
+~~~
+
+## 출력
+
+가능한 정답 개수의 최댓값과 최솟값을 공백으로 출력하세요.
+
+## 샘플
+
+### 입력 1 {file="stdin"}
+
+~~~text
+3 5
+1 2 1
+~~~
+
+### 출력 1 {file="stdout"}
+
+~~~text
+2 0
+~~~
+
+예측 1을 두 사람이 동시에 맞힐 수 없으므로 최댓값은 2이고, 모두 틀릴 수도 있으므로 최솟값은 0입니다.

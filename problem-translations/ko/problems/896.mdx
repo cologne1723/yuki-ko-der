@@ -1,0 +1,67 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 896
+problemId: 2101
+sourceTitle: "友達以上恋人未満"
+sourceHtmlSha256: "12edc44b48b188190492add7c8ab1d199968ecb9a9dc3c4d165f57a8a4ff8c00"
+reviewStatus: unreviewed
+title: "친구 이상 연인 미만"
+---
+
+## 문제
+
+체리 씨가 선물로 받은 길이 $N$의 수열 $A$는 매일 낮에, $d\geq T_i$이고 $i$번째 항이 양수인 모든 $i$에 대해 그 항이 1씩 감소합니다. 수열을 받은 시점은 0일째 밤입니다.
+
+$q$번째 질의에서는 $D_q$일째 밤의 수열에서 $L_q$번째부터 $R_q$번째까지의 합을 구하세요.
+
+## 제약
+
+- $1\leq N,Q\leq2\times10^5$
+- $0\leq A_i\leq10^9$, $1\leq T_i\leq10^9$
+- $0\leq D_q\leq2\times10^9$
+- $1\leq L_q\leq R_q\leq N$
+
+## 입력
+
+~~~text
+N
+A_1 T_1
+⋮
+A_N T_N
+Q
+D_1 L_1 R_1
+⋮
+D_Q L_Q R_Q
+~~~
+
+## 출력
+
+각 질의의 답을 한 줄에 출력하세요.
+
+## 샘플
+
+### 입력 {file="stdin"}
+
+~~~text
+5
+4 3
+6 1
+5 5
+0 8
+2 2
+4
+0 1 5
+2 3 4
+5 2 5
+100 1 5
+~~~
+
+### 출력 {file="stdout"}
+
+~~~text
+17
+5
+5
+0
+~~~

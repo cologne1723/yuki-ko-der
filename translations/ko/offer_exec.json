@@ -1,0 +1,47 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#localhost-mode strong",
+      "source": "[開発環境]",
+      "target": "📝 [개발 환경]"
+    },
+    {
+      "selector": "#localhost-mode p",
+      "source": "localhost環境のため、広告なしでワンデーサポーターを有効化できます。",
+      "target": "📝 localhost 환경이므로 광고 없이 원데이 서포터를 활성화할 수 있습니다."
+    },
+    {
+      "selector": "#localhost-mode button",
+      "source": "ワンデーサポーターを有効化する",
+      "target": "📝 원데이 서포터 활성화"
+    },
+    {
+      "selector": "#waiting-for-ad p",
+      "source": "広告システムを読み込んでいます。しばらくお待ちください...",
+      "target": "📝 광고 시스템을 불러오는 중입니다. 잠시 기다려 주세요..."
+    },
+    {
+      "selector": "#redirect-countdown p",
+      "source": "ワンデーサポーターが有効になりました！",
+      "target": "📝 원데이 서포터가 활성화되었습니다!"
+    },
+    {
+      "selector": "#redirect-countdown p",
+      "source": "秒後に元のページに戻ります...",
+      "target": "📝 초 후 원래 페이지로 돌아갑니다..."
+    },
+    {
+      "selector": "#content p",
+      "source": "広告の視聴が完了すると、自動的にワンデーサポーターが有効になります。",
+      "target": "📝 광고 시청이 끝나면 원데이 서포터가 자동으로 활성화됩니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "有効化後、前に見ていたページに戻ります。",
+      "target": "📝 활성화한 뒤 이전에 보던 페이지로 돌아갑니다."
+    }
+  ]
+}

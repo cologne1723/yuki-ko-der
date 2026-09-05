@@ -1,0 +1,79 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 642
+problemId: 2110
+sourceTitle: "Two Operations No.1"
+sourceHtmlSha256: "499d80c2eb3d5dce754028eaf342d3f21cc9889eb19416f21c91350dbfadba47"
+reviewStatus: unreviewed
+title: "두 연산 No.1"
+---
+
+## 문제
+
+자연수 $N$과 $X=1$을 가지고 있습니다. 다음 두 연산을 원하는 순서로 여러 번 수행해 $X=N$으로 만들 때 필요한 최소 연산 횟수를 구하세요. 불가능하면 -1을 출력하세요.
+
+- 연산 1: $X$를 1 감소시킵니다.
+- 연산 2: $X$를 2배 합니다.
+
+## 입력
+
+```text
+N
+```
+
+$1\le N\le10^9$
+
+## 출력
+
+최소 연산 횟수를 출력하세요. 불가능하면 -1을 출력하고 마지막에 개행하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+3
+```
+
+출력:
+
+```text
+3
+```
+
+연산 2, 연산 2, 연산 1을 수행하면 $1\to2\to4\to3$이 됩니다.
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+1
+```
+
+출력:
+
+```text
+0
+```
+
+연산이 필요하지 않을 수도 있습니다.
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+256
+```
+
+출력:
+
+```text
+8
+```
+
+연산 2를 8번 수행하면 됩니다.

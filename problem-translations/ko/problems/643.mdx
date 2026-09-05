@@ -1,0 +1,79 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 643
+problemId: 1988
+sourceTitle: "Two Operations No.2"
+sourceHtmlSha256: "40859c2702661b3d1f4c3984e10dab68c65e35429b024ce5bb3e5b9e93f199e0"
+reviewStatus: unreviewed
+title: "두 연산 No.2"
+---
+
+## 문제
+
+두 정수 $X,Y$를 가지고 다음 두 연산을 원하는 순서로 여러 번 수행할 수 있습니다. $X,Y$를 같게 만드는 최소 연산 횟수를 구하세요. 불가능하면 -1을 출력하세요.
+
+연산 후 값을 $X',Y'$라 할 때,
+
+- 연산 1: $X'=Y,\ Y'=X$
+- 연산 2: $X'=X+Y,\ Y'=X-Y$
+
+## 입력
+
+```text
+X Y
+```
+
+$-100\le X,Y\le100$
+
+## 출력
+
+최소 연산 횟수를 출력하세요. 불가능하면 -1을 출력하고 마지막에 개행하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+0 2
+```
+
+출력:
+
+```text
+2
+```
+
+연산 1 후 연산 2를 수행하면 $(0,2)\to(2,0)\to(2,2)$입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+-2 -2
+```
+
+출력:
+
+```text
+0
+```
+
+연산이 필요하지 않습니다.
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+-100 99
+```
+
+출력:
+
+```text
+-1
+```

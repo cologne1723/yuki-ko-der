@@ -1,0 +1,237 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    { "selector": "#toplinks a", "source": "統計", "target": "📝 통계" },
+    { "selector": "#toplinks a", "source": "質問", "target": "📝 질문" },
+    {
+      "selector": "#toplinks a",
+      "source": "提出一覧",
+      "target": "📝 제출 목록"
+    },
+    { "selector": "#toplinks a", "source": "解説", "target": "📝 해설" },
+    {
+      "selector": "#toplinks a",
+      "source": "ショートコード",
+      "target": "📝 숏 코드"
+    },
+    { "selector": "#toplinks a", "source": "ページ", "target": "페이지" },
+    {
+      "selector": "#toplinks a",
+      "source": "問題集一覧",
+      "target": "📝 문제 모음 목록"
+    },
+    { "selector": "#content th", "source": "言語", "target": "📝 언어" },
+    { "selector": "#content th", "source": "問題数", "target": "📝 문제 수" },
+    { "selector": "#content th", "source": "レベル", "target": "📝 레벨" },
+    { "selector": "#content th", "source": "結果", "target": "📝 결과" },
+    { "selector": "#content th", "source": "問題", "target": "📝 문제" },
+    { "selector": "#content th", "source": "提出者", "target": "📝 제출자" },
+    {
+      "selector": "#content th",
+      "source": "提出日時",
+      "target": "📝 제출 일시"
+    },
+    {
+      "selector": "#content th",
+      "source": "コード長",
+      "target": "📝 코드 길이"
+    },
+    {
+      "selector": "#content th",
+      "source": "実行時間",
+      "target": "📝 실행 시간"
+    },
+    { "selector": "#content th", "source": "順位", "target": "📝 순위" },
+    { "selector": "#content th", "source": "合計", "target": "📝 합계" },
+    { "selector": "#content th", "source": "問題名", "target": "📝 문제명" },
+    {
+      "selector": "#content th",
+      "source": "ユーザー名",
+      "target": "📝 사용자명"
+    },
+    { "selector": "#content th", "source": "ナンバー", "target": "📝 번호" },
+    { "selector": "#content th", "source": "作問者", "target": "📝 출제자" },
+    { "selector": "#content th", "source": "タグ", "target": "📝 태그" },
+    {
+      "selector": "#content th",
+      "source": "時間制限",
+      "target": "📝 시간 제한"
+    },
+    {
+      "selector": "#content th",
+      "source": "メモリ制限",
+      "target": "📝 메모리 제한"
+    },
+    { "selector": "#content th", "source": "人数", "target": "📝 인원" },
+    {
+      "selector": "#content h4",
+      "source": "ショートコード",
+      "target": "📝 숏 코드"
+    },
+    {
+      "selector": "#content h4",
+      "source": "純ショートコード",
+      "target": "📝 순수 숏 코드"
+    },
+    {
+      "selector": "#content h4",
+      "source": "純主流ショートコード",
+      "target": "📝 순수 주류 숏 코드"
+    },
+    {
+      "selector": "#content h4",
+      "source": "最速実行時間",
+      "target": "📝 최단 실행 시간"
+    },
+    {
+      "selector": "#content .page-link",
+      "source": "前へ",
+      "target": "📝 이전"
+    },
+    {
+      "selector": "#content .page-link",
+      "source": "次へ",
+      "target": "📝 다음"
+    },
+    { "selector": "#content .left", "source": "言語", "target": "📝 언어" },
+    { "selector": "#content .header", "source": "検索", "target": "📝 검색" },
+    {
+      "selector": "#content #s_search",
+      "attribute": "value",
+      "source": "検索",
+      "target": "📝 검색"
+    },
+    {
+      "selector": "#content a[title]",
+      "attribute": "title",
+      "source": "このユーザーの提出の表示",
+      "target": "📝 이 사용자의 제출 보기"
+    },
+    { "selector": "#content option", "source": "すべて", "target": "📝 전체" },
+    {
+      "selector": "#content td",
+      "source": "C11(gcc12 gnu拡張)",
+      "target": "📝 C11(gcc12 GNU 확장)"
+    },
+    {
+      "selector": "#content td",
+      "source": "C++23(gnu拡張)",
+      "target": "📝 C++23(GNU 확장)"
+    },
+    {
+      "selector": "#content td",
+      "source": "C++23(gnu拡張gcc16)",
+      "target": "📝 C++23(GNU 확장 gcc16)"
+    },
+    {
+      "selector": ".noty_body",
+      "source": "コピーしました",
+      "target": "📝 복사했습니다"
+    },
+    {
+      "selector": ".noty-copy-btn",
+      "attribute": "title",
+      "source": "コピー",
+      "target": "📝 복사"
+    },
+    {
+      "selector": ".custom-anony-popover .popover-header",
+      "source": "ログイン",
+      "target": "📝 로그인"
+    },
+    {
+      "selector": ".noty_body",
+      "source": "ログインに失敗しました",
+      "target": "📝 로그인에 실패했습니다"
+    },
+    {
+      "selector": ".noty_body",
+      "source": "登録に失敗しました",
+      "target": "📝 등록에 실패했습니다"
+    },
+    {
+      "selector": ".noty_body",
+      "source": "通信エラーが発生しました",
+      "target": "📝 통신 오류가 발생했습니다"
+    },
+    {
+      "selector": ".noty_body",
+      "source": "リクエストに失敗しました",
+      "target": "📝 요청에 실패했습니다"
+    },
+    {
+      "selector": ".noty_body",
+      "source": "削除に失敗しました",
+      "target": "📝 삭제에 실패했습니다"
+    },
+    {
+      "selector": "#clarification_notification_count",
+      "source": "質問 {count}",
+      "target": "📝 질문 {count}",
+      "variables": { "count": "[0-9]+" }
+    },
+    {
+      "selector": ".noty_body",
+      "source": "[質問回答が更新されました] {rest}",
+      "target": "📝 [질문 답변이 업데이트되었습니다] {rest}",
+      "variables": { "rest": ".+" }
+    },
+    {
+      "selector": "#content .badge",
+      "source": "すごい！",
+      "target": "📝 훌륭해요!"
+    },
+    {
+      "selector": "#content .badge",
+      "source": "おしい！",
+      "target": "📝 아까워요!"
+    },
+    {
+      "selector": "#content .badge",
+      "source": "もうちょっと速く！",
+      "target": "📝 조금만 더 빠르게!"
+    },
+    {
+      "selector": "#content .badge",
+      "source": "メモリ節約！",
+      "target": "📝 메모리를 절약해 봐요!"
+    },
+    {
+      "selector": "#content .badge",
+      "source": "こけました！",
+      "target": "📝 오류가 발생했어요!"
+    },
+    {
+      "selector": "#content .badge",
+      "source": "落ち着いて！",
+      "target": "📝 침착하게!"
+    },
+    {
+      "selector": "#content .badge",
+      "source": "出力しすぎ！",
+      "target": "📝 출력이 너무 많아요!"
+    },
+    {
+      "selector": "#content .badge",
+      "source": "ごめんなさい！",
+      "target": "📝 죄송합니다!"
+    },
+    {
+      "selector": "#content .badge",
+      "source": "惜しくない！",
+      "target": "📝 아쉽지 않아요!"
+    },
+    {
+      "selector": "#content .badge",
+      "source": "ちょっと待ってね！",
+      "target": "📝 잠시 기다려 주세요!"
+    },
+    {
+      "selector": "#content .badge",
+      "source": "クエリ多すぎ！",
+      "target": "📝 쿼리가 너무 많아요!"
+    }
+  ]
+}

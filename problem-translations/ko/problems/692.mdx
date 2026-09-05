@@ -1,0 +1,91 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 692
+problemId: 2124
+sourceTitle: "square1001 and Permutation 1"
+sourceHtmlSha256: "a17c041fb4d865cc2a76bac055a61670febc0dac727c1541f39ef62fd93e488e"
+reviewStatus: unreviewed
+title: "square1001과 순열 1"
+---
+
+## 문제
+
+바구니에 순열이 $n$개 들어 있습니다. Petr과 square1001은 이를 사용해 게임을 하기로 했습니다. 플레이어들은 번갈아 다음 조작을 수행합니다.
+
+바구니에 있는 순열을 하나 이상 꺼내고, 꺼낸 순열을 모두 먹습니다.
+
+마지막 순열을 먹은 플레이어가 패배하고, 그 플레이어의 상대가 승리합니다.
+
+square1001은 Topcoder SRM에서 Petr에게 한 번도 이긴 적이 없으므로 Petr이 선공, square1001이 후공을 맡게 되었습니다.
+
+두 플레이어 모두 승리하기 위해 최선의 수를 둘 때, 어느 플레이어가 이기는지 판정하세요.
+
+## 입력
+
+~~~text
+$n$
+~~~
+
+첫째 줄에 순열의 개수를 나타내는 정수 $n$이 주어집니다.
+
+## 출력
+
+Petr이 이 게임에서 이기면 Petr, square1001이 이기면 square1001을 출력하세요.
+
+출력 마지막에는 줄바꿈을 추가하세요.
+
+## 제약
+
+모든 입력 데이터는 다음 제약을 만족합니다.
+
+- $1\leq n\leq10^9$
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+#### 입력
+
+~~~text
+2
+~~~
+
+#### 출력
+
+~~~text
+Petr
+~~~
+
+Petr이 처음에 순열 하나를 꺼내면 남은 순열은 하나가 됩니다. 그러면 square1001은 마지막 순열을 꺼낼 수밖에 없으므로 square1001이 패배하고, Petr이 승리합니다.
+
+### 샘플 2 {file="sample2.in"}
+
+#### 입력
+
+~~~text
+1
+~~~
+
+#### 출력
+
+~~~text
+square1001
+~~~
+
+순열이 하나뿐이므로 선공인 Petr은 처음이자 마지막 순열을 꺼낼 수밖에 없습니다. 따라서 Petr이 패배하고 square1001이 승리합니다.
+
+### 샘플 3 {file="sample3.in"}
+
+#### 입력
+
+~~~text
+20180125
+~~~
+
+#### 출력
+
+~~~text
+Petr
+~~~
+

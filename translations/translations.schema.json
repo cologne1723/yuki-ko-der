@@ -3,11 +3,7 @@
   "title": "yukicoder translation dictionary",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "locale",
-    "sourceLocale",
-    "translations"
-  ],
+  "required": ["locale", "sourceLocale", "translations"],
   "properties": {
     "$schema": {
       "type": "string"
@@ -25,15 +21,21 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "selector",
-          "source",
-          "target"
-        ],
+        "required": ["selector", "source", "target"],
         "properties": {
           "selector": {
             "type": "string",
             "minLength": 1
+          },
+          "attribute": {
+            "enum": [
+              "alt",
+              "aria-label",
+              "data-suffix",
+              "placeholder",
+              "title",
+              "value"
+            ]
           },
           "source": {
             "type": "string",
@@ -42,6 +44,38 @@
           "target": {
             "type": "string",
             "minLength": 1
+          },
+          "preserveBoundaryWhitespace": {
+            "type": "boolean"
+          },
+          "variables": {
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "minLength": 1
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["pattern"],
+                  "properties": {
+                    "pattern": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "values": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
           }
         }
       }

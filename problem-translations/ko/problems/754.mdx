@@ -1,0 +1,76 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 754
+problemId: 2175
+sourceTitle: "畳み込みの和"
+sourceHtmlSha256: "b08d45764e626cccdce583b6c83097ac09f126b67b520fe9d4350cbed9433f9b"
+reviewStatus: unreviewed
+title: "컨볼루션의 합"
+---
+
+## 문제
+
+함수 $f(x)=\sum_{i=0}^{\infty}a_ix^i$, $g(x)=\sum_{i=0}^{\infty}b_ix^i$가 있습니다. $f(x)g(x)=\sum_{i=0}^{\infty}c_ix^i$라 할 때 $\sum_{i=0}^{n}c_i$를 $10^9+7$로 나눈 나머지를 구하세요.
+
+## 입력
+
+~~~text
+n
+a_0
+a_1
+\vdots
+a_n
+b_0
+b_1
+\vdots
+b_n
+~~~
+
+- $0\leq n\leq10^5$
+- $0\leq a_i,b_i<10^9+7$
+
+$n,a_i,b_i$는 모두 정수입니다.
+
+## 출력
+
+$\sum_{i=0}^{n}c_i\bmod 10^9+7$를 출력하세요. 마지막에는 줄바꿈을 추가하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+#### 입력
+
+~~~text
+0
+2
+4
+~~~
+
+#### 출력
+
+~~~text
+8
+~~~
+
+### 샘플 2 {file="sample2.in"}
+
+#### 입력
+
+~~~text
+2
+3
+2
+2
+7
+0
+4
+~~~
+
+#### 출력
+
+~~~text
+61
+~~~
+

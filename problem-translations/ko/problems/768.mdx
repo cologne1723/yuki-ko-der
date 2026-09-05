@@ -1,0 +1,86 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 768
+problemId: 2085
+sourceTitle: "Tapris and Noel play the game on Treeone"
+sourceHtmlSha256: "de08d244227b73d543af465bba0feb8cfd1b9cc73b0c5e83c689ebfecbe232e3"
+reviewStatus: unreviewed
+title: "Tapris와 Noel의 Treeone 나무 게임"
+---
+
+## 문제
+
+어느 날 Noel과 Tapris가 친구 Treeone을 이용해 게임을 했습니다. 게임 규칙은 다음과 같습니다.
+
+0. Treeone은 정점에 아무것도 쓰여 있지 않은 $N$개의 정점으로 이루어진 나무입니다. 처음에 Noel이 원하는 정점 하나를 골라 문자 N을 씁니다.
+1. Tapris가 문자 N이 쓰인 정점에 인접한, 아무것도 쓰여 있지 않은 정점 하나를 골라 문자 T를 씁니다.
+2. Noel이 문자 T가 쓰인 정점에 인접한, 아무것도 쓰여 있지 않은 정점 하나를 골라 문자 N을 씁니다.
+3. 1과 2를 반복하며, 더 이상 쓸 수 없게 된 사람이 패배합니다.
+
+Noel은 Tapris에게 이기고 싶어 합니다. Tapris의 선택에 관계없이 Noel이 이길 수 있는 정점을 모두 구하세요.
+
+## 입력
+
+~~~text
+$N$
+$a_1\ b_1$
+$a_2\ b_2$
+$\vdots$
+$a_{N-1}\ b_{N-1}$
+~~~
+
+첫째 줄에 나무의 정점 수 $N$이 주어집니다. $2\leq N\leq10^5$입니다. 다음 $N-1$개 줄에 간선이 연결하는 두 정점 $a_i,b_i$가 주어집니다. $1\leq a_i,b_i\leq N$입니다.
+
+## 출력
+
+첫째 줄에 Noel이 처음 고르면 이길 수 있는 정점 수를 출력하세요. 이어지는 줄에 해당 정점을 오름차순으로 한 줄에 하나씩 출력하세요. 마지막 정점 뒤에도 줄바꿈을 출력하세요. 그런 정점이 없으면 0만 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+#### 입력
+
+~~~text
+6
+1 2
+1 3
+2 4
+2 5
+2 6
+~~~
+
+#### 출력
+
+~~~text
+3
+4
+5
+6
+~~~
+
+Noel은 4, 5, 6 중 하나를 고르면 Tapris가 어떻게 선택해도 이길 수 있습니다.
+
+### 샘플 2 {file="sample2.in"}
+
+#### 입력
+
+~~~text
+5
+1 2
+1 5
+2 3
+3 4
+~~~
+
+#### 출력
+
+~~~text
+3
+2
+4
+5
+~~~
+
+행운을 빕니다.

@@ -1,0 +1,8 @@
+node_modules/
+.pnpm-store/
+dist/
+.review-dist/
+web-ext-artifacts/
+tmp/
+problem-translations/
+*.log

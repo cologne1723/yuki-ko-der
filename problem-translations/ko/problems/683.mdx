@@ -1,0 +1,77 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 683
+problemId: 2257
+sourceTitle: "Two Operations No.3"
+sourceHtmlSha256: "51fb68afb643242e7657c0c34a0369cdac87c11b8194adbc4a2c864e5d75b9af"
+reviewStatus: unreviewed
+title: "두 연산 No.3"
+---
+
+## 문제
+
+비음이 아닌 정수 $A,B$와 $X=0,Y=0$을 가지고 있습니다. 다음 두 연산을 원하는 순서로 여러 번 수행해 $X=A,Y=B$로 만들 수 있는지 판정하세요.
+
+- 연산 1: $X'=2X,\ Y'=Y+1$
+- 연산 2: $X'=X+1,\ Y'=2Y$
+
+## 입력
+
+```text
+A B
+```
+
+$0\le A,B\le10^{18}$
+
+## 출력
+
+가능하면 Yes, 불가능하면 No를 출력하세요. 마지막에 개행을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+4 5
+```
+
+출력:
+
+```text
+Yes
+```
+
+연산 1, 2, 2, 1을 수행하면 $(0,0)\to(0,1)\to(1,2)\to(2,4)\to(4,5)$입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+1 1
+```
+
+출력:
+
+```text
+No
+```
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+0 0
+```
+
+출력:
+
+```text
+Yes
+```
+
+연산이 필요하지 않을 수 있습니다.

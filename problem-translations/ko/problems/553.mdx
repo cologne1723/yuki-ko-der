@@ -1,0 +1,105 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 553
+problemId: 1778
+sourceTitle: "AlphaCoder Rating"
+sourceHtmlSha256: "a24db1375995e833bcb8aa9eafb724bc54a9b18c9fc33d16b5e39a4e1fe2e8d2"
+reviewStatus: unreviewed
+title: "AlphaCoder Rating"
+---
+
+## 문제
+
+AlphaCoder에서는 사용자의 콘테스트 퍼포먼스로부터 레이팅을 계산합니다.
+
+새로운 퍼포먼스부터 RPerf1 … RPerfN이라 하면(지금까지 N번 퍼포먼스가 계산되었다고 합시다) 레이팅은 다음과 같습니다.
+
+F(n) = sqrt(sum(i=1 to n) 0.81^i) / sum(i=1 to n) 0.9^i
+
+f(n) = (F(n) − F(∞)) / (F(1) − F(∞)) × 1200
+
+g(X) = 2.0^(X/800)
+
+Ratingn = g^−1((sum(i=1 to n) g(RPerfi) × 0.9^i) / sum(i=1 to n) 0.9^i) − f(n)
+
+여기서 g^−1은 g의 역함수입니다.
+
+참고: y=(x에 관한 식)을 x에 대해 풀고 x와 y를 바꾸면 역함수가 됩니다. 이 설명은 대회 후에 추가되었으므로 난이도 변경에는 반영하지 않습니다.
+
+참가 횟수 N과 퍼포먼스 RPerf1 … RPerfN이 주어질 때 레이팅을 정수로 계산하세요. 절댓값 오차 1까지 허용됩니다.
+
+## 입력
+
+```text
+N
+RPerf1
+…
+RPerfN
+```
+
+첫 번째 줄: 참가 횟수 (1 ≤ N ≤ 100)
+
+두 번째 줄부터 N+1번째 줄까지: RPerfi (1 ≤ i ≤ N)
+
+1000 ≤ RPerfi ≤ 4000
+
+Ratingi는 음수가 되지 않는다고 가정합니다. 따라서 무작위 테스트에서는 1500 ≤ RPerfi가 보장됩니다.
+
+## 출력
+
+RatingN을 한 줄에 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+1
+2000
+```
+
+출력:
+
+```text
+800
+```
+
+퍼포먼스 평균은 2000이고 f(1)=1200이므로 레이팅은 800입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+2
+2000
+2000
+```
+
+출력:
+
+```text
+1255
+```
+
+f(2)=745.4입니다.
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+3
+1500
+2000
+2500
+```
+
+출력:
+
+```text
+1492
+```

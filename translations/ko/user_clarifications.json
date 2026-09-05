@@ -1,0 +1,28 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#content div",
+      "source": "さんの未回答質問一覧（本人以外の場合は空欄になります）",
+      "target": "📝 님의 답변 없는 질문 목록입니다(본인이 아니면 빈칸으로 표시됩니다)"
+    },
+    {
+      "selector": "#content h2",
+      "source": "作問・テストした問題",
+      "target": "📝 출제·테스트한 문제"
+    },
+    {
+      "selector": "#content h2",
+      "source": "質問した問題",
+      "target": "📝 질문한 문제"
+    },
+    {
+      "selector": "#content th",
+      "source": "未回答質問ページ",
+      "target": "📝 답변 없는 질문 페이지"
+    },
+    { "selector": "#content th", "source": "質問文", "target": "📝 질문 내용" }
+  ]
+}

@@ -1,0 +1,68 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 256
+problemId: 694
+sourceTitle: "桁の数字を入れ替え (2)"
+sourceHtmlSha256: a1b3f7b3382b0bfc573a1fb59c5194a06e8b69847393e35414fe114dc19a2e84
+reviewStatus: unreviewed
+title: "자릿수 숫자 교환 (2)"
+---
+
+## 문제
+
+2자리 이상 $10^5$자리 이하의 양의 정수 $N$이 주어집니다. 원하는 횟수만큼 두 자릿수의 숫자를 골라 서로 바꿀 수 있습니다. 한 번도 바꾸지 않아도 됩니다. 만들 수 있는 가장 큰 정수를 구하세요.
+
+$N$은 32비트 정수형으로 처리할 수 없는 수일 수 있습니다.
+
+## 입력
+
+```text
+N
+```
+
+- $10 \leq N < 10^{100000}$
+
+## 출력
+
+만들 수 있는 가장 큰 정수를 출력하세요.
+
+## 샘플
+
+### 입력 1 {file="stdin"}
+
+```text
+12
+```
+
+### 출력 1 {file="stdout"}
+
+```text
+21
+```
+
+### 입력 2 {file="stdin"}
+
+```text
+21
+```
+
+### 출력 2 {file="stdout"}
+
+```text
+21
+```
+
+### 입력 3 {file="stdin"}
+
+```text
+1122
+```
+
+### 출력 3 {file="stdout"}
+
+```text
+2211
+```
+
+[No.39](http://yukicoder.me/problems/36)와 달리 두 번 교환할 수 있다는 점에 주의하세요.

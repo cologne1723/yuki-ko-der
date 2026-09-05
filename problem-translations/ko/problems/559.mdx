@@ -1,0 +1,82 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 559
+problemId: 1655
+sourceTitle: "swapAB列"
+sourceHtmlSha256: "d5173006ec44ce78445d68d7e895c8a258c04c09d25533488049ef512eaa3d9c"
+reviewStatus: unreviewed
+title: "swapAB 열"
+---
+
+## 문제
+
+문자 A와 문자 B로 이루어진 문자열이 있습니다.
+
+문자열에 대해 다음 조작을 할 수 있습니다.
+
+* 한 번의 조작으로 인접한 두 문자를 서로 바꿉니다.
+
+모든 문자 A는 왼쪽으로, 모든 문자 B는 오른쪽으로 모으려면 필요한 최소 조작 횟수를 구하세요.
+
+## 입력
+
+```text
+S
+```
+
+S는 문자 A와 문자 B로 이루어진 문자열입니다. 문자열 길이는 1 이상 12 이하입니다.
+
+## 출력
+
+답을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+BA
+```
+
+출력:
+
+```text
+1
+```
+
+BA를 한 번 조작해 AB로 바꿀 수 있습니다.
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+B
+```
+
+출력:
+
+```text
+0
+```
+
+문자열이 한 글자인 경우도 있습니다. 이때 문자 B는 더 오른쪽으로 갈 수 없으므로 오른쪽에 모인 것으로 봅니다.
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+ABAABA
+```
+
+출력:
+
+```text
+4
+```
+
+“ABAABA” → “ABAAAB” → “AABAAB” → “AAABAB” → “AAAABB”와 같이 최소 4번의 조작이 필요합니다.

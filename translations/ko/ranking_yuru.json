@@ -1,0 +1,80 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#content h4",
+      "source": "ゆるふわポイント歴",
+      "target": "📝 유루후와 포인트 기록"
+    },
+    {
+      "selector": "#content th",
+      "source": "付加日時",
+      "target": "📝 부여 일시"
+    },
+    { "selector": "#content th", "source": "ユーザー", "target": "📝 사용자" },
+    { "selector": "#content th", "source": "ポイント", "target": "📝 포인트" },
+    { "selector": "#content th", "source": "説明", "target": "📝 설명" },
+    {
+      "selector": "#content td.desc",
+      "source": "No.{problem}がFavされました。",
+      "target": "📝 No.{problem} 문제가 즐겨찾기에 추가되었습니다.",
+      "variables": { "problem": "\\d+" }
+    },
+    {
+      "selector": "#content td.desc",
+      "source": "#{submission}がFavされました。",
+      "target": "📝 #{submission} 제출이 즐겨찾기에 추가되었습니다.",
+      "variables": { "submission": "\\d+" }
+    },
+    {
+      "selector": "#content td.desc",
+      "source": "No.{problem}のショートコード",
+      "target": "📝 No.{problem}의 숏 코드",
+      "variables": { "problem": "\\d+" }
+    },
+    {
+      "selector": "#content td.desc",
+      "source": "No.{problem}の純ショートコード",
+      "target": "📝 No.{problem}의 순수 숏 코드",
+      "variables": { "problem": "\\d+" }
+    },
+    {
+      "selector": "#content td.desc",
+      "source": "No.{problem}の純主流ショートコード",
+      "target": "📝 No.{problem}의 순수 주류 숏 코드",
+      "variables": { "problem": "\\d+" }
+    },
+    {
+      "selector": "#content td.desc",
+      "source": "No.{problem}のチャレンジ",
+      "target": "📝 No.{problem}의 챌린지",
+      "variables": { "problem": "\\d+" }
+    },
+    {
+      "selector": "#content td.desc",
+      "source": "No.{problem}の最短時間",
+      "target": "📝 No.{problem}의 최단 실행 시간",
+      "variables": { "problem": "\\d+" }
+    },
+    {
+      "selector": "#content td.desc",
+      "source": "No.{problem}の解説",
+      "target": "📝 No.{problem}의 해설",
+      "variables": { "problem": "\\d+" }
+    },
+    {
+      "selector": "#content td.desc",
+      "source": "No.{problem}の作問ポイント",
+      "target": "📝 No.{problem}의 출제 포인트",
+      "variables": { "problem": "\\d+" }
+    },
+    {
+      "selector": "#content td.desc",
+      "source": "No.{problem}のテスターポイント",
+      "target": "📝 No.{problem}의 테스터 포인트",
+      "variables": { "problem": "\\d+" }
+    }
+  ]
+}

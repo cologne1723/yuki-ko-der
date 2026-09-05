@@ -1,0 +1,77 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 752
+problemId: 2158
+sourceTitle: "mod数列"
+sourceHtmlSha256: "d4f10e5ffc4154f9a6c47d00354b8c8a30dd07f27016594cb10ba4f1efaaf2bf"
+reviewStatus: unreviewed
+title: "mod 수열"
+---
+
+## 문제
+
+$a_n=P\bmod n\ (n=1,2,\dots)$로 정의합니다. 각 $L_i,R_i$에 대해 $\sum_{n=L_i}^{R_i}a_n$을 구하세요.
+
+## 입력
+
+~~~text
+$P$ $Q$
+$L_1$ $R_1$
+$L_2$ $R_2$
+$\vdots$
+$L_Q$ $R_Q$
+~~~
+
+- $1\leq P\leq10^9$
+- $1\leq Q\leq10^5$
+- $1\leq L_i\leq R_i\leq10^9$
+
+입력은 모두 정수입니다.
+
+## 출력
+
+$i$번째 줄에 $\sum_{n=L_i}^{R_i}a_n$을 출력하세요. 마지막에는 줄바꿈을 추가하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+#### 입력
+
+~~~text
+23 1
+1 7
+~~~
+
+#### 출력
+
+~~~text
+16
+~~~
+
+$\sum_{n=1}^{7}a_n=0+1+2+3+3+5+2=16$입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+#### 입력
+
+~~~text
+3000 4
+7 36
+1 2491
+2934 3000
+1542 5231
+~~~
+
+#### 출력
+
+~~~text
+263
+1465544
+2211
+7756611
+~~~
+
+$P\lt R_i$인 경우도 있습니다.
+

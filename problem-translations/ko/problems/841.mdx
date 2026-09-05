@@ -1,0 +1,76 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 841
+problemId: 2866
+sourceTitle: "8/32"
+sourceHtmlSha256: "0f242b23d149ef1f13ad7da3ecfb47fb689ecf8b215f306066753c60703b43fc"
+reviewStatus: unreviewed
+title: "8/32"
+---
+
+## 문제
+
+9월 1일과 9월 2일의 요일이 주어집니다. 9월 1일만 토요일(Sat) 또는 일요일(Sun)이면 8/32, 두 날 모두 토요일 또는 일요일이면 8/33을 출력하세요. 그 외에는 8/31을 출력하세요.
+
+현실의 요일 진행 방식과 다를 수 있습니다. Sat와 Sun 이외의 단어는 토요일이나 일요일을 뜻하지 않습니다.
+
+## 입력
+
+~~~text
+$S_1\ S_2$
+~~~
+
+$S_1,S_2$는 각각 9월 1일과 9월 2일의 요일이며 Mon, Tue, Wed, Thu, Fri, Sat, Sun 중 하나입니다.
+
+## 출력
+
+정답을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+#### 입력
+
+~~~text
+Sun Mon
+~~~
+
+#### 출력
+
+~~~text
+8/32
+~~~
+
+여름 방학은 8/32일까지 계속됩니다.
+
+### 샘플 2 {file="sample2.in"}
+
+#### 입력
+
+~~~text
+Sat Sun
+~~~
+
+#### 출력
+
+~~~text
+8/33
+~~~
+
+### 샘플 3 {file="sample3.in"}
+
+#### 입력
+
+~~~text
+Sun Sat
+~~~
+
+#### 출력
+
+~~~text
+8/33
+~~~
+
+일요일 다음이 토요일일 수도 있습니다.

@@ -1,0 +1,22 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#content p",
+      "source": "下のボタンを押すと広告ページに移動します。",
+      "target": "📝 아래 버튼을 누르면 광고 페이지로 이동합니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "広告の視聴が完了すると、24時間ワンデーサポーターが有効になります。",
+      "target": "📝 광고 시청을 완료하면 일일 서포터가 24시간 활성화됩니다."
+    },
+    {
+      "selector": "#content a.btn",
+      "source": "広告ページへ移動する",
+      "target": "📝 광고 페이지로 이동"
+    }
+  ]
+}

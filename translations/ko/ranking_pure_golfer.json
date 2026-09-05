@@ -1,0 +1,74 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#content h4",
+      "source": "問題別純ショートコード一覧",
+      "target": "📝 문제별 순수 숏 코드 목록"
+    },
+    {
+      "selector": "#content option",
+      "source": "すべての言語",
+      "target": "📝 모든 언어"
+    },
+    {
+      "selector": "#content option",
+      "source": "純主流のみ (cLay/kuin以外)",
+      "target": "📝 순수 주류만(cLay/kuin 제외)"
+    },
+    {
+      "selector": "#body div",
+      "source": "「純」とは外部プロセスを起動していないという意味です。",
+      "target": "📝 '순수'란 외부 프로세스를 실행하지 않았다는 뜻입니다."
+    },
+    {
+      "selector": "#body div",
+      "source": "つまり性質上「シェルスクリプト」はとても厳しい条件になります。",
+      "target": "📝 따라서 특성상 '셸 스크립트'에는 매우 까다로운 조건입니다."
+    },
+    { "selector": "#body div", "source": "注意", "target": "📝 주의" },
+    {
+      "selector": "#content li",
+      "source": "標準ライブラリや仮想マシンでプログラマーの意図とは別に呼び出されている可能性があります。",
+      "target": "📝 표준 라이브러리나 가상 머신이 프로그래머의 의도와 무관하게 외부 프로세스를 호출할 수 있습니다."
+    },
+    {
+      "selector": "#content li",
+      "source": "見つけ・ご指摘次第リジャッジしておりますが、過去の提出では正常に判定できてないものが掲載されている可能性があります。",
+      "target": "📝 발견하거나 제보받는 대로 재채점하지만 과거 제출 중에는 올바르게 판정되지 않은 것이 표시될 수 있습니다."
+    },
+    {
+      "selector": "#content li",
+      "source": "外部プロセスの起動の検知にバグが有る可能性もありますのでご指摘とご了承ください。（つまり実験プロジェクトです）",
+      "target": "📝 외부 프로세스 실행 감지에 버그가 있을 수 있으므로 제보와 양해를 부탁드립니다. (즉, 실험 프로젝트입니다.)"
+    },
+    {
+      "selector": "#body div",
+      "source": "言語別純ショートコード:",
+      "target": "📝 언어별 순수 숏 코드:"
+    },
+    {
+      "selector": "#lang-list option",
+      "source": "C++23(gnu拡張gcc16) (gcc 16.1.0 + boost 1.92.0)",
+      "target": "📝 C++23(GNU 확장 gcc16) (gcc 16.1.0 + boost 1.92.0)"
+    },
+    {
+      "selector": "#lang-list option",
+      "source": "C++23(gnu拡張) (gcc 15.3.0 + boost 1.92.0)",
+      "target": "📝 C++23(GNU 확장) (gcc 15.3.0 + boost 1.92.0)"
+    },
+    {
+      "selector": "#lang-list option",
+      "source": "C++17(gnu拡張) (gcc 15.3.0 + boost 1.92.0)",
+      "target": "📝 C++17(GNU 확장) (gcc 15.3.0 + boost 1.92.0)"
+    },
+    {
+      "selector": "#lang-list option",
+      "source": "C11(gcc12 gnu拡張) (gcc 12.4.0)",
+      "target": "📝 C11(gcc12 GNU 확장) (gcc 12.4.0)"
+    },
+    { "selector": "#content td", "source": "(最新)", "target": "📝 (최신)" }
+  ]
+}

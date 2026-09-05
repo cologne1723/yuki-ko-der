@@ -1,0 +1,76 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 702
+problemId: 1934
+sourceTitle: "中央値を求めよ LIMITED"
+sourceHtmlSha256: "b3ba287bac08bad39a9214a556c9840aac706f919342690a7f10cad0c025a77f"
+reviewStatus: unreviewed
+title: "중앙값을 구하라 LIMITED"
+---
+
+## 문제
+
+수열 $a$의 중앙값을 구하세요.
+
+프로 여러분에게는 너무 쉬울 것 같으므로 메모리 제한을 32MB로 설정했습니다.
+
+## 입력
+
+~~~text
+seed
+~~~
+
+- $|a|=10000001$ (1000만 1개)
+- $1\leq seed\leq100000$
+
+수열 $a$는 다음 C++ 코드로 구현된 XOR Shift라는 의사 난수 생성 알고리즘으로 생성됩니다.
+
+uint32_t는 32비트 부호 없는 정수형입니다.
+
+~~~cpp
+uint32_t x = 0, y = 1, z = 2, w = 3;
+uint32_t generate() { 
+    uint32_t t = (x^(x<<11));
+    x = y;
+    y = z;
+    z = w;
+    w = (w ^ (w >> 19)) ^ (t ^ (t >> 8)); 
+    return w;
+}
+int main(void) {
+    int64_t seed; cin >> seed; 
+    x = seed;
+    uint32_t a[10000001];
+    for (int i = 0; i < 10000001; i++) {
+        a[i] = generate();
+    }
+    for (int i = 0; i < 10000001; i++) {
+        cout << a[i] << endl;
+    }
+    return 0;
+}
+~~~
+
+## 출력
+
+중앙값을 1줄에 출력하세요. 출력 마지막에는 줄바꿈을 추가하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+#### 입력
+
+~~~text
+1
+~~~
+
+#### 출력
+
+~~~text
+2147058707
+~~~
+
+생성되는 수열은 $2058,3,4113,2058,4198488,4196427,12587210,8390784,4332056,4212747,413321,\dots$입니다.
+

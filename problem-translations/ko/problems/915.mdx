@@ -1,0 +1,61 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 915
+problemId: 3389
+sourceTitle: "Plus Or Multiple Operation"
+sourceHtmlSha256: "e1f3be65ef5b07365b0fd44dd4980336405b167d70df7ae187afa09d90e6c4b7"
+reviewStatus: unreviewed
+title: "달력 계산"
+---
+
+## 문제
+
+이 나라의 1년은 $N$개월이고, $i$월은 $D_i$일입니다. $Q$개의 질의에서 $y_i$년 $m_i$월 $d_i$일의 $k_i$일 후가 몇 년 몇 월 며칠인지 구하세요.
+
+## 제약
+
+- $1\leq N,Q\leq10^5$
+- $1\leq D_i\leq10^9$
+- $1\leq y_i,k_i\leq10^{18}$
+- $1\leq m_i\leq N$, $1\leq d_i\leq D_{m_i}$
+
+## 입력
+
+~~~text
+N
+D_1 D_2 ... D_N
+Q
+y_1 m_1 d_1 k_1
+⋮
+y_Q m_Q d_Q k_Q
+~~~
+
+## 출력
+
+각 질의의 결과를 연도, 월, 일을 순서대로 공백으로 구분하여 한 줄에 출력하세요.
+
+## 샘플
+
+### 입력 {file="stdin"}
+
+~~~text
+5
+2 3 5 7 8
+5
+1 1 2 1
+1 2 1 2
+1 1 1 25
+23 5 7 8
+271828182845904523 5 3 602874713526624977
+~~~
+
+### 출력 {file="stdout"}
+
+~~~text
+1 2 1
+1 2 3
+2 1 1
+24 3 2
+295943171386969522 5 5
+~~~

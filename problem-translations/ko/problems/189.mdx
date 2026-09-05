@@ -1,0 +1,68 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 189
+problemId: 493
+sourceTitle: "SUPER HAPPY DAY"
+sourceHtmlSha256: f4839373298d55448ba8faae827a28b2b4dcb14b27b39da121dbd326ae6f417c
+reviewStatus: unreviewed
+title: "SUPER HAPPY DAY"
+---
+
+## 문제 설명
+
+새로운 달력인 “오타쿠력”이 채택되었습니다. 오타쿠력은 1년이 $M$개월, 1개월이 $D$일입니다. 예를 들어 $M=2,D=3$이면 1년은 1월 1일〜3일과 2월 1일〜3일, 총 6일입니다.
+
+$X$월 $Y$일에 대해 $X$의 각 자리 숫자의 합과 $Y$의 각 자리 숫자의 합이 같으면 `SUPER HAPPY DAY`라고 합니다. 예를 들어 4월 22일, 10월 1일, 121월 2020일은 각각 $4=2+2$, $1+0=1$, $1+2+1=2+0+2+0$이므로 SUPER HAPPY DAY입니다.
+
+반대로 4월 5일, 10월 19일, 1234월 123450일은 두 자리 숫자 합이 다르므로 SUPER HAPPY DAY가 아닙니다.
+
+오타쿠력의 $M,D$가 주어질 때 1년에 포함되는 SUPER HAPPY DAY의 수를 $1000000009$로 나눈 나머지를 구하세요.
+
+## 입력
+
+```text
+M D
+```
+
+- $1 \le M,D \le 10^{200}$
+
+## 출력
+
+1년에 포함되는 SUPER HAPPY DAY의 수를 $1000000009$로 나눈 나머지를 한 줄에 출력하세요.
+
+## 예제
+
+### 예제 1
+
+```text
+2 3
+```
+
+```text
+2
+```
+
+6일 중 1월 1일과 2월 2일이 SUPER HAPPY DAY입니다.
+
+### 예제 2
+
+```text
+1000000 1000000
+```
+
+```text
+581170081
+```
+
+### 예제 3
+
+```text
+1 1
+```
+
+```text
+1
+```
+
+매일이 SUPER HAPPY DAY입니다.

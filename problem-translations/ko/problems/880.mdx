@@ -1,0 +1,65 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 880
+problemId: 3281
+sourceTitle: "Yet Another Segment Tree Problem"
+sourceHtmlSha256: "3bd847e3edb126a57ef0ab692bdfea244cb8ca78cc94ee1ef1ffcfdce51014df"
+reviewStatus: unreviewed
+title: "또 다른 세그먼트 트리 문제"
+---
+
+## 문제
+
+카마일돌고래의 공격력은 처음에 $p=1$입니다. 공격할 때마다 원하는 셀리언 하나의 체력을 $p$만큼 줄이고, 체력이 0 이하가 된 셀리언은 사라집니다. 그 후 공격력 $p$는 2배가 됩니다.
+
+$N$마리의 셀리언이 있고 셀리언 $i$의 체력은 $H_i$입니다. 모든 셀리언을 없애는 데 필요한 최소 공격 횟수를 구하세요.
+
+## 제약
+
+- $1\leq N\leq10^5$
+- $1\leq H_i\leq10^{18}$
+- 입력은 모두 정수입니다.
+
+## 입력
+
+~~~text
+N
+H_1 H_2 ... H_N
+~~~
+
+## 출력
+
+답을 출력하세요.
+
+## 샘플
+
+### 입력 1 {file="stdin"}
+
+~~~text
+3
+9 2 4
+~~~
+
+### 출력 1 {file="stdout"}
+
+~~~text
+4
+~~~
+
+공격력을 1, 2, 4, 8로 사용하여 각각 체력을 줄이면 네 번에 모두 없앨 수 있습니다. 세 번 이하로는 불가능합니다.
+
+### 입력 2 {file="stdin"}
+
+~~~text
+1
+924
+~~~
+
+### 출력 2 {file="stdout"}
+
+~~~text
+10
+~~~
+
+초과 피해를 주어도 됩니다.

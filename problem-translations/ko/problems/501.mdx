@@ -1,0 +1,82 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 501
+problemId: 1075
+sourceTitle: "穴と文字列"
+sourceHtmlSha256: "f0d884b7912bc92cfb9de7fa7c44a9682057737c60368a7b292db31f64c9fc9a"
+reviewStatus: unreviewed
+title: "구멍과 문자열"
+---
+
+## 문제
+
+영문 대문자(N개)를 이어 붙인 문자열 중 각 문자의 구멍 개수의 합이 D인 문자열을 S라고 합시다. S가 될 수 있는 문자열 중 사전순으로 가장 앞서는 문자열을 구하세요.
+
+구멍이 0개인 영문 대문자: C, E, F, G, H, I, J, K, L, M, N, S, T, U, V, W, X, Y, Z
+
+구멍이 1개인 영문 대문자: A, D, O, P, Q, R
+
+구멍이 2개인 영문 대문자: B
+
+## 입력
+
+```text
+N D
+```
+
+입력은 정수로 주어집니다.
+
+1 ≤ N ≤ 50000
+
+0 ≤ D ≤ 2N
+
+## 출력
+
+S가 될 수 있는 문자열 중 사전순으로 가장 앞서는 문자열을 출력하세요.
+
+출력 마지막에는 줄바꿈이 필요합니다.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+5 6
+```
+
+출력:
+
+```text
+AAAAB
+```
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+2 1
+```
+
+출력:
+
+```text
+AC
+```
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+4 8
+```
+
+출력:
+
+```text
+BBBB
+```

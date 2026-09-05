@@ -1,0 +1,76 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 338
+problemId: 814
+sourceTitle: "アンケート機能"
+sourceHtmlSha256: "a23aef10aeca08e5254a4df021d3995ec9521bce0618855b6d1a0ab1078802d1"
+reviewStatus: unreviewed
+title: "설문 기능"
+---
+
+## 문제
+
+어떤 사이트의 설문 기능으로 `Yes` 또는 `No`를 고르는 2지선다 설문을 실시했더니 한 명 이상이 응답했고, 결과는 `Yes`가 $A$%, `No`가 $B$%였습니다.
+
+단, $A,B$는 소수점 이하를 반올림한 값입니다. 즉 `Yes`, `No`에 투표한 사람 수를 각각 $a,b$명이라 하면, $A,B$는 각각 $\displaystyle\frac{100a}{a+b}$, $\displaystyle\frac{100b}{a+b}$를 소수점 이하 반올림한 값입니다.
+
+정수 $A,B$가 주어질 때 결과가 성립하는 $(a,b)$ 중 응답자 합계 $a+b$가 가장 작은 것을 찾으세요($a+b\ge1$).
+
+## 입력
+
+```text
+A B
+```
+
+- $0\le A\le100$
+- $0\le B\le100$
+- 결과가 $A$%, $B$%가 되는 $(a,b)$가 존재함이 보장됩니다.
+
+## 출력
+
+조건을 만족하는 $a+b$의 최솟값을 한 줄에 출력하세요. 마지막에 개행하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+```text
+50 50
+```
+
+### 샘플 1 {file="sample1.out"}
+
+```text
+2
+```
+
+$a=b=1$일 때 $a+b$가 최소입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+```text
+1 99
+```
+
+### 샘플 2 {file="sample2.out"}
+
+```text
+67
+```
+
+$a=1,b=66$일 때입니다.
+
+### 샘플 3 {file="sample3.in"}
+
+```text
+3 98
+```
+
+### 샘플 3 {file="sample3.out"}
+
+```text
+40
+```
+
+$a=1,b=39$이면 $100a/(a+b)=2.5$, $100b/(a+b)=97.5$가 되어 입력 조건을 만족합니다. 반드시 $A+B=100$일 필요는 없습니다.

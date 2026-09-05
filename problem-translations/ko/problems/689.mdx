@@ -1,0 +1,82 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 689
+problemId: 1685
+sourceTitle: "E869120 and Constructing Array 3"
+sourceHtmlSha256: "5d1ce9940de261af1f8d4850875e162cfc63786d8594b4805ca4715630e56be3"
+reviewStatus: unreviewed
+title: "E869120과 배열 구성 3"
+---
+
+## 문제
+
+다음 조건을 만족하는 수열 $c$를 구성하세요.
+
+- $N$은 길이이고 $c_i$는 $i$번째 값입니다.
+- $1\le i\lt j\le N$인 쌍 중 $c_i+c_j$가 소수인 쌍의 수가 $K$입니다.
+- $1\le N\le250$
+- $1\le c_i\le1{,}000{,}000$
+
+## 입력
+
+```text
+K
+```
+
+$0\le K\le10000$
+
+## 출력
+
+첫째 줄에 길이 $N$, 둘째 줄에 $c_i$를 공백으로 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+2
+```
+
+출력:
+
+```text
+4
+3 4 5 6
+```
+
+3+4와 5+6만 소수인 합이 됩니다.
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+9
+```
+
+출력:
+
+```text
+6
+1 1 4 5 1 4
+```
+
+총 9쌍에서 합이 소수입니다.
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+6
+```
+
+출력:
+
+```text
+5
+1 2 3 4 5
+```

@@ -1,0 +1,58 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 879
+problemId: 3279
+sourceTitle: "Range Mod 2 Query "
+sourceHtmlSha256: "80e3a54057947e4cb2857dd1670ffd7ed592c57425d204abbce37a90bdabd70c"
+reviewStatus: unreviewed
+title: "돌의 배수"
+---
+
+## 문제
+
+돌의 미라클은 레벨에 따라 주는 피해 배율이 레벨 1부터 5까지 각각 390, 429, 468, 507, 546입니다. 공격 타입이 `Beat`이면 레벨이 1 높은 것으로 계산합니다.
+
+레벨 $L$과 공격 타입 문자열 $S$가 주어질 때 피해 배율을 출력하세요. 레벨 6 이상에 해당하는 배율을 출력해야 하는 입력은 주어지지 않습니다.
+
+## 제약
+
+- $1\leq L\leq5$
+- $S$는 `Action`, `Beat`, `Try` 중 하나입니다.
+- $L=5$이면 $S$는 `Beat`가 아닙니다.
+
+## 입력
+
+~~~text
+L S
+~~~
+
+## 출력
+
+답을 출력하세요.
+
+## 샘플
+
+### 입력 1 {file="stdin"}
+
+~~~text
+1 Action
+~~~
+
+### 출력 1 {file="stdout"}
+
+~~~text
+390
+~~~
+
+### 입력 2 {file="stdin"}
+
+~~~text
+1 Beat
+~~~
+
+### 출력 2 {file="stdout"}
+
+~~~text
+429
+~~~

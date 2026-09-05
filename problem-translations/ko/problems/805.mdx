@@ -1,0 +1,81 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 805
+problemId: 2839
+sourceTitle: "UMG"
+sourceHtmlSha256: "7cd74dd407aadc6a2724fd3710bb34be1b1b214bb8e8922b0e44762c105658bd"
+reviewStatus: unreviewed
+title: "UMG"
+---
+
+## 문제
+
+문자 U, M, G만 나타나는 길이 $N$의 문자열 $S$가 있습니다. 처음부터 $i$번째 문자를 $s_i$라고 할 때 다음 조건을 만족하는 $(i,j,k)$의 개수를 구하세요.
+
+1. $1\leq i\lt j\lt k\leq N$이고 $j-i=k-j$입니다.
+2. $s_i$는 U, $s_j$는 M, $s_k$는 G입니다.
+
+## 입력
+
+~~~text
+$N$
+$S$
+~~~
+
+$3\leq N\leq5000$, $|S|=N$이고 $S$는 U, M, G로 이루어집니다.
+
+## 출력
+
+정답을 한 줄에 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+#### 입력
+
+~~~text
+5
+UUMGG
+~~~
+
+#### 출력
+
+~~~text
+2
+~~~
+
+조건을 만족하는 것은 $(1,3,5)$와 $(2,3,4)$입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+#### 입력
+
+~~~text
+4
+UUUU
+~~~
+
+#### 출력
+
+~~~text
+0
+~~~
+
+M이나 G가 없습니다.
+
+### 샘플 3 {file="sample3.in"}
+
+#### 입력
+
+~~~text
+10
+UUMMGGGUMG
+~~~
+
+#### 출력
+
+~~~text
+4
+~~~

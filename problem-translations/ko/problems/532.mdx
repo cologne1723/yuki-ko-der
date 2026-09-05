@@ -1,0 +1,86 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 532
+problemId: 1625
+sourceTitle: "Possible or Impossible"
+sourceHtmlSha256: "e5d35934f677709efaf673729457431296ab4f49ebd07892c1fdd713eecff1b4"
+reviewStatus: unreviewed
+title: "Possible or Impossible"
+---
+
+## 문제
+
+자연수 N과 N 이하의 음이 아닌 정수 M이 주어집니다.
+
+1부터 N까지의 N개 수를 각각 정확히 한 번씩 사용해 사칙연산과 괄호로 값 M을 만들 수 있는지 판정하세요.
+
+### 사칙연산에 관한 주의
+
+* 다루는 수는 유리수 범위입니다. 따라서 계산 중간에 유리수가 나와도 됩니다.
+* 0으로 나눌 수 없습니다.
+* 사칙연산은 두 수로 새로운 수를 정하므로, -(1+3) ÷ (−2) = 2처럼 계산 중간에 −1을 곱할 수는 없습니다.
+
+## 입력
+
+```text
+N M
+```
+
+1 ≤ N ≤ 50, 0 ≤ M ≤ N
+
+## 출력
+
+값 M을 만들 수 있으면 Possible, 만들 수 없으면 Impossible을 출력하세요.
+
+출력 마지막에는 줄바꿈이 필요합니다.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+5 3
+```
+
+출력:
+
+```text
+Possible
+```
+
+4 × (5 ÷ 2 − 1) − 3 = 3으로 만들 수 있습니다.
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+1 0
+```
+
+출력:
+
+```text
+Impossible
+```
+
+N=1이므로 사칙연산을 사용할 수 없습니다. 또한 N은 자연수인 반면 M은 음이 아닌 정수라는 점에 주의하세요.
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+10 1
+```
+
+출력:
+
+```text
+Possible
+```
+
+8 − 9 − {(10 − 7 + 1) ÷ 2 − 4 × 5} ÷ (6 + 3) = 1로 만들 수 있습니다.

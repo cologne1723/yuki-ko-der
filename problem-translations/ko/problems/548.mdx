@@ -1,0 +1,88 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 548
+problemId: 1642
+sourceTitle: "国士無双"
+sourceHtmlSha256: "a3ff9cd86c2934cad38e92149bcf160ed9770b4db5af4001a3126a53aceeaf5c"
+reviewStatus: unreviewed
+title: "국사무쌍"
+---
+
+## 문제
+
+abcdefghijklm의 13종 소문자를 각각 0개 이상 포함하는 길이 13의 문자열 S가 주어집니다.
+
+S에 문자 하나를 추가해 abcdefghijklm 중 한 종류만 2개, 나머지 문자는 각각 1개씩 포함하도록 만들 수 있는지 판정하세요.
+
+## 입력
+
+```text
+S
+```
+
+S가 한 줄에 주어집니다.
+
+## 출력
+
+조건을 만족하도록 만들 수 있으면 추가할 문자 하나를 출력하세요. 가능한 문자가 여러 개이면 사전순으로 줄바꿈해 출력하세요.
+
+불가능하면 Impossible을 한 줄에 출력하세요.
+
+출력 마지막에는 줄바꿈이 필요합니다.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+abcdfghijklmm
+```
+
+출력:
+
+```text
+e
+```
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+abcdefgmmmmmm
+```
+
+출력:
+
+```text
+Impossible
+```
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+cbmlieadfghjk
+```
+
+출력:
+
+```text
+a
+b
+c
+d
+e
+f
+g
+h
+i
+j
+k
+l
+m
+```

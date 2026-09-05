@@ -1,0 +1,59 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 836
+problemId: 2708
+sourceTitle: "じょうよ"
+sourceHtmlSha256: "f8ac6d19da76c3faa18e3865218b32c7c8dfcbc139b322b59ceaba90fd9e96e3"
+reviewStatus: unreviewed
+title: "나눗셈"
+---
+
+## 문제
+
+닫힌 구간 $[l,r]$의 정수를 $n$으로 나눈 나머지에 따라 분류하세요.
+
+## 입력
+
+~~~text
+$l\ r\ n$
+~~~
+
+$1\leq l\leq r\leq10^{18}$, $1\leq n\leq10^5$이며 입력은 모두 정수입니다.
+
+## 출력
+
+$n$줄에 출력하세요. $i$번째 줄에는 $[l,r]$에 포함된 정수 중 $n$으로 나눈 나머지가 $i-1$인 정수의 개수를 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+#### 입력
+
+~~~text
+1 7 2
+~~~
+
+#### 출력
+
+~~~text
+3
+4
+~~~
+
+나머지가 0인 수는 2,4,6의 3개이고, 1인 수는 1,3,5,7의 4개입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+#### 입력
+
+~~~text
+5 5 1
+~~~
+
+#### 출력
+
+~~~text
+1
+~~~

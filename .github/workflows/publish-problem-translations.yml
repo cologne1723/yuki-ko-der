@@ -1,0 +1,53 @@
+name: Publish problem translations
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "problem-translations/**"
+      - "src/problem-markdown.ts"
+      - "scripts/build-problem-translations.ts"
+      - "scripts/validate-problem-translations.ts"
+      - "scripts/problem-review.ts"
+      - "src/problem-translations.ts"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "PRIVACY.md"
+      - "DISCLAIMER.md"
+      - ".github/workflows/publish-problem-translations.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Validate translated HTML and canonical sources
+        run: pnpm verify:problems
+      - name: Compile Markdown problem sources
+        run: pnpm build:problems
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .problem-translations-dist
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,84 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    { "selector": "#toplinks a", "source": "一覧", "target": "📝 목록" },
+    {
+      "selector": "#content h4",
+      "source": "提出一覧",
+      "target": "📝 제출 목록"
+    },
+    {
+      "selector": "#content label",
+      "source": "自分の提出",
+      "target": "📝 내 제출"
+    },
+    { "selector": "#content .left", "source": "結果", "target": "📝 결과" },
+    {
+      "selector": "#content label",
+      "source": "提出日時昇順",
+      "target": "📝 제출 일시 오름차순"
+    },
+    {
+      "selector": "#content label",
+      "source": "実行時間順",
+      "target": "📝 실행 시간순"
+    },
+    {
+      "selector": "#content label",
+      "source": "コード長順",
+      "target": "📝 코드 길이순"
+    },
+    {
+      "selector": "#content label",
+      "source": "純コード",
+      "target": "📝 순수 코드"
+    },
+    {
+      "selector": "#content span",
+      "source": "（外部プロセスなし）",
+      "target": "📝 (외부 프로세스 없음)"
+    },
+    {
+      "selector": "#content label",
+      "source": "クエリ数順",
+      "target": "📝 쿼리 수순"
+    },
+    {
+      "selector": "#content span",
+      "source": "（リアクティブ問題用）",
+      "target": "📝 (리액티브 문제용)"
+    },
+    {
+      "selector": "#content label",
+      "source": "リジャッジ",
+      "target": "📝 재채점"
+    },
+    {
+      "selector": "#content label",
+      "source": "各ユーザーの最新",
+      "target": "📝 사용자별 최신 제출"
+    },
+    {
+      "selector": "#content td, #content option",
+      "source": "C++23(gnu拡張gcc16)",
+      "target": "📝 C++23(GNU 확장 gcc16)"
+    },
+    {
+      "selector": "#content td, #content option",
+      "source": "C++23(gnu拡張)",
+      "target": "📝 C++23(GNU 확장)"
+    },
+    {
+      "selector": "#content td, #content option",
+      "source": "C++17(gnu拡張)",
+      "target": "📝 C++17(GNU 확장)"
+    },
+    {
+      "selector": "#content td, #content option",
+      "source": "C11(gcc12 gnu拡張)",
+      "target": "📝 C11(gcc12 GNU 확장)"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 603
+problemId: 1993
+sourceTitle: "hel__world (2)"
+sourceHtmlSha256: "77b1cb2eeeba15950612a322e3bc75a5f9eff94093bccdab7446a51120633028"
+reviewStatus: unreviewed
+title: "hel__world (2)"
+---
+
+## 참고
+
+이 문제는 No.295 hel__world와 그 예상 풀이를 바탕으로 만들었습니다. 이 출제로 오류가 발견되어 No.295의 문제문 자체도 수정되었습니다.
+
+2017/12/03 02:50에 문제문을 수정했습니다. 불편을 드려 죄송합니다.
+
+## 문제
+
+문자열 $S$의 연속 성분 수를, 다음 조작을 가능한 만큼 반복한 뒤의 문자열 길이로 정의합니다.
+
+조작: 같은 문자가 2개 이상 연속된 부분이 있으면 그 부분에서 문자 하나를 제거합니다.
+
+예를 들어 helloworld의 연속 성분 수는 9이고, aababbaaa의 연속 성분 수는 5입니다.
+
+문자열 $S$의 $T$ 수를 $S$가 부분 수열로 포함하는 $T$의 개수로 정의합니다. 예를 들어 $S$가 helloworld이고 $T$가 helworld라면, helloworld는 hel__world와 he_l_world라는 2개의 부분 수열을 포함하므로 helworld 수는 2입니다.
+
+다음 두 조건을 만족하는 문자열 $S$에 대한 $T$ 수의 최댓값을 $10^6+3$으로 나눈 나머지를 구하세요.
+
+- $S$에 포함된 문자 $alpha$의 개수는 최대 $S_{alpha}$개입니다.
+- $S$의 연속 성분 수와 $T$의 연속 성분 수가 같습니다.
+
+조건을 만족하는 문자열이 존재하지 않으면 0을 출력하세요.
+
+## 입력
+
+```text
+Sa Sb Sc Sd Se Sf Sg Sh Si Sj Sk Sl Sm Sn So Sp Sq Sr Ss St Su Sv Sw Sx Sy Sz
+T
+```
+
+- $0 \le S_{alpha} \le 10^{18}$ ($alpha \in \{a,\ldots,z\}$)
+- $1 \le |T| \le 10^6$
+- $S_{alpha}$는 문자열 $S$에 문자 $alpha$가 최대 $S_{alpha}$개 포함된다는 뜻입니다.
+- 문자열 $S$와 $T$에 포함되는 문자는 a, b, …, z 중 하나입니다.
+
+## 출력
+
+조건을 만족하는 문자열 $S$에 대한 최대 $T$ 수를 $10^6+3$으로 나눈 나머지를 출력하세요. $10^6+3$은 소수입니다. 마지막에 개행을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+0 0 0 1 1 0 0 1 0 0 0 3 0 0 2 0 0 1 0 0 0 0 1 0 0 0
+helworld
+```
+
+출력:
+
+```text
+4
+```
+
+$S$를 hellwoorld로 하면 helworld 수가 4가 되며, 이것이 최댓값입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+0 0 0 1 1 0 0 1 0 0 0 3 0 0 2 0 0 1 0 0 0 0 1 0 0 0
+hello
+```
+
+출력:
+
+```text
+6
+```
+
+$S$를 hellloo로 하면 hello 수가 6이 되며, 이것이 최댓값입니다.
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+100 100 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+abababababababababababababababab
+```
+
+출력:
+
+```text
+64250
+```
+
+조건을 만족하는 문자열에서 $T$ 수의 최댓값은 $27315825477537795403677696$이므로 $10^6+3$으로 나눈 나머지는 64250입니다.

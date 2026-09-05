@@ -1,0 +1,48 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 420
+problemId: 491
+sourceTitle: "mod2漸化式"
+sourceHtmlSha256: "c743042418f947bf5c62d3a607604362b7556c32d4ff057f5e13d702322af4a2"
+reviewStatus: unreviewed
+title: "mod2 점화식"
+---
+
+## 문제
+
+다음 점화식이 주어집니다.
+
+- f(0) = 0
+- f(n) = f(n / 2) + (n mod 2)
+- n은 정수이고 n / 2는 소수점 이하를 버린 값입니다.
+
+0 ≤ n ≤ 2³¹ − 1 (2147483647)인 범위에서 f(n) = x가 되는 n의 개수와 n의 총합을 구하세요.
+
+## 입력
+
+정수 x가 한 줄에 주어집니다.
+
+```text
+x
+```
+
+- 0 ≤ x ≤ 10^9
+
+## 출력
+
+f(n) = x가 되는 n의 개수와 n의 총합을 공백으로 구분해 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+```text
+5
+```
+
+### 샘플 1 출력 {file="sample1.out"}
+
+```text
+169911 58851789346035
+```

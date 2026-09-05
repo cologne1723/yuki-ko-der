@@ -1,0 +1,80 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#toplinks a",
+      "source": "👑新規作成",
+      "target": "📝 👑새로 만들기"
+    },
+    {
+      "selector": "#content h3",
+      "source": "運営者おすすめ",
+      "target": "📝 운영자 추천"
+    },
+    { "selector": "#content th", "source": "タイトル", "target": "📝 제목" },
+    { "selector": "#content th", "source": "作成者", "target": "📝 작성자" },
+    {
+      "selector": "#content th",
+      "source": "更新日時",
+      "target": "📝 업데이트 일시"
+    },
+    {
+      "selector": "#content a",
+      "source": "Step 1: 競技プログラミング入門",
+      "target": "📝 Step 1: 경쟁 프로그래밍 입문"
+    },
+    {
+      "selector": "#content a",
+      "source": "Step 2: 計算と数の扱い",
+      "target": "📝 Step 2: 계산과 수 다루기"
+    },
+    {
+      "selector": "#content a",
+      "source": "Step 3: 文字列と配列の操作",
+      "target": "📝 Step 3: 문자열과 배열 조작"
+    },
+    {
+      "selector": "#content a",
+      "source": "Step 4: 全探索とシミュレーション",
+      "target": "📝 Step 4: 완전 탐색과 시뮬레이션"
+    },
+    {
+      "selector": "#content a",
+      "source": "Step 5: ソート・二分探索・グラフ探索入門",
+      "target": "📝 Step 5: 정렬·이분 탐색·그래프 탐색 입문"
+    },
+    {
+      "selector": "#content a",
+      "source": "Step 6: 貪欲法と動的計画法の基礎",
+      "target": "📝 Step 6: 그리디와 동적 계획법 기초"
+    },
+    {
+      "selector": "#content a",
+      "source": "Step 7: 動的計画法の発展",
+      "target": "📝 Step 7: 동적 계획법 심화"
+    },
+    {
+      "selector": "#content a",
+      "source": "Step 8: グラフアルゴリズム",
+      "target": "📝 Step 8: 그래프 알고리즘"
+    },
+    {
+      "selector": "#content a",
+      "source": "Step 9: 累積和とセグメント木",
+      "target": "📝 Step 9: 누적 합과 세그먼트 트리"
+    },
+    {
+      "selector": "#content a",
+      "source": "Step 10: 総合演習 - 高難度への挑戦",
+      "target": "📝 Step 10: 종합 연습 - 고난도에 도전"
+    },
+    {
+      "selector": "#toplinks a[href='/supporter']",
+      "attribute": "title",
+      "source": "サイトサポーターになると問題集を作成できます",
+      "target": "📝 사이트 서포터가 되면 문제집을 만들 수 있습니다"
+    }
+  ]
+}

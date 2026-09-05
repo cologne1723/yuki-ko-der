@@ -1,0 +1,45 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 906
+problemId: 2413
+sourceTitle: "Y자 그래프"
+sourceHtmlSha256: "aef432818ad16f07d980ae1ed85743e95bc0114ebf30b290e92fc0b2cf8bb6a9"
+reviewStatus: unreviewed
+title: "우아한 수"
+---
+
+## 문제
+
+음이 아닌 정수 $x$의 십진법 각 자리의 합을 $d(x)$라 합니다. $0$ 이상 $10^N$ 미만의 99의 배수를 우아한 수라고 할 때, 모든 우아한 수 $x$에 대해 $d(x)^K$의 합을 $998244353$으로 나눈 나머지를 구하세요.
+
+## 제약
+
+- $2\leq N\leq10^5$
+- $1\leq K\leq10^5$
+
+## 입력
+
+~~~text
+N K
+~~~
+
+## 출력
+
+답을 출력하세요.
+
+## 샘플
+
+### 입력 1 {file="stdin"}
+
+~~~text
+2 2
+~~~
+
+### 출력 1 {file="stdout"}
+
+~~~text
+324
+~~~
+
+우아한 수는 0과 99이고 자리수 합은 각각 0과 18이므로 답은 $0^2+18^2=324$입니다.

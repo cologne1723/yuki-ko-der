@@ -1,0 +1,73 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 289
+problemId: 783
+sourceTitle: "数字を全て足そう"
+sourceHtmlSha256: "aee5afed9dd937c13dd5e17eb93b493a772287fa96a6b93f58c0ae6ab2a27b5c"
+reviewStatus: unreviewed
+title: "숫자를 모두 더하자"
+---
+
+## 문제
+
+문자열 $S$가 주어집니다. 그 안의 각 숫자를 한 자리 수로 간주하여 모두 더한 값을 구하세요.
+
+예를 들어 `1test23`이라는 문자열에 포함된 숫자의 합은 $1+2+3=6$입니다.
+
+숫자가 없는 경우에는 0을 출력하세요.
+
+## 입력
+
+```text
+S
+```
+
+- $1 \le |S| \le 10000$
+
+$|S|$는 문자열 $S$의 길이입니다. 문자열 $S$는 반각 영숫자로만 이루어집니다.
+
+## 출력
+
+각 숫자의 합을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+```text
+1test23
+```
+
+### 샘플 1 {file="sample1.out"}
+
+```text
+6
+```
+
+$1+2+3=6$입니다. $1+23$이 아니라는 점에 주의하세요.
+
+### 샘플 2 {file="sample2.in"}
+
+```text
+2015
+```
+
+### 샘플 2 {file="sample2.out"}
+
+```text
+8
+```
+
+### 샘플 3 {file="sample3.in"}
+
+```text
+1a2b3c4d5e6f7g8h90
+```
+
+### 샘플 3 {file="sample3.out"}
+
+```text
+45
+```
+

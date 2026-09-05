@@ -1,0 +1,280 @@
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #233047;
+  background: #f4f6fa;
+  font-size: 14px;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 24px;
+  background: white;
+  border-bottom: 1px solid #dbe0e9;
+}
+h1 {
+  font-size: 21px;
+  margin: 0;
+}
+h2 {
+  font-size: 15px;
+}
+a {
+  color: #3457c9;
+}
+.layout {
+  display: grid;
+  grid-template-columns: 290px minmax(0, 1fr);
+}
+aside {
+  padding: 18px;
+  height: calc(100vh - 60px);
+  overflow: auto;
+  position: sticky;
+  top: 0;
+}
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+input,
+select,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 9px;
+  margin-top: 6px;
+  border: 1px solid #c9d0df;
+  border-radius: 6px;
+  font: inherit;
+  background: white;
+}
+textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+button {
+  cursor: pointer;
+  border: 1px solid #cad2e2;
+  border-radius: 6px;
+  padding: 9px 13px;
+  background: white;
+  color: inherit;
+  font: inherit;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+#approve {
+  background: #3457c9;
+  color: white;
+}
+#entries button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin: 6px 0;
+  overflow-wrap: anywhere;
+}
+#entries button.active {
+  border-color: #3457c9;
+  background: #eaf0ff;
+}
+#entries small {
+  display: block;
+  margin-top: 5px;
+  color: #687386;
+}
+main {
+  min-width: 0;
+  padding: 20px;
+}
+.editor,
+.preview-controls {
+  background: white;
+  border: 1px solid #dbe0e9;
+  border-radius: 10px;
+  padding: 18px;
+  margin-bottom: 16px;
+}
+.heading,
+.actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+#context,
+#variables {
+  overflow-wrap: anywhere;
+  color: #5a667b;
+}
+#notice {
+  color: #3457c9;
+}
+#dirty,
+#badge {
+  color: #8b5812;
+}
+.previews {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+iframe {
+  background: white;
+  width: 100%;
+  height: 680px;
+  border: 1px solid #c9d0df;
+  border-radius: 8px;
+}
+.preview-controls p {
+  color: #5a667b;
+  line-height: 1.6;
+}
+:focus-visible {
+  outline: 3px solid #819ef1;
+  outline-offset: 2px;
+}
+@media (max-width: 950px) {
+  .layout {
+    grid-template-columns: 230px minmax(0, 1fr);
+  }
+  .previews {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 600px) {
+  header {
+    flex-wrap: wrap;
+  }
+  .layout {
+    display: block;
+  }
+  aside {
+    position: static;
+    height: 320px;
+  }
+}
+[hidden] {
+  display: none !important;
+}
+.layout.sidebar-collapsed {
+  grid-template-columns: minmax(0, 1fr);
+}
+header,
+.actions,
+.heading {
+  flex-wrap: wrap;
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 16px 0;
+}
+.legend span {
+  padding: 5px 9px;
+  border-radius: 4px;
+}
+.legend .draft {
+  border: 2px dashed #ba6500;
+}
+.legend .approved {
+  border: 2px solid #21804c;
+}
+.legend .selected {
+  border: 3px solid #3457d5;
+}
+#entries button[data-review-status="draft"] {
+  border-left: 4px dashed #ba6500;
+}
+#entries button[data-review-status="approved"] {
+  border-left: 4px solid #21804c;
+}
+.changed-tag {
+  display: inline-block;
+  font-size: 11px;
+  margin-left: 6px;
+  padding: 2px 5px;
+  border-radius: 4px;
+  color: #294bba;
+  background: #eaf0ff;
+}
+.change-summary {
+  margin-top: 14px;
+  padding: 12px;
+  background: #eef3ff;
+  border-left: 4px solid #3457d5;
+  overflow-wrap: anywhere;
+}
+.change-summary p {
+  white-space: pre-wrap;
+  margin: 7px 0 0;
+}
+/* Keep editing and the translated page visible together during review. */
+main {
+  display: grid;
+  grid-template-columns: minmax(260px, 330px) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+.editor {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  position: sticky;
+  top: 12px;
+  max-height: calc(100vh - 24px);
+  overflow: auto;
+}
+.preview-controls {
+  grid-column: 2;
+  margin-bottom: 0;
+}
+.previews {
+  grid-column: 2;
+  grid-template-columns: minmax(0, 1fr);
+}
+.previews.show-japanese {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.previews section {
+  min-width: 0;
+}
+iframe {
+  height: max(480px, 70vh);
+}
+.shortcut-hint {
+  color: #687386;
+  font-size: 12px;
+  line-height: 1.7;
+}
+@media (max-width: 1100px) {
+  main {
+    grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+    padding: 12px;
+    gap: 10px;
+  }
+  .previews.show-japanese {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 800px) {
+  main {
+    display: block;
+  }
+  .editor {
+    position: static;
+    max-height: none;
+  }
+  .preview-controls {
+    margin-bottom: 16px;
+  }
+}

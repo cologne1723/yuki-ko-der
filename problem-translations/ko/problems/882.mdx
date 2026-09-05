@@ -1,0 +1,60 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 882
+problemId: 3354
+sourceTitle: "約数倍数"
+sourceHtmlSha256: "2121a338f0b4b95f9d14df839ac78bffbb4ebc7345b057857d52c19888242574"
+reviewStatus: unreviewed
+title: "유리수 비교"
+---
+
+## 문제
+
+두 유리수 $P,Q$가 주어집니다. $P,Q$의 대소를 판정하세요.
+
+## 입력
+
+첫째 줄에 $P=N_1/D_1$을 만족하는 정수 $N_1$과 양의 정수 $D_1$, 둘째 줄에 $Q=N_2/D_2$를 만족하는 정수 $N_2$와 양의 정수 $D_2$가 주어집니다.
+
+~~~text
+N_1 D_1
+N_2 D_2
+~~~
+
+## 제약
+
+- $-10^9\leq N_1,N_2\leq10^9$
+- $1\leq D_1,D_2\leq10^9$
+
+## 출력
+
+$P\lt Q$이면 `<`, $P\gt Q$이면 `>`, $P=Q$이면 `=`를 출력하세요.
+
+## 샘플
+
+### 입력 1 {file="stdin"}
+
+~~~text
+0 1
+0 2
+~~~
+
+### 출력 1 {file="stdout"}
+
+~~~text
+=
+~~~
+
+### 입력 2 {file="stdin"}
+
+~~~text
+-1 2
+1 1
+~~~
+
+### 출력 2 {file="stdout"}
+
+~~~text
+<
+~~~

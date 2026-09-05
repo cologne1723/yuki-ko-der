@@ -1,0 +1,102 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 599
+problemId: 1171
+sourceTitle: "回文かい"
+sourceHtmlSha256: "b1784c3886a1b39b8d163605138ce74d25851e6a2f8fe8616e4f0b8a1c5e568e"
+reviewStatus: unreviewed
+title: "회문인가"
+---
+
+## 문제
+
+“수돗물”은 회문, 그럼 회문인가!
+
+문자열 S를 k개(k ≥ 1)의 비어 있지 않은 부분 문자열 T1,T2,…,Tk로 분해한다고 합시다.
+
+S = T1 + T2 + … + Tk이고 |Ti| ≥ 1입니다.
+
+모든 i (1 ≤ i ≤ k)에 대해 Ti = T(k−i+1)이면 수열 T=[T1,T2,…,Tk]를 문자열 S의 회문 분해라고 합니다.
+
+문자열 S가 주어질 때 가능한 회문 분해의 수를 계산하세요. 답이 매우 커질 수 있으므로 1,000,000,007로 나눈 나머지를 출력합니다.
+
+## 입력
+
+```text
+S
+```
+
+1 ≤ |S| ≤ 10^4
+
+S는 소문자 영문자 a-z로만 이루어집니다.
+
+## 출력
+
+가능한 회문 분해의 수를 1,000,000,007로 나눈 나머지를 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+abc
+```
+
+출력:
+
+```text
+1
+```
+
+T=[“abc”]가 회문 분해입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+suidousui
+```
+
+출력:
+
+```text
+2
+```
+
+T=[“suidousui”], T=[“sui”, “dou”, “sui”]입니다.
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+kaibunkaibunkai
+```
+
+출력:
+
+```text
+3
+```
+
+T=[“kaibunkaibunkai”], T=[“kai”, “bunkaibun”, “kai”], T=[“kai”, “bun”, “kai”, “bun”, “kai”]입니다.
+
+### 샘플 4 {file="sample4.in"}
+
+입력:
+
+```text
+aaaaa
+```
+
+출력:
+
+```text
+4
+```
+
+T=[“aaaaa”], T=[“aa”, “a”, “aa”], T=[“a”, “aaa”, “a”], T=[“a”, “a”, “a”, “a”, “a”]입니다.

@@ -1,0 +1,95 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 465
+problemId: 1467
+sourceTitle: "PPPPPPPPPPPPPPPPAPPPPPPPP"
+sourceHtmlSha256: "4d910175da6edbfa1806580cf79cfd908a93fb1c6b09a1592783b87f3986bd6e"
+reviewStatus: unreviewed
+title: "PPPPPPPPPPPPPPPPAPPPPPPPP"
+---
+
+## 문제
+
+이 문제는 Advent Calendar Contest 2016의 15일 차 문제입니다.
+
+$P_1,P_2,P_3$를 길이가 1 이상인 임의의 회문, $A$를 길이가 1 이상인 임의의 문자열이라고 합니다.
+
+문자열 $S$가 입력으로 주어집니다.
+
+$P_1,P_2,A,P_3$를 이 순서대로 이어 붙여 만든 문자열을 $PPAP$라고 할 때, $PPAP=S$가 되는 $(P_1,P_2,A,P_3)$의 조합은 몇 가지인가요?
+
+## 입력
+
+```text
+S
+```
+
+첫 번째 줄에 문자열 $S$가 주어집니다.
+
+$4\leq|S|\leq500000$
+
+$S$는 반각 영소문자만으로 이루어집니다.
+
+## 출력
+
+답을 나타내는 정수를 한 줄에 출력하세요.
+
+마지막에 줄바꿈을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+testsetlevelisminim
+```
+
+출력:
+
+```text
+8
+```
+
+다음 8가지입니다.
+
+```text
+(t, e, stsetlevelis, minim)
+(t, e, stsetlevelismini, m)
+(t, estse, tlevelis, minim)
+(t, estse, tlevelismini, m)
+(testset, l, evelis, minim)
+(testset, l, evelismini, m)
+(testset, level, is, minim)
+(testset, level, ismini, m)
+```
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+xxoxxxxoxxoxxoxxxxoxxxxoxxxxoxxoxxoxxxxoxx
+```
+
+출력:
+
+```text
+92
+```
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+ppppppppppppppppapppppppp
+```
+
+출력:
+
+```text
+1009
+```

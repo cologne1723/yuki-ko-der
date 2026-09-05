@@ -1,0 +1,54 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 166
+problemId: 380
+sourceTitle: "マス埋めゲーム"
+sourceHtmlSha256: 0e887dcd7a0ac70b8c2102ef38c4369567918db26aac1ab4ae7b422bb6a83001
+reviewStatus: unreviewed
+title: "칸 채우기 게임"
+---
+
+## 문제 설명
+
+$H$행 $\times$ $W$열의 칸이 있습니다. 1번부터 $N$번까지의 사람들이 1번 사람부터 차례로 비어 있는 칸 하나를 원하는 대로 채웁니다.
+
+N번 사람까지 차례가 지나면 다시 1번 사람으로 돌아갑니다. 마지막 칸을 채운 사람이 패배합니다. $K$번 사람이 패배하면 `YES`, 패배하지 않으면 `NO`를 출력하세요.
+
+값이 $2^{31}$을 초과할 수 있습니다.
+
+## 입력
+
+```text
+H W N K
+```
+
+- $1 \le H,W \le 10^9$
+- $1 \le N \le 10^{18}$
+- $1 \le K \le N$
+
+## 출력
+
+$K$번 사람이 패배하면 `YES`, 그렇지 않으면 `NO`를 출력하세요.
+
+## 예제
+
+### 예제 1
+
+```text
+1 2 2 2
+```
+
+```text
+YES
+```
+
+### 예제 2
+
+```text
+1 2 2 1
+```
+
+```text
+NO
+```

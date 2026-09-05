@@ -1,0 +1,85 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 554
+problemId: 1287
+sourceTitle: "recurrence formula"
+sourceHtmlSha256: "d46f479bb08b29778aa1efff2e743be124b56f37cc8eb2865869adca0ac225ea"
+reviewStatus: unreviewed
+title: "점화식 공식"
+---
+
+## 문제
+
+다음 점화식으로 정의되는 수열 {a}의 n번째 항을 10^9+7로 나눈 나머지를 구하세요.
+
+a1 = 1
+
+n이 1이 아닐 때,
+
+* n이 짝수이면 an = n × (a1 + a3 + a5 + … + an−1)
+* n이 홀수이면 an = n × (a2 + a4 + a6 + … + an−1)
+
+## 입력
+
+```text
+n
+```
+
+1 ≤ n ≤ 10^5
+
+## 출력
+
+수열 {a}의 n번째 항을 10^9+7로 나눈 나머지를 출력하세요.
+
+출력 마지막에는 줄바꿈이 필요합니다.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+2
+```
+
+출력:
+
+```text
+2
+```
+
+a2 = 2 × a1 = 2입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+4
+```
+
+출력:
+
+```text
+28
+```
+
+a4 = 4 × (a1 + a3) = 28입니다.
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+6
+```
+
+출력:
+
+```text
+942
+```
+
+a6 = 6 × (a1 + a3 + a5) = 942입니다.

@@ -1,0 +1,74 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 233
+problemId: 537
+sourceTitle: "めぐるはめぐる (3)"
+sourceHtmlSha256: a0efe636b3a9133c1b7f79409238144bc4fdc3e008405524401c1823c6121f0a
+reviewStatus: unreviewed
+title: "메구루는 메구루 (3)"
+---
+
+## 문제
+
+메구루가 사용할 이름은 `inabameguru`의 애너그램이며 로마자 발음이 가능한 문자열이어야 합니다. 로마자 발음이 가능하다는 것은 자음이 연속하지 않고 모음으로 끝나는 문자열이라는 뜻입니다. 모음은 `a`, `i`, `u`, `e`, `o`의 5개 문자입니다.
+
+지금까지 $N$개의 게임에서 각각 $S_1,S_2,\ldots,S_N$이라는 이름을 사용했습니다. 다음 게임에서 사용할 수 있는 이름을 하나 고르세요. 같은 이름은 다시 사용하지 않습니다.
+
+## 입력
+
+```text
+N
+S_1
+S_2
+⋮
+S_N
+```
+
+$N$은 0 이상인 정수입니다. $S_1,S_2,\ldots,S_N$은 지금까지 메구루가 사용한 이름입니다.
+
+## 출력
+
+다음 게임에서 사용할 수 있는 이름을 하나 출력하세요. 존재하지 않으면 `NO`를 출력하세요. 스페셜 저지 문제이므로 마지막에 개행을 넣으세요.
+
+## 샘플
+
+### 입력 1 {file="stdin"}
+
+```text
+1
+inabameguru
+```
+
+### 출력 1 {file="stdout"}
+
+```text
+meguruinaba
+```
+
+### 입력 2 {file="stdin"}
+
+```text
+3
+inabameguru
+meguruinaba
+nemuriugaba
+```
+
+### 출력 2 {file="stdout"}
+
+```text
+meguriunaba
+```
+
+### 입력 3 {file="stdin"}
+
+```text
+0
+```
+
+### 출력 3 {file="stdout"}
+
+```text
+inabameguru
+```

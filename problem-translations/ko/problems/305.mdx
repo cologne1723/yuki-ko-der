@@ -1,0 +1,135 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 305
+problemId: 768
+sourceTitle: "鍵(2)"
+sourceHtmlSha256: "2666d8ef7713f6b87f57112ee992d864f51c1bca479b9a1ad0523b4f042923fe"
+reviewStatus: unreviewed
+title: "열쇠 (2)"
+---
+
+## 문제
+
+yuki 군은 금고 열쇠의 비밀번호를 잊어버렸습니다. 적당한 번호를 yuki 군에게 알려 주어 어떻게든 열쇠를 여는 것을 도와주세요.
+
+비밀번호는 10자리 숫자(`0000000000`〜`9999999999`)입니다. 앞의 0을 포함한 10자리 숫자를 표준 출력으로 출력하세요.
+
+출력이 비밀번호와 다르면 판정기가 다음을 표준 입력으로 반환합니다.
+
+```text
+X locked
+```
+
+여기서 $X$는 금고 비밀번호와 일치한 숫자의 개수입니다. 열쇠는 아직 열리지 않았으므로 $X$를 참고해 다른 숫자를 시도하세요.
+
+출력이 비밀번호와 일치하면 판정기가 다음을 반환합니다.
+
+```text
+10 unlocked
+```
+
+열쇠가 열렸으므로 프로그램을 종료하세요. 열쇠를 연 쿼리 뒤에 불필요한 출력을 하면 오답입니다.
+
+시간 제한 안에서는 몇 번이든 시도할 수 있습니다. 약 7000쿼리 정도면 시간 초과가 난다고 합니다.
+
+## 입출력
+
+이 문제는 인터랙티브 문제입니다. 문제의 내용에 따라 입출력 작업을 수행하세요. 특히 각 출력을 개행하고 flush하는 것을 잊지 마세요.
+
+인터랙티브 문제의 입출력에 관한 주의사항은 [yukicoder wiki의 인터랙티브 형식 문제 정리](https://yukicoder.me/wiki/interactive), [문제 246](https://yukicoder.me/problems/246), [문제 253](https://yukicoder.me/problems/253) 등을 참고하세요.
+
+## 판정 코드 (참고)
+
+판정에 사용되는 코드입니다. C++로 작성되었으며, 명령줄 인수의 첫 번째 파일에서 정답 문자열을 읽습니다.
+
+```cpp
+#include <iostream>
+#include <fstream>
+#include <cassert>
+using namespace std;
+
+string input(istream& is){
+ string ret;
+ getline(is, ret); //回答コードから受け取った文字列
+ assert(ret.size() == 10); //長さは 10
+ for(char c : ret){ //数字のみかチェック
+ assert('0' <= c && c <= '9');
+ }
+ return ret;
+}
+
+int main(int argc, char* argv[]){
+ ifstream ifs(argv[1]);
+ string ans = input(ifs); //第一引数のファイルから正解の文字列を取得
+ cerr << "Answer : " << ans << endl;
+
+ while(1){
+ string in = input(cin); //標準入力から回答の文字列を取得
+ if(in == ans){ //正解なら "10 unlocked" を出力して終了
+ cout << "10 unlocked" << endl;
+ if(cin >> in){ //余計な出力がないか確認
+ cerr << "Wrong Answer : too many outputs" << endl;
+ abort();
+ }
+ return 0;
+ }else{ //不正解なら "locked" を出力
+ int x = 0;
+ for(int i=0; i<10; i++){
+ x += ans[i] == in[i];
+ }
+ cout << x << " locked" << endl;
+ }
+ }
+ return 0;
+}
+```
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+비밀번호: `0000000001`
+
+### 샘플 1 {file="sample1.out"}
+
+```text
+1234567890
+0000000000
+0000000001
+```
+
+### 샘플 1 {file="sample1.judge"}
+
+```text
+0 locked
+9 locked
+10 unlocked
+```
+
+비밀번호가 `0000000001`일 때의 입출력 예입니다. 첫 번째 입력은 비밀번호와 일치하는 숫자가 0개입니다. 두 번째 입력에서는 앞의 9개 0이 일치합니다. 세 번째 시도에서 열렸습니다. 앞의 0을 포함해 10자리 숫자를 출력하세요.
+
+### 샘플 2 {file="sample2.in"}
+
+비밀번호: `1234567890`
+
+### 샘플 2 {file="sample2.out"}
+
+```text
+0000000000
+9999999999
+1234500000
+1234567899
+1234567890
+```
+
+### 샘플 2 {file="sample2.judge"}
+
+```text
+1 locked
+1 locked
+6 locked
+9 locked
+10 unlocked
+```
+

@@ -1,0 +1,72 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 672
+problemId: 1486
+sourceTitle: "最長AB列"
+sourceHtmlSha256: "2fbf5ce793ed04c8a21851f6138f4526c56c285d94a806978a23500d938f4628"
+reviewStatus: unreviewed
+title: "최장 AB 열"
+---
+
+## 문제
+
+문자 A와 B로 이루어진 문자열 $S$가 있습니다. $S$의 연속 구간 중 A와 B의 개수가 같은 구간의 최대 길이를 구하세요.
+
+## 입력
+
+문자열 $S$는 A와 B로 이루어지고 길이는 1 이상 200000 이하입니다.
+
+## 출력
+
+조건을 만족하는 최대 길이를 출력하세요. 그런 문자열이 없으면 0을 출력하세요. 마지막에 개행을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+AAABBA
+```
+
+출력:
+
+```text
+4
+```
+
+최장은 AABB 또는 ABBA이고 길이는 4입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+ABBBBBA
+```
+
+출력:
+
+```text
+2
+```
+
+최장은 AB 또는 BA이고 길이는 2입니다.
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+B
+```
+
+출력:
+
+```text
+0
+```
+
+조건을 만족하는 구간이 없으면 0입니다.

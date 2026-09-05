@@ -1,0 +1,82 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 829
+problemId: 2596
+sourceTitle: "成長関数インフレ中"
+sourceHtmlSha256: "3863579ab06fae9bea2e549ce256c6b84351f604c890010e608cf4b4fdcebc0a"
+reviewStatus: unreviewed
+title: "성장 함수 인플레이션 중"
+---
+
+## 문제
+
+Aoki 군은 $N$일 동안 콘테스트에 참가해 점수를 기록했습니다. 점수 수열 $A$의 성장 수 $g(A)$를, $\max\{A_1,\ldots,A_i\}\lt A_{i+1}$인 $0\leq i\leq N-1$의 개수로 정의합니다. $\max(\emptyset)=-\infty$이며 첫날도 성장한 것으로 셉니다.
+
+점수의 순서가 사라지고 중복을 허용한 점수 집합 $\{S_1,\ldots,S_N\}$만 남았습니다. 순열 $p$에 대해 $S(p)=\{S_{p_1},\ldots,S_{p_N}\}$라 하고, $\mathrm{SCORE}(p)=g(S(p))\times B^{g(S(p))}$로 정의합니다.
+
+모든 순열의 SCORE 합을 $10^9+7$로 나눈 나머지를 구하세요.
+
+## 입력
+
+~~~text
+$N\ B$
+$S_1\ S_2\ \ldots\ S_N$
+~~~
+
+$1\leq N\leq2\times10^5$, $1\leq B\lt10^9+7$, $0\leq S_i\lt N$입니다.
+
+## 출력
+
+모든 순열에 대한 SCORE 합을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+#### 입력
+
+~~~text
+3 2
+0 1 2
+~~~
+
+#### 출력
+
+~~~text
+52
+~~~
+
+각 순열에서 성장 수가 3, 2, 2, 2, 1, 1이고 SCORE는 각각 24, 8, 8, 8, 2, 2이므로 합은 52입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+#### 입력
+
+~~~text
+2 1
+1 1
+~~~
+
+#### 출력
+
+~~~text
+2
+~~~
+
+두 순열은 같은 수열을 만들지만 서로 다른 순열로 세어야 합니다.
+
+### 샘플 3 {file="sample3.in"}
+
+#### 입력
+
+~~~text
+6 548438800
+2 3 3 1 0 2
+~~~
+
+#### 출력
+
+~~~text
+140476412
+~~~

@@ -1,0 +1,337 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#toplinks a",
+      "source": "編集履歴(外部サイト)",
+      "target": "편집 내역 (외부 사이트)"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "Blame(外部サイト)",
+      "target": "Blame (외부 사이트)"
+    },
+    {
+      "selector": "#content h4",
+      "source": "初心者のためのガイド",
+      "target": "초보자 가이드"
+    },
+    {
+      "selector": "#content div",
+      "source": "初心者の方へのガイドです。",
+      "target": "초보자를 위한 가이드입니다."
+    },
+    {
+      "selector": "#content div",
+      "source": "特におすすめの問題を掲載しています。",
+      "target": "추천하는 문제를 소개합니다."
+    },
+    {
+      "selector": "#content h2",
+      "source": "まずはじめに",
+      "target": "시작하기 전에"
+    },
+    {
+      "selector": "#content h3",
+      "source": "環境を準備しましょう",
+      "target": "개발 환경을 준비합시다"
+    },
+    {
+      "selector": "#content p",
+      "source": "手元に使い慣れたテキストエディタや統合開発環境を準備しましょう。これから環境を構築するときは、",
+      "target": "익숙한 텍스트 편집기나 IDE를 준비합시다. 지금부터 환경을 구축한다면, "
+    },
+    {
+      "selector": "#content a",
+      "source": "環境構築まとめ",
+      "target": "환경 구축 정리"
+    },
+    {
+      "selector": "#content p",
+      "source": "が参考になります。",
+      "target": "를 참고할 수 있습니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "環境の構築をしなくても、",
+      "target": "환경을 구축하지 않아도"
+    },
+    {
+      "selector": "#content a",
+      "source": "オンライン実行",
+      "target": "온라인 실행"
+    },
+    {
+      "selector": "#content p",
+      "source": "が使用できます。",
+      "target": "을 사용할 수 있습니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "また、各問題の提出画面でも動作の確認ができます。",
+      "target": "각 문제의 제출 화면에서도 동작을 확인할 수 있습니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "将来的には手元に環境構築できたほうが何かと便利です。",
+      "target": "장기적으로는 로컬에 환경을 구축해 두는 편이 여러모로 편리합니다."
+    },
+    {
+      "selector": "#content h4",
+      "source": "外部サービス",
+      "target": "외부 서비스"
+    },
+    {
+      "selector": "#content div",
+      "source": "また、外部サービスとして以下のようなオンラインコンパイラを利用することも出来ます。",
+      "target": "다음과 같은 외부 온라인 컴파일러를 이용할 수도 있습니다."
+    },
+    {
+      "selector": "#content h3",
+      "source": "チュートリアルの問題を解いてみましょう！",
+      "target": "튜토리얼 문제를 풀어 봅시다!"
+    },
+    {
+      "selector": "#content p",
+      "source": "これらの問題から始めて、問題の入出力の方法に慣れましょう。コードを書いて、提出ページでコードを提出してみましょう。",
+      "target": "이 문제들부터 시작해 입출력 방식에 익숙해집시다. 코드를 작성하고 제출 페이지에서 제출해 봅시다."
+    },
+    {
+      "selector": "#content p",
+      "source": "入出力の方法が分からない場合は、",
+      "target": "입출력 방법을 모른다면 "
+    },
+    {
+      "selector": "#content a",
+      "source": "言語別標準入出力",
+      "target": "언어별 표준 입출력"
+    },
+    {
+      "selector": "#content p",
+      "source": "を参考にしてください。",
+      "target": "을 참고해 주세요."
+    },
+    {
+      "selector": "#content h4",
+      "source": "テストケース・解説について",
+      "target": "테스트 케이스·해설 안내"
+    },
+    {
+      "selector": "#content p",
+      "source": "このサイトでは、問題を解かなくてもテストケースと解説が表示できます。",
+      "target": "이 사이트에서는 문제를 풀지 않아도 테스트 케이스와 해설을 볼 수 있습니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "ですが、悩まずに見てしまうと力にならないと思いますので、なるべく自力で考えてどうしても詰まったら見るようにしましょう。",
+      "target": "하지만 고민하지 않고 열어보는 경우 실력 향상에 도움이 되지 않으므로, 가능한 한 스스로 생각한 뒤 정말 막혔을 때 확인합시다."
+    },
+    {
+      "selector": "#content h2",
+      "source": "簡単な問題を解いてみよう（★）",
+      "target": "쉬운 문제를 풀어 봅시다 (★)"
+    },
+    {
+      "selector": "#content h4",
+      "source": "考察が必要な競技よりの問題",
+      "target": "관찰이 필요한 대회형 문제"
+    },
+    {
+      "selector": "#content h2",
+      "source": "アルゴリズム寄りの問題を解く（★★）",
+      "target": "알고리즘 중심 문제 풀기 (★★)"
+    },
+    {
+      "selector": "#content h4",
+      "source": "アルゴリズムの参考",
+      "target": "알고리즘 참고 자료"
+    },
+    {
+      "selector": "#content h2",
+      "source": "難しい問題をとく（★★★以上）",
+      "target": "어려운 문제 풀기 (★★★ 이상)"
+    },
+    {
+      "selector": "#content h3",
+      "source": "アルゴリズムの参考",
+      "target": "알고리즘 참고 자료"
+    },
+    {
+      "selector": "#content p",
+      "source": "空白や改行区切りで与えられる問題に慣れましょう。",
+      "target": "공백이나 줄바꿈으로 구분된 입력 문제에 익숙해집시다."
+    },
+    {
+      "selector": "#content p",
+      "source": "また32ビット整数型では解けないものもあるということを知っておくと良いでしょう。",
+      "target": "32비트 정수형으로는 풀 수 없는 문제도 있다는 점을 알아 둡시다."
+    },
+    {
+      "selector": "#content p",
+      "source": "（なお、ジャッジは64ビット環境で行われております。）",
+      "target": "(채점은 64비트 환경에서 수행됩니다.)"
+    },
+    {
+      "selector": "#content p",
+      "source": "競技プログラミングをしたことない方でも比較的簡単に解けると思われるシンプルな問題です。",
+      "target": "경쟁 프로그래밍을 처음 접하는 사람도 비교적 쉽게 풀 수 있는 간단한 문제들입니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "概ね制約を意識しなくても解ける問題です。",
+      "target": "보통 제한을 크게 의식하지 않아도 풀 수 있습니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "他にも簡単な問題（★）はたくさんあります。",
+      "target": "그 밖에도 쉬운 문제(★)가 많이 있습니다."
+    },
+    {
+      "selector": "#content a",
+      "source": "問題一覧",
+      "target": "문제 목록"
+    },
+    {
+      "selector": "#content p",
+      "source": "から問題を選んで解いてみましょう。",
+      "target": "📝 에서 문제를 골라 풀어 봅시다."
+    },
+    {
+      "selector": "#content p",
+      "source": "（★1が解けるようになってきた方だと）解けそうで解けなさそうな問題だと思います。",
+      "target": "★1 문제를 풀 수 있게 된 사람이라면 풀 수 있을 듯하면서도 쉽지 않은 문제들입니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "ここから、探索系アルゴリズムが必要になってきます。",
+      "target": "여기부터 여러 탐색 방법들을 사용해야 하는 문제가 등장합니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "制約も意識しないといけない問題が出てきます。",
+      "target": "문제의 제한을 고려해야 하는 문제도 등장합니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "制約を見たら、簡単な解法では解けない。もしくは、制約が小さいので、全て列挙する事が可能かもしれません。",
+      "target": "제한을 보면 단순한 풀이로는 풀 수 없는 문제도 있습니다. 제한이 작아 모든 경우를 나열할 수 있는 문제도 있습니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "少し考察も必要になってきて、競技では最初のハードルである動的計画法を使う問題もあります。",
+      "target": "조금 더 관찰이 필요해지며, 대회에서 첫 번째 장벽인 동적 계획법을 사용하는 문제도 있습니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "競技プログラミングをよくしてる方から典型かもしれません。",
+      "target": "Competitive Programming에 익숙한 사람에게는 전형적인 문제일 수 있습니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "慣れないとデバッグが少し大変になってくるので、バグらせないように実装するスキルも必要になってきます。",
+      "target": "디버깅에 익숙해져서, 버그 없이 구현하는 능력도 필요합니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "正直、直接業務では出てこないような処理かもしれません。",
+      "target": "솔직히, 실무에서 마추지지 않을 수도 있는 문제입니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "（ですが、運営者的には、エンジニアはこれらの問題も解けるようなスキルがある世の中になってほしいと願ってます。）",
+      "target": "(하지만 운영자는 엔지니어가 이런 문제도 풀 수 있는 역량을 갖춘 세상이 되기를 바랍니다.)"
+    },
+    {
+      "selector": "#content li",
+      "source": "深さ優先探索",
+      "target": "깊이 우선 탐색"
+    },
+    {
+      "selector": "#content li",
+      "source": "幅優先探索",
+      "target": "너비 우선 탐색"
+    },
+    {
+      "selector": "#content li",
+      "source": "二分探索",
+      "target": "이분 탐색"
+    },
+    {
+      "selector": "#content li",
+      "source": "素因数分解",
+      "target": "소인수분해"
+    },
+    {
+      "selector": "#content li",
+      "source": "エラトステネスの篩（素数）",
+      "target": "에라토스테네스의 체 (소수 판정 알고리즘)"
+    },
+    {
+      "selector": "#content li",
+      "source": "ユークリッド互除法(最大公約数・最小公倍数)",
+      "target": "유클리드 호제법 (최대공약수, 최소공배수)"
+    },
+    {
+      "selector": "#content li",
+      "source": "動的計画法・メモ化再帰",
+      "target": "동적 계획법, 메모이제이션"
+    },
+    {
+      "selector": "#content li",
+      "source": "しゃくとり法",
+      "target": "투 포인터"
+    },
+    {
+      "selector": "#content li",
+      "source": "Imos法（累積和手法)",
+      "target": "누적 합"
+    },
+    {
+      "selector": "#content p",
+      "source": "より複雑なアルゴリズム・データ構造を使用した問題が出てきます。",
+      "target": "더 복잡한 알고리즘과 자료 구조를 사용하는 문제가 등장합니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "考察も必要になり、事前にアルゴリズムについて知ってないと厳しいかもしれません。",
+      "target": "관찰이 필요하며 알고리즘을 미리 알지 못하면 어려울 수 있습니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "この辺が解けると、十分競技プログラミングの問題が解けるようになってると思われますので、どんどん解いていきましょう。",
+      "target": "이 정도를 풀 수 있다면 Competitive Programming 문제를 충분히 해결할 수 있는 수준이므로 계속 도전합시다."
+    },
+    {
+      "selector": "#content li",
+      "source": "ワーシャルフロイド法",
+      "target": "플로이드-워셜 알고리즘"
+    },
+    {
+      "selector": "#content li",
+      "source": "ダイクストラ法",
+      "target": "다익스트라 알고리즘"
+    },
+    {
+      "selector": "#content li",
+      "source": "優先度付きキュー",
+      "target": "우선순위 큐"
+    },
+    {
+      "selector": "#content div",
+      "source": "などなど",
+      "target": "등등"
+    },
+    {
+      "selector": "footer",
+      "source": "は",
+      "target": "는"
+    },
+    {
+      "selector": "footer a",
+      "source": "クリエイティブ・コモンズ 表示 4.0 国際 ライセンスの下で提供されています。",
+      "target": "크리에이티브 커먼즈 저작자표시 4.0 국제 라이선스로 제공됩니다."
+    }
+  ]
+}

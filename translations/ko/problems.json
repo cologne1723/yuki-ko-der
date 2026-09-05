@@ -1,0 +1,181 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#toplinks a",
+      "source": "通常問題",
+      "target": "📝 일반 문제"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "スコア問題",
+      "target": "📝 점수 문제"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "教育的問題",
+      "target": "📝 교육적 문제"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "数学的知識問題",
+      "target": "📝 수학 지식 문제"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "ネタ問題",
+      "target": "📝 재미 문제"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "⚠未証明/不備あり問題",
+      "target": "📝 ⚠미증명/결함이 있는 문제"
+    },
+    {
+      "selector": "#content h4",
+      "source": "問題一覧",
+      "target": "📝 문제 목록"
+    },
+    {
+      "selector": "#content .left",
+      "source": "の問題に",
+      "target": "📝 번 문제로"
+    },
+    {
+      "selector": "#problem_no_jump_button",
+      "source": "移動",
+      "target": "📝 이동"
+    },
+    {
+      "selector": "#content .left",
+      "source": "全{count}件",
+      "target": "📝 전체 {count}개",
+      "variables": { "count": "\\d+" }
+    },
+    { "selector": "#content .left", "source": "レベル", "target": "📝 레벨" },
+    { "selector": "#content .left", "source": "順番", "target": "📝 정렬" },
+    {
+      "selector": "#content option",
+      "source": "最新順",
+      "target": "📝 최신순"
+    },
+    {
+      "selector": "#content option",
+      "source": "過去順",
+      "target": "📝 오래된순"
+    },
+    {
+      "selector": "#content option",
+      "source": "レベルが低い順",
+      "target": "📝 레벨 낮은순"
+    },
+    {
+      "selector": "#content option",
+      "source": "レベルが高い順",
+      "target": "📝 레벨 높은순"
+    },
+    {
+      "selector": "#content option",
+      "source": "解いたユーザーが多い順",
+      "target": "📝 푼 사용자 많은순"
+    },
+    {
+      "selector": "#content option",
+      "source": "解いたユーザーが少ない順",
+      "target": "📝 푼 사용자 적은순"
+    },
+    {
+      "selector": "#content option",
+      "source": "Favが多い順",
+      "target": "📝 즐겨찾기 많은순"
+    },
+    {
+      "selector": "#content option",
+      "source": "Favが少ない順",
+      "target": "📝 즐겨찾기 적은순"
+    },
+    { "selector": "#content .left", "source": "問題名", "target": "📝 문제명" },
+    {
+      "selector": "#content .left",
+      "source": "（以降）",
+      "target": "📝 (이후)"
+    },
+    { "selector": "#content .left", "source": "タグ", "target": "📝 태그" },
+    { "selector": "#content .left", "source": "ジャッジ", "target": "📝 채점" },
+    {
+      "selector": "#content option",
+      "source": "通常・誤差",
+      "target": "📝 일반·오차"
+    },
+    {
+      "selector": "#content option",
+      "source": "スペシャル",
+      "target": "📝 스페셜"
+    },
+    {
+      "selector": "#content option",
+      "source": "リアクティブ",
+      "target": "📝 리액티브"
+    },
+    {
+      "selector": "#content option",
+      "source": "コミュニケーション",
+      "target": "📝 커뮤니케이션"
+    },
+    { "selector": "#content .left", "source": "誤差", "target": "📝 오차" },
+    {
+      "selector": "#content option",
+      "source": "誤差なし",
+      "target": "📝 오차 없음"
+    },
+    {
+      "selector": "#content option",
+      "source": "誤差あり",
+      "target": "📝 오차 있음"
+    },
+    {
+      "selector": "#content label",
+      "source": "解いてない問題",
+      "target": "📝 풀지 않은 문제"
+    },
+    {
+      "selector": "#content label",
+      "source": "公開済み問題",
+      "target": "📝 공개된 문제"
+    },
+    {
+      "selector": "#content label",
+      "source": "（作問者用）",
+      "target": "📝 (출제자용)"
+    },
+    {
+      "selector": "#content label",
+      "source": "完成問題のみ",
+      "target": "📝 완성된 문제만"
+    },
+    {
+      "selector": "#content label",
+      "source": "テスターした問題",
+      "target": "📝 테스트한 문제"
+    },
+    {
+      "selector": "#content label",
+      "source": "デフォルトにする",
+      "target": "📝 기본값으로 설정"
+    },
+    {
+      "selector": "#content i.my_tooltip",
+      "attribute": "title",
+      "source": "ジャッジ＝通常・誤差を選んだときだけ表示されます。誤差判定の有無でさらに絞り込みます。",
+      "target": "📝 채점에서 일반·오차를 선택한 경우에만 표시됩니다. 오차 판정 여부로 다시 필터링합니다."
+    },
+    {
+      "selector": "#content i.my_tooltip",
+      "attribute": "title",
+      "source": "左の一覧メニューのデフォルトの条件にします。ちなみに、左上のタブを押すと条件なしにできます。",
+      "target": "📝 왼쪽 목록 메뉴의 기본 조건으로 설정합니다. 왼쪽 위 탭을 누르면 조건을 해제할 수 있습니다."
+    }
+  ]
+}

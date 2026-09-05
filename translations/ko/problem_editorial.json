@@ -1,0 +1,63 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    { "selector": "#toplinks a", "source": "閲覧", "target": "📝 열람" },
+    {
+      "selector": "#body div",
+      "source": "現在解説は表示することはできません。",
+      "target": "📝 현재 해설을 표시할 수 없습니다."
+    },
+    {
+      "selector": "#body div",
+      "source": "表示することができないユーザーは以下のとおりです。",
+      "target": "📝 해설을 볼 수 없는 사용자는 다음과 같습니다."
+    },
+    {
+      "selector": "#content li",
+      "source": "非ログイン・匿名ログインユーザー(ガチモードと同様の扱い)",
+      "target": "📝 비로그인·익명 로그인 사용자(진지 모드와 동일하게 취급)"
+    },
+    {
+      "selector": "#content li",
+      "source": "ガチモード時にACを取ってないユーザー",
+      "target": "📝 진지 모드에서 AC하지 않은 사용자"
+    },
+    {
+      "selector": "#content li",
+      "source": "コンテスト中",
+      "target": "📝 대회 진행 중"
+    },
+    {
+      "selector": "#disableEditorialModal .modal-title",
+      "source": "解説URLを無効化",
+      "target": "📝 해설 URL 비활성화"
+    },
+    {
+      "selector": "#disableEditorialForm label",
+      "source": "解説URL:",
+      "target": "📝 해설 URL:"
+    },
+    {
+      "selector": "#disableEditorialForm label",
+      "source": "無効化理由:",
+      "target": "📝 비활성화 사유:"
+    },
+    {
+      "selector": "#disableEditorialForm .form-check-label",
+      "source": "URLも完全に削除する（復旧不可能）",
+      "target": "📝 URL도 완전히 삭제(복구 불가)"
+    },
+    {
+      "selector": "#disableEditorialModal button",
+      "source": "キャンセル",
+      "target": "📝 취소"
+    },
+    {
+      "selector": "#disableEditorialModal button",
+      "source": "無効化する",
+      "target": "📝 비활성화"
+    }
+  ]
+}

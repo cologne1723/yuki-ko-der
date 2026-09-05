@@ -1,0 +1,73 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 431
+problemId: 1352
+sourceTitle: "死亡フラグ"
+sourceHtmlSha256: "1c1267781fbe5a7cedea55cd1669fb0f8c7b5dc8c11b0d149213ed9ac343fc99"
+reviewStatus: unreviewed
+title: "사망 플래그"
+---
+
+## 문제
+
+사망 플래그 3개의 상태와 생존 플래그 1개의 상태가 주어집니다. 다음 방법으로 사망인지 생존인지 판정하세요.
+
+- 사망 플래그가 2개 이상 켜져 있으면 사망, 2개 미만이면 생존입니다.
+- 생존 플래그가 켜져 있으면 사망 플래그 상태와 관계없이 생존입니다.
+
+## 입력
+
+Dᵢ는 사망 플래그 i의 상태이고 S는 생존 플래그의 상태입니다. 각각 1 또는 0으로 주어집니다. 1은 ON(플래그가 켜짐), 0은 OFF(플래그가 꺼짐)를 뜻합니다.
+
+```text
+D₁ D₂ D₃ S
+```
+
+## 출력
+
+사망이면 `DEAD`, 생존이면 `SURVIVED`를 출력하세요. 마지막에 개행을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+```text
+0 1 0 0
+```
+
+### 샘플 1 출력 {file="sample1.out"}
+
+```text
+SURVIVED
+```
+
+켜진 사망 플래그가 2개 미만이므로 생존입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+```text
+1 1 1 0
+```
+
+### 샘플 2 출력 {file="sample2.out"}
+
+```text
+DEAD
+```
+
+사망 플래그가 2개 이상 켜져 있으므로 사망입니다.
+
+### 샘플 3 {file="sample3.in"}
+
+```text
+1 0 1 1
+```
+
+### 샘플 3 출력 {file="sample3.out"}
+
+```text
+SURVIVED
+```
+
+생존 플래그가 켜져 있으므로 사망 플래그 상태와 관계없이 생존입니다.

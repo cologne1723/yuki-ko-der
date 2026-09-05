@@ -1,0 +1,100 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#toplinks a",
+      "source": "タグ一覧",
+      "target": "📝 태그 목록"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "出題待ち",
+      "target": "📝 출제 대기"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "言語別速度",
+      "target": "📝 언어별 속도"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "記録保有数",
+      "target": "📝 기록 보유 수"
+    },
+    {
+      "selector": "#content h4",
+      "source": "レベル別問題数",
+      "target": "📝 레벨별 문제 수"
+    },
+    {
+      "selector": "#content h4",
+      "source": "言語別提出数",
+      "target": "📝 언어별 제출 수"
+    },
+    {
+      "selector": "#content h4",
+      "source": "ユーザーレベル分布",
+      "target": "📝 사용자 레벨 분포"
+    },
+    {
+      "selector": "#content h4",
+      "source": "ユーザーレベル分布 (0-9)",
+      "target": "📝 사용자 레벨 분포 (0-9)"
+    },
+    {
+      "selector": "#content span",
+      "source": "解いてないものから",
+      "target": "📝 풀지 않은 문제 중에서"
+    },
+    { "selector": "#content th", "source": "ランダム", "target": "📝 무작위" },
+    {
+      "selector": "#content a",
+      "source": "おみくじ",
+      "target": "📝 운세 뽑기"
+    },
+    {
+      "selector": "#content th",
+      "source": "問題数合計",
+      "target": "📝 전체 문제 수"
+    },
+    {
+      "selector": "#content th",
+      "source": "レベル合計",
+      "target": "📝 전체 레벨 합계"
+    },
+    { "selector": "#content th", "source": "提出数", "target": "📝 제출 수" },
+    {
+      "selector": "#content th",
+      "source": "ユーザーレベル",
+      "target": "📝 사용자 레벨"
+    },
+    { "selector": "#content th", "source": "上位", "target": "📝 상위" },
+    {
+      "selector": "#content th",
+      "source": "偏差値（すべての範囲）",
+      "target": "📝 편차값(전체 범위)"
+    },
+    {
+      "selector": "#submissionLangTable td",
+      "source": "C11(gcc12 gnu拡張)",
+      "target": "📝 C11(gcc12 GNU 확장)"
+    },
+    {
+      "selector": "#submissionLangTable td",
+      "source": "C++17(gnu拡張)",
+      "target": "📝 C++17(GNU 확장)"
+    },
+    {
+      "selector": "#submissionLangTable td",
+      "source": "C++23(gnu拡張)",
+      "target": "📝 C++23(GNU 확장)"
+    },
+    {
+      "selector": "#submissionLangTable td",
+      "source": "C++23(gnu拡張gcc16)",
+      "target": "📝 C++23(GNU 확장 gcc16)"
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>yukicoder 한국어 번역 검수</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/client.js" defer></script>
+  </head>
+  <body>
+    <div id="app-shell" class="app-shell">
+      <aside id="problem-sidebar" class="sidebar" aria-label="문제 목록">
+        <div class="brand">
+          <span class="brand-mark">KO</span>
+          <div>
+            <strong>번역 검수</strong>
+            <span>yukicoder problems</span>
+            <a href="/ui">UI 용어집 검수 →</a>
+          </div>
+        </div>
+        <label class="search-field">
+          <span class="sr-only">문제 검색</span>
+          <input id="search" type="search" placeholder="번호 또는 제목 검색" />
+        </label>
+        <div class="filters" role="group" aria-label="검수 상태 필터">
+          <button class="filter active" data-filter="all" type="button">
+            전체
+          </button>
+          <button class="filter" data-filter="unreviewed" type="button">
+            미검수
+          </button>
+          <button class="filter" data-filter="approved" type="button">
+            승인
+          </button>
+        </div>
+        <div id="summary" class="summary" aria-live="polite"></div>
+        <nav id="problem-list" class="problem-list"></nav>
+      </aside>
+
+      <div
+        id="sidebar-resizer"
+        class="sidebar-resizer"
+        role="separator"
+        aria-label="문제 목록 너비 조절"
+        aria-orientation="vertical"
+        aria-valuemin="0"
+        aria-valuemax="520"
+        aria-valuenow="280"
+        tabindex="0"
+      ></div>
+
+      <main class="workspace">
+        <header class="toolbar">
+          <div class="problem-heading">
+            <div class="eyebrow">현재 문제</div>
+            <div class="title-row">
+              <h1 id="problem-title">문제를 선택하세요</h1>
+              <span id="status-badge" class="status-badge hidden"></span>
+              <span id="dirty-badge" class="dirty-badge hidden"
+                >저장 안 됨</span
+              >
+            </div>
+            <div id="japanese-title" class="japanese-title"></div>
+          </div>
+          <div class="toolbar-actions">
+            <button id="previous" class="button secondary" type="button">
+              이전
+            </button>
+            <button id="next" class="button secondary" type="button">
+              다음
+            </button>
+            <button id="unapprove" class="button warning hidden" type="button">
+              승인 취소
+            </button>
+            <button id="save" class="button secondary" type="button">
+              저장
+            </button>
+            <button id="approve" class="button primary" type="button">
+              승인
+            </button>
+          </div>
+        </header>
+
+        <div id="notice" class="notice hidden" role="status"></div>
+
+        <div class="view-controls" role="group" aria-label="미리보기 표시 설정">
+          <span>미리보기</span>
+          <button
+            id="japanese-pane-toggle"
+            class="button secondary active"
+            type="button"
+            aria-controls="japanese-preview"
+            aria-pressed="true"
+          >
+            원문: 표시
+          </button>
+          <button
+            id="korean-pane-toggle"
+            class="button secondary active"
+            type="button"
+            aria-controls="korean-preview"
+            aria-pressed="true"
+          >
+            번역: 표시
+          </button>
+          <button
+            id="scroll-sync"
+            class="button secondary"
+            type="button"
+            aria-pressed="false"
+          >
+            스크롤 동기화: 끔
+          </button>
+        </div>
+
+        <section
+          id="review-grid"
+          class="review-grid"
+          aria-label="번역 비교 및 편집"
+        >
+          <article id="japanese-pane" class="pane">
+            <header class="pane-header">
+              <div class="pane-label">
+                <span class="language-dot ja"></span>원문
+              </div>
+              <span class="pane-meta">日本語</span>
+            </header>
+            <iframe
+              id="japanese-preview"
+              class="preview"
+              title="일본어 원문 미리보기"
+              sandbox="allow-same-origin"
+            ></iframe>
+          </article>
+          <article id="korean-pane" class="pane">
+            <header class="pane-header">
+              <div class="pane-label">
+                <span class="language-dot ko"></span>번역
+              </div>
+              <span class="pane-meta">한국어</span>
+            </header>
+            <iframe
+              id="korean-preview"
+              class="preview"
+              title="한국어 번역 미리보기"
+              sandbox="allow-same-origin"
+            ></iframe>
+          </article>
+          <article class="pane editor-pane">
+            <header class="pane-header">
+              <div><span class="language-dot source"></span>소스</div>
+              <div class="pane-header-actions">
+                <span id="source-format">Ctrl/⌘ + S로 저장</span>
+                <button
+                  id="source-view-toggle"
+                  class="pane-source-toggle hidden"
+                  type="button"
+                >
+                  HTML 보기
+                </button>
+              </div>
+            </header>
+            <div
+              id="editor"
+              class="editor"
+              aria-label="한국어 번역 소스 편집기"
+            ></div>
+          </article>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

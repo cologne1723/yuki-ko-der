@@ -1,0 +1,77 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 741
+problemId: 1333
+sourceTitle: "AscNumber(Easy)"
+sourceHtmlSha256: "09b4255857fa24d1528e4a289f80ebe4fdd1f442839fb7a6c6ab6fdbb994d08a"
+reviewStatus: unreviewed
+title: "AscNumber(Easy)"
+---
+
+## 문제
+
+10진수 표기에서 자릿수가 오름차순으로 나열된 음이 아닌 정수를 AscNumber라고 정의합니다.
+
+예를 들어 $0,1,9,123,1359,12234,55555$는 AscNumber입니다. $21,132,3141,2590,43221$은 아닙니다.
+
+양의 정수 $N$이 주어질 때 $10^N$ 미만인 AscNumber의 개수를 구하세요. 답을 $10^9+7$로 나눈 나머지를 출력하세요.
+
+## 입력
+
+~~~text
+N
+~~~
+
+$1\leq N\leq1000000$입니다. $N$은 10진수로 주어집니다.
+
+## 출력
+
+AscNumber의 개수를 $10^9+7$로 나눈 나머지로 출력하세요. 마지막에는 줄바꿈을 추가하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+#### 입력
+
+~~~text
+1
+~~~
+
+#### 출력
+
+~~~text
+10
+~~~
+
+0부터 9는 모두 AscNumber입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+#### 입력
+
+~~~text
+8
+~~~
+
+#### 출력
+
+~~~text
+24310
+~~~
+
+### 샘플 3 {file="sample3.in"}
+
+#### 입력
+
+~~~text
+893
+~~~
+
+#### 출력
+
+~~~text
+919248923
+~~~
+

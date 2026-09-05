@@ -1,0 +1,22 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#content div",
+      "source": "さんの解説一覧",
+      "target": "📝 님의 해설 목록"
+    },
+    {
+      "selector": "#content th",
+      "source": "解説ページ",
+      "target": "📝 해설 페이지"
+    },
+    {
+      "selector": "#content a",
+      "source": "解説ページ",
+      "target": "📝 해설 페이지"
+    }
+  ]
+}

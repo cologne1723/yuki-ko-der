@@ -1,0 +1,70 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 264
+problemId: 699
+sourceTitle: "じゃんけん"
+sourceHtmlSha256: b53c2a47b6745d361879f7795d750cef7780067d2afaa984a0a33c032da90ac1
+reviewStatus: unreviewed
+title: "가위바위보"
+---
+
+## 문제
+
+당신과 상대가 가위바위보를 합니다. 가위바위보 결과를 표준 출력으로 출력하세요. 당신이 이기면 `Won`, 지면 `Lost`, 비기면 `Drew`를 출력합니다.
+
+## 입력
+
+```text
+N K
+```
+
+바위, 가위, 보는 각각 0, 1, 2로 나타내며, 첫 번째에 당신의 패, 두 번째에 상대의 패가 주어집니다.
+
+## 출력
+
+당신의 가위바위보 결과를 출력하세요.
+
+## 샘플
+
+### 입력 1 {file="stdin"}
+
+```text
+0 0
+```
+
+### 출력 1 {file="stdout"}
+
+```text
+Drew
+```
+
+당신도 바위(0), 상대도 바위(0)이므로 무승부입니다.
+
+### 입력 2 {file="stdin"}
+
+```text
+2 0
+```
+
+### 출력 2 {file="stdout"}
+
+```text
+Won
+```
+
+당신은 보(2), 상대는 바위(0)이므로 승리입니다.
+
+### 입력 3 {file="stdin"}
+
+```text
+2 1
+```
+
+### 출력 3 {file="stdout"}
+
+```text
+Lost
+```
+
+당신은 보(2), 상대는 가위(1)이므로 패배입니다.

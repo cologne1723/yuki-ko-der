@@ -1,0 +1,137 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#toplinks a",
+      "source": "コンテスト一覧",
+      "target": "대회 목록"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "カレンダー",
+      "target": "캘린더"
+    },
+    {
+      "selector": "#content",
+      "source": "ここにない時間は空いています。 仮予約する場合もここに載せます",
+      "target": "여기에 표시되지 않은 시간은 비어 있습니다. 임시 예약도 여기에 표시됩니다."
+    },
+    {
+      "selector": "#content label",
+      "source": "通常コンテスト",
+      "target": "일반 대회"
+    },
+    {
+      "selector": "#content label",
+      "source": "スコアコンテスト",
+      "target": "점수 대회"
+    },
+    {
+      "selector": "#content label",
+      "source": "企画コンテスト",
+      "target": "기획 대회"
+    },
+    {
+      "selector": "#content h4",
+      "source": "現在開催中のコンテスト",
+      "target": "현재 진행 중인 대회"
+    },
+    {
+      "selector": "#content h4",
+      "source": "将来のコンテスト",
+      "target": "예정된 대회"
+    },
+    {
+      "selector": "#content h4",
+      "source": "過去のコンテスト一覧",
+      "target": "지난 대회 목록"
+    },
+    {
+      "selector": "#content th",
+      "source": "コンテスト名",
+      "target": "대회명"
+    },
+    {
+      "selector": "#content th",
+      "source": "コンテストセッター",
+      "target": "대회 출제자"
+    },
+    {
+      "selector": "#content th",
+      "source": "開催日時",
+      "target": "개최 일시"
+    },
+    {
+      "selector": "#content th",
+      "source": "問題数",
+      "target": "문제 수"
+    },
+    {
+      "selector": "#content th",
+      "source": "コンテスト時間",
+      "target": "대회 시간"
+    },
+    {
+      "selector": "#content th",
+      "source": "順位表",
+      "target": "스코어보드"
+    },
+    {
+      "selector": "#content a",
+      "source": "順位表へ",
+      "target": "스코어보드"
+    },
+    {
+      "selector": "#content .contest-tag",
+      "source": "チーム戦",
+      "target": "팀전"
+    },
+    {
+      "selector": "#content td",
+      "source": "{count} 問",
+      "target": "{count}문제",
+      "variables": {
+        "count": "\\d+"
+      }
+    },
+    {
+      "selector": "#content .page-link",
+      "source": "前へ",
+      "target": "이전"
+    },
+    {
+      "selector": "#content .page-link",
+      "source": "次へ",
+      "target": "다음"
+    },
+    {
+      "selector": "#content td",
+      "source": "{date} ({weekday}) {time}",
+      "target": "{date} ({weekday}) {time}",
+      "variables": {
+        "date": "\\d{4}-\\d{2}-\\d{2}",
+        "weekday": {
+          "pattern": "[日月火水木金土]",
+          "values": {
+            "日": "일",
+            "月": "월",
+            "火": "화",
+            "水": "수",
+            "木": "목",
+            "金": "금",
+            "土": "토"
+          }
+        },
+        "time": "\\d{2}:\\d{2}:\\d{2}〜?"
+      }
+    },
+    {
+      "selector": "#content span.contest-tag-team",
+      "attribute": "title",
+      "source": "チームを作って参加できるコンテストです",
+      "target": "📝 팀을 만들어 참가할 수 있는 대회입니다"
+    }
+  ]
+}

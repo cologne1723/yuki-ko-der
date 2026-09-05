@@ -1,0 +1,147 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 470
+problemId: 1425
+sourceTitle: "Inverse S+T Problem"
+sourceHtmlSha256: "c64511e3c04cd780a5fb3c70b0ef07fde6972eb927f06c3dc43c7b6df944d662"
+reviewStatus: unreviewed
+title: "역 S+T 문제"
+---
+
+## 문제
+
+문자열 $S,T$에 대해 $S$와 $T$를 이어 붙인 것을 $S+T$로 나타냅니다.
+
+길이 3인 문자열 $U_1,U_2,\dots,U_N$이 $N$개 주어집니다.
+
+모든 $1\leq i\leq N$에 대해 $S_i+T_i=U_i$가 되고, $S_1,S_2,\dots,S_N,T_1,T_2,\dots,T_N$이 서로 다른 빈 문자열이 아니도록 하는 $2N$개의 문자열을 구하세요.
+
+## 입력
+
+```text
+N
+$U_1$
+$U_2$
+...
+$U_N$
+```
+
+첫 번째 줄에 문자열의 개수 $N$이 주어집니다.
+
+이후 $N$개의 줄에 입력 문자열이 주어지며, $i+1$번째 줄에 $U_i$가 주어집니다.
+
+$1\leq N\leq10^5$
+
+$U_i$는 길이 3인 문자열이며, 소문자 a부터 z 또는 대문자 A부터 Z까지의 문자만 포함합니다.
+
+## 출력
+
+이 문제는 스페셜 저지입니다.
+
+조건을 만족하는 문자열이 존재하지 않으면 `Impossible`을 출력하세요.
+
+그렇지 않으면 1번째 줄부터 $N$번째 줄까지, $i$번째 줄에 $S_i$와 $T_i$를 공백으로 구분하여 출력하세요.
+
+조건을 만족한다면 어떤 해를 출력해도 정답으로 인정됩니다.
+
+마지막에 줄바꿈을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+3
+abc
+abd
+cbc
+```
+
+출력:
+
+```text
+a bc
+ab d
+cb c
+```
+
+$S_1=a,T_1=bc$, $S_2=ab,T_2=d$, $S_3=cb,T_3=c$로 두면 조건을 만족합니다.
+
+이 경우 이것이 유일한 답입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+2
+aaa
+aaa
+```
+
+출력:
+
+```text
+Impossible
+```
+
+조건을 만족하는 $S_i,T_i$가 존재하지 않으므로 `Impossible`을 출력합니다.
+
+$S_i$와 $T_i$는 비어 있지 않아야 한다는 점에 유의하세요.
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+2
+aaa
+AAA
+```
+
+출력:
+
+```text
+a aa
+A AA
+```
+
+대문자와 소문자는 구별합니다.
+
+`a aa`, `AA A`와 같은 다른 답도 존재합니다.
+
+### 샘플 4 {file="sample4.in"}
+
+입력:
+
+```text
+10
+kgb
+cih
+blm
+kee
+lgj
+dcl
+bam
+ibc
+mca
+lkf
+```
+
+출력:
+
+```text
+k gb
+c ih
+b lm
+ke e
+l gj
+d cl
+ba m
+i bc
+mc a
+lk f
+```

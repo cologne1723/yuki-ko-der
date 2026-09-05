@@ -1,0 +1,32 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#content h2",
+      "source": "オンライン実行 履歴",
+      "target": "📝 온라인 실행 기록"
+    },
+    {
+      "selector": "#content th",
+      "source": "実行日時",
+      "target": "📝 실행 일시"
+    },
+    {
+      "selector": "#body div",
+      "source": "最新50件が表示されます。",
+      "target": "📝 최근 50건이 표시됩니다."
+    },
+    {
+      "selector": "#content .alert-warning",
+      "source": "サイトサポーターでないと表示できません。 サイトサポーターへのなり方は",
+      "target": "📝 사이트 서포터만 볼 수 있습니다. 사이트 서포터가 되는 방법은 "
+    },
+    {
+      "selector": "#content .alert-warning a",
+      "source": "こちら",
+      "target": "📝 여기"
+    }
+  ]
+}

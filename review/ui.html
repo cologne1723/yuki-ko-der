@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UI 용어집 검수 · yukicoder</title>
+    <link rel="stylesheet" href="/ui.css" />
+    <script src="/ui.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <button
+        id="sidebar-toggle"
+        aria-controls="glossary-sidebar"
+        aria-expanded="true"
+        type="button"
+      >
+        목록 접기
+      </button>
+      <a href="/">← 문제 검수</a>
+      <h1>UI 용어집 검수</h1>
+      <span id="summary"></span>
+    </header>
+    <div id="layout" class="layout">
+      <aside id="glossary-sidebar" aria-label="용어집 목록">
+        <label
+          >일본어·한국어·선택자로 검색<input id="search" type="search" /></label
+        ><label>번역 사전<select id="dictionary"></select></label
+        ><label
+          >검수 상태<select id="status">
+            <option value="all">전체 항목</option>
+            <option value="draft">미검수</option>
+            <option value="approved">검수 완료</option>
+          </select></label
+        >
+        <nav id="entries" aria-label="번역 항목"></nav>
+      </aside>
+      <main>
+        <section class="editor">
+          <div class="actions">
+            <button id="entry-previous" type="button">이전 항목</button
+            ><button id="entry-next" type="button">다음 항목</button>
+          </div>
+          <div class="heading">
+            <h2 id="title">번역을 선택하세요</h2>
+            <span id="badge"></span>
+          </div>
+          <label
+            >일본어 원문<textarea
+              id="source"
+              readonly
+              rows="2"
+            ></textarea></label
+          ><label>한국어 번역<textarea id="target" rows="3"></textarea></label>
+          <p class="shortcut-hint">
+            Ctrl/⌘+Enter: 승인 후 다음 · Ctrl/⌘+S: 저장
+          </p>
+          <p id="context"></p>
+          <p id="variables"></p>
+          <div class="actions">
+            <button id="save">저장</button
+            ><button id="approve" title="Ctrl/⌘+Enter">승인 후 다음</button
+            ><button id="unapprove">미검수로 변경</button
+            ><span id="dirty"></span>
+          </div>
+          <div
+            id="change-summary"
+            class="change-summary"
+            hidden
+            aria-live="polite"
+          ></div>
+          <p id="notice" role="status"></p>
+        </section>
+        <section class="preview-controls">
+          <label>저장된 페이지<select id="page"></select></label>
+          <p>
+            선택한 사전과 공통 번역을 적용한 미리보기입니다. 표시된 문구를
+            누르면 해당 항목을 편집할 수 있습니다. 저장은 검수 상태를 유지하며,
+            승인을 눌러야 미검수 항목이 검수 완료로 바뀝니다.
+          </p>
+          <div class="legend" aria-label="미리보기 표시 안내">
+            <span class="draft">미검수 · 주황 점선</span
+            ><span class="approved">검수 완료 · 초록 실선</span
+            ><span class="selected">선택한 항목 · 파랑 테두리</span>
+          </div>
+          <div class="actions">
+            <button
+              id="japanese-toggle"
+              type="button"
+              aria-controls="japanese-pane"
+              aria-expanded="false"
+            >
+              일본어 원문 함께 보기
+            </button>
+            <button id="locate" type="button">수정 위치 보기</button
+            ><button id="match-previous" type="button">이전 위치</button
+            ><button id="match-next" type="button">다음 위치</button>
+          </div>
+          <p id="matches" role="status"></p>
+        </section>
+        <div id="previews" class="previews">
+          <section id="japanese-pane" hidden>
+            <h2>일본어 페이지</h2>
+            <iframe
+              id="japanese"
+              title="저장된 일본어 페이지"
+              sandbox="allow-same-origin"
+            ></iframe>
+          </section>
+          <section>
+            <h2>한국어 페이지 · 저장 전 수정 사항 포함</h2>
+            <iframe
+              id="korean"
+              title="한국어 번역 미리보기"
+              sandbox="allow-same-origin"
+            ></iframe>
+          </section>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

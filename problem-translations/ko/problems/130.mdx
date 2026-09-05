@@ -1,0 +1,65 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 130
+problemId: 282
+sourceTitle: "XOR Minimax"
+sourceHtmlSha256: 51241f960f16c2630cff9547fde1c4871e8ff4c155e7283fac7ed9d949693276
+reviewStatus: unreviewed
+title: "XOR 최솟값"
+---
+
+## 문제 설명
+
+음이 아닌 정수 수열 $a_1,a_2,\ldots,a_N$이 주어집니다.
+
+음이 아닌 정수 $x$를 적절히 선택하여 $a_1 \oplus x,a_2 \oplus x,\ldots,a_N \oplus x$의 최댓값을 최소화하려고 합니다. 여기서 $\oplus$는 비트 XOR 연산자입니다.
+
+최소화한 최댓값을 출력하세요.
+
+## 입력
+
+```text
+N
+a_1 a_2 ... a_N
+```
+
+- $1 \le N \le 100\,000$
+- $0 \le a_i \le 1\,000\,000\,000$
+
+## 출력
+
+최소화한 최댓값을 출력하세요.
+
+## 예제
+
+```text
+1
+1
+```
+
+```text
+0
+```
+
+$x=1$로 선택하면 $a_1 \oplus x=1 \oplus 1=0$입니다.
+
+```text
+2
+2 3
+```
+
+```text
+1
+```
+
+예를 들어 $x=2$로 선택하면 $a_1 \oplus x=2 \oplus 2=0$, $a_2 \oplus x=3 \oplus 2=1$이므로 최댓값은 1입니다.
+
+```text
+3
+0 4 0
+```
+
+```text
+4
+```

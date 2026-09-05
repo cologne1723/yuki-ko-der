@@ -1,0 +1,142 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    { "selector": "#toplinks a", "source": "問題", "target": "📝 문제" },
+    { "selector": "#toplinks a", "source": "提出", "target": "📝 제출" },
+    { "selector": "#toplinks a", "source": "問題文", "target": "📝 문제 설명" },
+    { "selector": "#toplinks a", "source": "テスト", "target": "📝 테스트" },
+    {
+      "selector": "#toplinks a",
+      "source": "ジャッジコード",
+      "target": "📝 채점 코드"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "ジェネレータ",
+      "target": "📝 생성기"
+    },
+    {
+      "selector": "#body div",
+      "source": "問題一覧 >",
+      "target": "📝 문제 목록 >"
+    },
+    {
+      "selector": "#content a",
+      "source": "教育的問題",
+      "target": "📝 교육적 문제"
+    },
+    {
+      "selector": "#content a",
+      "source": "数学的知識問題",
+      "target": "📝 수학 지식 문제"
+    },
+    {
+      "selector": "#content a",
+      "source": "ネタ問題",
+      "target": "📝 재미 문제"
+    },
+    {
+      "selector": "#content a",
+      "source": "スコア問題",
+      "target": "📝 점수 문제"
+    },
+    { "selector": "#content div", "source": "レベル :", "target": "📝 레벨:" },
+    {
+      "selector": "#content div",
+      "source": "/ 実行時間制限 : 1ケース {seconds}秒 / メモリ制限 : {memory} MB / 標準ジャッジ問題",
+      "target": "📝 / 시간 제한: 케이스당 {seconds}초 / 메모리 제한: {memory}MB / 표준 채점 문제",
+      "variables": { "seconds": "[0-9.]+", "memory": "[0-9]+" }
+    },
+    {
+      "selector": "#content div",
+      "source": "タグ : /",
+      "target": "📝 태그: /"
+    },
+    {
+      "selector": "#content span",
+      "source": "解いたユーザー数",
+      "target": "📝 푼 사용자 수 "
+    },
+    {
+      "selector": "#content div",
+      "source": "作問者 :",
+      "target": "📝 출제자:"
+    },
+    {
+      "selector": "#content a",
+      "source": "お気に入りにしたユーザー",
+      "target": "📝 즐겨찾기에 추가한 사용자"
+    },
+    {
+      "selector": "#content a",
+      "source": "自分の提出",
+      "target": "📝 내 제출"
+    },
+    {
+      "selector": "#content div",
+      "source": "問題文最終更新日: {updatedAt}",
+      "target": "📝 문제 설명 최종 수정일: {updatedAt}",
+      "variables": {
+        "updatedAt": "[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}"
+      }
+    },
+    {
+      "selector": "#content button",
+      "source": "問題文のHTMLを表示",
+      "target": "📝 문제 설명 HTML 표시"
+    },
+    {
+      "selector": "#content p",
+      "source": "提出するには、Twitter 、GitHub、 Googleもしくは右上の雲マークをクリックしてアカウントを作成してください。",
+      "target": "📝 제출하려면 Twitter, GitHub, Google 또는 오른쪽 위의 구름 아이콘을 눌러 계정을 만들어 주세요."
+    },
+    {
+      "selector": "#subtask-edit-modal .modal-title",
+      "source": "部分点の編集",
+      "target": "📝 부분 점수 편집"
+    },
+    {
+      "selector": "#subtask-edit-modal button",
+      "source": "+ サブタスク追加",
+      "target": "📝 + 서브태스크 추가"
+    },
+    {
+      "selector": "#subtask-edit-modal summary",
+      "source": "JSON直接編集",
+      "target": "📝 JSON 직접 편집"
+    },
+    {
+      "selector": "#subtask-edit-modal button",
+      "source": "閉じる",
+      "target": "📝 닫기"
+    },
+    {
+      "selector": "#subtask-edit-modal button",
+      "source": "保存",
+      "target": "📝 저장"
+    },
+    {
+      "selector": "#problem-html-modal .modal-title",
+      "source": "問題文のHTML",
+      "target": "📝 문제 설명 HTML"
+    },
+    {
+      "selector": "#problem-html-modal button",
+      "source": "HTMLをコピー",
+      "target": "📝 HTML 복사"
+    },
+    {
+      "selector": "#problem-html-modal button",
+      "source": "閉じる",
+      "target": "📝 닫기"
+    },
+    {
+      "selector": "#subtask-edit-json",
+      "attribute": "placeholder",
+      "source": "{\"subtasks\":[{\"name\":\"サブタスク1\",\"prefixes\":[\"01\"],\"score\":50},...]}",
+      "target": "📝 {\"subtasks\":[{\"name\":\"서브태스크 1\",\"prefixes\":[\"01\"],\"score\":50},...]}"
+    }
+  ]
+}

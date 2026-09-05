@@ -1,6 +1,9 @@
 node_modules/
+.pnpm-store/
 dist/
+.review-dist/
+.problem-translations-dist/
 web-ext-artifacts/
+tmp/
 .DS_Store
 *.log
-

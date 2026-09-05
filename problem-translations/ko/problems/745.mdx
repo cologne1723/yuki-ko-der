@@ -1,0 +1,86 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 745
+problemId: 2171
+sourceTitle: "letinopia raoha"
+sourceHtmlSha256: "64c720727d2c9a395d80fb99e4b4aea3bfc6cc553ffc0a080347cf1ee06d6baf"
+reviewStatus: unreviewed
+title: "letinopia raoha"
+---
+
+## 문제
+
+피아노 타일 오하라 군은 리듬 게임에 빠져 있습니다. 노트를 타이밍에 맞춰 터치하면 점수가 올라가며, 판정은 좋은 순서대로 perfect, great, good, miss입니다.
+
+perfect는 100점, great는 50점을 얻고 good은 0점입니다. miss는 0점이며 라이프가 100 감소합니다. 처음 라이프는 1000이고, 라이프가 0이 되면 곡이 중단되어 클리어 실패입니다. 라이프가 중간에 회복되지는 않습니다.
+
+이 게임에서는 great 또는 perfect 판정이 연속되는 콤보 수가 1에서 100 늘어날 때마다 추가 점수가 2배가 됩니다. 즉 콤보 101부터는 점수가 2배이고, 콤보 201부터 300까지는 콤보 101부터 200까지의 점수의 2배입니다.
+
+perfect를 $A$회, great를 $B$회, good를 $C$회, miss를 $D$회 기록했을 때, 클리어가 가능하면 Possible과 가능한 점수 중 최댓값을, 불가능하면 Impossible을 출력하세요.
+
+## 입력
+
+~~~text
+A B C D
+~~~
+
+- $0\leq A\leq400$
+- $0\leq B\leq400$
+- $0\leq C\leq400$
+- $0\leq D\leq10$
+
+## 출력
+
+가능하면 Possible과 점수의 최댓값을 각각 한 줄에 출력하고, 불가능하면 Impossible을 출력하세요. 마지막에는 줄바꿈을 추가하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+#### 입력
+
+~~~text
+101 0 0 0
+~~~
+
+#### 출력
+
+~~~text
+Possible
+10200
+~~~
+
+처음 100회는 100점씩, 101번째는 $100\times2$점이므로 $100\times100+100\times2=10200$점입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+#### 입력
+
+~~~text
+349 222 3 4
+~~~
+
+#### 출력
+
+~~~text
+Possible
+517800
+~~~
+
+### 샘플 3 {file="sample3.in"}
+
+#### 입력
+
+~~~text
+400 0 0 10
+~~~
+
+#### 출력
+
+~~~text
+Impossible
+~~~
+
+miss를 10회 기록해 라이프가 0이므로 클리어에 실패합니다.
+

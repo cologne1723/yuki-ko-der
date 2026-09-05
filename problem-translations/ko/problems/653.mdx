@@ -1,0 +1,76 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 653
+problemId: 1921
+sourceTitle: "E869120 and Lucky Numbers"
+sourceHtmlSha256: "592ebfae8fa3bd81b4d58c69f8375be31a09803781621b89042164d060dab56a"
+reviewStatus: unreviewed
+title: "E869120과 행운의 수"
+---
+
+## 문제
+
+6과 7은 좋은 수입니다. 이 숫자만 사용해 만든 수(예: 66, 767, 7767, 6667)를 행운의 수라고 합니다. 0은 행운의 수가 아닙니다.
+
+두 행운의 수를 더해 $p$를 만들 수 있는지 Yes 또는 No로 판정하세요.
+
+## 입력
+
+```text
+p
+```
+
+$1\le p\le10^{20000}$
+
+## 출력
+
+가능하면 Yes, 불가능하면 No를 출력하세요. 마지막에 개행을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+123
+```
+
+출력:
+
+```text
+No
+```
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+142
+```
+
+출력:
+
+```text
+Yes
+```
+
+66+76=142입니다.
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+1552
+```
+
+출력:
+
+```text
+Yes
+```
+
+776+776=1552입니다.

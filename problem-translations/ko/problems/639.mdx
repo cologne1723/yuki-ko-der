@@ -1,0 +1,60 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 639
+problemId: 1805
+sourceTitle: "An Ordinary Sequence"
+sourceHtmlSha256: "582196b6740dd46ccb8493bccfa9f199dba11f0634a1afc77592cee679434476"
+reviewStatus: unreviewed
+title: "평범한 수열"
+---
+
+## 문제
+
+정수 $N$이 주어집니다. $a_0=1$, $a_i=a_{\lfloor i/3\rfloor}+a_{\lfloor i/5\rfloor}$로 정의되는 수열의 $N$번째 항 $a_N$을 구하세요. 음이 아닌 실수 $x$에 대해 $\lfloor x\rfloor$는 정수 부분입니다.
+
+## 입력
+
+```text
+N
+```
+
+$0\le N\le10^{18}$인 정수 $N$이 주어집니다.
+
+## 출력
+
+$a_N$을 한 줄에 출력하세요. 마지막에 개행을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+7
+```
+
+출력:
+
+```text
+4
+```
+
+$a_7=a_{\lfloor7/3\rfloor}+a_{\lfloor7/5\rfloor}=a_1+a_2=(a_0+a_0)+(a_0+a_0)=4$입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+1000000000000000000
+```
+
+출력:
+
+```text
+3207281389
+```
+
+$N$이 최댓값인 경우입니다.

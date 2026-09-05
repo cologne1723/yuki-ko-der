@@ -1,0 +1,76 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 522
+problemId: 1415
+sourceTitle: "Make Test Cases(テストケースを作る)"
+sourceHtmlSha256: "2fb04648e2c69921e813ac2a86e85ccd24fa882296bd7a2b2ef85e7b1d50b2d5"
+reviewStatus: unreviewed
+title: "Make Test Cases(테스트 케이스 만들기)"
+---
+
+## 문제
+
+h는 다음 조건에 맞는 테스트 케이스를 만들라는 부탁을 받았습니다.
+
+a+b+c = N이고 a ≤ b ≤ c (a,b,c,N은 양의 정수)
+
+가능한 모든 테스트 케이스를 다음 순서로 출력하세요.
+
+* a가 작은 순서
+* a가 같으면 b가 작은 순서
+
+출력량이 많으므로 빠른 출력 함수를 사용하세요.
+
+## 입력
+
+```text
+N
+```
+
+N이 한 줄에 주어집니다.
+
+3 ≤ N ≤ 3000
+
+## 출력
+
+a,b,c를 공백으로 구분하고, 케이스는 줄바꿈으로 구분해 출력하세요.
+
+출력 마지막에는 줄바꿈이 필요합니다.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+3
+```
+
+출력:
+
+```text
+1 1 1
+```
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+10
+```
+
+출력:
+
+```text
+1 1 8
+1 2 7
+1 3 6
+1 4 5
+2 2 6
+2 3 5
+2 4 4
+3 3 4
+```

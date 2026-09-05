@@ -1,0 +1,39 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#content h4",
+      "source": "提出統計（コンテスト時間外含む）",
+      "target": "📝 제출 통계(대회 시간 외 포함)"
+    },
+    {
+      "selector": "#content h4",
+      "source": "問題の難易度の提案",
+      "target": "📝 문제 난이도 제안"
+    },
+    {
+      "selector": "#content li",
+      "source": "AC / 提出人数 : {accepted} / {submitted} ( {rate} %)",
+      "target": "📝 AC/제출 인원: {accepted}/{submitted} ({rate}%)",
+      "variables": {
+        "accepted": "\\d+",
+        "submitted": "\\d+",
+        "rate": "[0-9.]+"
+      }
+    },
+    {
+      "selector": "#content li",
+      "source": "最小Try : {tries}",
+      "target": "📝 최소 시도: {tries}",
+      "variables": { "tries": "\\d+" }
+    },
+    {
+      "selector": "#content li",
+      "source": "最大Try : {tries}",
+      "target": "📝 최대 시도: {tries}",
+      "variables": { "tries": "\\d+" }
+    }
+  ]
+}

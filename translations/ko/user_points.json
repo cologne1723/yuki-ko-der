@@ -1,0 +1,12 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#content div",
+      "source": "さんの ゆるふわポイント一覧",
+      "target": "📝 님의 유루후와 포인트 목록"
+    }
+  ]
+}

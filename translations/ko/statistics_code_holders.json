@@ -1,0 +1,80 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#content h4",
+      "source": "👑 記録保有数ランキング TOP10",
+      "target": "📝 👑 기록 보유 수 랭킹 TOP 10"
+    },
+    {
+      "selector": "#content p",
+      "source": "各カテゴリでの記録保有数・作問回数のランキングです",
+      "target": "📝 각 부문의 기록 보유 수와 출제 횟수 랭킹입니다."
+    },
+    {
+      "selector": "#content h4",
+      "source": "純ショートコード(言語別)",
+      "target": "📝 순수 숏 코드(언어별)"
+    },
+    {
+      "selector": "#content h4",
+      "source": "純主流(言語別)",
+      "target": "📝 순수 주류(언어별)"
+    },
+    {
+      "selector": "#content h4",
+      "source": "Writer回数",
+      "target": "📝 출제 횟수"
+    },
+    {
+      "selector": "#content h4",
+      "source": "Tester回数",
+      "target": "📝 테스트 횟수"
+    },
+    {
+      "selector": "#content th",
+      "source": "記録保有数",
+      "target": "📝 기록 보유 수"
+    },
+    { "selector": "#content th", "source": "記録数", "target": "📝 기록 수" },
+    { "selector": "#content th", "source": "作問数", "target": "📝 출제 수" },
+    {
+      "selector": "#content th",
+      "source": "テスト数",
+      "target": "📝 테스트 수"
+    },
+    {
+      "selector": "#content p",
+      "source": "記録保有数ランキングは、",
+      "target": "📝 기록 보유 수 랭킹은"
+    },
+    { "selector": "#content p", "source": "または", "target": "📝 또는" },
+    {
+      "selector": "#content p",
+      "source": "が表示できます。",
+      "target": "📝 을 표시할 수 있습니다."
+    },
+    {
+      "selector": "#ranking-tables p.description",
+      "source": "cLay/kuin以外",
+      "target": "📝 cLay/kuin 이외"
+    },
+    {
+      "selector": "#supporter-message a",
+      "source": "サイトサポーター",
+      "target": "📝 사이트 서포터"
+    },
+    {
+      "selector": "#supporter-message a",
+      "source": "ワンデーサポーター",
+      "target": "📝 원데이 서포터"
+    },
+    {
+      "selector": "#supporter-message a",
+      "source": "ワンデーサポーターになる →",
+      "target": "📝 원데이 서포터 되기 →"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 436
+problemId: 1098
+sourceTitle: "ccw"
+sourceHtmlSha256: "6fdda67dd5e97ffeda979db1ffd499f198391f14227aaddc408e14d56af6932c"
+reviewStatus: unreviewed
+title: "ccw"
+---
+
+## 문제
+
+C군은 문자열 S를 가지고 있습니다. 문자열 S는 `c...ccw...w` 형태, 즉 왼쪽부터 c가 2개 이상 연속으로 나오고 그 뒤에 w가 1개 이상 연속으로 나오는 형태입니다.
+
+C군은 S에 `ccw`( `cww`가 아님)라는 부분 문자열이 포함되지 않게 하려고 합니다. 다음 연산을 반복할 때 필요한 최소 횟수를 구하세요.
+
+- 연산: S의 왼쪽 끝 또는 오른쪽 끝 문자를 하나 삭제합니다.
+
+## 입력
+
+문자열 S가 한 줄에 주어집니다. S는 왼쪽부터 c가 2개 이상 연속으로 나오고 그 뒤에 w가 1개 이상 연속으로 나옵니다.
+
+```text
+S
+```
+
+- 3 ≤ |S| ≤ 100000
+
+## 출력
+
+C군이 수행해야 하는 최소 연산 횟수를 한 줄에 출력하세요. 마지막에 개행을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+```text
+cccwwwwww
+```
+
+### 샘플 1 출력 {file="sample1.out"}
+
+```text
+2
+```
+
+왼쪽 끝을 2번 삭제하면 `cwwwwww`가 되어 `ccw`가 포함되지 않습니다.
+
+### 샘플 2 {file="sample2.in"}
+
+```text
+ccccccccwww
+```
+
+### 샘플 2 출력 {file="sample2.out"}
+
+```text
+3
+```
+
+오른쪽 끝을 3번 삭제하면 `cccccccc`가 되어 `ccw`가 포함되지 않습니다.

@@ -1,0 +1,69 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 357
+problemId: 810
+sourceTitle: "品物の並び替え (Middle)"
+sourceHtmlSha256: "b298a3ed9378e1faa9455780188e61f9739a6a827026e07c68fb5e0f8c61487e"
+reviewStatus: unreviewed
+title: "물건의 재배열 (Middle)"
+---
+
+## 문제
+
+0번부터 $N-1$번까지의 물건이 있습니다. 또한 다음 형식의 점수표가 있습니다.
+
+```text
+item1 item2 score
+```
+
+물건을 배열했을 때 `item1`이 `item2`보다 앞에 있으면 `score`점을 얻는다는 뜻입니다.
+
+점수표가 주어질 때 물건을 적절히 재배열하여 얻을 수 있는 점수의 최댓값을 출력하세요.
+
+## 입력
+
+```text
+N M
+item1_1 item2_1 score_1
+⋮
+item1_M item2_M score_M
+```
+
+- $N$은 물건의 수입니다.
+- $M$은 점수표의 행 수입니다.
+- $1\le M\le N(N-1)$
+- $2\le N\le14$
+- $0\le item1,item2\lt N$
+- $item1\ne item2$
+- $1\le score\le10000$
+- 점수표의 서로 다른 행에서 `item1`과 `item2`가 모두 같은 경우는 없습니다.
+
+## 출력
+
+얻을 수 있는 최대 점수를 출력하세요. 출력 후 개행하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+```text
+4 9
+0 1 1
+0 2 2
+0 3 3
+1 2 4
+1 3 5
+2 3 6
+3 2 100
+2 1 100
+1 0 100
+```
+
+### 샘플 1 {file="sample1.out"}
+
+```text
+300
+```
+
+`3 2 1 0`으로 배열하면 300점으로 최대입니다. `0 1 2 3`으로 배열하면 적용되는 항목은 6개지만 21점에 불과하므로 최고 점수를 얻지 못한다는 점에 주의하세요.

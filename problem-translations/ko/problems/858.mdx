@@ -1,0 +1,89 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 858
+problemId: 2506
+sourceTitle: "わり算"
+sourceHtmlSha256: "aaf8d8f68ebaeff308bf6f570dbedf7d57cd74c19c1780c9fadb751c2e0b3e30"
+reviewStatus: unreviewed
+title: "나눗셈"
+---
+
+## 문제
+
+길이 $n+1$인 정수열 $A=(A_0,A_1,\ldots,A_n)$, $B=(B_0,B_1,\ldots,B_n)$, $C=(C_0,C_1,\ldots,C_n)$와 정수 $x$가 주어집니다.
+
+다음 조건을 모두 만족하는 정수 삼중항 $(i,j,k)$의 집합을 $\Lambda_n$이라 합니다.
+
+$$0\leq i\leq n,\quad 0\leq j\leq n,\quad 0\leq k\leq n,\quad i=j+k$$
+
+다음과 같이 정의되는 정수 $S$를 $943718401$로 나눈 나머지를 구하세요. 이 문제에서는 $0^0=1$로 정의합니다.
+
+$$S=\sum_{(i,j,k)\in\Lambda_n}A_iB_jC_kx^{ijk}$$
+
+## 입력
+
+~~~text
+n x
+A_0 A_1 ... A_n
+B_0 B_1 ... B_n
+C_0 C_1 ... C_n
+~~~
+
+## 제약
+
+- $0\leq n\leq2\times10^5$
+- $0\leq x<943718401$
+- $0\leq A_i,B_i,C_i<943718401$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+$S$를 $943718401$로 나눈 나머지를 한 줄에 출력하세요. 일반적인 나머지와 다른 mod임에 주의하세요.
+
+## 샘플
+
+### 입력 1 {file="stdin"}
+
+~~~text
+2 6
+1 2 3
+4 5 6
+7 8 9
+~~~
+
+### 출력 1 {file="stdout"}
+
+~~~text
+4716
+~~~
+
+### 입력 2 {file="stdin"}
+
+~~~text
+6 8
+3 1 4 1 5 9 2
+6 5 3 5 8 9 7
+9 3 2 3 8 4 6
+~~~
+
+### 출력 2 {file="stdout"}
+
+~~~text
+577188643
+~~~
+
+### 입력 3 {file="stdin"}
+
+~~~text
+0 10
+10
+10
+10
+~~~
+
+### 출력 3 {file="stdout"}
+
+~~~text
+1000
+~~~

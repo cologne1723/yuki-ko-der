@@ -1,0 +1,19 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    { "selector": "#toplinks a", "source": "編集", "target": "편집" },
+    {
+      "selector": "#content small",
+      "source": "(Favした一覧ページはユーザーページから)",
+      "target": "(즐겨찾기한 페이지 목록은 사용자 페이지에서 확인)"
+    },
+    {
+      "selector": "footer img[alt]",
+      "attribute": "alt",
+      "source": "クリエイティブ・コモンズ・ライセンス",
+      "target": "📝 크리에이티브 커먼즈 라이선스"
+    }
+  ]
+}

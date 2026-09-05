@@ -1,0 +1,76 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 820
+problemId: 2902
+sourceTitle: "Power of Two"
+sourceHtmlSha256: "4a0da9469119ade1239519626f7688cfa5efc538b5b1243bb7e15e3c07b0d2bb"
+reviewStatus: unreviewed
+title: "2의 거듭제곱"
+---
+
+## 문제
+
+음이 아닌 정수 $N,K$가 주어집니다. 다음 조건을 만족하는 $x$의 개수를 구하세요.
+
+$x$는 $1\leq x\leq2^N$인 양의 정수이고, $2^K$의 배수입니다.
+
+## 입력
+
+~~~text
+$N\ K$
+~~~
+
+$0\leq N,K\leq30$
+
+## 출력
+
+조건을 만족하는 $x$의 개수를 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+#### 입력
+
+~~~text
+5 3
+~~~
+
+#### 출력
+
+~~~text
+4
+~~~
+
+$x=8,16,24,32$가 조건을 만족합니다.
+
+### 샘플 2 {file="sample2.in"}
+
+#### 입력
+
+~~~text
+5 10
+~~~
+
+#### 출력
+
+~~~text
+0
+~~~
+
+조건을 만족하는 $x$가 존재하지 않을 수도 있습니다.
+
+### 샘플 3 {file="sample3.in"}
+
+#### 입력
+
+~~~text
+30 0
+~~~
+
+#### 출력
+
+~~~text
+1073741824
+~~~

@@ -1,0 +1,119 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 769
+problemId: 2558
+sourceTitle: "UNOシミュレータ"
+sourceHtmlSha256: "e4bac4ef85df544708b987f7e32bf0d772cd9f0870ee894d2a5b63845097ff93"
+reviewStatus: unreviewed
+title: "UNO 시뮬레이터"
+---
+
+## 문제
+
+1부터 $N$까지의 ID가 붙은 $N$명의 술 취한 사람들이 UNO를 하고 있습니다. 이 문제에서 UNO의 규칙은 다음과 같습니다.
+
+- 게임 시작 시 모두에게 한 장 이상 카드를 나누어 주며, 남은 카드는 카드 더미로 둡니다.
+- 손에 든 카드가 처음으로 0장이 된 사람이 이기고 게임은 끝납니다.
+- 공평하게 하려면 받은 카드 수가 같아야 하지만, 나누는 사람이 술에 취해 있어 같지 않을 수 있습니다.
+- 1번부터 턴을 시작해 ID 오름차순으로 진행합니다.
+- 자신의 턴에는 손에서 카드 한 장을 골라 낸다고 합니다.
+
+카드 종류는 다음과 같습니다.
+
+- number: 특별한 효과가 없습니다.
+- drawtwo: 다음 플레이어가 카드 더미에서 2장을 뽑고, 그 턴에는 카드를 내지 못한 채 다음 플레이어로 넘어갑니다. 다음 플레이어가 drawtwo를 겹쳐 내면 이를 피할 수 있으며, 효과는 누적됩니다. 예를 들어 5명이 연속으로 drawtwo를 내고 6번째가 내지 못하면 10장을 뽑습니다.
+- drawfour: drawtwo의 4장 버전입니다.
+- skip: 다음 플레이어를 건너뜁니다.
+- reverse: 턴 순서를 반전합니다. ID 오름차순이면 내림차순으로, 내림차순이면 오름차순으로 바뀝니다.
+
+시간 순서대로 낸 카드 로그가 주어집니다. 이를 분석해 승자의 ID와 승자가 게임 시작 시 가지고 있던 카드 수를 출력하세요.
+
+연속된 drawtwo 또는 drawfour는 반드시 서로 겹쳐 낸 것으로 해석합니다. drawtwo와 drawfour를 서로 겹쳐 낼 수는 없습니다. 카드 더미가 바닥나지 않으며 로그는 항상 올바르고, 누군가의 손에 든 카드가 0장이 되는 시점에 로그가 끝납니다.
+
+## 입력
+
+~~~text
+$N\ M$
+$l_1$
+$l_2$
+$\vdots$
+$l_M$
+~~~
+
+$2\leq N\leq10^5$, $1\leq M\leq3\times10^5$입니다. $l_i$는 number, drawtwo, drawfour, skip, reverse 중 하나입니다.
+
+## 출력
+
+승자의 ID와 그 사람이 처음 가지고 있던 카드 수를 공백으로 구분해 출력하세요. 마지막에는 줄바꿈을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+#### 입력
+
+~~~text
+2 5
+skip
+skip
+skip
+skip
+reverse
+~~~
+
+#### 출력
+
+~~~text
+1 5
+~~~
+
+1번이 skip을 내고 2번이 건너뛰어지는 일을 네 번 반복한 뒤 1번이 reverse를 내고 승리합니다. 2번은 카드를 한 장도 내지 못했습니다.
+
+### 샘플 2 {file="sample2.in"}
+
+#### 입력
+
+~~~text
+4 9
+number
+reverse
+skip
+reverse
+drawtwo
+drawfour
+drawfour
+skip
+number
+~~~
+
+#### 출력
+
+~~~text
+3 3
+~~~
+
+1번이 number, 2번이 reverse, 1번이 skip을 내고 4번이 건너뛰어집니다. 3번이 reverse, 4번이 drawtwo, 1번이 2장을 뽑고 2번과 3번이 drawfour를 겹쳐 냅니다. 4번이 8장을 뽑고 1번이 skip을 내며 2번이 건너뛰어진 뒤 3번이 number를 내고 승리합니다.
+
+### 샘플 3 {file="sample3.in"}
+
+#### 입력
+
+~~~text
+3 7
+drawtwo
+reverse
+number
+skip
+number
+reverse
+number
+~~~
+
+#### 출력
+
+~~~text
+2 1
+~~~
+
+최종적으로 낸 카드 수가 아니라 게임 시작 때 손에 있던 카드 수를 답해야 합니다.

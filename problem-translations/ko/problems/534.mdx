@@ -1,0 +1,78 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 534
+problemId: 1481
+sourceTitle: "フィボナッチフィボナッチ数"
+sourceHtmlSha256: "b16eeef64e7901c73bd6f4b03b5d70fe2a604b321e263dbab7e1a66c32d57a07"
+reviewStatus: unreviewed
+title: "피보나치 피보나치 수"
+---
+
+## 문제
+
+정수 n이 주어집니다.
+
+X = fib(fib(n)) mod 10^9+7을 구하세요.
+
+단, fib(n)은 n번째 피보나치 수입니다.
+
+## 입력
+
+```text
+n
+```
+
+입력은 0 ≤ n ≤ 10^18을 만족합니다.
+
+## 출력
+
+X를 출력하세요.
+
+출력 마지막에는 줄바꿈이 필요합니다.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+7
+```
+
+출력:
+
+```text
+233
+```
+
+fib(7) = 13이고 fib(13) = 233입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+0
+```
+
+출력:
+
+```text
+0
+```
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+1000000000000000000
+```
+
+출력:
+
+```text
+279478839
+```

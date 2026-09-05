@@ -1,0 +1,92 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 802
+problemId: 2778
+sourceTitle: "だいたい等差数列"
+sourceHtmlSha256: "48017a10af6f4b7d71c48b8f320ef5df07da3ff871152aef119e70cb0ff658aa"
+reviewStatus: unreviewed
+title: "대략 등차수열"
+---
+
+## 문제
+
+다음 조건을 모두 만족하는 길이 $N$의 정수열 $A_1,\ldots,A_N$의 개수를 $10^9+7$로 나눈 나머지로 구하세요.
+
+$1\leq A_1\leq A_2\leq\cdots\leq A_N\leq M$
+
+모든 $1\leq i\leq N-1$에 대해 $D_1\leq A_{i+1}-A_i\leq D_2$
+
+두 수열은 어떤 인덱스에서라도 원소가 다르면 서로 다릅니다.
+
+## 입력
+
+~~~text
+$N\ M\ D_1\ D_2$
+~~~
+
+$2\leq N\leq3\times10^5$, $1\leq M\leq10^6$, $0\leq D_1\leq D_2\leq M$이며 입력은 모두 정수입니다.
+
+## 출력
+
+조건을 만족하는 정수열의 개수를 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+#### 입력
+
+~~~text
+3 5 1 2
+~~~
+
+#### 출력
+
+~~~text
+8
+~~~
+
+조건을 만족하는 수열은 (1,2,3), (1,2,4), (1,3,4), (1,3,5), (2,3,4), (2,3,5), (2,4,5), (3,4,5)입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+#### 입력
+
+~~~text
+3 5 2 2
+~~~
+
+#### 출력
+
+~~~text
+1
+~~~
+
+### 샘플 3 {file="sample3.in"}
+
+#### 입력
+
+~~~text
+5 2 1 1
+~~~
+
+#### 출력
+
+~~~text
+0
+~~~
+
+### 샘플 4 {file="sample4.in"}
+
+#### 입력
+
+~~~text
+3141 592653 58 97
+~~~
+
+#### 출력
+
+~~~text
+200759484
+~~~

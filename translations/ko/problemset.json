@@ -1,0 +1,113 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#content .badge",
+      "source": "運営者おすすめ",
+      "target": "📝 운영자 추천"
+    },
+    { "selector": "#content p", "source": "作成者:", "target": "📝 작성자:" },
+    {
+      "selector": "#content h2",
+      "source": "Step 1: 競技プログラミング入門",
+      "target": "📝 Step 1: Competitive Programming 입문"
+    },
+    {
+      "selector": "#content div",
+      "source": "競技プログラミングの第一歩。入出力、条件分岐、ループなど基本的なプログラミングスキルだけで解ける問題です。まずはここから始めましょう。",
+      "target": "📝 Competitive Programming의 첫걸음입니다. 입출력, 조건문, 반복문 같은 기본 프로그래밍 기술만으로 풀 수 있는 문제입니다. 여기서 시작해 봅시다."
+    },
+    {
+      "selector": "#content h2",
+      "source": "Step 2: 計算と数の扱い",
+      "target": "📝 Step 2: 계산과 수 다루기"
+    },
+    {
+      "selector": "#content div",
+      "source": "四則演算、割り算の余り、約数・素数など、数を扱う問題に挑戦します。競技プログラミングでは数学的な考え方が重要です。",
+      "target": "📝 사칙연산, 나눗셈의 나머지, 약수와 소수 등 수를 다루는 문제에 도전합니다. Competitive Programming에서는 수학적 사고가 중요합니다."
+    },
+    {
+      "selector": "#content h2",
+      "source": "Step 3: 文字列と配列の操作",
+      "target": "📝 Step 3: 문자열과 배열 조작"
+    },
+    {
+      "selector": "#content div",
+      "source": "文字列の変換・判定や配列操作を学びます。文字列処理は実務でも頻出のスキルで、ここをしっかり身につけることが大切です。",
+      "target": "📝 문자열 변환과 판정, 배열 조작을 배웁니다. 문자열 처리는 실무에서도 자주 쓰이는 기술이므로 확실히 익히는 것이 중요합니다."
+    },
+    {
+      "selector": "#content h2",
+      "source": "Step 4: 全探索とシミュレーション",
+      "target": "📝 Step 4: 완전 탐색과 시뮬레이션"
+    },
+    {
+      "selector": "#content div",
+      "source": "全探索（ブルートフォース）は最も基本的なアルゴリズムの考え方です。すべての可能性を調べ上げて答えを見つける方法を学びます。",
+      "target": "📝 완전 탐색(브루트 포스)은 가장 기본적인 알고리즘 사고방식입니다. 모든 가능성을 조사해 답을 찾는 방법을 배웁니다."
+    },
+    {
+      "selector": "#content h2",
+      "source": "Step 5: ソート・二分探索・グラフ探索入門",
+      "target": "📝 Step 5: 정렬·이분 탐색·그래프 탐색 입문"
+    },
+    {
+      "selector": "#content div",
+      "source": "ソート、二分探索、BFS/DFS といった基本アルゴリズムを学びます。これらは中級以上の問題を解くために不可欠なツールです。",
+      "target": "📝 정렬, 이분 탐색, BFS/DFS 같은 기본 알고리즘을 배웁니다. 중급 이상의 문제를 푸는 데 꼭 필요한 도구입니다."
+    },
+    {
+      "selector": "#content h2",
+      "source": "Step 6: 貪欲法と動的計画法の基礎",
+      "target": "📝 Step 6: 그리디와 동적 계획법 기초"
+    },
+    {
+      "selector": "#content div",
+      "source": "貪欲法（Greedy）と動的計画法（DP）の入門です。貪欲法は局所最適を積み重ねる手法、DPは部分問題の解を再利用する手法です。競プロの核心テクニックに踏み込みます。",
+      "target": "📝 그리디(Greedy)와 동적 계획법(DP) 입문입니다. 그리디는 국소 최적해를 쌓는 기법이고 DP는 부분 문제의 해를 재사용하는 기법입니다. Competitive Programming의 핵심 기법을 다룹니다."
+    },
+    {
+      "selector": "#content h2",
+      "source": "Step 7: 動的計画法の発展",
+      "target": "📝 Step 7: 동적 계획법 심화"
+    },
+    {
+      "selector": "#content div",
+      "source": "ナップサック問題、区間DP、メモ化再帰など、DPのバリエーションを学びます。DPは競技プログラミングで最頻出のテクニックです。",
+      "target": "📝 배낭 문제, 구간 DP, 메모이제이션 재귀 등 다양한 DP를 배웁니다. DP는 Competitive Programming에서 가장 자주 등장하는 기법입니다."
+    },
+    {
+      "selector": "#content h2",
+      "source": "Step 8: グラフアルゴリズム",
+      "target": "📝 Step 8: 그래프 알고리즘"
+    },
+    {
+      "selector": "#content div",
+      "source": "ダイクストラ法、Union-Find、最小全域木など本格的なグラフアルゴリズムを学びます。グラフ問題は中上級で頻出です。",
+      "target": "📝 다익스트라, Union-Find, 최소 신장 트리 같은 본격적인 그래프 알고리즘을 배웁니다. 그래프 문제는 중상급에서 자주 등장합니다."
+    },
+    {
+      "selector": "#content h2",
+      "source": "Step 9: 累積和とセグメント木",
+      "target": "📝 Step 9: 누적 합과 세그먼트 트리"
+    },
+    {
+      "selector": "#content div",
+      "source": "累積和やセグメント木など、区間クエリを高速に処理するデータ構造を学びます。効率的なデータ構造は難問を解く鍵です。",
+      "target": "📝 누적 합과 세그먼트 트리처럼 구간 쿼리를 빠르게 처리하는 자료구조를 배웁니다. 효율적인 자료구조는 어려운 문제를 푸는 열쇠입니다."
+    },
+    {
+      "selector": "#content h2",
+      "source": "Step 10: 総合演習 - 高難度への挑戦",
+      "target": "📝 Step 10: 종합 연습 - 고난도 도전"
+    },
+    {
+      "selector": "#content div",
+      "source": "複数のアルゴリズムやデータ構造を組み合わせて解く総合問題です。ここまで学んだスキルを駆使して挑戦しましょう。",
+      "target": "📝 여러 알고리즘과 자료구조를 조합해 푸는 종합 문제입니다. 지금까지 배운 기술을 활용해 도전해 봅시다."
+    }
+  ]
+}

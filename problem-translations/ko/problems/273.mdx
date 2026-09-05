@@ -1,0 +1,78 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 273
+problemId: 389
+sourceTitle: "回文分解"
+sourceHtmlSha256: "27ab18f3ce717f9336354531a96dc511c4b430d3e1dcb2f39d5aa8001cae583c"
+reviewStatus: unreviewed
+title: "회문 분해"
+---
+
+## 문제
+
+문자열 $S$가 주어집니다.
+
+문자열 $S$를 문자와 문자 사이에서 자유롭게 잘라 2개 이상의 회문으로 분해합니다. 반드시 한 곳 이상을 잘라야 합니다.
+
+이때 만들어지는 회문 중 문자 수가 가장 많은 회문의 길이를 구하세요.
+
+## 입력
+
+```text
+S
+```
+
+문자열 $S$가 주어집니다.
+
+- $2 \le$ 문자열 $S$의 길이 $\le 50$
+- 문자열 $S$는 모두 대문자 알파벳으로 이루어집니다.
+
+## 출력
+
+분해한 회문 중 가장 긴 회문의 문자 수를 한 줄에 출력하세요.
+
+마지막에 개행을 출력하는 것을 잊지 마세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+```text
+ABACDDCEFGFE
+```
+
+### 샘플 1 {file="sample1.out"}
+
+```text
+5
+```
+
+예를 들어 `ABA`, `CDDC`, `EFGFE`라는 세 회문으로 분해할 수 있습니다. 가장 긴 회문은 `EFGFE`이고 길이는 5입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+```text
+ZZ
+```
+
+### 샘플 2 {file="sample2.out"}
+
+```text
+1
+```
+
+`ZZ`는 이미 회문이지만 반드시 2개 이상의 회문으로 분해해야 합니다. 한 글자인 `Z`도 회문으로 간주할 수 있으므로 `Z`와 `Z`로 분해할 수 있고, 길이는 1입니다.
+
+### 샘플 3 {file="sample3.in"}
+
+```text
+AABAAABBABBABBBAAABAA
+```
+
+### 샘플 3 {file="sample3.out"}
+
+```text
+8
+```
+

@@ -1,0 +1,12 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#content p",
+      "source": "提出するには、Twitter または、GitHubもしくは右上の雲マークをクリックしてアカウントを作成してください。",
+      "target": "📝 제출하려면 Twitter, GitHub 또는 오른쪽 위의 구름 아이콘을 눌러 계정을 만들어 주세요."
+    }
+  ]
+}

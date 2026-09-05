@@ -1,0 +1,142 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#content h4",
+      "source": "実行OS環境",
+      "target": "실행 OS 환경"
+    },
+    {
+      "selector": "#content h4",
+      "source": "実行コマンド",
+      "target": "실행 명령어"
+    },
+    {
+      "selector": "#content h4",
+      "source": "各コンパイラバージョン",
+      "target": "컴파일러별 버전"
+    },
+    {
+      "selector": "#content th",
+      "source": "バージョン",
+      "target": "버전"
+    },
+    {
+      "selector": "#content th",
+      "source": "言語ID",
+      "target": "언어 ID"
+    },
+    {
+      "selector": "#content th",
+      "source": "コンパイルコマンド",
+      "target": "컴파일 명령어"
+    },
+    {
+      "selector": "#content th",
+      "source": "コンパイル内部コマンド",
+      "target": "내부 컴파일 명령어"
+    },
+    {
+      "selector": "#content th",
+      "source": "実行コマンド",
+      "target": "실행 명령어"
+    },
+    {
+      "selector": "#content th",
+      "source": "実行内部コマンド",
+      "target": "내부 실행 명령어"
+    },
+    {
+      "selector": "#content td",
+      "source": "C++17(gnu拡張)",
+      "target": "C++17(GNU 확장)"
+    },
+    {
+      "selector": "#content p",
+      "source": "に",
+      "target": "에 "
+    },
+    {
+      "selector": "#content p",
+      "source": "を入れています。",
+      "target": "을 포함하고 있습니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "つまり、ACLが使えます。（使用方法は上記のリンク先参照）",
+      "target": "즉, ACL을 사용할 수 있습니다. (사용법은 위 링크 참고)"
+    },
+    {
+      "selector": ".tex2jax_ignore",
+      "source": "whitespaceは",
+      "target": "whitespace는"
+    },
+    {
+      "selector": ".tex2jax_ignore",
+      "source": "の処理系を使用。(Rust 1.94.0 でビルド)",
+      "target": " 구현체를 사용합니다.(Rust 1.94.0으로 빌드)"
+    },
+    {
+      "selector": ".tex2jax_ignore",
+      "source": "brainfuckは",
+      "target": "brainfuck은"
+    },
+    {
+      "selector": ".tex2jax_ignore",
+      "source": "の処理系を使用。(gcc 16.1.0 でビルド)",
+      "target": " 구현체를 사용합니다.(gcc 16.1.0으로 빌드)"
+    },
+    {
+      "selector": ".tex2jax_ignore",
+      "source": "Text言語は cat 相当の最小バイナリ fcat で実行しています。(",
+      "target": "Text 언어는 cat에 해당하는 최소 바이너리 fcat으로 실행합니다. ("
+    },
+    {
+      "selector": "#content a",
+      "source": "fcatの実装",
+      "target": "fcat 구현"
+    },
+    {
+      "selector": ".tex2jax_ignore",
+      "source": "通常の cat は毎回の起動で ① 動的リンカ(ld.so)による libc の読み込み・シンボル解決、 ② glibc の起動処理(TLS・ロケール・malloc 等の初期化) のコストがかかります。 fcat はこれらを持たない(libc/CRT を使わず起動処理ゼロ)ため高速です。",
+      "target": "일반 cat은 실행할 때마다 ① 동적 링커(ld.so)의 libc 로드와 심볼 해석, ② glibc 시작 처리 (TLS·로케일·malloc 등의 초기화) 비용이 듭니다. fcat은 이러한 과정이 없어 (libc/CRT 미사용, 시작 처리 없음) 빠릅니다."
+    },
+    {
+      "selector": ".tex2jax_ignore",
+      "source": "cLayについては",
+      "target": "cLay는 "
+    },
+    {
+      "selector": ".tex2jax_ignore",
+      "source": "yukicoderではgcc 12.3.0(C++14)でビルド、実行しています",
+      "target": "yukicoder에서는 gcc 12.3.0(C++14)으로 빌드하고 실행합니다"
+    },
+    {
+      "selector": ".tex2jax_ignore",
+      "source": "入れて欲しいコンパイラがありましたら、ご連絡ください。(Ubuntu 25.04 で動作するもの)",
+      "target": "추가를 원하는 컴파일러가 있다면 연락해 주세요. (Ubuntu 25.04에서 동작하는 것)"
+    },
+    {
+      "selector": ".tex2jax_ignore",
+      "source": "もしくはDockerfileを頂ければスムーズかもしれません。",
+      "target": "또는 Dockerfile을 제공해 주시면 더 원활할 수 있습니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "（今後、予告なく変更する可能性があります、あくまでも2023年04月01日現在のものです。）",
+      "target": "(향후 예고 없이 변경될 수 있으며 2023년 4월 1일 기준 정보입니다.)"
+    },
+    {
+      "selector": "#content p",
+      "source": "コアが複数あっても、ジャッジのコアは1つに制限しています。",
+      "target": "코어가 여러 개여도 채점에는 코어 하나만 사용하도록 제한합니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "万が一、上の記述と異なるものがある場合は下のコマンドが最新です。",
+      "target": "위 설명과 다른 내용이 있다면 아래 명령어가 최신 정보입니다."
+    }
+  ]
+}

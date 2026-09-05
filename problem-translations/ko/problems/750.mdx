@@ -1,0 +1,113 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 750
+problemId: 2455
+sourceTitle: "Frac #1"
+sourceHtmlSha256: "325fea84bf276bd6850b352417485b6e4e8a1175b4a089cdcb224cb669ad63b5"
+reviewStatus: unreviewed
+title: "분수 #1"
+---
+
+## 문제
+
+서로 다른 기약분수, 분자가 0인 분수 또는 분모가 1인 분수 $n$개가 주어집니다.
+
+~~~text
+$\frac{A_1}{B_1},\frac{A_2}{B_2},\cdots,\frac{A_n}{B_n}$
+~~~
+
+주어진 분수를 내림차순으로 정렬하세요.
+
+## 입력
+
+~~~text
+n
+A_1 B_1
+A_2 B_2
+\vdots
+A_n B_n
+~~~
+
+- $1\leq n\leq10$
+- $-9\leq A_i\leq9$
+- $1\leq B_i\leq9$
+- $i\neq j$이면 $(A_i,B_i)\neq(A_j,B_j)$
+
+## 출력
+
+주어진 분수를 내림차순으로 정렬해, 각 줄에 분자와 분모를 공백으로 구분하여 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+#### 입력
+
+~~~text
+6
+4 5
+9 1
+3 4
+3 7
+3 8
+-2 3
+~~~
+
+#### 출력
+
+~~~text
+9 1
+4 5
+3 4
+3 7
+3 8
+-2 3
+~~~
+
+$\frac91\gt\frac45\gt\frac34\gt\frac37\gt\frac38\gt\frac{-2}3$입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+#### 입력
+
+~~~text
+3
+3 3
+7 1
+5 3
+~~~
+
+#### 출력
+
+~~~text
+5 3
+7 1
+3 3
+~~~
+
+### 샘플 3 {file="sample3.in"}
+
+#### 입력
+
+~~~text
+6
+1 7
+4 1
+5 1
+3 8
+9 5
+-8 9
+~~~
+
+#### 출력
+
+~~~text
+5 1
+7 4
+1 1
+1 3
+0 5
+-8 9
+~~~
+

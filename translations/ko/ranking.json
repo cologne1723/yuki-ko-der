@@ -1,0 +1,55 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#toplinks a",
+      "source": "AC問題数",
+      "target": "📝 AC 문제 수"
+    },
+    { "selector": "#toplinks a", "source": "スコア", "target": "📝 점수" },
+    {
+      "selector": "#toplinks a",
+      "source": "ユーザーLv.",
+      "target": "📝 사용자 레벨"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "ゆるふわポイント",
+      "target": "📝 유루후와 포인트"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "純ショートコード",
+      "target": "📝 순수 숏 코드"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "最速実行時間",
+      "target": "📝 최단 실행 시간"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "ゆるふわポイント歴",
+      "target": "📝 유루후와 포인트 기록"
+    },
+    { "selector": "#content h4", "source": "ランキング", "target": "📝 랭킹" },
+    {
+      "selector": "#content th a",
+      "source": "AC問題数",
+      "target": "📝 AC 문제 수"
+    },
+    { "selector": "#content a", "source": "スコア", "target": "📝 점수" },
+    {
+      "selector": "#content a",
+      "source": "ユーザーLv.",
+      "target": "📝 사용자 레벨"
+    },
+    {
+      "selector": "#content a",
+      "source": "ゆるふわポイント",
+      "target": "📝 유루후와 포인트"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 237
+problemId: 239
+sourceTitle: "作図可能性"
+sourceHtmlSha256: bbcfc0caff0241c28f4abf075676b5541d3122d461d3cc23b9bfa058dc0b0bae
+reviewStatus: unreviewed
+title: "작도 가능성"
+---
+
+## 문제
+
+정수 $A$가 주어집니다. $3$ 이상 $A$ 이하인 정수 $n$ 중 자와 컴퍼스만으로 정$n$각형을 작도할 수 있는 것의 개수를 구하세요.
+
+자와 컴퍼스를 이용한 작도와 이 문제를 푸는 데 필요한 지식은 Wikipedia를 참고하세요: [자와 컴퍼스를 이용한 작도](http://ja.wikipedia.org/wiki/%E5%AE%9A%E8%A6%8F%E3%81%A8%E3%82%B3%E3%83%B3%E3%83%91%E3%82%B9%E3%81%AB%E3%82%88%E3%82%8B%E4%BD%9C%E5%9B%B3)
+
+## 입력
+
+```text
+A
+```
+
+- $3 \leq A \leq 10^9$
+
+## 출력
+
+조건을 만족하는 정수 $n$의 개수를 출력하세요. 출력 끝에는 개행을 넣으세요.
+
+## 샘플
+
+### 입력 1 {file="stdin"}
+
+```text
+9
+```
+
+### 출력 1 {file="stdout"}
+
+```text
+5
+```
+
+정삼각형, 정사각형, 정오각형, 정육각형, 정팔각형은 자와 컴퍼스로 작도할 수 있지만 정칠각형과 정구각형은 작도할 수 없습니다.
+
+### 입력 2 {file="stdin"}
+
+```text
+1000000000
+```
+
+### 출력 2 {file="stdout"}
+
+```text
+456
+```

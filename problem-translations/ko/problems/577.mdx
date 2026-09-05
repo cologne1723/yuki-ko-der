@@ -1,0 +1,61 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 577
+problemId: 1807
+sourceTitle: "Prime Powerful Numbers"
+sourceHtmlSha256: "69c58845b0664a91eb35222a08191cb3e0917b7db73b6662222fb239b928c0d4"
+reviewStatus: unreviewed
+title: "Prime Powerful Numbers"
+---
+
+## 문제
+
+square1001은 소수의 k제곱(k은 양의 정수)으로 나타낼 수 있는 수를 “중요하고 강력한 수”라고 정의했습니다.
+
+양의 정수 N이 주어질 때 N=p^a+q^b가 되는 소수 p,q와 양의 정수 a,b의 조합이 존재하는지 판정하세요.
+
+즉 N을 두 “중요하고 강력한 수”의 합으로 나타낼 수 있는지 판정하세요.
+
+테스트 케이스가 Q개 있으므로 i번째 테스트 케이스의 수를 Ni라고 합니다.
+
+## 입력
+
+```text
+Q
+N1
+N2
+:
+NQ
+```
+
+첫 번째 줄에 정수 Q (1 ≤ Q ≤ 200)가 주어집니다.
+
+i+1번째 줄에 정수 Ni (1 ≤ Ni ≤ 10^18)가 주어집니다.
+
+## 출력
+
+i번째 줄에 Ni=p^a+q^b가 되는 (p,q,a,b) 조합이 존재하면 Yes, 존재하지 않으면 No를 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+2
+251
+149
+```
+
+출력:
+
+```text
+Yes
+No
+```
+
+251=2^3+3^5로 나타낼 수 있으므로 (p,q,a,b)=(2,3,3,5)가 조건을 만족합니다.
+
+149는 두 “중요하고 강력한 수”의 합으로 나타낼 수 없습니다.

@@ -1,0 +1,76 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 822
+problemId: 2544
+sourceTitle: "Bitwise AND"
+sourceHtmlSha256: "0ca83b65cd591244872332ed98d225abfec63b6affd2dace51e207ae35453661"
+reviewStatus: unreviewed
+title: "비트별 AND"
+---
+
+## 문제
+
+음이 아닌 정수 $N,K$가 주어집니다. $0\leq x\leq y$, $y-x\leq K$, $x\mathbin{\mathrm{AND}}y=N$을 만족하는 순서쌍 $(x,y)$의 개수를 구하세요. AND는 비트별 논리곱입니다. 무한히 많으면 INF를 출력하세요.
+
+## 입력
+
+~~~text
+$N\ K$
+~~~
+
+$0\leq N\leq10^5$, $0\leq K\leq300$
+
+## 출력
+
+조건을 만족하는 순서쌍의 개수를 출력하세요. 무한히 많으면 INF를 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+#### 입력
+
+~~~text
+9 5
+~~~
+
+#### 출력
+
+~~~text
+4
+~~~
+
+$(x,y)=(9,9),(9,11),(9,13),(11,13)$입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+#### 입력
+
+~~~text
+0 0
+~~~
+
+#### 출력
+
+~~~text
+1
+~~~
+
+$(x,y)=(0,0)$입니다.
+
+### 샘플 3 {file="sample3.in"}
+
+#### 입력
+
+~~~text
+0 1
+~~~
+
+#### 출력
+
+~~~text
+INF
+~~~
+
+$(0,0),(0,1),(1,2),(3,4),(7,8),(15,16),\ldots$가 조건을 만족합니다.

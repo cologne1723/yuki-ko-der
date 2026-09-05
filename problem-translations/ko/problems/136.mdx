@@ -1,0 +1,62 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 136
+problemId: 254
+sourceTitle: "Yet Another GCD Problem"
+sourceHtmlSha256: a3f4c48f12caa7e31a3c41ee61d5dc63a30e9e6b2be19e67bbdd598e379c16aa
+reviewStatus: unreviewed
+title: "또 하나의 GCD 문제"
+---
+
+## 문제 설명
+
+양의 정수 배열 $A$의 합이 정확히 $x$일 때 $A$를 $x$의 분할이라고 합니다.
+
+정수 배열 $A$에 대해 $\gcd(A)=\gcd(A_1,A_2,\ldots,A_{|A|})$로 정의합니다.
+
+정수 $N,K$가 주어집니다. $2 \le |A| \le K$를 만족하는 $N$의 분할 $A$에 대해 $\gcd(A)$를 최대로 하세요.
+
+## 입력
+
+```text
+N K
+```
+
+$2 \le N,K \le 100\,000$
+
+## 출력
+
+조건을 만족하는 $A$ 중 $\gcd(A)$가 최대인 배열의 $\gcd(A)$를 출력하세요.
+
+## 예제
+
+```text
+21 2
+```
+
+```text
+7
+```
+
+예를 들어 $A=[7,14]$는 합이 21이고 최대공약수는 $\gcd(7,14)=7$입니다.
+
+```text
+23 100000
+```
+
+```text
+1
+```
+
+23을 길이 2 이상인 배열로 어떻게 분할해도 원소의 최대공약수는 1입니다.
+
+```text
+100 2
+```
+
+```text
+50
+```
+
+최대공약수가 50인 유일한 분할은 $A=[50,50]$입니다.

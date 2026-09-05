@@ -1,0 +1,105 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 368
+problemId: 1048
+sourceTitle: "LCM of K-products"
+sourceHtmlSha256: "842a212ebdd16defa3a368ef77b1f70ac0dfb578ec393bb92f65bb94a72f5e0a"
+reviewStatus: unreviewed
+title: "K개 곱의 최소공배수"
+---
+
+## 문제
+
+양의 정수 $N$개로 이루어진 수열 $A=\{a_1,a_2,\ldots,a_N\}$가 있습니다. 서로 다른 인덱스를 가진 $K$개 원소의 곱으로 이루어진 집합을 $B$라고 합니다. $B$의 모든 원소의 최소공배수를 $10^9+7$로 나눈 나머지를 구하세요.
+
+## 입력
+
+```text
+N K
+a_1 a_2 … a_N
+```
+
+- $1\le N\le1000$, $1\le K\le N$
+- $1\le a_i\le10^9$
+
+## 출력
+
+답을 한 줄에 출력하고 개행하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+```text
+3 2
+2 3 5
+```
+
+### 샘플 1 {file="sample1.out"}
+
+```text
+30
+```
+
+$B=\{a_1\times a_2,a_1\times a_3,a_2\times a_3\}=\{6,10,15\}$이고 최소공배수는 30입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+```text
+3 2
+2 4 8
+```
+
+### 샘플 2 {file="sample2.out"}
+
+```text
+32
+```
+
+$B=\{8,16,32\}$입니다.
+
+### 샘플 3 {file="sample3.in"}
+
+```text
+4 3
+2 2 2 2
+```
+
+### 샘플 3 {file="sample3.out"}
+
+```text
+8
+```
+
+$B=\{8,8,8,8\}$입니다. $B$가 만들어지는 방식에 주의하세요.
+
+### 샘플 4 {file="sample4.in"}
+
+```text
+3 1
+2016 4 11
+```
+
+### 샘플 4 {file="sample4.out"}
+
+```text
+22176
+```
+
+$K=1$이므로 $B=\{2016,4,11\}$입니다.
+
+### 샘플 5 {file="sample5.in"}
+
+```text
+10 7
+832 223 29375 10 447239 999299573 5272 829829 6265 33
+```
+
+### 샘플 5 {file="sample5.out"}
+
+```text
+738866291
+```
+
+답을 $10^9+7$로 나눈 나머지를 출력하세요.

@@ -1,0 +1,117 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 700
+problemId: 2301
+sourceTitle: "LOVE"
+sourceHtmlSha256: "f1d124f839fdff7231f18f392cebbdcc4e48fc7c020d90759204ad8098673e55"
+reviewStatus: unreviewed
+title: "LOVE"
+---
+
+## 문제
+
+아래 이미지를 보세요. 그 안에서 처음 발견한 영어 단어가 ‘지금 당신에게 중요한 것’입니다.
+
+~~~text
+TEOWMZGTZKRECDSBYSUY
+IIXIGGXYZZOUGETSFZNH
+JELNHDQHYKFIUEQBNQZO
+PQJXUCRABFHMJUCTASAY
+FIGZOZABPAQGQZEMDVOG
+AXSMSWFSPFSUPAVEZWFQ
+YXXQYDCBYTHBQCNKYSEP
+ZWLPXHVYFAPDYOVYRZAR
+SJSLLHVMZCDBYPQXWLYB
+NPGNDBMWAOPVXIGLPDXR
+~~~
+
+LOVE가 중요한 것이 될 수 있을까요?
+
+## 입력
+
+~~~text
+n m
+s[1]
+...
+s[n]
+~~~
+
+- $2\leq n\leq50$
+- $2\leq m\leq50$
+- $s[i]$는 대문자 알파벳으로만 이루어진 길이 $m$인 문자열입니다.
+
+## 출력
+
+정확히 말하면, 이미지의 어떤 위치에서 오른쪽으로 읽어 연속된 문자열 LOVE가 나타나면 LOVE가 중요한 것이 될 수 있다고 합니다.
+
+LOVE가 중요한 것이 될 수 있으면 YES, 될 수 없으면 NO를 출력하세요.
+
+출력 마지막에는 줄바꿈을 추가하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+#### 입력
+
+~~~text
+2 6
+FJSYSK
+RLOVER
+~~~
+
+#### 출력
+
+~~~text
+YES
+~~~
+
+2번째 줄에 LOVE라는 문자열이 있으므로 LOVE가 중요한 것이 될 수 있습니다. 언제나 마음에 사랑을.
+
+### 샘플 2 {file="sample2.in"}
+
+#### 입력
+
+~~~text
+4 4
+LLLL
+OOOO
+VVVV
+EEEE
+~~~
+
+#### 출력
+
+~~~text
+NO
+~~~
+
+가로로 읽어 LOVE가 되는 문자열은 없습니다. 세로, 대각선, 왼쪽 방향으로는 읽을 수 없습니다.
+
+### 샘플 3 {file="sample3.in"}
+
+#### 입력
+
+~~~text
+10 20
+TEOWMZGTZKRECDSBYSUY
+IIXIGGXYZZOUGETSFZNH
+JELNHDQHYKFIUEQBNQZO
+PQJXUCRABFHMJUCTASAY
+FIGZOZABPAQGQZEMDVOG
+AXSMSWFSPFSUPAVEZWFQ
+YXXQYDCBYTHBQCNKYSEP
+ZWLPXHVYFAPDYOVYRZAR
+SJSLLHVMZCDBYPQXWLYB
+NPGNDBMWAOPVXIGLPDXR
+~~~
+
+#### 출력
+
+~~~text
+NO
+~~~
+
+LOVE는 중요한 것이 될 수 없지만, 5번째 줄의 시작에 있는 FIG(무화과)는 중요한 것이 될 수 있습니다. 언제나 마음에 무화과를.
+

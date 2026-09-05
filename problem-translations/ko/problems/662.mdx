@@ -1,0 +1,97 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 662
+problemId: 2090
+sourceTitle: "スロットマシーン"
+sourceHtmlSha256: "4acd23f4f62444b7da8b67a57c53b1297984937a21e6af6fc58e1b3699efa29f"
+reviewStatus: unreviewed
+title: "슬롯머신"
+---
+
+## 참고
+
+이 문제는 HackerRank에 공개한 문제를 양측 허가를 받아 yukicoder와 HackerRank에 공개한 것입니다.
+
+## 문제
+
+5종류의 그림이 있는 슬롯머신이 있습니다. 3열 3행이고 버튼을 누르면 각 릴이 멈춥니다. 가로 3줄 또는 대각선 2종류에서 같은 그림 3개가 맞으면 코인을 받습니다.
+
+각 릴이 어느 위치에서 멈추는 확률이 같다고 할 때 한 게임에서 돌려받는 코인의 기대값을 구하세요(오차 0.1 허용). 또한 가능한 모든 릴 정지 방법을 조사했을 때 각 그림이 몇 번 맞는지 단순 합산해 그림별로 구하세요. 동시에 여러 줄이 맞으면 각각의 합을 모두 받습니다.
+
+## 입력
+
+```text
+str1 coin1
+...
+str5 coin5
+n1
+A1
+...
+An1
+n2
+B1
+...
+Bn2
+n3
+C1
+...
+Cn3
+```
+
+str과 coin은 그림 이름과 당첨 시 코인 수입니다. $n_1,n_2,n_3$는 각 릴 길이이며 각 릴의 그림 이름이 이어집니다.
+
+- $3\le n_1,n_2,n_3\le5000$
+- 그림 이름은 영숫자 1~10자이고 coin은 1001 이하의 자연수입니다.
+
+## 출력
+
+첫째 줄에 1회 회전의 기대 코인 수 $a$, 다음 5줄에 모든 정지 방법에서 각 그림이 맞는 횟수 $U_i$를 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+Bell 5
+star 10
+heart 20
+spade 50
+diamond 100
+6
+Bell
+diamond
+star
+spade
+star
+Bell
+6
+Bell
+heart
+star
+Bell
+heart
+diamond
+6
+spade
+heart
+spade
+star
+Bell
+diamond
+```
+
+출력:
+
+```text
+3.240741
+20
+10
+0
+0
+5
+```
+
+기대값은 3.240741이고, 모든 정지 방법을 단순 합산하면 Bell 20회, star 10회, heart 0회, spade 0회, diamond 5회입니다.

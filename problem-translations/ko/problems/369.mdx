@@ -1,0 +1,82 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 369
+problemId: 1039
+sourceTitle: "足し間違い"
+sourceHtmlSha256: "6a9b3d5390ec37f1ebcaf222d0ecc645fedc5c1efd488968d41135fa11dbff28"
+reviewStatus: unreviewed
+title: "덧셈 실수"
+---
+
+## 문제
+
+yuki군은 덧셈을 어려워해서 자주 잘못 더합니다. $N$개의 수와 yuki군의 답이 주어질 때, “실제 답”−“yuki군의 답”을 출력하세요.
+
+## 입력
+
+```text
+N
+A_1 A_2 … A_N
+v
+```
+
+- $1\le N\le10^4$
+- $-10^4\le A_i\le10^4$
+- $-10^8\le v\le10^8$
+- $N,A_i,v$는 모두 정수입니다.
+- $v$는 yuki군의 답입니다.
+
+## 출력
+
+“실제 답”−“yuki군의 답”을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+```text
+4
+5 1 4 3
+10
+```
+
+### 샘플 1 {file="sample1.out"}
+
+```text
+3
+```
+
+합계가 13인데 yuki군의 답은 10이므로 3이 부족합니다.
+
+### 샘플 2 {file="sample2.in"}
+
+```text
+3
+2 1 -1
+0
+```
+
+### 샘플 2 {file="sample2.out"}
+
+```text
+2
+```
+
+입력에 음수가 포함될 수 있습니다.
+
+### 샘플 3 {file="sample3.in"}
+
+```text
+3
+-5 -2 -4
+0
+```
+
+### 샘플 3 {file="sample3.out"}
+
+```text
+-11
+```
+
+출력이 음수가 될 수도 있습니다.

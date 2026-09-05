@@ -1,0 +1,129 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 227
+problemId: 562
+sourceTitle: "簡単ポーカー"
+sourceHtmlSha256: b4af7542b0b1eb7bd7c81bd6b5e6531dce2ba14c2805a24b9feb8faa08c9fdde
+reviewStatus: unreviewed
+title: "포커 핸드"
+---
+
+## 문제
+
+카드 5장이 주어집니다. 각 카드에는 1 이상 13 이하의 정수 중 하나가 쓰여 있습니다. 카드에 쓰인 정수의 조합에 따라 핸드가 결정됩니다.
+
+주어진 5장의 카드가 다음 핸드 중 어느 것에 해당하는지 판정하세요. 여러 핸드에 해당하면 아래에서 먼저 설명한 핸드로 판정합니다.
+
+- `FULL HOUSE`: 어떤 수가 정확히 3개이고, 다른 수가 정확히 2개 있습니다.
+- `THREE CARD`: 어떤 수가 정확히 3개 있습니다.
+- `TWO PAIR`: 어떤 수가 정확히 2개이고, 다른 수가 정확히 2개 있습니다.
+- `ONE PAIR`: 어떤 수가 정확히 2개 있습니다.
+
+## 입력
+
+```text
+A_1 A_2 A_3 A_4 A_5
+```
+
+$A_i$는 $i$번째 카드에 쓰인 정수입니다. $1 \leq i \leq 5$, $1 \leq A_i \leq 13$입니다.
+
+## 출력
+
+해당하는 핸드의 이름을 출력하세요. 어떤 핸드에도 해당하지 않으면 `NO HAND`를 출력하세요. 마지막에 개행을 넣으세요.
+
+출력은 다음 중 하나입니다.
+
+```text
+FULL HOUSE
+THREE CARD
+TWO PAIR
+ONE PAIR
+NO HAND
+```
+
+## 샘플
+
+### 입력 1 {file="stdin"}
+
+```text
+5 6 5 6 5
+```
+
+### 출력 1 {file="stdout"}
+
+```text
+FULL HOUSE
+```
+
+5가 3장이고 6이 2장이므로 `FULL HOUSE`입니다.
+
+### 입력 2 {file="stdin"}
+
+```text
+5 6 5 7 5
+```
+
+### 출력 2 {file="stdout"}
+
+```text
+THREE CARD
+```
+
+5가 3장이므로 `THREE CARD`입니다.
+
+### 입력 3 {file="stdin"}
+
+```text
+5 6 5 6 7
+```
+
+### 출력 3 {file="stdout"}
+
+```text
+TWO PAIR
+```
+
+5가 2장이고 6이 2장이므로 `TWO PAIR`입니다.
+
+### 입력 4 {file="stdin"}
+
+```text
+5 6 5 7 8
+```
+
+### 출력 4 {file="stdout"}
+
+```text
+ONE PAIR
+```
+
+5가 2장이므로 `ONE PAIR`입니다.
+
+### 입력 5 {file="stdin"}
+
+```text
+5 6 7 8 9
+```
+
+### 출력 5 {file="stdout"}
+
+```text
+NO HAND
+```
+
+어떤 핸드에도 해당하지 않습니다.
+
+### 입력 6 {file="stdin"}
+
+```text
+5 5 5 5 5
+```
+
+### 출력 6 {file="stdout"}
+
+```text
+NO HAND
+```
+
+어떤 핸드에도 해당하지 않습니다.

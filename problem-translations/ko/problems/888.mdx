@@ -1,0 +1,44 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 888
+problemId: 3149
+sourceTitle: "約数の総和"
+sourceHtmlSha256: "28b4f92d237881f948ba11c84b532e42fad26a067e1330bad905f969d3d5ae6b"
+reviewStatus: unreviewed
+title: "XOR"
+---
+
+## 문제
+
+$A\oplus X=B$를 만족하는 유일한 정수 $X$를 출력하세요. $\oplus$는 이진수의 각 비트에 대한 XOR입니다.
+
+## 제약
+
+- $0\leq A,B\leq255$
+
+## 입력
+
+~~~text
+A B
+~~~
+
+## 출력
+
+조건을 만족하는 유일한 $X$를 십진수로 출력하세요.
+
+## 샘플
+
+### 입력 1 {file="stdin"}
+
+~~~text
+1 2
+~~~
+
+### 출력 1 {file="stdout"}
+
+~~~text
+3
+~~~
+
+$(1)_{10}\oplus(3)_{10}=(2)_{10}$입니다.

@@ -1,0 +1,64 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 895
+problemId: 3387
+sourceTitle: "MESE"
+sourceHtmlSha256: "9461da8a6256487e09e3300abd5fdd9ffaba0004599eb9d629d4bec1fa47191a"
+reviewStatus: unreviewed
+title: "23578 수열"
+---
+
+## 문제
+
+양의 정수열 $A$가 모든 $1\leq i\leq N$에 대해
+
+$$A_i+A_{N-i+1}=A_1+A_N$$
+
+을 만족하면 이를 23578 수열이라고 합니다. 주어진 수열 $A$가 23578 수열인지 판정하세요.
+
+## 제약
+
+- $1\leq N\leq100$
+- $1\leq A_i\leq100$
+
+## 입력
+
+~~~text
+N
+A_1 A_2 ... A_N
+~~~
+
+## 출력
+
+23578 수열이면 `Yes`, 아니면 `No`를 출력하세요.
+
+## 샘플
+
+### 입력 1 {file="stdin"}
+
+~~~text
+5
+2 3 5 7 8
+~~~
+
+### 출력 1 {file="stdout"}
+
+~~~text
+Yes
+~~~
+
+각 대칭 위치의 합이 10으로 같습니다.
+
+### 입력 2 {file="stdin"}
+
+~~~text
+4
+2 3 5 7
+~~~
+
+### 출력 2 {file="stdout"}
+
+~~~text
+No
+~~~

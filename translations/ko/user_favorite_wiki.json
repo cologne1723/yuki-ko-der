@@ -1,0 +1,17 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#content div",
+      "source": "さんのfav Wikiページ一覧",
+      "target": "📝 님의 즐겨찾기 위키 페이지 목록"
+    },
+    {
+      "selector": "#content th",
+      "source": "Wikiページ",
+      "target": "📝 위키 페이지"
+    }
+  ]
+}

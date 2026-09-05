@@ -1,0 +1,134 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#toplinks a",
+      "source": "ユーザー",
+      "target": "📝 사용자"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "問題一覧",
+      "target": "📝 문제 목록"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "ゆるふわポイント一覧",
+      "target": "📝 유루후와 포인트 목록"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "レベル提案一覧",
+      "target": "📝 레벨 제안 목록"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "解説一覧",
+      "target": "📝 해설 목록"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "未回答質問",
+      "target": "📝 답변 없는 질문"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "テスター待ち問題",
+      "target": "📝 테스터 대기 문제"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "Favコード",
+      "target": "📝 즐겨찾기 코드"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "Fav問題",
+      "target": "📝 즐겨찾기 문제"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "リジャッジ問題",
+      "target": "📝 재채점 문제"
+    },
+    {
+      "selector": "#toplinks a",
+      "source": "チャレンジ一覧",
+      "target": "📝 챌린지 목록"
+    },
+    {
+      "selector": "#content h4",
+      "source": "プロフィール",
+      "target": "📝 프로필"
+    },
+    {
+      "selector": "#summary div",
+      "source": "ユーザーID = {userId}",
+      "target": "📝 사용자 ID = {userId}",
+      "variables": {
+        "userId": "\\d+"
+      }
+    },
+    {
+      "selector": "#summary .left",
+      "source": "登録日時",
+      "target": "📝 가입 일시"
+    },
+    {
+      "selector": "#summary .left",
+      "source": "公開問題",
+      "target": "📝 공개 문제"
+    },
+    {
+      "selector": "#summary .left",
+      "source": "提出",
+      "target": "📝 제출"
+    },
+    {
+      "selector": "#summary .left",
+      "source": "AC問題数",
+      "target": "📝 AC 문제 수"
+    },
+    {
+      "selector": "#summary .left",
+      "source": "ユーザーLv.",
+      "target": "📝 사용자 레벨"
+    },
+    {
+      "selector": "#summary .right",
+      "source": "{level} （レベルアップまで★ * {stars}）",
+      "target": "📝 {level} (레벨 업까지 ★ × {stars})",
+      "variables": {
+        "level": "[0-9.]+",
+        "stars": "\\d+"
+      }
+    },
+    {
+      "selector": "#summary .left",
+      "source": "スコア",
+      "target": "📝 점수"
+    },
+    {
+      "selector": "#summary .left",
+      "source": "ゆるふわポイント",
+      "target": "📝 유루후와 포인트"
+    },
+    {
+      "selector": "#summary .left",
+      "source": "ほしいものリスト",
+      "target": "📝 위시리스트"
+    },
+    {
+      "selector": "#summary .right",
+      "source": "(更新処理は1分ごと)",
+      "target": "📝 (1분마다 갱신)"
+    },
+    {
+      "selector": "#content .left",
+      "source": "前へ | 次へ",
+      "target": "📝 이전 | 다음"
+    }
+  ]
+}

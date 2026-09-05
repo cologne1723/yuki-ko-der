@@ -1,0 +1,52 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#content h4",
+      "source": "タグ一覧",
+      "target": "📝 태그 목록"
+    },
+    {
+      "selector": "#content label",
+      "source": "出現回数順",
+      "target": "📝 출현 횟수순"
+    },
+    {
+      "selector": "#content label",
+      "source": "文字列順",
+      "target": "📝 문자열순"
+    },
+    {
+      "selector": "#content th",
+      "source": "タグ名（リンク先は使われている問題）",
+      "target": "📝 태그명(링크는 사용된 문제로 연결)"
+    },
+    {
+      "selector": "#content th",
+      "source": "Wikiへのリンク",
+      "target": "📝 위키 링크"
+    },
+    {
+      "selector": "#content div",
+      "source": "問題へのリンクは、ユーザーページの「練習モード」が「ノーマル」または「ガチ」の場合は",
+      "target": "📝 문제 링크는 사용자 페이지의 '연습 모드'가 '노멀' 또는 '진지'인 경우 "
+    },
+    {
+      "selector": "#content b",
+      "source": "解いた問題のみ",
+      "target": "📝 푼 문제만"
+    },
+    {
+      "selector": "#content div",
+      "source": "になります。",
+      "target": "📝 표시됩니다."
+    },
+    {
+      "selector": "#content div",
+      "source": "(Wikiのリンクは記事があることは保証してません。)",
+      "target": "📝 (위키 링크에 문서가 존재한다고 보장하지는 않습니다.)"
+    }
+  ]
+}

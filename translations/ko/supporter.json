@@ -1,0 +1,132 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#content h2",
+      "source": "サイトサポーター一覧（順不同）",
+      "target": "📝 사이트 서포터 목록(순서 무관)"
+    },
+    {
+      "selector": "#content p",
+      "source": "ありがとうございます！",
+      "target": "📝 감사합니다!"
+    },
+    {
+      "selector": "#content h2",
+      "source": "サイトサポーターの特典",
+      "target": "📝 사이트 서포터 혜택"
+    },
+    {
+      "selector": "#content li",
+      "source": "広告がなくなります",
+      "target": "📝 광고가 사라집니다"
+    },
+    {
+      "selector": "#content li",
+      "source": "オンライン実行で実行履歴が表示できます",
+      "target": "📝 온라인 실행에서 실행 기록을 볼 수 있습니다"
+    },
+    {
+      "selector": "#content li",
+      "source": "Writerの方は、問題公開前のコードの変更ができます",
+      "target": "📝 출제자는 문제 공개 전에 코드를 변경할 수 있습니다"
+    },
+    {
+      "selector": "#content li",
+      "source": "好きな画像（ただし、一般に公開可能なもの）をユーザーアイコンに設定できます。",
+      "target": "📝 원하는 이미지(공개 가능한 이미지에 한함)를 사용자 아이콘으로 설정할 수 있습니다."
+    },
+    {
+      "selector": "#content li",
+      "source": "問題集の新規作成ができます",
+      "target": "📝 새 문제 모음을 만들 수 있습니다"
+    },
+    {
+      "selector": "#content",
+      "source": "他にも何かコンテストには影響しない範囲の機能を計画してます。",
+      "target": "📝 그 밖에도 대회에 영향을 주지 않는 범위에서 기능을 계획하고 있습니다."
+    },
+    {
+      "selector": "#content h2",
+      "source": "ワンデーサポーターについて",
+      "target": "📝 일일 서포터 안내"
+    },
+    {
+      "selector": "#content a",
+      "source": "ワンデーサポーター",
+      "target": "📝 일일 서포터"
+    },
+    {
+      "selector": "#content p",
+      "source": "は、広告を見ることで24時間だけ一部の機能を利用できる機能です。",
+      "target": "📝 는 광고를 시청하면 일부 기능을 24시간 동안 이용할 수 있는 기능입니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "サイトサポーターになると、ワンデーサポーター機能が常時有効になります。",
+      "target": "📝 사이트 서포터가 되면 일일 서포터 기능이 항상 활성화됩니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "なおご支援いただける方は、サイトサポーターの方も広告をご覧いただくと大変うれしいです。",
+      "target": "📝 후원해 주실 수 있다면 사이트 서포터도 광고를 봐 주시면 매우 감사하겠습니다."
+    },
+    {
+      "selector": "#content h2",
+      "source": "サイトサポーターになる方法",
+      "target": "📝 사이트 서포터가 되는 방법"
+    },
+    {
+      "selector": "#content p",
+      "source": "何かしらの方法で1000円以上送っていただければ、1年間サイトサポーターの権限を付加します。",
+      "target": "📝 어떤 방법으로든 1,000엔 이상 보내 주시면 1년간 사이트 서포터 권한을 부여합니다."
+    },
+    {
+      "selector": "#content p",
+      "source": "申し訳ないですが手動対応しているため、見逃していたらDMしてください。",
+      "target": "📝 수동으로 처리하므로 누락되었다면 DM을 보내 주세요."
+    },
+    {
+      "selector": "#content p",
+      "source": "他の項目でも良いので合計して合計8ドル（日本円1000円）以上でご連絡ください。 yukicoderにGitHubでログイン（連携）していることが必須です。スポンサーのアカウントと突き合わせて権限を付けるため、連携が無いと確認できません。",
+      "target": "📝 다른 항목을 합산해도 되므로 총 8달러(일본 엔화 1,000엔) 이상이면 연락해 주세요. yukicoder에 GitHub로 로그인(연동)되어 있어야 합니다. 스폰서 계정과 대조하여 권한을 부여하므로 연동되어 있지 않으면 확인할 수 없습니다."
+    },
+    {
+      "selector": "#content h3",
+      "source": "Google Playのコードを送る",
+      "target": "📝 Google Play 코드 보내기"
+    },
+    {
+      "selector": "#content a",
+      "source": "Google Play ギフトカード",
+      "target": "📝 Google Play 기프트 카드"
+    },
+    {
+      "selector": "#content",
+      "source": "上はAmazon経由ですが、Google PlayのコードをDMしていただいても構いません。",
+      "target": "📝 위 링크는 Amazon을 통하지만 Google Play 코드를 DM으로 보내도 됩니다."
+    },
+    {
+      "selector": "#content",
+      "source": "メールアドレスは左のメールアドレスはクリックからコピーできます。",
+      "target": "📝 이메일 주소는 왼쪽의 이메일 주소 링크를 클릭해 복사할 수 있습니다."
+    },
+    {
+      "selector": "#content",
+      "source": "説明欄に UserId = 〇〇　と記載してください。",
+      "target": "📝 설명란에 UserId = 〇〇라고 적어 주세요."
+    },
+    {
+      "selector": "#content h3",
+      "source": "Amazon ギフトカード",
+      "target": "📝 Amazon 기프트 카드"
+    },
+    {
+      "selector": "#content a",
+      "source": "Amazonギフトカード",
+      "target": "📝 Amazon 기프트 카드"
+    }
+  ]
+}

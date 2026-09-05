@@ -1,0 +1,22 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#content h4",
+      "source": "テスター待ち問題",
+      "target": "📝 테스터 대기 문제"
+    },
+    {
+      "selector": "#content h4",
+      "source": "出題待ち問題",
+      "target": "📝 출제 대기 문제"
+    },
+    {
+      "selector": "#body div",
+      "source": "レベルなしは難易度未設定です。",
+      "target": "📝 레벨 없음은 난이도가 설정되지 않았음을 뜻합니다."
+    }
+  ]
+}

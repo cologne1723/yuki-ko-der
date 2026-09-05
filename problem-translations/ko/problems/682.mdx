@@ -1,0 +1,72 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 682
+problemId: 2256
+sourceTitle: "Average"
+sourceHtmlSha256: "e17e10afd810b2713ef0417aaf508e98c19f3885ab0ff44e882873a5f4ba964f"
+reviewStatus: unreviewed
+title: "평균"
+---
+
+## 문제
+
+자연수 $A,B$($A\le B$)가 주어집니다. $A\le i\le B$인 $i$ 중 $\{A,B,i\}$ 세 수의 평균이 정수가 되는 $i$의 개수를 구하세요.
+
+## 입력
+
+```text
+A B
+```
+
+$1\le A\le B\le100$
+
+## 출력
+
+조건을 만족하는 $i$의 개수를 출력하세요. 마지막에 개행을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+2 8
+```
+
+출력:
+
+```text
+3
+```
+
+$i=2$이면 평균은 $(2+8+2)/3=4$로 정수입니다. $i=3$이면 $4.33\ldots$로 정수가 아닙니다.
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+2 3
+```
+
+출력:
+
+```text
+0
+```
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+1 100
+```
+
+출력:
+
+```text
+34
+```

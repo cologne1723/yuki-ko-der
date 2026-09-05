@@ -1,0 +1,17 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#content p",
+      "source": "WebCalは",
+      "target": "WebCal은 "
+    },
+    {
+      "selector": "#content a",
+      "source": "こちら",
+      "target": "여기로"
+    }
+  ]
+}

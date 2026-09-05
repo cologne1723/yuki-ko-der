@@ -1,0 +1,78 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 589
+problemId: 1594
+sourceTitle: "Counting Even"
+sourceHtmlSha256: "b9e56f199fe60717622cae1eae2bfb4be5e8efd6a70b63592a88c10a5683072a"
+reviewStatus: unreviewed
+title: "짝수 세기"
+---
+
+## 문제
+
+음이 아닌 정수 N이 주어집니다. 0 ≤ i ≤ N에서 이항계수 NCi가 짝수가 되는 i의 개수를 구하세요.
+
+## 입력
+
+```text
+N
+```
+
+0 ≤ N ≤ 10^18
+
+## 출력
+
+0 ≤ i ≤ N에서 NCi가 짝수가 되는 i의 개수를 출력하세요.
+
+출력 마지막에는 줄바꿈이 필요합니다.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+입력:
+
+```text
+4
+```
+
+출력:
+
+```text
+3
+```
+
+(4C0,4C1,4C2,4C3,4C4)=(1,4,6,4,1)이므로 4Ci가 짝수가 되는 i는 1,2,3의 3개입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+입력:
+
+```text
+3
+```
+
+출력:
+
+```text
+0
+```
+
+3C0,3C1,3C2,3C3은 모두 홀수입니다.
+
+### 샘플 3 {file="sample3.in"}
+
+입력:
+
+```text
+0
+```
+
+출력:
+
+```text
+0
+```
+
+0C0의 값은 1입니다.

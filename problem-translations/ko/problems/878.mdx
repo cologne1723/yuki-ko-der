@@ -1,0 +1,60 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 878
+problemId: 3287
+sourceTitle: "Range High-Element Query"
+sourceHtmlSha256: "c72796a8ab06f86fa13c5804e82db4e357688cfd3e64d772c907e664f83a3fd9"
+reviewStatus: unreviewed
+title: "황금 고리"
+---
+
+## 문제
+
+원형으로 놓인 길이 2 이상인 배열에서 인접한 원소의 합이 서로 모두 다른 것을 황금 고리라고 합니다. 즉, 길이 $N$ 배열 $A$에 대해 $S_i=A_i+A_{i+1}$($1\leq i\lt N$), $S_N=A_N+A_1$라 할 때, $i\ne j$이면 $S_i\ne S_j$입니다.
+
+$(1,2,\ldots,N)$을 자유롭게 재배열하여 황금 고리를 만들 수 있는지 판정하고, 가능하면 그 배열을 출력하세요.
+
+## 제약
+
+- $2\leq N\leq2000$
+
+## 입력
+
+~~~text
+N
+~~~
+
+## 출력
+
+가능하면 `Yes`와 황금 고리 배열을 출력하고, 불가능하면 `No`를 출력하세요.
+
+## 샘플
+
+### 입력 1 {file="stdin"}
+
+~~~text
+4
+~~~
+
+### 출력 1 {file="stdout"}
+
+~~~text
+Yes
+1 3 4 2
+~~~
+
+인접한 합은 $4,7,6,3$으로 모두 다릅니다.
+
+### 입력 2 {file="stdin"}
+
+~~~text
+5
+~~~
+
+### 출력 2 {file="stdout"}
+
+~~~text
+Yes
+2 4 5 3 1
+~~~

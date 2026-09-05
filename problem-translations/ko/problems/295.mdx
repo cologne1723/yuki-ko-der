@@ -1,0 +1,106 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 295
+problemId: 400
+sourceTitle: "hel__world"
+sourceHtmlSha256: "1cecc134c00efb3bf79a208957513440f604f2c567045ece12310d183601dc49"
+reviewStatus: unreviewed
+title: "hel__world"
+---
+
+## 문제
+
+문자열 $S$의 연결 성분 개수를 다음 연산을 가능한 만큼 수행한 뒤의 문자열 길이로 정의합니다.
+
+연산: 같은 문자가 2개 이상 연속하는 부분이 있으면, 그 부분에서 문자 하나를 제거합니다.
+
+예를 들어 `helloworld`의 연결 성분 개수는 9이고, `aababbaaa`의 연결 성분 개수는 5입니다.
+
+문자열 $S$의 $T$ 수를 문자열 $S$가 포함하는 부분 수열 $T$의 개수로 정의합니다. 예를 들어 $S$가 `helloworld`이고 $T$가 `helworld`라면, `helloworld`는 `hel__world`와 `he_l_world`라는 두 부분 수열을 가지므로 `helloworld`의 `helworld` 수는 2입니다.
+
+문자열 $S$의 각 알파벳별 문자 수의 상한과 문자열 $T$가 주어집니다. 다음 두 조건을 만족하는 문자열 $S$에 대한 $T$ 수의 최댓값을 구하세요.
+
+- $S$에 포함되는 문자 $\alpha$의 개수는 최대 $S_\alpha$입니다.
+- $S$의 연결 성분 개수와 $T$의 연결 성분 개수가 같습니다.
+
+단, 답이 매우 커질 수 있으므로 $2^{62}$ 이상이면 `hel`을 출력하세요.
+
+## 입력
+
+```text
+S_a S_b S_c S_d S_e S_f S_g S_h S_i S_j S_k S_l S_m S_n S_o S_p S_q S_r S_s S_t S_u S_v S_w S_x S_y S_z
+T
+```
+
+- $0 \le S_\alpha \le 10^{18}$ ($\alpha\in\{a,\ldots,z\}$)
+- $1 \le |T| \le 10^6$
+
+$S_\alpha$는 문자열 $S$에 문자 $\alpha$가 $S_\alpha$개 포함될 수 있음을 나타냅니다. 문자열 $S$와 $T$에 포함되는 문자는 모두 소문자 알파벳 `a`〜`z` 중 하나입니다.
+
+## 출력
+
+$S$를 재배열하여 얻을 수 있는 $T$ 수의 최댓값 또는 `hel`을 한 줄에 출력하세요.
+
+마지막에 개행을 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+```text
+0 0 0 1 1 0 0 1 0 0 0 3 0 0 2 0 0 1 0 0 0 0 1 0 0 0
+helworld
+```
+
+### 샘플 1 {file="sample1.out"}
+
+```text
+4
+```
+
+이 경우 $S$는 `helloworld`를 재배열해 얻을 수 있는 문자열입니다. $S$를 `hellwoorld`로 만들면 `helworld` 수가 4가 되며, 이것이 최댓값입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+```text
+0 0 0 1 1 0 0 1 0 0 0 3 0 0 2 0 0 1 0 0 0 0 1 0 0 0
+hello
+```
+
+### 샘플 2 {file="sample2.out"}
+
+```text
+6
+```
+
+`hello`와 연결 성분 수가 같은 문자열로 생각하면 `hellloo`의 `hello` 수가 6으로 최대가 됩니다.
+
+### 샘플 3 {file="sample3.in"}
+
+```text
+100 100 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+abababababababababababababababab
+```
+
+### 샘플 3 {file="sample3.out"}
+
+```text
+hel
+```
+
+답이 매우 큰 경우에는 `hel`을 출력합니다.
+
+### 샘플 4 {file="sample4.in"}
+
+```text
+9 1 0 0 0 0 0 0 9 0 0 0 0 0 0 0 0 0 0 7 0 0 0 0 0
+iauba
+```
+
+### 샘플 4 {file="sample4.out"}
+
+```text
+1260
+```
+

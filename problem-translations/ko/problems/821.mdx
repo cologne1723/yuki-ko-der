@@ -1,0 +1,62 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 821
+problemId: 2901
+sourceTitle: "Making Integers"
+sourceHtmlSha256: "e8105e1551ac24c7663d2604b2f7c5f0a1c01b83d05396ec65d6839eba354204"
+reviewStatus: unreviewed
+title: "정수 만들기"
+---
+
+## 문제
+
+양의 정수 $N,K$가 주어집니다. 수열 $A=(1,2,\ldots,N)$에 다음 조작을 0회 이상 $K$회 이하 적용했을 때, 수열 합으로 가능한 값의 개수를 구하세요.
+
+조작: $1\leq i\leq N$인 정수 $i$를 골라 $A_i$의 부호를 바꿉니다.
+
+## 입력
+
+~~~text
+$N\ K$
+~~~
+
+$1\leq K\leq N\leq10^9$
+
+## 출력
+
+조작 후 수열 합으로 가능한 값의 개수를 출력하세요.
+
+## 샘플
+
+### 샘플 1 {file="sample1.in"}
+
+#### 입력
+
+~~~text
+3 2
+~~~
+
+#### 출력
+
+~~~text
+6
+~~~
+
+가능한 합은 6, 4, 2, 0, -2, -4입니다.
+
+### 샘플 2 {file="sample2.in"}
+
+#### 입력
+
+~~~text
+987654321 123456789
+~~~
+
+#### 출력
+
+~~~text
+114311841799268404
+~~~
+
+답이 32비트 정수형에 들어가지 않을 수 있습니다.

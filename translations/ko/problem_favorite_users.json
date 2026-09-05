@@ -1,0 +1,58 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#toplinks a",
+      "source": "問題に戻る",
+      "target": "📝 문제로 돌아가기"
+    },
+    {
+      "selector": "#content h4",
+      "source": "お気に入りにしたユーザー（{count}人）",
+      "target": "📝 즐겨찾기에 추가한 사용자({count}명)",
+      "variables": {
+        "count": "[0-9]+"
+      }
+    },
+    {
+      "selector": "#favorite-users th",
+      "source": "ユーザー",
+      "target": "📝 사용자"
+    },
+    {
+      "selector": "#favorite-users th",
+      "source": "お気に入りにした日時",
+      "target": "📝 즐겨찾기에 추가한 일시"
+    },
+    {
+      "selector": "#favorite-users-message p",
+      "source": "お気に入りにしたユーザーの一覧は、この問題の Writer / Tester と、",
+      "target": "📝 즐겨찾기에 추가한 사용자 목록은 이 문제의 Writer / Tester와, ",
+      "preserveBoundaryWhitespace": false
+    },
+    {
+      "selector": "#favorite-users-message a",
+      "source": "サイトサポーター",
+      "target": "📝 사이트 서포터"
+    },
+    {
+      "selector": "#favorite-users-message p",
+      "source": "または",
+      "target": "📝  또는 ",
+      "preserveBoundaryWhitespace": false
+    },
+    {
+      "selector": "#favorite-users-message a",
+      "source": "ワンデーサポーター",
+      "target": "📝 원데이 서포터"
+    },
+    {
+      "selector": "#favorite-users-message p",
+      "source": "が表示できます。",
+      "target": "📝 가 볼 수 있습니다.",
+      "preserveBoundaryWhitespace": false
+    }
+  ]
+}

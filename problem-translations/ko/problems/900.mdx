@@ -1,0 +1,60 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 900
+problemId: 3406
+sourceTitle: "aδδitivee"
+sourceHtmlSha256: "268e6d8f145353eb7589485ff2ca7950797a7f2013c5295bc9137b7b04833b95"
+reviewStatus: unreviewed
+title: "제야의 종"
+---
+
+## 문제
+
+타로 씨에게 번뇌가 $N$개 있습니다. 종을 한 번 칠 때마다 번뇌가 하나 줄고, 한 번 치는 데 $A$초가 걸립니다. 현재는 2025년 12월 31일 $H$시 $M$분 $S$초입니다.
+
+지금부터 종을 치기 시작하면 종을 치는 중이거나 다 친 시점에 새해가 되는지 판정하세요. 여기서 새해가 된다는 것은 날짜가 바뀌는 것을 뜻합니다.
+
+## 제약
+
+- $1\leq N\leq500$
+- $1\leq A\leq300$
+- $0\leq H\leq23$, $0\leq M,S\leq59$
+
+## 입력
+
+~~~text
+N A H M S
+~~~
+
+## 출력
+
+새해가 되면 `Yes`, 그렇지 않으면 `No`를 출력하세요.
+
+## 샘플
+
+### 입력 1 {file="stdin"}
+
+~~~text
+108 100 23 0 0
+~~~
+
+### 출력 1 {file="stdout"}
+
+~~~text
+Yes
+~~~
+
+종을 다 치는 데 3시간이 걸리므로 치는 동안 날짜가 바뀝니다.
+
+### 입력 2 {file="stdin"}
+
+~~~text
+150 300 0 0 0
+~~~
+
+### 출력 2 {file="stdout"}
+
+~~~text
+No
+~~~

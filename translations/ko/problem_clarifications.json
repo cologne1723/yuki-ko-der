@@ -1,0 +1,18 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#body div",
+      "source": "↑に「REVEL CSRF:invalid token.」と表示された場合は、一旦ログアウトしてみてください。それでも直らない場合は",
+      "target": "📝 위에 'REVEL CSRF:invalid token.'이 표시되면 로그아웃한 뒤 다시 시도해 주세요. 그래도 해결되지 않으면 "
+    },
+    {
+      "selector": "#body div",
+      "source": "までお願いします..",
+      "target": "📝 로 문의해 주세요..",
+      "preserveBoundaryWhitespace": false
+    }
+  ]
+}

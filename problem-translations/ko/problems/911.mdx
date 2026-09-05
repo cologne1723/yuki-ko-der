@@ -1,0 +1,59 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 911
+problemId: 3333
+sourceTitle: "ラッキーソート"
+sourceHtmlSha256: "127629b3e77cff4d18efd4d5cc67cc0d55e5a9f178e422ca2bca30752fbc260c"
+reviewStatus: unreviewed
+title: "연속 거듭제곱 합"
+---
+
+## 문제
+
+양의 정수 $E,L,R$에 대해 $S(E,L,R)=\sum_{i=L}^{R}i^E$로 정의합니다. 양의 정수 $N$이 주어질 때 $1\leq L\leq R$이고 $S(E,L,R)=N$인 양의 정수 삼중항 $(E,L,R)$을 모두 구하세요.
+
+## 제약
+
+- $2\leq N\leq10^{24}$
+
+## 입력
+
+~~~text
+N
+~~~
+
+## 출력
+
+해의 개수를 $C$라 하고 사전순으로 정렬한 해를 출력하세요. 첫 줄에 $C$, 이후 각 해를 한 줄에 출력합니다.
+
+## 샘플
+
+### 입력 1 {file="stdin"}
+
+~~~text
+2
+~~~
+
+### 출력 1 {file="stdout"}
+
+~~~text
+1
+1 2 2
+~~~
+
+### 입력 2 {file="stdin"}
+
+~~~text
+24979
+~~~
+
+### 출력 2 {file="stdout"}
+
+~~~text
+4
+1 12489 12490
+1 24979 24979
+2 62 67
+4 5 10
+~~~

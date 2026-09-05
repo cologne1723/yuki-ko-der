@@ -1,0 +1,31 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    { "selector": "#content h4", "source": "質問一覧", "target": "질문 목록" },
+    {
+      "selector": "#content",
+      "source": "自分の作問した問題・テスターとして設定されている問題・質問を出したもの・公開されている質問が表示されます。",
+      "target": "직접 출제한 문제, 테스터로 지정된 문제, 질문을 올린 문제 및 공개된 질문이 표시됩니다."
+    },
+    {
+      "selector": "#content",
+      "source": "最新20件出していますが、今後変更するかもしれません。",
+      "target": "최신 20건을 표시하며, 향후 변경될 수 있습니다."
+    },
+    { "selector": "#content th", "source": "質問ID", "target": "질문 ID" },
+    {
+      "selector": "#content th",
+      "source": "質問日時/質問者",
+      "target": "질문 일시/질문자"
+    },
+    { "selector": "#content th", "source": "質問", "target": "질문" },
+    { "selector": "#content th", "source": "回答", "target": "답변" },
+    {
+      "selector": "#content th",
+      "source": "回答日時/回答者",
+      "target": "답변 일시/답변자"
+    }
+  ]
+}

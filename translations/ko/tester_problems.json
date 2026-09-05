@@ -1,0 +1,67 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#toplinks h3",
+      "source": "テスター募集問題",
+      "target": "📝 테스터 모집 문제"
+    },
+    {
+      "selector": "#content > p",
+      "source": "テスター募集中の未公開問題を表示しています。",
+      "target": "📝 테스터를 모집 중인 비공개 문제를 표시합니다."
+    },
+    {
+      "selector": "#content > p",
+      "source": "合計: {count}問",
+      "target": "📝 합계: {count}문제",
+      "variables": { "count": "\\d+" }
+    },
+    {
+      "selector": "#content > p",
+      "source": "表示順: 自分 → 👑サイトサポーター → その他",
+      "target": "📝 표시 순서: 나 → 👑사이트 서포터 → 기타"
+    },
+    {
+      "selector": "#content h5",
+      "source": "全体の難易度別統計",
+      "target": "📝 전체 난이도별 통계"
+    },
+    {
+      "selector": "#content h5",
+      "source": "ユーザーごとの問題一覧",
+      "target": "📝 사용자별 문제 목록"
+    },
+    { "selector": "#content .badge", "source": "通常", "target": "📝 일반" },
+    {
+      "selector": "#content .badge",
+      "source": "教育的",
+      "target": "📝 교육적"
+    },
+    { "selector": "#content .badge", "source": "ネタ", "target": "📝 재미" },
+    {
+      "selector": "#content strong",
+      "source": "メモと連絡先:",
+      "target": "📝 메모 및 연락처:"
+    },
+    {
+      "selector": "#content strong",
+      "source": "連絡先:",
+      "target": "📝 연락처:"
+    },
+    {
+      "selector": "#content div",
+      "source": "({count}問)",
+      "target": "📝 ({count}문제)",
+      "variables": { "count": "\\d+" }
+    },
+    {
+      "selector": "#content a",
+      "source": "{username} さんの問題（{count}問）",
+      "target": "📝 {username}님의 문제({count}문제)",
+      "variables": { "username": ".+?", "count": "\\d+" }
+    }
+  ]
+}

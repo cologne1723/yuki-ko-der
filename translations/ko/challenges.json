@@ -1,0 +1,22 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#main h1",
+      "source": "チャレンジ一覧",
+      "target": "📝 챌린지 목록"
+    },
+    {
+      "selector": "#main a",
+      "source": "Challenge Succeed! (ケース未追加のみ)",
+      "target": "📝 Challenge Succeed! (케이스가 추가되지 않은 항목만)"
+    },
+    {
+      "selector": "#main a",
+      "source": "Challenge Succeed! すでに成功済み",
+      "target": "📝 Challenge Succeed! 이미 성공함"
+    }
+  ]
+}

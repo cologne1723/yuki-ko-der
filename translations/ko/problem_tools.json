@@ -1,0 +1,22 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#body div",
+      "source": "ログインしていないと表示することが出来ません",
+      "target": "📝 로그인해야 볼 수 있습니다"
+    },
+    {
+      "selector": "#content span",
+      "source": "ログインされていないので表示されません",
+      "target": "📝 로그인하지 않아 표시할 수 없습니다"
+    },
+    {
+      "selector": "#body div",
+      "source": "TwitterかGithubでログインしないと表示されません",
+      "target": "📝 Twitter 또는 GitHub로 로그인해야 볼 수 있습니다"
+    }
+  ]
+}

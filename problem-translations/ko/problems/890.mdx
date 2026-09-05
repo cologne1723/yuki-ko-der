@@ -1,0 +1,55 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 890
+problemId: 3169
+sourceTitle: "移調の限られた旋法"
+sourceHtmlSha256: "4b0f8b1fdcb93b1107e4bfd021ed21d5e84fbc50d58bd0c12ca65a225e15d081"
+reviewStatus: unreviewed
+title: "5개 지표의 범위"
+---
+
+## 문제
+
+SNS에는 한 메시지마다 $N$개의 지표가 있고 각 지표는 0 이상의 실수입니다. $i$번째 지표는 형상 매개변수 $k_i$, 척도 매개변수 $a_i$인 Erlang 분포를 따르며 서로 독립입니다.
+
+$m=1,2,\dots,N$에 대해, 지표를 오름차순으로 정렬했을 때 $m$번째 값의 기대값을 $E_m$이라 합니다. $E_m\pmod{998244353}$을 구하세요.
+
+이 문제의 조건에서는 $Y E_m=X$인 정수쌍이 존재하며 $Y$는 $998244353$의 배수가 아닙니다. 따라서 $Y Z\equiv X\pmod{998244353}$인 $0\leq Z<998244353$를 $E_m$의 나머지로 정의합니다.
+
+## 제약
+
+- $1\leq N\leq12$
+- $1\leq k_i$, $k_1+\cdots+k_N\leq4000$
+- $1\leq a_i\leq20$
+
+## 입력
+
+~~~text
+N
+k_1 a_1
+⋮
+k_N a_N
+~~~
+
+## 출력
+
+$E_1,E_2,\dots,E_N$의 나머지를 공백으로 구분해 한 줄에 출력하세요.
+
+## 샘플
+
+### 입력 1 {file="stdin"}
+
+~~~text
+2
+1 2
+2 3
+~~~
+
+### 출력 1 {file="stdout"}
+
+~~~text
+439227517 559016844
+~~~
+
+이 경우 $E_1=42/25$, $E_2=158/25$입니다.
