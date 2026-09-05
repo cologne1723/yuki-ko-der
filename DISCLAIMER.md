@@ -1,15 +1,15 @@
-# Content ownership and removal
+# 콘텐츠 권리 및 삭제 요청 안내
 
-I do not own the original yukicoder problem statements or other third-party
-content reproduced or translated in this project. All rights to that content
-remain with their respective owners. This is an independent translation
-project and is not affiliated with or endorsed by yukicoder or the original
-authors.
+> 📝 이 안내 문서는 한국어 번역 검토 전입니다.
 
-Upon a removal request from a content owner or their authorized representative,
-I will completely delete the requested content from this project and its
-GitHub Pages site, including copies in releases or other distributions under
-my control.
+저는 이 프로젝트에서 복제하거나 번역한 yukicoder 원문 문제와 그 밖의 제삼자
+콘텐츠의 권리를 소유하지 않습니다. 해당 콘텐츠의 모든 권리는 각 권리자에게
+있습니다. 이 프로젝트는 독립적인 번역 프로젝트이며, yukicoder 또는 원저작자와
+제휴하거나 그들의 승인을 받은 프로젝트가 아닙니다.
 
-To request removal, please [open a GitHub issue](https://github.com/cologne1723/yuki-ko-der/issues/new)
-identifying the content and the URLs or problem numbers to be removed.
+권리자 또는 그 권한을 위임받은 대리인의 삭제 요청을 받으면, 요청한 콘텐츠를
+이 프로젝트와 GitHub Pages 사이트에서 완전히 삭제하겠습니다. 제가 관리하는
+릴리스나 그 밖의 배포본에 포함된 사본도 삭제 대상에 포함됩니다.
+
+삭제를 요청하려면 [GitHub 이슈를 등록](https://github.com/cologne1723/yuki-ko-der/issues/new)하고,
+삭제할 콘텐츠와 해당 URL 또는 문제 번호를 알려 주세요.

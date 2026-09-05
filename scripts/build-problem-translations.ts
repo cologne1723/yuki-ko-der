@@ -11,9 +11,10 @@ const sourceProblems = join(sourceRoot, "ko", "problems");
 const outputRoot = join(repositoryRoot, ".problem-translations-dist");
 const outputProblems = join(outputRoot, "ko", "problems");
 const disclaimer = `<footer>
-<p>I do not own the original problem statements or other third-party content. All rights remain with their respective owners. This project is not affiliated with or endorsed by yukicoder.</p>
-<p>Upon a request from a content owner or their authorized representative, I will completely delete the requested content from this project, its GitHub Pages site, and other distributions under my control.</p>
-<p><a href="https://github.com/cologne1723/yuki-ko-der/issues/new">Request content removal</a></p>
+<p>이 안내 문구는 한국어 번역 검토 전입니다.</p>
+<p>저는 원문 문제나 제삼자 콘텐츠의 권리를 소유하지 않습니다. 모든 권리는 각 권리자에게 있으며, 이 프로젝트는 yukicoder와 제휴하거나 승인을 받은 프로젝트가 아닙니다.</p>
+<p>권리자 또는 그 대리인의 요청을 받으면 해당 콘텐츠를 이 프로젝트, GitHub Pages 사이트, 제가 관리하는 배포본에서 완전히 삭제하겠습니다.</p>
+<p><a href="https://github.com/cologne1723/yuki-ko-der/issues/new">콘텐츠 삭제 요청</a></p>
 </footer>`;
 
 await rm(outputRoot, { recursive: true, force: true });
@@ -45,7 +46,7 @@ const links = [...sourceProblemsByNumber.keys()]
   .sort((left, right) => left - right)
   .map(
     (number) =>
-      `<li><a href="ko/problems/${number}.html">No. ${number}</a></li>`,
+      `<li><a href="ko/problems/${number}.html">${number}번 문제</a></li>`,
   )
   .join("\n");
 await writeFile(join(outputRoot, ".nojekyll"), "");
@@ -57,18 +58,18 @@ await cp(
 await writeFile(
   join(outputRoot, "index.html"),
   `<!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>yukicoder Korean problem translations</title>
+<title>yukicoder 한국어 문제 번역</title>
 </head>
 <body>
-<h1>yukicoder Korean problem translations</h1>
+<h1>yukicoder 한국어 문제 번역</h1>
 ${disclaimer}
-<p>${sourceProblemsByNumber.size} translated problems. Review status is recorded in each document.</p>
-<p>These files supply the Firefox and Chrome extension. The extension verifies the canonical source before applying a translation.</p>
-<p><a href="https://github.com/cologne1723/yuki-ko-der">Source and installation instructions</a> · <a href="PRIVACY.md">Privacy</a></p>
+<p>문제 번역 ${sourceProblemsByNumber.size}개를 제공합니다. 검수 상태는 각 문서에 기록되어 있습니다.</p>
+<p>Firefox와 Chrome 확장 기능이 사용하는 번역 파일입니다. 확장 기능은 원문을 검증한 뒤 번역을 적용합니다.</p>
+<p><a href="https://github.com/cologne1723/yuki-ko-der">소스 코드 및 설치 안내</a> · <a href="PRIVACY.md">개인정보 안내</a></p>
 <ul>
 ${links}
 </ul>

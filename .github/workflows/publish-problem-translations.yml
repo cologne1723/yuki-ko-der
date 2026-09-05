@@ -1,4 +1,4 @@
-name: Publish problem translations
+name: 문제 번역 배포
 
 on:
   push:
@@ -40,14 +40,14 @@ jobs:
           node-version: 24
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - name: Validate translated HTML and canonical sources
+      - name: 번역 HTML 및 실제 원문 검증
         run: pnpm verify:problems
-      - name: Compile Markdown problem sources
+      - name: 문제 Markdown 컴파일
         run: pnpm build:problems
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .problem-translations-dist
-      - name: Deploy to GitHub Pages
+      - name: GitHub Pages에 배포
         id: deployment
         uses: actions/deploy-pages@v4

@@ -1,33 +1,37 @@
-# yukicoder Korean Translator
+# yukicoder 한국어 번역 확장 기능
 
-A Manifest V3 browser extension for Firefox and Chrome that adds Korean
-translations to [yukicoder](https://yukicoder.me/).
+> 📝 이 안내 문서는 한국어 번역 검토 전입니다.
 
-I do not own the original problem statements or other third-party content in
-this project. Rights remain with their respective owners. Upon a request from
-a content owner or their authorized representative, I will completely delete
-the requested content from this project, its GitHub Pages site, and other
-distributions under my control. This project is not affiliated with or endorsed
-by yukicoder. See [the disclaimer and removal instructions](DISCLAIMER.md).
+[유키코더(yukicoder)](https://yukicoder.me/)의 일본어 화면과 문제를 한국어로
+번역하는 Firefox·Chrome용 Manifest V3 확장 기능입니다.
 
-## Development
+저는 이 프로젝트에 포함된 원문 문제나 제삼자 콘텐츠의 권리를 소유하지 않습니다.
+권리는 각 권리자에게 있습니다. 권리자 또는 그 대리인의 삭제 요청을 받으면
+요청한 콘텐츠를 이 프로젝트, GitHub Pages 사이트, 제가 관리하는 배포본에서
+완전히 삭제하겠습니다. 이 프로젝트는 yukicoder의 공식 프로젝트가 아니며,
+yukicoder와 제휴하거나 승인을 받은 프로젝트도 아닙니다.
+[권리 및 삭제 요청 안내](DISCLAIMER.md)를 확인해 주세요.
 
-The extension translates yukicoder's Japanese interface using the selector-
-scoped dictionaries under `translations/ko/`. Wiki translation is limited to
-the Wiki home page, beginner guide, and text directly related to using
-yukicoder or its Wiki.
+## 개발 환경
 
-Problem statements are edited as MDX (or legacy HTML) sources under
-`problem-translations/ko/problems/` and compiled to standalone HTML. The extension validates each document
-against the current yukicoder statement before applying it, leaving the
-Japanese statement unchanged if validation fails. Problem translations are fetched from
-`https://cologne1723.github.io/yuki-ko-der/ko/problems/{number}.html`.
-Successful downloads are cached locally; missing or incompatible translations
-leave the original statement visible.
-HTTP 404 or 410 responses also delete the cached translation, so removed
-content is not reused after the extension learns it is unavailable.
+`translations/ko/`의 사전을 사용해 선택자와 정확한 원문이 일치하는 화면 문구를
+번역합니다. 위키 번역 범위는 위키 첫 화면, 초보자 안내, yukicoder나 위키 사용에
+직접 관련된 문구로 제한합니다.
 
-Install dependencies and run the checks with:
+문제 번역은 `problem-translations/ko/problems/`의 MDX 파일 또는 기존 HTML 파일로
+편집하고, 배포할 때 독립된 HTML로 컴파일합니다. 확장 기능은 번역을 적용하기 전에
+현재 yukicoder 원문과 비교하며, 검증에 실패하면 일본어 원문을 그대로 표시합니다.
+번역 파일은 다음 주소에서 가져옵니다.
+
+```text
+https://cologne1723.github.io/yuki-ko-der/ko/problems/{number}.html
+```
+
+정상적으로 받은 번역은 브라우저에 캐시합니다. 번역이 없거나 호환되지 않으면
+원문을 유지합니다. HTTP 404 또는 410 응답을 받으면 해당 캐시도 삭제해,
+삭제된 사실을 확인한 번역이 다시 표시되지 않도록 합니다.
+
+의존성을 설치하고 검사하려면 다음 명령을 실행하세요.
 
 ```sh
 pnpm install
@@ -36,132 +40,139 @@ pnpm validate:problems
 pnpm verify:problems
 ```
 
-## Human review workbench
+## 번역 검수 화면
 
-Run the local problem-translation reviewer with:
+다음 명령으로 로컬 검수 화면을 실행합니다.
 
 ```sh
 pnpm review
 ```
 
-The **UI 용어집 검수** link opens `http://127.0.0.1:4173/ui`. Search UI entries by
-Japanese, Korean, or selector and filter by dictionary or review status. Edit a
-translation and compare the Japanese and Korean saved-page previews; matching
-UI elements are highlighted and unsaved edits appear immediately. The Korean
-review UI has a collapsible entry list that remembers its state. Draft entries
-use orange dashed outlines, reviewed entries use green outlines, and the selected
-entry uses a blue outline. Click a marked element to edit it, or use **수정 위치
-보기** and previous/next location controls to find it. A before/after panel and
-**수정됨** list labels retain changes made during the current review session. Choose a
-snapshot from `tmp/pages/*.html` to inspect another page state. Previews apply
-the selected dictionary with common/shared entries, disable scripts and
-navigation, and report when no exact match exists. They are saved-page previews,
-not a live signed-in session; site styles/images require network access.
+### 화면 문구 검수
 
-**저장** preserves an entry's review status, **승인 후 다음** explicitly marks it
-reviewed and advances to the next unreviewed entry within the current filters,
-and **미검수로 변경** restores the draft marker. The next entry's saved page is
-selected when available, and focus returns to the Korean editor. Use
-Ctrl/⌘+Enter to approve and advance, or Ctrl/⌘+S to save and stay. Editing and
-the Korean preview are displayed side by side on wider screens; expand
-**일본어 원문 함께 보기** when you need the original alongside the translation. Named placeholders
-must be retained. Concurrent dictionary changes are rejected to avoid overwrites.
-Draft `📝 ` markers remain in dictionary files but are hidden by the extension
-and page previews. Rebuild with `pnpm build` and reload the extension to apply
-saved UI changes on yukicoder.
+**UI 용어집 검수** 링크로 `http://127.0.0.1:4173/ui`를 엽니다.
+일본어, 한국어, 선택자로 검색하고 사전이나 검수 상태로 항목을 걸러 볼 수 있습니다.
+일본어와 한국어의 저장된 페이지 미리보기를 비교하며 편집합니다. 일치하는 요소는
+강조 표시되고, 아직 저장하지 않은 수정도 미리보기에 바로 반영됩니다.
+항목 목록은 접을 수 있으며 접은 상태가 유지됩니다.
 
-Open `http://127.0.0.1:4173/`. The page shows the saved Japanese statement,
-rendered Korean translation, and editable Korean HTML source side by side.
-Both previews render TeX locally with KaTeX and can be collapsed independently.
-Scroll synchronization is off by default and can be enabled from the toolbar;
-these display preferences are remembered in the browser.
-Problem sources may be either legacy HTML or editable constrained MDX. MDX uses
-frontmatter for document metadata, `##` headings for problem sections, fenced
-code blocks for input/output formats, and `### Title {file="…"}` sample
-headings. A sample ends at the next sample or section heading, so no component
-or closing tag is needed. Ordinary newlines compile to `<br>`; no literal
-`<br>` is needed. Consecutive non-empty lines remain in one paragraph, while an
-empty line starts a new paragraph. Structural HTML, import, export, expression,
-or JSX is not accepted. The editor previews compiled HTML live and can switch
-to a read-only generated-HTML view.
-Korean wording and notation follow
-[`problem-translations/TRANSLATION_GUIDELINE.md`](problem-translations/TRANSLATION_GUIDELINE.md)
-regardless of the Japanese source's writing style.
-Editor changes update the Korean preview immediately but reach the repository
-only through **Save**, **Approve**, or **Unapprove**. Save and approval require
-valid metadata and the exact local Japanese source hash. Formula, sample, code,
-attribute, and statement-structure differences are shown individually as
-non-blocking warnings with the differing values, so the source can still be
-saved and corrected in separate edits.
+미검수 항목은 주황색 점선, 검수된 항목은 초록색, 선택한 항목은 파란색으로
+표시합니다. 표시된 요소를 누르거나 **수정 위치 보기** 및 이전·다음 위치 버튼을
+사용해 편집할 위치를 찾습니다. 수정 전후 비교 영역과 목록의 **수정됨** 표시는
+현재 검수 작업에서 변경한 내용을 보여 줍니다.
 
-Problem HTML uses `data-review-status="unreviewed|approved"`. Existing machine
-translations display `[기계 번역]` in the document title and `<h3>`; the first
-human Save removes that label, while approval remains a separate action.
+`tmp/pages/*.html`의 저장된 페이지를 선택해 다른 화면을 확인할 수 있습니다.
+미리보기는 선택한 사전과 공통 사전을 함께 적용하고 스크립트 실행과 페이지 이동을
+차단하며, 정확히 일치하는 문구가 없으면 알려 줍니다. 로그인한 실제 페이지가 아닌
+저장된 페이지를 표시하며, 사이트의 스타일과 이미지를 불러오려면 인터넷 연결이
+필요합니다.
 
-Compile the publishable problem tree with:
+- **저장**은 현재 검수 상태를 유지합니다.
+- **승인 후 다음**은 명시적으로 검수를 완료하고, 현재 필터에 맞는 다음 미검수
+  항목으로 이동합니다. 저장된 페이지가 있으면 함께 선택하고 한국어 편집기로
+  초점을 옮깁니다.
+- **미검수로 변경**은 초안 표시를 복원합니다.
+- `Ctrl/⌘+Enter`는 승인 후 다음 항목으로 이동하고, `Ctrl/⌘+S`는 현재 항목에
+  머무르면서 저장합니다.
+
+넓은 화면에서는 편집기와 한국어 미리보기를 나란히 표시합니다. 원문이 필요하면
+**원문 비교**를 펼치세요. 이름 있는 자리표시자는 반드시 유지해야
+하며, 다른 작업에서 사전이 변경되면 덮어쓰기를 막기 위해 저장을 거부합니다.
+사전의 `📝 ` 표시는 파일에 유지되지만 확장 기능과 미리보기에서는 숨깁니다.
+저장한 화면 문구를 실제 사이트에 적용하려면 `pnpm build`를 실행하고 확장 기능을
+다시 불러오세요.
+
+### 문제 번역 검수
+
+`http://127.0.0.1:4173/`에서 저장된 일본어 원문, 한국어 미리보기, 편집 가능한
+한국어 소스를 나란히 확인할 수 있습니다. 두 미리보기는 로컬 KaTeX로 TeX를
+표시하며 각각 접을 수 있습니다. 스크롤 동기화는 기본적으로 꺼져 있고 도구 모음에서
+켤 수 있습니다. 화면 표시 설정은 브라우저에 저장됩니다.
+
+문제 소스는 기존 HTML 또는 제한된 문법의 MDX입니다. MDX는 파일 앞부분의
+메타데이터, `##` 절 제목, 입출력 형식의 코드 블록,
+`### 제목 {file="…"}` 형식의 예제 제목을 사용합니다.
+예제는 다음 예제나 절 제목에서 끝나므로 별도의 구성 요소나 닫는 태그가 필요하지
+않습니다. 일반 줄바꿈은 `<br>`로 컴파일되므로 `<br>`를 직접 쓰지 마세요.
+빈 줄 없이 이어지는 줄은 한 문단이며, 빈 줄이 있어야 새 문단을 시작합니다.
+구조를 나타내는 HTML, import, export, 표현식, JSX는 허용하지 않습니다.
+편집기는 컴파일 결과를 즉시 표시하며, 생성된 HTML을 읽기 전용으로 볼 수도 있습니다.
+
+한국어 문체와 표기는 일본어 원문의 표현 방식보다
+[문제 번역 지침](problem-translations/TRANSLATION_GUIDELINE.md)을 우선합니다.
+편집 내용은 미리보기에 바로 나타나지만, 저장·승인·승인 취소를 해야 저장소에
+반영됩니다. 저장과 승인에는 유효한 메타데이터와 로컬 일본어 원문의 정확한 해시가
+필요합니다. 수식, 예제, 코드, 속성, 문제 구조가 다르면 서로 다른 값을 각각
+경고로 보여 주며, 경고가 있어도 저장한 뒤 별도로 수정할 수 있습니다.
+
+문제 HTML의 검수 상태는 `data-review-status="unreviewed|approved"`로 저장합니다.
+기계 번역은 문서 제목과 `<h3>`에 `[기계 번역]`을 표시하며, 사람이 처음 저장하면
+이 표시가 사라집니다. 저장만으로 승인되지는 않습니다.
+
+다음 명령으로 배포용 문제 파일을 생성합니다.
 
 ```sh
 pnpm build:problems
 ```
 
-This writes transient HTML-only output to the ignored
-`.problem-translations-dist/` directory. GitHub Pages publishes that generated
-tree, so neither a checked-in HTML counterpart nor an MDX runtime is needed by
-the extension.
+Git에서 제외한 `.problem-translations-dist/`에 임시 HTML 파일이 생성됩니다.
+GitHub Pages는 이 결과물만 배포하므로, MDX와 함께 HTML을 저장소에 올리거나
+확장 기능에 MDX 실행 환경을 넣을 필요가 없습니다.
 
-To try the extension in Firefox, first run `pnpm build`:
+## Firefox에서 시험하기
 
-1. Open `about:debugging`.
-2. Select **This Firefox**.
-3. Select **Load Temporary Add-on**.
-4. Choose this repository's `dist/manifest.json`.
+먼저 `pnpm build`를 실행하세요.
 
-## Goals
+1. `about:debugging`을 엽니다.
+2. **이 Firefox**를 선택합니다. 영문 브라우저에서는 **This Firefox**입니다.
+3. **임시 부가 기능 로드**를 선택합니다. 영문 표시는 **Load Temporary Add-on**입니다.
+4. 저장소의 `dist/manifest.json`을 선택합니다.
 
-- Translate yukicoder's Japanese interface and problem content into Korean.
-- Prefer native Firefox WebExtension behavior.
-- Support Firefox and Chrome with the same extension package.
-- Preserve code, formulas, examples, and competitive-programming terminology.
+## 프로젝트 목표
 
-## GitHub Pages deployment
+- yukicoder의 일본어 화면 문구와 문제 내용을 한국어로 번역합니다.
+- Firefox의 기본 WebExtension 동작을 우선합니다.
+- 같은 확장 기능 패키지로 Firefox와 Chrome을 지원합니다.
+- 코드, 수식, 예제, 알고리즘 대회 용어를 보존합니다.
 
-In [repository Pages settings](https://github.com/cologne1723/yuki-ko-der/settings/pages),
-select **GitHub Actions** as the build and deployment source. The **Publish
-problem translations** workflow validates the live canonical sources, compiles
-the problem files, and deploys only `.problem-translations-dist/`. It runs on
-relevant pushes to `main` and can also be started manually from **Actions**.
+## GitHub Pages 배포
 
-The published index is <https://cologne1723.github.io/yuki-ko-der/>.
-The URL in `src/config.ts` and the exact GitHub Pages host in `manifest.json`
-must stay in sync if the repository moves. GitHub Pages serves public files
-with CORS enabled, allowing Firefox and Chrome content scripts to fetch them.
-Only translated HTML is downloaded; executable extension code and UI
-dictionaries are bundled in the extension. No review workbench or downloaded
-Japanese corpus is published.
+[저장소의 Pages 설정](https://github.com/cologne1723/yuki-ko-der/settings/pages)에서
+빌드 및 배포 원본으로 **GitHub Actions**를 선택합니다.
+**문제 번역 배포** 워크플로는 실제 원문을 검증하고 문제 파일을 컴파일한 뒤,
+`.problem-translations-dist/`만 배포합니다. `main`에 관련 변경을 푸시하면 실행되며,
+GitHub의 **Actions** 탭에서 직접 실행할 수도 있습니다.
 
-## Install and publish the extension
+공개 목록 주소는 <https://cologne1723.github.io/yuki-ko-der/>입니다.
+저장소를 옮기면 `src/config.ts`의 주소와 `manifest.json`의 GitHub Pages 호스트
+권한을 함께 수정해야 합니다. GitHub Pages의 공개 파일은 CORS를 허용하므로
+Firefox와 Chrome의 콘텐츠 스크립트에서 가져올 수 있습니다.
+실행 코드와 화면 문구 사전은 확장 기능에 포함되며, 원격으로 받는 것은 문제 HTML입니다.
+검수 화면이나 다운로드한 일본어 원문 모음은 배포하지 않습니다.
 
-Run `pnpm package` to build `dist/` and create
-`web-ext-artifacts/yukicoder-ko-0.1.0.zip` (requires the `zip` command).
-The ZIP has `manifest.json` at its root. Each successful **Quality** workflow
-also provides a **yukicoder-ko-extension** artifact containing the same build.
+## 확장 기능 설치와 배포
 
-- **Firefox development:** load `dist/manifest.json` using the temporary add-on
-  steps above. Temporary installations disappear when Firefox restarts.
-- **Chrome development:** open `chrome://extensions`, enable **Developer mode**,
-  choose **Load unpacked**, and select `dist/`.
-- **Firefox distribution:** submit the ZIP through
-  [Mozilla Add-on Developer Hub](https://addons.mozilla.org/developers/) for
-  signing and listed or unlisted distribution.
-- **Chrome distribution:** upload the ZIP to the
-  [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole).
+`pnpm package`를 실행하면 `dist/`를 빌드하고
+`web-ext-artifacts/yukicoder-ko-0.1.0.zip`을 만듭니다. `zip` 명령이 필요합니다.
+ZIP 최상위에는 `manifest.json`이 있습니다. **품질 검사** 워크플로가 성공하면
+같은 빌드 결과를 담은 **yukicoder-ko-extension** 파일도 내려받을 수 있습니다.
 
-Grant access to yukicoder and the configured Pages host when the browser asks.
-Visit a translated problem, such as <https://yukicoder.me/problems/no/1>, to
-check loading. Source or protected-structure mismatches intentionally preserve
-the Japanese statement and log a diagnostic in the browser console.
+- **Firefox 개발용 설치:** 위의 방법으로 `dist/manifest.json`을 임시 부가 기능으로
+  불러옵니다. Firefox를 다시 시작하면 임시 설치는 사라집니다.
+- **Chrome 개발용 설치:** `chrome://extensions`에서 **개발자 모드**를 켜고
+  **압축해제된 확장 프로그램을 로드합니다**를 선택한 뒤 `dist/`를 지정합니다.
+  영문 브라우저에서는 **Developer mode**, **Load unpacked**입니다.
+- **Firefox 배포:** [Mozilla 부가 기능 개발자 센터](https://addons.mozilla.org/developers/)에
+  ZIP을 제출해 서명을 받고, 목록에 공개하거나 비공개 배포를 선택합니다.
+- **Chrome 배포:** [Chrome 웹 스토어 개발자 대시보드](https://chrome.google.com/webstore/devconsole)에
+  ZIP을 업로드합니다.
 
-Store publication requires your developer account, listing details, and review;
-a GitHub Pages deployment does not publish the extension to either store.
-Increment `version` in both `package.json` and `manifest.json` for new releases.
-See [PRIVACY.md](PRIVACY.md) for the extension's network and storage behavior.
+브라우저가 요청하면 yukicoder와 설정한 Pages 호스트에 대한 접근을 허용하세요.
+<https://yukicoder.me/problems/no/1> 같은 번역 대상 문제에서 파일 요청을 확인할 수
+있습니다. 원문이나 보호된 구조가 다르면 일본어 원문을 유지하고 브라우저 콘솔에
+원인을 표시합니다.
+
+스토어 배포에는 개발자 계정, 소개 자료, 심사가 필요합니다. GitHub Pages를 배포해도
+확장 기능이 스토어에 자동 등록되지는 않습니다. 새 버전을 배포할 때는 `package.json`과
+`manifest.json`의 `version`을 함께 올리세요.
+통신과 저장 방식은 [개인정보 안내](PRIVACY.md)를 확인하세요.

@@ -1,4 +1,4 @@
-name: Quality
+name: 품질 검사
 
 on:
   pull_request:
@@ -26,7 +26,7 @@ jobs:
       - run: pnpm lint:problems
       - run: pnpm validate:problems
       - run: pnpm test
-      - name: Package browser extension
+      - name: 확장 기능 패키지 생성
         run: pnpm package
       - uses: actions/upload-artifact@v4
         with:

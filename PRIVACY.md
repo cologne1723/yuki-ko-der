@@ -1,19 +1,20 @@
-# Privacy
+# 개인정보 안내
 
-The yukicoder Korean Translator extension has no analytics, advertisements,
-or tracking service. It does not upload account details, submissions, cookies,
-or stored translations.
+> 📝 이 안내 문서는 한국어 번역 검토 전입니다.
 
-When you open a yukicoder problem page, the extension requests the corresponding
-translated problem HTML from `https://cologne1723.github.io/yuki-ko-der/` and
-the canonical problem metadata and HTML from `https://yukicoder.me/`. These
-requests include the public problem number or ID and omit credentials.
-As with ordinary HTTPS requests, the hosting services receive network
-information such as your IP address and the requested URL.
+yukicoder 한국어 번역 확장 기능에는 분석 도구, 광고, 추적 서비스가 없습니다.
+계정 정보, 제출 코드, 쿠키, 저장된 번역을 업로드하지 않습니다.
 
-Successfully downloaded translations are cached in the extension's local
-browser storage for fallback use. They are not synchronized or uploaded by
-the extension. Removing the extension clears its local storage.
+yukicoder 문제 페이지를 열면 `https://cologne1723.github.io/yuki-ko-der/`에서
+해당 문제의 한국어 HTML을 요청하고, `https://yukicoder.me/`에서 원문 메타데이터와
+HTML을 요청합니다. 요청에는 공개된 문제 번호 또는 내부 문제 ID가 포함되며,
+인증 정보는 보내지 않습니다. 일반적인 HTTPS 요청과 마찬가지로 호스팅 서비스는
+IP 주소와 요청 URL 같은 통신 정보를 받습니다.
 
-UI translation dictionaries and all executable extension code are included in
-the installed package. GitHub Pages supplies problem HTML, not executable code.
+정상적으로 다운로드한 번역은 통신 장애 시 사용할 수 있도록 확장 기능의 로컬
+브라우저 저장소에 캐시합니다. 확장 기능은 이 내용을 동기화하거나 업로드하지
+않습니다. HTTP 404 또는 410 응답으로 번역 삭제를 확인하면 해당 캐시를 지웁니다.
+확장 기능을 제거하면 로컬 저장소도 삭제됩니다.
+
+화면 문구 사전과 모든 실행 코드는 설치 패키지에 포함됩니다.
+GitHub Pages에서는 실행 코드가 아닌 문제 HTML을 받습니다.
