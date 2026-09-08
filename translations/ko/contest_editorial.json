@@ -3,21 +3,8 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#content h4",
-      "source": "{contest} 解説一覧",
-      "target": "📝 {contest} 해설 목록",
-      "variables": { "contest": ".+" }
-    },
-    {
-      "selector": "#content h4",
-      "source": "解説一覧",
-      "target": "📝 해설 목록"
-    },
-    {
-      "selector": "#content div",
-      "source": "各問題の解説ページ一覧です。設定で見れない問題もありますが、リンクのショートカットとしての表示です。",
-      "target": "📝 각 문제의 해설 페이지 목록입니다. 설정에 따라 볼 수 없는 문제도 있지만 링크 바로가기로 표시됩니다."
-    }
+    { "selector": "#content h4", "ref": "ui_1b00f091c9f285fd" },
+    { "selector": "#content h4", "ref": "ui_31f27edaf5abcb02" },
+    { "selector": "#content div", "ref": "ui_b0fb8bc52c102a7a" }
   ]
 }

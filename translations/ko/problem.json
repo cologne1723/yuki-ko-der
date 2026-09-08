@@ -3,140 +3,261 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    { "selector": "#toplinks a", "source": "問題", "target": "📝 문제" },
-    { "selector": "#toplinks a", "source": "提出", "target": "📝 제출" },
-    { "selector": "#toplinks a", "source": "問題文", "target": "📝 문제 설명" },
-    { "selector": "#toplinks a", "source": "テスト", "target": "📝 테스트" },
     {
       "selector": "#toplinks a",
-      "source": "ジャッジコード",
-      "target": "📝 채점 코드"
+      "ref": "ui_a477438947fe8cb4",
+      "variant": 0
     },
     {
       "selector": "#toplinks a",
-      "source": "ジェネレータ",
-      "target": "📝 생성기"
+      "ref": "ui_5e29a65ae8c58b9d"
+    },
+    {
+      "selector": "#toplinks a",
+      "ref": "ui_55743e56a7989e9b"
+    },
+    {
+      "selector": "#toplinks a",
+      "ref": "ui_41eedabd517e2d03"
+    },
+    {
+      "selector": "#toplinks a",
+      "ref": "ui_5fad48925aac4395"
+    },
+    {
+      "selector": "#toplinks a",
+      "ref": "ui_0c835343900e360b"
     },
     {
       "selector": "#body div",
-      "source": "問題一覧 >",
-      "target": "📝 문제 목록 >"
+      "ref": "ui_a58f16b254cd6948"
     },
     {
       "selector": "#content a",
-      "source": "教育的問題",
-      "target": "📝 교육적 문제"
+      "ref": "ui_78d060c3fc509993"
     },
     {
       "selector": "#content a",
-      "source": "数学的知識問題",
-      "target": "📝 수학 지식 문제"
+      "ref": "ui_03e825596d18f3ee"
     },
     {
       "selector": "#content a",
-      "source": "ネタ問題",
-      "target": "📝 재미 문제"
+      "ref": "ui_77c70c182b97382a"
     },
     {
       "selector": "#content a",
-      "source": "スコア問題",
-      "target": "📝 점수 문제"
-    },
-    { "selector": "#content div", "source": "レベル :", "target": "📝 레벨:" },
-    {
-      "selector": "#content div",
-      "source": "/ 実行時間制限 : 1ケース {seconds}秒 / メモリ制限 : {memory} MB / 標準ジャッジ問題",
-      "target": "📝 / 시간 제한: 케이스당 {seconds}초 / 메모리 제한: {memory}MB / 표준 채점 문제",
-      "variables": { "seconds": "[0-9.]+", "memory": "[0-9]+" }
+      "ref": "ui_f273a00cb28e4a91"
     },
     {
       "selector": "#content div",
-      "source": "タグ : /",
-      "target": "📝 태그: /"
+      "ref": "ui_a0a7530cd4206dbf"
+    },
+    {
+      "selector": "#content div",
+      "ref": "ui_635516ffb0784fe4"
+    },
+    {
+      "selector": "#content div",
+      "ref": "ui_7c793cbf1fca1507"
     },
     {
       "selector": "#content span",
-      "source": "解いたユーザー数",
-      "target": "📝 푼 사용자 수 "
+      "ref": "ui_3f6806ccf2aa8c73"
     },
     {
       "selector": "#content div",
-      "source": "作問者 :",
-      "target": "📝 출제자:"
+      "ref": "ui_feaae152bab1e6c9"
     },
     {
       "selector": "#content a",
-      "source": "お気に入りにしたユーザー",
-      "target": "📝 즐겨찾기에 추가한 사용자"
+      "ref": "ui_4becdb7bb01474db"
     },
     {
       "selector": "#content a",
-      "source": "自分の提出",
-      "target": "📝 내 제출"
+      "ref": "ui_cde1408f155cecdc"
     },
     {
       "selector": "#content div",
-      "source": "問題文最終更新日: {updatedAt}",
-      "target": "📝 문제 설명 최종 수정일: {updatedAt}",
-      "variables": {
-        "updatedAt": "[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}"
-      }
+      "ref": "ui_fd287b3103a13496"
     },
     {
       "selector": "#content button",
-      "source": "問題文のHTMLを表示",
-      "target": "📝 문제 설명 HTML 표시"
+      "ref": "ui_adb592c936019d6b"
     },
     {
       "selector": "#content p",
-      "source": "提出するには、Twitter 、GitHub、 Googleもしくは右上の雲マークをクリックしてアカウントを作成してください。",
-      "target": "📝 제출하려면 Twitter, GitHub, Google 또는 오른쪽 위의 구름 아이콘을 눌러 계정을 만들어 주세요."
+      "ref": "ui_8dea4700e109068d"
     },
     {
       "selector": "#subtask-edit-modal .modal-title",
-      "source": "部分点の編集",
-      "target": "📝 부분 점수 편집"
+      "ref": "ui_728c209119b92b4d"
     },
     {
       "selector": "#subtask-edit-modal button",
-      "source": "+ サブタスク追加",
-      "target": "📝 + 서브태스크 추가"
+      "ref": "ui_9194f0f96cadb91c"
     },
     {
       "selector": "#subtask-edit-modal summary",
-      "source": "JSON直接編集",
-      "target": "📝 JSON 직접 편집"
+      "ref": "ui_c8d79e9f81e5bc1b"
     },
     {
       "selector": "#subtask-edit-modal button",
-      "source": "閉じる",
-      "target": "📝 닫기"
+      "ref": "ui_5c7862f6964ec064"
     },
     {
       "selector": "#subtask-edit-modal button",
-      "source": "保存",
-      "target": "📝 저장"
+      "ref": "ui_ee98588b242e8401"
     },
     {
       "selector": "#problem-html-modal .modal-title",
-      "source": "問題文のHTML",
-      "target": "📝 문제 설명 HTML"
+      "ref": "ui_1f485058d25be259"
     },
     {
       "selector": "#problem-html-modal button",
-      "source": "HTMLをコピー",
-      "target": "📝 HTML 복사"
+      "ref": "ui_1d0f38a7725b0cab"
     },
     {
       "selector": "#problem-html-modal button",
-      "source": "閉じる",
-      "target": "📝 닫기"
+      "ref": "ui_5c7862f6964ec064"
     },
     {
       "selector": "#subtask-edit-json",
       "attribute": "placeholder",
-      "source": "{\"subtasks\":[{\"name\":\"サブタスク1\",\"prefixes\":[\"01\"],\"score\":50},...]}",
-      "target": "📝 {\"subtasks\":[{\"name\":\"서브태스크 1\",\"prefixes\":[\"01\"],\"score\":50},...]}"
+      "ref": "ui_38d422d2a87d4282"
+    },
+    {
+      "selector": "#content > a[href=\"/problems\"]",
+      "ref": "ui_d0e49d808cba9f27"
+    },
+    {
+      "selector": "#content .problem-header-cols :is(div, p, span, label, h4, h5, legend)",
+      "ref": "ui_f9315cb76c0e601d"
+    },
+    {
+      "selector": "#content .problem-header-cols :is(div, p, span, label)",
+      "ref": "ui_5604770b856931f3"
+    },
+    {
+      "selector": "#level_suggest option",
+      "ref": "ui_2fdb1414f76b2d0d"
+    },
+    {
+      "selector": "#problem_level_suggestion_same",
+      "ref": "ui_2c68b2ea71e1fe51"
+    },
+    {
+      "selector": "#content .problem-header-cols :is(div, span)",
+      "ref": "ui_25a0e0f1ce49553b"
+    },
+    {
+      "selector": "#content .problem-header-cols :is(div, span)",
+      "ref": "ui_f3056465adf2a227"
+    },
+    {
+      "selector": "#content .problem-header-cols :is(div, span, a)",
+      "ref": "ui_868e8dd40e980901"
+    },
+    {
+      "selector": "#content > div:has(> #contest-problem-selector-wrapper)",
+      "ref": "ui_be871f38ea236946"
+    },
+    {
+      "selector": "#content .problem-header-cols a[href$=\"/table\"]",
+      "ref": "ui_3209b39541b8f676"
+    },
+    {
+      "selector": "#tag_hidden",
+      "ref": "ui_c1e969435d9b3006"
+    },
+    {
+      "selector": "#tag_hidden .tag-hidden-hint",
+      "attribute": "title",
+      "ref": "ui_ebbe98df5fe21976"
+    },
+    {
+      "selector": "#submit_form :is(div,label,small,a,button)",
+      "ref": "ui_eaf482538bdd4206"
+    },
+    {
+      "selector": "#submit_form :is(div,label,small,a,button)",
+      "ref": "ui_409f86b63b6272fb"
+    },
+    {
+      "selector": "#submit_form :is(div,label,small,a,button)",
+      "ref": "ui_a477438947fe8cb4"
+    },
+    {
+      "selector": "#submit_form :is(div,label,small,a,button)",
+      "ref": "ui_bdb238c98bbd055e"
+    },
+    {
+      "selector": "#submit_form :is(div,label,small,a,button)",
+      "ref": "ui_88ee5586aeee58c0"
+    },
+    {
+      "selector": "#submit_form :is(div,label,small,a,button)",
+      "ref": "ui_9fd2ec00550ebffc"
+    },
+    {
+      "selector": "#submit_form :is(div,label,small,a,button)",
+      "ref": "ui_004874714cb91d3f"
+    },
+    {
+      "selector": "#submit_form :is(div,label,small,a,button)",
+      "ref": "ui_6e88c916f7f34632"
+    },
+    {
+      "selector": "#submit_form :is(div,label,small,a,button)",
+      "ref": "ui_58d11d645944c916"
+    },
+    {
+      "selector": "#submit_form :is(div,label,small,a,button)",
+      "ref": "ui_a08159e424807e2b"
+    },
+    {
+      "selector": "#submit_form input[type=\"submit\"]",
+      "ref": "ui_7fc8a1b0cdde422d",
+      "attribute": "value"
+    },
+    {
+      "selector": "#submit_form .right",
+      "ref": "ui_443de8623551a0dd"
+    },
+    {
+      "selector": "#content",
+      "ref": "ui_5fe6836acbaef224"
+    },
+    {
+      "selector": "#content > a#submit",
+      "ref": "ui_c0810031d135e496"
+    },
+    {
+      "selector": "#content",
+      "ref": "ui_a832c72624f1dde1"
+    },
+    {
+      "selector": "#content > div:has(#contest-problem-selector-wrapper) > a",
+      "ref": "ui_3209b39541b8f676"
+    },
+    {
+      "selector": "#submit_form #lang option",
+      "ref": "ui_b6ba0f132376c638"
+    },
+    {
+      "selector": "#submit_form #lang option",
+      "ref": "ui_07e724964294d850"
+    },
+    {
+      "selector": "#content > p",
+      "ref": "ui_a0a7530cd4206dbf"
+    },
+    {
+      "selector": "#content > p",
+      "ref": "ui_2b2bc6675bb9440d"
+    },
+    {
+      "selector": "#content .problem-header-cols a",
+      "ref": "ui_4cd235ac2d741633"
     }
   ]
 }

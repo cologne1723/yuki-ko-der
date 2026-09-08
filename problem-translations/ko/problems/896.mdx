@@ -4,64 +4,138 @@ locale: ko
 problemNo: 896
 problemId: 2101
 sourceTitle: "友達以上恋人未満"
-sourceHtmlSha256: "12edc44b48b188190492add7c8ab1d199968ecb9a9dc3c4d165f57a8a4ff8c00"
+sourceHtmlSha256: "03ada8c96db862986ae442c97b986429fb506f728ff409bec5211f45e90a9c7b"
 reviewStatus: unreviewed
 title: "친구 이상 연인 미만"
 ---
 
 ## 문제
 
-체리 씨가 선물로 받은 길이 $N$의 수열 $A$는 매일 낮에, $d\geq T_i$이고 $i$번째 항이 양수인 모든 $i$에 대해 그 항이 1씩 감소합니다. 수열을 받은 시점은 0일째 밤입니다.
+토끼가 $N$마리, 장어가 $N$종류 있습니다. $j$번째 토끼는 Yukic◯der 레이팅이 $a_j$의 배수인 장어를 친구로, $a_jb_j$의 배수인 장어를 연인으로 여깁니다. 레이팅이 $x_i$인 장어는 $z_{x_i}$마리 있습니다.
 
-$q$번째 질의에서는 $D_q$일째 밤의 수열에서 $L_q$번째부터 $R_q$번째까지의 합을 구하세요.
+각 토끼에 대해 친구 이상 연인 미만인 장어, 즉 레이팅이 $a_j$의 배수이면서 $a_jb_j$의 배수가 아닌 장어의 수를 구하세요.
 
-## 제약
+$z_x=\sum_{k:x_k=x}y_k$입니다. 처음에는 발견한 장어가 $0$마리이며, 입력 $x_i,y_i$가 주어질 때마다 레이팅이 $x_i$인 장어 $y_i$마리를 새로 발견한다고 생각하세요.
 
-- $1\leq N,Q\leq2\times10^5$
-- $0\leq A_i\leq10^9$, $1\leq T_i\leq10^9$
-- $0\leq D_q\leq2\times10^9$
-- $1\leq L_q\leq R_q\leq N$
+Yukic◯der에는 사용자가 매우 많으므로 다음 방법으로 입력을 생성합니다. 코드의 `X[i], Y[i], x[i], y[i], z[i], A[i], B[i], a[i], b[i]`는 각각 $X_i,Y_i,x_i,y_i,z_i,A_i,B_i,a_i,b_i$를 뜻합니다. `for i in [L, R]`는 `for(int i = L; i <= R; i++)`와 같습니다.
+
+$\mathrm{MOD}$는 $2^n$ 꼴의 2의 거듭제곱이므로 `x % MOD`는 `x & (MOD-1)`로 계산할 수 있습니다. `a % b`는 $a$를 $b$로 나눈 나머지이고, `a & b`는 비트별 논리곱입니다.
+
+다음은 입력 생성 알고리즘의 의사 코드입니다. **그대로 구현하면 시간 초과 또는 메모리 초과가 발생할 수 있습니다.** 64비트 변수 $2^{24}$개를 저장하면 128 MB를 사용합니다.
+
+~~~text
+z[0] = z[1] = ... = z[MOD-1] = 0
+for i in [1, M]:
+    x[i] = X[i]
+    y[i] = Y[i]
+    a[i] = A[i]
+    b[i] = B[i]
+    
+for i in [M+1, N]:
+    x[i] = (x[i-1] * mulX + addX) % MOD
+    y[i] = (y[i-1] * mulY + addY) % MOD
+    a[i] = (a[i-1] * mulX + addX + MOD - 1) % MOD + 1
+    b[i] = (b[i-1] * mulY + addY + MOD - 1) % MOD + 1
+
+for i in [1, N]:
+    z[x[i]] += y[i]
+~~~
+
+출력도 길어지므로 처음 $M$마리의 토끼에 대해서만 답을 그대로 출력하고, 마지막 줄에는 모든 토끼의 답을 배타적 논리합한 값을 출력하세요.
 
 ## 입력
 
 ~~~text
-N
-A_1 T_1
-⋮
-A_N T_N
-Q
-D_1 L_1 R_1
-⋮
-D_Q L_Q R_Q
+M N mulX addX mulY addY MOD
+X_1 ... X_M
+Y_1 ... Y_M
+A_1 ... A_M
+B_1 ... B_M
 ~~~
+
+첫째 줄에 $M,N,\mathrm{mulX},\mathrm{addX},\mathrm{mulY},\mathrm{addY},\mathrm{MOD}$가 주어집니다. $(1\le M\le10^3;\ M\le N\le10^7;\ 1\le\mathrm{MOD}\le2^{24})$ $\mathrm{MOD}$는 2의 거듭제곱이며, $0\le\mathrm{mulX},\mathrm{addX},\mathrm{mulY},\mathrm{addY}<\mathrm{MOD}$입니다.
+
+둘째 줄에는 $M$개의 $X_i$, 셋째 줄에는 $M$개의 $Y_i$, 넷째 줄에는 $M$개의 $A_i$, 다섯째 줄에는 $M$개의 $B_i$가 주어집니다. $(0\le X_i,Y_i<\mathrm{MOD};\ 1\le A_i,B_i\le\mathrm{MOD})$ 입력은 모두 정수입니다.
 
 ## 출력
 
-각 질의의 답을 한 줄에 출력하세요.
+총 $M+1$줄을 출력하세요. 처음 $M$개 줄의 $j$번째 줄에는 $j$번째 토끼에게 친구 이상 연인 미만인 장어의 수를 출력합니다. 마지막 줄에는 모든 토끼의 답을 배타적 논리합한 값을 출력합니다. 각 줄 끝에 줄바꿈을 넣으세요.
 
-## 샘플
+## 예제
 
-### 입력 {file="stdin"}
+### 입력 1 {file="stdin"}
 
 ~~~text
-5
-4 3
-6 1
-5 5
-0 8
-2 2
-4
-0 1 5
-2 3 4
-5 2 5
-100 1 5
+3 3 0 0 0 0 8
+4 4 4
+1 2 3
+1 2 3
+2 3 1
 ~~~
 
-### 출력 {file="stdout"}
+### 출력 1 {file="stdout"}
 
 ~~~text
-17
-5
-5
 0
+6
+0
+6
+~~~
+
+레이팅이 $4$인 장어가 $6$마리 있습니다. 첫 번째 토끼에게는 모든 장어가 친구이면서 연인입니다. 두 번째 토끼에게는 모든 장어가 친구 이상 연인 미만입니다. 세 번째 토끼에게는 모든 장어가 친구도 연인도 아닙니다.
+
+### 입력 2 {file="stdin"}
+
+~~~text
+2 2 1 2 3 4 8
+0 1
+1 0
+1 2
+2 1
+~~~
+
+### 출력 2 {file="stdout"}
+
+~~~text
+0
+0
+0
+~~~
+
+$0$은 모든 정수의 배수입니다.
+
+### 입력 3 {file="stdin"}
+
+~~~text
+1 10 1 1 1 1 32
+1
+2
+3
+4
+~~~
+
+### 출력 3 {file="stdout"}
+
+~~~text
+21
+13
+~~~
+
+
+
+### 입력 4 {file="stdin"}
+
+~~~text
+1 8 5 3 0 2 16
+1
+5
+2
+6
+~~~
+
+### 출력 4 {file="stdout"}
+
+~~~text
+6
+15
 ~~~

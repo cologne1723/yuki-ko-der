@@ -3,15 +3,7 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#content div",
-      "source": "さんのfav提出一覧",
-      "target": "📝 님의 즐겨찾기 제출 목록"
-    },
-    {
-      "selector": "#content th",
-      "source": "提出時間",
-      "target": "📝 제출 시간"
-    }
+    { "selector": "#content div", "ref": "ui_70d078d481755ced" },
+    { "selector": "#content th", "ref": "ui_0ef7106be42ab893" }
   ]
 }

@@ -3,53 +3,17 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#toplinks a",
-      "source": "AC問題数",
-      "target": "📝 AC 문제 수"
-    },
-    { "selector": "#toplinks a", "source": "スコア", "target": "📝 점수" },
-    {
-      "selector": "#toplinks a",
-      "source": "ユーザーLv.",
-      "target": "📝 사용자 레벨"
-    },
-    {
-      "selector": "#toplinks a",
-      "source": "ゆるふわポイント",
-      "target": "📝 유루후와 포인트"
-    },
-    {
-      "selector": "#toplinks a",
-      "source": "純ショートコード",
-      "target": "📝 순수 숏 코드"
-    },
-    {
-      "selector": "#toplinks a",
-      "source": "最速実行時間",
-      "target": "📝 최단 실행 시간"
-    },
-    {
-      "selector": "#toplinks a",
-      "source": "ゆるふわポイント歴",
-      "target": "📝 유루후와 포인트 기록"
-    },
-    { "selector": "#content h4", "source": "ランキング", "target": "📝 랭킹" },
-    {
-      "selector": "#content th a",
-      "source": "AC問題数",
-      "target": "📝 AC 문제 수"
-    },
-    { "selector": "#content a", "source": "スコア", "target": "📝 점수" },
-    {
-      "selector": "#content a",
-      "source": "ユーザーLv.",
-      "target": "📝 사용자 레벨"
-    },
-    {
-      "selector": "#content a",
-      "source": "ゆるふわポイント",
-      "target": "📝 유루후와 포인트"
-    }
+    { "selector": "#toplinks a", "ref": "ui_3939532fba6b68ab" },
+    { "selector": "#toplinks a", "ref": "ui_63d253663b7dde83" },
+    { "selector": "#toplinks a", "ref": "ui_c65b6e1d706ce2d9" },
+    { "selector": "#toplinks a", "ref": "ui_c9c8574121383f8d" },
+    { "selector": "#toplinks a", "ref": "ui_442362f02e1ccefa" },
+    { "selector": "#toplinks a", "ref": "ui_819ae365cf4a7ed5" },
+    { "selector": "#toplinks a", "ref": "ui_ad567ed4cfd5b00f" },
+    { "selector": "#content h4", "ref": "ui_2ac019aedd0103d2", "variant": 0 },
+    { "selector": "#content th a", "ref": "ui_3939532fba6b68ab" },
+    { "selector": "#content a", "ref": "ui_63d253663b7dde83" },
+    { "selector": "#content a", "ref": "ui_c65b6e1d706ce2d9" },
+    { "selector": "#content a", "ref": "ui_c9c8574121383f8d" }
   ]
 }

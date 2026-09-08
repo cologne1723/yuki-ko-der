@@ -2,11 +2,5 @@
   "$schema": "../translations.schema.json",
   "locale": "ko",
   "sourceLocale": "ja",
-  "translations": [
-    {
-      "selector": "#content h4",
-      "source": "問題別最速実行時間一覧",
-      "target": "📝 문제별 최단 실행 시간 목록"
-    }
-  ]
+  "translations": [{ "selector": "#content h4", "ref": "ui_38347288956270dd" }]
 }

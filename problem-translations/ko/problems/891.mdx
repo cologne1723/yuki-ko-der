@@ -4,46 +4,67 @@ locale: ko
 problemNo: 891
 problemId: 3068
 sourceTitle: "隣接3項間の漸化式"
-sourceHtmlSha256: "6d90a0b9e6dbcb6e372ee3a395cc0032aa0cc4251caaf7a38410df6fbb0c0946"
+sourceHtmlSha256: "2630b86e85fd22f0b9caba4d6b89331aa29ed7c48fa6183a893550d74af7fc5b"
 reviewStatus: unreviewed
-title: "스피드런"
+title: "두 항 점화식"
 ---
 
 ## 문제
 
-난이도 1, 1.5, 2, 2.5의 문제가 각각 $A,B,C,D$개 있고, 한 문제를 푸는 데 각각 $P,Q,R,S$분이 걸립니다. 정확히 $T$분에 $N$문제를 풀었을 때, 난이도별로 푼 문제 수의 가능한 조합 하나를 출력하세요. 해가 존재하는 입력만 주어집니다.
+정수 $a,b,n$이 주어집니다. $(0\le a,b,n<10^9+7)$
 
-## 제약
-
-- $1\leq A,B,C,D\leq10^4$
-- $1\leq P,Q,R,S\leq10^4$
-- $1\leq T\leq4\times10^8$
-- $1\leq N\leq A+B+C+D$
+$x_0=0$, $x_1=1$, $x_{i+2}=ax_{i+1}+bx_i$로 정의할 때, $x_n$을 $10^9+7$로 나눈 나머지를 구하세요. $(i\ge0)$
 
 ## 입력
 
 ~~~text
-A B C D N
-P Q R S T
+a b n
 ~~~
+
+입력은 모두 정수이며 $0\le a,b,n<10^9+7$을 만족합니다.
 
 ## 출력
 
-조건을 만족하는 $(n_a,n_b,n_c,n_d)$를 한 줄에 출력하세요.
+$x_n$을 $10^9+7$로 나눈 나머지를 출력하고 마지막에 줄바꿈을 넣으세요.
 
-## 샘플
+## 예제
 
-### 입력 {file="stdin"}
-
-~~~text
-1 3 3 3 8
-5 10 15 20 120
-~~~
-
-### 출력 {file="stdout"}
+### 입력 1 {file="stdin"}
 
 ~~~text
-1 1 3 3
+1 1 10
 ~~~
 
-총 시간은 $1\times5+1\times10+3\times15+3\times20=120$분입니다.
+### 출력 1 {file="stdout"}
+
+~~~text
+55
+~~~
+
+
+
+### 입력 2 {file="stdin"}
+
+~~~text
+10 10 10
+~~~
+
+### 출력 2 {file="stdout"}
+
+~~~text
+30499986
+~~~
+
+
+
+### 입력 3 {file="stdin"}
+
+~~~text
+1000000000 0 100
+~~~
+
+### 출력 3 {file="stdout"}
+
+~~~text
+7642709
+~~~

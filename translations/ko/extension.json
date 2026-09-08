@@ -1,0 +1,35 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#__yukicoder_extension_problem_load_failed",
+      "ref": "ui_2c5f750653d53ac9"
+    },
+    {
+      "selector": "#__yukicoder_extension_problem_verification_failed",
+      "ref": "ui_53f043227931596a"
+    },
+    {
+      "selector": "#__yukicoder_extension_settings_failed",
+      "ref": "ui_cdfa455e0a3e9a4e"
+    },
+    {
+      "selector": "#__yukicoder_extension_ui_load_failed",
+      "ref": "ui_c443c1c2326ecb43"
+    },
+    {
+      "selector": "#__yukicoder_extension_retry",
+      "ref": "ui_fb6cc190949da044"
+    },
+    {
+      "selector": "#__yukicoder_extension_toolbar_korean",
+      "ref": "ui_6d8b6e9c0f6d2a11"
+    },
+    {
+      "selector": "#__yukicoder_extension_toolbar_japanese",
+      "ref": "ui_7e03f8c72b1a4d55"
+    }
+  ]
+}

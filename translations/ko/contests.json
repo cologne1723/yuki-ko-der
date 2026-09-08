@@ -3,135 +3,31 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#toplinks a",
-      "source": "コンテスト一覧",
-      "target": "대회 목록"
-    },
-    {
-      "selector": "#toplinks a",
-      "source": "カレンダー",
-      "target": "캘린더"
-    },
-    {
-      "selector": "#content",
-      "source": "ここにない時間は空いています。 仮予約する場合もここに載せます",
-      "target": "여기에 표시되지 않은 시간은 비어 있습니다. 임시 예약도 여기에 표시됩니다."
-    },
-    {
-      "selector": "#content label",
-      "source": "通常コンテスト",
-      "target": "일반 대회"
-    },
-    {
-      "selector": "#content label",
-      "source": "スコアコンテスト",
-      "target": "점수 대회"
-    },
-    {
-      "selector": "#content label",
-      "source": "企画コンテスト",
-      "target": "기획 대회"
-    },
-    {
-      "selector": "#content h4",
-      "source": "現在開催中のコンテスト",
-      "target": "현재 진행 중인 대회"
-    },
-    {
-      "selector": "#content h4",
-      "source": "将来のコンテスト",
-      "target": "예정된 대회"
-    },
-    {
-      "selector": "#content h4",
-      "source": "過去のコンテスト一覧",
-      "target": "지난 대회 목록"
-    },
-    {
-      "selector": "#content th",
-      "source": "コンテスト名",
-      "target": "대회명"
-    },
-    {
-      "selector": "#content th",
-      "source": "コンテストセッター",
-      "target": "대회 출제자"
-    },
-    {
-      "selector": "#content th",
-      "source": "開催日時",
-      "target": "개최 일시"
-    },
-    {
-      "selector": "#content th",
-      "source": "問題数",
-      "target": "문제 수"
-    },
-    {
-      "selector": "#content th",
-      "source": "コンテスト時間",
-      "target": "대회 시간"
-    },
-    {
-      "selector": "#content th",
-      "source": "順位表",
-      "target": "스코어보드"
-    },
-    {
-      "selector": "#content a",
-      "source": "順位表へ",
-      "target": "스코어보드"
-    },
-    {
-      "selector": "#content .contest-tag",
-      "source": "チーム戦",
-      "target": "팀전"
-    },
-    {
-      "selector": "#content td",
-      "source": "{count} 問",
-      "target": "{count}문제",
-      "variables": {
-        "count": "\\d+"
-      }
-    },
-    {
-      "selector": "#content .page-link",
-      "source": "前へ",
-      "target": "이전"
-    },
-    {
-      "selector": "#content .page-link",
-      "source": "次へ",
-      "target": "다음"
-    },
-    {
-      "selector": "#content td",
-      "source": "{date} ({weekday}) {time}",
-      "target": "{date} ({weekday}) {time}",
-      "variables": {
-        "date": "\\d{4}-\\d{2}-\\d{2}",
-        "weekday": {
-          "pattern": "[日月火水木金土]",
-          "values": {
-            "日": "일",
-            "月": "월",
-            "火": "화",
-            "水": "수",
-            "木": "목",
-            "金": "금",
-            "土": "토"
-          }
-        },
-        "time": "\\d{2}:\\d{2}:\\d{2}〜?"
-      }
-    },
+    { "selector": "#toplinks a", "ref": "ui_41ef26891107b5a3" },
+    { "selector": "#toplinks a", "ref": "ui_406c11fd7b024ac5" },
+    { "selector": "#content", "ref": "ui_404333a453db0bc8" },
+    { "selector": "#content label", "ref": "ui_0e66844c9e9201a5" },
+    { "selector": "#content label", "ref": "ui_62ced09e002fcfa7" },
+    { "selector": "#content label", "ref": "ui_9a8d79861e291c36" },
+    { "selector": "#content h4", "ref": "ui_dfc51f75482517ec" },
+    { "selector": "#content h4", "ref": "ui_2251f58358dc9ab5" },
+    { "selector": "#content h4", "ref": "ui_27aa95bde582fc14" },
+    { "selector": "#content th", "ref": "ui_74f79cc32fe7a301" },
+    { "selector": "#content th", "ref": "ui_53b48f340a2af175" },
+    { "selector": "#content th", "ref": "ui_ec9d6f5dc5dbcdf3" },
+    { "selector": "#content th", "ref": "ui_7e04c7f51bc47121" },
+    { "selector": "#content th", "ref": "ui_ccc78aab0bff03d2" },
+    { "selector": "#content th", "ref": "ui_3209b39541b8f676" },
+    { "selector": "#content a", "ref": "ui_f6c9b666b74f8798" },
+    { "selector": "#content .contest-tag", "ref": "ui_a03f3aee4d03c32a" },
+    { "selector": "#content td", "ref": "ui_57747aa25e46f15f" },
+    { "selector": "#content .page-link", "ref": "ui_ffc09fc04508af44" },
+    { "selector": "#content .page-link", "ref": "ui_db400499a18f54ee" },
+    { "selector": "#content td", "ref": "ui_4a49aa7a427821bf" },
     {
       "selector": "#content span.contest-tag-team",
       "attribute": "title",
-      "source": "チームを作って参加できるコンテストです",
-      "target": "📝 팀을 만들어 참가할 수 있는 대회입니다"
+      "ref": "ui_6d26bd8dfe2f9cc3"
     }
   ]
 }

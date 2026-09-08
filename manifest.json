@@ -1,5 +1,6 @@
 {
   "manifest_version": 3,
+  "minimum_chrome_version": "121",
   "name": "yukicoder 한국어 번역",
   "version": "0.1.0",
   "description": "yukicoder의 고정 UI 문구를 한국어로 번역합니다.",
@@ -14,6 +15,7 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "yukicoder-ko@local",
+      "strict_min_version": "121.0",
       "data_collection_permissions": {
         "required": ["none"]
       }
@@ -23,17 +25,36 @@
     "https://yukicoder.me/*",
     "https://cologne1723.github.io/*"
   ],
+  "background": {
+    "scripts": ["src/background.js"],
+    "service_worker": "src/background.js"
+  },
   "content_scripts": [
     {
       "matches": ["https://yukicoder.me/*"],
       "js": ["src/config.js", "src/problem-translations.js", "src/content.js"],
-      "run_at": "document_idle"
+      "run_at": "document_idle",
+      "css": ["katex/katex.min.css"]
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": ["translations/ko/*.json"],
+      "resources": [
+        "translations/ko/*.json",
+        "translations/ko.messages.json",
+        "katex/fonts/*"
+      ],
       "matches": ["https://yukicoder.me/*"]
     }
-  ]
+  ],
+  "action": {
+    "default_title": "yukicoder 한국어 번역",
+    "default_icon": {
+      "16": "icons/toolbar-16.png",
+      "32": "icons/toolbar-32.png",
+      "48": "icons/toolbar-48.png",
+      "96": "icons/toolbar-96.png",
+      "128": "icons/toolbar-128.png"
+    }
+  }
 }

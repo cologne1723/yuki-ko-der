@@ -3,150 +3,42 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#toplinks a",
-      "source": "オンライン実行",
-      "target": "📝 온라인 실행"
-    },
-    {
-      "selector": "#toplinks a",
-      "source": "👑実行履歴",
-      "target": "📝 👑실행 기록"
-    },
-    {
-      "selector": "#content h2",
-      "source": "オンライン実行",
-      "target": "📝 온라인 실행"
-    },
+    { "selector": "#toplinks a", "ref": "ui_69af5ccfe059fdc7", "variant": 0 },
+    { "selector": "#toplinks a", "ref": "ui_c0a383d0f314e559" },
+    { "selector": "#content h2", "ref": "ui_69af5ccfe059fdc7", "variant": 0 },
     {
       "selector": "#content .left",
-      "source": "コンパイルコマンド",
-      "target": "📝 컴파일 명령어"
+      "ref": "ui_49b643e9c9d2a79f",
+      "variant": 0
     },
-    {
-      "selector": "#content div",
-      "source": "言語を選ぶと既定コマンドが自動入力されます。自由に編集でき、空欄なら既定を使用します。",
-      "target": "📝 언어를 선택하면 기본 명령어가 자동으로 입력됩니다. 자유롭게 편집할 수 있으며, 비워 두면 기본값을 사용합니다."
-    },
-    {
-      "selector": "#content div",
-      "source": "はソースファイル名に置換されます。",
-      "target": "📝 는 소스 파일명으로 치환됩니다."
-    },
+    { "selector": "#content div", "ref": "ui_4dd6cf2eb903ec33" },
+    { "selector": "#content div", "ref": "ui_5ceb8a90120406dd" },
     {
       "selector": "#content .left",
-      "source": "実行コマンド",
-      "target": "📝 실행 명령어"
+      "ref": "ui_9c80a4379c7042b3",
+      "variant": 0
     },
-    {
-      "selector": "#content .left",
-      "source": "ソースコード",
-      "target": "📝 소스 코드"
-    },
-    {
-      "selector": "#toggle_source_editor",
-      "source": "エディタの切り替え",
-      "target": "📝 편집기 전환"
-    },
-    {
-      "selector": "#submit_form div",
-      "source": "タブ幅",
-      "target": "📝 탭 너비"
-    },
-    {
-      "selector": "#content label",
-      "source": "一般公開する",
-      "target": "📝 공개하기"
-    },
-    {
-      "selector": "#content .left",
-      "source": "標準入力",
-      "target": "📝 표준 입력"
-    },
-    {
-      "selector": "#submit_form .right",
-      "source": "ログインしている場合のみ実行できます。",
-      "target": "📝 로그인한 경우에만 실행할 수 있습니다."
-    },
-    {
-      "selector": "#result_head a",
-      "source": "結果を非表示にする",
-      "target": "📝 결과 숨기기"
-    },
-    {
-      "selector": "#content .right",
-      "source": "非公開",
-      "target": "📝 비공개"
-    },
-    {
-      "selector": "#lang option",
-      "source": "C++23(gnu拡張gcc16) (gcc 16.1.0 + boost 1.92.0)",
-      "target": "📝 C++23(GNU 확장 gcc16) (gcc 16.1.0 + boost 1.92.0)"
-    },
-    {
-      "selector": "#lang option",
-      "source": "C++23(gnu拡張) (gcc 15.3.0 + boost 1.92.0)",
-      "target": "📝 C++23(GNU 확장) (gcc 15.3.0 + boost 1.92.0)"
-    },
-    {
-      "selector": "#lang option",
-      "source": "C++17(gnu拡張) (gcc 15.3.0 + boost 1.92.0)",
-      "target": "📝 C++17(GNU 확장) (gcc 15.3.0 + boost 1.92.0)"
-    },
-    {
-      "selector": "#lang option",
-      "source": "C11(gcc12 gnu拡張) (gcc 12.4.0)",
-      "target": "📝 C11(gcc12 GNU 확장) (gcc 12.4.0)"
-    },
-    {
-      "selector": "#result_area .right",
-      "source": "一般公開",
-      "target": "📝 전체 공개"
-    },
-    {
-      "selector": "#result_area h3",
-      "source": "実行結果",
-      "target": "📝 실행 결과"
-    },
-    {
-      "selector": "#result_area .left",
-      "source": "コンパイルメッセージ",
-      "target": "📝 컴파일 메시지"
-    },
-    {
-      "selector": "#result_area .left",
-      "source": "標準出力",
-      "target": "📝 표준 출력"
-    },
-    {
-      "selector": "#result_area .left",
-      "source": "標準エラー出力",
-      "target": "📝 표준 오류 출력"
-    },
-    {
-      "selector": "#result_area th",
-      "source": "実行時間 :",
-      "target": "📝 실행 시간:"
-    },
-    {
-      "selector": "#result_area th",
-      "source": "コンパイル時間/使用メモリ :",
-      "target": "📝 컴파일 시간/사용 메모리:"
-    },
-    {
-      "selector": "#result_area th",
-      "source": "実行使用メモリ :",
-      "target": "📝 실행 사용 메모리:"
-    },
-    {
-      "selector": "#result_area th",
-      "source": "終了ステータス :",
-      "target": "📝 종료 상태:"
-    },
-    {
-      "selector": "#result_area th",
-      "source": "コード長 :",
-      "target": "📝 코드 길이:"
-    }
+    { "selector": "#content .left", "ref": "ui_bdb238c98bbd055e" },
+    { "selector": "#toggle_source_editor", "ref": "ui_004874714cb91d3f" },
+    { "selector": "#submit_form div", "ref": "ui_6e88c916f7f34632" },
+    { "selector": "#content label", "ref": "ui_158629a5c5bd82ff" },
+    { "selector": "#content .left", "ref": "ui_31643911d67924d7" },
+    { "selector": "#submit_form .right", "ref": "ui_cd75c8686b381972" },
+    { "selector": "#result_head a", "ref": "ui_07c8bf2f41d1b1da" },
+    { "selector": "#content .right", "ref": "ui_7adf741d346741ac" },
+    { "selector": "#lang option", "ref": "ui_e21594d32056b3e8" },
+    { "selector": "#lang option", "ref": "ui_ce98c7289983bdba" },
+    { "selector": "#lang option", "ref": "ui_94b1238db3922c8e" },
+    { "selector": "#lang option", "ref": "ui_39b273b80d3d2bb2" },
+    { "selector": "#result_area .right", "ref": "ui_780a38156b9eb047" },
+    { "selector": "#result_area h3", "ref": "ui_ab37f9544fe5891a" },
+    { "selector": "#result_area .left", "ref": "ui_9aeaf11d40b70407" },
+    { "selector": "#result_area .left", "ref": "ui_a36d2bc57de4641b" },
+    { "selector": "#result_area .left", "ref": "ui_c68bdfd6e3a391d6" },
+    { "selector": "#result_area th", "ref": "ui_1a35193369d2b456" },
+    { "selector": "#result_area th", "ref": "ui_879515c130f16005" },
+    { "selector": "#result_area th", "ref": "ui_f7bd644f5baac6d0" },
+    { "selector": "#result_area th", "ref": "ui_d11acc54057ea4bc" },
+    { "selector": "#result_area th", "ref": "ui_abc29796a53bbc88" }
   ]
 }

@@ -3,130 +3,30 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#content h2",
-      "source": "サイトサポーター一覧（順不同）",
-      "target": "📝 사이트 서포터 목록(순서 무관)"
-    },
-    {
-      "selector": "#content p",
-      "source": "ありがとうございます！",
-      "target": "📝 감사합니다!"
-    },
-    {
-      "selector": "#content h2",
-      "source": "サイトサポーターの特典",
-      "target": "📝 사이트 서포터 혜택"
-    },
-    {
-      "selector": "#content li",
-      "source": "広告がなくなります",
-      "target": "📝 광고가 사라집니다"
-    },
-    {
-      "selector": "#content li",
-      "source": "オンライン実行で実行履歴が表示できます",
-      "target": "📝 온라인 실행에서 실행 기록을 볼 수 있습니다"
-    },
-    {
-      "selector": "#content li",
-      "source": "Writerの方は、問題公開前のコードの変更ができます",
-      "target": "📝 출제자는 문제 공개 전에 코드를 변경할 수 있습니다"
-    },
-    {
-      "selector": "#content li",
-      "source": "好きな画像（ただし、一般に公開可能なもの）をユーザーアイコンに設定できます。",
-      "target": "📝 원하는 이미지(공개 가능한 이미지에 한함)를 사용자 아이콘으로 설정할 수 있습니다."
-    },
-    {
-      "selector": "#content li",
-      "source": "問題集の新規作成ができます",
-      "target": "📝 새 문제 모음을 만들 수 있습니다"
-    },
-    {
-      "selector": "#content",
-      "source": "他にも何かコンテストには影響しない範囲の機能を計画してます。",
-      "target": "📝 그 밖에도 대회에 영향을 주지 않는 범위에서 기능을 계획하고 있습니다."
-    },
-    {
-      "selector": "#content h2",
-      "source": "ワンデーサポーターについて",
-      "target": "📝 일일 서포터 안내"
-    },
-    {
-      "selector": "#content a",
-      "source": "ワンデーサポーター",
-      "target": "📝 일일 서포터"
-    },
-    {
-      "selector": "#content p",
-      "source": "は、広告を見ることで24時間だけ一部の機能を利用できる機能です。",
-      "target": "📝 는 광고를 시청하면 일부 기능을 24시간 동안 이용할 수 있는 기능입니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "サイトサポーターになると、ワンデーサポーター機能が常時有効になります。",
-      "target": "📝 사이트 서포터가 되면 일일 서포터 기능이 항상 활성화됩니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "なおご支援いただける方は、サイトサポーターの方も広告をご覧いただくと大変うれしいです。",
-      "target": "📝 후원해 주실 수 있다면 사이트 서포터도 광고를 봐 주시면 매우 감사하겠습니다."
-    },
-    {
-      "selector": "#content h2",
-      "source": "サイトサポーターになる方法",
-      "target": "📝 사이트 서포터가 되는 방법"
-    },
-    {
-      "selector": "#content p",
-      "source": "何かしらの方法で1000円以上送っていただければ、1年間サイトサポーターの権限を付加します。",
-      "target": "📝 어떤 방법으로든 1,000엔 이상 보내 주시면 1년간 사이트 서포터 권한을 부여합니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "申し訳ないですが手動対応しているため、見逃していたらDMしてください。",
-      "target": "📝 수동으로 처리하므로 누락되었다면 DM을 보내 주세요."
-    },
-    {
-      "selector": "#content p",
-      "source": "他の項目でも良いので合計して合計8ドル（日本円1000円）以上でご連絡ください。 yukicoderにGitHubでログイン（連携）していることが必須です。スポンサーのアカウントと突き合わせて権限を付けるため、連携が無いと確認できません。",
-      "target": "📝 다른 항목을 합산해도 되므로 총 8달러(일본 엔화 1,000엔) 이상이면 연락해 주세요. yukicoder에 GitHub로 로그인(연동)되어 있어야 합니다. 스폰서 계정과 대조하여 권한을 부여하므로 연동되어 있지 않으면 확인할 수 없습니다."
-    },
-    {
-      "selector": "#content h3",
-      "source": "Google Playのコードを送る",
-      "target": "📝 Google Play 코드 보내기"
-    },
-    {
-      "selector": "#content a",
-      "source": "Google Play ギフトカード",
-      "target": "📝 Google Play 기프트 카드"
-    },
-    {
-      "selector": "#content",
-      "source": "上はAmazon経由ですが、Google PlayのコードをDMしていただいても構いません。",
-      "target": "📝 위 링크는 Amazon을 통하지만 Google Play 코드를 DM으로 보내도 됩니다."
-    },
-    {
-      "selector": "#content",
-      "source": "メールアドレスは左のメールアドレスはクリックからコピーできます。",
-      "target": "📝 이메일 주소는 왼쪽의 이메일 주소 링크를 클릭해 복사할 수 있습니다."
-    },
-    {
-      "selector": "#content",
-      "source": "説明欄に UserId = 〇〇　と記載してください。",
-      "target": "📝 설명란에 UserId = 〇〇라고 적어 주세요."
-    },
-    {
-      "selector": "#content h3",
-      "source": "Amazon ギフトカード",
-      "target": "📝 Amazon 기프트 카드"
-    },
-    {
-      "selector": "#content a",
-      "source": "Amazonギフトカード",
-      "target": "📝 Amazon 기프트 카드"
-    }
+    { "selector": "#content h2", "ref": "ui_dc6ef4074cc9a4fb" },
+    { "selector": "#content p", "ref": "ui_0d6fbdb30cb1cb62" },
+    { "selector": "#content h2", "ref": "ui_35631d10792c0569" },
+    { "selector": "#content li", "ref": "ui_e11344239ecaf4a3" },
+    { "selector": "#content li", "ref": "ui_f4b86358c247ac27" },
+    { "selector": "#content li", "ref": "ui_1b776feaac02b17f" },
+    { "selector": "#content li", "ref": "ui_0f74f8c9db480774" },
+    { "selector": "#content li", "ref": "ui_a59893b5a1e3e69c" },
+    { "selector": "#content", "ref": "ui_39ddc6e4bdcc5416" },
+    { "selector": "#content h2", "ref": "ui_cfb2f1a1da0fe2a9" },
+    { "selector": "#content a", "ref": "ui_bb4500ee5ebc42a2", "variant": 2 },
+    { "selector": "#content p", "ref": "ui_b945e512c82d2aaa" },
+    { "selector": "#content p", "ref": "ui_b4af4c2a9c82fa50" },
+    { "selector": "#content p", "ref": "ui_f1dd4688fc39a614" },
+    { "selector": "#content h2", "ref": "ui_4e88b3a712698edf" },
+    { "selector": "#content p", "ref": "ui_5310c1f35dc74f1d" },
+    { "selector": "#content p", "ref": "ui_817a943b886a87a6" },
+    { "selector": "#content p", "ref": "ui_8ddba74660bc6214" },
+    { "selector": "#content h3", "ref": "ui_29e16fab4020d281" },
+    { "selector": "#content a", "ref": "ui_ee422cb084302a65" },
+    { "selector": "#content", "ref": "ui_ba14afc1cf4853ca" },
+    { "selector": "#content", "ref": "ui_4a0ddf70b2b5a9a3" },
+    { "selector": "#content", "ref": "ui_eabba09ee7933af4" },
+    { "selector": "#content h3", "ref": "ui_7418b0fd20906b0b" },
+    { "selector": "#content a", "ref": "ui_844644c1d9484a61" }
   ]
 }

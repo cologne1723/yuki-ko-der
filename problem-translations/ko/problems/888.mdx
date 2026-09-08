@@ -4,41 +4,65 @@ locale: ko
 problemNo: 888
 problemId: 3149
 sourceTitle: "約数の総和"
-sourceHtmlSha256: "28b4f92d237881f948ba11c84b532e42fad26a067e1330bad905f969d3d5ae6b"
+sourceHtmlSha256: "918d36600fe2f118d43dca8de8e8594777d4bd599b2f05a23a23d204eaa3caa7"
 reviewStatus: unreviewed
-title: "XOR"
+title: "양의 약수의 합"
 ---
 
 ## 문제
 
-$A\oplus X=B$를 만족하는 유일한 정수 $X$를 출력하세요. $\oplus$는 이진수의 각 비트에 대한 XOR입니다.
-
-## 제약
-
-- $0\leq A,B\leq255$
+양의 정수 $N$이 주어집니다. $N$의 양의 약수의 합을 구하세요.
 
 ## 입력
 
 ~~~text
-A B
+N
 ~~~
+
+양의 정수 $N$이 주어집니다. $(1\le N\le10^{12})$
 
 ## 출력
 
-조건을 만족하는 유일한 $X$를 십진수로 출력하세요.
+$N$의 양의 약수의 합을 출력하고 마지막에 줄바꿈을 넣으세요.
 
-## 샘플
+## 예제
 
 ### 입력 1 {file="stdin"}
 
 ~~~text
-1 2
+6
 ~~~
 
 ### 출력 1 {file="stdout"}
 
 ~~~text
-3
+12
 ~~~
 
-$(1)_{10}\oplus(3)_{10}=(2)_{10}$입니다.
+$6$의 양의 약수는 $1,2,3,6$이므로 그 합인 $12$가 답입니다.
+
+### 입력 2 {file="stdin"}
+
+~~~text
+37
+~~~
+
+### 출력 2 {file="stdout"}
+
+~~~text
+38
+~~~
+
+
+
+### 입력 3 {file="stdin"}
+
+~~~text
+100000
+~~~
+
+### 출력 3 {file="stdout"}
+
+~~~text
+246078
+~~~

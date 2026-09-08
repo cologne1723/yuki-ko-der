@@ -3,30 +3,14 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#content h2",
-      "source": "オンライン実行 履歴",
-      "target": "📝 온라인 실행 기록"
-    },
-    {
-      "selector": "#content th",
-      "source": "実行日時",
-      "target": "📝 실행 일시"
-    },
-    {
-      "selector": "#body div",
-      "source": "最新50件が表示されます。",
-      "target": "📝 최근 50건이 표시됩니다."
-    },
-    {
-      "selector": "#content .alert-warning",
-      "source": "サイトサポーターでないと表示できません。 サイトサポーターへのなり方は",
-      "target": "📝 사이트 서포터만 볼 수 있습니다. 사이트 서포터가 되는 방법은 "
-    },
+    { "selector": "#content h2", "ref": "ui_195fbb4b1625a5d0" },
+    { "selector": "#content th", "ref": "ui_27b1e388e66da2e9" },
+    { "selector": "#body div", "ref": "ui_03fa0c632b4548b0" },
+    { "selector": "#content .alert-warning", "ref": "ui_e14f9564fa213bd3" },
     {
       "selector": "#content .alert-warning a",
-      "source": "こちら",
-      "target": "📝 여기"
+      "ref": "ui_31e61adb10231594",
+      "variant": 1
     }
   ]
 }

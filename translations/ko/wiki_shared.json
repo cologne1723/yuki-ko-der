@@ -3,17 +3,12 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    { "selector": "#toplinks a", "source": "編集", "target": "편집" },
-    {
-      "selector": "#content small",
-      "source": "(Favした一覧ページはユーザーページから)",
-      "target": "(즐겨찾기한 페이지 목록은 사용자 페이지에서 확인)"
-    },
+    { "selector": "#toplinks a", "ref": "ui_b999a7f95f5b1e7c" },
+    { "selector": "#content small", "ref": "ui_0ec8cab27f8f3bb8" },
     {
       "selector": "footer img[alt]",
       "attribute": "alt",
-      "source": "クリエイティブ・コモンズ・ライセンス",
-      "target": "📝 크리에이티브 커먼즈 라이선스"
+      "ref": "ui_49290b86c07a1622"
     }
   ]
 }

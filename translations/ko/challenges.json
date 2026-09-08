@@ -3,20 +3,8 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#main h1",
-      "source": "チャレンジ一覧",
-      "target": "📝 챌린지 목록"
-    },
-    {
-      "selector": "#main a",
-      "source": "Challenge Succeed! (ケース未追加のみ)",
-      "target": "📝 Challenge Succeed! (케이스가 추가되지 않은 항목만)"
-    },
-    {
-      "selector": "#main a",
-      "source": "Challenge Succeed! すでに成功済み",
-      "target": "📝 Challenge Succeed! 이미 성공함"
-    }
+    { "selector": "#main h1", "ref": "ui_e86ec5aec7031a4c" },
+    { "selector": "#main a", "ref": "ui_7a3cdd83ba44344d" },
+    { "selector": "#main a", "ref": "ui_a39a55116e4fef7f" }
   ]
 }

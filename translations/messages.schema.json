@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "$schema": { "type": "string" },
+    "messages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "source": { "type": "string", "minLength": 1 },
+          "target": { "type": "string", "minLength": 1 },
+          "reviewStatus": {
+            "type": "string",
+            "enum": ["unreviewed", "approved"]
+          },
+          "meaning": { "type": "string", "minLength": 1 },
+          "variables": {
+            "type": "object",
+            "propertyNames": { "type": "string" },
+            "additionalProperties": {
+              "anyOf": [
+                { "type": "string", "minLength": 1 },
+                {
+                  "type": "object",
+                  "properties": {
+                    "pattern": { "type": "string", "minLength": 1 },
+                    "values": {
+                      "type": "object",
+                      "propertyNames": { "type": "string" },
+                      "additionalProperties": { "type": "string" }
+                    }
+                  },
+                  "required": ["pattern"],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "alternatives": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "target": { "type": "string", "minLength": 1 },
+                "reviewStatus": {
+                  "type": "string",
+                  "enum": ["unreviewed", "approved"]
+                }
+              },
+              "required": ["target"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": ["id", "source", "target"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["messages"],
+  "additionalProperties": false
+}

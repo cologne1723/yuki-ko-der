@@ -3,112 +3,68 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#sidelinks > a[href='/']",
-      "source": "トップページ",
-      "target": "메인 페이지"
-    },
+    { "selector": "#sidelinks > a[href='/']", "ref": "ui_5dc14e1bc6daa7b0" },
     {
       "selector": "#sidelinks > a[href='/problems']",
-      "source": "問題一覧",
-      "target": "문제 목록"
+      "ref": "ui_a7170948fa97285b"
     },
     {
       "selector": "#sidelinks > a[href='/submissions']",
-      "source": "提出一覧",
-      "target": "제출 목록"
+      "ref": "ui_2efde06346c1bf97"
     },
     {
       "selector": "#sidelinks > a[href='/contests']",
-      "source": "コンテスト一覧",
-      "target": "대회 목록"
+      "ref": "ui_41ef26891107b5a3"
     },
     {
       "selector": "#sidelinks > a[href='/clarifications']",
-      "source": "質問一覧",
-      "target": "질문 목록"
+      "ref": "ui_c960b057fa3a2b03"
     },
     {
       "selector": "#sidelinks > a[href='/ranking']",
-      "source": "ランキング",
-      "target": "랭킹"
+      "ref": "ui_2ac019aedd0103d2"
     },
     {
       "selector": "#sidelinks > a[href='/wiki']",
-      "source": "Wiki",
-      "target": "위키"
+      "ref": "ui_cc9d01a82866f983"
     },
     {
       "selector": "#sidelinks > a[href='/statistics']",
-      "source": "統計/タグ一覧",
-      "target": "통계/태그 목록"
+      "ref": "ui_3cefd706061b2fb3"
     },
     {
       "selector": "#sidelinks > a[href='/supporter']",
-      "source": "サポーター👑",
-      "target": "서포터 👑"
+      "ref": "ui_22f1a2883ac13497"
     },
     {
       "selector": "#sidelinks > a[href='/offer']",
-      "source": "ワンデーサポーター",
-      "target": "데일리 서포터"
+      "ref": "ui_bb4500ee5ebc42a2"
     },
     {
       "selector": "#sidelinks > a[href='/problemsets']",
-      "source": "問題集",
-      "target": "문제 모음"
+      "ref": "ui_46eeb66eb293f3f9"
     },
     {
       "selector": "#sidelinks > a[href='/wiki/guide']",
-      "source": "初めての方へ",
-      "target": "처음 오신 분께"
+      "ref": "ui_0dba5954f69bb21d"
     },
-    {
-      "selector": "#sidelinks > a[href='/run']",
-      "source": "オンライン実行",
-      "target": "온라인 실행"
-    },
+    { "selector": "#sidelinks > a[href='/run']", "ref": "ui_69af5ccfe059fdc7" },
     {
       "selector": "#sidelinks > a[href='/help']",
-      "source": "ヘルプ",
-      "target": "도움말"
+      "ref": "ui_4cd235ac2d741633"
     },
     {
       "selector": "#sidelinks > a[href='/tester_problems']",
-      "source": "テスター募集問題",
-      "target": "테스터 모집 중인 문제"
+      "ref": "ui_01e29b99c5b95a0d"
     },
     {
       "selector": "#sidelinks > a[href='/tester_problems'] > small",
-      "source": "({people}人/{problems}問)",
-      "target": "({people}명/{problems}문제)",
-      "variables": {
-        "people": "\\d+",
-        "problems": "\\d+"
-      }
+      "ref": "ui_477fc4e51156c9ab"
     },
-    {
-      "selector": "#sidelinks > div > small",
-      "source": "同時接続数:{count}",
-      "target": "동시 접속자수: {count}",
-      "variables": {
-        "count": "\\d+"
-      }
-    },
-    {
-      "selector": "#sidebar > a",
-      "source": "ギフトカード送る場合はこちら",
-      "target": "기프트 카드를 보내려면 여기를 클릭하세요"
-    },
-    {
-      "selector": "#email-copy-link",
-      "source": "メールアドレスはクリック",
-      "target": "이메일 주소를 보려면 클릭하세요"
-    },
-    {
-      "selector": "#side_ads a",
-      "source": "競技プログラミング関連の書籍(Amazonで何か購入される場合もこちらから)",
-      "target": "Competitive Programming 관련 도서 (Amazon에서 구매하실 때도 이 링크를 이용해 주세요)"
-    }
+    { "selector": "#sidelinks > div > small", "ref": "ui_f4a83d2428488f45" },
+    { "selector": "#sidebar > a", "ref": "ui_4d8639ba6833ed66" },
+    { "selector": "#email-copy-link", "ref": "ui_a5be822515ba35ec" },
+    { "selector": "#side_ads a", "ref": "ui_60dd60a906b26ad0" },
+    { "ref": "ui_a7170948fa97285b", "selector": "a" }
   ]
 }

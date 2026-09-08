@@ -1,3 +1,10 @@
+packages:
+  - packages/*
+  - tools/*
+
 allowBuilds:
   esbuild: true
-  simple-git-hooks: true
+  simple-git-hooks: false
+
+verifyDepsBeforeRun: error
+enableGlobalVirtualStore: false

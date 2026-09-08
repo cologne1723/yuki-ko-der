@@ -3,46 +3,14 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    { "selector": "#content h4", "source": "質問一覧", "target": "질문 목록" },
-    {
-      "selector": "#content p",
-      "source": "このコンテストの問題に関する質問が表示されます。",
-      "target": "📝 이 대회의 문제에 관한 질문이 표시됩니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "公開されている質問と自分が出した質問が表示されます。",
-      "target": "📝 공개된 질문과 내가 작성한 질문이 표시됩니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "自分が Writer / Tester の問題は、非公開の質問も表示されます。",
-      "target": "📝 내가 Writer/Tester인 문제는 비공개 질문도 표시됩니다."
-    },
-    {
-      "selector": "#clarifications_list th",
-      "source": "問題 / 質問ID",
-      "target": "📝 문제/질문 ID"
-    },
-    {
-      "selector": "#clarifications_list th",
-      "source": "質問日時 / 質問者",
-      "target": "📝 질문 일시/질문자"
-    },
-    {
-      "selector": "#clarifications_list th",
-      "source": "質問",
-      "target": "📝 질문"
-    },
-    {
-      "selector": "#clarifications_list th",
-      "source": "回答",
-      "target": "📝 답변"
-    },
-    {
-      "selector": "#clarifications_list th",
-      "source": "回答日時 / 回答者",
-      "target": "📝 답변 일시/답변자"
-    }
+    { "selector": "#content h4", "ref": "ui_c960b057fa3a2b03" },
+    { "selector": "#content p", "ref": "ui_afe7b5cecea6e3d2" },
+    { "selector": "#content p", "ref": "ui_3da5e7908df52cff" },
+    { "selector": "#content p", "ref": "ui_6d7ed2ebcf7b430c" },
+    { "selector": "#clarifications_list th", "ref": "ui_6274d2b97616fded" },
+    { "selector": "#clarifications_list th", "ref": "ui_7bb3f0e1452f5e83" },
+    { "selector": "#clarifications_list th", "ref": "ui_637343d2d5108708" },
+    { "selector": "#clarifications_list th", "ref": "ui_2f35881fae854aae" },
+    { "selector": "#clarifications_list th", "ref": "ui_f201f00d1586da2a" }
   ]
 }

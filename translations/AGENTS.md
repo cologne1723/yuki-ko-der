@@ -1,0 +1,5 @@
+- Translate the intended meaning in context into natural Korean without adding or omitting information; flag ambiguity for human review instead of guessing.
+- Reuse translations for the same meaning and keep terminology consistent; distinguish different meanings even when their source wording is identical.
+- Translate only the intended user-visible text; preserve application data and behavior, including when the interface updates dynamically.
+- Preserve dynamic values, placeholder identities, link destinations, and identifiers; allow translated wording to reorder placeholders without changing their meaning.
+- Korean translation changes require human review. Keep unreviewed work distinguishable, never infer approval from saving, and do not change approved wording or mark work reviewed without explicit authorization.

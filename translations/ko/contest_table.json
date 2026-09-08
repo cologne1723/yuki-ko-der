@@ -3,54 +3,14 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#content h4",
-      "source": "{contest} 順位表",
-      "target": "📝 {contest} 순위표",
-      "variables": { "contest": ".+" }
-    },
-    {
-      "selector": "#content .left",
-      "source": "{period}のコンテストです。",
-      "target": "📝 {period} 대회입니다.",
-      "variables": { "period": ".+" }
-    },
-    {
-      "selector": "#content .left",
-      "source": "{startedAt}に出題されて現在までの順位表です。",
-      "target": "📝 {startedAt}에 출제된 뒤 현재까지의 순위표입니다.",
-      "variables": { "startedAt": ".+" }
-    },
-    {
-      "selector": "#content .left",
-      "source": "全問均一{points}点です。",
-      "target": "📝 모든 문제는 동일하게 {points}점입니다.",
-      "variables": { "points": "\\d+" }
-    },
-    {
-      "selector": "#content .left",
-      "source": "参加人数",
-      "target": "📝 참가 인원"
-    },
-    {
-      "selector": "#content span",
-      "source": "時間順 1位:",
-      "target": "📝 시간순 1위:"
-    },
-    {
-      "selector": "#content span",
-      "source": "スコア順（旧方式） 1位:",
-      "target": "📝 점수순(이전 방식) 1위:"
-    },
-    {
-      "selector": "#content small",
-      "source": "(W含む）",
-      "target": "📝 (W 포함)"
-    },
-    {
-      "selector": "#content a",
-      "source": "提出コード",
-      "target": "📝 제출 코드"
-    }
+    { "selector": "#content h4", "ref": "ui_b371289b001c424a" },
+    { "selector": "#content .left", "ref": "ui_86fdd03f6eef00e9" },
+    { "selector": "#content .left", "ref": "ui_d384de9b58a8e0e7" },
+    { "selector": "#content .left", "ref": "ui_0cbea268555e6063" },
+    { "selector": "#content .left", "ref": "ui_2d60a92ba1e3a207" },
+    { "selector": "#content span", "ref": "ui_c6c307c3f4531dbc" },
+    { "selector": "#content span", "ref": "ui_c676ca9550687181" },
+    { "selector": "#content small", "ref": "ui_318f2b07f7723732" },
+    { "selector": "#content a", "ref": "ui_76fcdb3790bf8855" }
   ]
 }

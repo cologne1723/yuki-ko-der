@@ -1,8 +1,9 @@
 node_modules/
 .pnpm-store/
-dist/
-.review-dist/
-web-ext-artifacts/
-tmp/
+/dist/
+/data/
 problem-translations/
 *.log
+
+
+.review-settings.json

@@ -3,195 +3,50 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#toplinks a",
-      "source": "概要",
-      "target": "개요"
-    },
-    {
-      "selector": "#toplinks a",
-      "source": "順位表",
-      "target": "스코어보드"
-    },
-    {
-      "selector": "#toplinks a",
-      "source": "新順位表(β)",
-      "target": "새 스코어보드(β)"
-    },
-    {
-      "selector": "#toplinks a",
-      "source": "現在の順位表",
-      "target": "현재 스코어보드"
-    },
-    {
-      "selector": "#toplinks a",
-      "source": "チーム",
-      "target": "팀"
-    },
-    {
-      "selector": "#toplinks a",
-      "source": "統計",
-      "target": "통계"
-    },
-    {
-      "selector": "#toplinks a",
-      "source": "提出一覧",
-      "target": "제출 목록"
-    },
-    {
-      "selector": "#toplinks a",
-      "source": "質問",
-      "target": "질문"
-    },
-    {
-      "selector": "#toplinks a",
-      "source": "解説",
-      "target": "해설"
-    },
-    {
-      "selector": "#content h4",
-      "source": "{contest} 概要",
-      "target": "{contest} 개요",
-      "variables": {
-        "contest": ".+"
-      }
-    },
-    {
-      "selector": "#body div",
-      "source": ")のコンテストです。",
-      "target": ") 대회입니다."
-    },
-    {
-      "selector": "#body div",
-      "source": "参加登録などはありません。問題が公開されたら、回答を提出すれば大丈夫です。",
-      "target": "별도의 참가 등록은 없습니다. 문제가 공개되면 답안을 제출하면 됩니다."
-    },
-    {
-      "selector": "#body div",
-      "source": "誤回答によるペナルティーはありません。",
-      "target": "오답에 대한 페널티는 없습니다."
-    },
-    {
-      "selector": "#content b",
-      "source": "このコンテストはチーム参加です。",
-      "target": "이 대회는 팀 참가 대회입니다."
-    },
-    {
-      "selector": "#content .alert-info",
-      "source": "順位表ではチーム全体で1人の参加者として扱います。",
-      "target": "스코어보드에서는 팀 전체를 한 명의 참가자로 취급합니다."
-    },
-    {
-      "selector": "#content .alert-info",
-      "source": "チームに入るには招待コードが必要です。",
-      "target": "팀에 가입하려면 초대 코드가 필요합니다."
-    },
-    {
-      "selector": "#content b",
-      "source": "先に提出してしまうとチームに参加できなくなる",
-      "target": "먼저 제출하면 팀에 참가할 수 없으므로"
-    },
-    {
-      "selector": "#content .alert-info",
-      "source": "ので、提出前にチームを決めてください。",
-      "target": "제출 전에 팀을 정해 주세요."
-    },
-    {
-      "selector": "#content .btn-primary",
-      "source": "チーム参加はこちら",
-      "target": "팀 참가"
-    },
-    {
-      "selector": "#content th",
-      "source": "ナンバー",
-      "target": "문제 번호"
-    },
-    {
-      "selector": "#content th",
-      "source": "問題名",
-      "target": "문제 제목"
-    },
-    {
-      "selector": "#content th",
-      "source": "レベル",
-      "target": "레벨"
-    },
-    {
-      "selector": "#content th",
-      "source": "作問者",
-      "target": "출제자"
-    },
-    {
-      "selector": "#content th",
-      "source": "テスター",
-      "target": "테스터"
-    },
-    {
-      "selector": "#content .problem-title",
-      "source": "問題名非公開",
-      "target": "문제명 비공개"
-    },
-    {
-      "selector": "#content div",
-      "source": "コンテストセッター :",
-      "target": "대회 출제자:"
-    },
-    {
-      "selector": "#content div",
-      "source": "コンテストの待ち時間に",
-      "target": "대회를 기다리는 동안 "
-    },
-    {
-      "selector": "#content a",
-      "source": "ワンデーサポーター",
-      "target": "원 데이 서포터"
-    },
-    {
-      "selector": "#content div",
-      "source": "になるのはいかがですか？",
-      "target": "가 되어 보는 건 어떠세요?"
-    },
-    {
-      "selector": "#content h4.shadow",
-      "source": "以下システムで共通表示",
-      "target": "아래 내용은 시스템 공통 표시"
-    },
-    {
-      "selector": "#content li",
-      "source": "誤回答によるペナルティはありません",
-      "target": "오답에 대한 페널티가 없습니다"
-    },
-    {
-      "selector": "#content li",
-      "source": "何度でも提出可能です",
-      "target": "몇 번이든 제출할 수 있습니다"
-    },
-    {
-      "selector": "#content li",
-      "source": "ソースコードサイズ制限: 64KB",
-      "target": "소스 코드 크기 제한: 64KB"
-    },
-    {
-      "selector": "#content li",
-      "source": "提出頻度制限（サイト全体）: 2個前の提出から60秒以上の間隔が必要",
-      "target": "제출 빈도 제한(사이트 전체): 60초당 2번 제출 가능"
-    },
-    {
-      "selector": "#content li",
-      "source": "AI使用は、コンテスト情報によるとする、明示がなければ問題文丸ごと投げるなどは禁止で 問題によらない汎用的なもののみ可とする",
-      "target": "AI 사용은 각 대회 정보에 따릅니다. 별다른 명시가 없다면 문제 설명 전체를 입력하는 행위 등은 금지되며 문제와 무관한 범용적 사용만 허용됩니다."
-    },
+    { "selector": "#toplinks a", "ref": "ui_7286d6a174127ec1" },
+    { "selector": "#toplinks a", "ref": "ui_3209b39541b8f676" },
+    { "selector": "#toplinks a", "ref": "ui_00b8938dccd21b65" },
+    { "selector": "#toplinks a", "ref": "ui_880d08ae1a7b9a85" },
+    { "selector": "#toplinks a", "ref": "ui_ce6d526c6524e026" },
+    { "selector": "#toplinks a", "ref": "ui_824c84b4bad7ecca" },
+    { "selector": "#toplinks a", "ref": "ui_2efde06346c1bf97" },
+    { "selector": "#toplinks a", "ref": "ui_637343d2d5108708" },
+    { "selector": "#toplinks a", "ref": "ui_18a86598ada75fce" },
+    { "selector": "#content h4", "ref": "ui_49aa03bca47860c5" },
+    { "selector": "#body div", "ref": "ui_6be020f3e9d80928" },
+    { "selector": "#body div", "ref": "ui_2b061c7aafd5ae65" },
+    { "selector": "#body div", "ref": "ui_28bc409f13fd8518" },
+    { "selector": "#content b", "ref": "ui_69c14ec16c6be356" },
+    { "selector": "#content .alert-info", "ref": "ui_22eb815cf3ac6cd4" },
+    { "selector": "#content .alert-info", "ref": "ui_912839db5f24000a" },
+    { "selector": "#content b", "ref": "ui_a43450af9a2cd4c8" },
+    { "selector": "#content .alert-info", "ref": "ui_8ea0bbbf784a0483" },
+    { "selector": "#content .btn-primary", "ref": "ui_6bf0d2a7a1eaf33e" },
+    { "selector": "#content th", "ref": "ui_80384278dd555ba5" },
+    { "selector": "#content th", "ref": "ui_4f35318695c80073" },
+    { "selector": "#content th", "ref": "ui_7321d9218cc1de0b" },
+    { "selector": "#content th", "ref": "ui_c330436b3c6c33a4" },
+    { "selector": "#content th", "ref": "ui_da463429fc14e479" },
+    { "selector": "#content .problem-title", "ref": "ui_3ce6f7e497d57049" },
+    { "selector": "#content div", "ref": "ui_de6a2c119e8278f8" },
+    { "selector": "#content div", "ref": "ui_6ccb02867dae9796" },
+    { "selector": "#content a", "ref": "ui_bb4500ee5ebc42a2", "variant": 0 },
+    { "selector": "#content div", "ref": "ui_5b6bc7ea2386f09f" },
+    { "selector": "#content h4.shadow", "ref": "ui_b6cbfed6ea5bd300" },
+    { "selector": "#content li", "ref": "ui_1f647db6076fb936" },
+    { "selector": "#content li", "ref": "ui_110e27cbc5408941" },
+    { "selector": "#content li", "ref": "ui_e444c797c62a6971" },
+    { "selector": "#content li", "ref": "ui_f38d4711f8e3c442" },
+    { "selector": "#content li", "ref": "ui_c876ccc1f5844472" },
     {
       "selector": "#content span.problem-hide-toggle-all",
       "attribute": "title",
-      "source": "問題名を非公開にする/表示する",
-      "target": "📝 문제명을 숨기기/표시하기"
+      "ref": "ui_75f482584289d0ed"
     },
     {
       "selector": "#content i[title]",
       "attribute": "title",
-      "source": "Writer/Testerを除いたAC人数 (全体のAC人数)",
-      "target": "📝 Writer/Tester를 제외한 AC 인원(전체 AC 인원)"
+      "ref": "ui_f74348443d5a57f2"
     }
   ]
 }

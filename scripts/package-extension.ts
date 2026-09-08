@@ -1,20 +1,19 @@
-#!/usr/bin/env node
+import { mkdir, readFile } from "node:fs/promises";
+import { join } from "node:path";
+import { archiveDirectory } from "translation-core/build-files";
+import { buildDirectory } from "translation-core/paths";
 
-import { execFile } from "node:child_process";
-import { mkdir, readFile, rm } from "node:fs/promises";
-import { dirname, join, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
-import { promisify } from "node:util";
-
-const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const manifest = JSON.parse(
-  await readFile(join(root, "dist/manifest.json"), "utf8"),
-);
-const artifacts = join(root, "web-ext-artifacts");
+const artifacts = buildDirectory("archives", "extension");
 await mkdir(artifacts, { recursive: true });
-const archive = join(artifacts, `yukicoder-ko-${manifest.version}.zip`);
-await rm(archive, { force: true });
-await promisify(execFile)("zip", ["-qr", archive, "."], {
-  cwd: join(root, "dist"),
-});
-console.log(archive);
+for (const browser of ["chrome", "firefox"]) {
+  const directory = buildDirectory("extension", browser);
+  const manifest = JSON.parse(
+    await readFile(join(directory, "manifest.json"), "utf8"),
+  );
+  const archive = join(
+    artifacts,
+    `yukicoder-ko-${browser}-${manifest.version}.zip`,
+  );
+  await archiveDirectory(directory, archive);
+  console.log(archive);
+}

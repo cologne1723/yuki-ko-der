@@ -1,0 +1,425 @@
+[
+  {
+    "file": "offer_shared.json",
+    "source": "期限切れ",
+    "selector": "#premium-remaining-time",
+    "url": "https://yukicoder.me/offer",
+    "evidenceUrl": "https://yukicoder.me/public/js/base.js",
+    "state": "남은 이용 시간 표시는 브라우저의 이용권 상태에 따라 생성됩니다. 원본 base.js의 formatRemainingTime에서 문구를 확인했습니다.",
+    "kind": "dynamic"
+  },
+  {
+    "file": "offer_shared.json",
+    "source": "{hours}時間{minutes}分",
+    "selector": "#premium-remaining-time",
+    "url": "https://yukicoder.me/offer",
+    "evidenceUrl": "https://yukicoder.me/public/js/base.js",
+    "state": "남은 이용 시간 표시는 브라우저의 이용권 상태에 따라 생성됩니다. 원본 base.js의 formatRemainingTime에서 문구를 확인했습니다.",
+    "kind": "dynamic"
+  },
+  {
+    "file": "offer_shared.json",
+    "source": "{minutes}分",
+    "selector": "#premium-remaining-time",
+    "url": "https://yukicoder.me/offer",
+    "evidenceUrl": "https://yukicoder.me/public/js/base.js",
+    "state": "남은 이용 시간 표시는 브라우저의 이용권 상태에 따라 생성됩니다. 원본 base.js의 formatRemainingTime에서 문구를 확인했습니다.",
+    "kind": "dynamic"
+  },
+  {
+    "file": "shared.json",
+    "source": "コピーしました",
+    "selector": ".noty_body",
+    "url": "https://yukicoder.me/",
+    "evidenceUrl": "https://yukicoder.me/public/js/base.js",
+    "state": "공통 알림·로그인 UI입니다. 복사, 로그인/등록 실패, 통신 실패 또는 질문 갱신이 발생할 때 원본 base.js에서 생성됩니다. 오류를 일으키거나 계정 작업을 수행하지 않았습니다.",
+    "kind": "dynamic"
+  },
+  {
+    "file": "shared.json",
+    "source": "コピー",
+    "selector": ".noty-copy-btn",
+    "url": "https://yukicoder.me/",
+    "evidenceUrl": "https://yukicoder.me/public/js/base.js",
+    "state": "공통 알림·로그인 UI입니다. 복사, 로그인/등록 실패, 통신 실패 또는 질문 갱신이 발생할 때 원본 base.js에서 생성됩니다. 오류를 일으키거나 계정 작업을 수행하지 않았습니다.",
+    "kind": "dynamic"
+  },
+  {
+    "file": "shared.json",
+    "source": "ログイン",
+    "selector": ".custom-anony-popover .popover-header",
+    "url": "https://yukicoder.me/",
+    "evidenceUrl": "https://yukicoder.me/public/js/base.js",
+    "state": "공통 알림·로그인 UI입니다. 복사, 로그인/등록 실패, 통신 실패 또는 질문 갱신이 발생할 때 원본 base.js에서 생성됩니다. 오류를 일으키거나 계정 작업을 수행하지 않았습니다.",
+    "kind": "dynamic"
+  },
+  {
+    "file": "shared.json",
+    "source": "ログインに失敗しました",
+    "selector": ".noty_body",
+    "url": "https://yukicoder.me/",
+    "evidenceUrl": "https://yukicoder.me/public/js/base.js",
+    "state": "공통 알림·로그인 UI입니다. 복사, 로그인/등록 실패, 통신 실패 또는 질문 갱신이 발생할 때 원본 base.js에서 생성됩니다. 오류를 일으키거나 계정 작업을 수행하지 않았습니다.",
+    "kind": "dynamic"
+  },
+  {
+    "file": "shared.json",
+    "source": "登録に失敗しました",
+    "selector": ".noty_body",
+    "url": "https://yukicoder.me/",
+    "evidenceUrl": "https://yukicoder.me/public/js/base.js",
+    "state": "공통 알림·로그인 UI입니다. 복사, 로그인/등록 실패, 통신 실패 또는 질문 갱신이 발생할 때 원본 base.js에서 생성됩니다. 오류를 일으키거나 계정 작업을 수행하지 않았습니다.",
+    "kind": "dynamic"
+  },
+  {
+    "file": "shared.json",
+    "source": "通信エラーが発生しました",
+    "selector": ".noty_body",
+    "url": "https://yukicoder.me/",
+    "evidenceUrl": "https://yukicoder.me/public/js/base.js",
+    "state": "공통 알림·로그인 UI입니다. 복사, 로그인/등록 실패, 통신 실패 또는 질문 갱신이 발생할 때 원본 base.js에서 생성됩니다. 오류를 일으키거나 계정 작업을 수행하지 않았습니다.",
+    "kind": "dynamic"
+  },
+  {
+    "file": "shared.json",
+    "source": "リクエストに失敗しました",
+    "selector": ".noty_body",
+    "url": "https://yukicoder.me/",
+    "evidenceUrl": "https://yukicoder.me/public/js/base.js",
+    "state": "공통 알림·로그인 UI입니다. 복사, 로그인/등록 실패, 통신 실패 또는 질문 갱신이 발생할 때 원본 base.js에서 생성됩니다. 오류를 일으키거나 계정 작업을 수행하지 않았습니다.",
+    "kind": "dynamic"
+  },
+  {
+    "file": "shared.json",
+    "source": "削除に失敗しました",
+    "selector": ".noty_body",
+    "url": "https://yukicoder.me/",
+    "evidenceUrl": "https://yukicoder.me/public/js/base.js",
+    "state": "공통 알림·로그인 UI입니다. 복사, 로그인/등록 실패, 통신 실패 또는 질문 갱신이 발생할 때 원본 base.js에서 생성됩니다. 오류를 일으키거나 계정 작업을 수행하지 않았습니다.",
+    "kind": "dynamic"
+  },
+  {
+    "file": "shared.json",
+    "source": "質問 {count}",
+    "selector": "#clarification_notification_count",
+    "url": "https://yukicoder.me/",
+    "evidenceUrl": "https://yukicoder.me/public/js/base.js",
+    "state": "공통 알림·로그인 UI입니다. 복사, 로그인/등록 실패, 통신 실패 또는 질문 갱신이 발생할 때 원본 base.js에서 생성됩니다. 오류를 일으키거나 계정 작업을 수행하지 않았습니다.",
+    "kind": "dynamic"
+  },
+  {
+    "file": "shared.json",
+    "source": "[質問回答が更新されました] {rest}",
+    "selector": ".noty_body",
+    "url": "https://yukicoder.me/",
+    "evidenceUrl": "https://yukicoder.me/public/js/base.js",
+    "state": "공통 알림·로그인 UI입니다. 복사, 로그인/등록 실패, 통신 실패 또는 질문 갱신이 발생할 때 원본 base.js에서 생성됩니다. 오류를 일으키거나 계정 작업을 수행하지 않았습니다.",
+    "kind": "dynamic"
+  },
+  {
+    "file": "shared.json",
+    "source": "ごめんなさい！",
+    "selector": "#content .badge",
+    "url": "https://yukicoder.me/submissions",
+    "evidenceUrl": "https://yukicoder.me/public/js/base.js",
+    "state": "4월 1일에 IE·WJ 판정 배지가 변환되는 문구입니다. 원본 코드에서 확인했지만 현재 공개 제출 목록에 이 판정의 행이 없어 일치하는 화면은 확보하지 못했습니다.",
+    "kind": "dynamic"
+  },
+  {
+    "file": "shared.json",
+    "source": "ちょっと待ってね！",
+    "selector": "#content .badge",
+    "url": "https://yukicoder.me/submissions",
+    "evidenceUrl": "https://yukicoder.me/public/js/base.js",
+    "state": "4월 1일에 IE·WJ 판정 배지가 변환되는 문구입니다. 원본 코드에서 확인했지만 현재 공개 제출 목록에 이 판정의 행이 없어 일치하는 화면은 확보하지 못했습니다.",
+    "kind": "dynamic"
+  },
+  {
+    "file": "user.json",
+    "source": "ユーザーID",
+    "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "（ログイン時に必要）",
+    "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "（変更は運営に連絡）",
+    "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "ユーザー表示名",
+    "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "パスワード",
+    "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "パスワード{spacing}（確認）",
+    "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "半角英数字8文字以上 空白なら変更なし",
+    "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "パスワード紛失時は、運営にDMやメールしてください。",
+    "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "デフォルト言語",
+    "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "スマートサブミット",
+    "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "ショートカットキー",
+    "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "有効",
+    "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "言語認識モード",
+    "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "コードの先頭で",
+    "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "を抽出して提出します",
+    "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "使い方",
+    "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "変更",
+    "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "ユーザー情報の変更",
+    "selector": "#content :is(h3,h4)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "非公開問題",
+    "selector": "#summary .left",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "画像の変更(png, jpg)",
+    "selector": "#content :is(div,p,span,small,a,label)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "紐付いているログインサービスから",
+    "selector": "#content :is(div,p,span,small,a,label)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "使用する画像を選ぶ",
+    "selector": "#content :is(div,p,span,small,a,label)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "他のログインサービスの追加",
+    "selector": "#content :is(div,p,span,small,a,label)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "他のアカウントで使っているログインと連携すると、今のアカウントに提出などがマージされます。",
+    "selector": "#content :is(div,p,span,small,a,label)",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "user.json",
+    "source": "変更",
+    "selector": "#content form.user_profile input[type=\"submit\"]",
+    "url": "https://yukicoder.me/users/15798",
+    "evidenceUrl": "https://yukicoder.me/public/js/user.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "problem.json",
+    "source": "の難易度を基準に選択してください。",
+    "selector": "#content .problem-header-cols :is(div, p, span, label)",
+    "url": "https://yukicoder.me/problems/no/1",
+    "evidenceUrl": "https://yukicoder.me/public/js/problems.show.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "problem.json",
+    "source": "未選択",
+    "selector": "#level_suggest option",
+    "url": "https://yukicoder.me/problems/no/1",
+    "evidenceUrl": "https://yukicoder.me/public/js/problems.show.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "problem.json",
+    "source": "現在と同意見",
+    "selector": "#problem_level_suggestion_same",
+    "url": "https://yukicoder.me/problems/no/1",
+    "evidenceUrl": "https://yukicoder.me/public/js/problems.show.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "problem.json",
+    "source": "タグ :",
+    "selector": "#content .problem-header-cols :is(div, span)",
+    "url": "https://yukicoder.me/problems/no/1",
+    "evidenceUrl": "https://yukicoder.me/public/js/problems.show.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "problem.json",
+    "source": "解いた言語{spacing}:",
+    "selector": "#content .problem-header-cols :is(div, span)",
+    "url": "https://yukicoder.me/problems/no/1",
+    "evidenceUrl": "https://yukicoder.me/public/js/problems.show.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "problem.json",
+    "source": "solved",
+    "selector": "#content .problem-header-cols :is(div, span, a)",
+    "url": "https://yukicoder.me/problems/no/1",
+    "evidenceUrl": "https://yukicoder.me/public/js/problems.show.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  },
+  {
+    "file": "problem.json",
+    "source": "動的計画法",
+    "selector": "#tag_text a",
+    "url": "https://yukicoder.me/problems/no/1",
+    "evidenceUrl": "https://yukicoder.me/public/js/problems.show.js",
+    "kind": "dynamic",
+    "state": "로그인 상태에 따라 표시되는 UI입니다. 사용자가 제공한 화면과 공개 UI 스크립트를 기준으로 추가했으며, 로그인한 실제 페이지 HTML은 저장하지 않았습니다."
+  }
+]

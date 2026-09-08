@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  font:
+    15px system-ui,
+    sans-serif;
+  color: #222;
+}
+main {
+  max-width: 1000px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+button,
+select {
+  margin: 6px;
+  padding: 5px;
+}
+article {
+  border: 1px solid #ddd;
+  margin: 8px 0;
+  padding: 8px;
+}
+code {
+  white-space: pre-wrap;
+}
+iframe {
+  width: 100%;
+  min-height: 280px;
+  border: 1px solid #ccc;
+}

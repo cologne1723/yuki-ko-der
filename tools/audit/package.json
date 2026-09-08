@@ -1,0 +1,41 @@
+{
+  "name": "translation-audit",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "audit:translations": "node --import tsx src/audit-translations.ts",
+    "build:problems": "node --import tsx src/build-problem-translations.ts",
+    "convert:problem": "node --import tsx src/convert-problem-html-to-mdx.ts",
+    "validate:problems": "node --import tsx src/validate-problem-translations.ts",
+    "lint:problems": "node --import tsx src/lint-problem-html.ts",
+    "verify:problems": "node --import tsx src/validate-problem-translations.ts --verify-source",
+    "download:problems": "node --import tsx src/download-problem-corpus.ts",
+    "audit:ui-pages": "node --import tsx src/audit-ui-pages.ts",
+    "download:ui-pages": "node --import tsx src/download-ui-pages.ts",
+    "audit:ui-contexts": "node --import tsx src/audit-ui-contexts.ts",
+    "validate:ui": "node --import tsx src/validate-ui-catalog.ts",
+    "setup": "node --import tsx src/setup.ts",
+    "test": "node --import tsx --test test/*.test.ts",
+    "audit:problems": "node --import tsx src/audit-problems.ts"
+  },
+  "devDependencies": {
+    "@codemirror/lang-html": "^6.4.0",
+    "jsdom": "^27.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0",
+    "@types/node": "^24.0.0",
+    "@types/jsdom": "^27.0.0",
+    "@types/turndown": "^5.0.5"
+  },
+  "dependencies": {
+    "translation-core": "workspace:*",
+    "turndown": "^7.2.0",
+    "markdown-it": "^15.0.1"
+  },
+  "exports": {
+    "./*": "./src/*.ts"
+  }
+}

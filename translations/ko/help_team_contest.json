@@ -5,801 +5,706 @@
   "translations": [
     {
       "selector": "#content h3",
-      "source": "チーム戦の参加方法",
-      "target": "📝 팀전 참가 방법"
+      "ref": "ui_017304f13c0d1b59"
     },
     {
       "selector": "#content h4",
-      "source": "チームを作る人（リーダー）の手順",
-      "target": "📝 팀을 만드는 사람(리더)의 절차"
+      "ref": "ui_734440dbd9e3c188"
     },
     {
       "selector": "#content h4",
-      "source": "招待された人（メンバー）の手順",
-      "target": "📝 초대받은 사람(멤버)의 절차"
+      "ref": "ui_f8e7e4033fdb12f7"
     },
     {
       "selector": "#content h4",
-      "source": "コンテストが始まってから",
-      "target": "📝 대회 시작 후"
+      "ref": "ui_14ee0e08fa698168"
     },
     {
       "selector": "#content h4",
-      "source": "成績の付き方",
-      "target": "📝 성적 산정 방식"
+      "ref": "ui_ab1bbaf20ecdf797"
     },
     {
       "selector": "#content h4",
-      "source": "困ったとき",
-      "target": "📝 문제가 생겼을 때"
+      "ref": "ui_d3a28b3f67154ce3"
     },
     {
       "selector": "#content label",
-      "source": "新しいチームを作る:",
-      "target": "📝 새 팀 만들기:"
+      "ref": "ui_35819a13e2336ded"
     },
     {
       "selector": "#content label",
-      "source": "招待コードで参加:",
-      "target": "📝 초대 코드로 참가:"
-    },
-    { "selector": "#content th", "source": "チーム名", "target": "📝 팀명" },
-    { "selector": "#content th", "source": "メンバー", "target": "📝 멤버" },
-    { "selector": "#content th", "source": "操作", "target": "📝 작업" },
-    { "selector": "#content th", "source": "参加者", "target": "📝 참가자" },
-    {
-      "selector": "#content th",
-      "source": "順位表から分かること",
-      "target": "📝 순위표에서 알 수 있는 것"
+      "ref": "ui_18e3ec5bb035d507"
     },
     {
       "selector": "#content th",
-      "source": "順位表から分からないこと",
-      "target": "📝 순위표에서 알 수 없는 것"
+      "ref": "ui_795f116779a30330"
     },
     {
       "selector": "#content th",
-      "source": "まだ提出していない",
-      "target": "📝 아직 제출하지 않음"
+      "ref": "ui_5d59cdb512762e81"
     },
     {
       "selector": "#content th",
-      "source": "もう提出した",
-      "target": "📝 이미 제출함"
+      "ref": "ui_a93cb0680c5d21af"
     },
     {
       "selector": "#content th",
-      "source": "コンテストが終わった後",
-      "target": "📝 대회 종료 후"
+      "ref": "ui_15b68b5057f66d0c"
     },
     {
       "selector": "#content th",
-      "source": "問題ごとの得点",
-      "target": "📝 문제별 점수"
+      "ref": "ui_091e1a405f89b0a5"
     },
     {
       "selector": "#content th",
-      "source": "正解の時刻",
-      "target": "📝 정답 시각"
-    },
-    { "selector": "#content th", "source": "不正解", "target": "📝 오답" },
-    {
-      "selector": "#content th",
-      "source": "順位表の表示",
-      "target": "📝 순위표 표시"
+      "ref": "ui_50bc7f57d2c77684"
     },
     {
       "selector": "#content th",
-      "source": "チームに入らない人",
-      "target": "📝 팀에 가입하지 않은 사람"
-    },
-    { "selector": "#content th", "source": "自分の行", "target": "📝 내 행" },
-    {
-      "selector": "#content p",
-      "source": "「チーム参加」が有効なコンテストでは、何人かでチームを組んで参加できます。 順位表では",
-      "target": "📝 '팀 참가'가 활성화된 대회에서는 여러 명이 팀을 이루어 참가할 수 있습니다. 순위표에서는"
+      "ref": "ui_619d4b100e3a8d8c"
     },
     {
-      "selector": "#content b",
-      "source": "チーム全体で1人の参加者",
-      "target": "📝 팀 전체가 한 명의 참가자"
+      "selector": "#content th",
+      "ref": "ui_258ea3539a98e7f5"
+    },
+    {
+      "selector": "#content th",
+      "ref": "ui_e5bebeea81552b76"
+    },
+    {
+      "selector": "#content th",
+      "ref": "ui_a4d56425683d7795"
+    },
+    {
+      "selector": "#content th",
+      "ref": "ui_dcec19a75459db52"
+    },
+    {
+      "selector": "#content th",
+      "ref": "ui_07907ac4fae0f116"
+    },
+    {
+      "selector": "#content th",
+      "ref": "ui_bb60f37c4a68984a"
+    },
+    {
+      "selector": "#content th",
+      "ref": "ui_05b51d6bfaf8a970"
+    },
+    {
+      "selector": "#content th",
+      "ref": "ui_0bf2df94c6e9a768"
     },
     {
       "selector": "#content p",
-      "source": "として扱われます。",
-      "target": "📝 로 취급됩니다."
+      "ref": "ui_636592ed003dbb4d"
     },
     {
       "selector": "#content b",
-      "source": "先に提出してしまうと、チームに参加できなくなります。",
-      "target": "📝 먼저 제출하면 팀에 참가할 수 없습니다."
+      "ref": "ui_4638a60cdf79736e"
+    },
+    {
+      "selector": "#content p",
+      "ref": "ui_f87d6794f79e4c53"
+    },
+    {
+      "selector": "#content b",
+      "ref": "ui_f6ae99f510d0f345"
     },
     {
       "selector": "#content .tg-warn",
-      "source": "個人として出した提出が、後からチームの成績に変わってしまうのを防ぐためです。",
-      "target": "📝 개인으로 제출한 결과가 나중에 팀 성적으로 바뀌는 것을 방지하기 위해서입니다."
+      "ref": "ui_dbc4aa51de71dcd4"
     },
     {
       "selector": "#content b",
-      "source": "提出する前にチームを決めてください。",
-      "target": "📝 제출하기 전에 팀을 정해 주세요."
+      "ref": "ui_97825b1e471bce0d"
     },
     {
       "selector": "#content a",
-      "source": "チームを作る人（リーダー）の手順",
-      "target": "📝 팀을 만드는 사람(리더)의 절차"
+      "ref": "ui_734440dbd9e3c188"
     },
     {
       "selector": "#content a",
-      "source": "招待された人（メンバー）の手順",
-      "target": "📝 초대받은 사람(멤버)의 절차"
+      "ref": "ui_f8e7e4033fdb12f7",
+      "variant": 0
     },
     {
       "selector": "#content a",
-      "source": "コンテストが始まってから",
-      "target": "📝 대회 시작 후"
+      "ref": "ui_14ee0e08fa698168",
+      "variant": 0
     },
     {
       "selector": "#content a",
-      "source": "成績の付き方",
-      "target": "📝 성적 산정 방식"
+      "ref": "ui_ab1bbaf20ecdf797",
+      "variant": 0
     },
     {
       "selector": "#content a",
-      "source": "困ったとき",
-      "target": "📝 문제가 생겼을 때"
+      "ref": "ui_d3a28b3f67154ce3",
+      "variant": 0
     },
     {
       "selector": "#content .tg-head",
-      "source": "コンテストのページで「チーム参加はこちら」を押す",
-      "target": "📝 대회 페이지에서 '팀 참가' 누르기"
+      "ref": "ui_7fcfa768ca08459c"
     },
     {
       "selector": "#content p",
-      "source": "チーム参加のコンテストには、概要ページに案内が出ています。",
-      "target": "📝 팀 참가 대회는 개요 페이지에 안내가 표시됩니다."
+      "ref": "ui_742d8264a1820ba0"
     },
     {
       "selector": "#content .tg-cap",
-      "source": "コンテストの概要ページ",
-      "target": "📝 대회 개요 페이지"
+      "ref": "ui_b0a621833e0375a6"
     },
     {
       "selector": "#content b",
-      "source": "このコンテストはチーム参加です。",
-      "target": "📝 이 대회는 팀 참가 대회입니다."
+      "ref": "ui_69c14ec16c6be356",
+      "variant": 0
     },
     {
       "selector": "#content .tg-alert",
-      "source": "順位表ではチーム全体で1人の参加者として扱います。",
-      "target": "📝 순위표에서는 팀 전체를 한 명의 참가자로 취급합니다."
+      "ref": "ui_22eb815cf3ac6cd4",
+      "variant": 0
     },
     {
       "selector": "#content .tg-alert",
-      "source": "チームに入るには招待コードが必要です。",
-      "target": "📝 팀에 가입하려면 초대 코드가 필요합니다."
+      "ref": "ui_912839db5f24000a"
     },
     {
       "selector": "#content b",
-      "source": "先に提出してしまうとチームに参加できなくなる",
-      "target": "📝 먼저 제출하면 팀에 참가할 수 없으므로"
+      "ref": "ui_a43450af9a2cd4c8"
     },
     {
       "selector": "#content .tg-alert",
-      "source": "ので、提出前にチームを決めてください。",
-      "target": "📝 제출 전에 팀을 정해 주세요."
+      "ref": "ui_8ea0bbbf784a0483",
+      "variant": 0
     },
     {
       "selector": "#content .tg-btn",
-      "source": "チーム参加はこちら",
-      "target": "📝 팀 참가"
+      "ref": "ui_6bf0d2a7a1eaf33e",
+      "variant": 0
     },
     {
       "selector": "#content .tg-head",
-      "source": "チーム名を入れて「作成」を押す",
-      "target": "📝 팀명을 입력하고 '만들기' 누르기"
+      "ref": "ui_7f2d0cc5f66a7e34"
     },
     {
       "selector": "#content p",
-      "source": "まだどのチームにも入っていないときだけ、この欄が出ます。",
-      "target": "📝 아직 어떤 팀에도 가입하지 않았을 때만 이 항목이 표시됩니다."
+      "ref": "ui_f48055d1e07206ae"
     },
     {
       "selector": "#content .tg-cap",
-      "source": "チームのページ",
-      "target": "📝 팀 페이지"
+      "ref": "ui_ef07c7401c72cf55"
     },
     {
       "selector": "#content .tg-input",
-      "source": "チームさくら",
-      "target": "📝 팀 사쿠라"
+      "ref": "ui_b618d22250c52902",
+      "variant": 0
     },
-    { "selector": "#content .tg-btn", "source": "作成", "target": "📝 만들기" },
+    {
+      "selector": "#content .tg-btn",
+      "ref": "ui_22214d8a96b46d20"
+    },
     {
       "selector": "#content .tg-input",
-      "source": "招待コード",
-      "target": "📝 초대 코드"
+      "ref": "ui_da37507bd8c12810"
     },
-    { "selector": "#content .tg-btn", "source": "参加", "target": "📝 참가" },
+    {
+      "selector": "#content .tg-btn",
+      "ref": "ui_f7315af16bae27c0"
+    },
     {
       "selector": "#content .tg-note",
-      "source": "作った人がそのチームの",
-      "target": "📝 팀을 만든 사람이 해당 팀의"
-    },
-    { "selector": "#content b", "source": "作成者", "target": "📝 생성자" },
-    {
-      "selector": "#content .tg-note",
-      "source": "になります。作成者だけが、招待URLの再発行・名前の変更・メンバーを外す・解散をできます。",
-      "target": "📝 가 됩니다. 생성자만 초대 URL 재발급, 이름 변경, 멤버 제외 및 해산을 할 수 있습니다."
-    },
-    {
-      "selector": "#content .tg-head",
-      "source": "招待URLをコピーして、仲間に直接送る",
-      "target": "📝 초대 URL을 복사해 팀원에게 직접 보내기"
-    },
-    {
-      "selector": "#content p",
-      "source": "チームを作ると「あなたのチーム」の枠が出ます。ここに",
-      "target": "📝 팀을 만들면 '내 팀' 영역이 표시됩니다. 여기에"
-    },
-    { "selector": "#content b", "source": "招待URL", "target": "📝 초대 URL" },
-    {
-      "selector": "#content p",
-      "source": "があります。",
-      "target": "📝 이 있습니다."
-    },
-    {
-      "selector": "#content .tg-cap",
-      "source": "自分のチームの枠",
-      "target": "📝 내 팀 영역"
+      "ref": "ui_14f7eb6d31995c15"
     },
     {
       "selector": "#content b",
-      "source": "あなたのチーム: チームさくら",
-      "target": "📝 내 팀: 팀 사쿠라"
+      "ref": "ui_cd1dee46e4d56d6b"
+    },
+    {
+      "selector": "#content .tg-note",
+      "ref": "ui_3559eac497f2d91c"
+    },
+    {
+      "selector": "#content .tg-head",
+      "ref": "ui_0f4720f88724c70a"
+    },
+    {
+      "selector": "#content p",
+      "ref": "ui_4be055a49111737a"
+    },
+    {
+      "selector": "#content b",
+      "ref": "ui_1ac1906b799d74cf"
+    },
+    {
+      "selector": "#content p",
+      "ref": "ui_b39e28a9853d539f"
+    },
+    {
+      "selector": "#content .tg-cap",
+      "ref": "ui_4657166c6676943d"
+    },
+    {
+      "selector": "#content b",
+      "ref": "ui_e07b5ab59b50c9b9"
     },
     {
       "selector": "#content .tg-sub",
-      "source": "招待URL（このコードを知っている人だけが参加できます）",
-      "target": "📝 초대 URL(이 코드를 아는 사람만 참가할 수 있습니다)"
-    },
-    { "selector": "#content .tg-btn", "source": "コピー", "target": "📝 복사" },
-    {
-      "selector": "#content .tg-note",
-      "source": "DMなど、当人にだけ届く方法で伝えてください。不特定多数が見えるところには出さないでください。",
-      "target": "📝 DM처럼 당사자에게만 전달되는 방법으로 알려 주세요. 불특정 다수가 볼 수 있는 곳에 게시하지 마세요."
-    },
-    {
-      "selector": "#content .tg-note",
-      "source": "再度発行すると、過去のURLは無効になります。",
-      "target": "📝 다시 발급하면 이전 URL은 무효가 됩니다."
+      "ref": "ui_bcdcfc8e1f08d71a"
     },
     {
       "selector": "#content .tg-btn",
-      "source": "招待URLを再発行",
-      "target": "📝 초대 URL 재발급"
+      "ref": "ui_c70ac6b9e1b9faab"
+    },
+    {
+      "selector": "#content .tg-note",
+      "ref": "ui_805088144e06051a"
+    },
+    {
+      "selector": "#content .tg-note",
+      "ref": "ui_40c800778dcc2765"
     },
     {
       "selector": "#content .tg-btn",
-      "source": "名前を変更",
-      "target": "📝 이름 변경"
+      "ref": "ui_4e6b6f947e7eb894"
     },
-    { "selector": "#content .tg-btn", "source": "解散", "target": "📝 해산" },
+    {
+      "selector": "#content .tg-btn",
+      "ref": "ui_b61f706de3050299"
+    },
+    {
+      "selector": "#content .tg-btn",
+      "ref": "ui_490ce8df8a112851"
+    },
     {
       "selector": "#content .tg-warn",
-      "source": "招待URLを知っている人は誰でもチームに入れます。",
-      "target": "📝 초대 URL을 아는 사람은 누구나 팀에 가입할 수 있습니다."
+      "ref": "ui_8db463d615cea107"
     },
     {
       "selector": "#content b",
-      "source": "X（Twitter）や掲示板など、不特定多数が見えるところに貼らないでください。",
-      "target": "📝 X(Twitter)나 게시판처럼 불특정 다수가 볼 수 있는 곳에 게시하지 마세요."
+      "ref": "ui_0799982f0a1070f4"
     },
     {
       "selector": "#content .tg-head",
-      "source": "（必要なら）メンバーを外す・チーム名を変える・解散する",
-      "target": "📝 (필요한 경우) 멤버 제외·팀명 변경·해산"
+      "ref": "ui_186b4f6be6abe022"
     },
     {
       "selector": "#content p",
-      "source": "作成者には、メンバーの名前の横に「外す」が出ます。",
-      "target": "📝 생성자에게는 멤버 이름 옆에 '제외'가 표시됩니다."
+      "ref": "ui_6a4567bebdb3e84c"
     },
     {
       "selector": "#content .tg-cap",
-      "source": "チーム一覧（作成者から見たところ）",
-      "target": "📝 팀 목록(생성자 화면)"
+      "ref": "ui_079a97a37e37f41b"
     },
     {
       "selector": "#content td",
-      "source": "チームさくら",
-      "target": "📝 팀 사쿠라"
+      "ref": "ui_b618d22250c52902",
+      "variant": 0
     },
     {
       "selector": "#content .tg-user",
-      "source": "Alice（作成者）",
-      "target": "📝 Alice(생성자)"
+      "ref": "ui_f62dcdd1001c34dc"
     },
-    { "selector": "#content .tg-btn", "source": "外す", "target": "📝 제외" },
+    {
+      "selector": "#content .tg-btn",
+      "ref": "ui_da5143fbaadc6abe"
+    },
     {
       "selector": "#content .tg-muted",
-      "source": "（{current}/{limit}人）",
-      "target": "📝 ({current}/{limit}명)",
-      "variables": { "current": "\\d+", "limit": "\\d+" }
+      "ref": "ui_9e2ef921c03af086"
     },
-    { "selector": "#content .tg-btn", "source": "脱退", "target": "📝 탈퇴" },
+    {
+      "selector": "#content .tg-btn",
+      "ref": "ui_703892a85ad269f0"
+    },
     {
       "selector": "#content .tg-note",
-      "source": "外す相手・解散するチームのメンバーに",
-      "target": "📝 제외할 사람 또는 해산할 팀의 멤버에게"
+      "ref": "ui_67e97bdd88d282c1"
     },
     {
       "selector": "#content b",
-      "source": "すでに提出がある場合はできません",
-      "target": "📝 이미 제출 기록이 있으면 실행할 수 없습니다"
+      "ref": "ui_212da91cbf3f662b"
     },
     {
       "selector": "#content .tg-note",
-      "source": "。 成績の帰属が決められなくなるためです。",
-      "target": "📝 . 성적의 귀속을 결정할 수 없기 때문입니다."
+      "ref": "ui_84005b6c1f3d876b"
     },
     {
       "selector": "#content .tg-head",
-      "source": "届いた招待URLを開く",
-      "target": "📝 받은 초대 URL 열기"
+      "ref": "ui_8625bcb2ee097855"
     },
     {
       "selector": "#content p",
-      "source": "URLを開いただけでは参加になりません。確認のページが出ます。",
-      "target": "📝 URL을 여는 것만으로는 참가되지 않습니다. 확인 페이지가 표시됩니다."
+      "ref": "ui_c6984d343769735b"
     },
     {
       "selector": "#content b",
-      "source": "まだそのコンテストの問題に提出していないこと",
-      "target": "📝 아직 해당 대회의 문제에 제출하지 않았는지"
+      "ref": "ui_71cd0951d8aee050"
     },
     {
       "selector": "#content p",
-      "source": "を確かめてから開いてください。",
-      "target": "📝 를 확인한 뒤 열어 주세요."
+      "ref": "ui_152a0d28d82f6bbf"
     },
     {
       "selector": "#content .tg-cap",
-      "source": "招待URLを開いたところ",
-      "target": "📝 초대 URL을 연 화면"
+      "ref": "ui_7deb4fccf238db0b"
     },
     {
       "selector": "#content .tg-invite-title",
-      "source": "チーム",
-      "target": "📝 팀 "
+      "ref": "ui_ce6d526c6524e026",
+      "variant": 0
     },
     {
       "selector": "#content b",
-      "source": "チームさくら",
-      "target": "📝 팀 사쿠라"
+      "ref": "ui_b618d22250c52902"
     },
     {
       "selector": "#content .tg-invite-title",
-      "source": "に参加しますか？",
-      "target": "📝 에 참가하시겠습니까?"
+      "ref": "ui_d4a4d79d656e3c12"
     },
     {
       "selector": "#content .tg-muted",
-      "source": "現在 {current} 人 / 上限 {limit} 人",
-      "target": "📝 현재 {current}명/정원 {limit}명",
-      "variables": { "current": "\\d+", "limit": "\\d+" }
+      "ref": "ui_e90ae908ca8db172"
     },
     {
       "selector": "#content .tg-note",
-      "source": "参加すると、このコンテストでは",
-      "target": "📝 참가하면 이 대회에서는 "
+      "ref": "ui_ff70198e2289e65b"
     },
     {
       "selector": "#content .tg-note",
-      "source": "として順位表に載ります。 不正解はメンバー全員分が合算されます。",
-      "target": "📝 (으)로 순위표에 표시됩니다. 오답 횟수는 모든 멤버의 횟수를 합산합니다."
+      "ref": "ui_be69f6893c6cb401"
     },
     {
       "selector": "#content b",
-      "source": "一度提出すると脱退できなくなります。",
-      "target": "📝 한 번 제출하면 탈퇴할 수 없습니다."
+      "ref": "ui_b431bc1df068ea48"
     },
     {
       "selector": "#content .tg-btn.tg-primary.tg-mark",
-      "source": "参加する",
-      "target": "📝 참가하기"
+      "ref": "ui_3524061683fc4ca3"
     },
     {
       "selector": "#content .tg-link",
-      "source": "やめる",
-      "target": "📝 취소"
+      "ref": "ui_99f723f4e7b59da1"
     },
     {
       "selector": "#content .tg-head",
-      "source": "「参加する」を押す",
-      "target": "📝 '참가하기' 누르기"
+      "ref": "ui_f726583115a9abba"
     },
     {
       "selector": "#content p",
-      "source": "これでチームのメンバーになります。チームのページに自分の名前が出ます。",
-      "target": "📝 이제 팀 멤버가 됩니다. 팀 페이지에 내 이름이 표시됩니다."
+      "ref": "ui_6a7bfeabfc346d3e"
     },
     {
       "selector": "#content .tg-cap",
-      "source": "参加した後のチーム一覧",
-      "target": "📝 참가 후 팀 목록"
+      "ref": "ui_246bfa2afe6265fb"
     },
     {
       "selector": "#content p.tg-note",
-      "source": "招待URLが手元に無いときは、チームのページの「招待コードで参加」欄に、URLの末尾のコード（例:",
-      "target": "📝 초대 URL이 없다면 팀 페이지의 '초대 코드로 참가' 칸에 URL 끝의 코드(예:"
+      "ref": "ui_f8378fb9aa20081b"
     },
     {
       "selector": "#content p.tg-note",
-      "source": "）を入れても参加できます。",
-      "target": "📝 )를 입력해도 참가할 수 있습니다."
+      "ref": "ui_d09bbb18046b9cfb"
     },
     {
       "selector": "#content .tg-head",
-      "source": "提出はいつもどおり、自分のアカウントから",
-      "target": "📝 제출은 평소처럼 내 계정에서"
+      "ref": "ui_94beb1209217d3c4"
     },
     {
       "selector": "#content p",
-      "source": "チーム専用の提出画面はありません。",
-      "target": "📝 팀 전용 제출 화면은 없습니다."
+      "ref": "ui_fc1fec4e01b8348c"
     },
     {
       "selector": "#content b",
-      "source": "提出のしかたは個人参加のときと何も変わりません。",
-      "target": "📝 제출 방법은 개인 참가 때와 완전히 같습니다."
+      "ref": "ui_6fc8628ce8f33ae3"
     },
     {
       "selector": "#content p",
-      "source": "メンバーの誰が出しても、順位表ではチームの結果としてまとめられます。",
-      "target": "📝 어느 멤버가 제출하더라도 순위표에는 팀 결과로 합쳐집니다."
+      "ref": "ui_fce2fc2f707a914c"
     },
     {
       "selector": "#content p.tg-note",
-      "source": "提出一覧・自分の提出・質問（clar）は",
-      "target": "📝 제출 목록·내 제출·질문(clar)은 "
+      "ref": "ui_5f630fdfbb4a6808"
     },
     {
       "selector": "#content b",
-      "source": "これまでどおり個人単位",
-      "target": "📝 기존과 마찬가지로 개인 단위"
+      "ref": "ui_dae176db332c639d"
     },
     {
       "selector": "#content p.tg-note",
-      "source": "です。 チームでまとまるのは順位表だけです。",
-      "target": "📝 입니다. 팀 단위로 합쳐지는 것은 순위표뿐입니다."
+      "ref": "ui_7bd7d30e201ec2dc"
     },
     {
       "selector": "#content .tg-head",
-      "source": "順位表ではチーム名の1行になる",
-      "target": "📝 순위표에서는 팀명으로 한 행에 표시"
+      "ref": "ui_c0e672f0c2a9c9b2"
     },
     {
       "selector": "#content p",
-      "source": "チーム名が大きく出て、その下にメンバーのアイコンが並びます。アイコンにマウスを乗せると名前が出ます。自分が入っているチームの行は",
-      "target": "📝 팀명이 크게 표시되고 그 아래에 멤버 아이콘이 나열됩니다. 아이콘에 마우스를 올리면 이름이 표시됩니다. 내가 속한 팀의 행은 "
+      "ref": "ui_ebaf22f171f6f685"
     },
     {
       "selector": "#content b",
-      "source": "自分の行として強調表示",
-      "target": "📝 내 행으로 강조 표시"
+      "ref": "ui_70b651a868e79520"
     },
     {
       "selector": "#content p",
-      "source": "されます。",
-      "target": "📝 됩니다."
+      "ref": "ui_5531929c23a373ee"
     },
     {
       "selector": "#content .tg-cap",
-      "source": "順位表（チームと個人が混ざっているところ）",
-      "target": "📝 순위표(팀과 개인이 함께 표시되는 부분)"
+      "ref": "ui_98ae00b385c5dbaa"
     },
     {
       "selector": "#content .tg-teamname",
-      "source": "チームさくら",
-      "target": "📝 팀 사쿠라"
+      "ref": "ui_b618d22250c52902"
     },
     {
       "selector": "#content .tg-user",
-      "source": "個人参加のひと",
-      "target": "📝 개인 참가자"
+      "ref": "ui_367ae960e37645d5"
     },
     {
       "selector": "#content p.tg-note",
-      "source": "チームに入っていない参加者は、これまでどおり1人1行のままです。同じ順位表に混ざります。",
-      "target": "📝 팀에 가입하지 않은 참가자는 기존처럼 한 사람당 한 행으로 표시되며 같은 순위표에 함께 나옵니다."
+      "ref": "ui_bf64d2e06192a74c"
     },
     {
       "selector": "#content td",
-      "source": "問題ごとの",
-      "target": "📝 문제별 "
-    },
-    { "selector": "#content b", "source": "得点", "target": "📝 점수" },
-    { "selector": "#content td", "source": "と", "target": "📝 와 " },
-    {
-      "selector": "#content b",
-      "source": "正解時刻",
-      "target": "📝 정답 시각"
-    },
-    {
-      "selector": "#content td",
-      "source": "（チーム内で最良のもの）、",
-      "target": "📝 (팀 내 최선의 결과), "
+      "ref": "ui_1c42a11160745f6f"
     },
     {
       "selector": "#content b",
-      "source": "不正解の回数",
-      "target": "📝 오답 횟수"
+      "ref": "ui_51c39c673e26939c"
     },
     {
       "selector": "#content td",
-      "source": "（メンバー全員の合算）。順位表は自動で更新されます。",
-      "target": "📝 (모든 멤버의 합계)를 표시합니다. 순위표는 자동으로 갱신됩니다."
+      "ref": "ui_8698753ad1e623f0"
     },
     {
       "selector": "#content b",
-      "source": "誰が出したのか",
-      "target": "📝 누가 제출했는지"
+      "ref": "ui_2e80754227d382b6"
     },
     {
       "selector": "#content td",
-      "source": "（メンバー別の内訳は出ません）／",
-      "target": "📝 (멤버별 내역은 표시되지 않음)/"
+      "ref": "ui_002dbad723569533"
     },
     {
       "selector": "#content b",
-      "source": "今どの問題に取り組んでいるか、ジャッジ待ちの提出があるか",
-      "target": "📝 현재 어떤 문제를 풀고 있는지, 채점 대기 중인 제출이 있는지"
+      "ref": "ui_48a5d69bc049258f"
     },
     {
       "selector": "#content td",
-      "source": "／ 最良でない提出（他のメンバーの不正解の中身など）。",
-      "target": "📝 /최선이 아닌 제출(다른 멤버의 오답 내용 등)은 알 수 없습니다."
+      "ref": "ui_c4f5a64a5bfe6328"
+    },
+    {
+      "selector": "#content b",
+      "ref": "ui_28bba5d6be5c8824"
+    },
+    {
+      "selector": "#content td",
+      "ref": "ui_58315dc498adc800"
+    },
+    {
+      "selector": "#content b",
+      "ref": "ui_15db7e5b6f39b9cf"
+    },
+    {
+      "selector": "#content td",
+      "ref": "ui_9b7317097bab06f6"
     },
     {
       "selector": "#content p.tg-note",
-      "source": "メンバー個々の提出は、コンテストの",
-      "target": "📝 각 멤버의 제출은 대회의 "
+      "ref": "ui_efce93bd56b1b4b5"
     },
     {
       "selector": "#content b",
-      "source": "提出一覧",
-      "target": "📝 제출 목록"
+      "ref": "ui_2efde06346c1bf97"
     },
     {
       "selector": "#content p.tg-note",
-      "source": "に個人参加のときと同じように並びます （誰が・どの問題に・何を出して・結果がどうだったか。ジャッジ中のものも出ます）。 これはチーム参加かどうかに関わらず、参加者以外にも見えているものです。 提出一覧の",
-      "target": "📝 에 개인 참가 때와 똑같이 나열됩니다(누가·어떤 문제에·무엇을 제출했고 결과가 어땠는지, 채점 중인 제출도 표시). 이는 팀 참가 여부와 관계없이 참가자가 아닌 사람에게도 공개되는 정보입니다. 제출 목록의 "
+      "ref": "ui_0a39817310352b3b"
     },
     {
       "selector": "#content b",
-      "source": "「自分のチームのみ」",
-      "target": "📝 '내 팀만'"
+      "ref": "ui_ec957822e4a169e1"
     },
     {
       "selector": "#content p.tg-note",
-      "source": "にチェックを入れると、自分のチームのメンバーの提出だけに絞れます。",
-      "target": "📝 을 체크하면 내 팀 멤버의 제출만 볼 수 있습니다."
+      "ref": "ui_2e048b1a9d511e34"
     },
     {
       "selector": "#content b",
-      "source": "担当の分担や進み具合の共有は、yukicoder 以外のサービスを検討してください。",
-      "target": "📝 담당 분배나 진행 상황 공유에는 yukicoder 외의 서비스를 이용해 주세요."
+      "ref": "ui_e35aa6af032b8ef1"
     },
     {
       "selector": "#content .tg-warn",
-      "source": "チーム内で連絡を取る機能はありません。",
-      "target": "📝 팀 내부 연락 기능은 없습니다."
+      "ref": "ui_f2fd57290d50825b"
     },
     {
       "selector": "#content .tg-head",
-      "source": "不正解はメンバー全員分が合算される",
-      "target": "📝 오답은 모든 멤버의 횟수를 합산"
+      "ref": "ui_d539bcc902ff9787"
     },
     {
       "selector": "#content p",
-      "source": "チームのペナルティは、メンバーそれぞれの不正解を足したものです。 3人が同じ問題で1回ずつ間違えると、チームとしては3回分になります。",
-      "target": "📝 팀 페널티는 각 멤버의 오답 횟수를 더한 값입니다. 세 사람이 같은 문제에서 한 번씩 틀리면 팀의 오답은 세 번이 됩니다."
+      "ref": "ui_fd8ed988e23fc37f"
     },
     {
       "selector": "#content .tg-head",
-      "source": "始まった後でもチームには入れる（ただし未提出のうちだけ）",
-      "target": "📝 시작 후에도 팀 참가 가능(단, 제출하기 전까지만)"
+      "ref": "ui_27ab5f27b077589f"
     },
     {
       "selector": "#content td",
-      "source": "コンテスト中でもチームを作る・参加する・脱退するができます。",
-      "target": "📝 대회 중에도 팀을 만들거나 참가하거나 탈퇴할 수 있습니다."
+      "ref": "ui_b30e29f550dd6109"
     },
     {
       "selector": "#content b",
-      "source": "参加も脱退もできません。",
-      "target": "📝 참가와 탈퇴 모두 할 수 없습니다."
+      "ref": "ui_3a142eb0d9adf8d3"
     },
     {
       "selector": "#content td",
-      "source": "個人として出した提出が後からチームの成績に変わってしまうためです。",
-      "target": "📝 개인으로 낸 제출이 나중에 팀 성적으로 바뀌기 때문입니다."
+      "ref": "ui_079ecc12c20203a2"
     },
     {
       "selector": "#content td",
-      "source": "作成・参加・脱退・除名・改名・解散のいずれもできません。順位表が確定しているためです。",
-      "target": "📝 생성·참가·탈퇴·제외·이름 변경·해산을 모두 할 수 없습니다. 순위표가 확정되었기 때문입니다."
+      "ref": "ui_6e83f5c32c24f4a7"
     },
     {
       "selector": "#content p.tg-note",
-      "source": "「提出したか」は",
-      "target": "📝 '제출했는지' 여부는 "
+      "ref": "ui_8faa71c2ef196e68"
     },
     {
       "selector": "#content b",
-      "source": "そのコンテストの問題への提出",
-      "target": "📝 해당 대회 문제에 대한 제출"
+      "ref": "ui_c0258e70e3e27bff"
     },
     {
       "selector": "#content p.tg-note",
-      "source": "で見ます。正解・不正解は関係ありません。 コンテスト終了後の提出は数えません。",
-      "target": "📝 로 판단합니다. 정답인지 오답인지는 관계없으며 대회 종료 후의 제출은 세지 않습니다."
+      "ref": "ui_0daf62f4e03f9898"
     },
     {
       "selector": "#content td",
-      "source": "メンバーの中で",
-      "target": "📝 멤버 중 "
+      "ref": "ui_444dbc7b8acb1ee4"
     },
     {
       "selector": "#content b",
-      "source": "一番高い得点",
-      "target": "📝 가장 높은 점수"
+      "ref": "ui_c60b367f19db5c5e"
     },
     {
       "selector": "#content td",
-      "source": "。同点ならより早い方の時刻を採ります。",
-      "target": "📝 를 사용합니다. 동점이면 더 이른 시각을 사용합니다."
+      "ref": "ui_34adf7f75239bc83"
     },
     {
       "selector": "#content b",
-      "source": "チーム内で最も早い正解",
-      "target": "📝 팀 내 가장 이른 정답"
+      "ref": "ui_1c7a699c8f397f0a"
     },
     {
       "selector": "#content td",
-      "source": "の時刻。",
-      "target": "📝 의 시각입니다."
+      "ref": "ui_9c99afd087a044bf"
     },
     {
       "selector": "#content b",
-      "source": "メンバー全員分が合算",
-      "target": "📝 모든 멤버의 횟수를 합산"
+      "ref": "ui_3e0a39f4333a0014"
+    },
+    {
+      "selector": "#rules + table.tg-rules tr:nth-child(3) > td",
+      "ref": "ui_9a04995a512cb3c2"
     },
     {
       "selector": "#content td",
-      "source": "されます。",
-      "target": "📝 합니다."
+      "ref": "ui_947b25360354ce2e"
     },
     {
       "selector": "#content td",
-      "source": "チーム名で1行にまとまります。その下にメンバーのアイコンが並びます。",
-      "target": "📝 팀명으로 한 행에 표시되며 그 아래에 멤버 아이콘이 나열됩니다."
+      "ref": "ui_7fd12743515089d3"
     },
     {
       "selector": "#content td",
-      "source": "これまでどおり個人として1行に出ます。",
-      "target": "📝 기존처럼 개인으로 한 행에 표시됩니다."
-    },
-    {
-      "selector": "#content td",
-      "source": "自分がメンバーなら、そのチームの行が",
-      "target": "📝 내가 멤버라면 해당 팀의 행이 "
+      "ref": "ui_1789e296e0b000f8"
     },
     {
       "selector": "#content b",
-      "source": "自分の行として強調",
-      "target": "📝 내 행으로 강조"
+      "ref": "ui_bd3961e273820fec"
     },
     {
       "selector": "#content td",
-      "source": "メンバーの",
-      "target": "📝 멤버 중 "
+      "ref": "ui_ebd8e9b50fe74a65"
     },
     {
       "selector": "#content b",
-      "source": "誰か1人でも",
-      "target": "📝 한 명이라도"
+      "ref": "ui_c9ebf833453879e7"
     },
     {
       "selector": "#content td",
-      "source": "その問題の Writer / Tester なら、チームごとその扱いになります。",
-      "target": "📝 해당 문제의 Writer/Tester라면 팀 전체가 같은 취급을 받습니다."
+      "ref": "ui_1c053443054276f8"
     },
     {
       "selector": "#content dt",
-      "source": "「このコンテストに既に提出があるためチームに参加できません」と出る",
-      "target": "📝 '이 대회에 이미 제출한 기록이 있어 팀에 참가할 수 없습니다'라고 표시됨"
+      "ref": "ui_815cb132216d036c"
     },
     {
       "selector": "#content dd",
-      "source": "そのコンテストの問題に、もう提出しています。個人として出した提出が後からチームの成績に変わらないようにするための制限で、解除はできません。次回は提出前にチームを決めてください。",
-      "target": "📝 해당 대회 문제에 이미 제출했습니다. 개인으로 낸 제출이 나중에 팀 성적으로 바뀌지 않도록 하는 제한이므로 해제할 수 없습니다. 다음에는 제출 전에 팀을 정해 주세요."
+      "ref": "ui_a0ccedc3317a6c6c"
     },
     {
       "selector": "#content dt",
-      "source": "「このチームは定員に達しています」と出る",
-      "target": "📝 '이 팀은 정원에 도달했습니다'라고 표시됨"
+      "ref": "ui_32d7f7a9943f9304"
     },
     {
       "selector": "#content dd",
-      "source": "チームの人数上限に達しています。上限はコンテストごとに決まっています。作成者に確認してください。",
-      "target": "📝 팀 인원이 정원에 도달했습니다. 정원은 대회마다 정해져 있으므로 생성자에게 확인해 주세요."
+      "ref": "ui_feed7e97ca44a93a"
     },
     {
       "selector": "#content dt",
-      "source": "脱退のボタンが出ない",
-      "target": "📝 탈퇴 버튼이 표시되지 않음"
+      "ref": "ui_ad049601f1b44589"
     },
     {
       "selector": "#content dd",
-      "source": "そのコンテストの問題に提出済みです。提出があると脱退できません。",
-      "target": "📝 해당 대회의 문제에 이미 제출했습니다. 제출 기록이 있으면 탈퇴할 수 없습니다."
+      "ref": "ui_982512ff7a0ac409"
     },
     {
       "selector": "#content dt",
-      "source": "招待URLを間違って公開してしまった",
-      "target": "📝 초대 URL을 실수로 공개함"
+      "ref": "ui_733718772d3ee3e4"
     },
     {
       "selector": "#content dd",
-      "source": "作成者が「招待URLを再発行」を押すと、それまでのURLは使えなくなります。新しいURLを改めて仲間に送ってください。すでに入ってしまった人は「外す」で外せます（その人に提出が無い場合）。",
-      "target": "📝 생성자가 '초대 URL 재발급'을 누르면 기존 URL은 사용할 수 없게 됩니다. 새 URL을 팀원에게 다시 보내 주세요. 이미 가입한 사람은 제출 기록이 없다면 '제외'로 내보낼 수 있습니다."
+      "ref": "ui_1d615c4da450a225"
     },
     {
       "selector": "#content dt",
-      "source": "作成者が抜けたらどうなる？",
-      "target": "📝 생성자가 탈퇴하면 어떻게 되나요?"
+      "ref": "ui_fa1794245ab70390"
     },
     {
       "selector": "#content dd",
-      "source": "残っているメンバーのうち、",
-      "target": "📝 남아 있는 멤버 중 "
+      "ref": "ui_7348efe5132c1d22"
     },
     {
       "selector": "#content b",
-      "source": "いちばん早く参加した人",
-      "target": "📝 가장 먼저 참가한 사람"
+      "ref": "ui_e28204607f808af0"
     },
     {
       "selector": "#content dd",
-      "source": "が自動的に作成者になります。チームが操作できなくなることはありません。",
-      "target": "📝 이 자동으로 생성자가 됩니다. 팀을 조작할 수 없게 되는 일은 없습니다."
+      "ref": "ui_ef9d774840a36d0e"
     },
     {
       "selector": "#content dt",
-      "source": "チームを解散したい",
-      "target": "📝 팀을 해산하고 싶음"
+      "ref": "ui_142ea5d24fd42b35"
     },
     {
       "selector": "#content dd",
-      "source": "作成者が「解散」を押します。",
-      "target": "📝 생성자가 '해산'을 누릅니다."
+      "ref": "ui_7df5c21a3459cc93"
     },
     {
       "selector": "#content b",
-      "source": "メンバーの誰か1人でも提出があると解散できません。",
-      "target": "📝 멤버 중 한 명이라도 제출 기록이 있으면 해산할 수 없습니다."
+      "ref": "ui_e5094cdc665fbc38"
     },
     {
       "selector": "#content dd",
-      "source": "全員が抜ければチームは自動的に消えます。",
-      "target": "📝 모두 탈퇴하면 팀은 자동으로 사라집니다."
+      "ref": "ui_26b0b2a7ca5bf109"
     },
     {
       "selector": "#content p.tg-note",
-      "source": "この画面の図は説明用に作ったもので、実際の配色や配置は変わることがあります。",
-      "target": "📝 이 화면의 그림은 설명용이며 실제 색상과 배치는 달라질 수 있습니다."
+      "ref": "ui_6aca7aee28a76e8e"
+    },
+    {
+      "selector": "#rules + table.tg-rules tr:nth-child(6) > td",
+      "ref": "ui_5531929c23a373ee"
     }
   ]
 }

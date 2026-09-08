@@ -3,90 +3,26 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#content h4",
-      "source": "言語別速度統計",
-      "target": "📝 언어별 속도 통계"
-    },
-    {
-      "selector": "#content p",
-      "source": "各言語の純粋計算時間（最小実行時間 - ベース実行時間）を使って相対速度を計算しています。",
-      "target": "📝 각 언어의 순수 계산 시간(최소 실행 시간-기준 실행 시간)을 이용해 상대 속도를 계산합니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "ベース実行時間は各言語の",
-      "target": "📝 기준 실행 시간은 각 언어의"
-    },
-    {
-      "selector": "#content p",
-      "source": "での最小実行時間で、実行のオーバーヘッドを表します。",
-      "target": "📝 에서의 최소 실행 시간이며 실행 오버헤드를 나타냅니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "基準言語（C++17）を100%として、各問題での相対速度の平均を表示しています。",
-      "target": "📝 기준 언어(C++17)를 100%로 두고 각 문제의 상대 속도 평균을 표시합니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "100%より大きい言語は基準言語より速く、小さい言語は遅いことを示します。",
-      "target": "📝 100%보다 크면 기준 언어보다 빠르고 작으면 느리다는 뜻입니다."
-    },
-    {
-      "selector": "#content th",
-      "source": "ベース(ms)",
-      "target": "📝 기준(ms)"
-    },
-    {
-      "selector": "#content th",
-      "source": "相対速度",
-      "target": "📝 상대 속도"
-    },
-    {
-      "selector": "#content th",
-      "source": "速度バー",
-      "target": "📝 속도 막대"
-    },
-    {
-      "selector": "#content small",
-      "source": "※ 純コード（Pure）の提出のみを対象としています。",
-      "target": "📝 ※ 순수 코드(Pure) 제출만 대상으로 합니다."
-    },
-    {
-      "selector": "#content small",
-      "source": "※ スコア問題・ショートコード問題は除外しています。",
-      "target": "📝 ※ 점수 문제와 숏 코드 문제는 제외합니다."
-    },
-    {
-      "selector": "#content small",
-      "source": "※ 基準言語もACしている問題のみを対象としています。10問以上ACがある言語のみ表示。",
-      "target": "📝 ※ 기준 언어로도 AC한 문제만 대상으로 합니다. AC가 10문제 이상인 언어만 표시합니다."
-    },
-    {
-      "selector": "#content small",
-      "source": "※ 高速化されるユーザーに依存しますので、あくまで参考程度にご覧ください。",
-      "target": "📝 ※ 최적화하는 사용자에 따라 달라지므로 참고용으로만 확인해 주세요."
-    },
+    { "selector": "#content h4", "ref": "ui_85ed5043643e797f" },
+    { "selector": "#content p", "ref": "ui_97ce488d1ff44775" },
+    { "selector": "#content p", "ref": "ui_7a7e3d3b40decad9" },
+    { "selector": "#content p", "ref": "ui_e92e899940b348b0" },
+    { "selector": "#content p", "ref": "ui_e618fcb718619ab5" },
+    { "selector": "#content p", "ref": "ui_e6aa76ab9b3b538e" },
+    { "selector": "#content th", "ref": "ui_53c69bbdfea6eab6" },
+    { "selector": "#content th", "ref": "ui_9dc3c5e3b68bde91" },
+    { "selector": "#content th", "ref": "ui_e38be6f6840647ed" },
+    { "selector": "#content small", "ref": "ui_c3a5025599a7ed1e" },
+    { "selector": "#content small", "ref": "ui_c9752c518974c6e5" },
+    { "selector": "#content small", "ref": "ui_c261cf5fd9959f37" },
+    { "selector": "#content small", "ref": "ui_781422b455ed69b8" },
+    { "selector": "#languageSpeedTable td", "ref": "ui_13a55efa2e8b37e6" },
+    { "selector": "#languageSpeedTable td", "ref": "ui_d01d656346ce7e50" },
+    { "selector": "#languageSpeedTable td", "ref": "ui_09a81b127c54895b" },
     {
       "selector": "#languageSpeedTable td",
-      "source": "C11(gcc12 gnu拡張)",
-      "target": "📝 C11(gcc12 GNU 확장)"
-    },
-    {
-      "selector": "#languageSpeedTable td",
-      "source": "C++23(gnu拡張gcc16)",
-      "target": "📝 C++23(GNU 확장 gcc16)"
-    },
-    {
-      "selector": "#languageSpeedTable td",
-      "source": "C++23(gnu拡張)",
-      "target": "📝 C++23(GNU 확장)"
-    },
-    {
-      "selector": "#languageSpeedTable td",
-      "source": "C++17(gnu拡張)",
-      "target": "📝 C++17(GNU 확장)"
+      "ref": "ui_0639256f38c5bb91",
+      "variant": 0
     }
   ]
 }

@@ -15,15 +15,15 @@ title: "바다에서 가장 먼 곳"
 
 ## 문제
 
-세로 H, 가로 W 크기의 지도가 있습니다. 지도에는 각 장소가 육지인지 바다인지에 대한 정보가 주어집니다. 지도 밖의 영역은 모두 바다입니다.
+세로 $H$, 가로 $W$ 크기의 지도가 있습니다. 지도에는 각 장소가 육지인지 바다인지에 대한 정보가 주어집니다. 지도 밖의 영역은 모두 바다입니다.
 
-바다로부터 체비쇼프 거리가 가장 먼 장소의 그 거리를 구하세요. [체비쇼프 거리](https://ja.wikipedia.org/wiki/チェビシェフ距離)는 두 점의 좌표가 (x₁, y₁), (x₂, y₂)일 때 max(|x₁ − x₂|, |y₁ − y₂|)로 정의됩니다.
+바다로부터 체비쇼프 거리가 가장 먼 장소의 그 거리를 구하세요. [체비쇼프 거리](https://ja.wikipedia.org/wiki/チェビシェフ距離)는 두 점의 좌표가 $(x_1,y_1),(x_2,y_2)$일 때 $\max(|x_1-x_2|,|y_1-y_2|)$로 정의됩니다.
 
 어떤 육지와 바다 사이의 거리는 해당 육지와 모든 바다 칸 사이의 체비쇼프 거리 중 최솟값입니다.
 
 ## 입력
 
-첫째 줄에 지도의 크기 H와 W가 공백으로 주어집니다. 둘째 줄부터 H개 줄에 지도를 나타내는 W문자열이 주어집니다. `#`은 육지, `.`은 바다를 나타냅니다. 육지는 하나 이상 존재합니다.
+첫째 줄에 지도의 크기 $H$와 $W$가 공백으로 주어집니다. 둘째 줄부터 $H$개 줄에 지도를 나타내는 길이 $W$의 문자열이 주어집니다. `#`은 육지, `.`은 바다를 나타냅니다. 육지는 하나 이상 존재합니다.
 
 ```text
 H W
@@ -33,16 +33,18 @@ S₂
 S_H
 ```
 
-- H와 W는 정수이며, 1 ≤ H,W ≤ 3000
-- Sᵢ는 `#`과 `.`으로 이루어진 길이 W의 문자열입니다.
+- $H$와 $W$는 정수입니다. $(1\le H,W\le3\,000)$
+- $S_i$는 `#`과 `.`으로 이루어진 길이 $W$의 문자열입니다.
 
 ## 출력
 
 바다로부터 체비쇼프 거리가 가장 먼 장소의 그 거리를 출력하세요.
 
-## 샘플
+## 예제
 
-### 샘플 1 {file="sample1.in"}
+### 예제 1 {file=""}
+
+#### 입력
 
 ```text
 8 8
@@ -56,7 +58,7 @@ S_H
 ...####.
 ```
 
-### 샘플 1 출력 {file="sample1.out"}
+#### 출력
 
 ```text
 3
@@ -64,7 +66,11 @@ S_H
 
 초록색 부분을 육지, 하늘색 부분을 바다로 했을 때 각 육지의 바다로부터의 체비쇼프 거리는 그림과 같습니다. 체비쇼프 거리가 가장 큰 곳의 값이 3이므로 이를 출력합니다.
 
-### 샘플 2 {file="sample2.in"}
+![예제 그림](data:image/png;base64,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)
+
+### 예제 2 {file=""}
+
+#### 입력
 
 ```text
 7 7
@@ -77,7 +83,7 @@ S_H
 #######
 ```
 
-### 샘플 2 출력 {file="sample2.out"}
+#### 출력
 
 ```text
 3
@@ -85,7 +91,11 @@ S_H
 
 섬 안에 바다가 존재할 수 있습니다. 또한 지도 범위 밖은 모두 바다라는 점에 주의하세요.
 
-### 샘플 3 {file="sample3.in"}
+![예제 그림](data:image/png;base64,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)
+
+### 예제 3 {file=""}
+
+#### 입력
 
 ```text
 60 60
@@ -116,6 +126,7 @@ S_H
 .....................................######.................
 .....................................#####..................
 ....................................#####...................
+....................................#####...................
 ....................................######..................
 ...................................#####....................
 ................................#.######....................
@@ -129,8 +140,8 @@ S_H
 ....................###..##############.....................
 ...............#####################.##.....................
 ..............###################.#..#......................
-.....#......###############.####..#..........................
-..........########......###..................................
+.....#......###############.####..#.........................
+..........########......###.................................
 ..........####....##.#.#####................................
 ......#.##...#.######..###..................................
 .....##.####...######..##...................................
@@ -147,9 +158,10 @@ S_H
 ........#.#.................................................
 ............................................................
 ............................................................
+............................................................
 ```
 
-### 샘플 3 출력 {file="sample3.out"}
+#### 출력
 
 ```text
 4

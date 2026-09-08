@@ -5,130 +5,321 @@
   "translations": [
     {
       "selector": "#toplinks a",
-      "source": "ユーザー",
-      "target": "📝 사용자"
+      "ref": "ui_3c781a44dd66d97b",
+      "variant": 0
     },
     {
       "selector": "#toplinks a",
-      "source": "問題一覧",
-      "target": "📝 문제 목록"
+      "ref": "ui_a7170948fa97285b",
+      "variant": 0
     },
     {
       "selector": "#toplinks a",
-      "source": "ゆるふわポイント一覧",
-      "target": "📝 유루후와 포인트 목록"
+      "ref": "ui_dfbae811bf756feb"
     },
     {
       "selector": "#toplinks a",
-      "source": "レベル提案一覧",
-      "target": "📝 레벨 제안 목록"
+      "ref": "ui_ea0ae0febd894dc7"
     },
     {
       "selector": "#toplinks a",
-      "source": "解説一覧",
-      "target": "📝 해설 목록"
+      "ref": "ui_31f27edaf5abcb02",
+      "variant": 0
     },
     {
       "selector": "#toplinks a",
-      "source": "未回答質問",
-      "target": "📝 답변 없는 질문"
+      "ref": "ui_e4c9b69c311da9b3"
     },
     {
       "selector": "#toplinks a",
-      "source": "テスター待ち問題",
-      "target": "📝 테스터 대기 문제"
+      "ref": "ui_d0cd8ad685f3c97b"
     },
     {
       "selector": "#toplinks a",
-      "source": "Favコード",
-      "target": "📝 즐겨찾기 코드"
+      "ref": "ui_e14621fae6e3b445"
     },
     {
       "selector": "#toplinks a",
-      "source": "Fav問題",
-      "target": "📝 즐겨찾기 문제"
+      "ref": "ui_384df77fd0c5c101"
     },
     {
       "selector": "#toplinks a",
-      "source": "リジャッジ問題",
-      "target": "📝 재채점 문제"
+      "ref": "ui_fceabd2f931aa3dd"
     },
     {
       "selector": "#toplinks a",
-      "source": "チャレンジ一覧",
-      "target": "📝 챌린지 목록"
+      "ref": "ui_e86ec5aec7031a4c"
     },
     {
       "selector": "#content h4",
-      "source": "プロフィール",
-      "target": "📝 프로필"
+      "ref": "ui_f8b14e45c51f697d"
     },
     {
       "selector": "#summary div",
-      "source": "ユーザーID = {userId}",
-      "target": "📝 사용자 ID = {userId}",
-      "variables": {
-        "userId": "\\d+"
-      }
+      "ref": "ui_294d7b340955dbc2"
     },
     {
       "selector": "#summary .left",
-      "source": "登録日時",
-      "target": "📝 가입 일시"
+      "ref": "ui_3c5100b7358b7ceb"
     },
     {
       "selector": "#summary .left",
-      "source": "公開問題",
-      "target": "📝 공개 문제"
+      "ref": "ui_3c0932de6ad17914"
     },
     {
       "selector": "#summary .left",
-      "source": "提出",
-      "target": "📝 제출"
+      "ref": "ui_5e29a65ae8c58b9d"
     },
     {
       "selector": "#summary .left",
-      "source": "AC問題数",
-      "target": "📝 AC 문제 수"
+      "ref": "ui_3939532fba6b68ab"
     },
     {
       "selector": "#summary .left",
-      "source": "ユーザーLv.",
-      "target": "📝 사용자 레벨"
+      "ref": "ui_c65b6e1d706ce2d9"
     },
     {
       "selector": "#summary .right",
-      "source": "{level} （レベルアップまで★ * {stars}）",
-      "target": "📝 {level} (레벨 업까지 ★ × {stars})",
-      "variables": {
-        "level": "[0-9.]+",
-        "stars": "\\d+"
-      }
+      "ref": "ui_e74ee899fbc24bb5"
     },
     {
       "selector": "#summary .left",
-      "source": "スコア",
-      "target": "📝 점수"
+      "ref": "ui_63d253663b7dde83"
     },
     {
       "selector": "#summary .left",
-      "source": "ゆるふわポイント",
-      "target": "📝 유루후와 포인트"
+      "ref": "ui_c9c8574121383f8d"
     },
     {
       "selector": "#summary .left",
-      "source": "ほしいものリスト",
-      "target": "📝 위시리스트"
+      "ref": "ui_857382e8b82f3adc",
+      "variant": 1
     },
     {
       "selector": "#summary .right",
-      "source": "(更新処理は1分ごと)",
-      "target": "📝 (1분마다 갱신)"
+      "ref": "ui_f33aca76c5a3ead8"
     },
     {
       "selector": "#content .left",
-      "source": "前へ | 次へ",
-      "target": "📝 이전 | 다음"
+      "ref": "ui_d7f08a3b9ddd20be"
+    },
+    {
+      "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+      "ref": "ui_93b48cc1dcfa8e68"
+    },
+    {
+      "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+      "ref": "ui_e2a8ec3c78a0a960"
+    },
+    {
+      "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+      "ref": "ui_211c7b3e38569bf4"
+    },
+    {
+      "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+      "ref": "ui_12492e489bf8e2a4"
+    },
+    {
+      "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+      "ref": "ui_dabf8af3825b0d0c"
+    },
+    {
+      "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+      "ref": "ui_7489fb219bc7bb08"
+    },
+    {
+      "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+      "ref": "ui_24f63eb72069ddf8"
+    },
+    {
+      "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+      "ref": "ui_490f580d90ef169b"
+    },
+    {
+      "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+      "ref": "ui_e34295b715b46b5a"
+    },
+    {
+      "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+      "ref": "ui_b031c046eec33bc0"
+    },
+    {
+      "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+      "ref": "ui_34e003c54fc6f0e0"
+    },
+    {
+      "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+      "ref": "ui_d60f5a152b3bdc9a"
+    },
+    {
+      "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+      "ref": "ui_217390e21e573aaa"
+    },
+    {
+      "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+      "ref": "ui_83fedf846177f1c1"
+    },
+    {
+      "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+      "ref": "ui_f27ce23b5f441478"
+    },
+    {
+      "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+      "ref": "ui_c36cf53dc61dd304"
+    },
+    {
+      "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+      "ref": "ui_b2b38101beaf3664"
+    },
+    {
+      "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+      "ref": "ui_d694424617ebd21b"
+    },
+    {
+      "selector": "#content form.user_profile, #content form.user_profile :is(label, div, span, p, small, td, th, a, button)",
+      "ref": "ui_ee98588b242e8401"
+    },
+    {
+      "selector": "#content :is(h3,h4)",
+      "ref": "ui_b10dd2f7b13f6b66"
+    },
+    {
+      "selector": "#summary .left",
+      "ref": "ui_f07c5d26c45122e6"
+    },
+    {
+      "selector": "#content :is(div,p,span,small,a,label)",
+      "ref": "ui_dd256b18aed419ed"
+    },
+    {
+      "selector": "#content :is(div,p,span,small,a,label)",
+      "ref": "ui_fad6ad3fb78e0991"
+    },
+    {
+      "selector": "#content :is(div,p,span,small,a,label)",
+      "ref": "ui_d839eb43c65af816"
+    },
+    {
+      "selector": "#content :is(div,p,span,small,a,label)",
+      "ref": "ui_c26bf810b1443520"
+    },
+    {
+      "selector": "#content :is(div,p,span,small,a,label)",
+      "ref": "ui_62a24e74b22a6984"
+    },
+    {
+      "selector": "#content :is(div,p,span,small,a,label)",
+      "ref": "ui_dbfd0c8a1b4cbd66"
+    },
+    {
+      "selector": "#content form.user_profile input[type=\"submit\"]",
+      "attribute": "value",
+      "ref": "ui_d694424617ebd21b"
+    },
+    {
+      "selector": "#content form.user_profile input[type=\"submit\"]",
+      "attribute": "value",
+      "ref": "ui_ee98588b242e8401"
+    },
+    {
+      "selector": "#content",
+      "ref": "ui_62a24e74b22a6984"
+    },
+    {
+      "selector": "#content",
+      "ref": "ui_dbfd0c8a1b4cbd66"
+    },
+    {
+      "selector": "#content form.user_profile .left",
+      "ref": "ui_787b359c95448ef1"
+    },
+    {
+      "selector": "#content form.user_profile .left",
+      "ref": "ui_6e41388023ce5681"
+    },
+    {
+      "selector": "#content form.user_profile .left",
+      "ref": "ui_0a422c4880ed049a"
+    },
+    {
+      "selector": "#content form.user_profile .left",
+      "ref": "ui_7495da3cf1595b0b"
+    },
+    {
+      "selector": "#content form.user_profile .left",
+      "ref": "ui_a0f7f57610ee7c57"
+    },
+    {
+      "selector": "#content form.user_profile .left",
+      "ref": "ui_1345911db34b4338"
+    },
+    {
+      "selector": "#content form.user_profile .left",
+      "ref": "ui_baa332e69686eada"
+    },
+    {
+      "selector": "#content form.user_profile #mode option",
+      "ref": "ui_6f7217cf80a42467"
+    },
+    {
+      "selector": "#content form.user_profile #mode option",
+      "ref": "ui_96cfba384e2d8231"
+    },
+    {
+      "selector": "#content form.user_profile #mode option",
+      "ref": "ui_95714ba9b0ffba87"
+    },
+    {
+      "selector": "#content form.user_profile small",
+      "ref": "ui_57693603df6c77a1"
+    },
+    {
+      "selector": "#content form.user_profile small",
+      "ref": "ui_6aa90cad361042fe"
+    },
+    {
+      "selector": "#summary > div",
+      "ref": "ui_82d503128cf244cc"
+    },
+    {
+      "selector": "#content form .left",
+      "ref": "ui_8b8b7e0b66d42d82"
+    },
+    {
+      "selector": "#content form small",
+      "ref": "ui_789186fe0e00f38e"
+    },
+    {
+      "selector": "#content form .left",
+      "ref": "ui_ce16cdcecc430162"
+    },
+    {
+      "selector": "#content form .right",
+      "ref": "ui_aceeeb2c24b54124"
+    },
+    {
+      "selector": "#content .left",
+      "ref": "ui_564e67f8259301c9"
+    },
+    {
+      "selector": "#content small",
+      "ref": "ui_421c4cb9dfbb0984"
+    },
+    {
+      "selector": "#content label:has(#beforeunload-alert)",
+      "ref": "ui_d60f5a152b3bdc9a"
+    },
+    {
+      "selector": "#save-beforeunload-setting",
+      "ref": "ui_f0d5fa7cc4bd98af"
+    },
+    {
+      "selector": "#content form.user_profile #lang option",
+      "ref": "ui_b6ba0f132376c638"
+    },
+    {
+      "selector": "#content form.user_profile #lang option",
+      "ref": "ui_07e724964294d850"
     }
   ]
 }

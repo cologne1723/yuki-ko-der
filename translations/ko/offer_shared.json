@@ -3,83 +3,21 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#content li",
-      "source": "テストケースバリデーション実行機能",
-      "target": "📝 테스트 케이스 검증 실행 기능"
-    },
-    {
-      "selector": "#content a",
-      "source": "ショートコード・最速実行時間 記録保有数ランキング",
-      "target": "📝 숏 코드·최단 실행 시간 기록 보유 수 랭킹"
-    },
-    { "selector": "#content li", "source": "の閲覧", "target": "📝 열람" },
-    {
-      "selector": "#content h3",
-      "source": "サイトサポーターについて",
-      "target": "📝 사이트 서포터 안내"
-    },
-    {
-      "selector": "#content a",
-      "source": "サイトサポーター",
-      "target": "📝 사이트 서포터"
-    },
-    {
-      "selector": "#content h2",
-      "source": "ワンデーサポーター 👑",
-      "target": "📝 원데이 서포터 👑"
-    },
-    {
-      "selector": "#premium-active strong",
-      "source": "ワンデーサポーターが有効です 👑",
-      "target": "📝 원데이 서포터가 활성화되어 있습니다 👑"
-    },
-    {
-      "selector": "#premium-active p",
-      "source": "残り時間:",
-      "target": "📝 남은 시간:"
-    },
-    {
-      "selector": "#premium-inactive p",
-      "source": "ワンデーサポーターは現在無効です。",
-      "target": "📝 원데이 서포터는 현재 비활성 상태입니다."
-    },
-    {
-      "selector": "#content h3",
-      "source": "ワンデーサポーターの特典",
-      "target": "📝 원데이 서포터 혜택"
-    },
-    {
-      "selector": "#content p",
-      "source": "※特典の項目は都度変更いたします",
-      "target": "📝 ※ 혜택 항목은 수시로 변경됩니다"
-    },
-    {
-      "selector": "#content p",
-      "source": "になると、ワンデーサポーター機能が常時有効になり、広告も非表示になります。",
-      "target": "📝 가 되면 원데이 서포터 기능이 항상 활성화되고 광고도 표시되지 않습니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "なおご支援いただける方は、サイトサポーターの方もご覧いただくと大変うれしいです。",
-      "target": "📝 후원해 주실 수 있다면 사이트 서포터 안내도 확인해 주시면 매우 감사하겠습니다."
-    },
-    {
-      "selector": "#premium-remaining-time",
-      "source": "期限切れ",
-      "target": "📝 만료됨"
-    },
-    {
-      "selector": "#premium-remaining-time",
-      "source": "{hours}時間{minutes}分",
-      "target": "📝 {hours}시간 {minutes}분",
-      "variables": { "hours": "[0-9]+", "minutes": "[0-9]+" }
-    },
-    {
-      "selector": "#premium-remaining-time",
-      "source": "{minutes}分",
-      "target": "📝 {minutes}분",
-      "variables": { "minutes": "[0-9]+" }
-    }
+    { "selector": "#content li", "ref": "ui_1c3091b8f4d327d6" },
+    { "selector": "#content a", "ref": "ui_937bde678e36615a" },
+    { "selector": "#content li", "ref": "ui_588c399f9289669a" },
+    { "selector": "#content h3", "ref": "ui_6d342c06287059e8" },
+    { "selector": "#content a", "ref": "ui_cb2da95559896235" },
+    { "selector": "#content h2", "ref": "ui_4d05467641df1fb2" },
+    { "selector": "#premium-active strong", "ref": "ui_75fc93d7efd84bfe" },
+    { "selector": "#premium-active p", "ref": "ui_2cb4c09c58d3c046" },
+    { "selector": "#premium-inactive p", "ref": "ui_2a7133a285a09611" },
+    { "selector": "#content h3", "ref": "ui_4494e917eb7d2647" },
+    { "selector": "#content p", "ref": "ui_da20512636d610a5" },
+    { "selector": "#content p", "ref": "ui_19786fc444f9b203" },
+    { "selector": "#content p", "ref": "ui_8cea3db899d7fb1c" },
+    { "selector": "#premium-remaining-time", "ref": "ui_2de4d85ad7005bd2" },
+    { "selector": "#premium-remaining-time", "ref": "ui_526c686ca08fd607" },
+    { "selector": "#premium-remaining-time", "ref": "ui_3ccabc1c1f1b322a" }
   ]
 }

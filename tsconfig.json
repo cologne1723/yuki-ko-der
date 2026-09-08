@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "lib": ["ES2024", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
@@ -10,15 +10,5 @@
     "skipLibCheck": true,
     "types": ["node"]
   },
-  "include": [
-    "src/**/*.ts",
-    "review/**/*.ts",
-    "scripts/audit-translations.ts",
-    "scripts/build-extension.ts",
-    "scripts/build-review.ts",
-    "scripts/lint-problem-html.ts",
-    "scripts/migrate-problem-review-status.ts",
-    "scripts/problem-review.ts",
-    "scripts/review-server.ts"
-  ]
+  "include": ["src/**/*.ts", "scripts/**/*.ts"]
 }

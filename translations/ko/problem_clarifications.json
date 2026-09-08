@@ -5,14 +5,44 @@
   "translations": [
     {
       "selector": "#body div",
-      "source": "↑に「REVEL CSRF:invalid token.」と表示された場合は、一旦ログアウトしてみてください。それでも直らない場合は",
-      "target": "📝 위에 'REVEL CSRF:invalid token.'이 표시되면 로그아웃한 뒤 다시 시도해 주세요. 그래도 해결되지 않으면 "
+      "ref": "ui_950e67313d5dabd8"
     },
     {
       "selector": "#body div",
-      "source": "までお願いします..",
-      "target": "📝 로 문의해 주세요..",
-      "preserveBoundaryWhitespace": false
+      "preserveBoundaryWhitespace": false,
+      "ref": "ui_f89fa96c3fdfd714"
+    },
+    {
+      "selector": "#content :is(h4,th)",
+      "ref": "ui_637343d2d5108708"
+    },
+    {
+      "selector": "#content :is(h4,th)",
+      "ref": "ui_12cb12f236ba0d34"
+    },
+    {
+      "selector": "#content :is(h4,th)",
+      "ref": "ui_59e8b6c947919aa2"
+    },
+    {
+      "selector": "#content :is(h4,th)",
+      "ref": "ui_2f35881fae854aae"
+    },
+    {
+      "selector": "#content :is(h4,th)",
+      "ref": "ui_e10ea6f2b38327f6"
+    },
+    {
+      "selector": "#content :is(h4,th)",
+      "ref": "ui_9b5b4808bb74bb53"
+    },
+    {
+      "selector": "#content :is(h4,th)",
+      "ref": "ui_f390ecfd63257831"
+    },
+    {
+      "selector": "#content > p",
+      "ref": "ui_7f28f4197f25b50b"
     }
   ]
 }

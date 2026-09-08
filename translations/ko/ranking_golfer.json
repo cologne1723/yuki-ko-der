@@ -3,31 +3,14 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#content h4",
-      "source": "問題別ショートコード一覧",
-      "target": "📝 문제별 숏 코드 목록"
-    },
-    {
-      "selector": "#content strong",
-      "source": "すべて表示",
-      "target": "📝 모두 표시"
-    },
-    {
-      "selector": "#content a",
-      "source": "非純コードのみ表示",
-      "target": "📝 비순수 코드만 표시"
-    },
-    {
-      "selector": "#content small",
-      "source": "(* = 非純コード)",
-      "target": "📝 (* = 비순수 코드)"
-    },
+    { "selector": "#content h4", "ref": "ui_470bd8e714b24b19" },
+    { "selector": "#content strong", "ref": "ui_73143a71231eeffb" },
+    { "selector": "#content a", "ref": "ui_4c6968f16a1ddb2d" },
+    { "selector": "#content small", "ref": "ui_f7e9bd7fe7cacd81" },
     {
       "selector": "#content span.pure-mark",
       "attribute": "title",
-      "source": "非純コード（外部プロセス呼び出しあり）",
-      "target": "📝 비순수 코드(외부 프로세스 호출 있음)"
+      "ref": "ui_aa0d359d790bb948"
     }
   ]
 }

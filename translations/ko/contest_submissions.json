@@ -3,12 +3,7 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    { "selector": "#content th", "source": "点数", "target": "📝 점수" },
-    {
-      "selector": "#content td",
-      "source": "{score}点",
-      "target": "📝 {score}점",
-      "variables": { "score": "\\d+" }
-    }
+    { "selector": "#content th", "ref": "ui_6282d85a6636c722" },
+    { "selector": "#content td", "ref": "ui_5105f268718b3fd3" }
   ]
 }

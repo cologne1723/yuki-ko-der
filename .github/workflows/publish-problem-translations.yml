@@ -5,15 +5,12 @@ on:
     branches: [main]
     paths:
       - "problem-translations/**"
-      - "src/problem-markdown.ts"
-      - "scripts/build-problem-translations.ts"
-      - "scripts/validate-problem-translations.ts"
-      - "scripts/problem-review.ts"
-      - "src/problem-translations.ts"
+      - "packages/translation-core/**"
+      - "tools/audit/**"
       - "package.json"
+      - "pnpm-workspace.yaml"
       - "pnpm-lock.yaml"
-      - "PRIVACY.md"
-      - "DISCLAIMER.md"
+      - "README.md"
       - ".github/workflows/publish-problem-translations.yml"
   workflow_dispatch:
 
@@ -47,7 +44,7 @@ jobs:
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .problem-translations-dist
+          path: dist/problems
       - name: GitHub Pages에 배포
         id: deployment
         uses: actions/deploy-pages@v4

@@ -3,27 +3,10 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#content h4",
-      "source": "{user}さんのテスター募集問題",
-      "target": "📝 {user}님의 테스터 모집 문제",
-      "variables": { "user": ".+" }
-    },
-    {
-      "selector": "#content h5",
-      "source": "難易度別統計",
-      "target": "📝 난이도별 통계"
-    },
-    {
-      "selector": "#content h5",
-      "source": "問題一覧",
-      "target": "📝 문제 목록"
-    },
-    { "selector": "#content th", "source": "タイプ", "target": "📝 유형" },
-    {
-      "selector": "#content td",
-      "source": "テスター募集問題はありません",
-      "target": "📝 테스터 모집 문제가 없습니다"
-    }
+    { "selector": "#content h4", "ref": "ui_fef1c08da7620ebd" },
+    { "selector": "#content h5", "ref": "ui_841ea00a8d26dc2e" },
+    { "selector": "#content h5", "ref": "ui_a7170948fa97285b" },
+    { "selector": "#content th", "ref": "ui_59481ee637d6ff70" },
+    { "selector": "#content td", "ref": "ui_8a939b4d34907342" }
   ]
 }

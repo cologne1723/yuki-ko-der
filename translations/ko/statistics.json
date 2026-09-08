@@ -3,98 +3,30 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#toplinks a",
-      "source": "タグ一覧",
-      "target": "📝 태그 목록"
-    },
-    {
-      "selector": "#toplinks a",
-      "source": "出題待ち",
-      "target": "📝 출제 대기"
-    },
-    {
-      "selector": "#toplinks a",
-      "source": "言語別速度",
-      "target": "📝 언어별 속도"
-    },
-    {
-      "selector": "#toplinks a",
-      "source": "記録保有数",
-      "target": "📝 기록 보유 수"
-    },
-    {
-      "selector": "#content h4",
-      "source": "レベル別問題数",
-      "target": "📝 레벨별 문제 수"
-    },
-    {
-      "selector": "#content h4",
-      "source": "言語別提出数",
-      "target": "📝 언어별 제출 수"
-    },
-    {
-      "selector": "#content h4",
-      "source": "ユーザーレベル分布",
-      "target": "📝 사용자 레벨 분포"
-    },
-    {
-      "selector": "#content h4",
-      "source": "ユーザーレベル分布 (0-9)",
-      "target": "📝 사용자 레벨 분포 (0-9)"
-    },
-    {
-      "selector": "#content span",
-      "source": "解いてないものから",
-      "target": "📝 풀지 않은 문제 중에서"
-    },
-    { "selector": "#content th", "source": "ランダム", "target": "📝 무작위" },
-    {
-      "selector": "#content a",
-      "source": "おみくじ",
-      "target": "📝 운세 뽑기"
-    },
-    {
-      "selector": "#content th",
-      "source": "問題数合計",
-      "target": "📝 전체 문제 수"
-    },
-    {
-      "selector": "#content th",
-      "source": "レベル合計",
-      "target": "📝 전체 레벨 합계"
-    },
-    { "selector": "#content th", "source": "提出数", "target": "📝 제출 수" },
-    {
-      "selector": "#content th",
-      "source": "ユーザーレベル",
-      "target": "📝 사용자 레벨"
-    },
-    { "selector": "#content th", "source": "上位", "target": "📝 상위" },
-    {
-      "selector": "#content th",
-      "source": "偏差値（すべての範囲）",
-      "target": "📝 편차값(전체 범위)"
-    },
+    { "selector": "#toplinks a", "ref": "ui_c40e96bcc43974bc" },
+    { "selector": "#toplinks a", "ref": "ui_a4d1db68f02f4447" },
+    { "selector": "#toplinks a", "ref": "ui_61746d713ff76149" },
+    { "selector": "#toplinks a", "ref": "ui_b1746f5fab56fbc9" },
+    { "selector": "#content h4", "ref": "ui_cf9308a42697b142" },
+    { "selector": "#content h4", "ref": "ui_63d7304bab8ae9fe" },
+    { "selector": "#content h4", "ref": "ui_c55053ef07c431df" },
+    { "selector": "#content h4", "ref": "ui_f5327a7b05e1e8dc" },
+    { "selector": "#content span", "ref": "ui_6aaefee48ab9678c" },
+    { "selector": "#content th", "ref": "ui_781b946ac6c5ec8f" },
+    { "selector": "#content a", "ref": "ui_71aa572b9fb0bdaf" },
+    { "selector": "#content th", "ref": "ui_fe84abae7244c18e" },
+    { "selector": "#content th", "ref": "ui_fefc028fa394eac1" },
+    { "selector": "#content th", "ref": "ui_4ee59e6be5fb84d6" },
+    { "selector": "#content th", "ref": "ui_7b449b5dce33bae5" },
+    { "selector": "#content th", "ref": "ui_a97c5e4d1954e1f3" },
+    { "selector": "#content th", "ref": "ui_c16d8ea0dcaaba31" },
+    { "selector": "#submissionLangTable td", "ref": "ui_13a55efa2e8b37e6" },
     {
       "selector": "#submissionLangTable td",
-      "source": "C11(gcc12 gnu拡張)",
-      "target": "📝 C11(gcc12 GNU 확장)"
+      "ref": "ui_0639256f38c5bb91",
+      "variant": 0
     },
-    {
-      "selector": "#submissionLangTable td",
-      "source": "C++17(gnu拡張)",
-      "target": "📝 C++17(GNU 확장)"
-    },
-    {
-      "selector": "#submissionLangTable td",
-      "source": "C++23(gnu拡張)",
-      "target": "📝 C++23(GNU 확장)"
-    },
-    {
-      "selector": "#submissionLangTable td",
-      "source": "C++23(gnu拡張gcc16)",
-      "target": "📝 C++23(GNU 확장 gcc16)"
-    }
+    { "selector": "#submissionLangTable td", "ref": "ui_09a81b127c54895b" },
+    { "selector": "#submissionLangTable td", "ref": "ui_d01d656346ce7e50" }
   ]
 }

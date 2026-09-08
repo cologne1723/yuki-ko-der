@@ -3,15 +3,7 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#content div",
-      "source": "さんのレベル提案（本人以外の場合は空欄になります）。全問題がでてますが、レベル提案が表示されているものが提案したものです。",
-      "target": "📝 님의 레벨 제안입니다(본인이 아니면 빈칸으로 표시됩니다). 모든 문제가 나오지만 레벨 제안이 표시된 항목이 제안한 문제입니다."
-    },
-    {
-      "selector": "#content th",
-      "source": "レベル提案",
-      "target": "📝 레벨 제안"
-    }
+    { "selector": "#content div", "ref": "ui_a74583b6e1641436" },
+    { "selector": "#content th", "ref": "ui_622dc8acafeed618" }
   ]
 }

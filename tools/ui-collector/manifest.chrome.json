@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "yukicoder UI collector (internal)",
+  "version": "0.1.0",
+  "description": "Collects evidence of remaining Japanese UI text on yukicoder.me.",
+  "permissions": ["storage"],
+  "host_permissions": ["https://yukicoder.me/*"],
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "yukicoder UI collector",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://yukicoder.me/*"],
+      "js": ["src/content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

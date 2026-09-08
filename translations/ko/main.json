@@ -3,542 +3,136 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": ".next-event-card .nec-type",
-      "source": "次回の通常コンテスト",
-      "target": "다음 정규 대회"
-    },
-    {
-      "selector": ".next-event-card .nec-type",
-      "source": "開催中の通常コンテスト",
-      "target": "진행 중인 정규 대회"
-    },
+    { "selector": ".next-event-card .nec-type", "ref": "ui_c92e1dd79dd57fa1" },
+    { "selector": ".next-event-card .nec-type", "ref": "ui_3ae19f4fedaf1daa" },
     {
       "selector": ".next-event-card .nec-link a",
-      "source": "コンテストページ →",
-      "target": "대회 페이지 →"
+      "ref": "ui_0f99e3c51f31535b"
     },
-    {
-      "selector": "#daily_problems h4",
-      "source": "今日の3問",
-      "target": "일일 문제 3문제"
-    },
-    {
-      "selector": "#daily_problems .daily-note",
-      "source": "全てのユーザーで同じ問題です。",
-      "target": "모든 사용자에게 같은 문제가 제공됩니다."
-    },
-    {
-      "selector": "#daily_problems .daily-band",
-      "source": "★4以上",
-      "target": "★4 이상"
-    },
-    {
-      "selector": "#content > h3",
-      "source": "yukicoderへようこそ!",
-      "target": "yukicoder에 오신 것을 환영합니다!"
-    },
-    {
-      "selector": "#content > p",
-      "source": "yukicoderは競技プログラミング・アルゴリズムを 練習する目的で運営されています。",
-      "target": "yukicoder는 Competitive Programming과 알고리즘 연습을 목적으로 운영됩니다."
-    },
-    {
-      "selector": "#content > p",
-      "source": "競技プログラミングの模試・勉強会のような位置づけを目指しております。",
-      "target": "Competitive Programming 모의고사와 스터디를 위한 공간입니다."
-    },
-    {
-      "selector": "#content > h4",
-      "source": "初めての方へ",
-      "target": "처음 오신 분께"
-    },
-    {
-      "selector": "#content > p",
-      "source": "Twitter/GitHub/Googleのアカウントで右上のログインしてください。",
-      "target": "오른쪽 위에서 Twitter/GitHub/Google 계정으로 로그인해 주세요."
-    },
-    {
-      "selector": "#content > p",
-      "source": "Google アカウントログイン時のメールアドレスは収集しません。",
-      "target": "Google 계정으로 로그인할 때 이메일 주소를 수집하지 않습니다."
-    },
-    {
-      "selector": "#content > p",
-      "source": "（ただし、想定外のことが発生したら、管理者は確認する可能性があります）",
-      "target": "(단, 예상치 못한 문제가 발생하면 관리자가 확인할 수 있습니다.)"
-    },
-    {
-      "selector": "#content > p",
-      "source": "初めての方は",
-      "target": "처음 오신 분은"
-    },
+    { "selector": "#daily_problems h4", "ref": "ui_852ccfb41a702fcb" },
+    { "selector": "#daily_problems .daily-note", "ref": "ui_c7e96f2a53263a8b" },
+    { "selector": "#daily_problems .daily-band", "ref": "ui_11aaa9f58f7db4e2" },
+    { "selector": "#content > h3", "ref": "ui_54af765d3dc99350" },
+    { "selector": "#content > p", "ref": "ui_01b9b699e1cb8720" },
+    { "selector": "#content > p", "ref": "ui_a4b7753370b3eddb" },
+    { "selector": "#content > h4", "ref": "ui_0dba5954f69bb21d" },
+    { "selector": "#content > p", "ref": "ui_fdcd1dceb5dcbc09" },
+    { "selector": "#content > p", "ref": "ui_a9fc48f9406bfb8d" },
+    { "selector": "#content > p", "ref": "ui_fb2f94b163918952" },
+    { "selector": "#content > p", "ref": "ui_9cc8ca565035668b" },
     {
       "selector": "#content > p a[href='/wiki/guide']",
-      "source": "初心者の方へのガイド",
-      "target": "초보자 가이드"
-    },
-    {
-      "selector": "#content h4",
-      "source": "このサービスについて",
-      "target": "이 서비스에 대하여"
-    },
-    {
-      "selector": "#content h4",
-      "source": "公式Xアカウント",
-      "target": "공식 X 계정"
-    },
-    {
-      "selector": "#content .x-account-note",
-      "source": "(手動)",
-      "target": "(수동)"
-    },
-    {
-      "selector": "#content .x-account-note",
-      "source": "ショートコード関連の自動ポストされます",
-      "target": "숏코딩 관련 게시물이 자동으로 올라옵니다"
-    },
-    {
-      "selector": "#content h4",
-      "source": "公式Slackチャンネル",
-      "target": "공식 Slack 채널"
-    },
-    {
-      "selector": "#content a",
-      "source": "slackの参加はこちら",
-      "target": "Slack 참여하기"
-    },
-    {
-      "selector": "#content li",
-      "source": "ショートコード通知関連",
-      "target": "숏코딩 알림 관련"
-    },
-    {
-      "selector": "#content h4",
-      "source": "有志のサイト",
-      "target": "유저 제작 사이트"
-    },
-    {
-      "selector": "#content h4",
-      "source": "問題を解く",
-      "target": "문제 풀기"
-    },
-    {
-      "selector": "#content h4",
-      "source": "問題投稿",
-      "target": "문제 출제"
-    },
-    {
-      "selector": "#content h4",
-      "source": "問題出題（初期の出題方法）",
-      "target": "문제 출제(초기의 출제 방식)"
-    },
-    {
-      "selector": "#content h4",
-      "source": "注意事項",
-      "target": "주의 사항"
-    },
-    {
-      "selector": "#content h4",
-      "source": "知的財産権について",
-      "target": "지식재산권에 대하여"
-    },
-    {
-      "selector": "#content h4",
-      "source": "他のユーザーが提出したコードの利用について",
-      "target": "다른 사용자가 제출한 코드의 이용에 대하여"
-    },
-    {
-      "selector": "#content h4",
-      "source": "おすすめの競技プログラミングサイト",
-      "target": "추천 Competitive Programming 사이트"
-    },
-    {
-      "selector": "#content h4",
-      "source": "管理人について",
-      "target": "관리자 정보"
-    },
-    {
-      "selector": "#content h4",
-      "source": "ほしいものリスト",
-      "target": "사고 싶은 것들 (Amazon)"
-    },
-    {
-      "selector": "#content h4",
-      "source": "使用ライブラリ",
-      "target": "사용 라이브러리"
-    },
-    {
-      "selector": "#content h4",
-      "source": "免責事項",
-      "target": "면책 조항"
-    },
-    {
-      "selector": "#content p",
-      "source": "をご覧ください。",
-      "target": "📝 를 확인해 주세요."
-    },
-    {
-      "selector": "#content p",
-      "source": "競技プログラミングのスキルの練習として、回答したい人と出題したい人をつなぐサービスです。",
-      "target": "📝 경쟁 프로그래밍 실력 향상을 위해 문제를 풀고 싶은 사람과 출제하고 싶은 사람을 연결하는 서비스입니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "競技プログラミングは、出題することもとてもアルゴリズムの勉強になります。",
-      "target": "📝 경쟁 프로그래밍에서는 문제를 출제하는 것도 알고리즘 공부에 큰 도움이 됩니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "完璧に出題できなくても、気軽にお互い指摘しあって向上していこうという方針で行っております。",
-      "target": "📝 완벽하게 출제하지 못하더라도 서로 편하게 의견을 나누며 발전하는 것을 지향합니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "競技プログラミングで遊ぼう！という感じで勉強会などで使って便利なサービスを目指しております。",
-      "target": "📝 '경쟁 프로그래밍으로 놀아 보자!'라는 느낌으로 스터디 등에서 편리하게 사용할 수 있는 서비스를 지향합니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "(Writer, Tester, 要望, バグ報告, 雑談などお気軽に)",
-      "target": "📝 (출제자, 테스터, 요청, 버그 신고, 잡담 등을 편하게 나눠 주세요)"
-    },
-    {
-      "selector": "#content li",
-      "source": "5分前に通知されます",
-      "target": "📝 5분 전에 알림이 전송됩니다"
-    },
-    {
-      "selector": "#content li",
-      "source": "テスターさんの呼びかけやテスター募集の更新がある場合は自動投稿されます",
-      "target": "📝 테스터 호출이나 테스터 모집 업데이트가 있으면 자동으로 게시됩니다"
-    },
-    {
-      "selector": "#content p",
-      "source": "今までに出題された問題を解くことが出来ます。 「問題一覧」を選んで、「問題名」を選んで問題を解き、「提出」を選んでコードの提出をしてください。",
-      "target": "📝 지금까지 출제된 문제를 풀 수 있습니다. '문제 목록'에서 문제명을 선택해 문제를 푼 뒤 '제출'을 선택하여 코드를 제출해 주세요."
-    },
-    {
-      "selector": "#content p",
-      "source": "問題はTwitter/GitHub/Googleのアカウントをお持ちであれば、誰でも投稿することが出来ます。",
-      "target": "📝 Twitter/GitHub/Google 계정이 있으면 누구나 문제를 출제할 수 있습니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "（雲マークのログインは、連絡ができなくなる可能性があるので、できないようになっています。）",
-      "target": "📝 (구름 아이콘 로그인은 연락이 불가능해질 수 있어 출제에 사용할 수 없습니다.)"
-    },
-    {
-      "selector": "#content p",
-      "source": "投稿はできますが、公開は一旦ご連絡ください。",
-      "target": "📝 문제를 등록할 수는 있지만 공개하려면 먼저 연락해 주세요."
-    },
-    {
-      "selector": "#content p",
-      "source": "競技プログラミングでの問題出題する醍醐味や、解く面白さなどを味わえたらと思っております。",
-      "target": "📝 경쟁 프로그래밍 문제를 출제하고 푸는 재미를 느껴 보시기를 바랍니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "もし、このシステムでの問題投稿がわからなかったら、右のTwitterにDMでテキスト送っていたければ、こちらで作成いたします。",
-      "target": "📝 이 시스템에서 문제를 등록하는 방법을 모르겠다면 오른쪽 Twitter 계정으로 내용을 DM해 주세요. 대신 작성해 드립니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "自分では公開はできませんが、運営にご連絡いただければ基本的に問題なければいつでも公開するつもりです。",
-      "target": "📝 직접 공개할 수는 없지만 운영진에게 연락하면 특별한 문제가 없는 한 언제든 공개할 예정입니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "頂いた問題で、ニコ生を使いゆるふわなコンテストを行っておりました。",
-      "target": "📝 제공받은 문제로 니코니코 생방송을 이용한 가벼운 대회를 진행했습니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "レーティングが付くような、ちゃんとしたコンテストを行うつもりはありませんのでご注意ください。",
-      "target": "📝 레이팅이 부여되는 정식 대회를 진행할 예정은 없으니 유의해 주세요."
-    },
-    {
-      "selector": "#content p",
-      "source": "詳しくはこちらのニコニコのコミュニティへ",
-      "target": "📝 자세한 내용은 이 니코니코 커뮤니티에서 확인하세요"
-    },
-    {
-      "selector": "#content a",
-      "source": "【ニコニコ動画】yuki2006のプログラミング配信",
-      "target": "📝 【니코니코 동화】yuki2006의 프로그래밍 방송"
-    },
-    {
-      "selector": "#content li",
-      "source": "予定された時間に出題",
-      "target": "📝 예정된 시간에 문제 출제"
-    },
-    {
-      "selector": "#content li",
-      "source": "コーディングタイム",
-      "target": "📝 코딩 시간"
-    },
-    {
-      "selector": "#content li",
-      "source": "writer解・解説発表",
-      "target": "📝 출제자 풀이·해설 발표"
-    },
-    {
-      "selector": "#content li",
-      "source": "他の提出者へのチャレンジ（あれば）",
-      "target": "📝 다른 제출자에 대한 챌린지(있는 경우)"
-    },
-    {
-      "selector": "#content li",
-      "source": "システムテスト（後日コーナーケース・嘘解法が見つかり次第ご連絡）",
-      "target": "📝 시스템 테스트(추후 예외 사례나 잘못된 풀이가 발견되면 연락)"
-    },
-    {
-      "selector": "#content p",
-      "source": "競技プログラミングの解答と問題作成の練習を目標としておりますので、想定解が必ずしも正しいとは限らない事があります。",
-      "target": "📝 경쟁 프로그래밍 풀이와 문제 제작 연습을 목표로 하므로 의도한 풀이가 반드시 정확하지 않을 수 있습니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "ちゃんとしたコンテストではないので、間違ってても楽しみながら、出題者に質問なり、ご指摘してみんなで勉強していきましょう。",
-      "target": "📝 정식 대회가 아니므로 오류가 있더라도 즐기면서 출제자에게 질문하거나 지적하여 함께 공부합시다."
-    },
-    {
-      "selector": "#content p",
-      "source": "なので、「想定解がわからないけど、誰かといてください！」みたいな出題でもOKです。（ただし、作成後その旨をお知らせください）",
-      "target": "📝 따라서 '의도한 풀이를 모르겠으니 누군가 풀어 주세요!' 같은 출제도 괜찮습니다.(단, 작성 후 그 사실을 알려 주세요.)"
-    },
-    {
-      "selector": "#content p",
-      "source": "問題を作品だと思っております。その作品の完成度を高めるためにもコンテスト後のテストケース追加とリジャッジを多用します。 当時ACだったものがWAなどになってしまう可能性があります。ご了承ください。",
-      "target": "📝 문제를 하나의 작품으로 생각합니다. 완성도를 높이기 위해 대회 후 테스트 케이스 추가와 재채점을 자주 실시합니다. 당시 AC였던 제출이 WA 등으로 바뀔 수 있으니 양해해 주세요."
-    },
-    {
-      "selector": "#content p",
-      "source": "各問題について、言語によっては時間制限内に解けることは保証しておりません。ご了承ください。",
-      "target": "📝 문제마다 언어에 따라 시간 제한 내에 해결할 수 있음을 보장하지 않습니다. 양해해 주세요."
-    },
-    {
-      "selector": "#content p",
-      "source": "問題投稿は、他の競技プログラミングサイト等からの問題の転載は、そのサイトの利用規約やWriterさんがOKと確認が取れている場合のみOKとします。",
-      "target": "📝 다른 경쟁 프로그래밍 사이트 등의 문제를 전재하려면 해당 사이트의 이용약관과 출제자의 허락을 확인한 경우에만 가능합니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "草案なども含めSNSで公開している場合は、その旨を書いて単独公開で公開を検討してください。",
-      "target": "📝 초안을 포함해 SNS에 공개한 경우 그 사실을 적고 단독 공개를 검토해 주세요."
-    },
-    {
-      "selector": "#content p",
-      "source": "知らなかった、結果的に似てしまった、同じ解法だったなどはしょうがない（多分よくある）と思います。",
-      "target": "📝 몰랐거나 결과적으로 비슷해졌거나 풀이가 같아진 경우는 어쩔 수 없는 일이며 흔히 있을 수 있다고 생각합니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "予めお知らせせずに、ちょっとしたメンテナンスを行う時があります。投稿できない、表示がおかしいなどが5分ほど経っても改善されない場合はご連絡ください。",
-      "target": "📝 사전 공지 없이 간단한 점검을 진행할 수 있습니다. 제출할 수 없거나 표시가 이상한 상태가 5분 정도 지나도 개선되지 않으면 연락해 주세요."
-    },
-    {
-      "selector": "#content p",
-      "source": "「頂いた問題や画像、テストケース」の所有権と著作権は、運営者・出題者に帰属し、運営者・出題者ならば自由に使えるものとします。",
-      "target": "📝 '제공받은 문제, 이미지, 테스트 케이스'의 소유권과 저작권은 운영자·출제자에게 귀속되며 운영자·출제자는 자유롭게 사용할 수 있습니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "運営者が多少変更することがございます。",
-      "target": "📝 운영자가 일부 변경할 수 있습니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "「提出されたコード」の所有権と著作権は、回答者に帰属します。",
-      "target": "📝 '제출된 코드'의 소유권과 저작권은 답안 제출자에게 귀속됩니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "ただし、提出の条件として、回答者は、運営者が「提出されたコード」を他のユーザーに対して Apache License 2.0 のもとで公開することを許可するものとします。",
-      "target": "📝 단, 제출 조건으로 답안 제출자는 운영자가 '제출된 코드'를 다른 사용자에게 Apache License 2.0으로 공개하는 것을 허용합니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "サーバーに提出された、「頂いた問題や画像、テストケース」および「提出されたコード」のデータに関して、将来的に保存されることは保証致しません。ご了承ください。",
-      "target": "📝 서버에 제출된 '제공받은 문제, 이미지, 테스트 케이스' 및 '제출된 코드' 데이터가 향후 보존될 것을 보장하지 않습니다. 양해해 주세요."
-    },
-    {
-      "selector": "#content p",
-      "source": "個人・法人を問わずご利用いただけますが、問題やコードが必ずしも正しいという保証はできません。",
-      "target": "📝 개인과 법인 모두 이용할 수 있지만 문제와 코드가 반드시 정확하다고 보장할 수 없습니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "「提出されたコード」を利用される場合は、Apache License 2.0 に従ってください（出典・著作者表示として、当該提出コードの yukicoder の URL を明記してください）。",
-      "target": "📝 '제출된 코드'를 이용할 때는 Apache License 2.0을 따라 주세요(출처·저작자 표시로 해당 제출 코드의 yukicoder URL을 명시해 주세요)."
-    },
-    {
-      "selector": "#content p",
-      "source": "問題ページ・提出コードなどのリンクは、（事前確認なしに）ブログ等で自由に貼っていただいて構いません。",
-      "target": "📝 문제 페이지와 제출 코드 등의 링크는 사전 확인 없이 블로그 등에 자유롭게 게시해도 됩니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "なお教材として利用される際は、利用状況確認のため、あらかじめ下記の連絡先までご連絡ください。",
-      "target": "📝 교재로 이용할 때는 이용 현황 확인을 위해 미리 아래 연락처로 연락해 주세요."
-    },
-    {
-      "selector": "#content p",
-      "source": "yukicoderで問題解くのが面白いと思って頂けた方はこちらも挑戦してみましょう。",
-      "target": "📝 yukicoder에서 문제 푸는 것이 재미있었다면 다음 사이트에도 도전해 보세요."
-    },
-    {
-      "selector": "#content p",
-      "source": "是非AtCoderにも出題できるように頑張りましょう！",
-      "target": "📝 AtCoder에도 출제할 수 있도록 노력해 봅시다!"
-    },
-    {
-      "selector": "#content li",
-      "source": "(日本語)",
-      "target": "📝 (일본어)"
-    },
-    { "selector": "#content li", "source": "(英語)", "target": "📝 (영어)" },
-    { "selector": "#content div", "source": "管理人", "target": "📝 관리자" },
-    {
-      "selector": "#content div",
-      "source": "(お知らせアカウント)",
-      "target": "📝 (공지 계정)"
-    },
-    { "selector": "#content a", "source": "メール", "target": "📝 이메일" },
-    {
-      "selector": "#content div",
-      "source": "(TopCoder:青いひと)",
-      "target": "📝 (TopCoder: 파란 사람)"
-    },
-    {
-      "selector": "#content p",
-      "source": "スポンサー・広告など募集中です。",
-      "target": "📝 스폰서·광고 등을 모집하고 있습니다."
-    },
-    {
-      "selector": "#content a",
-      "source": "ほしいものリスト",
-      "target": "📝 희망 상품 목록"
-    },
-    {
-      "selector": "#content a",
-      "source": "メールアドレスはこちら",
-      "target": "📝 이메일 주소는 여기"
-    },
-    {
-      "selector": "#content dt",
-      "source": "timeout (GNU utils)の実装アイデアをもとにしたコードがあります",
-      "target": "📝 timeout(GNU utils)의 구현 아이디어를 바탕으로 한 코드가 있습니다"
-    },
-    {
-      "selector": "#content dd",
-      "source": "ご連絡いただければ、開示します。",
-      "target": "📝 연락해 주시면 공개하겠습니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "このサイトではGoogle Analytics、Adsense、Amazonウィジェットを使用しています。また ユーザーは、本サイトを利用することでcookieの使用に許可を与えたものとみなします。",
-      "target": "📝 이 사이트는 Google Analytics, Adsense, Amazon 위젯을 사용합니다. 또한 사용자는 이 사이트를 이용함으로써 쿠키 사용에 동의한 것으로 간주됩니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "また、サイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイト宣伝プログラムである、Amazonアソシエイト・プログラムの参加者です。",
-      "target": "📝 또한 사이트가 소개 수수료를 얻을 수단을 제공하기 위한 제휴 광고 프로그램인 Amazon 어소시에이트 프로그램의 참가자입니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "また、Google社によるアクセス情報の収集方法および利用方法については、",
-      "target": "📝 Google의 접속 정보 수집 및 이용 방법은"
-    },
-    {
-      "selector": "#content a",
-      "source": "Google Analyticsサービス利用規約",
-      "target": "📝 Google Analytics 서비스 이용약관"
-    },
-    { "selector": "#content p", "source": "および", "target": "📝 및" },
-    {
-      "selector": "#content a",
-      "source": "Google社プライバシーポリシー",
-      "target": "📝 Google 개인정보처리방침"
-    },
-    {
-      "selector": "#content p",
-      "source": "によって定められています。",
-      "target": "📝 에 규정되어 있습니다."
+      "ref": "ui_29c6967b5be7fbeb"
+    },
+    { "selector": "#content h4", "ref": "ui_4b7a1b532fc6e892" },
+    { "selector": "#content h4", "ref": "ui_f89bf4ff103c8ca9" },
+    { "selector": "#content .x-account-note", "ref": "ui_4e370d43870946e0" },
+    { "selector": "#content .x-account-note", "ref": "ui_15be07fcb75543e8" },
+    { "selector": "#content h4", "ref": "ui_628e0a59c325fa57" },
+    { "selector": "#content a", "ref": "ui_d18185bbf16f593d" },
+    { "selector": "#content li", "ref": "ui_f6d528e6b86c5cd9" },
+    { "selector": "#content h4", "ref": "ui_41af87b257290a62" },
+    { "selector": "#content h4", "ref": "ui_d6073c0147aad1b3" },
+    { "selector": "#content h4", "ref": "ui_076a24b852af473e" },
+    { "selector": "#content h4", "ref": "ui_28553a5854582562" },
+    { "selector": "#content h4", "ref": "ui_67a6d33430af9a09" },
+    { "selector": "#content h4", "ref": "ui_1b35724e7088ff17" },
+    { "selector": "#content h4", "ref": "ui_3f5227bff357936e" },
+    { "selector": "#content h4", "ref": "ui_1be10ae19a71744f" },
+    { "selector": "#content h4", "ref": "ui_ff456497f466a94f" },
+    { "selector": "#content h4", "ref": "ui_857382e8b82f3adc" },
+    { "selector": "#content h4", "ref": "ui_e001f0227bc64af9" },
+    { "selector": "#content h4", "ref": "ui_58458742a6838458" },
+    { "selector": "#content p", "ref": "ui_e18f17b1650c382d" },
+    { "selector": "#content p", "ref": "ui_e1e3b5b1b165dd2b" },
+    { "selector": "#content p", "ref": "ui_707c2bb6aa48d185" },
+    { "selector": "#content p", "ref": "ui_e544c880c8417c26" },
+    { "selector": "#content p", "ref": "ui_793e13ff229eba8d" },
+    { "selector": "#content p", "ref": "ui_3a8ba437f25a9fa2" },
+    { "selector": "#content li", "ref": "ui_0c399c607943875c" },
+    { "selector": "#content li", "ref": "ui_6127b460141784c3" },
+    { "selector": "#content p", "ref": "ui_94a565f868598828" },
+    { "selector": "#content p", "ref": "ui_5c6dbf0d1158ac07" },
+    { "selector": "#content p", "ref": "ui_a1a14feceee1e913" },
+    { "selector": "#content p", "ref": "ui_ed1e3fa30b5a3a0e" },
+    { "selector": "#content p", "ref": "ui_e2f6211f7f216e3b" },
+    { "selector": "#content p", "ref": "ui_ef4ac8114ab974bb" },
+    { "selector": "#content p", "ref": "ui_8d03bf2cf49fb11e" },
+    { "selector": "#content p", "ref": "ui_484ccc21eedb8e71" },
+    { "selector": "#content p", "ref": "ui_97882bfc8e514f05" },
+    { "selector": "#content p", "ref": "ui_616bff58adea1e0a" },
+    { "selector": "#content a", "ref": "ui_91f27930b775b7f6" },
+    { "selector": "#content li", "ref": "ui_de70475336845605" },
+    { "selector": "#content li", "ref": "ui_7c4b26db1c2c03c0" },
+    { "selector": "#content li", "ref": "ui_21152471a6eea50a" },
+    { "selector": "#content li", "ref": "ui_8695b0869d26daca" },
+    { "selector": "#content li", "ref": "ui_b17d0ccc37637dcc" },
+    { "selector": "#content p", "ref": "ui_e0654c0fe562e3f3" },
+    { "selector": "#content p", "ref": "ui_edca5f57e6e4d3d2" },
+    { "selector": "#content p", "ref": "ui_5bd01abb4627545a" },
+    { "selector": "#content p", "ref": "ui_7ae9fd8de057c523" },
+    { "selector": "#content p", "ref": "ui_a25ac124e1f66b98" },
+    { "selector": "#content p", "ref": "ui_0c5363845337cbf4" },
+    { "selector": "#content p", "ref": "ui_3c7676a82ef87e08" },
+    { "selector": "#content p", "ref": "ui_6f575a1c3ccbfc98" },
+    { "selector": "#content p", "ref": "ui_f967299a4e96fd82" },
+    { "selector": "#content p", "ref": "ui_97d24c5af72d41c7" },
+    { "selector": "#content p", "ref": "ui_e455fc3309885879" },
+    { "selector": "#content p", "ref": "ui_59b83078a3af4685" },
+    { "selector": "#content p", "ref": "ui_5bafcdba87fdda1b" },
+    { "selector": "#content p", "ref": "ui_f84fd85e206b0817" },
+    { "selector": "#content p", "ref": "ui_f177bc2956c3ba7a" },
+    { "selector": "#content p", "ref": "ui_5f1570b9b65ad673" },
+    { "selector": "#content p", "ref": "ui_d1160db201de129d" },
+    { "selector": "#content p", "ref": "ui_30f5e272455b67a6" },
+    { "selector": "#content p", "ref": "ui_9f2f3410cdae4bbc" },
+    { "selector": "#content p", "ref": "ui_222e96576bcc2c2d" },
+    { "selector": "#content li", "ref": "ui_553fafea853e14e9" },
+    { "selector": "#content li", "ref": "ui_78a3d7aca65795d4" },
+    { "selector": "#content div", "ref": "ui_e4e7baa897f1bf22" },
+    { "selector": "#content div", "ref": "ui_23c0f6fa5391f482" },
+    { "selector": "#content a", "ref": "ui_d8c99a463d790d45" },
+    { "selector": "#content div", "ref": "ui_0a685df32e1bd0fb" },
+    { "selector": "#content p", "ref": "ui_1f81c9d7d098fc9e" },
+    { "selector": "#content a", "ref": "ui_857382e8b82f3adc", "variant": 0 },
+    { "selector": "#content a", "ref": "ui_6f79c50e0f81b683" },
+    { "selector": "#content dt", "ref": "ui_9c97eaa5b310e0f9" },
+    { "selector": "#content dd", "ref": "ui_a30047fc3b493f4f" },
+    { "selector": "#content p", "ref": "ui_8daf7ba29570ad3c" },
+    { "selector": "#content p", "ref": "ui_08b5a20ef1eb0e7a" },
+    { "selector": "#content p", "ref": "ui_efa7c656cd77ae40" },
+    { "selector": "#content a", "ref": "ui_6b1bab8a75af8f0e" },
+    { "selector": "#content p", "ref": "ui_e680e0d0a5b01adb" },
+    { "selector": "#content a", "ref": "ui_6613d28eb41f46e3" },
+    { "selector": "#content p", "ref": "ui_2114c2a1257d27b6" },
+    {
+      "selector": ".next-event-card .nec-countdown",
+      "ref": "ui_343352ee06219f52"
     },
     {
       "selector": ".next-event-card .nec-countdown",
-      "source": "開催中",
-      "target": "📝 진행 중"
+      "ref": "ui_b99b1cb3fbaf6f21"
     },
     {
       "selector": ".next-event-card .nec-countdown",
-      "source": "あと {minutes}分",
-      "target": "📝 {minutes}분 남음",
-      "variables": { "minutes": "\\d+" }
+      "ref": "ui_880f4f735f8f2d8d"
     },
     {
       "selector": ".next-event-card .nec-countdown",
-      "source": "あと {hours}時間 {minutes}分",
-      "target": "📝 {hours}시간 {minutes}분 남음",
-      "variables": { "hours": "\\d+", "minutes": "\\d+" }
+      "ref": "ui_abff4c41fe60bfb0"
     },
+    { "selector": ".next-event-card .nec-when", "ref": "ui_4bba189b10efebbb" },
     {
-      "selector": ".next-event-card .nec-countdown",
-      "source": "あと {days}日 {hours}時間 {minutes}分",
-      "target": "📝 {days}일 {hours}시간 {minutes}분 남음",
-      "variables": { "days": "\\d+", "hours": "\\d+", "minutes": "\\d+" }
-    },
-    {
-      "selector": ".next-event-card .nec-when",
-      "source": "{date} ({weekday}) {start} 〜 {end}",
-      "target": "📝 {date} ({weekday}) {start} ~ {end}",
-      "variables": {
-        "date": "\\d{4}/\\d{2}/\\d{2}",
-        "weekday": {
-          "pattern": "[日月火水木金土]",
-          "values": {
-            "日": "일",
-            "月": "월",
-            "火": "화",
-            "水": "수",
-            "木": "목",
-            "金": "금",
-            "土": "토"
-          }
-        },
-        "start": "\\d{2}:\\d{2}",
-        "end": "\\d{2}:\\d{2}"
-      }
+      "selector": "#content a[title]",
+      "attribute": "title",
+      "ref": "ui_6b1bab8a75af8f0e"
     },
     {
       "selector": "#content a[title]",
       "attribute": "title",
-      "source": "Google Analyticsサービス利用規約",
-      "target": "📝 Google Analytics 서비스 이용약관"
+      "ref": "ui_6613d28eb41f46e3"
     },
-    {
-      "selector": "#content a[title]",
-      "attribute": "title",
-      "source": "Google社プライバシーポリシー",
-      "target": "📝 Google 개인정보처리방침"
-    },
-    {
-      "selector": ".next-event-card .nec-type",
-      "attribute": "data-suffix",
-      "source": "通常コンテスト",
-      "target": "📝 일반 대회"
-    },
-    {
-      "selector": "#content .alert.alert-info",
-      "source": "Xは3/30から自動的にユーザーの言語に翻訳される機能を提供しました。それにインスパイアされて、ステータスも日本語表現にしました。",
-      "target": "📝 X는 3월 30일부터 사용자 언어로 자동 번역되는 기능을 제공했습니다. 여기에서 영감을 받아 상태도 일본어 표현으로 바꿨습니다."
-    },
-    {
-      "selector": "#content .alert.alert-info",
-      "source": "（今日は4/1です）",
-      "target": "📝 (오늘은 4월 1일입니다)"
-    }
+    { "selector": "#content .alert.alert-info", "ref": "ui_951b900d0c670457" },
+    { "selector": "#content .alert.alert-info", "ref": "ui_8efe8e351e5cb3ba" }
   ]
 }

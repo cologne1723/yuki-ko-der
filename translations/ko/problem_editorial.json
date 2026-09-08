@@ -3,61 +3,93 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    { "selector": "#toplinks a", "source": "閲覧", "target": "📝 열람" },
     {
-      "selector": "#body div",
-      "source": "現在解説は表示することはできません。",
-      "target": "📝 현재 해설을 표시할 수 없습니다."
+      "selector": "#toplinks a",
+      "ref": "ui_e5edd884d499a4a3"
     },
     {
       "selector": "#body div",
-      "source": "表示することができないユーザーは以下のとおりです。",
-      "target": "📝 해설을 볼 수 없는 사용자는 다음과 같습니다."
+      "ref": "ui_eeb8bf4f58a30398"
+    },
+    {
+      "selector": "#body div",
+      "ref": "ui_c3e37405f92c80ce"
     },
     {
       "selector": "#content li",
-      "source": "非ログイン・匿名ログインユーザー(ガチモードと同様の扱い)",
-      "target": "📝 비로그인·익명 로그인 사용자(진지 모드와 동일하게 취급)"
+      "ref": "ui_ae97b014948374ef"
     },
     {
       "selector": "#content li",
-      "source": "ガチモード時にACを取ってないユーザー",
-      "target": "📝 진지 모드에서 AC하지 않은 사용자"
+      "ref": "ui_2882147a92d5d149"
     },
     {
       "selector": "#content li",
-      "source": "コンテスト中",
-      "target": "📝 대회 진행 중"
+      "ref": "ui_4a157b4dbb22b9c9"
     },
     {
       "selector": "#disableEditorialModal .modal-title",
-      "source": "解説URLを無効化",
-      "target": "📝 해설 URL 비활성화"
+      "ref": "ui_2673c1ea41093edb"
     },
     {
       "selector": "#disableEditorialForm label",
-      "source": "解説URL:",
-      "target": "📝 해설 URL:"
+      "ref": "ui_ba36752c04d309ae"
     },
     {
       "selector": "#disableEditorialForm label",
-      "source": "無効化理由:",
-      "target": "📝 비활성화 사유:"
+      "ref": "ui_f1fdea4a4c3d1f39"
     },
     {
       "selector": "#disableEditorialForm .form-check-label",
-      "source": "URLも完全に削除する（復旧不可能）",
-      "target": "📝 URL도 완전히 삭제(복구 불가)"
+      "ref": "ui_be917ce30363ffa0"
     },
     {
       "selector": "#disableEditorialModal button",
-      "source": "キャンセル",
-      "target": "📝 취소"
+      "ref": "ui_6a30866ba0bed9af"
     },
     {
       "selector": "#disableEditorialModal button",
-      "source": "無効化する",
-      "target": "📝 비활성화"
+      "ref": "ui_8eb55be9272b757f"
+    },
+    {
+      "selector": "#content > div:has(> form#my_editorial_url) > h4",
+      "ref": "ui_54eaacd9dd8af89a"
+    },
+    {
+      "selector": "#content > div:has(> form#my_editorial_url) > p",
+      "ref": "ui_eed76ba61b74f897"
+    },
+    {
+      "selector": "#content > div:has(> form#my_editorial_url) > p",
+      "ref": "ui_23ab110779657e34"
+    },
+    {
+      "selector": "#content > div:has(> form#my_editorial_url) > p",
+      "ref": "ui_4165110baad7cfe5"
+    },
+    {
+      "selector": "#content > div:has(> form#my_editorial_url) > ul > li",
+      "ref": "ui_51b0b05f59023ac0"
+    },
+    {
+      "selector": "#content > div:has(> form#my_editorial_url) > ul > li",
+      "ref": "ui_8c2c5e932fb55b7a"
+    },
+    {
+      "selector": "#content > div:has(> form#my_editorial_url) > p",
+      "ref": "ui_a7e355c40a49e20a"
+    },
+    {
+      "selector": "#content > div:has(> form#my_editorial_url) > p",
+      "ref": "ui_74eca5f7284dde1a"
+    },
+    {
+      "selector": "#content > div:has(> form#my_editorial_url) > p > a[href$=\"/editorial/user/edit\"]",
+      "ref": "ui_f4e10b24f3b5f555"
+    },
+    {
+      "selector": "#my_editorial_url",
+      "ref": "ui_8b579b73fe9e746d"
     }
   ]
 }

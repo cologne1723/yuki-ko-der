@@ -3,15 +3,7 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#toplinks a",
-      "source": "ページ",
-      "target": "📝 페이지"
-    },
-    {
-      "selector": "#content p",
-      "source": "現在、通常ログインされている方かつAC数が10以上の方のみに限定しております。",
-      "target": "📝 현재 일반 로그인 사용자 중 AC한 문제가 10개 이상인 사용자만 이용할 수 있습니다."
-    }
+    { "selector": "#toplinks a", "ref": "ui_edac66d4e40f38c2" },
+    { "selector": "#content p", "ref": "ui_251afe94515dd5e4" }
   ]
 }

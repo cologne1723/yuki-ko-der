@@ -3,15 +3,7 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#content p",
-      "source": "WebCalは",
-      "target": "WebCal은 "
-    },
-    {
-      "selector": "#content a",
-      "source": "こちら",
-      "target": "여기로"
-    }
+    { "selector": "#content p", "ref": "ui_60228b8e3e0689fe" },
+    { "selector": "#content a", "ref": "ui_31e61adb10231594" }
   ]
 }

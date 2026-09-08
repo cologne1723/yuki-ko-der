@@ -3,214 +3,116 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#toplinks a",
-      "source": "提出ソース",
-      "target": "📝 제출 소스"
-    },
-    { "selector": "#content h4", "source": "結果", "target": "📝 결과" },
-    { "selector": "#content td", "source": "問題", "target": "📝 문제" },
-    { "selector": "#content td", "source": "コンテスト", "target": "📝 대회" },
-    { "selector": "#content td", "source": "ユーザー", "target": "📝 사용자" },
-    {
-      "selector": "#content td",
-      "source": "提出日時",
-      "target": "📝 제출 일시"
-    },
-    { "selector": "#content td", "source": "言語", "target": "📝 언어" },
-    {
-      "selector": "#content .record-help-title",
-      "source": "コンパイル:",
-      "target": "📝 컴파일:"
-    },
-    {
-      "selector": "#content .record-help-title",
-      "source": "実行:",
-      "target": "📝 실행:"
-    },
-    { "selector": "#content td", "source": "結果", "target": "📝 결과" },
-    {
-      "selector": "#content td",
-      "source": "実行時間",
-      "target": "📝 실행 시간"
-    },
-    {
-      "selector": "#content td",
-      "source": "コード長",
-      "target": "📝 코드 길이"
-    },
-    { "selector": "#content td", "source": "記録", "target": "📝 기록" },
+    { "selector": "#toplinks a", "ref": "ui_3095ee84eccb93ee" },
+    { "selector": "#content h4", "ref": "ui_62b02e04f2a22a74" },
+    { "selector": "#content td", "ref": "ui_a477438947fe8cb4", "variant": 0 },
+    { "selector": "#content td", "ref": "ui_af9b1cb3b733a5a4" },
+    { "selector": "#content td", "ref": "ui_3c781a44dd66d97b", "variant": 0 },
+    { "selector": "#content td", "ref": "ui_2ee0d0b84cc73413" },
+    { "selector": "#content td", "ref": "ui_eaf482538bdd4206" },
+    { "selector": "#content .record-help-title", "ref": "ui_162a157bd2180123" },
+    { "selector": "#content .record-help-title", "ref": "ui_239803dec8ba7a39" },
+    { "selector": "#content td", "ref": "ui_62b02e04f2a22a74" },
+    { "selector": "#content td", "ref": "ui_d0f687e9b9bc6234" },
+    { "selector": "#content td", "ref": "ui_d8f366652e98a646" },
+    { "selector": "#content td", "ref": "ui_cbf573a7c32cbb33" },
     {
       "selector": "#record-help-popup .record-help-title",
-      "source": "記録タグの例:",
-      "target": "📝 기록 태그 예시:"
+      "ref": "ui_d4f354eb60ddf13b"
     },
     {
       "selector": "#record-help-popup .record-tag",
-      "source": "初AC",
-      "target": "📝 첫 AC"
+      "ref": "ui_3282ca370b3b83c3"
     },
     {
       "selector": "#record-help-popup .record-tag",
-      "source": "ショートコード",
-      "target": "📝 숏 코드"
+      "ref": "ui_eb86d5aa315eb703"
     },
     {
       "selector": "#record-help-popup .record-tag",
-      "source": "純ショートコード",
-      "target": "📝 순수 숏 코드"
+      "ref": "ui_442362f02e1ccefa"
     },
     {
       "selector": "#record-help-popup .record-tag",
-      "source": "純主流ショートコード",
-      "target": "📝 순수 주류 숏 코드"
+      "ref": "ui_f57b0d6378676570"
     },
     {
       "selector": "#record-help-popup .record-tag",
-      "source": "最速実行時間",
-      "target": "📝 최단 실행 시간"
+      "ref": "ui_819ae365cf4a7ed5"
     },
+    { "selector": "#content td", "ref": "ui_bc6990e88e819686" },
+    { "selector": "#content td", "ref": "ui_73e933f73356a54b" },
+    { "selector": "#content td", "ref": "ui_8c66912f7eff1c03" },
+    { "selector": "#content td", "ref": "ui_205f7549c042a4b2" },
+    { "selector": "#content td", "ref": "ui_983770c4a5a5266e" },
+    { "selector": "#content td", "ref": "ui_a1b884f992e37131" },
+    { "selector": "#content td", "ref": "ui_69a8f5129d36bc25" },
+    { "selector": "#content .left", "ref": "ui_7f46c2930a9ba24c" },
+    { "selector": "#content .left", "ref": "ui_c26bf810b1443520" },
+    { "selector": "#testcase_table th", "ref": "ui_b2e055ee95ebcf97" },
+    { "selector": "#content div", "ref": "ui_1ed4ee4b67b07985" },
+    { "selector": "#content h4", "ref": "ui_bdb238c98bbd055e" },
+    { "selector": "#content button", "ref": "ui_7369668476d20233" },
+    { "selector": "#source_code_modal button", "ref": "ui_5c7862f6964ec064" },
     {
-      "selector": "#content td",
-      "source": "コンパイル時間",
-      "target": "📝 컴파일 시간"
-    },
-    {
-      "selector": "#content td",
-      "source": "コンパイル使用メモリ",
-      "target": "📝 컴파일 사용 메모리"
-    },
-    {
-      "selector": "#content td",
-      "source": "実行使用メモリ",
-      "target": "📝 실행 사용 메모리"
-    },
-    {
-      "selector": "#content td",
-      "source": "最終ジャッジ日時",
-      "target": "📝 최종 채점 일시"
-    },
-    {
-      "selector": "#content td",
-      "source": "合計ジャッジ時間",
-      "target": "📝 총 채점 시간"
-    },
-    {
-      "selector": "#content td",
-      "source": "ジャッジサーバーID",
-      "target": "📝 채점 서버 ID"
-    },
-    {
-      "selector": "#content td",
-      "source": "（参考情報）",
-      "target": "📝 (참고 정보)"
-    },
-    {
-      "selector": "#content .left",
-      "source": "このコードへのチャレンジ",
-      "target": "📝 이 코드에 대한 챌린지"
-    },
-    {
-      "selector": "#content .left",
-      "source": "（要ログイン）",
-      "target": "📝 (로그인 필요)"
-    },
-    {
-      "selector": "#testcase_table th",
-      "source": "ファイルパターン",
-      "target": "📝 파일 패턴"
-    },
-    {
-      "selector": "#content div",
-      "source": "権限があれば一括ダウンロードができます",
-      "target": "📝 권한이 있으면 한꺼번에 다운로드할 수 있습니다"
-    },
-    {
-      "selector": "#content h4",
-      "source": "ソースコード",
-      "target": "📝 소스 코드"
-    },
-    {
-      "selector": "#content button",
-      "source": "大きく表示",
-      "target": "📝 크게 표시"
-    },
-    {
-      "selector": "#source_code_modal button",
-      "source": "閉じる",
-      "target": "📝 닫기"
+      "selector": "#content i[title]",
+      "attribute": "title",
+      "ref": "ui_4dc1618487876f43"
     },
     {
       "selector": "#content i[title]",
       "attribute": "title",
-      "source": "Accepted : 正解です！",
-      "target": "📝 Accepted: 정답입니다!"
+      "ref": "ui_999ec9f59b60050d"
     },
     {
       "selector": "#content i[title]",
       "attribute": "title",
-      "source": "Wrong Answer : 残念ながら不正解です！",
-      "target": "📝 Wrong Answer: 아쉽지만 오답입니다!"
+      "ref": "ui_dd133b59aa784977"
     },
     {
       "selector": "#content i[title]",
       "attribute": "title",
-      "source": "Runtime Error : ランタイムエラーです。",
-      "target": "📝 Runtime Error: 런타임 오류입니다."
+      "ref": "ui_5317f4654fdac78a"
     },
     {
       "selector": "#content i[title]",
       "attribute": "title",
-      "source": "Time Limit Exceeded : 実行時間オーバーです。効率的なアルゴリズムを考えてみましょう。",
-      "target": "📝 Time Limit Exceeded: 실행 시간 초과입니다. 효율적인 알고리즘을 생각해 봅시다."
+      "ref": "ui_1b2da627d3c29dbc"
     },
     {
       "selector": "#content i[title]",
       "attribute": "title",
-      "source": "Memory Limit Exceeded : 実行メモリーオーバーです。効率的なアルゴリズムを考えてみましょう。",
-      "target": "📝 Memory Limit Exceeded: 메모리 제한 초과입니다. 효율적인 알고리즘을 생각해 봅시다."
+      "ref": "ui_b901309094942f5b"
     },
     {
       "selector": "#content i[title]",
       "attribute": "title",
-      "source": "Output Limit Exceeded : 出力ファイル制限です。出力を少なくしてください。",
-      "target": "📝 Output Limit Exceeded: 출력 파일 제한 초과입니다. 출력을 줄여 주세요."
+      "ref": "ui_f0bb16fa56fb6af2"
     },
     {
       "selector": "#content i[title]",
       "attribute": "title",
-      "source": "Query Limit Exceeded : 出力するクエリが想定より多いです。",
-      "target": "📝 Query Limit Exceeded: 출력한 쿼리가 예상보다 많습니다."
+      "ref": "ui_587e144e513c0904"
     },
     {
       "selector": "#content i[title]",
       "attribute": "title",
-      "source": "純コードではありません : 正解ですが、純コードと判定されませんでした。",
-      "target": "📝 순수 코드가 아닙니다: 정답이지만 순수 코드로 판정되지 않았습니다."
+      "ref": "ui_a8048073d4bd65eb"
     },
     {
       "selector": "#content i[title]",
       "attribute": "title",
-      "source": "ジャッジ側の時間切れです。ジャッジ調整ミスか特殊な問題です。",
-      "target": "📝 채점 측 시간 초과입니다. 채점 설정 오류이거나 특수한 문제입니다."
+      "ref": "ui_7bdbe91c18cceb3d"
     },
     {
       "selector": "#content i[title]",
       "attribute": "title",
-      "source": "Compile Error : コンパイルエラーです。手元でご確認などをお願いします。",
-      "target": "📝 Compile Error: 컴파일 오류입니다. 로컬 환경 등에서 확인해 주세요."
-    },
-    {
-      "selector": "#content i[title]",
-      "attribute": "title",
-      "source": "参考程度に掲載しています。現時点では実行時間順などのキーになっていません。",
-      "target": "📝 참고용으로 표시됩니다. 현재는 실행 시간순 등의 정렬 기준에 사용되지 않습니다."
+      "ref": "ui_25062495caf36b84"
     },
     {
       "selector": "#source_code_modal button.btn-close",
       "attribute": "aria-label",
-      "source": "閉じる",
-      "target": "📝 닫기"
+      "ref": "ui_5c7862f6964ec064"
     }
   ]
 }

@@ -3,78 +3,29 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#content h4",
-      "source": "👑 記録保有数ランキング TOP10",
-      "target": "📝 👑 기록 보유 수 랭킹 TOP 10"
-    },
-    {
-      "selector": "#content p",
-      "source": "各カテゴリでの記録保有数・作問回数のランキングです",
-      "target": "📝 각 부문의 기록 보유 수와 출제 횟수 랭킹입니다."
-    },
-    {
-      "selector": "#content h4",
-      "source": "純ショートコード(言語別)",
-      "target": "📝 순수 숏 코드(언어별)"
-    },
-    {
-      "selector": "#content h4",
-      "source": "純主流(言語別)",
-      "target": "📝 순수 주류(언어별)"
-    },
-    {
-      "selector": "#content h4",
-      "source": "Writer回数",
-      "target": "📝 출제 횟수"
-    },
-    {
-      "selector": "#content h4",
-      "source": "Tester回数",
-      "target": "📝 테스트 횟수"
-    },
-    {
-      "selector": "#content th",
-      "source": "記録保有数",
-      "target": "📝 기록 보유 수"
-    },
-    { "selector": "#content th", "source": "記録数", "target": "📝 기록 수" },
-    { "selector": "#content th", "source": "作問数", "target": "📝 출제 수" },
-    {
-      "selector": "#content th",
-      "source": "テスト数",
-      "target": "📝 테스트 수"
-    },
-    {
-      "selector": "#content p",
-      "source": "記録保有数ランキングは、",
-      "target": "📝 기록 보유 수 랭킹은"
-    },
-    { "selector": "#content p", "source": "または", "target": "📝 또는" },
-    {
-      "selector": "#content p",
-      "source": "が表示できます。",
-      "target": "📝 을 표시할 수 있습니다."
-    },
+    { "selector": "#content h4", "ref": "ui_f35330335090e0b0" },
+    { "selector": "#content p", "ref": "ui_92b10eec81161094" },
+    { "selector": "#content h4", "ref": "ui_bc0babf875d3dad0" },
+    { "selector": "#content h4", "ref": "ui_ce7ff6100bbd9232" },
+    { "selector": "#content h4", "ref": "ui_b0172d8ca2372355" },
+    { "selector": "#content h4", "ref": "ui_de4d33b3b7df214c" },
+    { "selector": "#content th", "ref": "ui_b1746f5fab56fbc9" },
+    { "selector": "#content th", "ref": "ui_07e27c62c645c17a" },
+    { "selector": "#content th", "ref": "ui_758e9235ab6d72ee" },
+    { "selector": "#content th", "ref": "ui_5f20313f05c693a3" },
+    { "selector": "#content p", "ref": "ui_11a10697cf4402bd" },
+    { "selector": "#content p", "ref": "ui_6a65bef72f316ce5", "variant": 0 },
+    { "selector": "#content p", "ref": "ui_7ab01f968ed262fc" },
     {
       "selector": "#ranking-tables p.description",
-      "source": "cLay/kuin以外",
-      "target": "📝 cLay/kuin 이외"
+      "ref": "ui_0f04bb96712d8bc5"
     },
+    { "selector": "#supporter-message a", "ref": "ui_cb2da95559896235" },
     {
       "selector": "#supporter-message a",
-      "source": "サイトサポーター",
-      "target": "📝 사이트 서포터"
+      "ref": "ui_bb4500ee5ebc42a2",
+      "variant": 1
     },
-    {
-      "selector": "#supporter-message a",
-      "source": "ワンデーサポーター",
-      "target": "📝 원데이 서포터"
-    },
-    {
-      "selector": "#supporter-message a",
-      "source": "ワンデーサポーターになる →",
-      "target": "📝 원데이 서포터 되기 →"
-    }
+    { "selector": "#supporter-message a", "ref": "ui_c7653d74fb16f5e3" }
   ]
 }

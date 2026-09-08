@@ -2,11 +2,5 @@
   "$schema": "../translations.schema.json",
   "locale": "ko",
   "sourceLocale": "ja",
-  "translations": [
-    {
-      "selector": "#content div",
-      "source": "さんの問題一覧",
-      "target": "📝 님의 문제 목록"
-    }
-  ]
+  "translations": [{ "selector": "#content div", "ref": "ui_47a00eef3f3ee716" }]
 }

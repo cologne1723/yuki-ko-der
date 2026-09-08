@@ -17,20 +17,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm format:check
-      - run: pnpm typecheck
-      - run: pnpm review:build
-      - run: pnpm build:problems
-      - run: pnpm lint:problems
-      - run: pnpm validate:problems
-      - run: pnpm test
+      - run: pnpm check
+      - run: pnpm review:smoke
       - name: 확장 기능 패키지 생성
-        run: pnpm package
+        run: pnpm package:built
       - uses: actions/upload-artifact@v4
         with:
           name: yukicoder-ko-extension
-          path: dist/
+          path: |
+            dist/extension/
+            dist/collector/
+            dist/archives/
           if-no-files-found: error
           include-hidden-files: false

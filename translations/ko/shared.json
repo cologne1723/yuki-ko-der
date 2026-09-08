@@ -3,235 +3,101 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    { "selector": "#toplinks a", "source": "統計", "target": "📝 통계" },
-    { "selector": "#toplinks a", "source": "質問", "target": "📝 질문" },
+    { "selector": "#toplinks a", "ref": "ui_824c84b4bad7ecca" },
+    { "selector": "#toplinks a", "ref": "ui_637343d2d5108708", "variant": 0 },
+    { "selector": "#toplinks a", "ref": "ui_2efde06346c1bf97", "variant": 0 },
+    { "selector": "#toplinks a", "ref": "ui_18a86598ada75fce", "variant": 0 },
+    { "selector": "#toplinks a", "ref": "ui_eb86d5aa315eb703" },
+    { "selector": "#toplinks a", "ref": "ui_edac66d4e40f38c2" },
+    { "selector": "#toplinks a", "ref": "ui_83f5e107ff40bf7c" },
+    { "selector": "#content th", "ref": "ui_eaf482538bdd4206" },
+    { "selector": "#content th", "ref": "ui_7e04c7f51bc47121", "variant": 0 },
+    { "selector": "#content th", "ref": "ui_7321d9218cc1de0b", "variant": 0 },
+    { "selector": "#content th", "ref": "ui_62b02e04f2a22a74" },
+    { "selector": "#content th", "ref": "ui_a477438947fe8cb4", "variant": 0 },
+    { "selector": "#content th", "ref": "ui_042320976fa274f2" },
+    { "selector": "#content th", "ref": "ui_2ee0d0b84cc73413" },
+    { "selector": "#content th", "ref": "ui_d8f366652e98a646" },
+    { "selector": "#content th", "ref": "ui_d0f687e9b9bc6234" },
+    { "selector": "#content th", "ref": "ui_21f1938bada54a2b", "variant": 0 },
+    { "selector": "#content th", "ref": "ui_23ace36f2a05ea30" },
+    { "selector": "#content th", "ref": "ui_4f35318695c80073", "variant": 0 },
+    { "selector": "#content th", "ref": "ui_8a0f2d49206e03dc" },
+    { "selector": "#content th", "ref": "ui_80384278dd555ba5", "variant": 0 },
+    { "selector": "#content th", "ref": "ui_c330436b3c6c33a4", "variant": 0 },
+    { "selector": "#content th", "ref": "ui_43005562274b2af8" },
+    { "selector": "#content th", "ref": "ui_8e531dc469ba8347" },
+    { "selector": "#content th", "ref": "ui_f8cc9cd8daaac2d1" },
+    { "selector": "#content th", "ref": "ui_1dabf5eaa5e92425" },
+    { "selector": "#content h4", "ref": "ui_eb86d5aa315eb703" },
+    { "selector": "#content h4", "ref": "ui_442362f02e1ccefa" },
+    { "selector": "#content h4", "ref": "ui_f57b0d6378676570" },
+    { "selector": "#content h4", "ref": "ui_819ae365cf4a7ed5" },
     {
-      "selector": "#toplinks a",
-      "source": "提出一覧",
-      "target": "📝 제출 목록"
-    },
-    { "selector": "#toplinks a", "source": "解説", "target": "📝 해설" },
-    {
-      "selector": "#toplinks a",
-      "source": "ショートコード",
-      "target": "📝 숏 코드"
-    },
-    { "selector": "#toplinks a", "source": "ページ", "target": "페이지" },
-    {
-      "selector": "#toplinks a",
-      "source": "問題集一覧",
-      "target": "📝 문제 모음 목록"
-    },
-    { "selector": "#content th", "source": "言語", "target": "📝 언어" },
-    { "selector": "#content th", "source": "問題数", "target": "📝 문제 수" },
-    { "selector": "#content th", "source": "レベル", "target": "📝 레벨" },
-    { "selector": "#content th", "source": "結果", "target": "📝 결과" },
-    { "selector": "#content th", "source": "問題", "target": "📝 문제" },
-    { "selector": "#content th", "source": "提出者", "target": "📝 제출자" },
-    {
-      "selector": "#content th",
-      "source": "提出日時",
-      "target": "📝 제출 일시"
-    },
-    {
-      "selector": "#content th",
-      "source": "コード長",
-      "target": "📝 코드 길이"
-    },
-    {
-      "selector": "#content th",
-      "source": "実行時間",
-      "target": "📝 실행 시간"
-    },
-    { "selector": "#content th", "source": "順位", "target": "📝 순위" },
-    { "selector": "#content th", "source": "合計", "target": "📝 합계" },
-    { "selector": "#content th", "source": "問題名", "target": "📝 문제명" },
-    {
-      "selector": "#content th",
-      "source": "ユーザー名",
-      "target": "📝 사용자명"
-    },
-    { "selector": "#content th", "source": "ナンバー", "target": "📝 번호" },
-    { "selector": "#content th", "source": "作問者", "target": "📝 출제자" },
-    { "selector": "#content th", "source": "タグ", "target": "📝 태그" },
-    {
-      "selector": "#content th",
-      "source": "時間制限",
-      "target": "📝 시간 제한"
-    },
-    {
-      "selector": "#content th",
-      "source": "メモリ制限",
-      "target": "📝 메모리 제한"
-    },
-    { "selector": "#content th", "source": "人数", "target": "📝 인원" },
-    {
-      "selector": "#content h4",
-      "source": "ショートコード",
-      "target": "📝 숏 코드"
-    },
-    {
-      "selector": "#content h4",
-      "source": "純ショートコード",
-      "target": "📝 순수 숏 코드"
-    },
-    {
-      "selector": "#content h4",
-      "source": "純主流ショートコード",
-      "target": "📝 순수 주류 숏 코드"
-    },
-    {
-      "selector": "#content h4",
-      "source": "最速実行時間",
-      "target": "📝 최단 실행 시간"
+      "selector": "#content .page-link",
+      "ref": "ui_ffc09fc04508af44",
+      "variant": 0
     },
     {
       "selector": "#content .page-link",
-      "source": "前へ",
-      "target": "📝 이전"
+      "ref": "ui_db400499a18f54ee",
+      "variant": 0
     },
-    {
-      "selector": "#content .page-link",
-      "source": "次へ",
-      "target": "📝 다음"
-    },
-    { "selector": "#content .left", "source": "言語", "target": "📝 언어" },
-    { "selector": "#content .header", "source": "検索", "target": "📝 검색" },
+    { "selector": "#content .left", "ref": "ui_eaf482538bdd4206" },
+    { "selector": "#content .header", "ref": "ui_a90912da7b7af369" },
     {
       "selector": "#content #s_search",
       "attribute": "value",
-      "source": "検索",
-      "target": "📝 검색"
+      "ref": "ui_a90912da7b7af369"
     },
     {
       "selector": "#content a[title]",
       "attribute": "title",
-      "source": "このユーザーの提出の表示",
-      "target": "📝 이 사용자의 제출 보기"
+      "ref": "ui_cb213b1f048b4f4b"
     },
-    { "selector": "#content option", "source": "すべて", "target": "📝 전체" },
-    {
-      "selector": "#content td",
-      "source": "C11(gcc12 gnu拡張)",
-      "target": "📝 C11(gcc12 GNU 확장)"
-    },
-    {
-      "selector": "#content td",
-      "source": "C++23(gnu拡張)",
-      "target": "📝 C++23(GNU 확장)"
-    },
-    {
-      "selector": "#content td",
-      "source": "C++23(gnu拡張gcc16)",
-      "target": "📝 C++23(GNU 확장 gcc16)"
-    },
-    {
-      "selector": ".noty_body",
-      "source": "コピーしました",
-      "target": "📝 복사했습니다"
-    },
+    { "selector": "#content option", "ref": "ui_1e27c61719511950" },
+    { "selector": "#content td", "ref": "ui_13a55efa2e8b37e6" },
+    { "selector": "#content td", "ref": "ui_09a81b127c54895b" },
+    { "selector": "#content td", "ref": "ui_d01d656346ce7e50" },
+    { "selector": ".noty_body", "ref": "ui_138a98797a23a495" },
     {
       "selector": ".noty-copy-btn",
       "attribute": "title",
-      "source": "コピー",
-      "target": "📝 복사"
+      "ref": "ui_c70ac6b9e1b9faab"
     },
     {
       "selector": ".custom-anony-popover .popover-header",
-      "source": "ログイン",
-      "target": "📝 로그인"
+      "ref": "ui_be836d59223d4e37"
     },
-    {
-      "selector": ".noty_body",
-      "source": "ログインに失敗しました",
-      "target": "📝 로그인에 실패했습니다"
-    },
-    {
-      "selector": ".noty_body",
-      "source": "登録に失敗しました",
-      "target": "📝 등록에 실패했습니다"
-    },
-    {
-      "selector": ".noty_body",
-      "source": "通信エラーが発生しました",
-      "target": "📝 통신 오류가 발생했습니다"
-    },
-    {
-      "selector": ".noty_body",
-      "source": "リクエストに失敗しました",
-      "target": "📝 요청에 실패했습니다"
-    },
-    {
-      "selector": ".noty_body",
-      "source": "削除に失敗しました",
-      "target": "📝 삭제에 실패했습니다"
-    },
+    { "selector": ".noty_body", "ref": "ui_8b94458ab31cf4fe" },
+    { "selector": ".noty_body", "ref": "ui_45d1d23c889fac6e" },
+    { "selector": ".noty_body", "ref": "ui_257dfffab0b638c8" },
+    { "selector": ".noty_body", "ref": "ui_9816ff04dddfd0a9" },
+    { "selector": ".noty_body", "ref": "ui_410e8bbc4f7ea970" },
     {
       "selector": "#clarification_notification_count",
-      "source": "質問 {count}",
-      "target": "📝 질문 {count}",
-      "variables": { "count": "[0-9]+" }
+      "ref": "ui_b02be8413f50eeb3"
     },
+    { "selector": ".noty_body", "ref": "ui_30e32756f9a2d177" },
+    { "selector": "#content .badge", "ref": "ui_fea606251d5ef017" },
+    { "selector": "#content .badge", "ref": "ui_fb077a44737142ef" },
+    { "selector": "#content .badge", "ref": "ui_30de566acba33d28" },
+    { "selector": "#content .badge", "ref": "ui_6b619a9b899fe033" },
+    { "selector": "#content .badge", "ref": "ui_8c8f97500e15c941" },
+    { "selector": "#content .badge", "ref": "ui_540564c15cd3ffd6" },
+    { "selector": "#content .badge", "ref": "ui_359e5552dff28004" },
+    { "selector": "#content .badge", "ref": "ui_27c6071993bb4f64" },
+    { "selector": "#content .badge", "ref": "ui_a6792bbd817660f7" },
+    { "selector": "#content .badge", "ref": "ui_c498ed53f374164d" },
+    { "selector": "#content .badge", "ref": "ui_d4fbceb5e980b7c3" },
     {
-      "selector": ".noty_body",
-      "source": "[質問回答が更新されました] {rest}",
-      "target": "📝 [질문 답변이 업데이트되었습니다] {rest}",
-      "variables": { "rest": ".+" }
+      "selector": ".noty_body, #content > .alert, #login-form-container .alert",
+      "ref": "ui_a101f451f5920988"
     },
-    {
-      "selector": "#content .badge",
-      "source": "すごい！",
-      "target": "📝 훌륭해요!"
-    },
-    {
-      "selector": "#content .badge",
-      "source": "おしい！",
-      "target": "📝 아까워요!"
-    },
-    {
-      "selector": "#content .badge",
-      "source": "もうちょっと速く！",
-      "target": "📝 조금만 더 빠르게!"
-    },
-    {
-      "selector": "#content .badge",
-      "source": "メモリ節約！",
-      "target": "📝 메모리를 절약해 봐요!"
-    },
-    {
-      "selector": "#content .badge",
-      "source": "こけました！",
-      "target": "📝 오류가 발생했어요!"
-    },
-    {
-      "selector": "#content .badge",
-      "source": "落ち着いて！",
-      "target": "📝 침착하게!"
-    },
-    {
-      "selector": "#content .badge",
-      "source": "出力しすぎ！",
-      "target": "📝 출력이 너무 많아요!"
-    },
-    {
-      "selector": "#content .badge",
-      "source": "ごめんなさい！",
-      "target": "📝 죄송합니다!"
-    },
-    {
-      "selector": "#content .badge",
-      "source": "惜しくない！",
-      "target": "📝 아쉽지 않아요!"
-    },
-    {
-      "selector": "#content .badge",
-      "source": "ちょっと待ってね！",
-      "target": "📝 잠시 기다려 주세요!"
-    },
-    {
-      "selector": "#content .badge",
-      "source": "クエリ多すぎ！",
-      "target": "📝 쿼리가 너무 많아요!"
-    }
+    { "selector": ".noty_body", "ref": "ui_a06fa7f26aa243d9" },
+    { "selector": ".noty_body", "ref": "ui_38f7ff13634f152a" },
+    { "selector": ".noty_body", "ref": "ui_4903dd35fef770c4" },
+    { "selector": ".noty_body", "ref": "ui_e3b4b54f9dc0c90d" },
+    { "selector": ".noty_body", "ref": "ui_9acdd8794e0e2e9a" }
   ]
 }

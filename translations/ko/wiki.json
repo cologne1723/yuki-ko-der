@@ -3,171 +3,39 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#toplinks a",
-      "source": "編集履歴(外部サイト)",
-      "target": "편집 기록(외부 사이트)"
-    },
-    {
-      "selector": "#toplinks a",
-      "source": "Blame(外部サイト)",
-      "target": "Blame(외부 사이트)"
-    },
-    {
-      "selector": "#content h4",
-      "source": "編集履歴 (最新5件)",
-      "target": "편집 기록 (최근 5건)"
-    },
-    {
-      "selector": "#content h4",
-      "source": "このWikiについて",
-      "target": "이 위키 안내"
-    },
-    {
-      "selector": "#content h4",
-      "source": "初心者の方向け",
-      "target": "초보자용"
-    },
-    {
-      "selector": "#content h5",
-      "source": "参加方法についてのまとめ",
-      "target": "참여 방법 정리"
-    },
-    {
-      "selector": "#content h5",
-      "source": "問題・解答についてのまとめ",
-      "target": "📝 문제·풀이 정리"
-    },
-    {
-      "selector": "#content h4",
-      "source": "作問者・テスター向けページ",
-      "target": "📝 출제자·테스터용 페이지"
-    },
-    {
-      "selector": "#content h5",
-      "source": "yukicoder の基本的な作問方法",
-      "target": "📝 yukicoder 기본 출제 방법"
-    },
-    {
-      "selector": "#content h5",
-      "source": "ガイドライン",
-      "target": "📝 가이드라인"
-    },
-    {
-      "selector": "#content strong",
-      "source": "(必ず目を通してください)",
-      "target": "📝 (반드시 읽어 주세요)"
-    },
-    {
-      "selector": "#content h5",
-      "source": "ページの書き方についてのまとめ",
-      "target": "📝 페이지 작성법 정리"
-    },
-    {
-      "selector": "#content p",
-      "source": "ACの問題数が10以上の方であれば、誰でも編集することができます。",
-      "target": "📝 AC한 문제가 10개 이상이면 누구나 편집할 수 있습니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "新しいページを作成するには",
-      "target": "📝 새 페이지를 만들려면"
-    },
-    {
-      "selector": "#content p",
-      "source": "とURLに入力し、右上の編集を押したら作成することができます。",
-      "target": "📝 를 URL에 입력하고 오른쪽 위의 편집을 누르면 만들 수 있습니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "サイト的にはまだ実装途中で、まだ編集履歴のUIが無いですが、バージョン管理されてるので、管理者に言っていただければ戻せますし、下から手動で文字列を戻すこともできます。",
-      "target": "📝 사이트는 아직 구현 중이라 편집 기록 UI가 없지만 버전 관리되고 있으므로 관리자에게 요청하면 되돌릴 수 있으며 아래에서 직접 문자열을 복원할 수도 있습니다."
-    },
-    {
-      "selector": "#content p",
-      "source": "から変更履歴を見ることができます。",
-      "target": "📝 에서 변경 기록을 확인할 수 있습니다."
-    },
-    {
-      "selector": "#content a",
-      "source": "初心者のためのガイド",
-      "target": "초보자 가이드"
-    },
-    {
-      "selector": "#content a",
-      "source": "言語別標準入出力（追記中）",
-      "target": "📝 언어별 표준 입출력(작성 중)"
-    },
-    {
-      "selector": "#content a",
-      "source": "作問から公開までの流れ",
-      "target": "📝 출제부터 공개까지의 과정"
-    },
-    {
-      "selector": "#content a",
-      "source": "テストケースバリデーションの書き方",
-      "target": "📝 테스트 케이스 검증 작성법"
-    },
-    {
-      "selector": "#content a",
-      "source": "スペシャルジャッジの基本的な書き方",
-      "target": "📝 스페셜 저지 기본 작성법"
-    },
-    {
-      "selector": "#content a",
-      "source": "問題ポリシー",
-      "target": "📝 문제 정책"
-    },
-    {
-      "selector": "#content a",
-      "source": "作問用チェックリスト",
-      "target": "📝 출제용 체크리스트"
-    },
-    {
-      "selector": "#content a",
-      "source": "テスターガイドライン",
-      "target": "📝 테스터 가이드라인"
-    },
-    {
-      "selector": "#content a",
-      "source": "テスター用チェックリスト",
-      "target": "📝 테스터용 체크리스트"
-    },
-    {
-      "selector": "#content a",
-      "source": "嘘解法・誤解法対策として入れるケース",
-      "target": "📝 잘못된 풀이 방지를 위해 넣을 케이스"
-    },
-    {
-      "selector": "#content a",
-      "source": "MathJaxテンプレート",
-      "target": "📝 MathJax 템플릿"
-    },
-    {
-      "selector": "#content a",
-      "source": "ページ編集に使えるHTML記法についてのまとめ",
-      "target": "📝 페이지 편집용 HTML 문법 정리"
-    },
-    {
-      "selector": "#content a",
-      "source": "作問などで使う記号",
-      "target": "📝 출제 등에 사용하는 기호"
-    },
-    {
-      "selector": "#content a",
-      "source": "画像の貼り方",
-      "target": "📝 이미지 첨부 방법"
-    },
-    {
-      "selector": "#content p",
-      "source": "テストケースのファイル名で使える文字(これら以外の文字を使用するとアップロード時に対象の文字が消去されます。）",
-      "target": "📝 테스트 케이스 파일명에 사용할 수 있는 문자(이외의 문자는 업로드할 때 삭제됩니다.)"
-    },
-    { "selector": "footer", "source": "は", "target": "📝 는" },
-    {
-      "selector": "footer a",
-      "source": "クリエイティブ・コモンズ 表示 4.0 国際 ライセンスの下で提供されています。",
-      "target": "📝 크리에이티브 커먼즈 저작자표시 4.0 국제 라이선스로 제공됩니다."
-    }
+    { "selector": "#toplinks a", "ref": "ui_11a2612d8448d939", "variant": 0 },
+    { "selector": "#toplinks a", "ref": "ui_2a2bbe3b4db259c1", "variant": 0 },
+    { "selector": "#content h4", "ref": "ui_057a2a4772aebb2a" },
+    { "selector": "#content h4", "ref": "ui_e3089a367cbee5b2" },
+    { "selector": "#content h4", "ref": "ui_655b93b1f518e918" },
+    { "selector": "#content h5", "ref": "ui_4c5aa63d596f070a" },
+    { "selector": "#content h5", "ref": "ui_98fd653dcc65502b" },
+    { "selector": "#content h4", "ref": "ui_679df57f56cfb611" },
+    { "selector": "#content h5", "ref": "ui_b1003c4716be45be" },
+    { "selector": "#content h5", "ref": "ui_566fccfd5d902455" },
+    { "selector": "#content strong", "ref": "ui_21eea43376c32bb3" },
+    { "selector": "#content h5", "ref": "ui_a81d03b3540b6a5b" },
+    { "selector": "#content p", "ref": "ui_457572f5c94ba364" },
+    { "selector": "#content p", "ref": "ui_e137fb245171a50c" },
+    { "selector": "#content p", "ref": "ui_91d69889073c54f9" },
+    { "selector": "#content p", "ref": "ui_a6cd24ce1c488a95" },
+    { "selector": "#content p", "ref": "ui_fbade2a32645fc4d" },
+    { "selector": "#content a", "ref": "ui_2eafe2513e3505c4" },
+    { "selector": "#content a", "ref": "ui_712cd5a39793d925" },
+    { "selector": "#content a", "ref": "ui_9bbc70851d57662f" },
+    { "selector": "#content a", "ref": "ui_66c232278668c246" },
+    { "selector": "#content a", "ref": "ui_3e0a04cec5506a79" },
+    { "selector": "#content a", "ref": "ui_cea09444a8937cff" },
+    { "selector": "#content a", "ref": "ui_664c300a4e92b370" },
+    { "selector": "#content a", "ref": "ui_f385c7f891875a8d" },
+    { "selector": "#content a", "ref": "ui_b248e7695660ab7e" },
+    { "selector": "#content a", "ref": "ui_d4ddbac627c924f5" },
+    { "selector": "#content a", "ref": "ui_3f5d2fa4121ba70b" },
+    { "selector": "#content a", "ref": "ui_744f38efe72309dc" },
+    { "selector": "#content a", "ref": "ui_40536b13d196b697" },
+    { "selector": "#content a", "ref": "ui_5536d905035f69db" },
+    { "selector": "#content p", "ref": "ui_fcf4a044714f5ed6" },
+    { "selector": "footer", "ref": "ui_eef8537ed84d27e5", "variant": 0 },
+    { "selector": "footer a", "ref": "ui_8022886d9abc3de4" }
   ]
 }

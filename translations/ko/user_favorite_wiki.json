@@ -3,15 +3,7 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    {
-      "selector": "#content div",
-      "source": "さんのfav Wikiページ一覧",
-      "target": "📝 님의 즐겨찾기 위키 페이지 목록"
-    },
-    {
-      "selector": "#content th",
-      "source": "Wikiページ",
-      "target": "📝 위키 페이지"
-    }
+    { "selector": "#content div", "ref": "ui_287b4e7e54cf63f7" },
+    { "selector": "#content th", "ref": "ui_7a325854716753ff" }
   ]
 }
