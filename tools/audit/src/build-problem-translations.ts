@@ -87,7 +87,7 @@ await writeFile(
 ${disclaimer}
 <p>문제 번역 ${sourceProblemsByNumber.size}개를 제공합니다. 검수 상태는 각 문서에 기록되어 있습니다.</p>
 <p>Firefox와 Chrome 확장 기능이 사용하는 번역 파일입니다. 확장 기능은 원문을 검증한 뒤 번역을 적용합니다.</p>
-<p><a href="https://github.com/cologne1723/yuki-ko-der">소스 코드 및 설치 안내</a> · <a href="README.md">콘텐츠 권리 및 삭제 요청 / コンテンツの権利と削除依頼</a> · <a href="README.md">개인정보 안내 / プライバシーについて</a></p>
+<p><a href="https://github.com/cologne1723/yuki-ko-der">소스 코드 및 설치 안내</a> · <a href="README.md">콘텐츠 권리 및 삭제 요청 / コンテンツの権利と削除依頼</a></p>
 <ul>
 ${links}
 </ul>
