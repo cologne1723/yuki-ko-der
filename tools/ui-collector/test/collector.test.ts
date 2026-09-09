@@ -14,6 +14,164 @@ function deferred() {
   return { promise, resolve };
 }
 
+for (const resume of [false, true]) {
+  test(`deleting during ${resume ? "resume" : "creation"} drains startup and permits a new session`, async (context) => {
+    const dom = new JSDOM("<button>日本語</button>", {
+      url: "https://yukicoder.me/",
+    });
+    Object.assign(globalThis, {
+      window: dom.window,
+      location: dom.window.location,
+      Element: dom.window.Element,
+      Document: dom.window.Document,
+      HTMLButtonElement: dom.window.HTMLButtonElement,
+      NodeFilter: dom.window.NodeFilter,
+      CSS: { escape: cssEscape },
+      MutationObserver: dom.window.MutationObserver,
+    });
+    const store = new IndexedDbStore(`delete-start-${crypto.randomUUID()}`);
+    let controller = new CollectorController(dom.window.document, { store });
+    let id: string | undefined;
+    if (resume) {
+      id = (await controller.start()).sessionId;
+      await controller.pause();
+      controller = new CollectorController(dom.window.document, { store });
+    }
+    const entered = deferred(),
+      release = deferred();
+    let held = false;
+    const hold = async () => {
+      if (held) return;
+      held = true;
+      entered.resolve();
+      await release.promise;
+    };
+    if (resume) {
+      const get = store.getSession.bind(store);
+      context.mock.method(store, "getSession", async (key: string) => {
+        const session = await get(key);
+        await hold();
+        return session;
+      });
+    } else {
+      const create = store.createSession.bind(store);
+      context.mock.method(
+        store,
+        "createSession",
+        async (session: Parameters<typeof create>[0]) => {
+          await create(session);
+          id = session.sessionId;
+          await hold();
+        },
+      );
+    }
+    try {
+      const started = controller.start(id);
+      await entered.promise;
+      const deletedId = id!;
+      let acknowledged = false;
+      const deletion = controller.discardSession(deletedId).then(async () => {
+        acknowledged = true;
+        await store.deleteSession(deletedId);
+      });
+      await new Promise((resolve) => setImmediate(resolve));
+      assert.equal(acknowledged, false);
+      release.resolve();
+      await Promise.all([started, deletion]);
+      assert.equal(controller.sessionId, undefined);
+      assert.equal(controller.recording, false);
+      assert.equal(await store.getSession(deletedId), undefined);
+      const next = await controller.start();
+      assert.notEqual(next.sessionId, deletedId);
+      assert.equal(controller.recording, true);
+    } finally {
+      release.resolve();
+      await controller.pause();
+      dom.window.close();
+    }
+  });
+}
+
+for (const resume of [false, true]) {
+  test(`pause during ${resume ? "navigation resume" : "initial creation"} prevents late recording and permits an explicit restart`, async (context) => {
+    const dom = new JSDOM("<button>日本語</button>", {
+      url: "https://yukicoder.me/",
+    });
+    Object.assign(globalThis, {
+      window: dom.window,
+      location: dom.window.location,
+      Element: dom.window.Element,
+      Document: dom.window.Document,
+      HTMLButtonElement: dom.window.HTMLButtonElement,
+      NodeFilter: dom.window.NodeFilter,
+      CSS: { escape: cssEscape },
+      MutationObserver: dom.window.MutationObserver,
+    });
+    const store = new IndexedDbStore(`pause-start-${crypto.randomUUID()}`);
+    let controller = new CollectorController(dom.window.document, { store });
+    let resumeId: string | undefined;
+    if (resume) {
+      resumeId = (await controller.start()).sessionId;
+      await controller.pause();
+      controller = new CollectorController(dom.window.document, { store });
+    }
+    const entered = deferred();
+    const release = deferred();
+    let first = true;
+    const hold = async () => {
+      if (!first) return;
+      first = false;
+      entered.resolve();
+      await release.promise;
+    };
+    if (resume) {
+      const get = store.getSession.bind(store);
+      context.mock.method(store, "getSession", async (id: string) => {
+        await hold();
+        return get(id);
+      });
+    } else {
+      const create = store.createSession.bind(store);
+      context.mock.method(
+        store,
+        "createSession",
+        async (session: Parameters<typeof create>[0]) => {
+          await hold();
+          return create(session);
+        },
+      );
+    }
+    try {
+      const started = controller.start(resumeId);
+      await entered.promise;
+      await controller.pause();
+      assert.equal(controller.recording, false);
+      release.resolve();
+      const session = await started;
+      assert.equal(controller.recording, false);
+      assert.equal(
+        (await store.getSession(session.sessionId))?.status,
+        "paused",
+      );
+      assert.equal(
+        (await store.bundle(session.sessionId)).captures.length,
+        resume ? 1 : 0,
+      );
+      await controller.start(session.sessionId);
+      assert.equal(controller.recording, true);
+      assert.equal(
+        (await store.getSession(session.sessionId))?.status,
+        "recording",
+      );
+    } finally {
+      release.resolve();
+      await controller.pause();
+      await store.close();
+      dom.window.close();
+    }
+  });
+}
+
 test("coalesces interactions for 250 ms and scans within one second of sustained activity", async (context) => {
   const dom = new JSDOM("<button>日本語</button>", {
     url: "https://yukicoder.me/",

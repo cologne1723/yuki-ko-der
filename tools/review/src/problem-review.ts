@@ -5,6 +5,7 @@ import {
 } from "translation-core/problem-review-status";
 import { mkdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { setTimeout } from "node:timers/promises";
 import { convertProblemHtmlToMarkdown } from "translation-audit/convert-problem-html-to-mdx";
 import {
   atomicFile,
@@ -62,11 +63,10 @@ export class ProblemReviewStore {
   readonly translationDirectory: string;
   readonly indexPath: string;
   private conversionDirectory: string;
-  private recovery: Promise<void>;
   private conversions: ProblemConversionRecovery;
   private repository: ProblemRepository;
   private recoveryErrors = new Map<number, string>();
-  private saveQueues = new Map<number, ReturnType<typeof pLimit>>();
+  private queue = pLimit(1);
 
   constructor(
     readonly repositoryRoot: string,
@@ -89,14 +89,12 @@ export class ProblemReviewStore {
       this.translationDirectory,
       this.indexPath,
       this.recoveryErrors,
-      () => this.recovery,
     );
     this.conversions = new ProblemConversionRecovery(
       this.conversionDirectory,
       (no) => this.paths(no),
       this.recoveryErrors,
     );
-    this.recovery = this.conversions.recoverAll();
   }
 
   private metadata() {
@@ -105,17 +103,11 @@ export class ProblemReviewStore {
   private paths(no: number) {
     return this.repository.paths(no);
   }
-  private translationPath(no: number) {
-    return this.repository.translationPath(no);
-  }
-  private compile(path: string, source: string) {
-    return this.repository.compile(path, source);
-  }
   list() {
-    return this.repository.list();
+    return this.withStoreLock(() => this.repository.list());
   }
   get(no: number) {
-    return this.repository.get(no);
+    return this.withStoreLock(() => this.repository.get(no));
   }
 
   async save(
@@ -125,7 +117,7 @@ export class ProblemReviewStore {
     action: "save" | "approve" | "unapprove",
     reviewer: "human" | "machine" = "human",
   ): Promise<ProblemReview> {
-    return this.withSaveLock(problemNo, () =>
+    return this.withStoreLock(() =>
       this.saveOnce(
         problemNo,
         submittedSource,
@@ -136,24 +128,44 @@ export class ProblemReviewStore {
     );
   }
 
-  private async withSaveLock<T>(
-    problemNo: number,
-    work: () => Promise<T>,
-  ): Promise<T> {
-    const limit = this.saveQueues.get(problemNo) ?? pLimit(1);
-    this.saveQueues.set(problemNo, limit);
-    try {
-      return await limit(work);
-    } finally {
-      if (!limit.activeCount && !limit.pendingCount)
-        this.saveQueues.delete(problemNo);
-    }
+  private withStoreLock<T>(work: () => Promise<T>): Promise<T> {
+    return this.queue(async () => {
+      await mkdir(this.conversionDirectory, { recursive: true });
+      // The server, machine-review CLI and conversion recovery share this lock.
+      // SQLite releases it even when a process exits during a write.
+      const { DatabaseSync } = await import("node:sqlite");
+      const lock = new DatabaseSync(
+        join(this.conversionDirectory, "lock.sqlite"),
+      );
+      try {
+        for (;;) {
+          try {
+            lock.exec("BEGIN IMMEDIATE");
+            break;
+          } catch (error) {
+            if (![5, 6].includes((error as { errcode?: number }).errcode ?? -1))
+              throw error;
+            await setTimeout(25);
+          }
+        }
+        await this.conversions.recoverAll();
+        return await work();
+      } finally {
+        lock.close();
+      }
+    });
   }
 
   async convert(problemNo: number, expectedRevision: string) {
-    await this.recovery;
-    return this.withSaveLock(problemNo, async () => {
+    return this.withStoreLock(async () => {
       const paths = this.paths(problemNo);
+      if (this.recoveryErrors.has(problemNo))
+        throw new ReviewError(this.recoveryErrors.get(problemNo)!, 409);
+      if (await optionalFile(paths.koreanMdx))
+        throw new ReviewError(
+          "An MDX source already exists; inspect both files",
+          409,
+        );
       const original = await readFile(paths.koreanHtml, "utf8");
       if (sha256(original) !== expectedRevision)
         throw new ReviewError(
@@ -161,13 +173,6 @@ export class ProblemReviewStore {
           409,
         );
       const mdx = convertProblemHtmlToMarkdown(original);
-      if (await optionalFile(paths.koreanMdx))
-        throw new ReviewError(
-          "An MDX source already exists; inspect both files",
-          409,
-        );
-      if (this.recoveryErrors.has(problemNo))
-        throw new ReviewError(this.recoveryErrors.get(problemNo)!, 409);
       await mkdir(this.conversionDirectory, { recursive: true });
       const journal = join(this.conversionDirectory, `${problemNo}.json`);
       await atomicFile(
@@ -200,14 +205,19 @@ export class ProblemReviewStore {
     action: "save" | "approve" | "unapprove",
     reviewer: "human" | "machine" = "human",
   ): Promise<ProblemReview> {
-    const current = await this.get(problemNo);
+    const metadata = (await this.metadata()).get(problemNo);
+    const current = await this.repository.get(problemNo);
     if (current.revision !== expectedRevision) {
       throw new ReviewError(
         "The translation changed on disk; reload before saving",
         409,
       );
     }
-    const metadata = (await this.metadata()).get(problemNo)!;
+    if (!metadata)
+      throw new ReviewError(
+        "The saved problem index changed; reload before saving",
+        409,
+      );
     const savedReviewStatus =
       submittedSource === current.koreanSource
         ? current.reviewStatus
@@ -267,8 +277,37 @@ export class ProblemReviewStore {
       metadata,
       current.sourceFormat,
     );
-    const path = await this.translationPath(problemNo);
+    const paths = this.paths(problemNo);
+    const path =
+      current.sourceFormat === "mdx" ? paths.koreanMdx : paths.koreanHtml;
+    // External editors do not participate in the SQLite lock. Recheck the raw
+    // inputs after validation, including the format, without compiling a newer
+    // (possibly unfinished) edit. This is optimistic validation, not filesystem CAS.
+    const [mdx, html, japanese, latestMetadata] = await Promise.all([
+      optionalFile(paths.koreanMdx),
+      optionalFile(paths.koreanHtml),
+      optionalFile(paths.japanese),
+      this.metadata(),
+    ]);
+    const [latest, alternate] =
+      current.sourceFormat === "mdx" ? [mdx, html] : [html, mdx];
+    if (latest?.toString() !== current.koreanSource || alternate !== undefined)
+      throw new ReviewError(
+        "The translation changed on disk; reload before saving",
+        409,
+      );
+    const latestProblem = latestMetadata.get(problemNo);
+    if (
+      japanese?.toString() !== current.japaneseHtml ||
+      latestProblem?.No !== metadata.No ||
+      latestProblem?.ProblemId !== metadata.ProblemId ||
+      latestProblem?.Title !== metadata.Title
+    )
+      throw new ReviewError(
+        "The saved original or problem index changed; reload before saving",
+        409,
+      );
     await atomicFile(path, nextSource);
-    return this.get(problemNo);
+    return this.repository.get(problemNo);
   }
 }

@@ -12,6 +12,10 @@ import {
 export class CollectorSessions {
   session?: Session;
   private pendingSession?: Session;
+  discard(id: string | undefined) {
+    if (this.session?.sessionId === id) this.session = undefined;
+    if (this.pendingSession?.sessionId === id) this.pendingSession = undefined;
+  }
   constructor(
     private store: CollectorStore,
     private dictionary: DictionaryIdentity,

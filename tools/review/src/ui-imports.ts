@@ -46,6 +46,24 @@ export interface ImportTask {
   locations: ImportLocation[];
 }
 
+function progressBasis(state: CatalogState, task: ImportTask) {
+  return hash(
+    [
+      ...new Set(
+        task.locations
+          .filter((l) => l.verified)
+          .map((l) =>
+            JSON.stringify([
+              l.messageId,
+              l.variant,
+              state.catalog.messages.find((m) => m.id === l.messageId),
+            ]),
+          ),
+      ),
+    ].sort(),
+  );
+}
+
 export class UiImportStore {
   private pending = pLimit(1);
   private progressStore: ImportProgress;
@@ -58,7 +76,7 @@ export class UiImportStore {
     this.progressStore = new ImportProgress(join(dataRoot, "collections"));
   }
   private serialize<T>(work: () => Promise<T>): Promise<T> {
-    return this.pending(work);
+    return this.pending(() => this.ui.withCatalogLock(work));
   }
   private taskCache?: { key: string; result: Promise<ImportTask[]> };
   private async tasks(
@@ -121,7 +139,10 @@ export class UiImportStore {
         .filter((l) => l.verified)
         .every((l) => l.messageId === message?.id);
       task.status =
-        progress.tasks[task.id] ??
+        (progress.bases?.[task.id] === undefined ||
+        progress.bases[task.id] === progressBasis(state, task)
+          ? progress.tasks[task.id]
+          : undefined) ??
         (task.locations.every((l) => l.reason === "콘텐츠 관찰")
           ? "excluded"
           : unresolved
@@ -138,13 +159,15 @@ export class UiImportStore {
     return [...tasks.values()].sort((a, b) => a.id.localeCompare(b.id));
   }
   async list() {
-    const progress = await this.progressStore.read();
-    return {
-      tasks: await this.tasks(await this.ui.catalogState(), progress),
-      collections: await this.collections.list(),
-      selected: progress.selected,
-      collection: progress.collection,
-    };
+    return this.ui.withCatalogLock(async () => {
+      const progress = await this.progressStore.read();
+      return {
+        tasks: await this.tasks(await this.ui.catalogState(), progress),
+        collections: await this.collections.list(),
+        selected: progress.selected,
+        collection: progress.collection,
+      };
+    });
   }
   async get(id: string) {
     const task = (await this.list()).tasks.find((t) => t.id === id);
@@ -195,11 +218,19 @@ export class UiImportStore {
             409,
           );
         if (body.action === "defer" || body.action === "exclude") {
+          (progress.bases ??= {})[id] = progressBasis(state, task);
           progress.tasks[id] =
             body.action === "defer" ? "deferred" : "excluded";
           return;
         }
+        if (progress.tasks[id] && progress.bases?.[id] === undefined) {
+          // Upgrade legacy overrides before changing the catalog, so a failed
+          // final write cannot hide the newly saved wording/review status.
+          (progress.bases ??= {})[id] = progressBasis(state, task);
+          await this.progressStore.write(progress);
+        }
         delete progress.tasks[id];
+        if (progress.bases) delete progress.bases[id];
         if (body.action === "restore") return;
         const locations = task.locations.filter((l) => l.verified);
         if (

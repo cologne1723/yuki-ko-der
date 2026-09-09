@@ -40,14 +40,13 @@ export function parseTranslationDocument(
   );
   const title = root?.querySelector<HTMLElement>(":scope > h3");
   const statement = root?.querySelector(":scope > .problem-statement");
-  const blocks = statement
-    ? [...statement.querySelectorAll(":scope > .block")]
-    : [];
+  // The statement container also owns introductory paragraphs outside sections.
+  const blocks = statement ? [...statement.children] : [];
   if (
     !root ||
     !title ||
     title.children.length > 0 ||
-    blocks.length === 0 ||
+    !blocks.some((block) => block.matches(".block")) ||
     root.dataset.schemaVersion !== "1" ||
     root.dataset.locale !== "ko" ||
     !Number.isSafeInteger(problemNo) ||

@@ -1,7 +1,13 @@
 import { readdir, readFile } from "node:fs/promises";
 import { extname, join } from "node:path";
 import { optionalFile } from "translation-audit/operations/source-store";
+import { pLimit } from "translation-core/concurrency";
 import { sha256 } from "translation-core/node-hash";
+import { parseProblemMarkdown } from "translation-core/problem-frontmatter";
+import {
+  effectiveProblemStatus,
+  metadataReviewStatus,
+} from "translation-core/problem-review-status";
 import { compileProblemMarkdown } from "translation-core/problem-markdown";
 import { parseReviewState, ReviewError } from "translation-core/review-state";
 import { z } from "translation-core/validation";
@@ -27,11 +33,7 @@ export class ProblemRepository {
     readonly translationDirectory: string,
     readonly indexPath: string,
     private recoveryErrors: Map<number, string>,
-    private waitForRecovery: () => Promise<void>,
   ) {}
-  private get recovery() {
-    return this.waitForRecovery();
-  }
   async metadata(): Promise<Map<number, ProblemMetadata>> {
     try {
       const index = indexSchema.parse(
@@ -80,7 +82,6 @@ export class ProblemRepository {
   }
 
   async list(): Promise<ProblemSummary[]> {
-    await this.recovery;
     const metadata = await this.metadata();
     const available = new Map<number, string>();
     const duplicates = new Set<number>();
@@ -96,44 +97,58 @@ export class ProblemRepository {
     const filenames = [...available.values()].sort(
       (left, right) => Number.parseInt(left) - Number.parseInt(right),
     );
+    const readSummary = pLimit(8);
     return Promise.all(
-      filenames.map(async (filename) => {
-        const problemNo = Number.parseInt(filename, 10);
-        const problem = metadata.get(problemNo);
-        const path = join(this.translationDirectory, filename);
-        const source = await readFile(path, "utf8");
-        let state: ReturnType<typeof parseReviewState>;
-        let validationErrors: string[] = [];
-        if (duplicates.has(problemNo))
-          validationErrors.push(
-            `Problem ${problemNo} has both HTML and MDX sources; inspect both files before editing`,
-          );
-        if (this.recoveryErrors.has(problemNo))
-          validationErrors.push(this.recoveryErrors.get(problemNo)!);
-        try {
-          state = parseReviewState(this.compile(path, source));
-        } catch (error) {
-          state = {
-            koreanTitle: `No.${problemNo}`,
-            reviewStatus: "unreviewed",
-            machineTranslated: false,
+      filenames.map((filename) =>
+        readSummary(async () => {
+          const problemNo = Number.parseInt(filename, 10);
+          const problem = metadata.get(problemNo);
+          const path = join(this.translationDirectory, filename);
+          const source = await readFile(path, "utf8");
+          let state: ReturnType<typeof parseReviewState>;
+          let validationErrors: string[] = [];
+          if (duplicates.has(problemNo))
+            validationErrors.push(
+              `Problem ${problemNo} has both HTML and MDX sources; inspect both files before editing`,
+            );
+          if (this.recoveryErrors.has(problemNo))
+            validationErrors.push(this.recoveryErrors.get(problemNo)!);
+          try {
+            // A list needs metadata only; get() and the audit validate the body.
+            if (extname(path) === ".mdx") {
+              const { metadata } = parseProblemMarkdown(source);
+              const status = metadataReviewStatus(metadata);
+              state = {
+                koreanTitle: metadata.title.trim(),
+                machineTranslated: status === "machine",
+                reviewStatus: effectiveProblemStatus(status),
+                ...(typeof status === "object" ? { reviews: status } : {}),
+              };
+            } else {
+              state = parseReviewState(source);
+            }
+          } catch (error) {
+            state = {
+              koreanTitle: `No.${problemNo}`,
+              reviewStatus: "unreviewed",
+              machineTranslated: false,
+            };
+            validationErrors.push(String(error));
+          }
+          return {
+            problemNo,
+            japaneseTitle:
+              problem?.Title ??
+              "Original unavailable — download from Tools and settings",
+            ...state,
+            ...(validationErrors.length ? { validationErrors } : {}),
           };
-          validationErrors.push(String(error));
-        }
-        return {
-          problemNo,
-          japaneseTitle:
-            problem?.Title ??
-            "Original unavailable — download from Tools and settings",
-          ...state,
-          ...(validationErrors.length ? { validationErrors } : {}),
-        };
-      }),
+        }),
+      ),
     );
   }
 
   async get(problemNo: number): Promise<ProblemReview> {
-    await this.recovery;
     const paths = this.paths(problemNo);
     const koreanPath = await this.translationPath(problemNo);
     let japaneseHtml: string;

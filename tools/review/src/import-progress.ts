@@ -6,6 +6,7 @@ const progressSchema = z.looseObject({
   selected: z.string().optional(),
   collection: z.string().optional(),
   tasks: z.record(z.string(), z.enum(["deferred", "excluded"])),
+  bases: z.record(z.string(), z.string()).optional(),
 });
 
 export type Progress = z.infer<typeof progressSchema>;

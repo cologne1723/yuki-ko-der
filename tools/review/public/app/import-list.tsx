@@ -81,6 +81,11 @@ export function Imports() {
   useEffect(() => {
     if (selected) persistSelection({ id: selected.id, collection });
   }, [selected?.id, collection, persistSelection]);
+  const refreshCollections = () =>
+    Promise.all([
+      client.invalidateQueries({ queryKey: ["/api/ui/imports"] }),
+      client.invalidateQueries({ queryKey: ["/api/ui"] }),
+    ]);
   const upload = useMutation({
     mutationFn: async () => {
       const results = [];
@@ -107,14 +112,13 @@ export function Imports() {
       }
       return results;
     },
-    onSuccess: () =>
-      client.invalidateQueries({ queryKey: ["/api/ui/imports"] }),
+    onSuccess: refreshCollections,
   });
   const remove = useMutation({
     mutationFn: () => reviewApi.deleteCollection(collection),
     onSuccess: async () => {
       setParams({ view: "imports" });
-      await client.invalidateQueries({ queryKey: ["/api/ui/imports"] });
+      await refreshCollections();
     },
   });
   return (

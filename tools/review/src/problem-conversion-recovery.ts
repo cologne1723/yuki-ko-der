@@ -16,6 +16,7 @@ export class ProblemConversionRecovery {
     readonly recoveryErrors: Map<number, string>,
   ) {}
   async recoverAll() {
+    this.recoveryErrors.clear();
     let names: string[];
     try {
       names = await readdir(this.conversionDirectory);

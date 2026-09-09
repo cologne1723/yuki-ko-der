@@ -91,6 +91,20 @@ export async function collectImportTasks(
               )
             ? "value"
             : undefined;
+        // Runtime text translations only visit direct child text nodes, not
+        // an element's aggregate textContent across nested markup.
+        const applicable = Boolean(
+          element &&
+          (attribute
+            ? element.getAttribute(attribute)?.replace(/\s+/gu, " ").trim() ===
+              observation.exactText.replace(/\s+/gu, " ").trim()
+            : [...element.childNodes].some(
+                (node) =>
+                  node.nodeType === 3 &&
+                  node.nodeValue?.replace(/\s+/gu, " ").trim() ===
+                    observation.exactText.replace(/\s+/gu, " ").trim(),
+              )),
+        );
         const matches: Array<{ file: string; usage: Usage }> = [];
         if (element && located)
           for (const file of files)
@@ -182,6 +196,7 @@ export async function collectImportTasks(
           url.origin === "https://yukicoder.me" &&
           observation.category === "interface" &&
           located &&
+          applicable &&
           Boolean(selector && file) &&
           !ambiguous &&
           !element?.closest(

@@ -36,6 +36,9 @@ export class UiReviewStore {
   catalogState() {
     return this.transactions.run(() => this.repository.readCatalogState());
   }
+  withCatalogLock<T>(work: () => Promise<T>): Promise<T> {
+    return this.transactions.run(work);
+  }
   catalogTransaction<T>(
     work: (
       state: Awaited<ReturnType<UiReviewStore["catalogState"]>>,

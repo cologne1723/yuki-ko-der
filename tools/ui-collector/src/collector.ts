@@ -111,10 +111,15 @@ export class CollectorController {
       : { saved: 0, pending: 0, failed: 0 };
   }
   private startQueue = pLimit(1);
+  private startRevision = 0;
   async start(resumeSessionId?: string): Promise<Session> {
-    return this.startQueue(() => this.startOnce(resumeSessionId));
+    const revision = this.startRevision;
+    return this.startQueue(() => this.startOnce(resumeSessionId, revision));
   }
-  private async startOnce(resumeSessionId?: string): Promise<Session> {
+  private async startOnce(
+    resumeSessionId: string | undefined,
+    revision: number,
+  ): Promise<Session> {
     if (!allowedPage())
       throw new Error("The collector only runs on https://yukicoder.me/*");
     if (
@@ -135,6 +140,12 @@ export class CollectorController {
       this.visibility.clear();
       this.documentId = createId("document");
       this.eventRecorder = undefined;
+    }
+    if (revision !== this.startRevision) {
+      // A pause received during durable creation/resumption must win over it.
+      this.session.status = "paused";
+      await this.store.updateSession(this.session);
+      return this.session;
     }
     this.eventRecorder ??= new EventRecorder(
       this.session.sessionId,
@@ -157,6 +168,7 @@ export class CollectorController {
     return (await this.store.getSession(session.sessionId)) ?? session;
   }
   async pause(): Promise<void> {
+    this.startRevision++;
     this.active = false;
     if (!this.session) return;
     this.session.status = "paused";
@@ -164,16 +176,19 @@ export class CollectorController {
     await this.store.updateSession(this.session);
   }
   async discardSession(id: string | undefined): Promise<void> {
-    if (!this.session || this.session.sessionId !== id) return;
-    this.active = false;
-    this.disconnect();
-    // Finish in-flight writes before background deletes the durable records.
-    await this.captureCompletion;
-    this.session = undefined;
-    this.eventRecorder = undefined;
-    this.seenLocations.clear();
-    this.visibility.clear();
-    this.retryRoots.clear();
+    this.startRevision++;
+    return this.startQueue(async () => {
+      if (this.session && this.session.sessionId !== id) return;
+      this.active = false;
+      this.disconnect();
+      // Drain creation/resumption as well as captures before acknowledging deletion.
+      await this.captureCompletion;
+      this.sessions.discard(id);
+      this.eventRecorder = undefined;
+      this.seenLocations.clear();
+      this.visibility.clear();
+      this.retryRoots.clear();
+    });
   }
   async stop(): Promise<void> {
     await this.pause();

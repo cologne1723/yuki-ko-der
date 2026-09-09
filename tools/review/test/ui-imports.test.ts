@@ -10,6 +10,151 @@ import { CollectionReviewStore } from "../src/collection-review.ts";
 import { createZip } from "../../ui-collector/src/export.ts";
 import { fixture } from "./collection-fixture.ts";
 
+test("aggregate button labels that runtime cannot translate remain unverified", async (t) => {
+  const root = await mkdtemp(join(tmpdir(), "ui-import-aggregate-"));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  await mkdir(join(root, "translations/ko"), { recursive: true });
+  await writeFile(
+    join(root, "translations/ko.messages.json"),
+    JSON.stringify({ messages: [] }),
+  );
+  await writeFile(
+    join(root, "translations/ko/main.json"),
+    JSON.stringify({ translations: [] }),
+  );
+  const collections = new CollectionReviewStore(root);
+  const bundle = fixture(
+    '<html><head></head><body><button data-collector-node="1"><span>日本</span><span>語</span></button></body></html>',
+  );
+  bundle.findings[0].kind = "button-label";
+  Object.assign(bundle.occurrences[0], {
+    kind: "button-label",
+    category: "interface",
+    liveCssSelectorHint: "button",
+  });
+  await collections.import(createZip(bundle));
+  const store = new UiImportStore(new UiReviewStore(root), collections, root);
+  const task = (await store.list()).tasks[0];
+  assert.equal(task.status, "needs-check");
+  assert.equal(task.locations[0].verified, false);
+  await assert.rejects(
+    store.save(task.id, {
+      revision: task.revision,
+      target: "한국어",
+      action: "approve",
+    }),
+    /확인/,
+  );
+});
+
+for (const [action, legacy] of (["defer", "exclude"] as const).flatMap(
+  (action) => [false, true].map((legacy) => [action, legacy] as const),
+)) {
+  test(`${legacy ? "legacy" : "current"} ${action} cannot hide a committed approval after progress write failure`, async (t) => {
+    const root = await mkdtemp(join(tmpdir(), "ui-import-progress-basis-"));
+    t.after(() => rm(root, { recursive: true, force: true }));
+    await mkdir(join(root, "translations/ko"), { recursive: true });
+    await writeFile(
+      join(root, "translations/ko.messages.json"),
+      JSON.stringify({ messages: [] }),
+    );
+    await writeFile(
+      join(root, "translations/ko/main.json"),
+      JSON.stringify({ translations: [] }),
+    );
+    const collections = new CollectionReviewStore(root);
+    const bundle = fixture();
+    Object.assign(bundle.occurrences[0], {
+      category: "interface",
+      liveCssSelectorHint: "button",
+    });
+    await collections.import(createZip(bundle));
+    const store = new UiImportStore(new UiReviewStore(root), collections, root);
+    let task = (await store.list()).tasks[0];
+    task = (await store.save(task.id, { revision: task.revision, action }))
+      .tasks[0];
+    if (legacy) {
+      await writeFile(
+        join(root, "data/collections/ui-progress.json"),
+        JSON.stringify({
+          tasks: { [task.id]: action === "defer" ? "deferred" : "excluded" },
+        }),
+      );
+    }
+    const write = ImportProgress.prototype.write;
+    let writes = 0;
+    const failure = t.mock.method(
+      ImportProgress.prototype,
+      "write",
+      async function (
+        this: ImportProgress,
+        value: Parameters<typeof write>[0],
+      ) {
+        if (legacy && writes++ === 0) return write.call(this, value);
+        throw new Error("Progress unavailable");
+      },
+    );
+    await assert.rejects(
+      store.save(task.id, {
+        revision: task.revision,
+        action: "approve",
+        target: "한국어",
+      }),
+      /Progress unavailable/,
+    );
+    failure.mock.restore();
+    const restarted = new UiImportStore(
+      new UiReviewStore(root),
+      collections,
+      root,
+    );
+    task = (await restarted.list()).tasks[0];
+    assert.equal(task.status, "approved");
+    assert.equal(task.target, "한국어");
+    task = (await restarted.save(task.id, { revision: task.revision, action }))
+      .tasks[0];
+    assert.equal(
+      (await restarted.list()).tasks[0].status,
+      action === "defer" ? "deferred" : "excluded",
+    );
+  });
+}
+
+test("independent import reviewers cannot overwrite progress using the same revision", async (t) => {
+  const root = await mkdtemp(join(tmpdir(), "ui-import-concurrent-"));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  await mkdir(join(root, "translations/ko"), { recursive: true });
+  await writeFile(
+    join(root, "translations/ko.messages.json"),
+    JSON.stringify({ messages: [] }),
+  );
+  await writeFile(
+    join(root, "translations/ko/main.json"),
+    JSON.stringify({ translations: [] }),
+  );
+  const collections = new CollectionReviewStore(root);
+  const bundle = fixture();
+  bundle.occurrences[0].category = "interface";
+  bundle.occurrences[0].liveCssSelectorHint = "button";
+  await collections.import(createZip(bundle));
+  const first = new UiImportStore(new UiReviewStore(root), collections, root);
+  const second = new UiImportStore(new UiReviewStore(root), collections, root);
+  const task = (await first.list()).tasks[0];
+  const results = await Promise.allSettled([
+    first.save(task.id, { revision: task.revision, action: "defer" }),
+    second.save(task.id, { revision: task.revision, action: "exclude" }),
+  ]);
+  const successes = results.filter((result) => result.status === "fulfilled");
+  const failures = results.filter((result) => result.status === "rejected");
+  assert.equal(successes.length, 1);
+  assert.equal(failures.length, 1);
+  assert.equal(failures[0].reason.statusCode, 409);
+  const current = (await second.list()).tasks[0];
+  assert.equal(current.status, successes[0].value.tasks[0].status);
+  await first.save(task.id, { revision: current.revision, action: "restore" });
+  assert.equal((await second.list()).tasks[0].status, "new");
+});
+
 test("imported work saves through the catalog, preserves explicit review and survives duplicate evidence and restart", async (t) => {
   const root = await mkdtemp(join(tmpdir(), "ui-imports-"));
   t.after(() => rm(root, { recursive: true, force: true }));

@@ -3,6 +3,7 @@ declare const __YUKICODER_TAG_TRANSLATIONS__: TagTranslation[];
 import {
   applyTranslations,
   TranslationHistory,
+  type TranslationScope,
 } from "translation-core/fixed-translations";
 import { TranslationMutations } from "translation-core/translation-mutations";
 import { type ProblemCatalog } from "translation-core/problem-catalog";
@@ -42,15 +43,42 @@ declare global {
   const titleHistory = new TranslationHistory();
   let problemTitles = new ProblemTitleTranslator([]);
   let titlesReady = false;
+  let pageTitleEnabled = true;
   let globallyEnabled = false;
   let settingsReady = false;
   let settingsRevision = 0;
   let revision = 0;
+  let problemRevision = 0;
   let suspended = false;
   let entries: Awaited<ReturnType<typeof loadTranslations>> | undefined;
   let uiLoading: ReturnType<typeof loadTranslations> | undefined;
   let catalogLoading: Promise<CatalogResult> | undefined;
-  const notices = createContentNotices(document, () => restart(true));
+  const notices = createContentNotices(document, (parts) => {
+    if (parts.every((part) => part === "ui")) {
+      const current = revision;
+      return loadUi(
+        () => current === revision && globallyEnabled && !suspended,
+        true,
+      );
+    }
+    return restart(true);
+  });
+  function restorePageTitle() {
+    pageTitleEnabled = false;
+    titleHistory.restoreWithin(
+      document.querySelectorAll("title, #content > h3"),
+    );
+  }
+  function titleScope(scope: TranslationScope): TranslationScope {
+    return {
+      querySelectorAll<E extends Element = Element>(selector: string): E[] {
+        return [...scope.querySelectorAll<E>(selector)].filter(
+          (element) =>
+            pageTitleEnabled || !element.closest("title, #content > h3"),
+        );
+      },
+    };
+  }
   const { notify } = notices;
   const mutations = new TranslationMutations(document);
   mutations.watch(
@@ -74,7 +102,8 @@ declare global {
       const scope = full ? document : pending.scope;
       if (entries) applyTranslations(document, entries, history, scope);
       tagTranslator.apply(document, history, scope);
-      if (titlesReady) problemTitles.apply(document, titleHistory, scope);
+      if (titlesReady)
+        problemTitles.apply(document, titleHistory, titleScope(scope));
     } finally {
       observer.observe(document.documentElement, mutations.options);
     }
@@ -95,13 +124,37 @@ declare global {
     }, 0);
   });
 
+  async function loadUi(live: () => boolean, renew = false) {
+    if (renew) uiLoading = undefined;
+    const request = (uiLoading ??= loadTranslations());
+    try {
+      const value = await request;
+      if (!live() || uiLoading !== request) return;
+      entries = value;
+      mutations.watch(
+        value.map((entry) => entry.selector),
+        value.flatMap((entry) => (entry.attribute ? [entry.attribute] : [])),
+      );
+      notices.notifyText("ui", "");
+      applyReadyTranslations();
+    } catch (error) {
+      if (!live() || uiLoading !== request) return;
+      uiLoading = undefined;
+      console.warn("[yukicoder-ko] UI translation failed", error);
+      notify("ui", "uiLoadFailed", true);
+    }
+  }
+
   async function render(renew: boolean) {
     const current = ++revision;
+    const currentProblem = ++problemRevision;
     const isProblemPage = /^\/problems\/no\/\d+\/?$/u.test(location.pathname);
     const live = () =>
       current === revision && globallyEnabled && settingsReady && !suspended;
+    const problemLive = () => live() && currentProblem === problemRevision;
     stopObserving();
     titlesReady = false;
+    pageTitleEnabled = true;
     titleHistory.restore();
     globalThis.yukicoderProblemTranslations?.restoreProblem();
     history.restore();
@@ -109,10 +162,9 @@ declare global {
     if (!live()) return;
     if (isProblemPage) {
       notices.setOriginalAction(() => {
-        revision++;
-        titlesReady = false;
-        titleHistory.restore();
+        problemRevision++;
         globalThis.yukicoderProblemTranslations?.restoreProblem();
+        restorePageTitle();
         notices.notifyText("problem", "일본어 원문입니다");
         notices.setOriginalAction(() => {
           void render(false);
@@ -125,26 +177,8 @@ declare global {
       catalogLoading = undefined;
     }
     observer.observe(document.documentElement, mutations.options);
-    uiLoading ??= loadTranslations().catch((error) => {
-      uiLoading = undefined;
-      throw error;
-    });
+    const uiTask = loadUi(live);
     catalogLoading ??= loadCatalog();
-    const uiTask = uiLoading
-      .then((value) => {
-        if (!live()) return;
-        entries = value;
-        mutations.watch(
-          value.map((entry) => entry.selector),
-          value.flatMap((entry) => (entry.attribute ? [entry.attribute] : [])),
-        );
-        applyReadyTranslations();
-      })
-      .catch((error) => {
-        if (!live()) return;
-        console.warn("[yukicoder-ko] UI translation failed", error);
-        notify("ui", "uiLoadFailed", true);
-      });
     const problemTask = catalogLoading
       .then(async (result) => {
         if (!live()) return;
@@ -153,14 +187,19 @@ declare global {
         );
         titlesReady = true;
         applyReadyTranslations();
-        if (!isProblemPage) return;
+        if (!isProblemPage || !problemLive()) return;
         const outcome =
           await globalThis.yukicoderProblemTranslations?.translateProblem(
-            live,
+            problemLive,
             result.catalog,
             { refresh: renew },
           );
-        if (!live()) return;
+        if (!problemLive()) return;
+        if (outcome?.status !== "applied") {
+          restorePageTitle();
+          notices.setOriginalAction(undefined);
+          notices.notifyText("problem", "");
+        }
         if (outcome?.status === "failed") {
           console.warn(
             "[yukicoder-ko] Problem translation was not applied",
@@ -177,7 +216,7 @@ declare global {
         if (outcome?.status === "applied") {
           notices.notifyText("problem", "한국어 번역본 입니다.");
           void outcome.verification?.then((result) => {
-            if (!live() || result.status === "cancelled") return;
+            if (!problemLive() || result.status === "cancelled") return;
             notices.notifyText(
               "problem",
               result.status === "changed"
@@ -196,9 +235,13 @@ declare global {
         applyReadyTranslations();
       })
       .catch((error) => {
-        if (!live()) return;
+        if (!problemLive()) return;
         console.warn("[yukicoder-ko] Problem translation failed", error);
-        if (isProblemPage) notify("problem", "problemLoadFailed", true);
+        if (isProblemPage) {
+          restorePageTitle();
+          notices.setOriginalAction(undefined);
+          notify("problem", "problemLoadFailed", true);
+        }
       });
     await Promise.all([uiTask, problemTask]);
   }

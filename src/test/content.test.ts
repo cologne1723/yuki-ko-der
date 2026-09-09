@@ -10,6 +10,10 @@ test("dynamic contest problem options translate titles and preserve selection, v
   const { dom, close } = page('<body><main id="content"></main></body>');
   let changed!: Change;
   Object.assign(dom.window, {
+    yukicoderProblemTranslations: {
+      restoreProblem() {},
+      translateProblem: async () => ({ status: "applied" }),
+    },
     chrome: {
       runtime: {
         getURL: (p: string) => p,
@@ -68,6 +72,89 @@ type Change = (
   changes: Record<string, { newValue: unknown }>,
   area: string,
 ) => void;
+
+for (const failWhileDisabled of [false, true]) {
+  test(`UI loading failure ${failWhileDisabled ? "while disabled" : "after re-enabling"} keeps an active retry and recovers`, async () => {
+    const { dom, close } = page(
+      '<span id="ui">source</span>',
+      "https://yukicoder.me/",
+    );
+    let changed!: Change;
+    let reject!: (error: Error) => void;
+    const pending = new Promise<Response>((_, fail) => {
+      reject = fail;
+    });
+    let failed = true;
+    let fetches = 0;
+    Object.assign(dom.window, {
+      chrome: {
+        runtime: { getURL: (path: string) => path },
+        storage: {
+          local: { get: async () => ({}) },
+          onChanged: {
+            addListener: (listener: Change) => {
+              changed = listener;
+            },
+          },
+        },
+      },
+      fetch: () => {
+        fetches++;
+        return failed
+          ? pending
+          : Promise.resolve(
+              Response.json({
+                translations: [
+                  { selector: "#ui", source: "source", target: "target" },
+                ],
+              }),
+            );
+      },
+    });
+    try {
+      dom.window.eval(code);
+      await settle();
+      const initialFetches = fetches;
+      changed({ translationEnabled: { newValue: false } }, "local");
+      if (failWhileDisabled) {
+        reject(new Error("dictionary unavailable"));
+        await settle();
+        assert.equal(
+          dom.window.document.querySelector("#yukicoder-ko-status"),
+          null,
+        );
+      }
+      changed({ translationEnabled: { newValue: true } }, "local");
+      if (!failWhileDisabled) {
+        await settle();
+        assert.equal(fetches, initialFetches);
+        reject(new Error("dictionary unavailable"));
+      }
+      await settle();
+      const notice = dom.window.document.querySelector("#yukicoder-ko-status");
+      assert.match(
+        notice?.textContent ?? "",
+        /화면 번역을 불러오지 못했습니다/,
+      );
+      const retry = notice!.querySelector("button")!;
+      assert.equal(retry.textContent, "다시 시도");
+      failed = false;
+      retry.click();
+      await settle();
+      assert.equal(
+        dom.window.document.querySelector("#ui")!.textContent,
+        "target",
+      );
+      assert.equal(
+        dom.window.document.querySelector("#yukicoder-ko-status"),
+        null,
+      );
+      assert.ok(fetches > initialFetches);
+    } finally {
+      close();
+    }
+  });
+}
 
 test("published titles apply before body verification even when UI loading fails, and disabling restores them", async () => {
   const { dom, close } = page(
@@ -140,6 +227,10 @@ test("settings failure preserves Japanese, offers retry, and cannot overwrite a 
   let fail = true;
   let changed!: Change;
   Object.assign(dom.window, {
+    yukicoderProblemTranslations: {
+      restoreProblem() {},
+      translateProblem: async () => ({ status: "applied" }),
+    },
     chrome: {
       runtime: { getURL: (p: string) => p },
       storage: {
@@ -222,7 +313,7 @@ test("page-load catalog removals override bundled titles and verification failur
     assert.equal(dom.window.document.querySelector("a")!.textContent, "題名");
     const notice = dom.window.document.querySelector("#yukicoder-ko-status")!;
     assert.match(notice.textContent!, /원문을 표시/);
-    assert.equal(notice.querySelector("button")?.textContent, "원문 보기");
+    assert.equal(notice.querySelector("button"), null);
     assert.doesNotMatch(notice.textContent!, /Sample changed/);
   } finally {
     close();
@@ -236,6 +327,10 @@ test("back-forward restoration rechecks settings and published titles without tr
   let title = "첫 제목";
   let fail = false;
   Object.assign(dom.window, {
+    yukicoderProblemTranslations: {
+      restoreProblem() {},
+      translateProblem: async () => ({ status: "applied" }),
+    },
     chrome: {
       runtime: {
         getURL: (p: string) => p,
@@ -588,6 +683,10 @@ test("actual text and attribute translations do not observe their own writes or 
   const NativeObserver = dom.window.MutationObserver;
   let callbacks = 0;
   Object.assign(dom.window, {
+    yukicoderProblemTranslations: {
+      restoreProblem() {},
+      translateProblem: async () => ({ status: "applied" }),
+    },
     MutationObserver: class extends NativeObserver {
       constructor(callback: MutationCallback) {
         super((records, observer) => {
@@ -729,3 +828,211 @@ test("late Noty announcements and errors translate through the real shared catal
     close();
   }
 });
+
+for (const state of [
+  "unavailable",
+  "network",
+  "verification",
+  "throw",
+  "cancelled",
+]) {
+  test(`unapplied problem ${state} removes redundant original action`, async () => {
+    const { dom, close } = page(
+      '<main id="content"><h3>No.1 題名</h3><nav><a href="/problems/no/1">No.1 題名</a></nav><p id="original-body">Japanese</p></main>',
+    );
+    Object.assign(dom.window, {
+      chrome: {
+        runtime: {
+          getURL: (p: string) => p,
+          sendMessage: async () => statusCatalog("제목"),
+        },
+        storage: { local: { get: async () => ({}) } },
+      },
+      fetch: async () => Response.json({ translations: [] }),
+      yukicoderProblemTranslations: {
+        restoreProblem() {},
+        translateProblem: async () => {
+          if (state === "throw") throw new Error("Load failed");
+          return state === "network" || state === "verification"
+            ? { status: "failed", reason: state }
+            : { status: state };
+        },
+      },
+    });
+    try {
+      dom.window.eval(code);
+      await settle();
+      const notice = dom.window.document.querySelector("#yukicoder-ko-status");
+      const buttons = [...(notice?.querySelectorAll("button") ?? [])];
+      assert.ok(buttons.every((b) => b.textContent !== "원문 보기"));
+      assert.equal(
+        buttons.length,
+        state === "network" || state === "throw" ? 1 : 0,
+      );
+      assert.doesNotMatch(notice?.textContent ?? "", /불러오고 있습니다/);
+      if (state === "unavailable")
+        assert.match(notice!.textContent!, /번역이 없어 원문을 표시/);
+      if (state === "cancelled") assert.equal(notice, null);
+      assert.equal(
+        dom.window.document.querySelector("nav a")!.textContent,
+        "No.1 제목",
+      );
+      assert.equal(
+        dom.window.document.querySelector("h3")!.textContent,
+        "No.1 題名",
+      );
+      dom.window.document.querySelector("h3")!.append(" ");
+      await settle();
+      assert.equal(
+        dom.window.document.querySelector("h3")!.textContent,
+        "No.1 題名 ",
+      );
+      assert.equal(
+        dom.window.document.querySelector("#original-body")!.textContent,
+        "Japanese",
+      );
+    } finally {
+      close();
+    }
+  });
+}
+
+for (const delayed of ["dictionary", "catalog"]) {
+  test(`original selection preserves pending UI translation with delayed ${delayed}`, async () => {
+    const { dom, close } = page(
+      '<main id="content"><h3>No.1 題名</h3><a id="ui">source</a></main>',
+    );
+    let release!: () => void;
+    const gate = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    let bodyCalls = 0;
+    Object.assign(dom.window, {
+      chrome: {
+        runtime: {
+          getURL: (p: string) => p,
+          sendMessage: async () => {
+            if (delayed === "catalog") await gate;
+            return statusCatalog("제목");
+          },
+        },
+        storage: { local: { get: async () => ({}) } },
+      },
+      fetch: async () => {
+        await gate;
+        return Response.json({
+          translations: [
+            { selector: "#ui", source: "source", target: "target" },
+          ],
+        });
+      },
+      yukicoderProblemTranslations: {
+        restoreProblem() {},
+        translateProblem: async () => {
+          bodyCalls++;
+          await gate;
+          return { status: "unavailable" };
+        },
+      },
+    });
+    try {
+      dom.window.eval(code);
+      await settle();
+      dom.window.document
+        .querySelector<HTMLButtonElement>("#yukicoder-ko-status button")!
+        .click();
+      release();
+      await settle();
+      assert.equal(
+        dom.window.document.querySelector("#ui")!.textContent,
+        "target",
+      );
+      assert.equal(
+        dom.window.document.querySelector("h3")!.textContent,
+        "No.1 題名",
+      );
+      assert.match(
+        dom.window.document.querySelector("#yukicoder-ko-status")!.textContent!,
+        /일본어 원문입니다/,
+      );
+      if (delayed === "catalog") assert.equal(bodyCalls, 0);
+    } finally {
+      close();
+    }
+  });
+}
+
+for (const original of [false, true]) {
+  test(`UI-only retry preserves ${original ? "original" : "translated"} problem and does not refetch it`, async () => {
+    const { dom, close } = page(
+      '<title>No.1 題名 - yukicoder</title><main id="content"><h3>No.1 題名</h3><nav><a href="/problems/no/1">No.1 題名</a></nav><span id="ui">source</span></main>',
+    );
+    let failed = true;
+    let bodyCalls = 0;
+    let catalogs = 0;
+    Object.assign(dom.window, {
+      chrome: {
+        runtime: {
+          getURL: (p: string) => p,
+          sendMessage: async () => {
+            catalogs++;
+            return statusCatalog("제목");
+          },
+        },
+        storage: { local: { get: async () => ({}) } },
+      },
+      fetch: async () => {
+        if (failed) throw new Error("UI unavailable");
+        return Response.json({
+          translations: [
+            { selector: "#ui", source: "source", target: "target" },
+          ],
+        });
+      },
+      yukicoderProblemTranslations: {
+        restoreProblem() {},
+        translateProblem: async () => {
+          bodyCalls++;
+          return { status: "applied" };
+        },
+      },
+    });
+    try {
+      dom.window.eval(code);
+      await settle();
+      const doc = dom.window.document;
+      const notice = () => doc.querySelector("#yukicoder-ko-status")!;
+      if (original)
+        [...notice().querySelectorAll("button")]
+          .find((b) => b.textContent === "원문 보기")!
+          .click();
+      failed = false;
+      [...notice().querySelectorAll("button")]
+        .find((b) => b.textContent === "다시 시도")!
+        .click();
+      await settle();
+      assert.equal(doc.querySelector("#ui")!.textContent, "target");
+      assert.equal(bodyCalls, 1);
+      assert.equal(catalogs, 1);
+      assert.equal(
+        notice().firstChild!.textContent,
+        original ? "일본어 원문입니다" : "한국어 번역본 입니다.",
+      );
+      assert.equal(
+        notice().querySelector("button")!.textContent,
+        original ? "한국어 번역 보기" : "원문 보기",
+      );
+      assert.equal(doc.querySelector("nav a")!.textContent, "No.1 제목");
+      assert.equal(
+        doc.querySelector("h3")!.textContent,
+        original ? "No.1 題名" : "No.1 제목",
+      );
+      assert.equal(
+        doc.title,
+        original ? "No.1 題名 - yukicoder" : "No.1 제목 - yukicoder",
+      );
+    } finally {
+      close();
+    }
+  });
+}

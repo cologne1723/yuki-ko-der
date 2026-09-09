@@ -31,6 +31,7 @@ async function setup(t: TestContext) {
   const app = createReviewApp({ repositoryRoot: root, assetRoot: root });
   let fail = false;
   const requests = new Set<Promise<Response>>();
+  const saves: Promise<Response>[] = [];
   const held: Array<() => void> = [];
   let hold = false;
   const page = reactPage(
@@ -55,6 +56,8 @@ async function setup(t: TestContext) {
         });
       })();
       requests.add(work);
+      if (init?.method === "PUT" && !path.endsWith("selection"))
+        saves.push(work);
       void work.finally(() => requests.delete(work));
       return work;
     },
@@ -97,6 +100,7 @@ async function setup(t: TestContext) {
     ...page,
     root,
     app,
+    saves,
     upload,
     held,
     hold: (v: boolean) => {
@@ -142,14 +146,21 @@ test("React ZIP import reports partial failures and duplicates, retains failed d
   await p.screen.findByText("Save failed");
   assert.equal(target.value, "한국어");
   p.fail(false);
-  await p.user.click(p.screen.getByRole("button", { name: "초안 저장" }));
-  await p.waitFor(async () =>
+  await p.waitFor(() =>
     assert.equal(
-      JSON.parse(
-        await readFile(join(p.root, "translations/ko.messages.json"), "utf8"),
-      ).messages.length,
-      1,
+      p.screen.getByRole("button", { name: "초안 저장" }).disabled,
+      false,
     ),
+  );
+  await p.user.click(p.screen.getByRole("button", { name: "초안 저장" }));
+  // Wait for the actual filesystem-backed save, not a one-second polling deadline.
+  assert.equal(p.saves.length, 2);
+  assert.equal((await p.saves[1]).status, 200);
+  assert.equal(
+    JSON.parse(
+      await readFile(join(p.root, "translations/ko.messages.json"), "utf8"),
+    ).messages.length,
+    1,
   );
   let catalog = JSON.parse(
     await readFile(join(p.root, "translations/ko.messages.json"), "utf8"),

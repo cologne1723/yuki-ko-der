@@ -10,7 +10,7 @@ export type { ProblemTitleTranslation } from "translation-core/problem-catalog";
 import { message } from "./extension-messages";
 
 const PROTECTED =
-  'pre, code, script, style, textarea, input, select, .sample, [contenteditable]:not([contenteditable="false"])';
+  'pre, code, script, style, textarea, input, select, .sample, #content > .block, .problem-statement, [contenteditable]:not([contenteditable="false"])';
 const LABELS =
   "title, h1, h2, h3, h4, h5, h6, p, span, div, td, th, li, dt, dd, strong, b, em, label";
 export const problemTitleSelectors = [

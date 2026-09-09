@@ -34,6 +34,11 @@ export class TranslationHistory {
     this.restoreWhere((node) => !node.isConnected);
   }
 
+  restoreWithin(roots: Iterable<Node>) {
+    const containers = [...roots];
+    this.restoreWhere((node) => containers.some((root) => root.contains(node)));
+  }
+
   restore() {
     this.restoreWhere(() => true);
   }

@@ -2,7 +2,7 @@ import { message } from "./extension-messages";
 
 export function createContentNotices(
   document: Document,
-  retryLoad: () => Promise<void>,
+  retryLoad: (parts: string[]) => Promise<void>,
 ) {
   const notices = new Map<string, { text: string; retry: boolean }>();
   const notice = document.createElement("p");
@@ -31,7 +31,9 @@ export function createContentNotices(
       button.textContent = message("retry");
       button.style.marginInlineStart = "0.5em";
       button.onclick = () => {
-        void retryLoad();
+        void retryLoad(
+          [...notices].filter(([, value]) => value.retry).map(([part]) => part),
+        );
       };
       notice.append(button);
     }
@@ -62,7 +64,7 @@ export function createContentNotices(
       else notices.delete(part);
       renderNotice();
     },
-    setOriginalAction(action: () => void, label = "원문 보기") {
+    setOriginalAction(action: (() => void) | undefined, label = "원문 보기") {
       showOriginal = action;
       actionLabel = label;
       renderNotice();

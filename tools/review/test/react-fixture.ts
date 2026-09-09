@@ -9,12 +9,12 @@ const bundle = await build({
     loader: "tsx",
     contents: `
 import React from 'react';
-import { render, screen, fireEvent, waitFor, cleanup } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, within, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MantineProvider } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { createMemoryRouter, RouterProvider, Outlet } from 'react-router-dom';
+import { createMemoryRouter, RouterProvider, Outlet, useSearchParams } from 'react-router-dom';
 import { Shell } from './public/app/shell.tsx';
 import { Problems } from './public/app/problems.tsx';
 import { Glossary } from './public/app/glossary.tsx';
@@ -23,11 +23,13 @@ import { Tools } from './public/app/tasks.tsx';
 import { Tags } from './public/app/tags.tsx';
 import { Comparison } from './public/app/preview.tsx';
 import { EditorView } from 'codemirror';
-export { screen, fireEvent, waitFor };
+export { screen, fireEvent, waitFor, within };
 let client, router;
+export function cachedUi(){return client.getQueryData(["/api/ui"]);}
+function Ui(){const [params]=useSearchParams();return params.get("view")==="imports"?<Imports/>:<Glossary/>;}
 export function mount(path, kind) {
- client = new QueryClient({defaultOptions:{queries:{retry:false,gcTime:0},mutations:{retry:false}}});
- router = createMemoryRouter([{element:kind==='shell'?<Shell/>:<><div id="review-problem-navigation"/><Outlet/></>,children:[{path:'/',element:<Problems/>},{path:'/ui',element:kind==='imports'?<Imports/>:<Glossary/>},{path:'/tools',element:<Tools/>},{path:'/tags',element:<Tags/>},{path:'/preview',element:<Comparison japanese="<p>Original</p>" korean="<p>Translation</p>"/>}]}],{initialEntries:[path]});
+ client = new QueryClient({defaultOptions:{queries:{retry:false,...(kind==="ui"?{staleTime:15000,gcTime:Infinity,refetchOnWindowFocus:false}:{gcTime:0})},mutations:{retry:false}}});
+ router = createMemoryRouter([{element:kind==='shell'?<Shell/>:<><div id="review-problem-navigation"/><Outlet/></>,children:[{path:'/',element:<Problems/>},{path:'/ui',element:kind==='ui'?<Ui/>:kind==='imports'?<Imports/>:<Glossary/>},{path:'/tools',element:<Tools/>},{path:'/tags',element:<Tags/>},{path:'/preview',element:<Comparison japanese="<p>Original</p>" korean="<p>Translation</p>"/>}]}],{initialEntries:[path]});
  render(<MantineProvider env="test"><ModalsProvider><QueryClientProvider client={client}><RouterProvider router={router}/></QueryClientProvider></ModalsProvider></MantineProvider>);
  return userEvent.setup({document});
 }
@@ -101,10 +103,12 @@ export function reactPage(
     dom: JSDOM;
     user: any;
     screen: any;
+    within: any;
     fireEvent: any;
     waitFor: (f: () => unknown) => Promise<void>;
     edit: (s: string) => void;
     editorView: () => import("codemirror").EditorView;
     navigate: (s: string) => Promise<void>;
+    cachedUi: () => { pages: unknown[] };
   };
 }

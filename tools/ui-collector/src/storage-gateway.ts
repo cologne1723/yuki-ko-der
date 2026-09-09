@@ -119,8 +119,11 @@ export async function storageRequest(
           await send(tabId, "collector:discard-session").catch((error) => {
             tabErrors.set(tabId, String(error));
           });
-          recordingTabs.delete(tabId);
-          sessionsByTab.delete(tabId);
+          // The discard may drain a pending rotation and assign a successor.
+          if (sessionsByTab.get(tabId) === id) {
+            recordingTabs.delete(tabId);
+            sessionsByTab.delete(tabId);
+          }
         }
       await persistState();
     }
