@@ -23,9 +23,9 @@ Vega는 벽돌로 평면 피라미드를 만들려고 합니다.
 
 이동이란 임의의 열 맨 위에 있는 벽돌 하나를 들어 다른 열이나 버리는 장소로 옮기는 것입니다.
 
-피라미드는 처음 배치의 1번째 열에 있는 벽돌의 위치에서 시작한다고 합니다. 주어진 열 수보다 더 큰 열 수의 피라미드가 될 수도 있습니다.
+피라미드는 처음 배치의 $1$번째 열에 있는 벽돌의 위치에서 시작한다고 합니다. 주어진 열 수보다 더 큰 열 수의 피라미드가 될 수도 있습니다.
 
-처음 배치에서 벽돌을 0개 이상 옮겨 피라미드 배치를 만들기 위한 최소 이동 횟수를 구하세요.
+처음 배치에서 벽돌을 $0$개 이상 옮겨 피라미드 배치를 만들기 위한 최소 이동 횟수를 구하세요.
 
 피라미드가 놓이는 장소에는 피라미드 하나만 있고, 필요 없는 벽돌은 모두 버리는 장소로 옮긴다고 합니다.
 
@@ -34,14 +34,16 @@ Vega는 벽돌로 평면 피라미드를 만들려고 합니다.
 ## 입력
 
 ```text
-N
-A_1 A_2 ... A_N
+$N$
+$A_1\ A_2\ \dots\ A_N$
 ```
 
-모든 입력은 정수입니다.
+첫째 줄에 열 수 $N$이 주어집니다. 둘째 줄에 각 열의 벽돌 개수 $A_i$가 $N$개 주어집니다. 모든 입력은 정수이며, 둘째 줄의 값은 공백으로 구분됩니다.
+
+## 제한
 
 - $1 \le N \le 100$
-- $1 \le A_i \le 100$
+- $1 \le A_i \le 100$ $(1 \le i \le N)$
 
 ## 출력
 
@@ -53,31 +55,39 @@ A_1 A_2 ... A_N
 
 ### 예제 1 {file=""}
 
+#### 입력
+
 ```text
 5
 2 2 2 1 2
 ```
 
+#### 출력
+
 ```text
 2
 ```
 
-1번째 열의 벽돌을 3번째 열로 옮기고 5번째 열의 벽돌을 4번째 열로 옮기면 피라미드 배치가 됩니다. 따라서 벽돌 2개를 옮기면 됩니다.
+$1$번째 열의 벽돌을 $3$번째 열로 옮기고 $5$번째 열의 벽돌을 $4$번째 열로 옮기면 피라미드 배치가 됩니다. 따라서 벽돌 $2$개를 옮기면 됩니다.
 
 ![](data:image/png;base64,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)
 
 ### 예제 2 {file=""}
+
+#### 입력
 
 ```text
 3
 3 2 3
 ```
 
+#### 출력
+
 ```text
 4
 ```
 
-벽돌 4개를 버리는 장소로 옮기면 피라미드 배치가 됩니다.
+벽돌 $4$개를 버리는 장소로 옮기면 피라미드 배치가 됩니다.
 
 ### 예제 3 {file=""}
 
@@ -127,4 +137,4 @@ A_1 A_2 ... A_N
 3
 ```
 
-처음에 열이 하나뿐이어도 벽돌 세 개를 옮기면 3열의 피라미드를 만들 수 있습니다.
+처음에 열이 하나뿐이어도 벽돌 세 개를 옮기면 $3$열의 피라미드를 만들 수 있습니다.

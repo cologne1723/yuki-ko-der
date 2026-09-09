@@ -6,8 +6,13 @@ import {
 } from "./problem-loader.ts";
 import { createProblemReplacement } from "./problem-replacement.ts";
 import { createProblemSemantics } from "./problem-semantics.ts";
+export type SourceVerification = {
+  status: "verified" | "changed" | "unavailable" | "cancelled";
+  detail?: string;
+};
 export type ProblemOutcome =
-  | { status: "applied" | "unavailable" | "cancelled" }
+  | { status: "applied"; verification?: Promise<SourceVerification> }
+  | { status: "unavailable" | "cancelled" }
   | { status: "failed"; reason: "network" | "verification"; detail: string };
 export function createProblemEngine(host: Window & typeof globalThis) {
   const { document, Node, location } = host;
@@ -82,16 +87,14 @@ export function createProblemEngine(host: Window & typeof globalThis) {
         expected,
       );
       if (!translation) return { status: "unavailable" };
-      const canonicalHtml = await verifyCanonicalSource(translation);
-      const canonicalDocument = parseHtml(canonicalHtml);
-      const canonicalBlocks = sourceStatementBlocks(canonicalDocument.body);
+      const displayedSource = semanticStatement(liveBlocks);
       let apply: ReturnType<typeof prepareReplacement>;
       try {
         apply = prepareReplacement(
           translation,
           liveTitle,
           liveBlocks,
-          canonicalBlocks,
+          liveBlocks,
         );
       } catch (error) {
         throw new ProblemVerificationError(String(error));
@@ -103,7 +106,33 @@ export function createProblemEngine(host: Window & typeof globalThis) {
         throw new ProblemVerificationError(String(error));
       }
       activeReplacement = apply;
-      return { status: "applied" };
+      const verification = (async (): Promise<SourceVerification> => {
+        try {
+          const canonicalHtml = await verifyCanonicalSource(translation);
+          if (!shouldApply() || activeReplacement !== apply)
+            return { status: "cancelled" };
+          const canonicalBlocks = sourceStatementBlocks(
+            parseHtml(canonicalHtml).body,
+          );
+          return {
+            status:
+              semanticStatement(canonicalBlocks) === displayedSource
+                ? "verified"
+                : "changed",
+          };
+        } catch (error) {
+          if (!shouldApply() || activeReplacement !== apply)
+            return { status: "cancelled" };
+          return {
+            status:
+              error instanceof ProblemVerificationError
+                ? "changed"
+                : "unavailable",
+            detail: String(error),
+          };
+        }
+      })();
+      return { status: "applied", verification };
     } catch (error) {
       if (!shouldApply()) return { status: "cancelled" };
       return {

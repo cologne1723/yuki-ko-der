@@ -166,8 +166,8 @@ test("standalone source samples participate in validation, replacement and resto
   }
 });
 
-test("sample and source mismatches reject cleanly without changing the Japanese page", async () => {
-  for (const kind of ["sample", "source", "catalog", "controls"]) {
+test("sample, catalog and control mismatches reject without changing the Japanese page", async () => {
+  for (const kind of ["sample", "catalog", "controls"]) {
     const f = fixture();
     try {
       const catalog = f.catalog();
@@ -175,7 +175,6 @@ test("sample and source mismatches reject cleanly without changing the Japanese 
         f.state.body = translated("1 2\n");
         catalog.entries[0].htmlSha256 = hash(f.state.body);
       }
-      if (kind === "source") f.state.canonical = source.replace("$N$", "$Z$");
       if (kind === "catalog") catalog.entries[0].htmlSha256 = "a".repeat(64);
       if (kind === "controls") {
         const button = f.dom.window.document.createElement("button");
@@ -248,7 +247,7 @@ test("authoritative removals invalidate caches and network failure cannot resurr
   }
 });
 
-test("late translation completion cannot apply after disabling and cached bodies still require live source verification", async () => {
+test("late translations cannot apply after disabling and cached bodies report offline verification", async () => {
   const f = fixture();
   try {
     assert.equal(
@@ -261,7 +260,11 @@ test("late translation completion cannot apply after disabling and cached bodies
     );
     f.state.offline = true;
     const result = await f.engine.translateProblem(() => true, f.catalog());
-    assert.equal(result.status === "failed" && result.reason, "network");
+    assert.equal(result.status, "applied");
+    assert.equal(
+      result.status === "applied" && (await result.verification)?.status,
+      "unavailable",
+    );
   } finally {
     f.close();
   }
@@ -275,16 +278,90 @@ test("KaTeX auto-render wrappers preserve source verification without hiding aut
     const formula =
       '<span><span class="katex"><span class="katex-mathml"><math><semantics><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true">N</span></span></span>';
     paragraph.innerHTML = formula;
-    assert.equal((await f.engine.translateProblem()).status, "applied");
+    const applied = await f.engine.translateProblem();
+    assert.equal(applied.status, "applied");
+    assert.equal(
+      applied.status === "applied" && (await applied.verification)?.status,
+      "verified",
+    );
     f.engine.restoreProblem();
-    for (const changed of [
+    for (const changedMarkup of [
       formula + "changed",
       formula.replace("<span>", '<span title="authored">'),
       formula.replace(">N</annotation>", ">M</annotation>"),
     ]) {
-      paragraph.innerHTML = changed;
-      assert.equal((await f.engine.translateProblem()).status, "failed");
+      paragraph.innerHTML = changedMarkup;
+      const changed = await f.engine.translateProblem();
+      assert.equal(changed.status, "applied");
+      assert.equal(
+        changed.status === "applied" && (await changed.verification)?.status,
+        "changed",
+      );
+      f.engine.restoreProblem();
     }
+  } finally {
+    f.close();
+  }
+});
+
+test("slow source HTML does not delay translation and changed source is reported afterward", async () => {
+  const f = fixture();
+  let release!: () => void;
+  const gate = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  const request = f.dom.window.fetch;
+  f.dom.window.fetch = async (url, options) => {
+    if (String(url).endsWith("/html")) await gate;
+    return request(url, options);
+  };
+  try {
+    f.state.canonical = source.replace("$N$", "$Z$");
+    const result = await f.engine.translateProblem(() => true, f.catalog());
+    assert.equal(result.status, "applied");
+    assert.equal(
+      f.dom.window.document.querySelector("h3")!.textContent,
+      "No.1 번역 제목",
+    );
+    release();
+    assert.equal(
+      result.status === "applied" && (await result.verification)?.status,
+      "changed",
+    );
+    assert.equal(
+      f.dom.window.document.querySelector("h3")!.textContent,
+      "No.1 번역 제목",
+    );
+    f.engine.restoreProblem();
+    assert.equal(
+      f.dom.window.document.querySelector("h3")!.textContent,
+      "No.1 題名",
+    );
+  } finally {
+    release();
+    f.close();
+  }
+});
+
+test("input format math renders inside fenced code while sample bytes stay literal", async () => {
+  const f = fixture();
+  try {
+    f.state.body = f.state.body.replace(
+      "<h4>설명</h4>",
+      "<h4>입력</h4><pre><code>$N$\n$S_1\\ S_2$\n</code></pre>",
+    );
+    const result = await f.engine.translateProblem();
+    assert.equal(result.status, "applied");
+    assert.equal(
+      f.dom.window.document.querySelectorAll(".block > pre > code .katex")
+        .length,
+      2,
+    );
+    assert.equal(
+      f.dom.window.document.querySelector(".sample pre")!.textContent,
+      "1  2\n",
+    );
+    if (result.status === "applied") await result.verification;
   } finally {
     f.close();
   }

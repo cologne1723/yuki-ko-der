@@ -13,7 +13,7 @@ title: "TV 채널 돌리기 (1)"
 
 유키가 가진 TV 리모컨에는 버튼이 세로 $N$행, 가로 $M$열의 직사각형으로 총 $N \times M$개 배치되어 있습니다.
 
-리모컨의 $X$행 $Y$열 버튼을 누르면 TV에서 채널 $(X-1) \times M+Y$를 볼 수 있습니다.
+리모컨의 $X$행 $Y$열 버튼을 누르면 TV에서 채널 $(X-1) \times M+Y$를 볼 수 있습니다. 구체적인 배치 예시는 예제 1의 설명을 참고하세요.
 
 유키는 방금 채널 $C$ 버튼을 눌러 현재 채널 $C$를 보고 있습니다. 그런데 도중에 다른 채널의 내용을 모두 한 번씩 보고 싶어졌습니다.
 
@@ -26,8 +26,12 @@ $N,M,C$가 주어질 때 위 규칙을 모두 만족하는 버튼 누르기 순�
 ## 입력
 
 ```text
-N M C
+$N\ M\ C$
 ```
+
+행 수 $N$, 열 수 $M$, 현재 채널 $C$가 공백으로 구분되어 주어집니다.
+
+## 제한
 
 - $1 \le N,M \le 100$
 - $1 \le C \le N \times M$
@@ -45,21 +49,31 @@ N M C
 
 ### 예제 1 {file=""}
 
+#### 입력
+
 ```text
 4 3 5
 ```
+
+#### 출력
 
 ```text
 YES
 ```
 
-예를 들어 채널 5에서 시작하여 `5→4→1→2→3→6→9→12→11→10→7→8→5` 순서로 누르면 모든 채널을 본 뒤 원래 채널 5로 돌아올 수 있습니다.
+예를 들어 채널 $5$에서 시작하여 `5→4→1→2→3→6→9→12→11→10→7→8→5` 순서로 누르면 모든 채널을 본 뒤 원래 채널 $5$로 돌아올 수 있습니다.
+
+![리모컨 배치와 순회 예시](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOgAAADgCAIAAACGmL1CAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAA6hSURBVHhe7Z0xiF3HFYZVqlxIo1JN6qhUF2Pc2E0auwpEuEoT2E5sExsjMDgCqQuoEhjBK1xspcq2RJCJghEWsnFpRDAGV94meAkmOId3/jfcvffOvPvunXNm5ur/OCzvzJ0nv3/n09G1tPv20q+ENAjFJU1CcUmTUFzSJBSXNMkFcc/PzzebDZrVse50Z2dnp6enaFbHMN0Fcd9+++1LhNTK48ePYWpP3JcvX169ehXN6lh3OjnU1157Dc3qGKajuCuB4lLcJqG4FLdJKC7FbRKKS3GbhOJS3CahuBS3SSguxW0Siktxm4TiUtwmobgUt0koLsVtEorrd7T6JT9o7HFLp7m64IIlPuIiTwdcMKYWcRF6C5bscUiHSGNghxnW4iLGGNhhSRXiIu4OrNrjJi6aHboooLfBR1w0O3RRQG9GeXERdBs1PPDB7c+TIQ5JrcWN4RBNqEXc4WMHKK4FDtGE8uJ28ckcoLgWOEQTKC7FzYlDLoXijqR78Oi7r1/+hMYAn5hpcXNl1CxdcMEYijuS7uT+s7fe+1Q+WuirGQX0ZqTFzZURYS6Ca5ZQ3Ki4Wtn1dcs4RdzsGTWdgN4MirtH3LxH6xlwurh5MwoOMSnuJHG1Fh6tc7pDxdXKoq9DUop7gLha847WOZowT1ythfo6hF2zuPI/zr3zyFgHHW3eXF3qydjFLm+A4i6qW5sX/zn/Bf+9CHlD9SiYcTSXLgrozSgvLoJGwKZZmB7qOx8+ll9/orUJsG8uBTMiwBjYYcmaxd3LvHvcicoqiBEH+wxYco87PSNidMAFY+q6VRAmCpGFQ8U9SNnizBO3lYx1ifvfX/73l7//Sz6iN2a6uG0pqxwq7sKM8lwt9MbUJe7pP/8tn0H5iN6YKeK2qKwyXdwsGcOvht6YisSVQfvHv/1DkstHn6GbFrddZZUp4mbMqNZKoTemInF13Gr5DN1YulubF00rq6TFzZ4xnB16Y2oRN4xbLZ+h6/nb0p+0uNkJZ4femFrE7Y5bLYehS3EzEg4OvTFViNsbt1oOQ5fiZiQcHHpjqhB3OG61rIcuxc1IODX0xpQXd3TcalkPXYqbkXBq6I0pL25s3GqZDl2Km5FwZOiNKSxuYtxqmQ5dipuRcGTojSksbnrcatkNXYqbkXBe6I0pKe7ecatlN3QpbkbCeaE3pqS4U8atltHQpbgZCYeF3piS4j788vsHuy8p0grhe+uyE8/JCsXNSDg79MaUFHeIc3iKmxHns6O4FDcPzmdHcSluHpzPjuJS3Dw4nx3Fpbhz+OiTb07uP+tWOLveuuzEc7JCcSnuHIr/VeYecY+Pjy9fviw7fAhp0Rtz/fp1z3TOXLt27ejoCE12Xn/jzZPTcF6xkj2yE0/JiqZ7+vQpTO2J++TJkytXrojdPoTA6I3ZbDae6Zy5e/eunC4aA25//Hk4r1jJHuzOjaY7Pz+HqbxVWA1yujKZ0BhQ9gukhuko7kqwFldI3+ka3d0qFJfizicxdE3HrUBxKe4iYkPXdNwKFJfiLmJ06FqPW4HiUtylDIeu9bgVKC7FXUpv6DqMW4HiUtwMdIeuw7gVKC7FzUAYuj7jVqC4FDcPOnR9xq1Ql7hfv/xJC70xFDcjMmg935S7LnGdobh58Xxj1hrFxQ/BsP8xGA7pkGQM7DDDU1xE2oFVS6oTF9G3YMkMirschBmAy2bUJS5C78CqGW7iovHFWVz0W3qtBTWK231gCsVdSFXpionb/Sx0H2fk069+kEJDcRdTVbp1iiu+vnvni7e275GDJYq7jILRhFrE7X0Weu0SgrJaRcTtgWvGUFxzcYefguHKDHrK1iOugh1muImrD7roBlPWKe6oslrO4g7RaAJ6M3zEjYFNZpQXdzTn6OIUEspqFRdXmR1wOm7iot+BVfd0F/571kcbSxhbT7BX2YWV9ysoZgQ8FB9x0VwkcSkXVYibBlvj/Hj2s6myWhS3RyJC4lIu1iCuIO7eOf22p1reorg9EhESl3JRWNwY85JP0beGe1xNJ6C3wVpcIZYitp6RVYmrpPX1FHc0hS4K6M1wE1dAv2W4YsEKxVVi+vqLOwp2WOIgroA8F8E1S1YrrjLU1/lWQYN0wQV7fMQVNNdvf/8nLawaU6m4eenqW8nf4zrgJq4SRgN6Y14JcRXVl+IaQXH9oLgZobh++Kcr++2EplBcP5zTFf8GblMorh/O6Yq/ZYYpFNcPz3QyaIu/SZEpFNcPz3Q6brV8hi7FpbhLCeNWy2foUlyKu5TuuNVyGLoUl+IuojdutRyGLsWluIsYjlst66FLcSnufEbHrZb10KW4FHc+sXGrZTp0KS7FnUli3GqZDl2KS3Fnkh63WnZDl+JS3DnsHbdadkOX4lLcOUwZt1pGQ5fiUtw5PPzy+wePvutWONreuuzEc7JiKu5Hn3xzcv9Zt0K63rrsxHOyQnH90oWjRW+MqbgV/nlCca0IZ4neGFNxK7yDp7hWhONEb4ypuMKUoWs0boU94t68efPy5cuyY5Vcv37dM104TvTGXLt27ejoCI0Fr7/x5slpCDUsuSp7sDk3mu758+cwtSfuZ599duXKFbF7lWw2G8904UTRG3P37l05XTQ23P748xBqWHIV+wzQdGdnZzCVtwp2hBNFb4ycrkwmNDYk7nTt7m6VYTqKa0U4VPTGOIgrxO507e5uFYpLcRcxOnStx61AcSnuUoZD13rcChSX4i6lN3Qdxq1AcSluBrpD12HcChSX4mYgDF2fcStQXIqbBx26PuNWoLgUNw8yaMu+MxrFtWLd4gpl34uS4lqxenE9obgUt0kKi6s/9yIB9tngJq5mCeJa51LcxNV0AawaQ3HNxUWSS5d+c/V3WtrishkO4mqQIbhsSWFxY+ATUEjcB4++y/UDUBHjYhAsGadzExfNFl0R0JtRtbhozIilO9l+6598XK5vLEhsPSPW4sYixNbzUqO4mlxAb0ZaXK2F+saCxNYzUkpcIXEpF/WKi8aSKeIu1DeWJbaeEYpLcVHz9NU4AnqvgBTXVVzNLKC35FBxtWboi0gdcMESH3EF9Duw+mqKi2YZDzpvHpO9DtVXcwWwaom1uALCRMAmG+oSF4lbEFfr1ubF3n+gR6RdKDT27jqIKyBMh7CoG4yoUVw0izEV950PH8uvP9FaNB1i6xnxEXeUIumKiatpBfT2zLvHnaiskI6TvrociusqLhoXDhV3urJKOlH66nJKiWudS6lFXE0roHdhuriHKqukE6WvLofi+omLxosp4s5TVtFQAvoOuNCyuMMXr4kE9JZQ3Ki4S5QNaK4Y2GSDg7ij4LIxVYiLxNvMC0U5iFi6W5sXy5XtgngdcMESa3EFhOmAC/bUMnEV52+4c07njIO4XeS3uhZ6Y+oS1/lbnCluRsL/FaA3piJxZdA6v6kExc3Iqyuujlstn6FLcTMSzg69MbWIG8atls/QpbgZCWeH3phaxO2OWy2HoUtxMxIODr0xVYjbG7daDkOX4mYkHBx6Y6oQdzhutayHLsXNSDg19MaUF3d03GpZD12Km5FwauiNKS9ubNxqmQ5dipuRcGTojSksbmLcapkOXYqbkXBk6I0pLG563GrZDV2Km5FwXuiNKSnu3nGrZTd0KW5GwnmhN6akuFPGrZbR0KW4GQmHhd6YkuI+/PL78CVFWiF8b1124jlZobgZCWeH3piS4g5xDk9xM+J8dhSX4ubB+ewoLsXNg/PZUVyKmwfns6O4FHcOH33yzcn9Z90KZ9dbl514TlYoLsWdQ/G/yqS4FHcOxf/xaI+49+7dOzo6et+LEBi9McfHx57pnLlx44b8tkRjwJ/fuxfOK1ayB7tzo+lk9MBUirsarMX96/sf/OG9h+HIhiVXZQ9252aPuLxVaBfTWwUlfadrdHer8B6X4s4ncadrd3erUFyKu4jY0DUdtwLFpbiLGB261uNWoLgUdynDoWs9bgWKS3GX0hu6DuNWoLgUNwPdoeswboW6xP365U9a6I2huLkIQ9dn3Ap1iesMxc2IDl2fcStQXIqbBxm0nm/KTXEpbjY8fwwCxV1Vuk+/+kFKH/uL60kxcSf+rAvdFsBqJoqnE6bvTCO+vnvnC7nLfLD7KQx24k55zbqnCy5kooC4yLEFS2NgxwBcnkV3IAkF0wnYtAVLswjKapmKi5e7BUsDcHkM7MiBt7hIsAOrA3D54gYszco/HEhCqXQCduzA6oH0lNWyExevdQdWB4xe1UUB/WJcxcVr37768GCU2NXYeoLYQBLKphPCY12fzqiyWkbi6usUwmNdn868Z8UoIO7wcY/EJSF9tUt6IAlF0gndq93HU0goq2Uq7vDxdOY9K4aruF0SMRKXhPRVZcpAEoqk6zF9515lF9b0f7Cc/pq7zHtWjLWJO30gCa2I++PZz6bKalHcSSRiJC4Jsav1DCQh9iKHTNwp7t45/bb3kvKWqbgznpJmDeLWNpCE4YuMMX2nMEVfo3vcLge9ZkH3C+hzsJKJW9VAEkZf5CjTdwbSYasVF00m1nOrIBw0kIRW7nFHiYWtTdyDNk9nVeIqEweS0LS4yjBsVeJO33koKxRX2TuQhBWIq3TD1iPuxG3zqFFcIXY1th4jMZCE1YiraNhKxJ2yZwlViyug34Klwz8dowNJWJm4PQqKu3fDclzF1TwxsGkHVgfg8uH0BpJQKh2WImDTYvKKixcXAZu2YCkO9i2jXnEFXNiB1XxQ3OngxUXApi1YioN9y3AVtzbWnS6vuLVBcSluk1BcitskFJfiNgnFpbhNQnEpbpNQXIrbJBSX4jYJxaW4TUJxKW6TUFyK2yQUl+I2CcWluE1CcSluk1BcitskFJfiNgnFpbhNQnEpbpNQXIrbJBSX4jYJxaW4TUJxKW6T7BF3s9kcHR29v1KOj49XnO7GjRvy2xLN6tB0Z2dnMLUn7u3btyluo7wK4j5//hym9sQV5M9TPFojTNcuvXR9cQlpAopLmoTikgb59df/AwiSrHCMF7GwAAAAAElFTkSuQmCC)
 
 ### 예제 2 {file=""}
+
+#### 입력
 
 ```text
 3 3 1
 ```
+
+#### 출력
 
 ```text
 NO
@@ -67,9 +81,13 @@ NO
 
 ### 예제 3 {file=""}
 
+#### 입력
+
 ```text
 12 34 56
 ```
+
+#### 출력
 
 ```text
 YES

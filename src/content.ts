@@ -72,6 +72,16 @@ declare global {
     history.restore();
     notices.clear();
     if (!live()) return;
+    if (/^\/problems\/no\/\d+\/?$/u.test(location.pathname)) {
+      notices.setOriginalAction(() => {
+        revision++;
+        titlesReady = false;
+        titleHistory.restore();
+        globalThis.yukicoderProblemTranslations?.restoreProblem();
+        notices.notifyText("problem", "원문을 표시하고 있습니다.");
+      });
+      notices.notifyText("problem", "문제 번역을 불러오고 있습니다.");
+    }
     if (renew) {
       uiLoading = undefined;
       catalogLoading = undefined;
@@ -123,6 +133,26 @@ declare global {
               ? "problemLoadFailed"
               : "problemVerificationFailed",
             outcome.reason === "network",
+          );
+        }
+        if (outcome?.status === "applied") {
+          notices.notifyText("problem", "원문 변경 여부를 확인하고 있습니다.");
+          void outcome.verification?.then((result) => {
+            if (!live() || result.status === "cancelled") return;
+            notices.notifyText(
+              "problem",
+              result.status === "changed"
+                ? "번역 시점과 문제가 달라졌습니다. 원문을 확인해 주세요."
+                : result.status === "unavailable"
+                  ? "원문 변경 여부를 확인하지 못했습니다. 원문을 확인해 주세요."
+                  : "",
+            );
+          });
+          if (!outcome.verification) notices.notifyText("problem", "");
+        } else if (outcome?.status === "unavailable") {
+          notices.notifyText(
+            "problem",
+            "이 문제의 번역이 없어 원문을 표시합니다.",
           );
         }
         applyReadyTranslations();

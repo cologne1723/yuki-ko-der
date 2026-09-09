@@ -62,6 +62,7 @@ await Promise.all([
   ),
   cp(join(repositoryRoot, "manifest.json"), join(outputRoot, "manifest.json")),
   cp(join(repositoryRoot, "README.md"), join(outputRoot, "README.md")),
+  cp(join(repositoryRoot, "LICENSE"), join(outputRoot, "LICENSE")),
   cp(join(repositoryRoot, "icons"), join(outputRoot, "icons"), {
     recursive: true,
     filter: (source) => !/toolbar-\d+\.png$/u.test(source),

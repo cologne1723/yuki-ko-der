@@ -4,23 +4,19 @@ export function createContentNotices(
   document: Document,
   retryLoad: () => Promise<void>,
 ) {
-  const notices = new Map<
-    string,
-    { key: Parameters<typeof message>[0]; retry: boolean }
-  >();
+  const notices = new Map<string, { text: string; retry: boolean }>();
   const notice = document.createElement("p");
   notice.id = "yukicoder-ko-status";
   notice.setAttribute("role", "status");
   notice.style.cssText = "font:inherit;font-size:0.9em;margin:0.5em 0";
   let noticeText = "";
+  let showOriginal: (() => void) | undefined;
 
   function renderNotice() {
-    const text = [...notices.values()]
-      .map((value) => message(value.key))
-      .join(" ");
+    const text = [...notices.values()].map((value) => value.text).join(" ");
     const retry = [...notices.values()].some((value) => value.retry);
-    const identity = text + retry;
-    if (!text) {
+    const identity = text + retry + Boolean(showOriginal);
+    if (!text && !showOriginal) {
       notice.remove();
       noticeText = "";
       return;
@@ -38,8 +34,16 @@ export function createContentNotices(
       };
       notice.append(button);
     }
+    if (showOriginal) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = "원문 보기";
+      if (text || retry) button.style.marginInlineStart = "0.5em";
+      button.onclick = () => showOriginal?.();
+      notice.append(button);
+    }
     const heading = document.querySelector("#content > h3");
-    if (heading) heading.after(notice);
+    if (heading) heading.before(notice);
     else (document.querySelector("#content") ?? document.body).prepend(notice);
   }
   function notify(
@@ -47,13 +51,23 @@ export function createContentNotices(
     key: Parameters<typeof message>[0],
     retry: boolean,
   ) {
-    notices.set(part, { key, retry });
+    notices.set(part, { text: message(key), retry });
     renderNotice();
   }
   return {
     notify,
+    notifyText(part: string, text: string, retry = false) {
+      if (text) notices.set(part, { text, retry });
+      else notices.delete(part);
+      renderNotice();
+    },
+    setOriginalAction(action: () => void) {
+      showOriginal = action;
+      renderNotice();
+    },
     clear() {
       notices.clear();
+      showOriginal = undefined;
       renderNotice();
     },
   };

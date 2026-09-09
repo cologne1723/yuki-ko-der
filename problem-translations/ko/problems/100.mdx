@@ -13,22 +13,31 @@ title: "직렬 아미다쿠지"
 
 $N$개의 세로선과 인접한 세로선을 가로로 잇는 가로선으로 이루어진 아미다쿠지를 생각합시다.
 
-완전히 같은 모양의 아미다쿠지 2개를 위아래로 연결한 것을 “직렬 아미다쿠지”라고 합니다.
+완전히 같은 모양의 아미다쿠지 $2$개를 위아래로 연결한 것을 “직렬 아미다쿠지”라고 합니다.
+
+아래 그림은 직렬 아미다쿠지의 예입니다.
+
+![직렬 아미다쿠지의 예](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAYAAACLz2ctAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAMuSURBVHhe7dxhattYFIBRT7MReSXOTrKUJEvxTuKVtbpCgfkxndIY/AV0DggZm3D14Osrhof/+bk6QeTHfoeEAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkNTT22p//XAfHx+n6/W6vV6WZbs/kvnt/JHugLfb7TT9z71gfjt/+C+YlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQVPrzbO/v79tpjOfn5+16tDmONNc8w+vr6/7u4xx9/ZsJsLIufOLPr3mOwtHXP+yAdkA74NwL5rfzhy8hpARISoCkBEhKgKQESEqApARISoCkBEhKgKQESOpbnIaZy2mUbv3V/M12JCGyLvxbnAapr3r91fxhB1xn2wHtgPs7j2V+vwP6EkJKgKQESEqApARISoCkBEhKgKQESEqApARISoCk/DrWgU+jOA2zn8aor3mOwuf6jzp/2AHtgNn8zZZhZF24HejgO6AvIaQESEqApARISoCkBEhKgKQESEqApARISoCkBEjq6W21v/6SOU1yvV6318uybPd/+7/Pb7fb9vmYz/7274f57fx73b0DziKm4bn/lz99PmaRX/37ez8f5n99/r3u3gHH+Xw+XS6X3/4L+d3ns6hZ/JwFfHl5+eu//2R+O/8u+7GsxNq+83jOA0JHgKQESEqApARISoCkBEhKgKQESEqApARISoCk/DrWes0zlL9OddT1b7YjCZE5hTGPUF/zHIWjr3/YAe2AdsC5F8xv5w9fQkgJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZDUtzgNM5fTKN36q/mb7UhCZF34tzgNUl/1+qv5ww64zrYD2gH3dx7L/H4H9CWElABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASfl1rAOfRnEaZj+NUV/zHIXP9R91/rAD2gGz+Zstw8i6cDvQwXdAX0JICZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJPb2t9teJ8/l8ulwup2VZ9ncey/x2fnoeEPwXTEqApARISoCkBEhKgKQESEqApARISoCkBEhKgKQESEqAhE6nX59CwVsKTSq5AAAAAElFTkSuQmCC)
 
 아미다쿠지의 출발점과 도착점의 대응이 주어질 때, 그 대응을 만족하는 직렬 아미다쿠지가 존재하는지 판정하세요.
 
 ## 입력
 
 ```text
-N
-a_1 ... a_N
+$N$
+$a_1\ \dots\ a_N$
 ```
 
-첫째 줄에 세로선의 수를 나타내는 $N$이 주어집니다. $(2 \le N \le 50)$
+$N$은 세로선의 수입니다.
+둘째 줄에는 출발점과 도착점의 대응을 나타내는 $a_1,\dots,a_N$이 공백으로 구분되어 주어집니다.
+왼쪽에서 $i$번째 세로선에서 출발하면 왼쪽에서 $a_i$번째 세로선에 도착한다는 뜻입니다. $(1 \le i \le N)$
 
-둘째 줄에 출발점과 도착점의 대응을 나타내는 $a_i$가 공백으로 주어집니다. $(1 \le a_i \le N)$
+$a_1,\dots,a_N$은 모두 서로 다릅니다.
 
-이는 왼쪽에서 $i$번째 세로선에서 출발하면 왼쪽에서 $a_i$번째 세로선에 도착한다는 뜻입니다. $a_1,\ldots,a_N$은 모두 서로 다릅니다.
+## 제한
+
+- $2 \le N \le 50$
+- $1 \le a_i \le N$ $(1 \le i \le N)$
 
 ## 출력
 
@@ -40,10 +49,14 @@ a_1 ... a_N
 
 ### 예제 1 {file=""}
 
+#### 입력
+
 ```text
 2
 1 2
 ```
+
+#### 출력
 
 ```text
 Yes
@@ -51,25 +64,37 @@ Yes
 
 그림과 같은 직렬 아미다쿠지가 존재합니다.
 
+![예제 1의 직렬 아미다쿠지](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAGvSURBVHhe7dvRbYMwGABht10EJoHNgM1gE5ik9Y/ch0olsUSce7lPQkQgaqILqWTIx3eWhPksa0EMADMAzAAwA8AMADMAzAAwA8AMADMAzAAwA8AMADMADL0fsK5r2rYtDcOQxnEsW9+HHj+gV0C8+XmezzWBHj/4FQQzAMwAMAPADAAzAMwAMAPADAAzAMwAMAPADABDp6OXZTlnI2MqmJqOjiXOYZqmsvXNIgAlv/GIjy9xHhSvAK8A7hNIjx/8JwwzAMwAMAPADAAzAMwAMAPADAAzAMwAMAPAmgWIWcaY7Yz1f35nIq/UHH93/9W+UHP8o/21mgV49uh3bH908jXH393fcvxaX/mPzOX1y/V9f/74oeu6suWv4zjSvu+X9wOeHX93f+vxq5RpaURu7/2As4IwBoAZAGYAmAFgBoAZAGYAmAFgBoAZAGYAmE9H5yXOwd8HgAs5G+oV4BXg/QCBDAAzAMwAMAPADAAzAMwAMAPADAAzAMwAMAPAmj6eXuMlj3jfQI+P3g+QX0E4A8AMADMAzAAwA8AMADMAzAAwA8AMADMAzAAwA6BS+gGV/2ZVfZotywAAAABJRU5ErkJggg==)
+
 ### 예제 2 {file=""}
+
+#### 입력
 
 ```text
 3
 2 3 1
 ```
 
+#### 출력
+
 ```text
 Yes
 ```
 
 그림과 같은 직렬 아미다쿠지가 존재합니다.
 
+![예제 2의 직렬 아미다쿠지](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAKBSURBVHhe7d1rTsJAAEXhqhuBlcBOWAqyFHYCK9PeCf3ps8rVnPMlTY0NmWlyMpIM1IeX2SSsx9tZUAYAZwBwBgBnAHAGAGcAcAYAZwBwBgBnAHAGAGcAcAYAZwBwT8+z2893d7lcpvP5PH7ebDbjfE/08aO6Alyv1yn95dxAHz/8EwBnAHAGAGcAcAYAZwBwBgBnAHAGAGcAcAYAZwBwBgBX/Xr46XQau2H7/X4c95bt2ByZw/F4vP32fpb7b40/JICW+cYTX/3IPBqW+2+NH64ArgA9KT9TyLmBPn74JhDOAOAMAM4A4AwAzgDgDADOAOAMAM4A4AwAzgDg/sRuYI7mbhx1N3IYW0Il2QXLFHJuWMZvH637D1cAV4CelJ8p5NxAHz98EwhnAHAGAGcAcAYAZwBwBgBnAHAGAGcAcAYAZwBwqx8Xn92s9x55/t71PCU71yPXvvr6oI+/1uoV4KNHnn90PXKT33392uvxn8df60f+YcR2u512u92bhb51PTeVm89e/OFw+PLrF/TxV7ltC1fM7fl5AD8PoCYDgDMAOAOAMwA4A4AzADgDgDMAOAOAMwA4A4DzaeHzkTk0v53cGn8YW0Il2QXLFNpH5tGw3H9r/HAFcAXoSfmZQs4N9PHDN4FwBgBnAHAGAGcAcAYAZwBwBgBnAHAGAGcAcAYA59PC57Gpu5HD2BIqyS5YppBzwzJ++2jdf7gCuAL0pPxMIecG+vjhm0A4A4AzADgDgDMAOAOAMwA4A4AzADgDgDMAOAOAMwC4H3lc/Bq/+ij0T6CPX/08gPr8EwBnAHAGAGcAcAYAZwBwBgBnAHAGAGcAcAYAZwBwBgBnAGjT9ArEfmoNcKlbTAAAAABJRU5ErkJggg==)
+
 ### 예제 3 {file=""}
+
+#### 입력
 
 ```text
 2
 2 1
 ```
+
+#### 출력
 
 ```text
 No

@@ -1,5 +1,5 @@
 import createDOMPurify from "dompurify";
-import renderMathInElement from "katex/contrib/auto-render";
+import { renderProblemMath } from "./problem-math.ts";
 
 // The layout comparison is not a security boundary. Remote documents must
 // remain inert even when their markup differs from the Japanese statement.
@@ -67,25 +67,7 @@ export function prepareTranslatedBlocks(blocks: Element[]): HTMLElement[] {
         }
       }
     }
-    const samples = [...imported.querySelectorAll(".sample pre")];
-    for (const pre of samples) pre.classList.add("yukicoder-ko-sample-data");
-    renderMathInElement(imported, {
-      delimiters: [
-        { left: "$$", right: "$$", display: true },
-        { left: "\\(", right: "\\)", display: false },
-        { left: "\\[", right: "\\]", display: true },
-        { left: "$", right: "$", display: false },
-      ],
-      ignoredTags: ["script", "noscript", "style", "textarea", "code"],
-      ignoredClasses: ["katex", "yukicoder-ko-sample-data"],
-      throwOnError: false,
-      strict: "ignore",
-      trust: false,
-    });
-    for (const pre of samples) {
-      pre.classList.remove("yukicoder-ko-sample-data");
-      if (!pre.className) pre.removeAttribute("class");
-    }
+    renderProblemMath(imported);
     return imported;
   });
 }

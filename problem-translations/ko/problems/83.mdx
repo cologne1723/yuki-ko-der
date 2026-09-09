@@ -17,6 +17,8 @@ title: "최대 매칭"
 
 수는 $0$부터 $9$까지의 숫자를 가로로 나열하여 표시합니다. 숫자의 표시 방법은 그림과 같습니다.
 
+![성냥으로 숫자를 표시하는 방법](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAADgCAIAAACRn3qiAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAvFSURBVHhe7d1Ba1NZH8fxa5rmRrpSNwqxEWJLnZUbl65KEIV5AX0DMgRpd4L4Jtp0Nr6KUlxOu3H3MM9Cd2liF4kDFhcGQWhvWpvnpvf/lNreuBj+/ef0nO+HwJxjAjm/e25/JDft5NpwOIwu+NRu7zWb97e2bnS7UaHQr1Z36/Xby8uVWk0egasstP3lfDaWUyvvNzYeLi1FSSLzU3Fx8PLJj0f3ZKrn+u9/ygiXL7T95Xy2V5D/nvGg0cjZg1RyNP3mnYxxZYW2v5zP9nJqJX2VKIOLct4w4aoJbX85n83lHPHW+vpRHMvkrNLU4fPHMsaVFdr+cj7by79k29vZ+bK6WtveHl3iiqJ+tdqp1++srNydn88egCsttP3lfLaW1sqHzc1vs7PfK5V0kE4nwoU1WCKv3yzzunBsz61hVOSH5XL6iiW9pYNeu509zpILa7BEXrnDU5Z53fz5LXxeWyseHGSvXNLBXrOZjS25sAZL5M3GvrLM6+jP79e5uaxmstvXhQWpIEMurMESeeUOT1nmdfPn99qwVIoGg6xpRsrlaH9fxmbiePJrsERe8mpx4dheWMOFD5h/8SG/GRfWYIm8frPM68bP7+jvI2Ry4tzUhgtrsEReGXnKMq8Lx/biGgq7i4syO/Hx56kNF9Zgibwy8pRlXkd/frut1nB6Si63lIq9TkeuwxhyYQ2WyCt3eMoyr5s/v6Nfh0tePT2+OXN8ayZ5/Sx7nD0X1mCJvH6zzOvgz+/ol/f3376Qly+T+5tuF9Zgibx+s8zr4M9vYNfkAVw+agWAMmoFgDJqBYAyagWAMmoFgDJqBYAyagWAMmoFgDJqBYAyagWAMmoFgDJqBYAyagWAMmoFgDJqBYAyagWAMmoFgDJqBYAyagWAMmoFgDJqBYAyagWAMmoFgDJqBYAyagWAMmoFgLLRdzDLEMH41G7vNZv3t7ZudLtRodCvVnfr9dvLy5VaTR7hF/Ia56VWgvN+Y+Ph0lKUJDI/FRcHL5/8eHRPpnom+13u5BWGeXkTFJwHjUbOOZdKjqbfvJOxR8grDPNSK+EpjN90L1+5kveUVV5qJTit9fWjOJbJWaWpw+ePZewR8grDvFxbCVFvZ+fL6mpte3t0SS+K+tVqp16/s7Jyd34+e4BnyGudN62VD5ub32Znv1cq6SCdToQLa7BkmTe0Y+uC0I75ubyjYjssl9NXLOktHfTa7exxllxYgyXLvKEdWxdwPhc+r60VDw6yVy7pYK/ZzMaWXFiDJcu8oR1bF3A+F+b++iubZ+5vbcnIkAtrsGSZN7Rj6wLO52vDUikaDOQfUuVytL8vYzNxPPk1WLLMG9qxdUHw5/OFD5h/8aG3GRfWYMkyb2jH1gXhnc+jvxeQyYlzUxsurMGSZd7Qjq0LQjvmF/MWdhcXZXbi489TGy6swZJl3tCOrQs4n6NuqzWcnso+HBqWir1ORz41MuTCGixZ5g3t2LqA83n063DJq6fHN2eOb80kr59lj7PnwhosWeYN7di6IPDzefTL+/tvX8jLl8n9TbcLa7BkmTe0Y+uCwM9nPhcAoIxaAaCMWgGgjFoBoIxaAaCMWgGgjFoBoIxaAaCMWgGgjFoBoIxaAaCMWgGgjFoBoIxaAaCMWgGgjFoBoIxaAaCMWgGgjFoBoIxaAaCMWgGgjFoBoIxaAaCMWgGgjFoBoIxaAaCMWgGgbPQdzDI841O7vdds3t/autHtRoVCv1rdrddvLy9XajV5BK6y0PaX89lYTq2839h4uLQUJYnMT8XFwcsnPx7dk6kevm/cUmj7y/lsL+dN0INGI2cPUsnR9Jt3MsaVFdr+cj7by7u2Uhh/wSXnDROumtD2l/PZXM4Rb62vH8WxTM4qTR0+fyxjXFmh7S/ns738S7a9nZ0vq6u17e3RJa4o6lernXr9zsrK3fn57AG40kLbX85nY/m1AgD/2vi3nQDwr1ArAJRRKwCUUSsAlFErAJRRKwCUUSsAlFErAJRRKwCUUSsAlFErAJRRKwCUUSsAlFErAJRRKwCUUSsAlFErAJRRKwCUUSsAlFErAJRRKwCUUSsAlFErAJRRKwCUUSsAlFErAJRRKwCUUSsAlFErAJRRKwCUUSsAlFErAJRRKwCUUSsAlFErAJTl18qndvvvFy/6CwvR9evRzEz/t9/+u7Lyz+6u3O0d8pLXJxPPe204HMrw/95vbDxcWoqSROan4uLg5ZMfj+7JVM/13/+U0SSQV5BXCXlzXq08aDRy1pRKjqbfvJOxR8gryOsFF/LmvQkqjL/gcv6VjRfIe4q8HnAgb84KWuvrR3Esk7NKU4fPH8vYI+QV5PWCE3mHebqt1t9//PF1bm5YKqW3dPCfRqO3syN3e4e85PXJxPOOauXD5ua32dnvlUo6yP7Vb6HldYHlMXdhfwPPG6Uddlgup++50ls66LXb2eN8FVpeF1gecxf2l7yFz2trxYOD7A1ROthrNrOxr0LL6wLLY+7C/pI3Gr0BO6mZ7PZ1YUEqyFOh5XWB5TF3YX/Je21YKkWDQdY0I+VytL8vYy/FcVh5XWB5zF3Y3+DzXviA+RcfensptLwusDzmLuxveHkL/WpVJifOTf0TWl4XWB5zF/aXvIXdxUWZnfj489Q/oeV1geUxd2F/yRt1W63h9JRcbikVe52OXIfxVGh5XWB5zF3YX/KOfh0uefX0+ObM8a2Z5PWz7HF+Cy2vCyyPuQv7G3je0f8YYf/tC3n5Mum/6bYRWl4XWB5zF/Y38Lx8DgJAGbUCQBm1AkAZtQJAGbUCQBm1AkAZtQJAGbUCQBm1AkAZtQJAGbUCQBm1AkAZtQJAGbUCQBm1AkAZtQJAGbUCQBm1AkAZtQJAGbUCQBm1AkAZtQJAGbUCQBm1AkAZtQJAGbUCQBm1AkDZ6DuYZXjGp3Z7r9m8v7V1o9uNCoV+tbpbr99eXq7UavIIv4SWNzScz8Z5c2rl/cbGw6WlKElkfiouDl4++fHonkz1TOr7qDOh5Q0N57MwzJvzJuhBo5GzplRyNP3mnYw9Elre0HA+C8O8eddWCuMvuOS8Ybr6QssbGs7nU1Z5c1bQWl8/imOZnFWaOnz+WMYeCS1vaDifhWHe/Eu2vZ2dL6urte3t0SWfKOpXq516/c7Kyt35+ewBngktb2g4n63zprXigg+bm99mZ79XKulA/unSWD7XOC6swZJlXheOrQtrsHQurxO1kpbrYbmcvmpKb+mg127LHZfA8rnGcWENlthfucNTF/OOv7pj6PPaWvHgIBung71mMxtfBsvnGseFNVhif7Oxr3LySuFM1Ne5uazqstvXhQW54xJYPtc4LqzBEvsrd3jqYt78S7bW4jgaDGScKpej/X0Zq7N8rnFcWIMl9jew/XXiTdB5v/jgXZ3lc43jwhossb9+K7gRuF+tyujEuakuy+cax4U1WLLM68KxdWENli7mdaJWdhcXZXTi489TXZbPNY4La7DE/srIUzl5s4suk9VttYbTU3LJp1TsdTpyxyWwfK5xXFiDJfZX7vDUxbyu/Dpc8urp8c2Z41szyetn8k+XxvK5xnFhDZbYX7+dy+vGJ0FRtP/2hYwu/+/KLZ9rHBfWYIn99du5vIFdowZw+agVAMqoFQDKqBUAyqgVAMqoFQDKqBUAyqgVAMqoFQDKqBUAyqgVAMqoFQDKqBUAyqgVAMqoFQDKqBUAyqgVAMqoFQDKqBUAyqgVAMqoFQDKqBUAyqgVAMqoFQDKqBUAyqgVAMqoFQDK8r+D+VO7vdds3t/autHtRoVCv1rdrddvLy9XajV5hF9CyxsazmfjvDm18n5j4+HSUpQkMj8VFwcvn/x4dE+meib73deh5Q0N57MwzJvzJuhBo5GzplRyNP3mnYw9Elre0HA+C8O8eddWCuMvuOS8Ybr6QssbGs7nU1Z5c1bQWl8/imOZnFWaOnz+WMYeCS1vaDifhWHe/Eu2vZ2dL6urte3t0SWfKOpXq516/c7Kyt35+ewBngktb2g4n03zRtH/ACoXQLLVvPFvAAAAAElFTkSuQmCC)
+
 성냥을 부러뜨려서는 안 되지만, 모두 사용할 필요는 없습니다.
 
 $N$개의 성냥이 주어질 때, 성냥을 나란히 놓아 표시할 수 있는 가장 큰 수를 구하세요.
@@ -24,10 +26,14 @@ $N$개의 성냥이 주어질 때, 성냥을 나란히 놓아 표시할 수 있�
 ## 입력
 
 ```text
-N
+$N$
 ```
 
-성냥의 개수 $N$이 주어집니다. $(2 \le N \le 100\,000)$
+성냥의 개수 $N$이 주어집니다.
+
+## 제한
+
+$2 \le N \le 100\,000$
 
 ## 출력
 
@@ -39,9 +45,13 @@ N
 
 ### 예제 1 {file=""}
 
+#### 입력
+
 ```text
 2
 ```
+
+#### 출력
 
 ```text
 1
@@ -49,9 +59,13 @@ N
 
 ### 예제 2 {file=""}
 
+#### 입력
+
 ```text
 3
 ```
+
+#### 출력
 
 ```text
 7
@@ -59,9 +73,13 @@ N
 
 ### 예제 3 {file=""}
 
+#### 입력
+
 ```text
 4
 ```
+
+#### 출력
 
 ```text
 11

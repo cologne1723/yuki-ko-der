@@ -16,10 +16,10 @@ title: "물건 재배열"
 또한 다음 형식으로 작성된 점수표가 있습니다.
 
 ```text
-item1 item2 score
+$\mathrm{item1}\ \mathrm{item2}\ \mathrm{score}$
 ```
 
-물건을 배열했을 때 `item1`이 `item2`보다 앞에 있으면 `score`점을 얻는다는 뜻입니다.
+물건을 배열했을 때 $\mathrm{item1}$번 물건이 $\mathrm{item2}$번 물건보다 앞에 있으면 $\mathrm{score}$점을 얻는다는 뜻입니다.
 
 점수표가 주어질 때, 물건을 적절히 재배열하여 얻을 수 있는 점수의 최댓값을 출력하세요.
 
@@ -28,22 +28,24 @@ LL 계열 언어에서는 별도의 기법이 필요할 수도 있습니다.
 ## 입력
 
 ```text
-N M
-item1[1] item2[1] score[1]
-:
-item1[M] item2[M] score[M]
+$N\ M$
+$\mathrm{item1}[1]\ \mathrm{item2}[1]\ \mathrm{score}[1]$
+$\vdots$
+$\mathrm{item1}[M]\ \mathrm{item2}[M]\ \mathrm{score}[M]$
 ```
 
-- $N$: 물건의 수
-- $M$: 점수표의 행 수
-- `item1[i] item2[i] score[i]`: 물건 1, 물건 2, 점수 $(1 \le i \le M)$
+$N$은 물건의 수이고, $M$은 점수표의 행 수입니다.
+점수표의 $i$번 행에는 두 물건의 번호 $\mathrm{item1}[i]$, $\mathrm{item2}[i]$와 점수 $\mathrm{score}[i]$가 공백으로 구분되어 주어집니다. $(1 \le i \le M)$
+
+점수표의 서로 다른 행에서 두 물건의 번호가 순서까지 모두 같은 경우는 없습니다.
+
+## 제한
+
 - $2 \le N \le 9$
 - $1 \le M \le N(N-1)$
-- $0 \le item1,item2 < N$
-- $item1 \ne item2$
-- $1 \le score \le 10\,000$
-
-점수표의 서로 다른 행에서 `item1`과 `item2`가 모두 같은 경우는 없습니다.
+- $0 \le \mathrm{item1}[i],\mathrm{item2}[i] < N$ $(1 \le i \le M)$
+- $\mathrm{item1}[i] \ne \mathrm{item2}[i]$ $(1 \le i \le M)$
+- $1 \le \mathrm{score}[i] \le 10\,000$ $(1 \le i \le M)$
 
 ## 출력
 
@@ -52,6 +54,8 @@ item1[M] item2[M] score[M]
 ## 예제
 
 ### 예제 1 {file=""}
+
+#### 입력
 
 ```text
 4 9
@@ -66,10 +70,12 @@ item1[M] item2[M] score[M]
 1 0 100
 ```
 
+#### 출력
+
 ```text
 300
 ```
 
-`3 2 1 0` 순서로 배열했을 때 얻는 300점이 최댓값입니다.
+`3 2 1 0` 순서로 배열했을 때 얻는 $300$점이 최댓값입니다.
 
-반대로 `0 1 2 3` 순서에서는 적용되는 항목이 6개이지만 21점에 불과하여 최고 점수를 얻을 수 없습니다.
+반대로 `0 1 2 3` 순서에서는 적용되는 항목이 $6$개이지만 $21$점에 불과하여 최고 점수를 얻을 수 없습니다.

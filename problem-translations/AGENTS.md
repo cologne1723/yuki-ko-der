@@ -2,7 +2,8 @@
 
 - Follow `problem-translations/TRANSLATION_GUIDELINE.md` for every Korean problem
   translation. Its Korean style, terminology, TeX, number-formatting, typo, and
-  constraint-placement rules take precedence over the source text's style.
+  constraint-organization rules take precedence over the source text's style,
+  never over its meaning.
 - Problem statements live in `problem-translations/ko/problems/`, one source
   file per problem. Prefer editable `{problem-number}.mdx` sources; legacy HTML
   remains supported during migration. Never keep both formats for the same
@@ -17,28 +18,17 @@
 - Do not check in an HTML counterpart for an MDX problem. The extension and
   GitHub Pages consume HTML compiled transiently by `pnpm build:problems` into
   the ignored `dist/problems/` directory.
-- Translated prose, formulas, headings, non-sample input/output formats, and
-  paragraph structure may differ from the source. Preserve sample input/output
-  exactly, along with source links and images. Never copy the Japanese statement
-  prose into a draft. Delete Japanese prose before writing a
-  complete Korean translation directly from the source meaning; do not use
-  word-by-word replacement or phrase-substitution scripts.
-- Concise writing must never delete a source sentence or semantic assertion.
-  Preserve every condition, exception, possibility, causal relation, and
-  explanatory detail. Sentences may be merged and repetition may be reduced
-  only when no information is lost.
-- Inspect the entire description once, including notes, constraints, output
-  explanations, and sample explanations, so no visible sentence is omitted.
-- Japanese text may remain only when the problem explicitly requires it as data,
-  quoted text, an identifier, or an example; accidental Japanese prose mixed
-  into Korean is not acceptable and requires manual review.
+- The Korean guideline is the single source of truth for meaning preservation,
+  prose, terminology, structure, input/output descriptions, constraints, TeX,
+  literal data, and review requirements. Apply its numbered rules to both new
+  translations and revisions; do not infer requirements from example problems.
+- Write Korean directly from the source meaning. Follow the guideline's rules
+  for preserved source-language data and for avoiding phrase-substitution scripts.
 - Problem translations never use `📝 `. Generated HTML uses `[기계 번역]` in
   `<title>` and `<h3>`; MDX stores only `reviewStatus`, using `machine`,
   `unreviewed`, or `approved`.
 - The first human Save removes `[기계 번역]` but does not approve the file.
   Approval is explicit, and later saves preserve an approved status.
-- Do not prefix sections or description lines, and never translate sample
-  input/output or code.
 - The validator checks review status, public number, internal problem ID, source
   title, and exact canonical HTML SHA-256. Only sample input/output differences must be reported as detailed non-blocking
   warnings that name the differing values. Do not compare translated prose,

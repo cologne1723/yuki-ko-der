@@ -120,6 +120,20 @@ test("React ZIP import reports partial failures and duplicates, retains failed d
     p.dom.window.document.body.textContent!,
     /duplicate.zip.*이미 가져온 자료/,
   );
+  // Select the first queued task explicitly: the last import can finish after
+  // the initial selection, and approve-and-next needs a remaining successor.
+  const imported = await (
+    await p.app.request("http://localhost/api/ui/imports", {
+      headers: { host: "localhost" },
+    })
+  ).json();
+  await p.navigate(`/ui?view=imports&item=${imported.tasks[0].id}`);
+  await p.waitFor(() =>
+    assert.equal(
+      p.screen.getByLabelText("일본어 원문").value,
+      imported.tasks[0].source,
+    ),
+  );
   const target = await p.screen.findByLabelText("한국어 번역");
   const before = p.screen.getByLabelText("일본어 원문").value;
   await p.user.type(target, "한국어");

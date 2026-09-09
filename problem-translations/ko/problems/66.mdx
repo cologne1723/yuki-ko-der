@@ -17,13 +17,17 @@ title: "빛나라☆전국 타코야키 컵"
 
 $2^M$명의 선수에게는 각각 $N_1$부터 $N_{2^M}$까지 선수 번호가 배정되어 있고, 타로에게는 $N_1$번이 배정되었습니다.
 
-토너먼트의 1라운드에서는 $N_{2j-1}$번 선수와 $N_{2j}$번 선수가 경기합니다. $(1 \le j \le 2^{M-1})$
+다음은 $M=3$인 대진표의 예입니다.
 
-각 경기의 승자를 $N'_j$번 선수라고 하면, 2라운드에서는 $N'_{2k-1}$번 선수와 $N'_{2k}$번 선수가 경기합니다. $(1 \le k \le 2^{M-2})$ 이와 같은 방식으로 총 $M$라운드를 진행하여 우승자 한 명을 정합니다.
+![대진표 예시](data:image/png;base64,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)
+
+토너먼트의 $1$라운드에서는 $N_{2j-1}$번 선수와 $N_{2j}$번 선수가 경기합니다. $(1 \le j \le 2^{M-1})$
+
+각 경기의 승자를 $N'_j$번 선수라고 하면, $2$라운드에서는 $N'_{2k-1}$번 선수와 $N'_{2k}$번 선수가 경기합니다. $(1 \le k \le 2^{M-2})$ 이와 같은 방식으로 총 $M$라운드를 진행하여 우승자 한 명을 정합니다.
 
 $2^M$명의 선수는 각각 강함을 나타내는 매개변수 $S_i$를 가집니다. 어떤 $A$번 선수와 $B$번 선수가 경기할 때 강함이 각각 $S_a,S_b$라면, $A$번 선수가 이길 확률 $P_a$와 $B$번 선수가 이길 확률 $P_b$는 다음과 같습니다.
 
-$$P_a = \frac{S_a^2}{S_a^2+S_b^2}, \qquad P_b = \frac{S_b^2}{S_a^2+S_b^2}$$
+$P_a = \frac{S_a^2}{S_a^2+S_b^2}, \qquad P_b = \frac{S_b^2}{S_a^2+S_b^2}$
 
 선수 간 상성 등 위에서 설명한 요소 이외의 요소는 승패에 영향을 주지 않습니다.
 
@@ -32,18 +36,22 @@ $2^M$명의 선수의 강함 매개변수가 주어질 때, 타로가 우승할 
 ## 입력
 
 ```text
-M
-S_1
-S_2
-:
-S_i
-:
-S_{2^M}
+$M$
+$S_1$
+$S_2$
+$\dots$
+$S_i$
+$\dots$
+$S_{2^M}$
 ```
 
-첫째 줄에 선수 수 $(2^M)$를 나타내는 $M$이 주어집니다. $(1 \le M \le 10)$
+첫째 줄에 선수 수 $2^M$의 지수 $M$이 주어집니다.
+이어지는 $2^M$개의 줄에 각 선수의 강함 매개변수 $S_i$가 주어집니다.
 
-이어지는 $2^M$개 줄에 각 선수의 강함 매개변수 $S_i$가 주어집니다. $(1 \le S_i \le 30\,000,\ 1 \le i \le 2^M)$
+## 제한
+
+- $1 \le M \le 10$
+- $1 \le S_i \le 30\,000$ $(1 \le i \le 2^M)$
 
 ## 출력
 
@@ -57,6 +65,8 @@ S_{2^M}
 
 ### 예제 1 {file=""}
 
+#### 입력
+
 ```text
 2
 1
@@ -65,21 +75,27 @@ S_{2^M}
 4
 ```
 
+#### 출력
+
 ```text
 0.0147294
 ```
 
-1라운드에서 타로 $N_1$번 선수와 강함이 $2$인 $N_2$번 선수가 경기합니다. 타로가 이길 확률은 $1^2/(1^2+2^2)=0.2$, 상대가 이길 확률은 $2^2/(1^2+2^2)=0.8$입니다. 같은 방식으로 $N_3$번 선수와 $N_4$번 선수가 경기하여, 각각 이길 확률은 $0.36$과 $0.64$입니다.
+$1$라운드에서 강함이 $1$인 타로 $N_1$번 선수와 강함이 $2$인 $N_2$번 선수가 경기합니다. 타로가 이길 확률은 $1^2/(1^2+2^2)=0.2$, 상대가 이길 확률은 $2^2/(1^2+2^2)=0.8$입니다. 같은 방식으로 $N_3$번 선수와 $N_4$번 선수가 경기하여, 두 선수의 강함은 각각 $3$과 $4$이고, 이길 확률은 각각 $3^2/(3^2+4^2)=0.36$과 $4^2/(3^2+4^2)=0.64$입니다.
 
-2라운드에서 타로는 $N_3$번 선수 또는 $N_4$번 선수 중 이긴 선수와 경기합니다. 타로가 $N_3$번 선수에게 이길 확률은 $1^2/(1^2+3^2)=0.1$이고, $N_4$번 선수에게 이길 확률은 $1^2/(1^2+4^2)=0.0588235$입니다. 따라서 2라운드를 이길 확률은 $0.36 \times 0.1 + 0.64 \times 0.0588235=0.0736467$입니다. 여기에 1라운드를 통과할 확률 $0.2$를 곱하면 타로가 우승할 확률 $0.0147294$를 얻습니다.
+$2$라운드에서 타로는 $N_3$번 선수 또는 $N_4$번 선수 중 이긴 선수와 경기합니다. 타로가 $N_3$번 선수에게 이길 확률은 $1^2/(1^2+3^2)=0.1$이고, $N_4$번 선수에게 이길 확률은 $1^2/(1^2+4^2)=0.0588235$입니다. 따라서 $2$라운드를 이길 확률은 $0.36 \times 0.1 + 0.64 \times 0.0588235=0.0736467$입니다. 여기에 $1$라운드를 통과할 확률 $0.2$를 곱하면 타로가 우승할 확률 $0.0147294$를 얻습니다.
 
 ### 예제 2 {file=""}
+
+#### 입력
 
 ```text
 1
 3000
 2995
 ```
+
+#### 출력
 
 ```text
 0.5008340

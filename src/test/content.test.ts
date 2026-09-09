@@ -173,7 +173,7 @@ test("page-load catalog removals override bundled titles and verification failur
     assert.equal(dom.window.document.querySelector("a")!.textContent, "題名");
     const notice = dom.window.document.querySelector("#yukicoder-ko-status")!;
     assert.match(notice.textContent!, /원문을 표시/);
-    assert.equal(notice.querySelector("button"), null);
+    assert.equal(notice.querySelector("button")?.textContent, "원문 보기");
     assert.doesNotMatch(notice.textContent!, /Sample changed/);
   } finally {
     close();
@@ -246,3 +246,123 @@ test("back-forward restoration rechecks settings and published titles without tr
     close();
   }
 });
+
+test("problem loading and background verification keep an original action and ignore late results after restoration", async () => {
+  const { dom, close } = page(
+    '<body><main id="content"><h3>No.1 題名</h3><p id="body">Japanese</p></main></body>',
+  );
+  let finishLoad!: (value: unknown) => void;
+  let finishVerification!: (value: unknown) => void;
+  const verification = new Promise((resolve) => {
+    finishVerification = resolve;
+  });
+  Object.assign(dom.window, {
+    chrome: {
+      runtime: {
+        getURL: (p: string) => p,
+        sendMessage: async () => statusCatalog("제목"),
+      },
+      storage: {
+        local: { get: async () => ({}) },
+        onChanged: { addListener() {} },
+      },
+    },
+    fetch: async () => Response.json({ translations: [] }),
+    yukicoderProblemTranslations: {
+      restoreProblem() {
+        dom.window.document.querySelector("#body")!.textContent = "Japanese";
+      },
+      translateProblem: () =>
+        new Promise((resolve) => {
+          finishLoad = resolve;
+        }),
+    },
+  });
+  try {
+    dom.window.eval(code);
+    await settle();
+    const status = () =>
+      dom.window.document.querySelector("#yukicoder-ko-status")!;
+    assert.match(status().textContent!, /불러오고 있습니다/);
+    const original = () =>
+      [...status().querySelectorAll("button")].find(
+        (b) => b.textContent === "원문 보기",
+      )!;
+    assert.ok(original());
+    dom.window.document.querySelector("#body")!.textContent = "Korean";
+    finishLoad({ status: "applied", verification });
+    await settle();
+    assert.match(status().textContent!, /변경 여부를 확인/);
+    assert.equal(
+      dom.window.document.querySelector("#body")!.textContent,
+      "Korean",
+    );
+    original().click();
+    finishVerification({ status: "changed" });
+    await settle();
+    assert.equal(
+      dom.window.document.querySelector("#body")!.textContent,
+      "Japanese",
+    );
+    assert.match(status().textContent!, /원문을 표시/);
+    assert.doesNotMatch(status().textContent!, /달라졌습니다/);
+    assert.ok(original());
+  } finally {
+    close();
+  }
+});
+
+for (const verificationStatus of ["verified", "changed", "unavailable"]) {
+  test(`background ${verificationStatus} result keeps original access`, async () => {
+    const { dom, close } = page(
+      '<body><main id="content"><h3>No.1 題名</h3></main></body>',
+    );
+    Object.assign(dom.window, {
+      chrome: {
+        runtime: {
+          getURL: (p: string) => p,
+          sendMessage: async () => statusCatalog("제목"),
+        },
+        storage: {
+          local: { get: async () => ({}) },
+          onChanged: { addListener() {} },
+        },
+      },
+      fetch: async () => Response.json({ translations: [] }),
+      yukicoderProblemTranslations: {
+        restoreProblem() {},
+        translateProblem: async () => ({
+          status: "applied",
+          verification: Promise.resolve({ status: verificationStatus }),
+        }),
+      },
+    });
+    try {
+      dom.window.eval(code);
+      await settle();
+      const notice = dom.window.document.querySelector("#yukicoder-ko-status")!;
+      assert.ok(
+        [...notice.querySelectorAll("button")].some(
+          (b) => b.textContent === "원문 보기",
+        ),
+      );
+      assert.doesNotMatch(
+        notice.textContent!,
+        /불러오고 있습니다|확인하고 있습니다/,
+      );
+      assert.equal(notice.nextElementSibling?.tagName, "H3");
+      if (verificationStatus === "verified")
+        assert.equal(
+          (notice.querySelector("button") as HTMLButtonElement).style
+            .marginInlineStart,
+          "",
+        );
+      if (verificationStatus === "changed")
+        assert.match(notice.textContent!, /번역 시점과 문제가 달라졌습니다/);
+      if (verificationStatus === "unavailable")
+        assert.match(notice.textContent!, /확인하지 못했습니다/);
+    } finally {
+      close();
+    }
+  });
+}

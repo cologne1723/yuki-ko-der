@@ -3,7 +3,7 @@
   "minimum_chrome_version": "121",
   "name": "yukicoder 한국어 번역",
   "version": "0.1.0",
-  "description": "yukicoder의 고정 UI 문구를 한국어로 번역합니다.",
+  "description": "yukicoder의 UI와 지원되는 문제를 한국어로 번역합니다.",
   "permissions": ["storage"],
   "icons": {
     "16": "icons/icon-16.png",
