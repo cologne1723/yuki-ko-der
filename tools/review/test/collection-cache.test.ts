@@ -81,9 +81,13 @@ test(
     );
     await p.screen.findByText("one.zip: 가져오기 완료", {}, { timeout: 10000 });
     await p.screen.findByLabelText("한국어 번역");
-    await p.navigate("/ui#main.json:0");
-    await p.waitFor(() =>
-      assert.equal(p.screen.queryByLabelText("수집한 ZIP 파일") === null, true),
+    await p.user.click(
+      p.screen.getByRole("link", { name: "용어집", exact: true }),
+    );
+    await p.screen.findByRole(
+      "heading",
+      { name: "문구 검수", exact: true },
+      { timeout: 10_000 },
     );
     await p.screen.findByLabelText("한국어 번역");
     const server = await (
@@ -126,9 +130,13 @@ test(
     await p.waitFor(() =>
       assert.equal(p.screen.queryByLabelText("한국어 번역") === null, true),
     );
-    await p.navigate("/ui#main.json:0");
-    await p.waitFor(() =>
-      assert.equal(p.screen.queryByLabelText("수집한 ZIP 파일") === null, true),
+    await p.user.click(
+      p.screen.getByRole("link", { name: "용어집", exact: true }),
+    );
+    await p.screen.findByRole(
+      "heading",
+      { name: "문구 검수", exact: true },
+      { timeout: 10_000 },
     );
     await p.screen.findByLabelText("한국어 번역");
     await p.waitFor(() => assert.equal(p.cachedUi().pages.length, 0));

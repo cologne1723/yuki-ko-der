@@ -6,7 +6,7 @@
   "scripts": {
     "build": "node --import tsx src/build-review.ts",
     "start": "node --import tsx src/review-server.ts",
-    "test": "cd ../.. && node --import tsx --test tools/review/test/*.test.ts",
+    "test": "cd ../.. && node --import tsx --test --test-concurrency=4 tools/review/test/*.test.ts",
     "typecheck": "tsc --noEmit",
     "review:smoke": "node --import tsx src/smoke-review.ts"
   },
