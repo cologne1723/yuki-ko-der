@@ -30,12 +30,17 @@ title: "제목"
     const published = labelPublishedProblem(original.serialize());
     const result = new JSDOM(published);
     try {
-      const expected = `No.1 제목${status === "approved" ? "" : " (기계번역입니다)"}`;
+      const expected = "No.1 제목";
       assert.equal(
         result.window.document.querySelector("h3")?.textContent,
         expected,
       );
       assert.equal(result.window.document.title, expected);
+      assert.equal(
+        result.window.document.querySelector("h3")?.previousElementSibling
+          ?.textContent ?? null,
+        status === "approved" ? null : "아래 텍스트는 기계번역 되었습니다",
+      );
       assert.equal(
         result.window.document.querySelector(".problem-statement")?.innerHTML,
         original.window.document.querySelector(".problem-statement")?.innerHTML,

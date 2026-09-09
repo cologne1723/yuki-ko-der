@@ -100,6 +100,17 @@ export function createProblemSemantics(Node: typeof globalThis.Node) {
       return undefined;
     }
 
+    // KaTeX auto-render wraps each formula in an otherwise empty span.
+    // Only unwrap that exact runtime shape; retain authored markup and text.
+    if (
+      node.tagName === "SPAN" &&
+      node.attributes.length === 0 &&
+      node.childNodes.length === 1 &&
+      node.firstElementChild?.matches(".katex, .katex-display")
+    ) {
+      return semanticNode(node.firstElementChild, inPreformattedElement);
+    }
+
     if (node.classList.contains("katex-display")) {
       const formula = node.querySelector(".katex");
       return [

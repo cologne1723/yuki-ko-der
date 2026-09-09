@@ -266,3 +266,26 @@ test("late translation completion cannot apply after disabling and cached bodies
     f.close();
   }
 });
+
+test("KaTeX auto-render wrappers preserve source verification without hiding authored changes", async () => {
+  const f = fixture();
+  try {
+    const doc = f.dom.window.document;
+    const paragraph = doc.querySelector(".block p")!;
+    const formula =
+      '<span><span class="katex"><span class="katex-mathml"><math><semantics><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true">N</span></span></span>';
+    paragraph.innerHTML = formula;
+    assert.equal((await f.engine.translateProblem()).status, "applied");
+    f.engine.restoreProblem();
+    for (const changed of [
+      formula + "changed",
+      formula.replace("<span>", '<span title="authored">'),
+      formula.replace(">N</annotation>", ">M</annotation>"),
+    ]) {
+      paragraph.innerHTML = changed;
+      assert.equal((await f.engine.translateProblem()).status, "failed");
+    }
+  } finally {
+    f.close();
+  }
+});
