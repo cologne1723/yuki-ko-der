@@ -85,6 +85,13 @@ async function setup(t: TestContext) {
     await page.user.click(
       page.screen.getByRole("button", { name: "가져오기", exact: true }),
     );
+    // Imports verify ZIPs and write files sequentially; shared CI can exceed
+    // Testing Library's default one-second wait even when imports succeed.
+    await page.screen.findByText(
+      `${items.at(-1)!.name}: 가져오기 완료`,
+      {},
+      { timeout: 10_000 },
+    );
   }
   return {
     ...page,
@@ -108,9 +115,6 @@ test("React ZIP import reports partial failures and duplicates, retains failed d
     { name: "duplicate.zip", bytes: bytes() },
     { name: "two.zip", bytes: bytes("次へ") },
   ]);
-  // Four sequential imports include ZIP verification and durable file writes.
-  // The default one-second DOM wait is too short on shared CI runners.
-  await p.screen.findByText("two.zip: 가져오기 완료", {}, { timeout: 10_000 });
   assert.match(p.dom.window.document.body.textContent!, /broken.zip/);
   assert.match(
     p.dom.window.document.body.textContent!,
@@ -166,7 +170,6 @@ test("React import navigation requires an explicit discard decision and late sna
     { name: "one.zip", bytes: bytes() },
     { name: "two.zip", bytes: bytes("次へ") },
   ]);
-  await p.screen.findByText("two.zip: 가져오기 완료");
   await p.screen.findByLabelText("한국어 번역");
   const data = await (
     await p.app.request("http://localhost/api/ui/imports", {
@@ -210,7 +213,6 @@ test("React import progress actions confirm draft discard and collection filters
     { name: "one.zip", bytes: bytes() },
     { name: "two.zip", bytes: bytes("次へ") },
   ]);
-  await p.screen.findByText("two.zip: 가져오기 완료");
   const target = await p.screen.findByLabelText("한국어 번역");
   await p.user.type(target, "작성 중");
   await p.user.click(
@@ -249,7 +251,6 @@ test("React approve-and-next retains the intended successor when the status filt
     { name: "two.zip", bytes: bytes("次へ") },
     { name: "three.zip", bytes: bytes("最後") },
   ]);
-  await p.screen.findByText("three.zip: 가져오기 완료");
   const data = await (
     await p.app.request("http://localhost/api/ui/imports", {
       headers: { host: "localhost" },
@@ -276,7 +277,6 @@ test("React approve-and-next retains the intended successor when the status filt
 test("React import refresh preserves drafts and explicit reload recovers a revision conflict", async (t) => {
   const p = await setup(t);
   await p.upload([{ name: "one.zip", bytes: bytes() }]);
-  await p.screen.findByText("one.zip: 가져오기 완료");
   await p.user.type(await p.screen.findByLabelText("한국어 번역"), "첫 번역");
   await p.user.click(p.screen.getByRole("button", { name: "초안 저장" }));
   const list = async () =>

@@ -37,8 +37,8 @@ jobs:
           node-version: 24
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - name: 번역 HTML 및 실제 원문 검증
-        run: pnpm verify:problems
+      - name: 문제 번역 로컬 검증
+        run: pnpm validate:problems
       - name: 문제 Markdown 컴파일
         run: pnpm build:problems
       - uses: actions/configure-pages@v5

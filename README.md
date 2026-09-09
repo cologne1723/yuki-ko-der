@@ -68,7 +68,13 @@ pnpm review
 | `pnpm verify:problems` | 문제 번역을 실제 원문과 대조                                     |
 | `pnpm build:problems`  | 문제 번역 배포 파일을 `dist/problems/`에 생성                    |
 
-`main`에 배포 대상 변경을 푸시하면 GitHub Actions가 문제 번역을 검증하고 GitHub Pages에 배포합니다.
+빌드와 배포는 yukicoder 서버에서 원문을 다운로드하지 않고 로컬 번역 파일을 검증합니다.
+원문 갱신이 필요할 때만 `pnpm run setup --problems 1 --refresh`를 실행하세요.
+`1` 대신 `1,3-8`처럼 대상 문제를 지정할 수 있습니다.
+`pnpm verify:problems --problems 1`은 지정한 문제를 실제 원문과 대조하며, 파일을 갱신하지 않습니다.
+대상을 생략하면 전체 문제에 요청하므로 필요할 때만 실행하세요.
+
+`main`에 배포 대상 변경을 푸시하면 GitHub Actions가 로컬 검증 후 GitHub Pages에 배포합니다.
 [문제 번역 배포 워크플로](https://github.com/cologne1723/yuki-ko-der/actions/workflows/publish-problem-translations.yml)를 직접 실행할 수도 있습니다.
 Pages에는 문제 번역 파일이 배포되며, 검수 편집기는 로컬에서 실행합니다.
 
