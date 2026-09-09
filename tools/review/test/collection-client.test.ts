@@ -108,7 +108,9 @@ test("React ZIP import reports partial failures and duplicates, retains failed d
     { name: "duplicate.zip", bytes: bytes() },
     { name: "two.zip", bytes: bytes("次へ") },
   ]);
-  await p.screen.findByText("two.zip: 가져오기 완료");
+  // Four sequential imports include ZIP verification and durable file writes.
+  // The default one-second DOM wait is too short on shared CI runners.
+  await p.screen.findByText("two.zip: 가져오기 완료", {}, { timeout: 10_000 });
   assert.match(p.dom.window.document.body.textContent!, /broken.zip/);
   assert.match(
     p.dom.window.document.body.textContent!,
