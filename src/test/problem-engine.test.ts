@@ -236,12 +236,18 @@ test("authoritative removals invalidate caches and network failure cannot resurr
       if (kind === "catalog") catalog.entries = [];
       else f.state.bodyStatus = Number(kind);
       assert.equal(
-        (await f.engine.translateProblem(() => true, catalog)).status,
+        (
+          await f.engine.translateProblem(() => true, catalog, {
+            refresh: true,
+          })
+        ).status,
         "unavailable",
       );
       assert.equal(f.saved["problem-translation-html:ko:1"], undefined);
       f.state.offline = true;
-      const result = await f.engine.translateProblem(() => true, catalog);
+      const result = await f.engine.translateProblem(() => true, catalog, {
+        refresh: true,
+      });
       assert.equal(
         result.status,
         kind === "catalog" ? "unavailable" : "failed",
@@ -259,8 +265,14 @@ test("authoritative removals invalidate caches and network failure cannot resurr
 test("late translations cannot apply after disabling and cached bodies report offline verification", async () => {
   const f = fixture();
   try {
+    let enabled = true;
+    const request = f.dom.window.fetch;
+    f.dom.window.fetch = async (url, options) => {
+      if (String(url).startsWith("https://translations.test/")) enabled = false;
+      return request(url, options);
+    };
     assert.equal(
-      (await f.engine.translateProblem(() => false, f.catalog())).status,
+      (await f.engine.translateProblem(() => enabled, f.catalog())).status,
       "cancelled",
     );
     assert.equal(
@@ -371,6 +383,252 @@ test("input format math renders inside fenced code while sample bytes stay liter
       "1  2\n",
     );
     if (result.status === "applied") await result.verification;
+  } finally {
+    f.close();
+  }
+});
+
+test("input-format math like problem 457 verifies after site rendering without erasing whitespace changes", async () => {
+  const f = fixture();
+  try {
+    f.state.canonical = source.replace("<p>$N$</p>", "<pre>$S$\n</pre>");
+    f.state.body = f.state.body.replace(hash(source), hash(f.state.canonical));
+    const formula =
+      '<span><span class="katex"><span class="katex-mathml"><math><semantics><annotation encoding="application/x-tex">S</annotation></semantics></math></span></span></span>';
+    f.dom.window.document.querySelector(".block p")!.outerHTML =
+      `<pre>${formula}\n</pre>`;
+    const result = await f.engine.translateProblem(() => true, f.catalog());
+    assert.equal(result.status, "applied");
+    assert.equal(
+      result.status === "applied" && (await result.verification)?.status,
+      "verified",
+    );
+    f.engine.restoreProblem();
+    const pre = f.dom.window.document.querySelector(".block > pre")!;
+    for (const changed of [
+      ` ${formula}\n`,
+      `${formula.replace(">S</annotation>", ">T</annotation>")}\n`,
+    ]) {
+      pre.innerHTML = changed;
+      const result = await f.engine.translateProblem(() => true, f.catalog());
+      assert.equal(
+        result.status === "applied" && (await result.verification)?.status,
+        "changed",
+      );
+      f.engine.restoreProblem();
+    }
+  } finally {
+    f.close();
+  }
+});
+
+test("language toggles reuse translation and verification offline; refresh and new versions revalidate", async () => {
+  const f = fixture();
+  try {
+    const first = await f.engine.translateProblem(() => true, f.catalog());
+    assert.equal(
+      first.status === "applied" && (await first.verification)?.status,
+      "verified",
+    );
+    const requests = f.calls.length;
+    f.state.offline = true;
+    for (let i = 0; i < 3; i++) {
+      f.engine.restoreProblem();
+      const result = await f.engine.translateProblem(() => true, f.catalog());
+      assert.equal(
+        result.status === "applied" && (await result.verification)?.status,
+        "verified",
+      );
+    }
+    assert.equal(f.calls.length, requests);
+    f.state.offline = false;
+    const refreshed = await f.engine.translateProblem(() => true, f.catalog(), {
+      refresh: true,
+    });
+    assert.equal(
+      refreshed.status === "applied" && (await refreshed.verification)?.status,
+      "verified",
+    );
+    assert.equal(f.calls.length, requests + 3);
+    f.state.body = f.state.body.replace("번역 제목", "새 제목");
+    const updated = await f.engine.translateProblem(() => true, f.catalog());
+    assert.equal(
+      updated.status === "applied" && (await updated.verification)?.status,
+      "verified",
+    );
+    assert.equal(f.calls.length, requests + 6);
+    assert.equal(
+      f.dom.window.document.querySelector("h3")!.textContent,
+      "No.1 새 제목",
+    );
+    const removed = { ...f.catalog(), entries: [] };
+    assert.equal(
+      (await f.engine.translateProblem(() => true, removed)).status,
+      "unavailable",
+    );
+    assert.equal(
+      f.dom.window.document.querySelector("h3")!.textContent,
+      "No.1 題名",
+    );
+  } finally {
+    f.close();
+  }
+});
+
+test("switching views shares in-flight downloads and verification while cancelling stale application", async () => {
+  const f = fixture();
+  let releaseBody!: () => void;
+  let releaseSource!: () => void;
+  const bodyGate = new Promise<void>((resolve) => {
+    releaseBody = resolve;
+  });
+  const sourceGate = new Promise<void>((resolve) => {
+    releaseSource = resolve;
+  });
+  const request = f.dom.window.fetch;
+  f.dom.window.fetch = async (url, options) => {
+    const response = request(url, options);
+    if (String(url).startsWith("https://translations.test/")) await bodyGate;
+    if (String(url).endsWith("/html")) await sourceGate;
+    return response;
+  };
+  try {
+    const stale = f.engine.translateProblem(() => true, f.catalog());
+    f.engine.restoreProblem();
+    const latest = f.engine.translateProblem(() => true, f.catalog());
+    releaseBody();
+    assert.equal((await stale).status, "cancelled");
+    const first = await latest;
+    assert.equal(first.status, "applied");
+    f.engine.restoreProblem();
+    const second = await f.engine.translateProblem(() => true, f.catalog());
+    releaseSource();
+    assert.equal(
+      first.status === "applied" && (await first.verification)?.status,
+      "cancelled",
+    );
+    assert.equal(
+      second.status === "applied" && (await second.verification)?.status,
+      "verified",
+    );
+    assert.equal(
+      f.calls.filter((url) => url.startsWith("https://translations.test/"))
+        .length,
+      1,
+    );
+    assert.equal(f.calls.filter((url) => url.endsWith("/html")).length, 1);
+  } finally {
+    releaseBody();
+    releaseSource();
+    f.close();
+  }
+});
+
+for (const change of ["blocks", "container", "identity", "missing"]) {
+  test(`download completion rechecks current statement after ${change} replacement`, async () => {
+    const f = fixture();
+    let release!: () => void;
+    const gate = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    const request = f.dom.window.fetch;
+    f.dom.window.fetch = async (url, options) => {
+      if (String(url).startsWith("https://translations.test/")) await gate;
+      return request(url, options);
+    };
+    try {
+      const pending = f.engine.translateProblem(() => true, f.catalog());
+      const doc = f.dom.window.document;
+      const old = doc.querySelector("#content")!;
+      if (change === "blocks") {
+        for (const block of old.querySelectorAll(".block"))
+          block.replaceWith(block.cloneNode(true));
+      } else if (change === "container") old.replaceWith(old.cloneNode(true));
+      else if (change === "identity") old.setAttribute("data-problem-id", "99");
+      else old.querySelector(".block")!.remove();
+      const before = doc.body.innerHTML;
+      release();
+      const outcome = await pending;
+      if (change === "blocks" || change === "container") {
+        assert.equal(outcome.status, "applied");
+        assert.equal(
+          outcome.status === "applied" && (await outcome.verification)?.status,
+          "verified",
+        );
+        assert.equal(doc.querySelector(".block h4")!.textContent, "설명");
+        f.engine.restoreProblem();
+        assert.equal(doc.body.innerHTML, before);
+      } else {
+        assert.equal(
+          outcome.status,
+          change === "identity" ? "cancelled" : "failed",
+        );
+        assert.equal(doc.body.innerHTML, before);
+      }
+    } finally {
+      release();
+      f.close();
+    }
+  });
+}
+
+test("unwrapped leading Note like problem 459 is replaced and restored without touching page controls", async () => {
+  const f = fixture();
+  try {
+    const note =
+      '<h4 class="shadow">Note</h4><p>Original note <a href="https://example.com/">link</a></p>';
+    f.state.canonical = note + source;
+    f.state.body = f.state.body
+      .replace(hash(source), hash(f.state.canonical))
+      .replace(
+        '<div class="problem-statement">',
+        '<div class="problem-statement"><div class="block"><h4>참고</h4><p>Translated note</p></div>',
+      );
+    const doc = f.dom.window.document;
+    doc
+      .querySelector(".block")!
+      .insertAdjacentHTML(
+        "beforebegin",
+        '<p id="controls"><button>site control</button></p>' + note,
+      );
+    const original = doc.body.innerHTML;
+    const control = doc.querySelector("#controls")!;
+    let clicks = 0;
+    control.querySelector("button")!.addEventListener("click", () => clicks++);
+    for (let i = 0; i < 2; i++) {
+      const result = await f.engine.translateProblem(() => true, f.catalog());
+      assert.equal(
+        result.status === "applied" && (await result.verification)?.status,
+        "verified",
+      );
+      assert.equal(doc.querySelector("#content > h4"), null);
+      assert.equal(doc.querySelector(".block h4")!.textContent, "참고");
+      assert.equal(doc.querySelector("#controls"), control);
+      (control.querySelector("button") as HTMLButtonElement).click();
+      f.engine.restoreProblem();
+      assert.equal(doc.body.innerHTML, original);
+    }
+    assert.equal(clicks, 2);
+  } finally {
+    f.close();
+  }
+});
+
+test("replacement refuses detached targets before writing or rolling back current site content", () => {
+  const f = fixture();
+  try {
+    const doc = f.dom.window.document;
+    const blocks = [...doc.querySelectorAll("#content > .block")];
+    const apply = f.engine.prepareReplacement(
+      f.engine.parseTranslationDocument(f.state.body, 1, "18"),
+      doc.querySelector("h3")!,
+      blocks,
+      blocks,
+    );
+    blocks[0].replaceWith(blocks[0].cloneNode(true));
+    const before = doc.body.innerHTML;
+    assert.throws(apply, /page changed before translation/);
+    assert.equal(doc.body.innerHTML, before);
   } finally {
     f.close();
   }

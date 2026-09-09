@@ -142,7 +142,16 @@ export function createProblemSemantics(Node: typeof globalThis.Node) {
     }
 
     for (let index = children.length - 1; index >= 0; index -= 1) {
-      if (children[index][0] !== "inline" || preformatted) {
+      if (children[index][0] !== "inline") {
+        continue;
+      }
+      // Input-format pre blocks render math on the site. Preserve their bytes
+      // outside formulas; code and sample data must remain literal.
+      if (preformatted) {
+        if (!node.closest("code, .sample"))
+          children[index][1] = canonicalizeFormulaWhitespace(
+            children[index][1],
+          );
         continue;
       }
       children[index][1] = canonicalizeFormulaWhitespace(

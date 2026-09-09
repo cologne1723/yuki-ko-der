@@ -101,3 +101,45 @@ test("fixed replacements stay selector-scoped and exact", () => {
     "トップページ",
   );
 });
+
+test("detached history restores originals and releases replaced nodes without losing moved nodes", () => {
+  const dom = new JSDOM(
+    '<main><p title="source">source</p></main><aside></aside>',
+  );
+  const doc = dom.window.document;
+  const history = new TranslationHistory();
+  const entries = [
+    { selector: "p", source: "source", target: "target" },
+    { selector: "p", attribute: "title", source: "source", target: "target" },
+  ];
+  const first = doc.querySelector("p")!;
+  applyTranslations(doc, entries, history);
+  doc.querySelector("aside")!.append(first);
+  history.restoreDetached();
+  assert.equal(
+    first.textContent,
+    "target",
+    "moves within the document retain translations",
+  );
+  first.remove();
+  history.restoreDetached();
+  assert.equal(first.textContent, "source");
+  assert.equal(first.getAttribute("title"), "source");
+  const main = doc.querySelector("main")!;
+  for (let i = 0; i < 100; i++) {
+    main.innerHTML = '<p title="source">source</p>';
+    applyTranslations(doc, entries, history);
+    history.restoreDetached();
+  }
+  // This assertion checks retained DOM references, the resource leak under test.
+  const changes = (history as unknown as { changes: Map<Node, unknown> })
+    .changes;
+  assert.equal(changes.size, 2);
+  assert.ok([...changes.keys()].every((node) => node.isConnected));
+  main.querySelector("p")!.setAttribute("title", "site edit");
+  history.restore();
+  assert.equal(main.textContent, "source");
+  assert.equal(main.querySelector("p")!.getAttribute("title"), "site edit");
+  assert.equal(changes.size, 0);
+  dom.window.close();
+});

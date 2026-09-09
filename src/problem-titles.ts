@@ -1,6 +1,7 @@
 import {
   normalizeTranslationText,
   type TranslationHistory,
+  type TranslationScope,
 } from "translation-core/fixed-translations";
 
 import type { ProblemTitleTranslation } from "translation-core/problem-catalog";
@@ -12,6 +13,13 @@ const PROTECTED =
   'pre, code, script, style, textarea, input, select, .sample, [contenteditable]:not([contenteditable="false"])';
 const LABELS =
   "title, h1, h2, h3, h4, h5, h6, p, span, div, td, th, li, dt, dd, strong, b, em, label";
+export const problemTitleSelectors = [
+  PROTECTED,
+  LABELS,
+  "select#contest-problem-selector option",
+  "title, #content > h3",
+  "a[href]",
+];
 const PREFIX = /^\s*No\.(?<problemNo>\d+)\s*/u;
 
 function replaceTextRange(
@@ -33,6 +41,7 @@ function replaceTextRange(
     const after =
       before.slice(0, left) + (inserted ? "" : target) + before.slice(right);
     inserted = true;
+    if (after === before) continue;
     history.record(node, "", before, after);
     node.nodeValue = after;
   }
@@ -75,8 +84,12 @@ export class ProblemTitleTranslator {
     replaceTextRange(element, start, end, target, history);
   }
 
-  apply(document: Document, history: TranslationHistory): void {
-    for (const option of document.querySelectorAll<HTMLOptionElement>(
+  apply(
+    document: Document,
+    history: TranslationHistory,
+    scope: TranslationScope = document,
+  ): void {
+    for (const option of scope.querySelectorAll<HTMLOptionElement>(
       "select#contest-problem-selector option",
     )) {
       const entry = this.byId.get(Number(option.value));
@@ -107,7 +120,7 @@ export class ProblemTitleTranslator {
     const editorialEntry = editorial && this.byNumber.get(Number(editorial[1]));
     if (editorialEntry) {
       const source = normalizeTranslationText(editorialEntry.source);
-      for (const element of document.querySelectorAll("title, #content > h3")) {
+      for (const element of scope.querySelectorAll("title, #content > h3")) {
         if (element.querySelector("a") || element.querySelector(PROTECTED))
           continue;
         const raw = element.textContent ?? "";
@@ -133,9 +146,7 @@ export class ProblemTitleTranslator {
       }
     }
 
-    for (const link of document.querySelectorAll<HTMLAnchorElement>(
-      "a[href]",
-    )) {
+    for (const link of scope.querySelectorAll<HTMLAnchorElement>("a[href]")) {
       let url: URL;
       try {
         url = new URL(link.getAttribute("href")!, document.baseURI);
@@ -153,7 +164,7 @@ export class ProblemTitleTranslator {
         : this.byId.get(Number(match.groups?.problemId));
       if (entry) this.translate(link, entry, history, true);
     }
-    for (const element of document.querySelectorAll(LABELS)) {
+    for (const element of scope.querySelectorAll(LABELS)) {
       // 링크의 문제 번호와 표시 이름이 다른 경우, 상위 요소를 통해 우회하지 않습니다.
       if (element.closest("a") || element.querySelector("a")) continue;
       const prefix = element.textContent?.match(PREFIX);

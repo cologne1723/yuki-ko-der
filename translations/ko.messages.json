@@ -7610,6 +7610,120 @@
       "source": "マイページの練習モードが「ノーマル」または「ガチ」なので、解いてない問題は検索されません。",
       "target": "마이 페이지의 연습 모드가 '노멀' 또는 '열심'이므로, 풀지 않은 문제는 검색되지 않습니다.",
       "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_f95bd12aef37c0f3",
+      "source": "コンテストが終了しました。",
+      "target": "대회가 종료되었습니다.",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "ui_0b82092dfb5b348b",
+      "source": "質問の取得に失敗しました",
+      "target": "질문을 불러오지 못했습니다",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "ui_32a8c92504224bb8",
+      "source": "質問の取得中にエラーが発生しました",
+      "target": "질문을 불러오는 중 오류가 발생했습니다",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "ui_5a16bc3b8eaca90e",
+      "source": "レベルの提案を変更しました。結果は統計ページに集計されています",
+      "target": "제안한 난이도를 변경했습니다. 결과는 통계 페이지에 집계됩니다",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "ui_4991b3403a5471df",
+      "source": "更新に失敗しました",
+      "target": "업데이트하지 못했습니다",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "ui_dbd317a8335ebb61",
+      "source": "入力をクリップボードにコピーしました",
+      "target": "입력을 클립보드에 복사했습니다",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "ui_d6af409a70764f4c",
+      "source": "ユーザーレベル10以上で編集できます。",
+      "target": "사용자 레벨이 10 이상이면 편집할 수 있습니다.",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "ui_c57187675bc7a898",
+      "source": "問題文HTMLの取得に失敗しました",
+      "target": "문제 설명의 HTML을 불러오지 못했습니다",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "ui_dd4bbac478a0ecf6",
+      "source": "問題文のHTMLをクリップボードにコピーしました",
+      "target": "문제 설명의 HTML을 클립보드에 복사했습니다",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "ui_c78ad46e7d0f777e",
+      "source": "HTMLのコピーに失敗しました",
+      "target": "HTML을 복사하지 못했습니다",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "ui_1cc585aea85d5c68",
+      "source": "ソースコードが空です",
+      "target": "소스 코드가 비어 있습니다",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "ui_3d43f5255229956a",
+      "source": "JSONに \"subtasks\" 配列が必要です",
+      "target": "JSON에 \"subtasks\" 배열이 필요합니다",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "ui_388d0043c394d474",
+      "source": "JSONのパースに失敗しました",
+      "target": "JSON을 파싱하지 못했습니다",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "ui_d614ab998a8f16b7",
+      "source": "配点の合計が{score}%です。合計100%にしてください",
+      "target": "배점 합계가 {score}%입니다. 합계를 100%로 맞춰 주세요",
+      "reviewStatus": "unreviewed",
+      "variables": {
+        "score": "-?[0-9]+(?:\\.[0-9]+)?"
+      }
+    },
+    {
+      "id": "ui_146ece6d2478a751",
+      "source": "サブタスク設定を保存しました",
+      "target": "서브태스크 설정을 저장했습니다",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "ui_8c8c179b95f1ef82",
+      "source": "保存に失敗しました",
+      "target": "저장하지 못했습니다",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "ui_acd7907820f59a60",
+      "source": "CSRFトークンが取得できませんでした",
+      "target": "CSRF 토큰을 가져오지 못했습니다",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "ui_4bdec6714249cc00",
+      "source": "HTTPエラー: {status}",
+      "target": "HTTP 오류: {status}",
+      "reviewStatus": "unreviewed",
+      "variables": {
+        "status": "[0-9]{3}"
+      }
     }
   ]
 }

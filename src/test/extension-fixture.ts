@@ -33,7 +33,8 @@ export async function bundle(
   return result.outputFiles[0].text;
 }
 export const settle = async () => {
-  for (let i = 0; i < 5; i++) await new Promise<void>((r) => setImmediate(r));
+  // Content mutation work yields through timers, not only microtasks.
+  for (let i = 0; i < 5; i++) await new Promise<void>((r) => setTimeout(r, 0));
 };
 export function page(html: string, url = "https://yukicoder.me/problems/no/1") {
   const dom = new JSDOM(`<!doctype html>${html}`, {

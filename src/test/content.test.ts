@@ -528,3 +528,204 @@ test("editorial titles translate only the matching problem and restore on disabl
     close();
   }
 });
+
+test("translation writes do not feed the observer, including unchanged contest titles", async () => {
+  const { dom, close } = page(
+    '<body><main id="content"><select id="contest-problem-selector"><option value="18">A. No.1 題名</option></select><a href="/problems/no/1">題名</a></main></body>',
+  );
+  const NativeObserver = dom.window.MutationObserver;
+  let callbacks = 0;
+  // Bound the old feedback loop so a regression fails instead of hanging tests.
+  class CountingObserver extends NativeObserver {
+    constructor(callback: MutationCallback) {
+      super((records, observer) => {
+        callbacks++;
+        if (callbacks > 20) observer.disconnect();
+        else callback(records, observer);
+      });
+    }
+  }
+  Object.assign(dom.window, {
+    MutationObserver: CountingObserver,
+    chrome: {
+      runtime: {
+        getURL: (p: string) => p,
+        sendMessage: async () => statusCatalog("題名"),
+      },
+      storage: { local: { get: async () => ({}) } },
+    },
+    fetch: async () => Response.json({ translations: [] }),
+  });
+  const flush = () => new Promise((resolve) => setTimeout(resolve, 30));
+  try {
+    dom.window.eval(code);
+    await flush();
+    assert.equal(
+      callbacks,
+      0,
+      "initial translations must not observe themselves",
+    );
+    const added = dom.window.document.createElement("p");
+    added.textContent = "site update";
+    dom.window.document.querySelector("main")!.append(added);
+    await flush();
+    assert.equal(
+      callbacks,
+      1,
+      "one site mutation must settle after one callback",
+    );
+    await flush();
+    assert.equal(callbacks, 1, "idle pages must not keep rescanning");
+  } finally {
+    close();
+  }
+});
+
+test("actual text and attribute translations do not observe their own writes or unrelated styles", async () => {
+  const { dom, close } = page(
+    '<main id="content"><p title="source">source</p><a href="/problems/no/1">題名</a></main>',
+  );
+  const NativeObserver = dom.window.MutationObserver;
+  let callbacks = 0;
+  Object.assign(dom.window, {
+    MutationObserver: class extends NativeObserver {
+      constructor(callback: MutationCallback) {
+        super((records, observer) => {
+          callbacks++;
+          if (callbacks > 20) observer.disconnect();
+          else callback(records, observer);
+        });
+      }
+    },
+    chrome: {
+      runtime: {
+        getURL: (p: string) => p,
+        sendMessage: async () => statusCatalog("제목"),
+      },
+      storage: { local: { get: async () => ({}) } },
+    },
+    fetch: async () =>
+      Response.json({
+        translations: [
+          { selector: "#content p", source: "source", target: "target" },
+          {
+            selector: "#content p",
+            attribute: "title",
+            source: "source",
+            target: "attribute",
+          },
+        ],
+      }),
+  });
+  try {
+    dom.window.eval(code);
+    await settle();
+    const p = dom.window.document.querySelector("#content p[title]")!;
+    assert.equal(p.textContent, "target");
+    assert.equal(p.getAttribute("title"), "attribute");
+    assert.equal(dom.window.document.querySelector("a")!.textContent, "제목");
+    assert.equal(callbacks, 0);
+    p.firstChild!.nodeValue = "source";
+    p.setAttribute("title", "source");
+    await settle();
+    assert.equal(p.textContent, "target");
+    assert.equal(p.getAttribute("title"), "attribute");
+    assert.equal(callbacks, 1);
+    for (let i = 0; i < 10; i++) {
+      p.setAttribute("style", `opacity:${i / 10}`);
+      await settle();
+    }
+    assert.equal(callbacks, 1);
+  } finally {
+    close();
+  }
+});
+
+test("late Noty announcements and errors translate through the real shared catalog while preserving controls and payloads", async () => {
+  const { readFile } = await import("node:fs/promises");
+  const { dom, close } = page(
+    '<main id="content"><pre>コンテストが終了しました。</pre></main>',
+    "https://yukicoder.me/problems/no/123",
+  );
+  let changed!: Change;
+  Object.assign(dom.window, {
+    chrome: {
+      runtime: { getURL: (path: string) => path },
+      storage: {
+        local: { get: async () => ({}) },
+        onChanged: {
+          addListener: (fn: Change) => {
+            changed = fn;
+          },
+        },
+      },
+    },
+    fetch: async (path: string) =>
+      Response.json(JSON.parse(await readFile(path, "utf8"))),
+  });
+  try {
+    dom.window.eval(code);
+    // Wait for the local dictionary reads, not just the observer's timer.
+    for (let i = 0; i < 20; i++) await settle();
+    const doc = dom.window.document;
+    const container = doc.createElement("div");
+    container.id = "noty_layout__top";
+    doc.body.append(container);
+    const cases = [
+      ["コンテストが終了しました。", "대회가 종료되었습니다."],
+      [
+        "入力をクリップボードにコピーしました",
+        "입력을 클립보드에 복사했습니다",
+      ],
+      [
+        'JSONに "subtasks" 配列が必要です',
+        'JSON에 "subtasks" 배열이 필요합니다',
+      ],
+      [
+        "配点の合計が87.5%です。合計100%にしてください",
+        "배점 합계가 87.5%입니다. 합계를 100%로 맞춰 주세요",
+      ],
+      ["HTTPエラー: 403", "HTTP 오류: 403"],
+    ];
+    let copies = 0;
+    const notifications: Element[] = [];
+    for (const [source, target] of cases) {
+      const notification = doc.createElement("div");
+      notification.className = "noty_body";
+      const button = doc.createElement("button");
+      button.className = "noty-copy-btn";
+      button.title = "コピー";
+      button.addEventListener("click", () => copies++);
+      const message = doc.createTextNode(source);
+      const link = doc.createElement("a");
+      link.href = "/submissions/123";
+      link.textContent = "#123";
+      notification.append(button, message, link);
+      container.append(notification);
+      await settle();
+      assert.equal(message.nodeValue, target);
+      assert.equal(notification.firstChild, button);
+      assert.equal(notification.lastChild, link);
+      assert.equal(link.getAttribute("href"), "/submissions/123");
+      assert.equal(link.textContent, "#123");
+      assert.equal(button.title, "복사");
+      button.click();
+      notifications.push(notification);
+    }
+    assert.equal(copies, cases.length);
+    assert.equal(doc.querySelector("pre")!.textContent, cases[0][0]);
+    changed({ translationEnabled: { newValue: false } }, "local");
+    await settle();
+    notifications.forEach((element, i) => {
+      assert.equal(element.childNodes[1].nodeValue, cases[i][0]);
+      assert.equal(element.querySelector("button")!.title, "コピー");
+    });
+    changed({ translationEnabled: { newValue: true } }, "local");
+    await settle();
+    notifications.forEach((element, i) =>
+      assert.equal(element.childNodes[1].nodeValue, cases[i][1]),
+    );
+  } finally {
+    close();
+  }
+});

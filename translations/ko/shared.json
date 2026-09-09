@@ -103,6 +103,24 @@
       "selector": "textarea[name=\"question\"]",
       "attribute": "placeholder",
       "ref": "ui_e01618b781929549"
-    }
+    },
+    { "selector": ".noty_body", "ref": "ui_f95bd12aef37c0f3" },
+    { "selector": ".noty_body", "ref": "ui_0b82092dfb5b348b" },
+    { "selector": ".noty_body", "ref": "ui_32a8c92504224bb8" },
+    { "selector": ".noty_body", "ref": "ui_5a16bc3b8eaca90e" },
+    { "selector": ".noty_body", "ref": "ui_4991b3403a5471df" },
+    { "selector": ".noty_body", "ref": "ui_dbd317a8335ebb61" },
+    { "selector": ".noty_body", "ref": "ui_d6af409a70764f4c" },
+    { "selector": ".noty_body", "ref": "ui_c57187675bc7a898" },
+    { "selector": ".noty_body", "ref": "ui_dd4bbac478a0ecf6" },
+    { "selector": ".noty_body", "ref": "ui_c78ad46e7d0f777e" },
+    { "selector": ".noty_body", "ref": "ui_1cc585aea85d5c68" },
+    { "selector": ".noty_body", "ref": "ui_3d43f5255229956a" },
+    { "selector": ".noty_body", "ref": "ui_388d0043c394d474" },
+    { "selector": ".noty_body", "ref": "ui_d614ab998a8f16b7" },
+    { "selector": ".noty_body", "ref": "ui_146ece6d2478a751" },
+    { "selector": ".noty_body", "ref": "ui_8c8c179b95f1ef82" },
+    { "selector": ".noty_body", "ref": "ui_acd7907820f59a60" },
+    { "selector": ".noty_body", "ref": "ui_4bdec6714249cc00" }
   ]
 }

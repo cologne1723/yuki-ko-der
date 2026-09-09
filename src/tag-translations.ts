@@ -2,6 +2,7 @@ import { z } from "translation-core/validation";
 import {
   translateTextNode,
   type TranslationHistory,
+  type TranslationScope,
 } from "translation-core/fixed-translations";
 
 export const tagTranslationsSchema = z.strictObject({
@@ -32,8 +33,12 @@ export class TagTranslator {
     this.tags = new Map(tags.map((tag) => [tag.source, tag]));
   }
 
-  apply(document: Document, history: TranslationHistory) {
-    for (const link of document.querySelectorAll<HTMLAnchorElement>(
+  apply(
+    document: Document,
+    history: TranslationHistory,
+    scope: TranslationScope = document,
+  ) {
+    for (const link of scope.querySelectorAll<HTMLAnchorElement>(
       "#content a[href]",
     )) {
       let url: URL;

@@ -4,6 +4,7 @@ import {
   applyTranslations,
   TranslationHistory,
 } from "translation-core/fixed-translations";
+import { TranslationMutations } from "translation-core/translation-mutations";
 import { type ProblemCatalog } from "translation-core/problem-catalog";
 import { createContentNotices } from "./content-notices.ts";
 import { createContentResources } from "./content-resources.ts";
@@ -11,6 +12,7 @@ import type { CatalogResult } from "./problem-catalog";
 import type { ProblemOutcome } from "./problem-engine";
 import {
   ProblemTitleTranslator,
+  problemTitleSelectors,
   type ProblemTitleTranslation,
 } from "./problem-titles";
 
@@ -21,6 +23,7 @@ declare global {
         translateProblem(
           shouldApply?: () => boolean,
           catalog?: ProblemCatalog,
+          options?: { refresh?: boolean },
         ): Promise<ProblemOutcome>;
         restoreProblem(): void;
       }
@@ -49,20 +52,47 @@ declare global {
   let catalogLoading: Promise<CatalogResult> | undefined;
   const notices = createContentNotices(document, () => restart(true));
   const { notify } = notices;
-  function applyReadyTranslations() {
+  const mutations = new TranslationMutations(document);
+  mutations.watch(
+    [...problemTitleSelectors, "#content a[href]", "#tags_tbody"],
+    ["value"],
+  );
+  let scheduled: ReturnType<typeof setTimeout> | undefined;
+  function applyReadyTranslations(full = true) {
     if (!globallyEnabled || !settingsReady || suspended) return;
-    if (entries) applyTranslations(document, entries, history);
-    tagTranslator.apply(document, history);
-    if (titlesReady) problemTitles.apply(document, titleHistory);
+    mutations.add(observer.takeRecords());
+    observer.disconnect();
+    clearTimeout(scheduled);
+    scheduled = undefined;
+    const pending = mutations.take();
+    try {
+      if (pending.removed) {
+        history.restoreDetached();
+        titleHistory.restoreDetached();
+      }
+      if (!full && !pending.changed) return;
+      const scope = full ? document : pending.scope;
+      if (entries) applyTranslations(document, entries, history, scope);
+      tagTranslator.apply(document, history, scope);
+      if (titlesReady) problemTitles.apply(document, titleHistory, scope);
+    } finally {
+      observer.observe(document.documentElement, mutations.options);
+    }
   }
-  let scheduled = false;
-  const observer = new MutationObserver(() => {
-    if (scheduled || !globallyEnabled) return;
-    scheduled = true;
-    queueMicrotask(() => {
-      scheduled = false;
-      applyReadyTranslations();
-    });
+  function stopObserving() {
+    observer.disconnect();
+    clearTimeout(scheduled);
+    scheduled = undefined;
+    mutations.take();
+  }
+  const observer = new MutationObserver((records) => {
+    mutations.add(records);
+    if (scheduled !== undefined || !globallyEnabled || suspended) return;
+    // Yield to the browser and combine mutations from the same task.
+    scheduled = setTimeout(() => {
+      scheduled = undefined;
+      applyReadyTranslations(false);
+    }, 0);
   });
 
   async function render(renew: boolean) {
@@ -70,7 +100,7 @@ declare global {
     const isProblemPage = /^\/problems\/no\/\d+\/?$/u.test(location.pathname);
     const live = () =>
       current === revision && globallyEnabled && settingsReady && !suspended;
-    observer.disconnect();
+    stopObserving();
     titlesReady = false;
     titleHistory.restore();
     globalThis.yukicoderProblemTranslations?.restoreProblem();
@@ -94,12 +124,7 @@ declare global {
       uiLoading = undefined;
       catalogLoading = undefined;
     }
-    observer.observe(document.documentElement, {
-      childList: true,
-      characterData: true,
-      attributes: true,
-      subtree: true,
-    });
+    observer.observe(document.documentElement, mutations.options);
     uiLoading ??= loadTranslations().catch((error) => {
       uiLoading = undefined;
       throw error;
@@ -109,6 +134,10 @@ declare global {
       .then((value) => {
         if (!live()) return;
         entries = value;
+        mutations.watch(
+          value.map((entry) => entry.selector),
+          value.flatMap((entry) => (entry.attribute ? [entry.attribute] : [])),
+        );
         applyReadyTranslations();
       })
       .catch((error) => {
@@ -129,6 +158,7 @@ declare global {
           await globalThis.yukicoderProblemTranslations?.translateProblem(
             live,
             result.catalog,
+            { refresh: renew },
           );
         if (!live()) return;
         if (outcome?.status === "failed") {
@@ -200,7 +230,7 @@ declare global {
     suspended = true;
     settingsRevision++;
     revision++;
-    observer.disconnect();
+    stopObserving();
   });
   window.addEventListener("pageshow", (event) => {
     if (!event.persisted) return;

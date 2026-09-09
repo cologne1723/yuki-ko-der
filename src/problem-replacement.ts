@@ -55,6 +55,20 @@ export function createProblemReplacement(
         };
       });
     const apply = () => {
+      // Validate before making any writes, so failure cannot overwrite a page
+      // the site has replaced since preparation.
+      const parent = liveTitle.parentNode;
+      if (
+        !liveTitle.isConnected ||
+        !parent ||
+        !liveBlocks.length ||
+        liveBlocks.some(
+          (block) => !block.isConnected || block.parentNode !== parent,
+        )
+      )
+        throw new Error(
+          "Problem page changed before translation could be applied",
+        );
       try {
         liveTitle.textContent = translation.title.textContent;
         liveBlocks.forEach((block, index) => block.replaceWith(anchors[index]));

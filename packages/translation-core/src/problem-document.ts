@@ -1,7 +1,30 @@
-// Some canonical statements place a sample beside their section blocks.
-// Include it in validation and replacement so no visible sample is overlooked.
+// Some statements put a sample or a leading Note outside their section blocks.
+// Restrict the leading range to the site's Note heading and prose, so navigation
+// and problem controls before the statement can never become replacement targets.
 export function sourceStatementBlocks(root: Element): Element[] {
-  return [...root.querySelectorAll(":scope > .block, :scope > .sample")];
+  const blocks = [
+    ...root.querySelectorAll(":scope > .block, :scope > .sample"),
+  ];
+  const leading: Element[] = [];
+  for (
+    let element = blocks[0]?.previousElementSibling;
+    element;
+    element = element.previousElementSibling
+  ) {
+    if (
+      element.matches("h4.shadow") &&
+      element.textContent?.trim() === "Note"
+    ) {
+      return [element, ...leading, ...blocks];
+    }
+    if (
+      !element.matches("p, ul, ol, pre, blockquote, table, br") ||
+      element.querySelector("button, input, select, textarea, form")
+    )
+      break;
+    leading.unshift(element);
+  }
+  return blocks;
 }
 
 export function parseTranslationDocument(

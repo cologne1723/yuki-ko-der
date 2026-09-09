@@ -9,6 +9,10 @@ export type TranslationVariable = z.infer<typeof translationVariableSchema>;
 export type TranslationEntry = z.infer<typeof translationEntrySchema>;
 export type TranslationDictionary = z.infer<typeof translationDictionarySchema>;
 
+export interface TranslationScope {
+  querySelectorAll<E extends Element = Element>(selector: string): Iterable<E>;
+}
+
 // Keep the original nodes and values, including site-owned event handlers.
 export class TranslationHistory {
   private changes = new Map<
@@ -26,8 +30,17 @@ export class TranslationHistory {
     this.changes.set(node, entries);
   }
 
+  restoreDetached() {
+    this.restoreWhere((node) => !node.isConnected);
+  }
+
   restore() {
+    this.restoreWhere(() => true);
+  }
+
+  private restoreWhere(include: (node: Node) => boolean) {
     for (const [node, entries] of this.changes) {
+      if (!include(node)) continue;
       for (const [key, { before, after }] of entries) {
         if (key === "") {
           if (node.nodeValue === after) node.nodeValue = before;
@@ -35,8 +48,8 @@ export class TranslationHistory {
           (node as Element).setAttribute(key, before);
         }
       }
+      this.changes.delete(node);
     }
-    this.changes.clear();
   }
 }
 
@@ -159,8 +172,9 @@ export function applyTranslationEntry(
   document: Document,
   entry: TranslationEntry,
   history?: TranslationHistory,
+  scope: TranslationScope = document,
 ): void {
-  for (const element of document.querySelectorAll(entry.selector)) {
+  for (const element of scope.querySelectorAll(entry.selector)) {
     if (entry.attribute !== undefined) {
       translateElementAttribute(element, entry, history);
       continue;
@@ -177,8 +191,9 @@ export function applyTranslations(
   document: Document,
   translations: TranslationEntry[],
   history?: TranslationHistory,
+  scope: TranslationScope = document,
 ): void {
   translations.forEach((entry) =>
-    applyTranslationEntry(document, entry, history),
+    applyTranslationEntry(document, entry, history, scope),
   );
 }
