@@ -1,0 +1,57 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { JSDOM } from "jsdom";
+import { compileProblemMarkdown } from "translation-core/problem-markdown";
+import { labelPublishedProblem } from "../src/problem-publication.ts";
+
+for (const status of ["machine", "unreviewed", "approved"]) {
+  test(`published ${status} problem shows the requested review notice`, () => {
+    const source = `---
+schemaVersion: 1
+locale: ko
+problemNo: 1
+problemId: 17
+sourceTitle: "Original"
+sourceHtmlSha256: ${"a".repeat(64)}
+reviewStatus: ${status}
+title: "제목"
+---
+
+## 예제
+
+### 입력 {file="sample.txt"}
+
+\`\`\`text
+1  2
+3
+\`\`\`
+`;
+    const original = new JSDOM(compileProblemMarkdown(source));
+    const published = labelPublishedProblem(original.serialize());
+    const result = new JSDOM(published);
+    try {
+      const expected = `No.1 제목${status === "approved" ? "" : " (기계번역입니다)"}`;
+      assert.equal(
+        result.window.document.querySelector("h3")?.textContent,
+        expected,
+      );
+      assert.equal(result.window.document.title, expected);
+      assert.equal(
+        result.window.document.querySelector(".problem-statement")?.innerHTML,
+        original.window.document.querySelector(".problem-statement")?.innerHTML,
+      );
+      assert.equal(
+        result.window.document
+          .querySelector("main")
+          ?.outerHTML.split(">", 1)[0],
+        original.window.document
+          .querySelector("main")
+          ?.outerHTML.split(">", 1)[0],
+      );
+      assert.equal(labelPublishedProblem(published), published);
+    } finally {
+      original.window.close();
+      result.window.close();
+    }
+  });
+}

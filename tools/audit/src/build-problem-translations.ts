@@ -8,6 +8,7 @@ import { fileURLToPath } from "node:url";
 import { parseProblemCatalog } from "translation-core/problem-catalog";
 import { compileProblemMarkdown } from "translation-core/problem-markdown";
 import { readProblemTitleCatalog } from "translation-core/problem-title-catalog";
+import { labelPublishedProblem } from "./problem-publication.ts";
 
 const repositoryRoot = resolve(
   dirname(fileURLToPath(import.meta.url)),
@@ -41,7 +42,7 @@ for (const [problemNo, filename] of sourceProblemsByNumber) {
   const extension = extname(filename);
   const source = await readFile(join(sourceProblems, filename), "utf8");
   const html = extension === ".mdx" ? compileProblemMarkdown(source) : source;
-  const published = html
+  const published = labelPublishedProblem(html)
     .replace(
       /<body([^>]*)>/iu,
       `<body$1><nav aria-label="원문"><a href="https://yukicoder.me/problems/no/${problemNo}">일본어 원문 보기</a></nav>`,
