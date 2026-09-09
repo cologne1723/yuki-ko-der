@@ -24,13 +24,14 @@ export function TaskMonitor() {
         component={Link}
         to="/tools"
         style={{ minWidth: 0, flexShrink: 1 }}
-        styles={{ label: { display: "block", textOverflow: "ellipsis" } }}
       >
-        {query.error
-          ? "작업 연결 끊김 · 다시 확인"
-          : running
-            ? `${taskLabels[running.input.operation]} · ${taskLabels[running.status]}`
-            : "작업 기록"}
+        <span style={{ overflow: "hidden", textOverflow: "ellipsis" }}>
+          {query.error
+            ? "작업 연결 끊김 · 다시 확인"
+            : running
+              ? `${taskLabels[running.input.operation]} · ${taskLabels[running.status]}`
+              : "작업 기록"}
+        </span>
       </Button>
       <TaskDrawer id={id} onClose={() => setId(undefined)} onStarted={setId} />
     </>

@@ -544,6 +544,7 @@ test("comparison scroll listeners follow each newly loaded iframe document", asy
   assert.equal(b.documentElement.scrollTop, 100);
   const replacement = doc(200);
   load(left, replacement);
+  assert.equal(replacement.documentElement.scrollTop, 50);
   b.documentElement.scrollTop = 0;
   a.documentElement.scrollTop = 25;
   a.dispatchEvent(new page.dom.window.Event("scroll"));
@@ -551,6 +552,49 @@ test("comparison scroll listeners follow each newly loaded iframe document", asy
   replacement.documentElement.scrollTop = 80;
   replacement.dispatchEvent(new page.dom.window.Event("scroll"));
   assert.equal(b.documentElement.scrollTop, 160);
+});
+
+test("editing a problem preserves preview scroll while switching problems resets it", async (t) => {
+  const page = reactPage(t, async (path) =>
+    Response.json(
+      path === "/api/problems"
+        ? { problems }
+        : problems[Number(path.split("/").at(-1)) - 1],
+    ),
+  );
+  await page.screen.findByRole("heading", { name: "1. Draft 1" });
+  const frame = page.screen.getByTitle("한국어 번역");
+  const load = (target: HTMLIFrameElement) => {
+    const doc = page.dom.window.document.implementation.createHTMLDocument();
+    Object.defineProperty(doc, "scrollingElement", {
+      value: doc.documentElement,
+    });
+    Object.defineProperty(target, "contentDocument", {
+      configurable: true,
+      value: doc,
+    });
+    page.fireEvent.load(target);
+    return doc;
+  };
+  const before = load(frame);
+  before.documentElement.scrollTop = 500;
+  before.dispatchEvent(new page.dom.window.Event("scroll"));
+  page.edit("<p>Changed preview</p>");
+  await page.waitFor(() => assert.match(frame.srcdoc, /Changed preview/));
+  const after = load(frame);
+  assert.equal(after.documentElement.scrollTop, 500);
+  before.documentElement.scrollTop = 100;
+  before.dispatchEvent(new page.dom.window.Event("scroll"));
+  assert.equal(load(frame).documentElement.scrollTop, 500);
+  await page.navigate("/?problem=2");
+  await page.user.click(
+    await page.screen.findByRole("button", { name: "변경 버리고 이동" }),
+  );
+  await page.screen.findByRole("heading", { name: "2. Draft 2" });
+  assert.equal(
+    load(page.screen.getByTitle("한국어 번역")).documentElement.scrollTop,
+    0,
+  );
 });
 
 test("glossary prefers observed pages and preserves a manual preview while editing", async (t) => {

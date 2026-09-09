@@ -377,6 +377,7 @@ export function GlossaryEditor({
         <Pending />
       ) : preview.html ? (
         <Preview
+          key={page}
           html={preview.html}
           title="번역 적용 페이지"
           showHeading={false}
@@ -422,6 +423,7 @@ export function GlossaryEditor({
                 <ExtensionPreview entry={saved} text={saved.source} />
               ) : preview.html && source.data ? (
                 <Preview
+                  key={page}
                   html={source.data.html}
                   title="일본어 페이지"
                   onFrame={focusPreview}

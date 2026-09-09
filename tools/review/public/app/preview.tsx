@@ -1,5 +1,5 @@
 import { Checkbox, Paper, SimpleGrid, Stack, Text } from "@mantine/core";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { previewDocument } from "./preview-document.ts";
 import { useComparisonScroll } from "./use-comparison-scroll.ts";
 
@@ -17,6 +17,31 @@ export function Preview({
   onFrame?: (frame: HTMLIFrameElement) => void;
 }) {
   const source = useMemo(() => previewDocument(html, inert), [html, inert]);
+  const position = useRef<{ top: number; left: number } | undefined>(undefined);
+  const detachScroll = useRef<(() => void) | undefined>(undefined);
+  useEffect(() => () => detachScroll.current?.(), []);
+  const loaded = (frame: HTMLIFrameElement) => {
+    detachScroll.current?.();
+    const previous = position.current;
+    onFrame?.(frame);
+    if (inert) return;
+    const doc = frame.contentDocument;
+    const scrolling = doc?.scrollingElement;
+    if (!doc || !scrolling) return;
+    if (previous) {
+      scrolling.scrollTop = previous.top;
+      scrolling.scrollLeft = previous.left;
+    }
+    const remember = () => {
+      position.current = {
+        top: scrolling.scrollTop,
+        left: scrolling.scrollLeft,
+      };
+    };
+    remember();
+    doc.addEventListener("scroll", remember);
+    detachScroll.current = () => doc.removeEventListener("scroll", remember);
+  };
   return (
     <Paper withBorder radius="md" style={{ overflow: "hidden" }}>
       <Stack gap={0}>
@@ -27,8 +52,8 @@ export function Preview({
         )}
         <iframe
           title={title}
-          sandbox={onFrame && !inert ? "allow-same-origin" : ""}
-          onLoad={(event) => onFrame?.(event.currentTarget)}
+          sandbox={!inert ? "allow-same-origin" : ""}
+          onLoad={(event) => loaded(event.currentTarget)}
           referrerPolicy="no-referrer"
           srcDoc={source}
           style={{
