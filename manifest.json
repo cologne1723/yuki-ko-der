@@ -14,7 +14,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "yukicoder-ko@local",
+      "id": "yuki-ko-der@cologne1723.github.io",
       "strict_min_version": "121.0",
       "data_collection_permissions": {
         "required": ["none"]
