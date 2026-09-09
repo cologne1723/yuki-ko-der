@@ -98,6 +98,11 @@
     { "selector": ".noty_body", "ref": "ui_38f7ff13634f152a" },
     { "selector": ".noty_body", "ref": "ui_4903dd35fef770c4" },
     { "selector": ".noty_body", "ref": "ui_e3b4b54f9dc0c90d" },
-    { "selector": ".noty_body", "ref": "ui_9acdd8794e0e2e9a" }
+    { "selector": ".noty_body", "ref": "ui_9acdd8794e0e2e9a" },
+    {
+      "selector": "textarea[name=\"question\"]",
+      "attribute": "placeholder",
+      "ref": "ui_e01618b781929549"
+    }
   ]
 }

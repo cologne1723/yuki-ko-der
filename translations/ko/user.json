@@ -320,6 +320,21 @@
     {
       "selector": "#content form.user_profile #lang option",
       "ref": "ui_07e724964294d850"
+    },
+    {
+      "selector": "#user_logout",
+      "ref": "ui_18db4ebaf4df16f4",
+      "attribute": "value"
+    },
+    {
+      "selector": "#change",
+      "ref": "ui_038adeb84f655b4c",
+      "attribute": "value"
+    },
+    {
+      "selector": "#content input.btn.btn-primary",
+      "ref": "ui_092c1065421f1eba",
+      "attribute": "value"
     }
   ]
 }

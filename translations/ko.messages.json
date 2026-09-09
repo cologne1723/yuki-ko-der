@@ -7158,6 +7158,331 @@
       "source": "yukicoder 日本語原文 · クリックすると韓国語を表示します。",
       "target": "yukicoder 일본어 원문 · 클릭하면 한국어를 표시합니다.",
       "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_140db920564f1a30",
+      "source": "入力サンプルをコピー",
+      "target": "입력 예제 복사",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_99645577d64566de",
+      "source": "新規問題の追加",
+      "target": "새 문제 추가",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_a9ed3ab3380fde04",
+      "source": "ここで対応できないケース（小数誤差等や出力ファイル使用など）は、恐れ入りますが",
+      "target": "여기서 처리할 수 없는 케이스 (실수 오차나 출력 파일 사용 등)는 번거로우시겠지만 ",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_0c98fa3c38a47b9b",
+      "source": "連絡先 URL:",
+      "target": "연락처 URL:",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_8ab3fc72e9a92dab",
+      "source": "マイページの練習モードを「ゆるふわ（最初から色々公開）」にすると、AC 前でもタグが表示されます。クリックすると設定を開きます。",
+      "target": "마이페이지의 연습 모드를 「유루후와(처음부터 여러 정보 공개)」로 설정하면 정답을 맞히기 전에도 태그가 표시됩니다. 클릭하면 설정을 엽니다.",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_ad3572a9fcb30911",
+      "source": "/ テスター :",
+      "target": "/ 테스터:",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_18db4ebaf4df16f4",
+      "source": "ログアウト",
+      "target": "로그아웃",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_fe52dc96b84c85a6",
+      "source": "プレゼンテーションモードにする",
+      "target": "프레젠테이션 모드로 전환",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_c52a9d8f5ddd26ae",
+      "source": "入力",
+      "target": "입력",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_2767cc142f9c2250",
+      "source": "（解説公開後に AC するまで非表示）",
+      "target": "(해설 공개 후 정답을 맞히기 전까지 숨김)",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_4cadadc0358b4561",
+      "source": "の最短時間",
+      "target": "의 최단 시간",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_784fa3a4c399e40c",
+      "source": "この提出は、あるケースではACにならないだろうというものにチャレンジ（撃墜）ケースを指定することができます。",
+      "target": "이 제출이 특정 테스트 케이스에서 정답을 받지 못할 것으로 생각된다면, 해당 케이스를 챌린지 (격추) 케이스로 지정할 수 있습니다.",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_d38a2a54cf74a633",
+      "source": "出力",
+      "target": "출력",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_5ce9cd752ae0f1e3",
+      "source": "のチャレンジ",
+      "target": "의 챌린지",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_b2a290ffb3fc65ea",
+      "source": "バリデーションがありませんので、問題として適切ではない入力にはご注意ください。",
+      "target": "입력 유효성 검사가 없으므로 문제의 조건에 맞지 않는 입력을 제출하지 않도록 주의해 주세요.",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_3d60fd17936366cd",
+      "source": "チャレンジ",
+      "target": "챌린지",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_9a5e155a2406eea7",
+      "source": "ACを除く",
+      "target": "정답 제외",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_7b0afc72ba77ab56",
+      "source": "チャレンジ対象 #",
+      "target": "챌린지 대상 #",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_456e48be4ae7b630",
+      "source": "チャレンジをキャンセル",
+      "target": "챌린지 취소",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_038adeb84f655b4c",
+      "source": "更新する",
+      "target": "갱신하기",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_87d1da7ed75fb6dc",
+      "source": "の純ショートコード",
+      "target": "의 순수 숏코드",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_46b0e0cd2dabda8d",
+      "source": "失敗しても、特にデメリットはありませんが、大量に投げるような行為があった場合は制限を課す可能性があります。",
+      "target": "실패해도 별다른 불이익은 없지만, 대량으로 제출하는 등의 행위에는 제한을 둘 수 있습니다.",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_edc331924a8d962b",
+      "source": "の純主流ショートコード",
+      "target": "의 순수 주류 숏코드",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_97744e9c09ea3c3b",
+      "source": "コードへのチャレンジ（β）",
+      "target": "코드에 대한 챌린지 (β)",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_b75430c5a3bd6561",
+      "source": "スペシャルやリアクティブ問題では、出力ファイルを参照している可能性があるので、チャレンジは成功とは言われるかもしれませんが、運営が確認後ケースを追加します。",
+      "target": "스페셜 저지 또는 인터랙티브 문제는 출력 파일을 참조할 수 있으므로, 챌린지가 성공으로 표시되더라도 운영진이 확인한 뒤 테스트 케이스를 추가합니다.",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_44647138d1c490ef",
+      "source": "ベータ版なのでURLなどは変更になる可能性があります。",
+      "target": "베타 버전이므로 URL 등이 변경될 수 있습니다.",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_510f1345f9400f53",
+      "source": "成功した場合、運営に連絡が行きますので、折を見て問題に追加します。",
+      "target": "성공하면 운영진에게 알림이 전달되며, 추후 문제에 테스트 케이스를 추가합니다.",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_9b66ba6c8a0ed958",
+      "source": "どれが落ちるかわからないけど、コーナーケースとして追加したほうが良さそうなのは、一旦ここに投げていただいて Failed でも良いので 上のTwitterなどにURL付きでご連絡ください。",
+      "target": "어떤 제출이 실패할지는 모르지만 코너 케이스로 추가하는 것이 좋겠다면, 우선 여기에 제출한 뒤 Failed가 나오더라도 위의 Twitter 등으로 URL과 함께 알려 주세요.",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_092c1065421f1eba",
+      "source": "新しいキーの発行",
+      "target": "새 키 발급",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_54b4e07e05fac8a9",
+      "source": "送信する",
+      "target": "보내기",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_7913a5922891e9bc",
+      "source": "エラー出力",
+      "target": "오류 출력",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_5e83d4de1b63ba06",
+      "source": "想定解 #",
+      "target": "모범 답안 #",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_069b429dcf0e3cce",
+      "source": "Challenge Succeed! ケース追加済み",
+      "target": "Challenge Succeed! 테스트 케이스 추가 완료",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_3d1f7c86e35aa91a",
+      "source": "チャレンジしたユーザー{crown}",
+      "target": "챌린지한 사용자{crown}",
+      "variables": { "crown": "(?:\\s*👑)?" },
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_9d3a0b1c188a83d7",
+      "source": "までお願いします。",
+      "target": " 로 연락해 주세요.",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_89dcb2c80b6b37d6",
+      "source": "の解説",
+      "target": "의 해설",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_c29e49a01eb63877",
+      "source": "問題の提出のほうが優先されるので待ち時間が発生する可能性があります。",
+      "target": "문제 풀이 제출이 우선 처리되므로 대기 시간이 발생할 수 있습니다.",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_6f8dbb7b317f0d1b",
+      "source": "同じケースで他の提出が落ちた場合は、1つ落とせば十分なので、チャレンジしないようにしてもらえればと思います。",
+      "target": "같은 테스트 케이스로 다른 제출도 챌린지 할 수 있는 경우, 하나만 챌린지해도 테스트케이스가 추가되므로, 추가로 챌린지하지 말아 주세요.",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_f462af86ee469d11",
+      "source": "のテスターポイント",
+      "target": "의 테스터 포인트",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_e754c45cb453f2c3",
+      "source": "このチャレンジを「evil ケース」としてマークする",
+      "target": "이 챌린지를 「evil 케이스」로 표시",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_7cda37b6f0a1d5d1",
+      "source": "ツイートURL:",
+      "target": "트위터 URL:",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_7fce78448a0f10a6",
+      "source": "以下。ただし、ジャッジ側の都合で500桁未満にしてください",
+      "target": "이하. 단, 채점 시스템의 제한으로 500자리 미만으로 작성해 주세요",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_f36b3c9dcaf2b2c2",
+      "source": "サイトサポーター機能",
+      "target": "사이트 서포터 기능",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_b6d3f655e595303c",
+      "source": "出力結果",
+      "target": "출력 결과",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_ecfda290e4dff5d1",
+      "source": "がFavされました。",
+      "target": "이(가) 즐겨찾기에 추가되었습니다.",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_295579dacdb6e4b7",
+      "source": "のショートコード",
+      "target": "의 숏코드",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_622b117f298b1865",
+      "source": "{seconds} 秒",
+      "target": "{seconds}초",
+      "reviewStatus": "approved",
+      "variables": { "seconds": "[0-9]+(?:\\.[0-9]+)?" }
+    },
+    {
+      "id": "ui_fd785d2c3b7b0a37",
+      "source": "提出日時 {timestamp}",
+      "target": "제출 일시 {timestamp}",
+      "reviewStatus": "approved",
+      "variables": { "timestamp": "[0-9-]+ [0-9:]+" }
+    },
+    {
+      "id": "ui_e19238e3b167b625",
+      "source": "ステータス最終変更日時 {timestamp}",
+      "target": "상태 최종 변경 일시 {timestamp}",
+      "reviewStatus": "approved",
+      "variables": { "timestamp": "[0-9-]+ [0-9:]+" }
+    },
+    {
+      "id": "ui_b6ee757146ca4396",
+      "source": "制限時間{seconds}秒: メモリ制限{memory}MBです。",
+      "target": "시간 제한은 {seconds}초, 메모리 제한은 {memory}MB입니다.",
+      "reviewStatus": "approved",
+      "variables": { "seconds": "[0-9]+", "memory": "[0-9]+" }
+    },
+    {
+      "id": "ui_ba1f68c31dd17192",
+      "source": "/ 実行時間制限 : 1ケース {seconds}秒 / メモリ制限 : {memory} MB / 作問者 : 👑",
+      "target": "/ 시간 제한: 케이스당 {seconds}초 / 메모리 제한: {memory} MB / 출제자: 👑",
+      "reviewStatus": "approved",
+      "variables": { "seconds": "[0-9.]+", "memory": "[0-9]+" }
+    },
+    {
+      "id": "ui_4b25783b9a530e13",
+      "source": "/ 実行時間制限 : 1ケース {seconds}秒 / メモリ制限 : {memory} MB / 小数誤差許容問題 絶対誤差または相対誤差が",
+      "target": "/ 시간 제한: 케이스당 {seconds}초 / 메모리 제한: {memory} MB / 소수 오차 허용 문제. 절대 오차 또는 상대 오차가",
+      "reviewStatus": "approved",
+      "variables": { "seconds": "[0-9.]+", "memory": "[0-9]+" }
+    },
+    {
+      "id": "ui_e01618b781929549",
+      "source": "質問を入力してください",
+      "target": "질문을 입력해 주세요",
+      "reviewStatus": "unreviewed"
     }
   ]
 }

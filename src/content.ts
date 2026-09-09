@@ -63,6 +63,7 @@ declare global {
 
   async function render(renew: boolean) {
     const current = ++revision;
+    const isProblemPage = /^\/problems\/no\/\d+\/?$/u.test(location.pathname);
     const live = () =>
       current === revision && globallyEnabled && settingsReady && !suspended;
     observer.disconnect();
@@ -72,7 +73,7 @@ declare global {
     history.restore();
     notices.clear();
     if (!live()) return;
-    if (/^\/problems\/no\/\d+\/?$/u.test(location.pathname)) {
+    if (isProblemPage) {
       notices.setOriginalAction(() => {
         revision++;
         titlesReady = false;
@@ -116,6 +117,7 @@ declare global {
         );
         titlesReady = true;
         applyReadyTranslations();
+        if (!isProblemPage) return;
         const outcome =
           await globalThis.yukicoderProblemTranslations?.translateProblem(
             live,
@@ -160,7 +162,7 @@ declare global {
       .catch((error) => {
         if (!live()) return;
         console.warn("[yukicoder-ko] Problem translation failed", error);
-        notify("problem", "problemLoadFailed", true);
+        if (isProblemPage) notify("problem", "problemLoadFailed", true);
       });
     await Promise.all([uiTask, problemTask]);
   }

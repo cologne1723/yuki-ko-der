@@ -2,5 +2,14 @@
   "$schema": "../translations.schema.json",
   "locale": "ko",
   "sourceLocale": "ja",
-  "translations": [{ "selector": "#content div", "ref": "ui_47a00eef3f3ee716" }]
+  "translations": [
+    {
+      "selector": "#content div",
+      "ref": "ui_47a00eef3f3ee716"
+    },
+    {
+      "selector": "#content button.btn.btn-success",
+      "ref": "ui_99645577d64566de"
+    }
+  ]
 }

@@ -13,6 +13,8 @@ import {
   type UsageDictionary,
 } from "translation-core/translation-catalog";
 import { ReviewError } from "./problem-review.ts";
+import { CollectionReviewStore } from "./collection-review.ts";
+import { collectedUiPages } from "./collected-ui-pages.ts";
 const revision = (text: string) =>
   createHash("sha256").update(text).digest("hex");
 export class UiCatalogRepository {
@@ -109,15 +111,28 @@ export class UiCatalogRepository {
     const sourceContexts = await optionalJson(
       "tools/review/public/ui-contexts.json",
     );
+    const collected = await collectedUiPages(
+      new CollectionReviewStore(this.root, this.dataRoot),
+      dictionaries,
+    );
     return {
       dictionaries,
-      pages,
-      coverage: coverage?.entries ?? [],
+      pages: [...pages, ...collected.pages],
+      pageLabels: collected.pageLabels,
+      coverage: [...(coverage?.entries ?? []), ...collected.coverage],
       sourceContexts: sourceContexts ?? [],
     };
   }
 
   async page(name: string) {
+    const collected = /^collection-([a-f0-9]{64})-([a-f0-9]{64})\.html$/u.exec(
+      name,
+    );
+    if (collected)
+      return new CollectionReviewStore(this.root, this.dataRoot).snapshot(
+        collected[1],
+        collected[2],
+      );
     if (!/^[a-zA-Z0-9_-]+\.html$/u.test(name))
       throw new ReviewError("올바르지 않은 페이지입니다.");
     const path = join(this.dataRoot, "pages", name);

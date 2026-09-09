@@ -386,8 +386,8 @@ export function GlossaryEditor({
       ) : (
         !source.error && (
           <Text c="dimmed">
-            선택한 문구가 포함된 미리보기가 없습니다. 미리보기 설정에서 페이지를
-            선택하거나 도구에서 UI 미리보기를 다운로드하세요.
+            선택한 문구와 일치하는 미리보기를 찾지 못했습니다. 미리보기 설정에서
+            저장된 페이지나 수집 ZIP 화면을 선택해 주세요.
           </Text>
         )
       )}
@@ -402,7 +402,10 @@ export function GlossaryEditor({
                     <Select
                       style={{ flex: 1 }}
                       label="미리보기 페이지"
-                      data={data.pages}
+                      data={data.pages.map((value) => ({
+                        value,
+                        label: data.pageLabels?.[value] ?? value,
+                      }))}
                       value={page}
                       onChange={setPage}
                       searchable

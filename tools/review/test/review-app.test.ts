@@ -688,7 +688,7 @@ test("a page without the selected phrase is not displayed as its preview", async
   await page.waitFor(() =>
     assert.match(
       page.dom.window.document.body.textContent!,
-      /선택한 문구가 포함된 미리보기가 없습니다/,
+      /선택한 문구와 일치하는 미리보기를 찾지 못했습니다/,
     ),
   );
   assert.equal(page.dom.window.document.querySelectorAll("iframe").length, 0);

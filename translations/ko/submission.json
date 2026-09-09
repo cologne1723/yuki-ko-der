@@ -113,6 +113,34 @@
       "selector": "#source_code_modal button.btn-close",
       "attribute": "aria-label",
       "ref": "ui_5c7862f6964ec064"
+    },
+    {
+      "selector": "#editor_presentation_mode",
+      "ref": "ui_fe52dc96b84c85a6"
+    },
+    {
+      "selector": "#content label.form-check-label",
+      "ref": "ui_9a5e155a2406eea7"
+    },
+    {
+      "selector": "#content a.stderr-hover-tooltip",
+      "ref": "ui_7913a5922891e9bc"
+    },
+    {
+      "selector": "#content a",
+      "ref": "ui_b6d3f655e595303c"
+    },
+    {
+      "selector": "#toplinks a",
+      "ref": "ui_b6d3f655e595303c"
+    },
+    {
+      "selector": "#content th",
+      "ref": "ui_c52a9d8f5ddd26ae"
+    },
+    {
+      "selector": "#content th",
+      "ref": "ui_d38a2a54cf74a633"
     }
   ]
 }

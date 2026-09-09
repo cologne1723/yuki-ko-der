@@ -366,3 +366,99 @@ for (const verificationStatus of ["verified", "changed", "unavailable"]) {
     }
   });
 }
+
+for (const path of [
+  "/problems/no/1/submissions",
+  "/problems/18/submissions",
+  "/submissions",
+]) {
+  test(`non-statement page ${path} translates titles without problem notices or body requests`, async () => {
+    const { dom, close } = page(
+      '<body><main id="content"><h3>提出一覧</h3><a href="/problems/no/1">No.1 題名</a></main></body>',
+      `https://yukicoder.me${path}`,
+    );
+    let bodyCalls = 0;
+    Object.assign(dom.window, {
+      chrome: {
+        runtime: {
+          getURL: (p: string) => p,
+          sendMessage: async () => statusCatalog("제목"),
+        },
+        storage: {
+          local: { get: async () => ({}) },
+          onChanged: { addListener() {} },
+        },
+      },
+      fetch: async () => Response.json({ translations: [] }),
+      yukicoderProblemTranslations: {
+        restoreProblem() {},
+        translateProblem: async () => {
+          bodyCalls++;
+          return { status: "unavailable" };
+        },
+      },
+    });
+    try {
+      dom.window.eval(code);
+      await settle();
+      assert.equal(bodyCalls, 0);
+      assert.equal(
+        dom.window.document.querySelector("#yukicoder-ko-status"),
+        null,
+      );
+      assert.equal(
+        dom.window.document.querySelector("a")!.textContent,
+        "No.1 제목",
+      );
+    } finally {
+      close();
+    }
+  });
+}
+
+test("editorial titles translate only the matching problem and restore on disable", async () => {
+  const { dom, close } = page(
+    '<title>解説 No.1 題名 - yukicoder</title><main id="content"><h3>No.1 題名 解説</h3></main>',
+    "https://yukicoder.me/problems/no/1/editorial",
+  );
+  let changed!: Change;
+  Object.assign(dom.window, {
+    chrome: {
+      runtime: {
+        getURL: (p: string) => p,
+        sendMessage: async () => statusCatalog("제목"),
+      },
+      storage: {
+        local: { get: async () => ({}) },
+        onChanged: {
+          addListener(fn: Change) {
+            changed = fn;
+          },
+        },
+      },
+    },
+    fetch: async () => Response.json({ translations: [] }),
+  });
+  try {
+    dom.window.eval(code);
+    await settle();
+    assert.equal(dom.window.document.title, "해설 No.1 제목 - yukicoder");
+    assert.equal(
+      dom.window.document.querySelector("h3")!.textContent,
+      "No.1 제목 해설",
+    );
+    assert.equal(
+      dom.window.document.querySelector("#yukicoder-ko-status"),
+      null,
+    );
+    changed({ translationEnabled: { newValue: false } }, "local");
+    await settle();
+    assert.equal(dom.window.document.title, "解説 No.1 題名 - yukicoder");
+    assert.equal(
+      dom.window.document.querySelector("h3")!.textContent,
+      "No.1 題名 解説",
+    );
+  } finally {
+    close();
+  }
+});

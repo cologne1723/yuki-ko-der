@@ -7,6 +7,14 @@
     { "selector": "#content h5", "ref": "ui_841ea00a8d26dc2e" },
     { "selector": "#content h5", "ref": "ui_a7170948fa97285b" },
     { "selector": "#content th", "ref": "ui_59481ee637d6ff70" },
-    { "selector": "#content td", "ref": "ui_8a939b4d34907342" }
+    { "selector": "#content td", "ref": "ui_8a939b4d34907342" },
+    {
+      "selector": "#content label",
+      "ref": "ui_0c98fa3c38a47b9b"
+    },
+    {
+      "selector": "#content label",
+      "ref": "ui_7cda37b6f0a1d5d1"
+    }
   ]
 }

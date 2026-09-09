@@ -6,6 +6,8 @@ import {
 import type { ProblemTitleTranslation } from "translation-core/problem-catalog";
 export type { ProblemTitleTranslation } from "translation-core/problem-catalog";
 
+import { message } from "./extension-messages";
+
 const PROTECTED =
   'pre, code, script, style, textarea, input, select, .sample, [contenteditable]:not([contenteditable="false"])';
 const LABELS =
@@ -74,6 +76,38 @@ export class ProblemTitleTranslator {
   }
 
   apply(document: Document, history: TranslationHistory): void {
+    const editorial = new URL(document.URL).pathname.match(
+      /^\/problems\/no\/(\d+)\/editorial\/?$/u,
+    );
+    const editorialEntry = editorial && this.byNumber.get(Number(editorial[1]));
+    if (editorialEntry) {
+      const source = normalizeTranslationText(editorialEntry.source);
+      for (const element of document.querySelectorAll("title, #content > h3")) {
+        if (element.querySelector("a") || element.querySelector(PROTECTED))
+          continue;
+        const raw = element.textContent ?? "";
+        const normalized = normalizeTranslationText(raw);
+        const base = `No.${editorialEntry.problemNo} ${source}`;
+        const translated = `No.${editorialEntry.problemNo} ${editorialEntry.target}`;
+        let replacement: string | undefined;
+        if (element.tagName === "TITLE") {
+          for (const suffix of ["", " - yukicoder"]) {
+            if (normalized === `解説 ${base}${suffix}`)
+              replacement = `${message("editorial")} ${translated}${suffix}`;
+          }
+        } else if (normalized === `${base} 解説`)
+          replacement = `${translated} ${message("editorial")}`;
+        if (replacement)
+          replaceTextRange(
+            element,
+            raw.match(/^\s*/u)![0].length,
+            raw.length - raw.match(/\s*$/u)![0].length,
+            replacement,
+            history,
+          );
+      }
+    }
+
     for (const link of document.querySelectorAll<HTMLAnchorElement>(
       "a[href]",
     )) {

@@ -28,6 +28,7 @@ import {
 export interface GlossaryData {
   dictionaries: ReviewDictionary[];
   pages: string[];
+  pageLabels?: Record<string, string>;
   coverage?: {
     file: string;
     index: number;

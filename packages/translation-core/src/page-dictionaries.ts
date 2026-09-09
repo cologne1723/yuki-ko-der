@@ -40,6 +40,7 @@ const pageDictionaries: Record<string, string[]> = {
   "/wiki/guide": ["wiki_shared", "guide"],
 };
 const dynamicPageDictionaries = [
+  { pattern: /^\/challenge\/\d+$/u, names: ["challenges"] },
   { pattern: /^\/contests\/\d+$/u, names: ["contest"] },
   {
     pattern: /^\/contests\/\d+\/(?:table|all)$/u,

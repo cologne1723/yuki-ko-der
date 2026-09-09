@@ -2,5 +2,42 @@
   "$schema": "../translations.schema.json",
   "locale": "ko",
   "sourceLocale": "ja",
-  "translations": [{ "selector": "#content div", "ref": "ui_b288f83f01b4a403" }]
+  "translations": [
+    {
+      "selector": "#content div",
+      "ref": "ui_b288f83f01b4a403"
+    },
+    {
+      "selector": "#content td.desc",
+      "ref": "ui_4cadadc0358b4561"
+    },
+    {
+      "selector": "#content td.desc",
+      "ref": "ui_5ce9cd752ae0f1e3"
+    },
+    {
+      "selector": "#content td.desc",
+      "ref": "ui_87d1da7ed75fb6dc"
+    },
+    {
+      "selector": "#content td.desc",
+      "ref": "ui_edc331924a8d962b"
+    },
+    {
+      "selector": "#content td.desc",
+      "ref": "ui_89dcb2c80b6b37d6"
+    },
+    {
+      "selector": "#content td.desc",
+      "ref": "ui_f462af86ee469d11"
+    },
+    {
+      "selector": "#content td.desc",
+      "ref": "ui_ecfda290e4dff5d1"
+    },
+    {
+      "selector": "#content td.desc",
+      "ref": "ui_295579dacdb6e4b7"
+    }
+  ]
 }

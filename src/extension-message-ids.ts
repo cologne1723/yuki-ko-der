@@ -1,4 +1,5 @@
 export const extensionMessageIds = {
+  editorial: "ui_18a86598ada75fce",
   toolbarKorean: "ui_6d8b6e9c0f6d2a11",
   toolbarJapanese: "ui_7e03f8c72b1a4d55",
   problemLoadFailed: "ui_2c5f750653d53ac9",

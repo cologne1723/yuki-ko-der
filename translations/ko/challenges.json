@@ -5,6 +5,99 @@
   "translations": [
     { "selector": "#main h1", "ref": "ui_e86ec5aec7031a4c" },
     { "selector": "#main a", "ref": "ui_7a3cdd83ba44344d" },
-    { "selector": "#main a", "ref": "ui_a39a55116e4fef7f" }
+    { "selector": "#main a", "ref": "ui_a39a55116e4fef7f" },
+    {
+      "selector": "#content p",
+      "ref": "ui_a9ed3ab3380fde04"
+    },
+    {
+      "selector": "#content p",
+      "ref": "ui_784fa3a4c399e40c"
+    },
+    {
+      "selector": "#content div.line",
+      "ref": "ui_b2a290ffb3fc65ea"
+    },
+    {
+      "selector": "#content input.btn.btn-primary",
+      "ref": "ui_3d60fd17936366cd",
+      "attribute": "value"
+    },
+    {
+      "selector": "#content label",
+      "ref": "ui_7b0afc72ba77ab56"
+    },
+    {
+      "selector": "#content button.btn.btn-danger",
+      "ref": "ui_456e48be4ae7b630"
+    },
+    {
+      "selector": "#content p",
+      "ref": "ui_46b0e0cd2dabda8d"
+    },
+    {
+      "selector": "#content h2",
+      "ref": "ui_97744e9c09ea3c3b"
+    },
+    {
+      "selector": "#content p",
+      "ref": "ui_b75430c5a3bd6561"
+    },
+    {
+      "selector": "#content p",
+      "ref": "ui_44647138d1c490ef"
+    },
+    {
+      "selector": "#content p",
+      "ref": "ui_510f1345f9400f53"
+    },
+    {
+      "selector": "#content p",
+      "ref": "ui_9b66ba6c8a0ed958"
+    },
+    {
+      "selector": "#content label",
+      "ref": "ui_5e83d4de1b63ba06"
+    },
+    {
+      "selector": "#content span.label.label-success",
+      "ref": "ui_069b429dcf0e3cce"
+    },
+    {
+      "selector": "#submit_form",
+      "ref": "ui_3d1f7c86e35aa91a"
+    },
+    {
+      "selector": "#content p",
+      "ref": "ui_9d3a0b1c188a83d7"
+    },
+    {
+      "selector": "#description",
+      "ref": "ui_c29e49a01eb63877"
+    },
+    {
+      "selector": "#content p",
+      "ref": "ui_6f8dbb7b317f0d1b"
+    },
+    {
+      "selector": "#content label",
+      "ref": "ui_e754c45cb453f2c3"
+    },
+    {
+      "selector": "#content p",
+      "ref": "ui_fd785d2c3b7b0a37"
+    },
+    {
+      "selector": "#content p",
+      "ref": "ui_e19238e3b167b625"
+    },
+    {
+      "selector": "#description",
+      "ref": "ui_b6ee757146ca4396"
+    },
+    {
+      "selector": "span.text-success",
+      "ref": "ui_069b429dcf0e3cce"
+    }
   ]
 }

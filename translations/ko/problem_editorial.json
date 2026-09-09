@@ -90,6 +90,10 @@
     {
       "selector": "#my_editorial_url",
       "ref": "ui_8b579b73fe9e746d"
+    },
+    {
+      "selector": "#content > h4.shadow, #content .block > h4.shadow",
+      "ref": "ui_18a86598ada75fce"
     }
   ]
 }

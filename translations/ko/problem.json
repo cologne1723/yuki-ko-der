@@ -158,7 +158,7 @@
       "ref": "ui_868e8dd40e980901"
     },
     {
-      "selector": "#content > div:has(> #contest-problem-selector-wrapper)",
+      "selector": "#content :is(div, span):has(> #contest-problem-selector-wrapper)",
       "ref": "ui_be871f38ea236946"
     },
     {
@@ -258,6 +258,53 @@
     {
       "selector": "#content .problem-header-cols a",
       "ref": "ui_4cd235ac2d741633"
+    },
+    {
+      "selector": "#content button.copy-sample-input",
+      "ref": "ui_140db920564f1a30"
+    },
+    {
+      "selector": "#content a.tag-hidden-hint",
+      "ref": "ui_8ab3fc72e9a92dab",
+      "attribute": "aria-label"
+    },
+    {
+      "selector": "#content div",
+      "ref": "ui_ad3572a9fcb30911"
+    },
+    {
+      "selector": "#tag_hidden",
+      "ref": "ui_2767cc142f9c2250"
+    },
+    {
+      "selector": "#content input",
+      "ref": "ui_54b4e07e05fac8a9",
+      "attribute": "value"
+    },
+    {
+      "selector": "#content div",
+      "ref": "ui_7fce78448a0f10a6"
+    },
+    {
+      "selector": "#content i.fas.fa-crown",
+      "ref": "ui_f36b3c9dcaf2b2c2",
+      "attribute": "title"
+    },
+    {
+      "selector": "#content :is(div, span):has(> #contest-problem-selector-wrapper) > a",
+      "ref": "ui_af9b1cb3b733a5a4"
+    },
+    {
+      "selector": "#content p",
+      "ref": "ui_ba1f68c31dd17192"
+    },
+    {
+      "selector": "#content .problem-header-cols div",
+      "ref": "ui_4b25783b9a530e13"
+    },
+    {
+      "selector": "#content p",
+      "ref": "ui_ad3572a9fcb30911"
     }
   ]
 }
