@@ -11,9 +11,10 @@ test(
   "upload and deletion refresh a previously visited glossary with production cache settings",
   { timeout: 30000 },
   async (t) => {
-    const root = await mkdtemp(
-      join(process.cwd(), "data/stray/collection-cache-"),
-    );
+    const temporaryDirectory = join(process.cwd(), "data/stray");
+    // Ignored local directories are absent in a fresh CI checkout.
+    await mkdir(temporaryDirectory, { recursive: true });
+    const root = await mkdtemp(join(temporaryDirectory, "collection-cache-"));
     t.after(() => rm(root, { recursive: true, force: true }));
     await mkdir(join(root, "translations/ko"), { recursive: true });
     await writeFile(
