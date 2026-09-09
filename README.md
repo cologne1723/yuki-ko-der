@@ -84,7 +84,6 @@ pnpm verify:problems
 | `translations/`                     | 공통 UI 문구와 페이지별 사용처                           |
 | `problem-translations/`             | 문제별 편집 소스와 번역 지침                             |
 | `icons/`                            | 원본 아이콘과 도구 모음 SVG                              |
-| `docs/`                             | 검토가 필요한 항목과 검증 기록                           |
 
 `dist/`는 모든 패키지의 빌드 출력이며 `data/`는 다운로드한 원문, 미리보기와
 보고서입니다. 두 경로와 `node_modules/`는 Git에서 제외합니다.

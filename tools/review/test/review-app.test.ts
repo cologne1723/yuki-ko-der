@@ -15,6 +15,39 @@ const problems: ProblemReview[] = [1, 2].map((problemNo) => ({
   revision: `r${problemNo}`,
   validationWarnings: [],
 }));
+test("initial problem loading does not show an empty list", async (t) => {
+  let resolveList!: (response: Response) => void;
+  const page = reactPage(t, async (path) =>
+    path === "/api/problems"
+      ? new Promise<Response>((resolve) => {
+          resolveList = resolve;
+        })
+      : Response.json(problems[0]),
+  );
+  await page.screen.findAllByRole("status");
+  assert.equal(page.screen.queryByText("문제가 없습니다."), null);
+  resolveList(Response.json({ problems }));
+  await page.screen.findByRole("heading", { name: "1. Draft 1" });
+  assert.equal(page.screen.queryByText("문제가 없습니다."), null);
+});
+
+test("problem list failures remain visible with navigation collapsed and can retry", async (t) => {
+  let failed = true;
+  const page = reactPage(t, async (path) =>
+    path === "/api/problems"
+      ? failed
+        ? Response.json({ error: "List unavailable" }, { status: 500 })
+        : Response.json({ problems: [] })
+      : Response.json(problems[0]),
+  );
+  await page.screen.findByRole("alert");
+  assert.equal(page.screen.queryByText("문제가 없습니다."), null);
+  failed = false;
+  await page.user.click(page.screen.getByRole("button", { name: "다시 시도" }));
+  await page.screen.findByText("문제가 없습니다.");
+  assert.equal(page.screen.queryByRole("alert"), null);
+});
+
 for (const fails of [false, true])
   test(`React problem save ${fails ? "failure" : "success"} preserves identity and blocks navigation while pending`, async (t) => {
     let settle: (r: Response) => void = () => {
@@ -172,9 +205,35 @@ test("glossary automatically selects a preview and retains isolated translated f
     assert.equal(page.dom.window.document.querySelectorAll("iframe").length, 2),
   );
   const frames = [...page.dom.window.document.querySelectorAll("iframe")];
-  assert.ok(frames.every((f) => f.getAttribute("sandbox") === ""));
+  assert.ok(
+    frames.every((f) => f.getAttribute("sandbox") === "allow-same-origin"),
+  );
+  assert.ok(
+    frames.every((f) => !f.getAttribute("sandbox")?.includes("allow-scripts")),
+  );
+  assert.equal(
+    page.screen.queryByRole("combobox", { name: "미리보기 페이지" }),
+    null,
+  );
+  assert.equal(page.screen.queryByRole("combobox", { name: "사전" }), null);
+  assert.equal(
+    page.screen
+      .getByRole("button", { name: "상세 정보" })
+      .getAttribute("aria-expanded"),
+    "false",
+  );
+  assert.equal(
+    page.screen.queryByRole("combobox", { name: "검사 작업" }),
+    null,
+  );
   assert.doesNotMatch(frames[0].srcdoc, /<script/);
-  assert.match(frames[1].srcdoc, /이름/);
+  assert.match(frames[0].srcdoc, /이름/);
+  const doc = frames[0].contentDocument!;
+  doc.body.innerHTML = "<nav><a>이름</a></nav>";
+  doc.querySelector("a")!.getBoundingClientRect = () =>
+    ({ top: 600 }) as DOMRect;
+  page.fireEvent.load(frames[0]);
+  assert.equal(doc.documentElement.scrollTop, 600);
 });
 test("task results separate successful validation from human review and prevent stale conversion", async (t) => {
   const task = {
@@ -340,7 +399,10 @@ test("completed refresh updates originals while preserving an unsaved problem dr
   page.edit("<p>Keep this draft</p>");
   await page.screen.findByText("저장하지 않음");
   await page.user.click(
-    page.screen.getByRole("combobox", { name: "검사 작업" }),
+    page.screen.getByRole("button", { name: "편집 도구 및 검사" }),
+  );
+  await page.user.click(
+    await page.screen.findByRole("combobox", { name: "검사 작업" }),
   );
   await page.user.click(
     await page.screen.findByRole("option", { name: "원문 다운로드" }),
@@ -431,15 +493,16 @@ test("glossary lists context variants separately and reload recovers a revision 
   await page.user.click(page.screen.getByRole("button", { name: "초안 저장" }));
   await page.screen.findByText("Revision conflict");
   assert.equal(lastRevision, "r1");
+  await page.user.click(page.screen.getByRole("button", { name: "상세 정보" }));
   await page.user.click(
-    page.screen.getByRole("button", { name: "문구 다시 불러오기" }),
+    await page.screen.findByRole("button", { name: "문구 다시 불러오기" }),
   );
   await page.user.click(
     await page.screen.findByRole("button", { name: "계속 편집" }),
   );
   assert.equal(target.value, "이름 내 초안");
   await page.user.click(
-    page.screen.getByRole("button", { name: "문구 다시 불러오기" }),
+    await page.screen.findByRole("button", { name: "문구 다시 불러오기" }),
   );
   await page.user.click(
     await page.screen.findByRole("button", { name: "버리고 다시 불러오기" }),
@@ -514,6 +577,11 @@ test("glossary prefers observed pages and preserves a manual preview while editi
     "/ui",
     "glossary",
   );
+  await page.user.click(
+    await page.screen.findByRole("button", {
+      name: "미리보기 설정 및 원문 비교",
+    }),
+  );
   const selector = await page.screen.findByRole("combobox", {
     name: "미리보기 페이지",
   });
@@ -526,7 +594,8 @@ test("glossary prefers observed pages and preserves a manual preview while editi
   assert.equal(selector.value, "other.html");
 });
 
-test("extension-only glossary messages still open an available preview automatically", async (t) => {
+test("extension messages show live component examples without unrelated page requests", async (t) => {
+  const requests: string[] = [];
   const data = {
     ...glossary(),
     dictionaries: [
@@ -541,20 +610,239 @@ test("extension-only glossary messages still open an available preview automatic
   };
   const page = reactPage(
     t,
+    async (path) => {
+      requests.push(path);
+      return Response.json(data);
+    },
+    "/ui",
+    "glossary",
+  );
+  const target = await page.screen.findByLabelText("한국어 번역");
+  assert.equal(page.screen.getByRole("status").textContent, "이름");
+  await page.user.type(target, "!");
+  assert.equal(page.screen.getByRole("status").textContent, "이름!");
+  assert.equal(
+    requests.some((path) => path.startsWith("/api/ui-pages/")),
+    false,
+  );
+  assert.equal(page.dom.window.document.querySelectorAll("iframe").length, 0);
+});
+
+test("a page without the selected phrase is not displayed as its preview", async (t) => {
+  const page = reactPage(
+    t,
     async (path) =>
       Response.json(
         path.startsWith("/api/ui-pages/")
-          ? { html: "<p>Saved page</p>" }
+          ? { html: "<nav><a>Unrelated</a></nav>" }
+          : glossary(),
+      ),
+    "/ui",
+    "glossary",
+  );
+  await page.screen.findByLabelText("한국어 번역");
+  await page.waitFor(() =>
+    assert.match(
+      page.dom.window.document.body.textContent!,
+      /선택한 문구가 포함된 미리보기가 없습니다/,
+    ),
+  );
+  assert.equal(page.dom.window.document.querySelectorAll("iframe").length, 0);
+});
+
+test("approval advances only after a successful save without an unsaved prompt", async (t) => {
+  const second = { ...entry, messageId: "next", source: "次", target: "다음" };
+  let data = {
+    ...glossary(),
+    dictionaries: [
+      { file: "main.json", revision: "r1", entries: [{ ...entry }, second] },
+    ],
+  };
+  let fail = true;
+  const page = reactPage(
+    t,
+    async (_path, init) => {
+      if (init?.method === "PUT") {
+        if (fail)
+          return Response.json({ error: "Save failed" }, { status: 409 });
+        const body = JSON.parse(String(init.body));
+        data = {
+          ...data,
+          dictionaries: [
+            {
+              ...data.dictionaries[0],
+              revision: "r2",
+              entries: [
+                { ...entry, target: body.target, reviewStatus: "approved" },
+                second,
+              ],
+            },
+          ],
+        };
+        return Response.json({
+          revision: "r2",
+          entry: data.dictionaries[0].entries[0],
+          dictionaries: data.dictionaries,
+        });
+      }
+      return Response.json(data);
+    },
+    "/ui",
+    "glossary",
+  );
+  await page.user.type(await page.screen.findByLabelText("한국어 번역"), "!");
+  await page.user.click(page.screen.getByRole("button", { name: "검수 승인" }));
+  await page.screen.findByText("Save failed");
+  assert.equal(page.screen.getByLabelText("한국어 번역").value, "이름!");
+  fail = false;
+  await page.user.click(page.screen.getByRole("button", { name: "검수 승인" }));
+  await page.waitFor(() =>
+    assert.equal(page.screen.getByLabelText("한국어 번역").value, "다음"),
+  );
+  assert.equal(page.screen.queryByRole("dialog"), null);
+});
+
+test("automatic preview checks newer saved pages when the dictionary page has no match", async (t) => {
+  const requests: string[] = [];
+  const page = reactPage(
+    t,
+    async (path) => {
+      requests.push(path);
+      return Response.json(
+        path.startsWith("/api/ui-pages/")
+          ? {
+              html: path.endsWith("main_current.html")
+                ? "<nav><a>名前</a></nav>"
+                : "<p>Old page</p>",
+            }
+          : { ...glossary(), pages: ["main.html", "main_current.html"] },
+      );
+    },
+    "/ui",
+    "glossary",
+  );
+  await page.screen.findByLabelText("한국어 번역");
+  await page.waitFor(() =>
+    assert.match(
+      page.dom.window.document.querySelector("iframe")?.srcdoc ?? "",
+      /이름/,
+    ),
+  );
+  assert.ok(requests.includes("/api/ui-pages/main_current.html"));
+});
+
+test("preview translates surrounding saved phrases while applying the selected draft", async (t) => {
+  const data = {
+    ...glossary(),
+    dictionaries: [
+      {
+        file: "main.json",
+        revision: "r1",
+        entries: [
+          { ...entry },
+          {
+            ...entry,
+            selector: "p",
+            source: "説明",
+            target: "설명",
+            messageId: "description",
+          },
+        ],
+      },
+    ],
+  };
+  const page = reactPage(
+    t,
+    async (path) =>
+      Response.json(
+        path.startsWith("/api/ui-pages/")
+          ? { html: "<nav><a>名前</a></nav><p>説明</p>" }
           : data,
       ),
     "/ui",
     "glossary",
   );
-  await page.waitFor(() =>
-    assert.equal(page.dom.window.document.querySelectorAll("iframe").length, 2),
+  await page.user.type(await page.screen.findByLabelText("한국어 번역"), "!");
+  await page.waitFor(() => {
+    const html = page.dom.window.document.querySelector("iframe")?.srcdoc ?? "";
+    assert.match(html, /이름!/);
+    assert.match(html, /설명/);
+    assert.doesNotMatch(html, /説明/);
+  });
+});
+
+test("problem editor shows both languages beside the source with secondary controls collapsed", async (t) => {
+  const page = reactPage(
+    t,
+    async (path) =>
+      Response.json(
+        path === "/api/problems"
+          ? { problems }
+          : problems[Number(path.split("/").at(-1)) - 1],
+      ),
+    "/",
+    "shell",
+  );
+  await page.screen.findByRole("heading", { name: "1. Draft 1" });
+  assert.ok(page.dom.window.document.querySelector(".cm-editor"));
+  assert.ok(page.screen.getByTitle("일본어 원문"));
+  assert.ok(page.screen.getByTitle("한국어 번역"));
+  assert.equal(
+    page.screen.queryByRole("combobox", { name: "검사 작업" }),
+    null,
   );
   assert.equal(
-    page.screen.getByRole("combobox", { name: "미리보기 페이지" }).value,
-    "main.html",
+    page.screen
+      .getByRole("button", { name: "탐색 메뉴" })
+      .getAttribute("aria-expanded"),
+    "false",
+  );
+  assert.equal(
+    page.screen.queryByRole("button", { name: "문제 목록 · 검색" }),
+    null,
+  );
+  await page.user.click(page.screen.getByRole("button", { name: "탐색 메뉴" }));
+  assert.equal(
+    page.screen
+      .getByRole("button", { name: "탐색 메뉴" })
+      .getAttribute("aria-expanded"),
+    "true",
+  );
+  const nextProblem = page.screen.getByRole("link", {
+    name: "2. Draft 2Original 2 승인됨",
+  });
+  assert.ok(nextProblem.closest("#review-navigation"));
+  await page.user.click(nextProblem);
+  await page.screen.findByRole("heading", { name: "2. Draft 2" });
+});
+
+test("Japanese and Korean math use identical embedded fonts and HTML rendering", async (t) => {
+  const problem = {
+    ...problems[0],
+    japaneseHtml: "<p>\\(N\\)</p>",
+    koreanSource: '<html lang="ko"><body><p>$N$</p></body></html>',
+  };
+  const page = reactPage(t, async (path) =>
+    Response.json(path === "/api/problems" ? { problems: [problem] } : problem),
+  );
+  await page.screen.findByRole("heading", { name: "1. Draft 1" });
+  const frames = [...page.dom.window.document.querySelectorAll("iframe")];
+  const docs = frames.map((frame) =>
+    new page.dom.window.DOMParser().parseFromString(frame.srcdoc, "text/html"),
+  );
+  assert.equal(docs.length, 2);
+  const styles = docs.map(
+    (doc) => doc.querySelector("style[data-review-math]")?.textContent,
+  );
+  assert.ok(styles[0]?.includes("data:font/woff2;base64,"));
+  assert.ok(styles[0] === styles[1]);
+  assert.ok(
+    docs.every(
+      (doc) => doc.querySelector(".katex-html") && !doc.querySelector("math"),
+    ),
+  );
+  assert.ok(
+    docs[0].querySelector(".katex")?.outerHTML ===
+      docs[1].querySelector(".katex")?.outerHTML,
   );
 });

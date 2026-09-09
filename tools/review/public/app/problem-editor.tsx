@@ -1,12 +1,12 @@
 import { html } from "@codemirror/lang-html";
 import { markdown } from "@codemirror/lang-markdown";
 import {
+  Accordion,
   Badge,
   Button,
   Group,
   SimpleGrid,
   Stack,
-  Tabs,
   Text,
   Title,
 } from "@mantine/core";
@@ -22,7 +22,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { compileProblemMarkdown } from "translation-core/problem-markdown";
 import type { ProblemReview } from "../../src/problem-review.ts";
 import { reviewApi } from "./client.ts";
-import { Comparison, Preview } from "./preview.tsx";
+import { Preview } from "./preview.tsx";
 import { Failure, ReviewBadge, UnsavedGuard } from "./shared.tsx";
 import { QuickTasks } from "./tasks.tsx";
 
@@ -82,7 +82,7 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
     }
   }, [initial, saved.revision, dirty, save.isPending, formatting.isPending]);
   return (
-    <Stack>
+    <Stack style={{ minWidth: 0 }}>
       <UnsavedGuard
         dirty={dirty}
         pending={save.isPending || formatting.isPending}
@@ -103,7 +103,7 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
           }
         />
       </Group>
-      <Text c="dimmed">{saved.japaneseTitle}</Text>
+
       <Group>
         <Button
           loading={save.isPending}
@@ -137,53 +137,54 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
           {w}
         </Text>
       ))}
-      <QuickTasks kind="problem" number={saved.problemNo} />
-      <Tabs defaultValue="editor">
-        <Tabs.List>
-          <Tabs.Tab value="editor">번역 편집</Tabs.Tab>
-          <Tabs.Tab value="preview">원문 · 번역 비교</Tabs.Tab>
-        </Tabs.List>
-        <Tabs.Panel value="editor" pt="md">
-          <Stack>
-            <Group justify="space-between">
-              <Text size="sm">{saved.sourceFormat.toUpperCase()}</Text>
-              <Button
-                variant="subtle"
-                loading={formatting.isPending}
-                disabled={compiled || save.isPending}
-                onClick={() => formatting.mutate()}
-              >
-                서식 정리
-              </Button>
-              {saved.sourceFormat === "mdx" && (
-                <Button variant="subtle" onClick={() => setCompiled(!compiled)}>
-                  {compiled ? "소스 편집" : "컴파일된 HTML 보기"}
+      <Failure error={preview.error} />
+      <SimpleGrid cols={{ base: 1, lg: 3 }} style={{ alignItems: "start" }}>
+        <Preview html={saved.japaneseHtml} title="일본어 원문" />
+        <Preview html={preview.html} title="한국어 번역" />
+        <Stack gap="xs" style={{ minWidth: 0 }}>
+          <Text fw={600}>번역 소스</Text>
+          <CodeMirror
+            value={compiled ? preview.html : source}
+            editable={!compiled && !save.isPending && !formatting.isPending}
+            height="72vh"
+            extensions={[
+              saved.sourceFormat === "mdx" && !compiled ? markdown() : html(),
+              EditorView.lineWrapping,
+            ]}
+            onChange={setSource}
+            aria-label="번역 소스"
+          />
+        </Stack>
+      </SimpleGrid>
+      <Accordion>
+        <Accordion.Item value="tools">
+          <Accordion.Control>편집 도구 및 검사</Accordion.Control>
+          <Accordion.Panel>
+            <Stack>
+              <Group justify="space-between">
+                <Text size="sm">{saved.sourceFormat.toUpperCase()}</Text>
+                <Button
+                  variant="subtle"
+                  loading={formatting.isPending}
+                  disabled={compiled || save.isPending}
+                  onClick={() => formatting.mutate()}
+                >
+                  서식 정리
                 </Button>
-              )}
-            </Group>
-            <Failure error={preview.error} />
-            <SimpleGrid cols={{ base: 1, xl: 2 }}>
-              <CodeMirror
-                value={compiled ? preview.html : source}
-                editable={!compiled && !save.isPending && !formatting.isPending}
-                height="60vh"
-                extensions={[
-                  saved.sourceFormat === "mdx" && !compiled
-                    ? markdown()
-                    : html(),
-                  EditorView.lineWrapping,
-                ]}
-                onChange={setSource}
-                aria-label="번역 소스"
-              />
-              <Preview html={preview.html} title="번역 미리보기" />
-            </SimpleGrid>
-          </Stack>
-        </Tabs.Panel>
-        <Tabs.Panel value="preview" pt="md">
-          <Comparison japanese={saved.japaneseHtml} korean={preview.html} />
-        </Tabs.Panel>
-      </Tabs>
+                {saved.sourceFormat === "mdx" && (
+                  <Button
+                    variant="subtle"
+                    onClick={() => setCompiled(!compiled)}
+                  >
+                    {compiled ? "소스 편집" : "컴파일된 HTML 보기"}
+                  </Button>
+                )}
+              </Group>
+              <QuickTasks kind="problem" number={saved.problemNo} />
+            </Stack>
+          </Accordion.Panel>
+        </Accordion.Item>
+      </Accordion>
     </Stack>
   );
 }

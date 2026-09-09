@@ -1,16 +1,5 @@
-import {
-  AppShell,
-  Burger,
-  Button,
-  Group,
-  MantineProvider,
-  NavLink,
-  Stack,
-  Text,
-  Title,
-} from "@mantine/core";
+import { Button, MantineProvider, Stack, Text, Title } from "@mantine/core";
 import "@mantine/core/styles.css";
-import { useDisclosure } from "@mantine/hooks";
 import { ModalsProvider } from "@mantine/modals";
 import { Notifications } from "@mantine/notifications";
 import "@mantine/notifications/styles.css";
@@ -19,17 +8,15 @@ import { Component, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import {
   createBrowserRouter,
-  Link,
-  Outlet,
   RouterProvider,
-  useLocation,
   useSearchParams,
 } from "react-router-dom";
 import { Glossary } from "./glossary.tsx";
 import { Imports } from "./imports.tsx";
+import { Shell } from "./shell.tsx";
 import { Problems } from "./problems.tsx";
 import { Failure } from "./shared.tsx";
-import { TaskMonitor, Tools } from "./tasks.tsx";
+import { Tools } from "./tasks.tsx";
 
 export class ErrorBoundary extends Component<
   { children: ReactNode },
@@ -53,60 +40,6 @@ export class ErrorBoundary extends Component<
       this.props.children
     );
   }
-}
-function Shell() {
-  const [opened, { toggle, close }] = useDisclosure();
-  const location = useLocation();
-  return (
-    <AppShell
-      header={{ height: 64 }}
-      navbar={{ width: 220, breakpoint: "md", collapsed: { mobile: !opened } }}
-      padding="lg"
-    >
-      <AppShell.Header>
-        <Group h="100%" px="lg">
-          <Burger
-            opened={opened}
-            onClick={toggle}
-            hiddenFrom="md"
-            aria-label="탐색 메뉴"
-          />
-          <Text fw={700} size="lg">
-            번역 검수
-          </Text>
-          <Text size="sm" c="dimmed">
-            편집 · 검수 · 자료 관리
-          </Text>
-          <TaskMonitor />
-        </Group>
-      </AppShell.Header>
-      <AppShell.Navbar p="md">
-        <Stack gap="xs">
-          {[
-            ["/", "문제 검수"],
-            ["/ui", "UI 용어집"],
-            ["/ui?view=imports", "ZIP 가져오기"],
-            ["/tools", "도구와 설정"],
-          ].map(([to, label]) => (
-            <NavLink
-              key={to}
-              component={Link}
-              to={to}
-              label={label}
-              active={
-                `${location.pathname}${new URLSearchParams(location.search).get("view") === "imports" ? "?view=imports" : ""}` ===
-                to
-              }
-              onClick={close}
-            />
-          ))}
-        </Stack>
-      </AppShell.Navbar>
-      <AppShell.Main>
-        <Outlet />
-      </AppShell.Main>
-    </AppShell>
-  );
 }
 function Ui() {
   const [params] = useSearchParams();

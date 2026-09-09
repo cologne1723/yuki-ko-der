@@ -1,4 +1,5 @@
 import DOMPurify from "dompurify";
+import katexCss from "katex/dist/katex.min.css?inline";
 import { renderPreviewMath } from "../tex.ts";
 
 export function previewDocument(
@@ -16,9 +17,12 @@ export function previewDocument(
   const base = doc.createElement("base");
   base.href = "https://yukicoder.me/";
   doc.head.prepend(base);
-  const css = doc.createElement("link");
-  css.rel = "stylesheet";
-  css.href = `${origin}/katex/katex.min.css`;
+  const css = doc.createElement("style");
+  css.dataset.reviewMath = "katex";
+  css.textContent = katexCss.replaceAll(
+    "url(fonts/",
+    `url(${origin}/katex/fonts/`,
+  );
   doc.head.append(css);
   const style = doc.createElement("style");
   style.textContent =
@@ -30,7 +34,7 @@ export function previewDocument(
     ? "default-src 'none'; style-src 'unsafe-inline'; form-action 'none'; base-uri 'none'"
     : "default-src 'none'; style-src 'unsafe-inline' " +
       origin +
-      " https://yukicoder.me https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://use.fontawesome.com; img-src data: https://yukicoder.me; font-src " +
+      " https://yukicoder.me https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://use.fontawesome.com; img-src data: https://yukicoder.me; font-src data: " +
       origin +
       " https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://use.fontawesome.com; form-action 'none'";
   if (inert) {

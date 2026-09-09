@@ -576,7 +576,8 @@
     },
     {
       "selector": "#content p:has(> code)",
-      "ref": "ui_f7809127fb1a06ff"
+      "ref": "ui_f7809127fb1a06ff",
+      "preserveBoundaryWhitespace": false
     },
     {
       "selector": "#content p:has(> a[href=\"/api/swagger.yaml\"])",

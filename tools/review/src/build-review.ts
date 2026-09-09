@@ -1,3 +1,4 @@
+import { katexStylePlugin } from "./katex-style-plugin.ts";
 import { buildDirectory } from "translation-core/paths";
 
 import { build } from "esbuild";
@@ -16,6 +17,7 @@ const katexRoot = join(repositoryRoot, "node_modules", "katex", "dist");
 await rm(outputRoot, { recursive: true, force: true });
 await mkdir(outputRoot, { recursive: true });
 await build({
+  plugins: [katexStylePlugin],
   entryPoints: [join(sourceRoot, "app/main.tsx")],
   bundle: true,
   format: "esm",

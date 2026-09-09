@@ -7,20 +7,24 @@ export function Preview({
   html,
   title,
   inert = false,
+  showHeading = true,
   onFrame,
 }: {
   html: string;
   title: string;
   inert?: boolean;
+  showHeading?: boolean;
   onFrame?: (frame: HTMLIFrameElement) => void;
 }) {
   const source = useMemo(() => previewDocument(html, inert), [html, inert]);
   return (
     <Paper withBorder radius="md" style={{ overflow: "hidden" }}>
       <Stack gap={0}>
-        <Text fw={600} p="sm" bg="gray.0">
-          {title}
-        </Text>
+        {showHeading && (
+          <Text fw={600} p="sm" bg="gray.0">
+            {title}
+          </Text>
+        )}
         <iframe
           title={title}
           sandbox={onFrame && !inert ? "allow-same-origin" : ""}

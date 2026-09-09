@@ -36,6 +36,10 @@ test("review starts without ignored data and retains UI dictionary access", asyn
   const headers = { host: "127.0.0.1" };
   const index = await app.request("http://127.0.0.1/", { headers });
   assert.equal(index.status, 200);
+  assert.match(
+    index.headers.get("content-security-policy")!,
+    /font-src[^;]* data:/,
+  );
   assert.match(await index.text(), /Review/);
   assert.doesNotMatch(
     index.headers.get("content-security-policy")!,

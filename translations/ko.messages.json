@@ -5,31 +5,31 @@
       "id": "ui_2c5f750653d53ac9",
       "source": "問題の翻訳を読み込めませんでした。",
       "target": "문제 번역을 불러오지 못했습니다.",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_53f043227931596a",
       "source": "問題の翻訳を確認できないため、原文を表示しています。",
       "target": "문제 번역을 검증하지 못해 원문을 표시합니다.",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_cdfa455e0a3e9a4e",
       "source": "翻訳設定を読み込めませんでした。",
       "target": "번역 설정을 불러오지 못했습니다.",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_c443c1c2326ecb43",
       "source": "画面の翻訳を読み込めませんでした。",
       "target": "화면 번역을 불러오지 못했습니다.",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_fb6cc190949da044",
       "source": "再試行",
       "target": "다시 시도",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_e86ec5aec7031a4c",
@@ -201,7 +201,7 @@
     {
       "id": "ui_f4a83d2428488f45",
       "source": "同時接続数:{count}",
-      "target": "동시 접속자수: {count}",
+      "target": "동시 접속자 수: {count}",
       "variables": { "count": "\\d+" },
       "reviewStatus": "approved"
     },
@@ -444,7 +444,7 @@
     {
       "id": "ui_f74348443d5a57f2",
       "source": "Writer/Testerを除いたAC人数 (全体のAC人数)",
-      "target": "Writer/Tester를 제외한 AC 인원(전체 AC 인원)",
+      "target": "출제자·테스터를 제외한 AC 인원 (전체 AC 인원)",
       "reviewStatus": "approved"
     },
     {
@@ -462,7 +462,7 @@
     {
       "id": "ui_6d7ed2ebcf7b430c",
       "source": "自分が Writer / Tester の問題は、非公開の質問も表示されます。",
-      "target": "내가 Writer / Tester인 문제는 비공개 질문도 표시됩니다. ",
+      "target": "내가 출제자·테스터인 문제는 비공개 질문도 표시됩니다. ",
       "reviewStatus": "approved"
     },
     {
@@ -526,7 +526,7 @@
     {
       "id": "ui_b371289b001c424a",
       "source": "{contest} 順位表",
-      "target": "{contest} 순위표",
+      "target": "{contest} 스코어보드",
       "variables": { "contest": ".+" },
       "reviewStatus": "approved"
     },
@@ -540,7 +540,7 @@
     {
       "id": "ui_d384de9b58a8e0e7",
       "source": "{startedAt}に出題されて現在までの順位表です。",
-      "target": "{startedAt}부터 현재까지의 순위표입니다.",
+      "target": "{startedAt}부터 현재까지의 스코어보드입니다.",
       "variables": { "startedAt": ".+" },
       "reviewStatus": "approved"
     },
@@ -584,7 +584,7 @@
     {
       "id": "ui_8f72f9b8c759c337",
       "source": "{contest} 順位表 (Beta)",
-      "target": "{contest} 순위표(Beta)",
+      "target": "{contest} 스코어보드(Beta)",
       "variables": { "contest": ".+" },
       "reviewStatus": "approved"
     },
@@ -661,7 +661,7 @@
       "id": "ui_a477438947fe8cb4",
       "source": "問題",
       "target": "문제",
-      "alternatives": [{ "target": "문제", "reviewStatus": "unreviewed" }],
+      "alternatives": [{ "target": "문제", "reviewStatus": "approved" }],
       "reviewStatus": "approved"
     },
     {
@@ -741,7 +741,7 @@
       "id": "ui_7e04c7f51bc47121",
       "source": "問題数",
       "target": "문제 수",
-      "alternatives": [{ "target": "문제 수", "reviewStatus": "unreviewed" }],
+      "alternatives": [{ "target": "문제 수", "reviewStatus": "approved" }],
       "reviewStatus": "approved"
     },
     {
@@ -774,14 +774,14 @@
       "id": "ui_ffc09fc04508af44",
       "source": "前へ",
       "target": "이전",
-      "alternatives": [{ "target": "이전", "reviewStatus": "unreviewed" }],
+      "alternatives": [{ "target": "이전", "reviewStatus": "approved" }],
       "reviewStatus": "approved"
     },
     {
       "id": "ui_db400499a18f54ee",
       "source": "次へ",
       "target": "다음",
-      "alternatives": [{ "target": "다음", "reviewStatus": "unreviewed" }],
+      "alternatives": [{ "target": "다음", "reviewStatus": "approved" }],
       "reviewStatus": "approved"
     },
     {
@@ -824,14 +824,14 @@
       "target": "여기로",
       "alternatives": [
         { "target": "여기", "reviewStatus": "approved" },
-        { "target": "여기", "reviewStatus": "unreviewed" }
+        { "target": "여기", "reviewStatus": "approved" }
       ],
       "reviewStatus": "approved"
     },
     {
       "id": "ui_11a2612d8448d939",
       "source": "編集履歴(外部サイト)",
-      "target": "편집 내역 (외부 사이트)",
+      "target": "편집 기록 (외부 사이트)",
       "alternatives": [
         { "target": "편집 기록(외부 사이트)", "reviewStatus": "approved" }
       ],
@@ -1029,7 +1029,7 @@
     {
       "id": "ui_db0cce75c924d4a9",
       "source": "競技プログラミングをしたことない方でも比較的簡単に解けると思われるシンプルな問題です。",
-      "target": "경쟁 프로그래밍을 처음 접하는 사람도 비교적 쉽게 풀 수 있는 간단한 문제들입니다.",
+      "target": "Competitive Programming을 처음 접하는 사람도 비교적 쉽게 풀 수 있는 간단한 문제들입니다.",
       "reviewStatus": "approved"
     },
     {
@@ -1089,13 +1089,13 @@
     {
       "id": "ui_ce6a9969f3127147",
       "source": "慣れないとデバッグが少し大変になってくるので、バグらせないように実装するスキルも必要になってきます。",
-      "target": "디버깅에 익숙해져서, 버그 없이 구현하는 능력도 필요합니다.",
+      "target": "익숙하지 않으면 디버깅이 조금 어려워지므로, 버그 없이 구현하는 능력도 필요합니다.",
       "reviewStatus": "approved"
     },
     {
       "id": "ui_bdbfa290fd1148e2",
       "source": "正直、直接業務では出てこないような処理かもしれません。",
-      "target": "솔직히, 실무에서 마추지지 않을 수도 있는 문제입니다.",
+      "target": "솔직히, 실무에서는 직접 접하지 않을 수도 있는 처리입니다.",
       "reviewStatus": "approved"
     },
     {
@@ -1155,7 +1155,7 @@
     {
       "id": "ui_37f62efe8b8d16bf",
       "source": "Imos法（累積和手法)",
-      "target": "누적 합",
+      "target": "누적 합 기법",
       "reviewStatus": "approved"
     },
     {
@@ -1204,7 +1204,7 @@
       "id": "ui_eef8537ed84d27e5",
       "source": "は",
       "target": "는",
-      "alternatives": [{ "target": "는", "reviewStatus": "unreviewed" }],
+      "alternatives": [{ "target": "는", "reviewStatus": "approved" }],
       "reviewStatus": "approved"
     },
     {
@@ -1444,7 +1444,7 @@
     {
       "id": "ui_794aba4fe86abdea",
       "source": "です。（注意：ただし、ミスがあれば後日指摘される可能性があリます。）",
-      "target": "입니다. (주의: 단, 이후에 재채점 될 수 있습니다.)",
+      "target": "입니다. (주의: 단, 오류가 있으면 나중에 재채점될 수 있습니다.)",
       "reviewStatus": "approved"
     },
     {
@@ -1492,7 +1492,7 @@
     {
       "id": "ui_a9cebfd3acbba1a4",
       "source": "(Internal Error)は、申し訳ありません。ジャッジシステムのエラーです。（運営者に自動的に連絡が行きます）",
-      "target": "(Internal Error)는 채점 시스템 오류입니다. 죄송합니다.(운영자에게 자동으로 연락됩니다.)",
+      "target": "(Internal Error)는 채점 시스템 오류입니다. 죄송합니다. (운영자에게 자동으로 연락됩니다.)",
       "reviewStatus": "approved"
     },
     {
@@ -1882,7 +1882,7 @@
     {
       "id": "ui_af63af6917d7cdf9",
       "source": "もし10%以上違うという場合は、ご連絡ください。（サーバーの増築などを考えます）",
-      "target": "10% 이상 차이가 난다면 연락해 주세요.( 서버 증설 등을 검토하겠습니다.)",
+      "target": "10% 이상 차이가 난다면 연락해 주세요. (서버 증설 등을 검토하겠습니다.)",
       "reviewStatus": "approved"
     },
     {
@@ -1912,7 +1912,7 @@
     {
       "id": "ui_21b71b16d66e87cd",
       "source": "エントリーポイントが複数ある場合は",
-      "target": "엔트리 포인트가 여러 개인 경우에는 ",
+      "target": "EntryPoint가 여러 개인 경우에는 ",
       "reviewStatus": "approved"
     },
     {
@@ -1924,7 +1924,7 @@
     {
       "id": "ui_98c365147f33313b",
       "source": "Scalaのクラス名もJavaと同様に、コンパイル可能でエントリーポイントがあれば、",
-      "target": "Scala 클래스명도 Java와 마찬가지로, 컴파일할 수 있고 엔트리 포인트가 있다면",
+      "target": "Scala 클래스명도 Java와 마찬가지로, 컴파일할 수 있고 EntryPoint가 있다면",
       "reviewStatus": "approved"
     },
     {
@@ -2033,7 +2033,7 @@
           "values": { "": "", " リクエストに": " 요청에 " }
         }
       },
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_85eeda135e6c0185",
@@ -2063,9 +2063,7 @@
       "id": "ui_9c80a4379c7042b3",
       "source": "実行コマンド",
       "target": "실행 커맨드",
-      "alternatives": [
-        { "target": "실행 명령어", "reviewStatus": "unreviewed" }
-      ],
+      "alternatives": [{ "target": "실행 명령어", "reviewStatus": "approved" }],
       "reviewStatus": "approved"
     },
     {
@@ -2091,7 +2089,7 @@
       "source": "コンパイルコマンド",
       "target": "컴파일 커맨드",
       "alternatives": [
-        { "target": "컴파일 명령어", "reviewStatus": "unreviewed" }
+        { "target": "컴파일 명령어", "reviewStatus": "approved" }
       ],
       "reviewStatus": "approved"
     },
@@ -2112,7 +2110,7 @@
       "source": "C++17(gnu拡張)",
       "target": "C++17(GNU 확장)",
       "alternatives": [
-        { "target": "C++17(GNU 확장)", "reviewStatus": "unreviewed" }
+        { "target": "C++17(GNU 확장)", "reviewStatus": "approved" }
       ],
       "reviewStatus": "approved"
     },
@@ -2235,7 +2233,7 @@
       "source": "招待された人（メンバー）の手順",
       "target": "초대받은 사람 (멤버) 도움말",
       "alternatives": [
-        { "target": "초대받은 사람(멤버)의 절차", "reviewStatus": "unreviewed" }
+        { "target": "초대받은 사람 (멤버)의 절차", "reviewStatus": "approved" }
       ],
       "reviewStatus": "approved"
     },
@@ -2244,7 +2242,7 @@
       "source": "コンテストが始まってから",
       "target": "대회 시작 후",
       "alternatives": [
-        { "target": "대회 시작 후", "reviewStatus": "unreviewed" }
+        { "target": "대회 시작 후", "reviewStatus": "approved" }
       ],
       "reviewStatus": "approved"
     },
@@ -2253,16 +2251,16 @@
       "source": "成績の付き方",
       "target": "평가 방식",
       "alternatives": [
-        { "target": "성적 산정 방식", "reviewStatus": "unreviewed" }
+        { "target": "성적 산정 방식", "reviewStatus": "approved" }
       ],
       "reviewStatus": "approved"
     },
     {
       "id": "ui_d3a28b3f67154ce3",
       "source": "困ったとき",
-      "target": "문제 발생시 해결 방법",
+      "target": "문제 발생 시 해결 방법",
       "alternatives": [
-        { "target": "문제가 생겼을 때", "reviewStatus": "unreviewed" }
+        { "target": "문제가 생겼을 때", "reviewStatus": "approved" }
       ],
       "reviewStatus": "approved"
     },
@@ -2371,7 +2369,7 @@
     {
       "id": "ui_636592ed003dbb4d",
       "source": "「チーム参加」が有効なコンテストでは、何人かでチームを組んで参加できます。 順位表では",
-      "target": "'팀 참가'가 활성화된 대회에서는 여러 명이 팀을 이루어 참가할 수 있습니다. 순위표에서는",
+      "target": "'팀 참가'가 활성화된 대회에서는 여러 명이 팀을 이루어 참가할 수 있습니다. 스코어보드에서는 ",
       "reviewStatus": "approved"
     },
     {
@@ -2444,13 +2442,13 @@
       "id": "ui_b618d22250c52902",
       "source": "チームさくら",
       "target": "팀 사쿠라",
-      "alternatives": [{ "target": "팀 사쿠라", "reviewStatus": "unreviewed" }],
+      "alternatives": [{ "target": "팀 사쿠라", "reviewStatus": "approved" }],
       "reviewStatus": "approved"
     },
     {
       "id": "ui_22214d8a96b46d20",
       "source": "作成",
-      "target": "생성",
+      "target": "만들기",
       "reviewStatus": "approved"
     },
     {
@@ -2475,7 +2473,7 @@
       "id": "ui_cd1dee46e4d56d6b",
       "source": "作成者",
       "target": "팀 리더",
-      "alternatives": [{ "target": "작성자", "reviewStatus": "unreviewed" }],
+      "alternatives": [{ "target": "작성자", "reviewStatus": "approved" }],
       "reviewStatus": "approved"
     },
     {
@@ -2687,7 +2685,7 @@
     {
       "id": "ui_be69f6893c6cb401",
       "source": "として順位表に載ります。 不正解はメンバー全員分が合算されます。",
-      "target": "(으)로 순위표에 표시됩니다. 오답 횟수는 모든 멤버의 횟수를 합산합니다.",
+      "target": "로 스코어보드에 표시됩니다. 오답 횟수는 모든 멤버의 횟수를 합산합니다.",
       "reviewStatus": "approved"
     },
     {
@@ -2747,7 +2745,7 @@
     {
       "id": "ui_fc1fec4e01b8348c",
       "source": "チーム専用の提出画面はありません。",
-      "target": "팀 전용 제출 화면은 없습니다.",
+      "target": "팀 전용 제출 화면은 없습니다. ",
       "reviewStatus": "approved"
     },
     {
@@ -2759,7 +2757,7 @@
     {
       "id": "ui_fce2fc2f707a914c",
       "source": "メンバーの誰が出しても、順位表ではチームの結果としてまとめられます。",
-      "target": "누가 제출하더라도 순위표에는 팀 결과로 합쳐집니다.",
+      "target": "누가 제출하더라도 스코어보드에는 팀 결과로 합쳐집니다.",
       "reviewStatus": "approved"
     },
     {
@@ -2808,7 +2806,7 @@
     {
       "id": "ui_98ae00b385c5dbaa",
       "source": "順位表（チームと個人が混ざっているところ）",
-      "target": "순위표 (팀과 개인이 함께 표시되는 부분)",
+      "target": "스코어보드 (팀과 개인이 함께 표시되는 부분)",
       "reviewStatus": "approved"
     },
     {
@@ -2850,7 +2848,7 @@
     {
       "id": "ui_002dbad723569533",
       "source": "（チーム内で最良のもの）、",
-      "target": " (팀 내에서 가장 좋은  결과), ",
+      "target": " (팀 내에서 가장 좋은 결과), ",
       "reviewStatus": "approved"
     },
     {
@@ -2862,7 +2860,7 @@
     {
       "id": "ui_c4f5a64a5bfe6328",
       "source": "（メンバー全員の合算）。順位表は自動で更新されます。",
-      "target": "(모든 멤버의 합계)를 표시합니다. 순위표는 자동으로 갱신됩니다.",
+      "target": "(모든 멤버의 합계)를 표시합니다. 스코어보드는 자동으로 갱신됩니다.",
       "reviewStatus": "approved"
     },
     {
@@ -3067,7 +3065,7 @@
     {
       "id": "ui_1c053443054276f8",
       "source": "その問題の Writer / Tester なら、チームごとその扱いになります。",
-      "target": " 해당 문제의 Writer / Tester라면 팀 전체가 같은 취급을 받습니다.",
+      "target": " 해당 문제의 출제자·테스터라면 팀 전체가 같은 취급을 받습니다.",
       "reviewStatus": "approved"
     },
     {
@@ -3357,8 +3355,8 @@
       "source": "ほしいものリスト",
       "target": "사고 싶은 것들 (Amazon)",
       "alternatives": [
-        { "target": "희망 상품 목록", "reviewStatus": "unreviewed" },
-        { "target": "위시리스트", "reviewStatus": "unreviewed" }
+        { "target": "희망 상품 목록", "reviewStatus": "approved" },
+        { "target": "위시리스트", "reviewStatus": "approved" }
       ],
       "reviewStatus": "approved"
     },
@@ -3521,7 +3519,7 @@
     {
       "id": "ui_e0654c0fe562e3f3",
       "source": "競技プログラミングの解答と問題作成の練習を目標としておりますので、想定解が必ずしも正しいとは限らない事があります。",
-      "target": "경쟁 프로그래밍 풀이와 문제 제작 연습을 목표로 하므로 의도한 풀이가 반드시 정확하지 않을 수 있습니다.",
+      "target": "Competitive Programming 풀이와 문제 제작 연습을 목표로 하므로 의도한 풀이가 반드시 정확하지 않을 수 있습니다.",
       "reviewStatus": "approved"
     },
     {
@@ -3551,7 +3549,7 @@
     {
       "id": "ui_0c5363845337cbf4",
       "source": "問題投稿は、他の競技プログラミングサイト等からの問題の転載は、そのサイトの利用規約やWriterさんがOKと確認が取れている場合のみOKとします。",
-      "target": "다른 경쟁 프로그래밍 사이트 등의 문제를 전재하려면 해당 사이트의 이용약관과 출제자의 허락을 확인한 경우에만 가능합니다.",
+      "target": "다른 Competitive Programming 사이트 등의 문제를 전재하려면 해당 사이트의 이용약관과 출제자의 허락을 확인한 경우에만 가능합니다.",
       "reviewStatus": "approved"
     },
     {
@@ -3811,7 +3809,7 @@
     {
       "id": "ui_f0ce0702b76968c0",
       "source": "広告の視聴が完了すると、24時間ワンデーサポーターが有効になります。",
-      "target": "광고 시청을 완료하면 데일리 서포터가 24시간 활성화됩니다.",
+      "target": "광고 시청을 완료하면 원 데이 서포터가 24시간 활성화됩니다.",
       "reviewStatus": "approved"
     },
     {
@@ -3829,13 +3827,13 @@
     {
       "id": "ui_fa8960bf0ace9fca",
       "source": "localhost環境のため、広告なしでワンデーサポーターを有効化できます。",
-      "target": "localhost 환경이므로 광고 없이 데일리 서포터를 활성화할 수 있습니다.",
+      "target": "localhost 환경이므로 광고 없이 원 데이 서포터를 활성화할 수 있습니다.",
       "reviewStatus": "approved"
     },
     {
       "id": "ui_7d86968100a3daef",
       "source": "ワンデーサポーターを有効化する",
-      "target": "데일리 서포터 활성화",
+      "target": "원 데이 서포터 활성화",
       "reviewStatus": "approved"
     },
     {
@@ -3847,7 +3845,7 @@
     {
       "id": "ui_8f9e3c6af1e615b9",
       "source": "ワンデーサポーターが有効になりました！",
-      "target": "데일리 서포터가 활성화되었습니다!",
+      "target": "원 데이 서포터가 활성화되었습니다!",
       "reviewStatus": "approved"
     },
     {
@@ -3859,7 +3857,7 @@
     {
       "id": "ui_19766f25db37f4be",
       "source": "広告の視聴が完了すると、自動的にワンデーサポーターが有効になります。",
-      "target": "광고 시청이 끝나면 데일리 서포터가 자동으로 활성화됩니다.",
+      "target": "광고 시청이 끝나면 원 데이 서포터가 자동으로 활성화됩니다.",
       "reviewStatus": "approved"
     },
     {
@@ -3901,13 +3899,13 @@
     {
       "id": "ui_4d05467641df1fb2",
       "source": "ワンデーサポーター 👑",
-      "target": "데일리 서포터 👑",
+      "target": "원 데이 서포터 👑",
       "reviewStatus": "approved"
     },
     {
       "id": "ui_75fc93d7efd84bfe",
       "source": "ワンデーサポーターが有効です 👑",
-      "target": "데일리 서포터가 활성화되어 있습니다 👑",
+      "target": "원 데이 서포터가 활성화되어 있습니다 👑",
       "reviewStatus": "approved"
     },
     {
@@ -3919,13 +3917,13 @@
     {
       "id": "ui_2a7133a285a09611",
       "source": "ワンデーサポーターは現在無効です。",
-      "target": "데일리 서포터는 현재 비활성 상태입니다.",
+      "target": "원 데이 서포터는 현재 비활성 상태입니다.",
       "reviewStatus": "approved"
     },
     {
       "id": "ui_4494e917eb7d2647",
       "source": "ワンデーサポーターの特典",
-      "target": "데일리 서포터 혜택",
+      "target": "원 데이 서포터 혜택",
       "reviewStatus": "approved"
     },
     {
@@ -3937,7 +3935,7 @@
     {
       "id": "ui_19786fc444f9b203",
       "source": "になると、ワンデーサポーター機能が常時有効になり、広告も非表示になります。",
-      "target": "가 되면 데일리 서포터 기능이 항상 활성화되고 광고도 표시되지 않습니다.",
+      "target": "가 되면 원 데이 서포터 기능이 항상 활성화되고 광고도 표시되지 않습니다.",
       "reviewStatus": "approved"
     },
     {
@@ -4244,14 +4242,14 @@
     {
       "id": "ui_8f250bb925be7de8",
       "source": "お気に入りにしたユーザーの一覧は、この問題の Writer / Tester と、",
-      "target": "즐겨찾기에 추가한 사용자 목록은 이 문제의 Writer / Tester와, ",
+      "target": "즐겨찾기에 추가한 사용자 목록은 이 문제의 출제자·테스터와, ",
       "reviewStatus": "approved"
     },
     {
       "id": "ui_6a65bef72f316ce5",
       "source": "または",
       "target": " 또는 ",
-      "alternatives": [{ "target": "또는", "reviewStatus": "unreviewed" }],
+      "alternatives": [{ "target": "또는", "reviewStatus": "approved" }],
       "reviewStatus": "approved"
     },
     {
@@ -4367,43 +4365,43 @@
     {
       "id": "ui_3617b2aa524e0e52",
       "source": "過去順",
-      "target": "오래된순",
+      "target": "오래된 순",
       "reviewStatus": "approved"
     },
     {
       "id": "ui_8757aabbfc37ee10",
       "source": "レベルが低い順",
-      "target": "레벨 낮은순",
+      "target": "레벨 낮은 순",
       "reviewStatus": "approved"
     },
     {
       "id": "ui_159a92cd4c9c00f0",
       "source": "レベルが高い順",
-      "target": "레벨 높은순",
+      "target": "레벨 높은 순",
       "reviewStatus": "approved"
     },
     {
       "id": "ui_21abf573e5ab0b0b",
       "source": "解いたユーザーが多い順",
-      "target": "해결한 사용자 많은순",
+      "target": "해결한 사용자 수가 많은 순",
       "reviewStatus": "approved"
     },
     {
       "id": "ui_557be2df0e0810d5",
       "source": "解いたユーザーが少ない順",
-      "target": "해결한 사용자 적은순",
+      "target": "해결한 사용자 수가 적은 순",
       "reviewStatus": "approved"
     },
     {
       "id": "ui_8b358859be82b36d",
       "source": "Favが多い順",
-      "target": "즐겨찾기 많은순",
+      "target": "즐겨찾기 수가 많은 순",
       "reviewStatus": "approved"
     },
     {
       "id": "ui_a842125cb20599d3",
       "source": "Favが少ない順",
-      "target": "즐겨찾기 적은순",
+      "target": "즐겨찾기 수가 적은 순",
       "reviewStatus": "approved"
     },
     {
@@ -4532,8 +4530,8 @@
       "target": "Step 1: Competitive Programming 입문",
       "alternatives": [
         {
-          "target": "Step 1: 경쟁 프로그래밍 입문",
-          "reviewStatus": "unreviewed"
+          "target": "Step 1: Competitive Programming 입문",
+          "reviewStatus": "approved"
         }
       ],
       "reviewStatus": "approved"
@@ -4613,7 +4611,7 @@
     {
       "id": "ui_df7fb4a37e681405",
       "source": "ナップサック問題、区間DP、メモ化再帰など、DPのバリエーションを学びます。DPは競技プログラミングで最頻出のテクニックです。",
-      "target": "냅색 문제, 구간 DP, 메모이제이션 등 다양한 DP를 배웁니다. DP는 Competitive Programming에서 가장 자주 등장하는 기법입니다.",
+      "target": "냅색 문제, 구간 DP, 메모이제이션을 사용하는 재귀 등 다양한 DP를 배웁니다. DP는 Competitive Programming에서 가장 자주 등장하는 기법입니다.",
       "reviewStatus": "approved"
     },
     {
@@ -4631,13 +4629,13 @@
     {
       "id": "ui_e56ac7771d129a68",
       "source": "Step 9: 累積和とセグメント木",
-      "target": "Step 9: 누적합과 세그먼트 트리",
+      "target": "Step 9: 누적 합과 세그먼트 트리",
       "reviewStatus": "approved"
     },
     {
       "id": "ui_6f0a1149050ffb8f",
       "source": "累積和やセグメント木など、区間クエリを高速に処理するデータ構造を学びます。効率的なデータ構造は難問を解く鍵です。",
-      "target": "누적합과 세그먼트 트리처럼 구간 쿼리를 빠르게 처리하는 자료구조를 배웁니다. 효율적인 자료구조는 어려운 문제를 푸는 열쇠입니다.",
+      "target": "누적 합과 세그먼트 트리처럼 구간 쿼리를 빠르게 처리하는 자료 구조를 배웁니다. 효율적인 자료 구조는 어려운 문제를 푸는 열쇠입니다.",
       "reviewStatus": "approved"
     },
     {
@@ -4647,7 +4645,7 @@
       "alternatives": [
         {
           "target": "Step 10: 종합 연습 - 고난도에 도전",
-          "reviewStatus": "unreviewed"
+          "reviewStatus": "approved"
         }
       ],
       "reviewStatus": "approved"
@@ -4655,7 +4653,7 @@
     {
       "id": "ui_c3cba2a7f9bc20b1",
       "source": "複数のアルゴリズムやデータ構造を組み合わせて解く総合問題です。ここまで学んだスキルを駆使して挑戦しましょう。",
-      "target": "여러 알고리즘과 자료구조를 조합해 푸는 종합 문제입니다. 지금까지 배운 기술을 활용해 도전해 봅시다.",
+      "target": "여러 알고리즘과 자료 구조를 조합해 푸는 종합 문제입니다. 지금까지 배운 기술을 활용해 도전해 봅시다.",
       "reviewStatus": "approved"
     },
     {
@@ -4679,7 +4677,7 @@
     {
       "id": "ui_654e8c8b5000fb3a",
       "source": "サイトサポーターになると問題集を作成できます",
-      "target": "사이트 서포터가 되면 문제집을 만들 수 있습니다",
+      "target": "사이트 서포터가 되면 문제 모음을 만들 수 있습니다",
       "reviewStatus": "approved"
     },
     {
@@ -4769,7 +4767,7 @@
     {
       "id": "ui_d830623c0b8a5e3d",
       "source": "純主流のみ (cLay/kuin以外)",
-      "target": "주류 언어만(cLay/kuin 제외)",
+      "target": "순수 주류만(cLay/kuin 제외)",
       "reviewStatus": "approved"
     },
     {
@@ -5091,7 +5089,7 @@
     {
       "id": "ui_eb86d5aa315eb703",
       "source": "ショートコード",
-      "target": "숏 코딩",
+      "target": "숏코딩",
       "reviewStatus": "approved"
     },
     {
@@ -5103,7 +5101,7 @@
     {
       "id": "ui_83f5e107ff40bf7c",
       "source": "問題集一覧",
-      "target": "문제집 목록",
+      "target": "문제 모음 목록",
       "reviewStatus": "approved"
     },
     {
@@ -5151,7 +5149,7 @@
     {
       "id": "ui_8a0f2d49206e03dc",
       "source": "ユーザー名",
-      "target": "참가자",
+      "target": "사용자 이름",
       "reviewStatus": "approved"
     },
     {
@@ -5321,7 +5319,7 @@
     {
       "id": "ui_a6792bbd817660f7",
       "source": "惜しくない！",
-      "target": "아쉽지 않나요!",
+      "target": "아깝지도 않아요!",
       "reviewStatus": "approved"
     },
     {
@@ -5507,7 +5505,7 @@
     {
       "id": "ui_c7653d74fb16f5e3",
       "source": "ワンデーサポーターになる →",
-      "target": "데일리 서포터 되기 →",
+      "target": "원 데이 서포터 되기 →",
       "reviewStatus": "approved"
     },
     {
@@ -5525,7 +5523,7 @@
     {
       "id": "ui_7a7e3d3b40decad9",
       "source": "ベース実行時間は各言語の",
-      "target": "기준 실행 시간은 각 언어의",
+      "target": "기준 실행 시간은 각 언어의 ",
       "reviewStatus": "approved"
     },
     {
@@ -5573,7 +5571,7 @@
     {
       "id": "ui_c9752c518974c6e5",
       "source": "※ スコア問題・ショートコード問題は除外しています。",
-      "target": "※ 점수 문제와 숏 코딩 문제는 제외합니다.",
+      "target": "※ 점수 문제와 숏코딩 문제는 제외합니다.",
       "reviewStatus": "approved"
     },
     {
@@ -5951,7 +5949,7 @@
     {
       "id": "ui_cfb2f1a1da0fe2a9",
       "source": "ワンデーサポーターについて",
-      "target": "데일리 서포터 안내",
+      "target": "원 데이 서포터 안내",
       "reviewStatus": "approved"
     },
     {
@@ -5963,7 +5961,7 @@
     {
       "id": "ui_b4af4c2a9c82fa50",
       "source": "サイトサポーターになると、ワンデーサポーター機能が常時有効になります。",
-      "target": "사이트 서포터가 되면 데일리 서포터 기능이 항상 활성화됩니다.",
+      "target": "사이트 서포터가 되면 원 데이 서포터 기능이 항상 활성화됩니다.",
       "reviewStatus": "approved"
     },
     {
@@ -6310,7 +6308,7 @@
     {
       "id": "ui_fef1c08da7620ebd",
       "source": "{user}さんのテスター募集問題",
-      "target": "{user} 님의 테스터 모집 문제",
+      "target": "{user}님의 테스터 모집 문제",
       "variables": { "user": ".+" },
       "reviewStatus": "approved"
     },
@@ -6835,13 +6833,13 @@
     {
       "id": "ui_57693603df6c77a1",
       "source": "Writer/Testerの方は質問が通知されます",
-      "target": "출제자 / 테스터에게는 질문 알림이 전송됩니다",
+      "target": "출제자·테스터에게는 질문 알림이 전송됩니다",
       "reviewStatus": "approved"
     },
     {
       "id": "ui_6aa90cad361042fe",
       "source": "Writer/Testerの方はぜひ",
-      "target": "출제자 / 테스터라면 꼭 등록해 주세요",
+      "target": "출제자·테스터라면 꼭 등록해 주세요",
       "reviewStatus": "approved"
     },
     {
@@ -7055,111 +7053,111 @@
       "id": "ui_f7809127fb1a06ff",
       "source": "を付けて呼び出します。",
       "target": "를 추가하여 호출합니다.",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_24cb627ce0a5a863",
       "source": "使えるAPIの一覧は",
       "target": "사용할 수 있는 API 목록은 ",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_cb44175c18691313",
       "source": "Swagger UI (APIドキュメント)",
       "target": "Swagger UI (API 문서)",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_67f28f6008273951",
       "source": "にあります。右上の Authorize で",
       "target": "에 있습니다. 오른쪽 위의 Authorize에서 ",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_62b09d09bdc6e624",
       "source": "にAPIキーを入れると、その場で試せます。 定義ファイルそのものは",
       "target": "에 API 키를 입력하면 바로 시험해 볼 수 있습니다. 정의 파일은 ",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_3a07fef74dcc30dc",
       "source": "です。",
       "target": "입니다.",
       "meaning": "API 정의 파일 경로를 가리키는 문장 종결",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_f54462052caa802e",
       "source": "問題の作者・テスターの方は、問題ごとに発行できる",
       "target": "문제 출제자·테스터는 문제마다 발급할 수 있는 ",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_85bf858478fb037e",
       "source": "編集トークン",
       "target": "편집 토큰",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_1ced4d71574ae1d1",
       "source": "でも一部のAPIを使えます。 アカウント全体のAPIキーと違って、その問題にしか効きません。 発行は問題の管理画面から、対象のAPIは",
       "target": "으로도 일부 API를 사용할 수 있습니다. 계정 전체에 적용되는 API 키와 달리 해당 문제에만 적용됩니다. 문제 관리 화면에서 발급할 수 있으며, 지원하는 API는 ",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_8e13f0a38b7684ae",
       "source": "「編集トークン対応」",
       "target": "「편집 토큰 지원」",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_86a977dd17037dab",
       "source": "にまとまっています。",
       "target": "에 정리되어 있습니다.",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_563353f15881499d",
       "source": "まだAPIになっていない機能も、今後API化していくつもりです。",
       "target": "아직 API가 없는 기능도 앞으로 API로 제공할 계획입니다.",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_4029fca3ede05123",
       "source": "足りないものがあればご相談ください。",
-      "target": "부족한 기능이 있으면 알려 주세요. ",
-      "reviewStatus": "unreviewed"
+      "target": "필요한 기능이 있으면 알려 주세요. ",
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_b7d1394f4c6a794c",
       "source": "機能・要望フォーム",
       "target": "기능·요청 양식",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_ffa898ec73c0a4d0",
       "source": "や",
       "target": " 또는 ",
       "meaning": "문의 접수 채널 두 가지를 연결",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_01ea03e68e613542",
       "source": "で受け付けています。",
       "target": "에서 접수하고 있습니다.",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_6d8b6e9c0f6d2a11",
       "source": "yukicoder 韓国語 · クリックすると日本語原文を表示します。",
       "target": "yukicoder 한국어 · 클릭하면 일본어 원문을 표시합니다.",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     },
     {
       "id": "ui_7e03f8c72b1a4d55",
       "source": "yukicoder 日本語原文 · クリックすると韓国語を表示します。",
       "target": "yukicoder 일본어 원문 · 클릭하면 한국어를 표시합니다.",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "approved"
     }
   ]
 }

@@ -58,7 +58,7 @@ export function createReviewApp(options: {
     c.header("cache-control", "no-store");
     c.header(
       "content-security-policy",
-      "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://yukicoder.me https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://use.fontawesome.com; frame-src 'self'; connect-src 'self'; img-src 'self' data: https://yukicoder.me; font-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://use.fontawesome.com",
+      "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://yukicoder.me https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://use.fontawesome.com; frame-src 'self'; connect-src 'self'; img-src 'self' data: https://yukicoder.me; font-src 'self' data: https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://use.fontawesome.com",
     );
     const host = c.req.header("host");
     const parsed = host ? new URL(`http://${host}`) : undefined;
@@ -128,6 +128,8 @@ export function createReviewApp(options: {
       )
     )
       return c.notFound();
+    // Sandboxed previews have an opaque origin; public math fonts need CORS.
+    c.header("Access-Control-Allow-Origin", "*");
     return serveStatic({ path: join(options.assetRoot, c.req.path) })(c, next);
   });
   app.notFound((c) => c.json({ error: "Not found" }, 404));

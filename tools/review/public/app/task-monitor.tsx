@@ -19,7 +19,13 @@ export function TaskMonitor() {
   }, [query.data, running]);
   return (
     <>
-      <Button variant="subtle" component={Link} to="/tools">
+      <Button
+        variant="subtle"
+        component={Link}
+        to="/tools"
+        style={{ minWidth: 0, flexShrink: 1 }}
+        styles={{ label: { display: "block", textOverflow: "ellipsis" } }}
+      >
         {query.error
           ? "작업 연결 끊김 · 다시 확인"
           : running

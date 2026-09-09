@@ -1,15 +1,15 @@
 import {
+  Accordion,
   Button,
   Grid,
-  Group,
   NavLink,
   Pagination,
   Paper,
+  ScrollArea,
   Select,
   Stack,
   Text,
   TextInput,
-  Title,
 } from "@mantine/core";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -102,12 +102,6 @@ export function Glossary() {
       : rows[0];
   return (
     <Stack>
-      <Group justify="space-between">
-        <Title order={1}>UI 용어집</Title>
-        <Button component={Link} to="/ui?view=imports" variant="light">
-          ZIP 가져오기
-        </Button>
-      </Group>
       <Failure error={query.error} retry={() => void query.refetch()} />
       {query.isPending ? (
         <Pending />
@@ -124,51 +118,77 @@ export function Glossary() {
                     setPage(1);
                   }}
                 />
-                <Select
-                  label="사전"
-                  searchable
-                  clearable
-                  value={dictionary}
-                  onChange={(v) => {
-                    setDictionary(v);
-                    setPage(1);
-                  }}
-                  data={query.data?.dictionaries.map((d) => d.file) ?? []}
-                />
-                <Select
-                  label="검수 상태"
-                  clearable
-                  value={status}
-                  onChange={(v) => {
-                    setStatus(v);
-                    setPage(1);
-                  }}
-                  data={[
-                    { value: "unreviewed", label: "미검수" },
-                    { value: "approved", label: "승인됨" },
-                  ]}
-                />
+                <Accordion>
+                  <Accordion.Item value="filters">
+                    <Accordion.Control>
+                      필터 및 가져오기{dictionary || status ? " · 적용 중" : ""}
+                    </Accordion.Control>
+                    <Accordion.Panel>
+                      <Stack>
+                        <Select
+                          label="사전"
+                          searchable
+                          clearable
+                          value={dictionary}
+                          onChange={(v) => {
+                            setDictionary(v);
+                            setPage(1);
+                          }}
+                          data={
+                            query.data?.dictionaries.map((d) => d.file) ?? []
+                          }
+                        />
+                        <Select
+                          label="검수 상태"
+                          clearable
+                          value={status}
+                          onChange={(v) => {
+                            setStatus(v);
+                            setPage(1);
+                          }}
+                          data={[
+                            { value: "unreviewed", label: "미검수" },
+                            { value: "approved", label: "승인됨" },
+                          ]}
+                        />
+                        <Button
+                          component={Link}
+                          to="/ui?view=imports"
+                          variant="subtle"
+                        >
+                          ZIP 가져오기
+                        </Button>
+                      </Stack>
+                    </Accordion.Panel>
+                  </Accordion.Item>
+                </Accordion>
                 <Text size="sm" c="dimmed">
                   {rows.length}개 문구
                 </Text>
-                {rows.slice((page - 1) * 12, page * 12).map((row) => (
-                  <NavLink
-                    key={`${row.dictionary.file}:${row.index}`}
-                    component={Link}
-                    to={`/ui#${row.dictionary.file}:${row.index}`}
-                    active={
-                      selected?.dictionary.file === row.dictionary.file &&
-                      selected.index === row.index
-                    }
-                    label={row.entry.target}
-                    description={row.entry.source}
-                    rightSection={
-                      <ReviewBadge
-                        status={row.entry.reviewStatus ?? "unreviewed"}
-                      />
-                    }
-                  />
-                ))}
+                <ScrollArea.Autosize
+                  mah="max(160px, calc(100dvh - 340px))"
+                  type="auto"
+                  offsetScrollbars
+                >
+                  {rows.slice((page - 1) * 12, page * 12).map((row) => (
+                    <NavLink
+                      key={`${row.dictionary.file}:${row.index}`}
+                      component={Link}
+                      to={`/ui#${row.dictionary.file}:${row.index}`}
+                      active={
+                        selected?.dictionary.file === row.dictionary.file &&
+                        selected.index === row.index
+                      }
+                      label={row.entry.target}
+                      description={row.entry.source}
+                      rightSection={
+                        <ReviewBadge
+                          status={row.entry.reviewStatus ?? "unreviewed"}
+                        />
+                      }
+                    />
+                  ))}
+                </ScrollArea.Autosize>
                 <Pagination
                   value={page}
                   onChange={setPage}
@@ -177,7 +197,7 @@ export function Glossary() {
               </Stack>
             </Paper>
           </Grid.Col>
-          <Grid.Col span={{ base: 12, lg: 9 }}>
+          <Grid.Col span={{ base: 12, lg: 9 }} style={{ minWidth: 0 }}>
             {selected?.entry && query.data ? (
               <GlossaryEditor
                 key={`${selected.dictionary.file}:${selected.index}`}
@@ -185,6 +205,24 @@ export function Glossary() {
                 dictionary={selected.dictionary}
                 index={selected.index}
                 data={query.data}
+                onApproved={() => {
+                  const position = rows.findIndex(
+                    (row) =>
+                      row.dictionary.file === selected.dictionary.file &&
+                      row.index === selected.index,
+                  );
+                  const next = position >= 0 ? rows[position + 1] : undefined;
+                  if (next) {
+                    setPage(
+                      Math.floor(
+                        (position + 1 - (status === "unreviewed" ? 1 : 0)) / 12,
+                      ) + 1,
+                    );
+                    void navigate(`/ui#${next.dictionary.file}:${next.index}`, {
+                      replace: true,
+                    });
+                  }
+                }}
               />
             ) : (
               <Empty>문구를 선택하세요.</Empty>

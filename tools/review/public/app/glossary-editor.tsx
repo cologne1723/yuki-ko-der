@@ -1,4 +1,5 @@
 import {
+  Accordion,
   Alert,
   Anchor,
   Button,
@@ -24,6 +25,7 @@ import {
 import { captureBindings, updateBindings } from "../live-preview.ts";
 import { reviewApi } from "./client.ts";
 import { GlossaryData } from "./glossary-list.tsx";
+import { ExtensionPreview } from "./extension-preview.tsx";
 import { Preview } from "./preview.tsx";
 import {
   Failure,
@@ -39,13 +41,16 @@ export function GlossaryEditor({
   dictionary,
   index,
   data,
+  onApproved,
 }: {
   initial: TranslationEntry;
   dictionary: ReviewDictionary;
   index: number;
   data: GlossaryData;
+  onApproved: () => void;
 }) {
   const [saved, setSaved] = useState(initial);
+  const [advance, setAdvance] = useState<(() => void) | null>(null);
   const form = useForm({ initialValues: { target: initial.target } });
   const target = form.values.target;
   const setTarget = (target: string) => {
@@ -60,22 +65,29 @@ export function GlossaryEditor({
   const matchedPage = data.coverage
     ?.filter(
       (row) =>
-        row.file === dictionary.file &&
-        row.index === index &&
+        ((row.file === dictionary.file && row.index === index) ||
+          members.some(
+            (member) =>
+              member.dictionary.file === row.file && member.index === row.index,
+          )) &&
         (row.source === undefined || row.source === saved.source),
     )
     .flatMap((row) => row.pages)
     .find((name) => data.pages.includes(name));
-  const automaticPage =
-    matchedPage ??
-    data.pages.find(
-      (name) => name === dictionary.file.replace(/\.json$/, ".html"),
-    ) ??
-    data.pages.find((name) => name === "main.html") ??
-    data.pages[0] ??
-    null;
+  const extension = dictionary.file === "extension.json";
+  const [candidateIndex, setCandidateIndex] = useState(0);
+  const stem = dictionary.file.replace(/\.json$/, "");
+  const candidates = [
+    ...new Set([
+      ...(matchedPage ? [matchedPage] : []),
+      ...data.pages.filter(
+        (name) => name === `${stem}.html` || name.startsWith(`${stem}_`),
+      ),
+    ]),
+  ];
+  const automaticPage = candidates[candidateIndex] ?? null;
   const page =
-    chosenPage === null
+    extension || chosenPage === null
       ? null
       : chosenPage !== undefined && data.pages.includes(chosenPage)
         ? chosenPage
@@ -96,15 +108,69 @@ export function GlossaryEditor({
       const entries = members.length
         ? members.map((m) => ({ ...m.entry, target }))
         : [{ ...saved, target }];
-      updateBindings(doc, captureBindings(doc, entries), target);
-      for (const entry of entries)
-        for (const element of doc.querySelectorAll(entry.selector))
-          (element as HTMLElement).style.outline = "2px solid #228be6";
+      const bindings = captureBindings(doc, entries);
+      if (!bindings.length) return { html: "" };
+      const pageFiles = new Set([
+        "common.json",
+        "shared.json",
+        dictionary.file,
+        ...(data.coverage ?? [])
+          .filter((row) => page && row.pages.includes(page))
+          .map((row) => row.file),
+      ]);
+      const surrounding = captureBindings(
+        doc,
+        data.dictionaries
+          .filter((item) => pageFiles.has(item.file))
+          .flatMap((item) => item.entries),
+      );
+      for (const binding of surrounding)
+        updateBindings(doc, [binding], binding.entry.target);
+      // Selected bindings retain their original text, so the unsaved draft wins.
+      updateBindings(doc, bindings, target);
+      for (const binding of bindings) {
+        let node: Node = doc.documentElement;
+        for (const index of binding.path) node = node.childNodes[index];
+        const element =
+          node.nodeType === 1 ? (node as HTMLElement) : node.parentElement;
+        if (element) {
+          element.style.outline = "2px solid #228be6";
+          element.setAttribute("data-review-selected", "");
+        }
+      }
       return { html: doc.documentElement.outerHTML };
     } catch (error) {
       return { html: "", error };
     }
-  }, [source.data, members, target, saved]);
+  }, [
+    source.data,
+    members,
+    target,
+    saved,
+    data.dictionaries,
+    data.coverage,
+    dictionary.file,
+    page,
+  ]);
+  useEffect(() => {
+    if (
+      !extension &&
+      chosenPage === undefined &&
+      source.data &&
+      !preview.html &&
+      !preview.error &&
+      candidateIndex + 1 < candidates.length
+    )
+      setCandidateIndex((value) => value + 1);
+  }, [
+    extension,
+    chosenPage,
+    source.data,
+    preview.html,
+    preview.error,
+    candidateIndex,
+    candidates.length,
+  ]);
   const save = useMutation({
     mutationFn: async (action: "save" | "approve" | "unapprove") => {
       if (members.length > 1) {
@@ -137,7 +203,8 @@ export function GlossaryEditor({
         ],
       };
     },
-    onSuccess: async (result) => {
+    onSuccess: async (result, action) => {
+      if (action === "approve") setAdvance(() => onApproved);
       notifications.show({ message: "문구를 저장했습니다.", color: "teal" });
       const current = result.dictionaries.find(
         (d) => d.file === dictionary.file,
@@ -163,6 +230,12 @@ export function GlossaryEditor({
       await client.invalidateQueries({ queryKey: ["/api/ui/imports"] });
     },
   });
+  useEffect(() => {
+    if (advance && !save.isPending && !form.isDirty()) {
+      setAdvance(null);
+      advance();
+    }
+  }, [advance, save.isPending, target]);
   const reload = useMutation({
     mutationFn: async () => {
       const fresh = await reviewApi.glossary();
@@ -205,6 +278,21 @@ export function GlossaryEditor({
     save.isPending,
     reload.isPending,
   ]);
+  const focusPreview = (frame: HTMLIFrameElement) => {
+    if (preview.error) return;
+    const doc = frame.contentDocument;
+    const element =
+      doc?.querySelector("[data-review-selected]") ??
+      doc?.querySelector(saved.selector);
+    const scrolling = doc?.scrollingElement ?? doc?.documentElement;
+    if (element && scrolling)
+      scrolling.scrollTop = Math.max(
+        0,
+        scrolling.scrollTop +
+          element.getBoundingClientRect().top -
+          frame.clientHeight / 2,
+      );
+  };
   const reloadCurrent = () => {
     if (form.isDirty()) {
       modals.openConfirmModal({
@@ -220,37 +308,28 @@ export function GlossaryEditor({
     } else reload.mutate();
   };
   return (
-    <Stack>
+    <Stack style={{ minWidth: 0, overflowWrap: "anywhere" }}>
       <UnsavedGuard
         dirty={form.isDirty()}
         pending={save.isPending || reload.isPending}
       />
       <Group justify="space-between">
         <Title order={2}>문구 검수</Title>
-        <ReviewBadge status={saved.reviewStatus ?? "unreviewed"} />
+        <Group gap="xs">
+          <ReviewBadge status={saved.reviewStatus ?? "unreviewed"} />
+        </Group>
       </Group>
-      <Text size="sm" c="dimmed">
-        {saved.variant === undefined
-          ? "기본 표현"
-          : `문맥별 표현 ${saved.variant + 1}`}
-      </Text>
-      <Button
-        variant="subtle"
-        loading={reload.isPending}
-        disabled={save.isPending}
-        onClick={reloadCurrent}
-      >
-        문구 다시 불러오기
-      </Button>
-      <Textarea label="일본어 원문" value={saved.source} readOnly autosize />
-      <Textarea
-        label="한국어 번역"
-        value={target}
-        onChange={(e) => form.setFieldValue("target", e.currentTarget.value)}
-        disabled={save.isPending || reload.isPending}
-        autosize
-        minRows={3}
-      />
+      <SimpleGrid cols={{ base: 1, md: 2 }}>
+        <Textarea label="일본어 원문" value={saved.source} readOnly autosize />
+        <Textarea
+          label="한국어 번역"
+          value={target}
+          onChange={(e) => form.setFieldValue("target", e.currentTarget.value)}
+          disabled={save.isPending || reload.isPending}
+          autosize
+          minRows={1}
+        />
+      </SimpleGrid>
       {form.isDirty() && (
         <Alert color="orange">
           저장하지 않은 변경이 있습니다.
@@ -288,66 +367,125 @@ export function GlossaryEditor({
         </Button>
       </Group>
       <Failure error={save.error ?? reload.error} />
-      <Text size="sm">이름 있는 변수와 적용 위치를 확인한 뒤 승인하세요.</Text>
-      <Code block>
-        {JSON.stringify(
-          {
-            selector: saved.selector,
-            attribute: saved.attribute,
-            variables: saved.variables,
-            messageId: saved.messageId,
-          },
-          null,
-          2,
-        )}
-      </Code>
-      {data.sourceContexts
-        ?.filter((c) => c.file === dictionary.file && c.source === saved.source)
-        .map((c, i) => (
-          <Text key={i} size="sm">
-            <Anchor
-              href={c.evidenceUrl ?? c.url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              원문 문맥
-            </Anchor>{" "}
-            · {c.state} · {c.kind}
-          </Text>
-        ))}
-      <QuickTasks kind="ui" />
-      <Select
-        label="미리보기 페이지"
-        data={data.pages}
-        value={page}
-        onChange={setPage}
-        searchable
-        clearable
-      />
-      {page && (
-        <Button variant="subtle" onClick={() => void source.refetch()}>
-          미리보기 새로고침
-        </Button>
-      )}
-      {!data.pages.length && (
-        <Text c="dimmed">
-          도구에서 UI 미리보기를 다운로드하면 문맥을 확인할 수 있습니다.
-        </Text>
-      )}
       <Failure
         error={source.error ?? preview.error}
         retry={() => void source.refetch()}
       />
-      {page && source.isPending ? (
+      {extension ? (
+        <ExtensionPreview entry={saved} text={target} />
+      ) : page && source.isPending ? (
         <Pending />
+      ) : preview.html ? (
+        <Preview
+          html={preview.html}
+          title="번역 적용 페이지"
+          showHeading={false}
+          onFrame={focusPreview}
+        />
       ) : (
-        source.data && (
-          <SimpleGrid cols={{ base: 1, xl: 2 }}>
-            <Preview html={source.data.html} title="일본어 페이지" />
-            <Preview html={preview.html} title="번역 적용 페이지" />
-          </SimpleGrid>
+        !source.error && (
+          <Text c="dimmed">
+            선택한 문구가 포함된 미리보기가 없습니다. 미리보기 설정에서 페이지를
+            선택하거나 도구에서 UI 미리보기를 다운로드하세요.
+          </Text>
         )
       )}
+      <Accordion>
+        <Accordion.Item value="preview">
+          <Accordion.Control>미리보기 설정 및 원문 비교</Accordion.Control>
+          <Accordion.Panel>
+            <Stack>
+              {!extension && (
+                <>
+                  <Group align="end">
+                    <Select
+                      style={{ flex: 1 }}
+                      label="미리보기 페이지"
+                      data={data.pages}
+                      value={page}
+                      onChange={setPage}
+                      searchable
+                      clearable
+                    />
+                    {page && (
+                      <Button
+                        variant="subtle"
+                        onClick={() => void source.refetch()}
+                      >
+                        미리보기 새로고침
+                      </Button>
+                    )}
+                  </Group>
+                </>
+              )}
+              {extension ? (
+                <ExtensionPreview entry={saved} text={saved.source} />
+              ) : preview.html && source.data ? (
+                <Preview
+                  html={source.data.html}
+                  title="일본어 페이지"
+                  onFrame={focusPreview}
+                />
+              ) : null}
+            </Stack>
+          </Accordion.Panel>
+        </Accordion.Item>
+        <Accordion.Item value="details">
+          <Accordion.Control>상세 정보</Accordion.Control>
+          <Accordion.Panel>
+            <Stack>
+              <Text size="sm" c="dimmed">
+                {saved.variant === undefined
+                  ? "기본 표현"
+                  : `문맥별 표현 ${saved.variant + 1}`}
+              </Text>
+
+              <Text size="sm">
+                이름 있는 변수와 적용 위치를 확인한 뒤 승인하세요.
+              </Text>
+              <Code block>
+                {JSON.stringify(
+                  {
+                    selector: saved.selector,
+                    attribute: saved.attribute,
+                    variables: saved.variables,
+                    messageId: saved.messageId,
+                  },
+                  null,
+                  2,
+                )}
+              </Code>
+              {data.sourceContexts
+                ?.filter(
+                  (c) =>
+                    c.file === dictionary.file && c.source === saved.source,
+                )
+                .map((c, i) => (
+                  <Text key={i} size="sm">
+                    <Anchor
+                      href={c.evidenceUrl ?? c.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      원문 문맥
+                    </Anchor>{" "}
+                    · {c.state} · {c.kind}
+                  </Text>
+                ))}
+              <Button
+                variant="subtle"
+                size="compact-xs"
+                loading={reload.isPending}
+                disabled={save.isPending}
+                onClick={reloadCurrent}
+              >
+                문구 다시 불러오기
+              </Button>
+              <QuickTasks kind="ui" />
+            </Stack>
+          </Accordion.Panel>
+        </Accordion.Item>
+      </Accordion>
     </Stack>
   );
 }

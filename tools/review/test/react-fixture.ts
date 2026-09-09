@@ -1,7 +1,9 @@
+import { katexStylePlugin } from "../src/katex-style-plugin.ts";
 import { build } from "esbuild";
 import { JSDOM } from "jsdom";
 import type { TestContext } from "node:test";
 const bundle = await build({
+  plugins: [katexStylePlugin],
   stdin: {
     resolveDir: process.cwd() + "/tools/review",
     loader: "tsx",
@@ -12,7 +14,8 @@ import userEvent from '@testing-library/user-event';
 import { MantineProvider } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { createMemoryRouter, RouterProvider } from 'react-router-dom';
+import { createMemoryRouter, RouterProvider, Outlet } from 'react-router-dom';
+import { Shell } from './public/app/shell.tsx';
 import { Problems } from './public/app/problems.tsx';
 import { Glossary } from './public/app/glossary.tsx';
 import { Imports } from './public/app/imports.tsx';
@@ -23,7 +26,7 @@ export { screen, fireEvent, waitFor };
 let client, router;
 export function mount(path, kind) {
  client = new QueryClient({defaultOptions:{queries:{retry:false,gcTime:0},mutations:{retry:false}}});
- router = createMemoryRouter([{path:'/',element:<Problems/>},{path:'/ui',element:kind==='imports'?<Imports/>:<Glossary/>},{path:'/tools',element:<Tools/>},{path:'/preview',element:<Comparison japanese="<p>Original</p>" korean="<p>Translation</p>"/>}],{initialEntries:[path]});
+ router = createMemoryRouter([{element:kind==='shell'?<Shell/>:<><div id="review-problem-navigation"/><Outlet/></>,children:[{path:'/',element:<Problems/>},{path:'/ui',element:kind==='imports'?<Imports/>:<Glossary/>},{path:'/tools',element:<Tools/>},{path:'/preview',element:<Comparison japanese="<p>Original</p>" korean="<p>Translation</p>"/>}]}],{initialEntries:[path]});
  render(<MantineProvider env="test"><ModalsProvider><QueryClientProvider client={client}><RouterProvider router={router}/></QueryClientProvider></ModalsProvider></MantineProvider>);
  return userEvent.setup({document});
 }
@@ -53,7 +56,12 @@ export function reactPage(
   });
   const w = dom.window;
   Object.assign(w, {
-    fetch: fetcher,
+    fetch: (requestPath: string, init?: RequestInit) =>
+      requestPath === "/api/tasks" &&
+      kind === "shell" &&
+      (!init?.method || init.method === "GET")
+        ? Promise.resolve(Response.json([]))
+        : fetcher(requestPath, init),
     Request,
     Response,
     Headers,
