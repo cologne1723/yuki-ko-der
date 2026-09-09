@@ -35,6 +35,7 @@ export function validateProblem(
       () => parsed,
     );
     if (
+      metadata.No !== problemNo ||
       Number(problemId) !== metadata.ProblemId ||
       translation.root.dataset.sourceTitle !== metadata.Title
     ) {

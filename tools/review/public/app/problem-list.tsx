@@ -1,3 +1,4 @@
+import { problemReviews } from "translation-core/problem-review-status";
 import {
   NavLink,
   Pagination,
@@ -32,13 +33,29 @@ export function Problems() {
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState<string | null>("all");
   const [page, setPage] = useState(1);
-  const list = (query.data?.problems ?? []).filter(
-    (p) =>
-      (status === "all" || p.reviewStatus === status) &&
+  const list = (query.data?.problems ?? []).filter((p) => {
+    const reviews =
+      p.reviews ??
+      problemReviews(p.machineTranslated ? "machine" : p.reviewStatus);
+    const human = reviews.human === "approved";
+    const machine = reviews.machine === "approved";
+    const matches =
+      status === "all" ||
+      (status === "human-unreviewed" && !human) ||
+      (status === "human-unreviewed-machine-approved" && !human && machine) ||
+      (status === "human-unreviewed-machine-unreviewed" &&
+        !human &&
+        !machine) ||
+      (status === "human-approved-machine-unreviewed" && human && !machine) ||
+      (status === "human-approved-machine-approved" && human && machine) ||
+      (status === "human-approved" && human);
+    return (
+      matches &&
       `${p.problemNo} ${p.japaneseTitle} ${p.koreanTitle}`
         .toLowerCase()
-        .includes(search.toLowerCase()),
-  );
+        .includes(search.toLowerCase())
+    );
+  });
   const selected =
     params.get("problem") ?? String(query.data?.problems[0]?.problemNo ?? "");
   useEffect(() => {
@@ -66,8 +83,24 @@ export function Problems() {
         }}
         data={[
           { value: "all", label: "전체" },
-          { value: "unreviewed", label: "미검수" },
-          { value: "approved", label: "승인됨" },
+          { value: "human-unreviewed", label: "사람 미검수" },
+          {
+            value: "human-unreviewed-machine-approved",
+            label: "사람 미검수 / 기계 검수",
+          },
+          {
+            value: "human-unreviewed-machine-unreviewed",
+            label: "사람 미검수 / 기계 미검수",
+          },
+          {
+            value: "human-approved-machine-unreviewed",
+            label: "사람 검수 / 기계 미검수",
+          },
+          {
+            value: "human-approved-machine-approved",
+            label: "사람 검수 / 기계 검수",
+          },
+          { value: "human-approved", label: "사람 검수" },
         ]}
       />
       {query.isPending ? (
@@ -90,11 +123,14 @@ export function Problems() {
                   status={
                     p.validationErrors?.length
                       ? "invalid"
-                      : p.reviewStatus === "approved"
-                        ? "approved"
-                        : p.machineTranslated
-                          ? "machine"
-                          : "unreviewed"
+                      : p.reviews?.human === null &&
+                          p.reviews.machine === "approved"
+                        ? "기계 승인"
+                        : p.reviewStatus === "approved"
+                          ? "approved"
+                          : p.machineTranslated
+                            ? "machine"
+                            : "unreviewed"
                   }
                 />
               }

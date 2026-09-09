@@ -1,0 +1,52 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1118
+problemId: 3409
+sourceTitle: "sin(x)/xの二乗和"
+sourceHtmlSha256: "3cf57ca110284b371b0322666c849e0b1a2fb8b3bba63937968b7f6053b2ea59"
+humanReview: null
+machineReview: unreviewed
+title: "sin(x)/x의 제곱합"
+---
+
+## 문제 설명
+
+$\sum_{j=0}^{\infty} \mathrm{sinc}^2(x+j)$를 구하세요.
+
+단, $\mathrm{sinc}(x)=\begin{cases}
+1 & x = 0;\\
+\frac{\sin(x)}{x} & \text{그 외}.
+\end{cases}$로 정의합니다.
+
+## 입력
+
+```text
+$x$
+```
+
+$x$는 배정밀도 부동 소수점 형식의 실수입니다.
+
+## 제한
+
+$0 \le x \le 1\,000$
+
+## 출력
+
+구한 값을 출력하세요. 절대 오차와 상대 오차 중 적어도 하나가 $10^{-9}$ 이하가 되도록 하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+0
+```
+
+#### 출력
+
+```text
+2.07079632677096370230                
+```

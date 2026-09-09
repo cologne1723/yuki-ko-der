@@ -1,0 +1,97 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 996
+problemId: 3338
+sourceTitle: "Phnom Penh"
+sourceHtmlSha256: 1508862f165d3c374160b9687caf117f3fcd4dea71f3d7c38f44cccdc08bbfa5
+humanReview: null
+machineReview: unreviewed
+title: "프놈펜"
+---
+
+## 문제 설명
+
+문자열 $S$가 주어집니다. 이 문자열에 다음 연산을 원하는 순서로 원하는 횟수만큼 적용할 수 있습니다.
+
+- 연산 1: $S$에 연속한 부분 문자열로 포함된 `phnom` 하나를 골라 `penh`로 치환합니다.
+- 연산 2: $S$에 포함된 모든 `h`를 삭제한 뒤, 모든 `e`를 `h`로 치환합니다.
+
+단, 연산을 적용하기 전과 적용한 후에 문자열이 변하지 않는 경우에는 그 연산을 적용할 수 없습니다.
+
+문자열 $S$에 적용할 수 있는 연산 횟수의 최댓값을 구하세요.
+
+## 입력
+
+```text
+$S$
+```
+
+입력은 다음 제한을 만족합니다.
+
+## 제한
+
+- $S$는 영소문자만으로 이루어진 문자열입니다.
+- $1 \le |S| \le 2 \times 10^5$
+
+## 출력
+
+연산 횟수의 최댓값을 출력하고, 마지막에 줄 바꿈을 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+phnompenh
+```
+
+#### 출력
+
+```text
+3
+```
+
+다음과 같이 연산을 적용하면 연산 횟수의 최댓값인 $3$을 달성할 수 있습니다.
+
+- 연산 1. `phnompenh` $\to$ `penhpenh`
+- 연산 2. `penhpenh` $\to$ `phnphn`
+- 연산 2. `phnphn` $\to$ `pnpn`
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+phnomom
+```
+
+#### 출력
+
+```text
+5
+```
+
+다음과 같이 연산을 적용하면 연산 횟수의 최댓값인 $5$를 달성할 수 있습니다.
+
+- 연산 1. `phnomom` $\to$ `penhom`
+- 연산 2. `penhom` $\to$ `phnom`
+- 연산 1. `phnom` $\to$ `penh`
+- 연산 2. `penh` $\to$ `phn`
+- 연산 2. `phn` $\to$ `pn`
+
+### 예제 3 {file=""}
+
+#### 입력
+
+```text
+pepenhomom
+```
+
+#### 출력
+
+```text
+6
+```

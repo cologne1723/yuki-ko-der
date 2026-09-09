@@ -5,17 +5,18 @@ problemNo: 73
 problemId: 144
 sourceTitle: "helloworld"
 sourceHtmlSha256: 374ca35f3bbb24bb10cbdc0e4302c1feccaed07c1be8432f229a66f147122d26
-reviewStatus: unreviewed
+humanReview: null
+machineReview: approved
 title: "helloworld"
 ---
 
 ## 문제 설명
 
-이 문제는 2014년 11월 26일 2시 35분에 문제문이 수정되었습니다.
+(출제자 공지) (2014/11/26 2:35 문제문을 수정했습니다.)
 
 A는 `helloworld`를 매우 좋아합니다.
 
-문자열 $S$의 helloworld 수를 다음 조건을 만족하는 순서쌍 $(i_0,\ldots,i_9)$의 개수로 정의합니다.
+문자열 $S$의 helloworld 수를 다음 조건을 만족하는 순서 있는 튜플 $(i_0,\ldots,i_9)$의 개수로 정의합니다.
 
 $S[i_0]S[i_1]\cdots S[i_9]=\text{helloworld}$
 
@@ -28,7 +29,7 @@ $i_0 < i_1 < \cdots < i_9$
 ```text
 $C_a$
 $C_b$
-$\dots$
+$\vdots$
 $C_z$
 ```
 
@@ -128,7 +129,7 @@ A가 얻을 수 있는 helloworld 수의 최댓값을 한 줄에 출력하세요
 
 사용할 수 있는 문자는 `d` $1$개, `e` $1$개, `h` $1$개, `l` $4$개, `o` $3$개, `r` $1$개, `w` $1$개입니다.
 
-예를 들어 `hellooworldl`로 배열하면 `hello`의 `o`를 인덱스 $4$인 문자를 선택할지 인덱스 $5$인 문자를 선택할지에 따라 다음 두 가지 순서쌍이 생깁니다.
+예를 들어 `hellooworldl`로 배열하면 `hello`의 `o`를 인덱스 $4$인 문자를 선택할지 인덱스 $5$인 문자를 선택할지에 따라 다음 두 가지 순서 있는 튜플이 생깁니다.
 
 $(0,1,2,3,4,6,7,8,9,10)$
 

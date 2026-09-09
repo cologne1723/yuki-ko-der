@@ -43,6 +43,7 @@ export function Shell() {
           {[
             ["/", "문제 목록"],
             ["/ui", "UI 용어집"],
+            ["/tags", "태그 번역"],
             ["/ui?view=imports", "ZIP 가져오기"],
             ["/tools", "도구와 설정"],
           ].map(([to, label]) => (

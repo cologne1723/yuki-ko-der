@@ -1,0 +1,1638 @@
+{
+  "locale": "ko",
+  "tags": [
+    {
+      "source": "動的計画法",
+      "target": "다이나믹 프로그래밍",
+      "reviewStatus": "approved",
+      "problemCount": 313,
+      "solvedAcKey": "dp"
+    },
+    {
+      "source": "数え上げ",
+      "target": "경우의 수 세기",
+      "reviewStatus": "approved",
+      "problemCount": 218
+    },
+    {
+      "source": "数学",
+      "target": "수학",
+      "reviewStatus": "approved",
+      "problemCount": 213,
+      "solvedAcKey": "math"
+    },
+    {
+      "source": "全探索",
+      "target": "브루트포스 알고리즘",
+      "reviewStatus": "approved",
+      "problemCount": 127,
+      "solvedAcKey": "bruteforcing"
+    },
+    {
+      "source": "構築",
+      "target": "해 구성하기",
+      "reviewStatus": "approved",
+      "problemCount": 125,
+      "solvedAcKey": "constructive"
+    },
+    {
+      "source": "二分探索",
+      "target": "이분 탐색",
+      "reviewStatus": "approved",
+      "problemCount": 113,
+      "solvedAcKey": "binary_search"
+    },
+    {
+      "source": "実装",
+      "target": "구현",
+      "reviewStatus": "approved",
+      "problemCount": 112,
+      "solvedAcKey": "implementation"
+    },
+    {
+      "source": "貪欲法",
+      "target": "그리디 알고리즘",
+      "reviewStatus": "approved",
+      "problemCount": 100,
+      "solvedAcKey": "greedy"
+    },
+    {
+      "source": "算数",
+      "target": "산수",
+      "reviewStatus": "approved",
+      "problemCount": 88
+    },
+    {
+      "source": "グラフ",
+      "target": "그래프 이론",
+      "reviewStatus": "approved",
+      "problemCount": 87,
+      "solvedAcKey": "graphs"
+    },
+    {
+      "source": "文字列",
+      "target": "문자열",
+      "reviewStatus": "approved",
+      "problemCount": 78,
+      "solvedAcKey": "string"
+    },
+    {
+      "source": "累積和",
+      "target": "누적 합",
+      "reviewStatus": "approved",
+      "problemCount": 75,
+      "solvedAcKey": "prefix_sum"
+    },
+    {
+      "source": "ゲーム",
+      "target": "게임 이론",
+      "reviewStatus": "approved",
+      "problemCount": 70,
+      "solvedAcKey": "game_theory"
+    },
+    {
+      "source": "セグメント木",
+      "target": "세그먼트 트리",
+      "reviewStatus": "approved",
+      "problemCount": 69,
+      "solvedAcKey": "segtree"
+    },
+    {
+      "source": "場合分け",
+      "target": "많은 조건 분기",
+      "reviewStatus": "approved",
+      "problemCount": 68,
+      "solvedAcKey": "case_work"
+    },
+    {
+      "source": "期待値",
+      "target": "기댓값",
+      "reviewStatus": "approved",
+      "problemCount": 51
+    },
+    {
+      "source": "幾何",
+      "target": "기하학",
+      "reviewStatus": "approved",
+      "problemCount": 50,
+      "solvedAcKey": "geometry"
+    },
+    {
+      "source": "発想",
+      "target": "애드 혹",
+      "reviewStatus": "approved",
+      "problemCount": 46
+    },
+    {
+      "source": "確率",
+      "target": "확률론",
+      "reviewStatus": "approved",
+      "problemCount": 45,
+      "solvedAcKey": "probability"
+    },
+    {
+      "source": "門松列",
+      "target": "카도마츠 수열",
+      "reviewStatus": "approved",
+      "problemCount": 45
+    },
+    {
+      "source": "リアクティブ",
+      "target": "인터랙티브",
+      "reviewStatus": "approved",
+      "problemCount": 44
+    },
+    {
+      "source": "行列累乗",
+      "target": "행렬 거듭제곱",
+      "reviewStatus": "approved",
+      "problemCount": 44
+    },
+    {
+      "source": "ソート",
+      "target": "정렬",
+      "reviewStatus": "approved",
+      "problemCount": 42,
+      "solvedAcKey": "sorting"
+    },
+    {
+      "source": "木",
+      "target": "트리",
+      "reviewStatus": "approved",
+      "problemCount": 42,
+      "solvedAcKey": "trees"
+    },
+    {
+      "source": "素因数分解",
+      "target": "소인수분해",
+      "reviewStatus": "approved",
+      "problemCount": 37,
+      "solvedAcKey": "prime_factorization"
+    },
+    {
+      "source": "形式的冪級数",
+      "target": "형식적 멱급수",
+      "reviewStatus": "approved",
+      "problemCount": 36
+    },
+    {
+      "source": "包除原理",
+      "target": "포함 배제의 원리",
+      "reviewStatus": "approved",
+      "problemCount": 35,
+      "solvedAcKey": "inclusion_and_exclusion"
+    },
+    {
+      "source": "幅優先探索",
+      "target": "너비 우선 탐색",
+      "reviewStatus": "approved",
+      "problemCount": 29,
+      "solvedAcKey": "bfs"
+    },
+    {
+      "source": "組合せ",
+      "target": "조합론",
+      "reviewStatus": "approved",
+      "problemCount": 27,
+      "solvedAcKey": "combinatorics"
+    },
+    {
+      "source": "順列",
+      "target": "순열",
+      "reviewStatus": "approved",
+      "problemCount": 27
+    },
+    {
+      "source": "シミュレーション",
+      "target": "시뮬레이션",
+      "reviewStatus": "approved",
+      "problemCount": 26,
+      "solvedAcKey": "simulation"
+    },
+    {
+      "source": "畳み込み",
+      "target": "합성곱",
+      "reviewStatus": "approved",
+      "problemCount": 26
+    },
+    {
+      "source": "剰余",
+      "target": "나머지",
+      "reviewStatus": "approved",
+      "problemCount": 25
+    },
+    {
+      "source": "最大公約数",
+      "target": "최대공약수",
+      "reviewStatus": "approved",
+      "problemCount": 25
+    },
+    {
+      "source": "桁DP",
+      "target": "자릿수를 이용한 다이나믹 프로그래밍",
+      "reviewStatus": "approved",
+      "problemCount": 25,
+      "solvedAcKey": "dp_digit"
+    },
+    {
+      "source": "しゃくとり法",
+      "target": "두 포인터",
+      "reviewStatus": "approved",
+      "problemCount": 24,
+      "solvedAcKey": "two_pointer"
+    },
+    {
+      "source": "ダイクストラ法",
+      "target": "데이크스트라",
+      "reviewStatus": "approved",
+      "problemCount": 21,
+      "solvedAcKey": "dijkstra"
+    },
+    {
+      "source": "最短経路",
+      "target": "최단 경로",
+      "reviewStatus": "approved",
+      "problemCount": 21,
+      "solvedAcKey": "shortest_path"
+    },
+    {
+      "source": "主客転倒",
+      "target": "식 정리 (주객전도)",
+      "reviewStatus": "approved",
+      "problemCount": 19
+    },
+    {
+      "source": "二項係数",
+      "target": "이항 계수",
+      "reviewStatus": "approved",
+      "problemCount": 18
+    },
+    {
+      "source": "半分全列挙",
+      "target": "중간에서 만나기",
+      "reviewStatus": "approved",
+      "problemCount": 18,
+      "solvedAcKey": "mitm"
+    },
+    {
+      "source": "周期性",
+      "target": "주기성",
+      "reviewStatus": "approved",
+      "problemCount": 18
+    },
+    {
+      "source": "平方分割",
+      "target": "제곱근 분할법",
+      "reviewStatus": "approved",
+      "problemCount": 18,
+      "solvedAcKey": "sqrt_decomposition"
+    },
+    {
+      "source": "木DP",
+      "target": "트리에서의 다이나믹 프로그래밍",
+      "reviewStatus": "approved",
+      "problemCount": 18,
+      "solvedAcKey": "dp_tree"
+    },
+    {
+      "source": "行列",
+      "target": "행렬",
+      "reviewStatus": "approved",
+      "problemCount": 18
+    },
+    {
+      "source": "誤差",
+      "target": "오차",
+      "reviewStatus": "approved",
+      "problemCount": 18
+    },
+    {
+      "source": "クエリ処理",
+      "target": "쿼리 처리",
+      "reviewStatus": "approved",
+      "problemCount": 17
+    },
+    {
+      "source": "繰り返し二乗法",
+      "target": "분할 정복을 이용한 거듭제곱",
+      "reviewStatus": "approved",
+      "problemCount": 17,
+      "solvedAcKey": "exponentiation_by_squaring"
+    },
+    {
+      "source": "貪欲",
+      "target": "그리디 알고리즘",
+      "reviewStatus": "approved",
+      "problemCount": 17,
+      "solvedAcKey": "greedy"
+    },
+    {
+      "source": "約数",
+      "target": "약수",
+      "reviewStatus": "approved",
+      "problemCount": 16
+    },
+    {
+      "source": "回文",
+      "target": "팰린드롬",
+      "reviewStatus": "approved",
+      "problemCount": 15
+    },
+    {
+      "source": "座標圧縮",
+      "target": "값 / 좌표 압축",
+      "reviewStatus": "approved",
+      "problemCount": 15,
+      "solvedAcKey": "coordinate_compression"
+    },
+    {
+      "source": "排他的論理和",
+      "target": "배타적 논리합",
+      "reviewStatus": "approved",
+      "problemCount": 15
+    },
+    {
+      "source": "漸化式",
+      "target": "점화식",
+      "reviewStatus": "approved",
+      "problemCount": 15
+    },
+    {
+      "source": "整数",
+      "target": "정수",
+      "reviewStatus": "approved",
+      "problemCount": 14
+    },
+    {
+      "source": "遅延セグメント木",
+      "target": "느리게 갱신되는 세그먼트 트리",
+      "reviewStatus": "approved",
+      "problemCount": 14,
+      "solvedAcKey": "lazyprop"
+    },
+    {
+      "source": "Grundy数",
+      "target": "그런디 수",
+      "reviewStatus": "approved",
+      "problemCount": 13
+    },
+    {
+      "source": "ビット演算",
+      "target": "비트 연산",
+      "reviewStatus": "approved",
+      "problemCount": 13
+    },
+    {
+      "source": "文字列処理",
+      "target": "문자열",
+      "reviewStatus": "approved",
+      "problemCount": 13,
+      "solvedAcKey": "string"
+    },
+    {
+      "source": "線形代数",
+      "target": "선형대수학",
+      "reviewStatus": "approved",
+      "problemCount": 13,
+      "solvedAcKey": "linear_algebra"
+    },
+    {
+      "source": "考察",
+      "target": "애드 혹",
+      "reviewStatus": "approved",
+      "problemCount": 13
+    },
+    {
+      "source": "imos法",
+      "target": "차분 배열 트릭",
+      "reviewStatus": "approved",
+      "problemCount": 12,
+      "solvedAcKey": "difference_array"
+    },
+    {
+      "source": "深さ優先探索",
+      "target": "깊이 우선 탐색",
+      "reviewStatus": "approved",
+      "problemCount": 12,
+      "solvedAcKey": "dfs"
+    },
+    {
+      "source": "転倒数",
+      "target": "역전쌍",
+      "reviewStatus": "approved",
+      "problemCount": 12
+    },
+    {
+      "source": "連想配列",
+      "target": "연관 배열",
+      "reviewStatus": "approved",
+      "problemCount": 12
+    },
+    {
+      "source": "マンハッタン距離",
+      "target": "맨해튼 거리",
+      "reviewStatus": "approved",
+      "problemCount": 11
+    },
+    {
+      "source": "優先度付きキュー",
+      "target": "우선순위 큐",
+      "reviewStatus": "approved",
+      "problemCount": 11,
+      "solvedAcKey": "priority_queue"
+    },
+    {
+      "source": "分割統治法",
+      "target": "분할 정복",
+      "reviewStatus": "approved",
+      "problemCount": 11,
+      "solvedAcKey": "divide_and_conquer"
+    },
+    {
+      "source": "最小全域木",
+      "target": "최소 스패닝 트리",
+      "reviewStatus": "approved",
+      "problemCount": 11,
+      "solvedAcKey": "mst"
+    },
+    {
+      "source": "条件分岐",
+      "target": "많은 조건 분기",
+      "reviewStatus": "approved",
+      "problemCount": 11,
+      "solvedAcKey": "case_work"
+    },
+    {
+      "source": "bit全探索",
+      "target": "비트마스크 완전 탐색",
+      "reviewStatus": "approved",
+      "problemCount": 10
+    },
+    {
+      "source": "平衡二分探索木",
+      "target": "BBST",
+      "reviewStatus": "approved",
+      "problemCount": 10
+    },
+    {
+      "source": "構文解析",
+      "target": "파싱",
+      "reviewStatus": "approved",
+      "problemCount": 10,
+      "solvedAcKey": "parsing"
+    },
+    {
+      "source": "素数",
+      "target": "소수",
+      "reviewStatus": "approved",
+      "problemCount": 10
+    },
+    {
+      "source": "群論",
+      "target": "군론",
+      "reviewStatus": "approved",
+      "problemCount": 10
+    },
+    {
+      "source": "データ構造",
+      "target": "자료 구조",
+      "reviewStatus": "approved",
+      "problemCount": 9,
+      "solvedAcKey": "data_structures"
+    },
+    {
+      "source": "フェルマーの小定理",
+      "target": "페르마의 소정리",
+      "reviewStatus": "approved",
+      "problemCount": 9,
+      "solvedAcKey": "flt"
+    },
+    {
+      "source": "マルチテストケース",
+      "target": "여러 테스트 케이스",
+      "reviewStatus": "approved",
+      "problemCount": 9
+    },
+    {
+      "source": "全方位木DP",
+      "target": "트리에서의 전방향 다이나믹 프로그래밍",
+      "reviewStatus": "approved",
+      "problemCount": 9,
+      "solvedAcKey": "rerooting"
+    },
+    {
+      "source": "整数論",
+      "target": "정수론",
+      "reviewStatus": "approved",
+      "problemCount": 9,
+      "solvedAcKey": "number_theory"
+    },
+    {
+      "source": "辞書順",
+      "target": "사전순",
+      "reviewStatus": "approved",
+      "problemCount": 9
+    },
+    {
+      "source": "ダブリング",
+      "target": "더블링",
+      "reviewStatus": "approved",
+      "problemCount": 8
+    },
+    {
+      "source": "データ構造をマージする一般的なテク",
+      "target": "작은 집합에서 큰 집합으로 합치는 테크닉",
+      "reviewStatus": "approved",
+      "problemCount": 8,
+      "solvedAcKey": "smaller_to_larger"
+    },
+    {
+      "source": "フィボナッチ",
+      "target": "피보나치 수",
+      "reviewStatus": "approved",
+      "problemCount": 8
+    },
+    {
+      "source": "メモ化再帰",
+      "target": "메모이제이션",
+      "reviewStatus": "approved",
+      "problemCount": 8
+    },
+    {
+      "source": "不変量",
+      "target": "불변량 찾기",
+      "reviewStatus": "approved",
+      "problemCount": 8,
+      "solvedAcKey": "invariant"
+    },
+    {
+      "source": "多倍長整数",
+      "target": "큰 수 연산",
+      "reviewStatus": "approved",
+      "problemCount": 8
+    },
+    {
+      "source": "括弧列",
+      "target": "괄호 문자열",
+      "reviewStatus": "approved",
+      "problemCount": 8
+    },
+    {
+      "source": "最大流",
+      "target": "최대 유량",
+      "reviewStatus": "approved",
+      "problemCount": 8,
+      "solvedAcKey": "flow"
+    },
+    {
+      "source": "逆元",
+      "target": "역원",
+      "reviewStatus": "approved",
+      "problemCount": 8
+    },
+    {
+      "source": "高速ゼータ変換",
+      "target": "고속 제타 변환",
+      "reviewStatus": "approved",
+      "problemCount": 8
+    },
+    {
+      "source": "ナップサック問題",
+      "target": "배낭 문제",
+      "reviewStatus": "approved",
+      "problemCount": 7,
+      "solvedAcKey": "knapsack"
+    },
+    {
+      "source": "多項式",
+      "target": "다항식",
+      "reviewStatus": "approved",
+      "problemCount": 7
+    },
+    {
+      "source": "探索",
+      "target": "탐색",
+      "reviewStatus": "approved",
+      "problemCount": 7
+    },
+    {
+      "source": "調和級数",
+      "target": "조화급수",
+      "reviewStatus": "approved",
+      "problemCount": 7
+    },
+    {
+      "source": "イベントソート",
+      "target": "이벤트 정렬",
+      "reviewStatus": "approved",
+      "problemCount": 6
+    },
+    {
+      "source": "カタラン数",
+      "target": "카탈란 수",
+      "reviewStatus": "approved",
+      "problemCount": 6
+    },
+    {
+      "source": "クエリ先読み",
+      "target": "오프라인 쿼리",
+      "reviewStatus": "approved",
+      "problemCount": 6,
+      "solvedAcKey": "offline_queries"
+    },
+    {
+      "source": "並列二分探索",
+      "target": "병렬 이분 탐색",
+      "reviewStatus": "approved",
+      "problemCount": 6,
+      "solvedAcKey": "pbs"
+    },
+    {
+      "source": "乱択アルゴリズム",
+      "target": "무작위화",
+      "reviewStatus": "approved",
+      "problemCount": 6,
+      "solvedAcKey": "randomization"
+    },
+    {
+      "source": "正規表現",
+      "target": "정규 표현식",
+      "reviewStatus": "approved",
+      "problemCount": 6,
+      "solvedAcKey": "regex"
+    },
+    {
+      "source": "素数判定",
+      "target": "소수 판정",
+      "reviewStatus": "approved",
+      "problemCount": 6,
+      "solvedAcKey": "primality_test"
+    },
+    {
+      "source": "連立方程式",
+      "target": "연립방정식",
+      "reviewStatus": "approved",
+      "problemCount": 6
+    },
+    {
+      "source": "順列全探索",
+      "target": "순열 완전 탐색",
+      "reviewStatus": "approved",
+      "problemCount": 6
+    },
+    {
+      "source": "鳩ノ巣原理",
+      "target": "비둘기집 원리",
+      "reviewStatus": "approved",
+      "problemCount": 6,
+      "solvedAcKey": "pigeonhole_principle"
+    },
+    {
+      "source": "オイラー路",
+      "target": "오일러 경로",
+      "reviewStatus": "approved",
+      "problemCount": 5,
+      "solvedAcKey": "eulerian_path"
+    },
+    {
+      "source": "クエリ",
+      "target": "쿼리",
+      "reviewStatus": "approved",
+      "problemCount": 5
+    },
+    {
+      "source": "スライド最小値",
+      "target": "슬라이딩 윈도우 최솟값",
+      "reviewStatus": "approved",
+      "problemCount": 5
+    },
+    {
+      "source": "マッチング",
+      "target": "매칭",
+      "reviewStatus": "approved",
+      "problemCount": 5
+    },
+    {
+      "source": "ローリングハッシュ",
+      "target": "롤링 해시",
+      "reviewStatus": "approved",
+      "problemCount": 5
+    },
+    {
+      "source": "中国剰余定理",
+      "target": "중국인의 나머지 정리",
+      "reviewStatus": "approved",
+      "problemCount": 5,
+      "solvedAcKey": "crt"
+    },
+    {
+      "source": "中華風剰余定理",
+      "target": "중국인의 나머지 정리",
+      "reviewStatus": "approved",
+      "problemCount": 5,
+      "solvedAcKey": "crt"
+    },
+    {
+      "source": "分数",
+      "target": "분수",
+      "reviewStatus": "approved",
+      "problemCount": 5
+    },
+    {
+      "source": "基数変換",
+      "target": "진법 변환",
+      "reviewStatus": "approved",
+      "problemCount": 5
+    },
+    {
+      "source": "場合の数",
+      "target": "경우의 수 세기",
+      "reviewStatus": "approved",
+      "problemCount": 5
+    },
+    {
+      "source": "平面走査",
+      "target": "스위핑",
+      "reviewStatus": "approved",
+      "problemCount": 5,
+      "solvedAcKey": "sweeping"
+    },
+    {
+      "source": "強連結成分分解",
+      "target": "강한 연결 요소",
+      "reviewStatus": "approved",
+      "problemCount": 5,
+      "solvedAcKey": "scc"
+    },
+    {
+      "source": "最小カット",
+      "target": "최소 컷",
+      "reviewStatus": "approved",
+      "problemCount": 5
+    },
+    {
+      "source": "最小公倍数",
+      "target": "최소공배수",
+      "reviewStatus": "approved",
+      "problemCount": 5
+    },
+    {
+      "source": "最小費用流",
+      "target": "최소 비용 유량",
+      "reviewStatus": "approved",
+      "problemCount": 5
+    },
+    {
+      "source": "格子点",
+      "target": "격자점",
+      "reviewStatus": "approved",
+      "problemCount": 5
+    },
+    {
+      "source": "約数列挙",
+      "target": "약수 나열",
+      "reviewStatus": "approved",
+      "problemCount": 5
+    },
+    {
+      "source": "素数列挙",
+      "target": "소수 나열",
+      "reviewStatus": "approved",
+      "problemCount": 5
+    },
+    {
+      "source": "行列式",
+      "target": "행렬식",
+      "reviewStatus": "approved",
+      "problemCount": 5
+    },
+    {
+      "source": "計算",
+      "target": "계산",
+      "reviewStatus": "approved",
+      "problemCount": 5
+    },
+    {
+      "source": "重心分解",
+      "target": "센트로이드 분할",
+      "reviewStatus": "approved",
+      "problemCount": 5,
+      "solvedAcKey": "centroid_decomposition"
+    },
+    {
+      "source": "2部マッチング",
+      "target": "이분 매칭",
+      "reviewStatus": "approved",
+      "problemCount": 4,
+      "solvedAcKey": "bipartite_matching"
+    },
+    {
+      "source": "アドホック",
+      "target": "애드 혹",
+      "reviewStatus": "approved",
+      "problemCount": 4,
+      "solvedAcKey": "ad_hoc"
+    },
+    {
+      "source": "キュー",
+      "target": "큐",
+      "reviewStatus": "approved",
+      "problemCount": 4,
+      "solvedAcKey": "queue"
+    },
+    {
+      "source": "コーナーケース",
+      "target": "코너 케이스",
+      "reviewStatus": "approved",
+      "problemCount": 4
+    },
+    {
+      "source": "チェビシェフ距離",
+      "target": "체비쇼프 거리",
+      "reviewStatus": "approved",
+      "problemCount": 4
+    },
+    {
+      "source": "トポロジカルソート",
+      "target": "위상 정렬",
+      "reviewStatus": "approved",
+      "problemCount": 4,
+      "solvedAcKey": "topological_sorting"
+    },
+    {
+      "source": "ルジャンドルの定理",
+      "target": "르장드르 공식",
+      "reviewStatus": "approved",
+      "problemCount": 4
+    },
+    {
+      "source": "三分探索",
+      "target": "삼분 탐색",
+      "reviewStatus": "approved",
+      "problemCount": 4,
+      "solvedAcKey": "ternary_search"
+    },
+    {
+      "source": "余り",
+      "target": "나머지",
+      "reviewStatus": "approved",
+      "problemCount": 4
+    },
+    {
+      "source": "余事象",
+      "target": "여사건",
+      "reviewStatus": "approved",
+      "problemCount": 4
+    },
+    {
+      "source": "全列挙",
+      "target": "브루트포스 알고리즘",
+      "reviewStatus": "approved",
+      "problemCount": 4,
+      "solvedAcKey": "bruteforcing"
+    },
+    {
+      "source": "凸包",
+      "target": "볼록 껍질",
+      "reviewStatus": "approved",
+      "problemCount": 4,
+      "solvedAcKey": "convex_hull"
+    },
+    {
+      "source": "巡回群",
+      "target": "순환군",
+      "reviewStatus": "approved",
+      "problemCount": 4
+    },
+    {
+      "source": "式変形",
+      "target": "수식 변형",
+      "reviewStatus": "approved",
+      "problemCount": 4
+    },
+    {
+      "source": "掃き出し法",
+      "target": "가우스 소거법",
+      "reviewStatus": "approved",
+      "problemCount": 4,
+      "solvedAcKey": "gaussian_elimination"
+    },
+    {
+      "source": "数字根",
+      "target": "이산 루트",
+      "reviewStatus": "approved",
+      "problemCount": 4
+    },
+    {
+      "source": "数論",
+      "target": "정수론",
+      "reviewStatus": "approved",
+      "problemCount": 4,
+      "solvedAcKey": "number_theory"
+    },
+    {
+      "source": "枝刈り",
+      "target": "가지치기",
+      "reviewStatus": "approved",
+      "problemCount": 4
+    },
+    {
+      "source": "積分",
+      "target": "적분",
+      "reviewStatus": "approved",
+      "problemCount": 4
+    },
+    {
+      "source": "Burnsideの補題",
+      "target": "번사이드 보조정리",
+      "reviewStatus": "approved",
+      "problemCount": 3,
+      "solvedAcKey": "burnside"
+    },
+    {
+      "source": "DM分解",
+      "target": "DM 분해",
+      "reviewStatus": "approved",
+      "problemCount": 3
+    },
+    {
+      "source": "HL分解",
+      "target": "Heavy-light 분할",
+      "reviewStatus": "approved",
+      "problemCount": 3,
+      "solvedAcKey": "hld"
+    },
+    {
+      "source": "Miller-Rabin素数判定法",
+      "target": "밀러–라빈 소수 판별법",
+      "reviewStatus": "approved",
+      "problemCount": 3,
+      "solvedAcKey": "miller_rabin"
+    },
+    {
+      "source": "Trie木",
+      "target": "트라이",
+      "reviewStatus": "approved",
+      "problemCount": 3,
+      "solvedAcKey": "trie"
+    },
+    {
+      "source": "きたまさ法",
+      "target": "다항식을 이용한 선형점화식 계산",
+      "reviewStatus": "approved",
+      "problemCount": 3,
+      "solvedAcKey": "kitamasa"
+    },
+    {
+      "source": "オイラーの定理",
+      "target": "오일러 정리",
+      "reviewStatus": "approved",
+      "problemCount": 3
+    },
+    {
+      "source": "オイラーツアー",
+      "target": "오일러 경로 테크닉",
+      "reviewStatus": "approved",
+      "problemCount": 3,
+      "solvedAcKey": "euler_tour_technique"
+    },
+    {
+      "source": "クラスカル法",
+      "target": "크루스칼",
+      "reviewStatus": "approved",
+      "problemCount": 3
+    },
+    {
+      "source": "グリッド",
+      "target": "격자 그래프",
+      "reviewStatus": "approved",
+      "problemCount": 3,
+      "solvedAcKey": "grid_graph"
+    },
+    {
+      "source": "サイクル",
+      "target": "사이클",
+      "reviewStatus": "approved",
+      "problemCount": 3
+    },
+    {
+      "source": "バケット法",
+      "target": "버킷",
+      "reviewStatus": "approved",
+      "problemCount": 3
+    },
+    {
+      "source": "ビット",
+      "target": "비트",
+      "reviewStatus": "approved",
+      "problemCount": 3
+    },
+    {
+      "source": "モンテカルロ法",
+      "target": "몬테카를로 기법",
+      "reviewStatus": "approved",
+      "problemCount": 3
+    },
+    {
+      "source": "ユークリッドの互除法",
+      "target": "유클리드 호제법",
+      "reviewStatus": "approved",
+      "problemCount": 3,
+      "solvedAcKey": "euclidean"
+    },
+    {
+      "source": "ワーシャルフロイド",
+      "target": "플로이드–워셜",
+      "reviewStatus": "approved",
+      "problemCount": 3,
+      "solvedAcKey": "floyd_warshall"
+    },
+    {
+      "source": "三角形分割",
+      "target": "삼각분할",
+      "reviewStatus": "approved",
+      "problemCount": 3
+    },
+    {
+      "source": "三角関数",
+      "target": "삼각함수",
+      "reviewStatus": "approved",
+      "problemCount": 3
+    },
+    {
+      "source": "中央値",
+      "target": "중앙값",
+      "reviewStatus": "approved",
+      "problemCount": 3
+    },
+    {
+      "source": "二次元累積和",
+      "target": "2차원 누적 합",
+      "reviewStatus": "approved",
+      "problemCount": 3
+    },
+    {
+      "source": "二進数",
+      "target": "이진수",
+      "reviewStatus": "approved",
+      "problemCount": 3
+    },
+    {
+      "source": "二部グラフ",
+      "target": "이분 그래프",
+      "reviewStatus": "approved",
+      "problemCount": 3,
+      "solvedAcKey": "bipartite_graph"
+    },
+    {
+      "source": "倍数",
+      "target": "배수",
+      "reviewStatus": "approved",
+      "problemCount": 3
+    },
+    {
+      "source": "再帰",
+      "target": "재귀",
+      "reviewStatus": "approved",
+      "problemCount": 3,
+      "solvedAcKey": "recursion"
+    },
+    {
+      "source": "区間スケジューリング",
+      "target": "구간 스케줄링",
+      "reviewStatus": "approved",
+      "problemCount": 3
+    },
+    {
+      "source": "多項式補間",
+      "target": "다항식 보간법",
+      "reviewStatus": "approved",
+      "problemCount": 3,
+      "solvedAcKey": "polynomial_interpolation"
+    },
+    {
+      "source": "拡張ユークリッド互除法",
+      "target": "확장 유클리드 호제법",
+      "reviewStatus": "approved",
+      "problemCount": 3,
+      "solvedAcKey": "extended_euclidean"
+    },
+    {
+      "source": "挿入DP",
+      "target": "삽입 다이나믹 프로그래밍",
+      "reviewStatus": "approved",
+      "problemCount": 3
+    },
+    {
+      "source": "数列",
+      "target": "수열",
+      "reviewStatus": "approved",
+      "problemCount": 3
+    },
+    {
+      "source": "有理数",
+      "target": "유리수",
+      "reviewStatus": "approved",
+      "problemCount": 3
+    },
+    {
+      "source": "特性多項式",
+      "target": "특성 다항식",
+      "reviewStatus": "approved",
+      "problemCount": 3
+    },
+    {
+      "source": "約数包除",
+      "target": "약수에 대한 포함 배제",
+      "reviewStatus": "approved",
+      "problemCount": 3
+    },
+    {
+      "source": "累乗",
+      "target": "거듭제곱",
+      "reviewStatus": "approved",
+      "problemCount": 3
+    },
+    {
+      "source": "経路復元",
+      "target": "역추적",
+      "reviewStatus": "approved",
+      "problemCount": 3,
+      "solvedAcKey": "traceback"
+    },
+    {
+      "source": "閉路検出",
+      "target": "사이클 탐지",
+      "reviewStatus": "approved",
+      "problemCount": 3
+    },
+    {
+      "source": "魔方陣",
+      "target": "마방진",
+      "reviewStatus": "approved",
+      "problemCount": 3
+    },
+    {
+      "source": "trie木",
+      "target": "트라이",
+      "reviewStatus": "approved",
+      "problemCount": 2,
+      "solvedAcKey": "trie"
+    },
+    {
+      "source": "union-find木",
+      "target": "분리 집합",
+      "reviewStatus": "approved",
+      "problemCount": 2,
+      "solvedAcKey": "disjoint_set"
+    },
+    {
+      "source": "いもす法",
+      "target": "차분 배열 트릭",
+      "reviewStatus": "approved",
+      "problemCount": 2,
+      "solvedAcKey": "difference_array"
+    },
+    {
+      "source": "エラトステネスのふるい",
+      "target": "에라토스테네스의 체",
+      "reviewStatus": "approved",
+      "problemCount": 2,
+      "solvedAcKey": "sieve"
+    },
+    {
+      "source": "エラトステネスの篩",
+      "target": "에라토스테네스의 체",
+      "reviewStatus": "approved",
+      "problemCount": 2,
+      "solvedAcKey": "sieve"
+    },
+    {
+      "source": "ナップサックDP",
+      "target": "배낭 문제",
+      "reviewStatus": "approved",
+      "problemCount": 2,
+      "solvedAcKey": "knapsack"
+    },
+    {
+      "source": "バックトラック",
+      "target": "백트래킹",
+      "reviewStatus": "approved",
+      "problemCount": 2,
+      "solvedAcKey": "backtracking"
+    },
+    {
+      "source": "ピックの定理",
+      "target": "픽의 정리",
+      "reviewStatus": "approved",
+      "problemCount": 2,
+      "solvedAcKey": "pick"
+    },
+    {
+      "source": "両端キュー",
+      "target": "덱",
+      "reviewStatus": "approved",
+      "problemCount": 2,
+      "solvedAcKey": "deque"
+    },
+    {
+      "source": "偶奇性",
+      "target": "홀짝성",
+      "reviewStatus": "approved",
+      "problemCount": 2,
+      "solvedAcKey": "parity"
+    },
+    {
+      "source": "分割統治",
+      "target": "분할 정복",
+      "reviewStatus": "approved",
+      "problemCount": 2,
+      "solvedAcKey": "divide_and_conquer"
+    },
+    {
+      "source": "巡回セールスマン問題",
+      "target": "외판원 순회 문제",
+      "reviewStatus": "approved",
+      "problemCount": 2,
+      "solvedAcKey": "tsp"
+    },
+    {
+      "source": "文字列操作",
+      "target": "문자열",
+      "reviewStatus": "approved",
+      "problemCount": 2,
+      "solvedAcKey": "string"
+    },
+    {
+      "source": "最短路問題",
+      "target": "최단 경로",
+      "reviewStatus": "approved",
+      "problemCount": 2,
+      "solvedAcKey": "shortest_path"
+    },
+    {
+      "source": "期待値の線形性",
+      "target": "기댓값의 선형성",
+      "reviewStatus": "approved",
+      "problemCount": 2,
+      "solvedAcKey": "linearity_of_expectation"
+    },
+    {
+      "source": "木構造",
+      "target": "트리",
+      "reviewStatus": "approved",
+      "problemCount": 2,
+      "solvedAcKey": "trees"
+    },
+    {
+      "source": "母関数",
+      "target": "생성 함수",
+      "reviewStatus": "approved",
+      "problemCount": 2,
+      "solvedAcKey": "generating_function"
+    },
+    {
+      "source": "永続セグメント木",
+      "target": "퍼시스턴트 세그먼트 트리",
+      "reviewStatus": "approved",
+      "problemCount": 2,
+      "solvedAcKey": "pst"
+    },
+    {
+      "source": "空間幾何",
+      "target": "3차원 기하학",
+      "reviewStatus": "approved",
+      "problemCount": 2,
+      "solvedAcKey": "geometry_3d"
+    },
+    {
+      "source": "総当り",
+      "target": "브루트포스 알고리즘",
+      "reviewStatus": "approved",
+      "problemCount": 2,
+      "solvedAcKey": "bruteforcing"
+    },
+    {
+      "source": "線形計画問題",
+      "target": "선형 계획법",
+      "reviewStatus": "approved",
+      "problemCount": 2,
+      "solvedAcKey": "linear_programming"
+    },
+    {
+      "source": "離散対数",
+      "target": "이산 로그",
+      "reviewStatus": "approved",
+      "problemCount": 2,
+      "solvedAcKey": "discrete_log"
+    },
+    {
+      "source": "2部グラフの最大マッチング",
+      "target": "이분 매칭",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "bipartite_matching"
+    },
+    {
+      "source": "Lucasの定理",
+      "target": "뤼카 정리",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "lucas"
+    },
+    {
+      "source": "オイラー関数",
+      "target": "오일러 피 함수",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "euler_phi"
+    },
+    {
+      "source": "オフラインクエリ",
+      "target": "오프라인 쿼리",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "offline_queries"
+    },
+    {
+      "source": "グラフ探索",
+      "target": "그래프 탐색",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "graph_traversal"
+    },
+    {
+      "source": "グラフ理論",
+      "target": "그래프 이론",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "graphs"
+    },
+    {
+      "source": "スタック",
+      "target": "스택",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "stack"
+    },
+    {
+      "source": "パリティ",
+      "target": "홀짝성",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "parity"
+    },
+    {
+      "source": "ビットDP",
+      "target": "비트필드를 이용한 다이나믹 프로그래밍",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "dp_bitfield"
+    },
+    {
+      "source": "ベルマンフォード法",
+      "target": "벨만–포드",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "bellman_ford"
+    },
+    {
+      "source": "マトロイド",
+      "target": "매트로이드",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "matroid"
+    },
+    {
+      "source": "メビウスの反転公式",
+      "target": "뫼비우스 반전 공식",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "mobius_inversion"
+    },
+    {
+      "source": "ランダム性",
+      "target": "무작위화",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "randomization"
+    },
+    {
+      "source": "リュカの定理",
+      "target": "뤼카 정리",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "lucas"
+    },
+    {
+      "source": "ワーシャルフロイド法",
+      "target": "플로이드–워셜",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "floyd_warshall"
+    },
+    {
+      "source": "一次元いもす法",
+      "target": "차분 배열 트릭",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "difference_array"
+    },
+    {
+      "source": "一筆描き",
+      "target": "오일러 경로",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "eulerian_path"
+    },
+    {
+      "source": "三平方の定理",
+      "target": "피타고라스 정리",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "pythagoras"
+    },
+    {
+      "source": "三次元空間",
+      "target": "3차원 기하학",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "geometry_3d"
+    },
+    {
+      "source": "二分法",
+      "target": "이분 탐색",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "binary_search"
+    },
+    {
+      "source": "二分累乗法",
+      "target": "분할 정복을 이용한 거듭제곱",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "exponentiation_by_squaring"
+    },
+    {
+      "source": "二重辺連結成分分解",
+      "target": "이중 연결 요소",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "bcc"
+    },
+    {
+      "source": "保存量",
+      "target": "불변량 찾기",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "invariant"
+    },
+    {
+      "source": "偏角ソート",
+      "target": "각도 정렬",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "angle_sorting"
+    },
+    {
+      "source": "偶奇に着目",
+      "target": "홀짝성",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "parity"
+    },
+    {
+      "source": "再帰関数",
+      "target": "재귀",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "recursion"
+    },
+    {
+      "source": "多点評価",
+      "target": "다중 대입값 계산",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "multipoint_evaluation"
+    },
+    {
+      "source": "安定マッチング",
+      "target": "안정 결혼 문제",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "stable_marriage"
+    },
+    {
+      "source": "数値解析",
+      "target": "수치해석",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "numerical_analysis"
+    },
+    {
+      "source": "最大フロー",
+      "target": "최대 유량",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "flow"
+    },
+    {
+      "source": "最短経路問題",
+      "target": "최단 경로",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "shortest_path"
+    },
+    {
+      "source": "最長増加部分列",
+      "target": "가장 긴 증가하는 부분 수열 문제",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "lis"
+    },
+    {
+      "source": "桁dp",
+      "target": "자릿수를 이용한 다이나믹 프로그래밍",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "dp_digit"
+    },
+    {
+      "source": "深さ優先探索,",
+      "target": "깊이 우선 탐색",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "dfs"
+    },
+    {
+      "source": "物理",
+      "target": "물리학",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "physics"
+    },
+    {
+      "source": "答えで二分探索",
+      "target": "매개 변수 탐색",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "parametric_search"
+    },
+    {
+      "source": "組み合わせ",
+      "target": "조합론",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "combinatorics"
+    },
+    {
+      "source": "組み合わせ論",
+      "target": "조합론",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "combinatorics"
+    },
+    {
+      "source": "統計",
+      "target": "통계학",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "statistics"
+    },
+    {
+      "source": "線型計画法",
+      "target": "선형 계획법",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "linear_programming"
+    },
+    {
+      "source": "線形計画",
+      "target": "선형 계획법",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "linear_programming"
+    },
+    {
+      "source": "離散対数問題",
+      "target": "이산 로그",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "discrete_log"
+    },
+    {
+      "source": "高速フーリエ変換",
+      "target": "고속 푸리에 변환",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "fft"
+    },
+    {
+      "source": "鳩の巣原理",
+      "target": "비둘기집 원리",
+      "reviewStatus": "approved",
+      "problemCount": 1,
+      "solvedAcKey": "pigeonhole_principle"
+    }
+  ]
+}

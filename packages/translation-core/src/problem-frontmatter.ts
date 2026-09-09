@@ -1,4 +1,9 @@
-import { isScalar, parseDocument } from "yaml";
+import {
+  problemReviews,
+  metadataReviewStatus,
+  type ProblemReviews,
+} from "./problem-review-status.ts";
+import { isMap, isScalar, parseDocument, type Document } from "yaml";
 import {
   metadataSchema,
   type ProblemMarkdownMetadata,
@@ -63,12 +68,64 @@ function replaceFrontmatterField(
 export function setProblemMarkdownReviewStatus(
   source: string,
   status: "unreviewed" | "approved",
+  reviewer: "human" | "machine" = "human",
 ): string {
-  return replaceFrontmatterField(source, "reviewStatus", status);
+  const current = metadataReviewStatus(parseProblemMarkdown(source).metadata);
+  if (typeof current === "string" && reviewer === "human")
+    return replaceFrontmatterField(source, "reviewStatus", status);
+  return setProblemMarkdownReviews(source, {
+    ...problemReviews(current),
+    [reviewer]: status,
+  });
 }
 
 export function removeProblemMarkdownMachineLabel(source: string): string {
   return parseProblemMarkdown(source).metadata.reviewStatus === "machine"
     ? setProblemMarkdownReviewStatus(source, "unreviewed")
     : source;
+}
+
+export function setProblemMarkdownReviews(
+  source: string,
+  reviews: ProblemReviews,
+): string {
+  const frontmatter = source.match(FRONTMATTER_PATTERN);
+  if (!frontmatter) throw new Error("Problem Markdown frontmatter is missing");
+  const doc: Document = parseDocument(frontmatter[1], { uniqueKeys: true });
+  if (doc.errors.length || !isMap(doc.contents))
+    throw new Error("Invalid problem frontmatter");
+  const legacy = doc.contents.items.find(
+    (pair) => isScalar(pair.key) && pair.key.value === "reviewStatus",
+  );
+  if (legacy) {
+    const comment =
+      legacy.value &&
+      typeof legacy.value === "object" &&
+      "comment" in legacy.value
+        ? legacy.value.comment
+        : undefined;
+    const commentBefore =
+      legacy.value &&
+      typeof legacy.value === "object" &&
+      "commentBefore" in legacy.value
+        ? legacy.value.commentBefore
+        : undefined;
+    legacy.key = doc.createNode("humanReview");
+    const value = doc.createNode(reviews.human);
+    if (typeof comment === "string") value.comment = comment;
+    if (typeof commentBefore === "string") value.commentBefore = commentBefore;
+    legacy.value = value;
+  } else doc.set("humanReview", reviews.human);
+  doc.set("machineReview", reviews.machine);
+  const machineIndex = doc.contents.items.findIndex(
+    (pair) => isScalar(pair.key) && pair.key.value === "machineReview",
+  );
+  const [machinePair] = doc.contents.items.splice(machineIndex, 1);
+  const humanIndex = doc.contents.items.findIndex(
+    (pair) => isScalar(pair.key) && pair.key.value === "humanReview",
+  );
+  doc.contents.items.splice(humanIndex + 1, 0, machinePair);
+  const newline = source.includes("\r\n") ? "\r\n" : "\n";
+  const yaml = doc.toString().trimEnd().replace(/\r?\n/g, newline);
+  return `---${newline}${yaml}${newline}---${source.slice(frontmatter[0].length - (frontmatter[0].endsWith("\r\n") ? 2 : frontmatter[0].endsWith("\n") ? 1 : 0))}`;
 }

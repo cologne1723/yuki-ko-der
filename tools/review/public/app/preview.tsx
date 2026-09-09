@@ -6,17 +6,22 @@ import { useComparisonScroll } from "./use-comparison-scroll.ts";
 export function Preview({
   html,
   title,
+  contentHeading,
   inert = false,
   showHeading = true,
   onFrame,
 }: {
   html: string;
   title: string;
+  contentHeading?: string;
   inert?: boolean;
   showHeading?: boolean;
   onFrame?: (frame: HTMLIFrameElement) => void;
 }) {
-  const source = useMemo(() => previewDocument(html, inert), [html, inert]);
+  const source = useMemo(
+    () => previewDocument(html, inert, undefined, contentHeading),
+    [html, inert, contentHeading],
+  );
   const position = useRef<{ top: number; left: number } | undefined>(undefined);
   const detachScroll = useRef<(() => void) | undefined>(undefined);
   useEffect(() => () => detachScroll.current?.(), []);

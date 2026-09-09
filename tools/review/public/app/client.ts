@@ -20,6 +20,16 @@ async function responseData<T>(
 }
 const requestOptions = (signal?: AbortSignal) => ({ init: { signal } });
 export const reviewApi = {
+  tags: (signal?: AbortSignal) =>
+    responseData(api.tags.$get({}, requestOptions(signal))),
+  deleteTag: (source: string, revision: string) =>
+    responseData(
+      api.tags[":source"].$delete({ param: { source }, json: { revision } }),
+    ),
+  saveTag: (
+    source: string,
+    json: InferRequestType<(typeof api.tags)[":source"]["$put"]>["json"],
+  ) => responseData(api.tags[":source"].$put({ param: { source }, json })),
   problems: (signal?: AbortSignal) =>
     responseData(api.problems.$get({}, requestOptions(signal))),
   problem: (number: string, signal?: AbortSignal) =>

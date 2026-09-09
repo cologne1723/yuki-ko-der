@@ -1,0 +1,93 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1091
+problemId: 4570
+sourceTitle: "Range Xor Query"
+sourceHtmlSha256: "c2c183a39dc91d5c3e93149864860aeacfadb1cd471d598449092730e2f1309b"
+humanReview: null
+machineReview: unreviewed
+title: "구간 XOR 질의"
+---
+
+## 문제 설명
+
+길이가 $N$인 수열 $a_1, a_2, \dots, a_N$이 있습니다.
+
+$\displaystyle \bigoplus_{i = l}^{r} a_i = a_l\ xor\ a_{l+1}\ xor\ \dots\ xor\ a_r$로 정의합니다.
+
+$j$번 질의($1 \le j \le Q$)에서는 $\displaystyle \bigoplus_{i = l_j}^{r_j} a_i$를 구하세요.
+
+$a\ xor\ b$는 $a$, $b$를 2진수로 나타냈을 때 각 자릿수에 대해 $a$, $b$ 모두 비트가 켜져 있거나 모두 꺼져 있으면 해당 자릿수를 $0$으로, 그렇지 않으면 $1$로 만드는 연산입니다. 자세한 내용은 "배타적 논리합"으로 검색하세요.
+
+## 입력
+
+```text
+$N\ Q$
+$a_1\ a_2\ \dots\ a_N$
+$l_1\ r_1$
+$l_2\ r_2$
+$\dots$
+$l_Q\ r_Q$
+```
+
+입력은 위 형식으로 주어집니다.
+
+## 제한
+
+$1 \le N, Q \le 2 \times 10^5$
+
+$1 \le a_i \le 10^5$
+
+$1 \le l_j \le r_j \le N$
+
+## 출력
+
+$Q$개의 답을 줄바꿈으로 구분하여 $Q$줄에 걸쳐 출력하세요. 마지막에 줄바꿈을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+10 10
+4 1 3 10 1 4 9 4 2 7
+1 10
+10 10
+1 5
+1 5
+2 4
+4 10
+1 2
+1 4
+9 9
+5 10
+```
+
+#### 출력
+
+```text
+1
+7
+13
+13
+8
+7
+5
+12
+2
+13
+```
+
+(출제자 공지) yukicoder 문제 정책에 대응하기 위해 샘플을 변경했습니다. (12/13 23:10)
+
+## 출처
+
+[YSF Beginner Contest: D - 구간 XOR 질의](https://www.hackerrank.com/contests/ysf1/challenges/ysf1-d)
+
+writer: null  
+tester: butsuri_0523
+
+HackerRank의 규약에 따라 이식되었습니다. 일부 사이트의 사정 등으로 수정된 부분이 있습니다.

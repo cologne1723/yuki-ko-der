@@ -24,6 +24,10 @@ export async function bundle(
     define: {
       __YUKICODER_PROBLEM_TITLES__: JSON.stringify(titles),
       __YUKICODER_EXTENSION_MESSAGES__: JSON.stringify(messages),
+      __YUKICODER_TAG_TRANSLATIONS__: await readFile(
+        "translations/tags/ko.json",
+        "utf8",
+      ).then((text) => JSON.stringify(JSON.parse(text).tags)),
     },
   });
   return result.outputFiles[0].text;

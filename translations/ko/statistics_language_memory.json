@@ -1,0 +1,114 @@
+{
+  "$schema": "../translations.schema.json",
+  "locale": "ko",
+  "sourceLocale": "ja",
+  "translations": [
+    {
+      "selector": "#content h4",
+      "ref": "ui_da5f620ea008549d"
+    },
+    {
+      "selector": "#content .description",
+      "ref": "ui_12f1cf82da436356",
+      "preserveBoundaryWhitespace": false
+    },
+    {
+      "selector": "#content b, #languageMemoryTable th",
+      "ref": "ui_4441074a26013099"
+    },
+    {
+      "selector": "#content .description",
+      "ref": "ui_f5f216c9485ea038"
+    },
+    {
+      "selector": "#content .description b",
+      "ref": "ui_694235534df62009"
+    },
+    {
+      "selector": "#content .description",
+      "ref": "ui_a8deeeb16444648f"
+    },
+    {
+      "selector": "#content .description",
+      "ref": "ui_8ab33c0458ee51a2",
+      "preserveBoundaryWhitespace": false
+    },
+    {
+      "selector": "#content .description small",
+      "ref": "ui_473f0cce702c55fa"
+    },
+    {
+      "selector": "#languageMemoryTable th",
+      "ref": "ui_eaf482538bdd4206"
+    },
+    {
+      "selector": "#languageMemoryTable th",
+      "ref": "ui_f27ce23b5f441478"
+    },
+    {
+      "selector": "#languageMemoryTable th",
+      "ref": "ui_1cf12934ba0f8e96"
+    },
+    {
+      "selector": "#languageMemoryTable th",
+      "ref": "ui_c0f1f54ad739e921"
+    },
+    {
+      "selector": "#content h4",
+      "ref": "ui_ff48d9e7471ffdaa"
+    },
+    {
+      "selector": "#content li",
+      "ref": "ui_73491e5e12b0fe93"
+    },
+    {
+      "selector": "#content li code",
+      "ref": "ui_c0cdd0a962bc0d5a"
+    },
+    {
+      "selector": "#content li",
+      "ref": "ui_be4ab4bab34f798a"
+    },
+    {
+      "selector": "#content li b",
+      "ref": "ui_111edff0d7f50e1f"
+    },
+    {
+      "selector": "#content li",
+      "ref": "ui_863cc21eea34d05f"
+    },
+    {
+      "selector": "#content li",
+      "ref": "ui_483611bb61519640"
+    },
+    {
+      "selector": "#content li",
+      "ref": "ui_5dff69e79a651a7f"
+    },
+    {
+      "selector": "#content li",
+      "ref": "ui_21bb5cdaa26d1f73"
+    },
+    {
+      "selector": "#content li",
+      "ref": "ui_abba8bacd66aee53"
+    },
+    {
+      "selector": "#languageMemoryTable td",
+      "ref": "ui_13a55efa2e8b37e6"
+    },
+    {
+      "selector": "#languageMemoryTable td",
+      "ref": "ui_d01d656346ce7e50"
+    },
+    {
+      "selector": "#languageMemoryTable td",
+      "ref": "ui_09a81b127c54895b"
+    },
+    {
+      "selector": "#languageMemoryTable td",
+      "ref": "ui_0639256f38c5bb91",
+      "variant": 0
+    }
+  ]
+}

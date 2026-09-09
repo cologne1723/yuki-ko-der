@@ -20,6 +20,8 @@ test("review status edits preserve comments, surrounding metadata and exact samp
       ">- # retained\n  machine",
     ]) {
       const source = original
+        .replace(/^humanReview:.*$/m, "reviewStatus: machine")
+        .replace(/^machineReview:.*\r?\n/m, "")
         .replace(/^reviewStatus:.*$/m, `reviewStatus: ${scalar}`)
         .replace(/\r?\n/g, newline);
       const result = setProblemMarkdownReviewStatus(source, "approved");

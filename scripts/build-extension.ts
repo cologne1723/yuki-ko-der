@@ -1,6 +1,6 @@
 import { copyBuildTree } from "translation-core/build-files";
 import { checkCatalog, readCatalog } from "translation-core/catalog-files";
-import { buildDirectory } from "translation-core/paths";
+import { buildDirectory, defaultDataDirectory } from "translation-core/paths";
 
 import { build } from "esbuild";
 import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
@@ -9,11 +9,17 @@ import { fileURLToPath } from "node:url";
 import { readProblemTitleCatalog } from "translation-core/problem-title-catalog";
 import { extensionMessageIds } from "../src/extension-message-ids";
 import { buildToolbarIcons } from "./build-toolbar-icons.ts";
+import { tagTranslationsSchema } from "../src/tag-translations.ts";
 
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const outputRoot = buildDirectory("extension", "chrome");
 
 await checkCatalog();
+const tagTranslations = tagTranslationsSchema.parse(
+  JSON.parse(
+    await readFile(join(repositoryRoot, "translations/tags/ko.json"), "utf8"),
+  ),
+).tags;
 const catalog = await readCatalog(repositoryRoot);
 const extensionMessages = Object.fromEntries(
   Object.entries(extensionMessageIds).map(([key, id]) => {
@@ -29,6 +35,7 @@ await mkdir(join(outputRoot, "src"), { recursive: true });
 
 const problemTitles = await readProblemTitleCatalog(
   join(repositoryRoot, "problem-translations", "ko", "problems"),
+  join(defaultDataDirectory(repositoryRoot), "problems-source/index.json"),
 );
 
 await build({
@@ -42,6 +49,7 @@ await build({
   define: {
     __YUKICODER_PROBLEM_TITLES__: JSON.stringify(problemTitles),
     __YUKICODER_EXTENSION_MESSAGES__: JSON.stringify(extensionMessages),
+    __YUKICODER_TAG_TRANSLATIONS__: JSON.stringify(tagTranslations),
   },
   entryNames: "[name]",
   format: "iife",

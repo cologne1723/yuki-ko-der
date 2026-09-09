@@ -20,17 +20,19 @@ import { Problems } from './public/app/problems.tsx';
 import { Glossary } from './public/app/glossary.tsx';
 import { Imports } from './public/app/imports.tsx';
 import { Tools } from './public/app/tasks.tsx';
+import { Tags } from './public/app/tags.tsx';
 import { Comparison } from './public/app/preview.tsx';
 import { EditorView } from 'codemirror';
 export { screen, fireEvent, waitFor };
 let client, router;
 export function mount(path, kind) {
  client = new QueryClient({defaultOptions:{queries:{retry:false,gcTime:0},mutations:{retry:false}}});
- router = createMemoryRouter([{element:kind==='shell'?<Shell/>:<><div id="review-problem-navigation"/><Outlet/></>,children:[{path:'/',element:<Problems/>},{path:'/ui',element:kind==='imports'?<Imports/>:<Glossary/>},{path:'/tools',element:<Tools/>},{path:'/preview',element:<Comparison japanese="<p>Original</p>" korean="<p>Translation</p>"/>}]}],{initialEntries:[path]});
+ router = createMemoryRouter([{element:kind==='shell'?<Shell/>:<><div id="review-problem-navigation"/><Outlet/></>,children:[{path:'/',element:<Problems/>},{path:'/ui',element:kind==='imports'?<Imports/>:<Glossary/>},{path:'/tools',element:<Tools/>},{path:'/tags',element:<Tags/>},{path:'/preview',element:<Comparison japanese="<p>Original</p>" korean="<p>Translation</p>"/>}]}],{initialEntries:[path]});
  render(<MantineProvider env="test"><ModalsProvider><QueryClientProvider client={client}><RouterProvider router={router}/></QueryClientProvider></ModalsProvider></MantineProvider>);
  return userEvent.setup({document});
 }
 export function edit(source){const view=EditorView.findFromDOM(document.querySelector('.cm-editor'));view.dispatch({changes:{from:0,to:view.state.doc.length,insert:source}});}
+export function editorView(){return EditorView.findFromDOM(document.querySelector('.cm-editor'));}
 export function navigate(path){return router.navigate(path);}
 export function unmount(){cleanup();router.dispose();client.clear();}
 `,
@@ -102,6 +104,7 @@ export function reactPage(
     fireEvent: any;
     waitFor: (f: () => unknown) => Promise<void>;
     edit: (s: string) => void;
+    editorView: () => import("codemirror").EditorView;
     navigate: (s: string) => Promise<void>;
   };
 }

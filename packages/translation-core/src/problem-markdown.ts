@@ -1,3 +1,7 @@
+import {
+  problemReviews,
+  metadataReviewStatus,
+} from "./problem-review-status.ts";
 import MarkdownIt from "markdown-it";
 import { parseProblemMarkdown } from "./problem-frontmatter.ts";
 type Token = ReturnType<ReturnType<typeof MarkdownIt>["parse"]>[number];
@@ -85,8 +89,19 @@ function renderStatement(body: string): string {
       i += 2;
       continue;
     }
-    if (!section)
-      throw new Error("Problem Markdown body must contain only ## sections");
+    if (!section) {
+      if (token.type !== "paragraph_open" || token.level !== 0)
+        throw new Error(
+          "Problem Markdown may contain only paragraphs before ## sections",
+        );
+      result += markdown.renderer.render(
+        tokens.slice(i, i + 3),
+        markdown.options,
+        environment,
+      );
+      i += 2;
+      continue;
+    }
     if (
       token.type === "heading_open" &&
       token.level === 0 &&
@@ -134,9 +149,13 @@ export function compileProblemMarkdown(source: string): string {
   const { metadata, body } = parseProblemMarkdown(source);
   const machineTranslated = metadata.reviewStatus === "machine";
   const label = machineTranslated ? "[기계 번역] " : "";
-  const htmlReviewStatus = machineTranslated
-    ? "unreviewed"
-    : metadata.reviewStatus;
+  const reviews = problemReviews(metadataReviewStatus(metadata));
+  const htmlReviewStatus =
+    reviews.human === "approved" ? "approved" : "unreviewed";
+  const reviewAttributes =
+    typeof metadataReviewStatus(metadata) === "object"
+      ? ` data-human-review="${reviews.human ?? "pending"}" data-machine-review="${reviews.machine}"`
+      : "";
   const statement = renderStatement(body);
   return `<!doctype html>
 <html lang="ko">
@@ -146,7 +165,7 @@ export function compileProblemMarkdown(source: string): string {
   <title>${label}${escapeHtml(`No.${metadata.problemNo} ${metadata.title}`)}</title>
 </head>
 <body>
-  <main data-yukicoder-ko-problem data-schema-version="${metadata.schemaVersion}" data-locale="${metadata.locale}" data-problem-no="${metadata.problemNo}" data-problem-id="${metadata.problemId}" data-source-title="${escapeHtml(metadata.sourceTitle)}" data-source-html-sha256="${metadata.sourceHtmlSha256}" data-review-status="${htmlReviewStatus}">
+  <main data-yukicoder-ko-problem data-schema-version="${metadata.schemaVersion}" data-locale="${metadata.locale}" data-problem-no="${metadata.problemNo}" data-problem-id="${metadata.problemId}" data-source-title="${escapeHtml(metadata.sourceTitle)}" data-source-html-sha256="${metadata.sourceHtmlSha256}" data-review-status="${htmlReviewStatus}"${reviewAttributes}>
     <h3>${label}${escapeHtml(`No.${metadata.problemNo} ${metadata.title}`)}</h3>
     <div class="problem-statement">
 ${statement}

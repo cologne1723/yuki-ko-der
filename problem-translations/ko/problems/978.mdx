@@ -1,0 +1,81 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 978
+problemId: 3209
+sourceTitle: "Fibonacci Convolution Easy"
+sourceHtmlSha256: "e1d1ac4c3a1c471f802f7216e62fe5bcafc73089a52b96863eb599d4955ce1b5"
+humanReview: null
+machineReview: unreviewed
+title: "피보나치 합성곱 Easy"
+---
+
+## 문제 설명
+
+수열 $a$를 $a_1 = 0$, $a_2 = 1$, $a_n = p \cdot a_{n - 1} + a_{n - 2}$로 정의합니다. 점화식은 $n \ge 3$에 적용됩니다.
+
+이때 $\displaystyle\sum_{i = 1}^{N} \sum_{j = 1}^{i} a_i \cdot a_j$를 $1\,000\,000\,007$로 나눈 나머지를 계산하세요.
+
+## 입력
+
+```text
+$N \; p$
+```
+
+## 제한
+
+- $1 \le N \le 2 \cdot 10^6$
+- $1 \le p \le 10^9$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+$\displaystyle\sum_{i = 1}^{N} \sum_{j = 1}^{i} a_i \cdot a_j$를 $1\,000\,000\,007$로 나눈 나머지를 출력하고, 마지막에 줄바꿈하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+3 3
+```
+
+#### 출력
+
+```text
+13
+```
+
+수열 $a$는 $0, 1, 3, 10, \ldots$으로 이어집니다.
+
+여기서 구해야 하는 것은 $a_1 \cdot a_1 + a_2 \cdot a_1 + a_2 \cdot a_2 + a_3 \cdot a_1 + a_3 \cdot a_2 + a_3 \cdot a_3$이므로, $0 + 0 + 1 + 0 + 3 + 9 = 13$이 됩니다.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+10 4
+```
+
+#### 출력
+
+```text
+370564556
+```
+
+### 예제 3 {file=""}
+
+#### 입력
+
+```text
+314159 265358979
+```
+
+#### 출력
+
+```text
+786063776
+```

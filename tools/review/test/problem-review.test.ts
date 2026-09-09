@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { tmpdir } from "node:os";
 import test, { after } from "node:test";
 import { JSDOM } from "jsdom";
+import { validateProblem } from "../src/problem-validation.ts";
 import {
   parseReviewState,
   ProblemReviewStore,
@@ -13,6 +14,30 @@ import {
 } from "../src/problem-review.ts";
 
 const fixtureRoots: string[] = [];
+test("review validation rejects an index record with the wrong public number even when ID and title match", async () => {
+  const root = await fixtureRoot();
+  const current = await new ProblemReviewStore(root).get(1);
+  assert.throws(
+    () =>
+      validateProblem(
+        1,
+        current.japaneseHtml,
+        current.koreanHtml,
+        { No: 17, ProblemId: 17, Title: "Fixture" },
+        "mdx",
+      ),
+    /number, ID/,
+  );
+  assert.doesNotThrow(() =>
+    validateProblem(
+      1,
+      current.japaneseHtml,
+      current.koreanHtml,
+      { No: 1, ProblemId: 17, Title: "Fixture" },
+      "mdx",
+    ),
+  );
+});
 after(() =>
   Promise.all(
     fixtureRoots.map((root) => rm(root, { recursive: true, force: true })),
@@ -352,4 +377,70 @@ test("conversion recovery preserves edited sources and isolates ambiguous proble
     if (changed !== "no-intent")
       assert.ok(await readFile(join(recovery, "1.json")));
   }
+});
+
+test("human review overrides machine approval and edited content resets both decisions", async () => {
+  const store = new ProblemReviewStore(await fixtureRoot());
+  let current = await store.get(1);
+  current = await store.save(
+    1,
+    current.koreanSource,
+    current.revision,
+    "approve",
+    "machine",
+  );
+  assert.deepEqual(current.reviews, { human: null, machine: "approved" });
+  assert.equal(current.reviewStatus, "approved");
+  assert.match(current.koreanHtml, /data-review-status="unreviewed"/);
+  const machineRevision = current.revision;
+  current = await store.save(
+    1,
+    current.koreanSource,
+    current.revision,
+    "unapprove",
+  );
+  assert.deepEqual(current.reviews, {
+    human: "unreviewed",
+    machine: "approved",
+  });
+  assert.equal(current.reviewStatus, "unreviewed");
+  current = await store.save(
+    1,
+    current.koreanSource,
+    current.revision,
+    "approve",
+    "machine",
+  );
+  assert.equal(current.reviewStatus, "unreviewed");
+  current = await store.save(
+    1,
+    current.koreanSource,
+    current.revision,
+    "approve",
+  );
+  assert.deepEqual(current.reviews, { human: "approved", machine: "approved" });
+  assert.match(current.koreanHtml, /data-review-status="approved"/);
+  current = await store.save(
+    1,
+    current.koreanSource,
+    current.revision,
+    "unapprove",
+    "machine",
+  );
+  assert.equal(current.reviewStatus, "approved");
+  await assert.rejects(
+    store.save(1, current.koreanSource, machineRevision, "approve", "machine"),
+    /changed on disk/,
+  );
+  current = await store.save(
+    1,
+    current.koreanSource.replace("마을에는", "도시에는"),
+    current.revision,
+    "save",
+  );
+  assert.deepEqual(current.reviews, {
+    human: "unreviewed",
+    machine: "unreviewed",
+  });
+  assert.equal(current.reviewStatus, "unreviewed");
 });

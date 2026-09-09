@@ -1,0 +1,92 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1094
+problemId: 4567
+sourceTitle: "木登り / Climbing tree"
+sourceHtmlSha256: "bfcca711013b7d13f5909ce6790e2d3b446b67ef622001c6c9f17bed1238c546"
+humanReview: null
+machineReview: unreviewed
+title: "나무 오르기 / Climbing tree"
+---
+
+## 문제 설명
+
+$N$개의 정점으로 이루어진 가중치가 있는 무방향 트리가 주어집니다. $i(1 \le i \le N - 1)$번째 간선은 정점 $a_i$와 정점 $b_i$를 비용 $c_i$로 연결합니다.
+
+$Q$개의 질의에 대해, $j(1 \le j \le Q)$번째 질의에서는 정점 $s_j$에서 정점 $t_j$까지의 최소 비용을 출력하세요.
+
+## 입력
+
+```text
+$N$
+$a_1\ b_1\ c_1$
+$a_2\ b_2\ c_2$
+$\dots$
+$a_{N-1}\ b_{N-1}\ c_{N-1}$
+$Q$
+$s_1\ t_1$
+$s_2\ t_2$
+$\dots$
+$s_Q\ t_Q$
+```
+
+## 제한
+
+$1 \le N, Q \le 2 \times 10^5$
+
+$a_i$, $b_i$, $c_i$는 정점 $a_i$와 정점 $b_i$를 비용 $c_i$로 연결하는 간선이 있음을 나타냅니다.
+
+$1 \le a_i, b_i, s_j, t_j \le N$
+
+$1 \le c_i \le 10^4$
+
+입력은 모두 정수입니다.
+
+입력은 트리입니다.
+
+## 출력
+
+답을 줄바꿈으로 구분하여 $Q$줄에 걸쳐 출력하세요. 마지막에 줄바꿈을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+5
+1 2 1
+2 3 10
+1 4 100
+2 5 1000
+6
+1 2
+1 5
+2 4
+1 4
+5 3
+1 1
+```
+
+#### 출력
+
+```text
+1
+1001
+101
+100
+1010
+0
+```
+
+## 출처
+
+[YSF Beginner Contest: G - 나무 오르기 / Climbing tree](https://www.hackerrank.com/contests/ysf1/challenges/ysf1-G)
+
+출제자: null
+
+테스터: butsuri_0523
+
+HackerRank의 규약에 따라 이식되었습니다. 일부 사이트의 사정에 따라 수정된 부분이 있습니다.

@@ -6,6 +6,7 @@ export function previewDocument(
   html: string,
   inert: boolean,
   origin = location.origin,
+  contentHeading?: string,
 ) {
   const clean = DOMPurify.sanitize(html, {
     WHOLE_DOCUMENT: true,
@@ -14,6 +15,11 @@ export function previewDocument(
     FORBID_TAGS: ["base", "form", "iframe", "object", "embed", "meta"],
   });
   const doc = new DOMParser().parseFromString(clean, "text/html");
+  if (contentHeading) {
+    const heading = doc.createElement("h3");
+    heading.textContent = contentHeading;
+    doc.body.prepend(heading);
+  }
   const base = doc.createElement("base");
   base.href = "https://yukicoder.me/";
   doc.head.prepend(base);

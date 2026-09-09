@@ -32,16 +32,6 @@ export function createProblemReplacement(
 
     const copyWrappers: HTMLElement[] = [];
     const originalTitle = [...liveTitle.childNodes];
-    const reviewStatus = (translation.title.parentElement as HTMLElement | null)
-      ?.dataset.reviewStatus;
-    const notice =
-      reviewStatus && reviewStatus !== "approved"
-        ? document.createElement("p")
-        : undefined;
-    if (notice) {
-      notice.className = "yukicoder-ko-machine-notice";
-      notice.textContent = "아래 텍스트는 기계번역 되었습니다";
-    }
     const originalValues = liveBlocks.flatMap((block) => [
       ...block.querySelectorAll(".sample pre"),
     ]);
@@ -67,7 +57,6 @@ export function createProblemReplacement(
     const apply = () => {
       try {
         liveTitle.textContent = translation.title.textContent;
-        if (notice) liveTitle.before(notice);
         liveBlocks.forEach((block, index) => block.replaceWith(anchors[index]));
         anchors[0].before(...importedBlocks);
         for (const { control, translated, parent, nextSibling } of controls) {
@@ -98,7 +87,6 @@ export function createProblemReplacement(
       }
       for (const wrapper of copyWrappers.splice(0))
         wrapper.replaceWith(...wrapper.childNodes);
-      notice?.remove();
       liveTitle.replaceChildren(...originalTitle);
       importedBlocks.forEach((block) => block.remove());
       anchors.forEach((anchor, index) => {

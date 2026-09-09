@@ -31,7 +31,7 @@ export class CatalogTransactions {
         (item) =>
           !item ||
           typeof item.path !== "string" ||
-          !/^translations\/(?:ko\.messages\.json|ko\/[a-z0-9_]+\.json)$/u.test(
+          !/^(?:translations\/(?:ko\.messages\.json|ko\/[a-z0-9_]+\.json)|translations\/tags\/ko\.json)$/u.test(
             item.path,
           ) ||
           typeof item.raw !== "string" ||

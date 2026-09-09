@@ -7483,6 +7483,133 @@
       "source": "質問を入力してください",
       "target": "질문을 입력해 주세요",
       "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_da5f620ea008549d",
+      "source": "言語別メモリ",
+      "target": "언어별 메모리",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_12f1cf82da436356",
+      "source": "各言語の",
+      "target": "각 언어의 ",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_4441074a26013099",
+      "source": "参考提出",
+      "target": "참고 제출",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_f5f216c9485ea038",
+      "source": "を解いた最小限の提出）を 本番と同じジャッジサーバで実行し、その使用メモリから 「この言語が通るために最低限必要なメモリ制限」を出しています。",
+      "target": "를 푼 최소한의 제출)을 실제 채점과 동일한 채점 서버에서 실행한 뒤, 그 메모리 사용량으로 각 언어가 통과하는 데 필요한 최소 메모리 제한을 구합니다.",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_694235534df62009",
+      "source": "メモリ制限をこの値より小さくすると、解法とは関係なくその言語では MLE になります。",
+      "target": "메모리 제한을 이 값보다 작게 설정하면 풀이 방법과 관계없이 해당 언어에서 MLE가 발생합니다.",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_a8deeeb16444648f",
+      "source": "いちばん要るのは",
+      "target": "가장 많은 메모리가 필요한 언어는",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_8ab33c0458ee51a2",
+      "source": "です。全言語を通したいなら、メモリ制限はこれに解法が使う分を足した値にしてください。 メモリ制限の上限は {limit} MB です。",
+      "target": "를 사용합니다. 모든 언어가 통과하게 하려면 이 값에 풀이에 필요한 메모리를 더해 메모리 제한을 설정하세요. 메모리 제한의 상한은 {limit} MB입니다.",
+      "reviewStatus": "approved",
+      "variables": { "limit": "[0-9]+" }
+    },
+    {
+      "id": "ui_473f0cce702c55fa",
+      "source": "※ 言語のバージョンを上げると変わるので、更新のたびに測り直しています。",
+      "target": "※ 언어 버전을 올리면 값이 달라지므로 업데이트할 때마다 다시 측정합니다.",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_1cf12934ba0f8e96",
+      "source": "最低メモリ制限",
+      "target": "최소 메모리 제한",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_c0f1f54ad739e921",
+      "source": "計測値",
+      "target": "측정값",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_ff48d9e7471ffdaa",
+      "source": "この数字の読み方",
+      "target": "이 수치의 의미",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_73491e5e12b0fe93",
+      "source": "判定に使うのは提出プロセスの使用メモリ（Maxrss）です。ジャッジは",
+      "target": "판정에는 제출 프로세스의 메모리 사용량(Maxrss)을 사용합니다. 채점기는",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_c0cdd0a962bc0d5a",
+      "source": "使用メモリ(KB) >= 1000 × メモリ制限(MB)",
+      "target": "메모리 사용량(KB) >= 1000 × 메모리 제한(MB)",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_be4ab4bab34f798a",
+      "source": "で MLE にするので、 「最低メモリ制限」は計測値を 1000 で割って切り上げた値ではなく、",
+      "target": "이면 MLE로 판정하므로, ‘최소 메모리 제한’은 측정값을 1000으로 나누어 올림한 값이 아니라",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_111edff0d7f50e1f",
+      "source": "それを超える最小の整数",
+      "target": "그 몫보다 큰 가장 작은 정수",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_863cc21eea34d05f",
+      "source": "です。 例えば 43104 KB の言語は 43 MB では",
+      "target": "입니다. 예를 들어 43104 KB를 사용하는 언어의 메모리 제한을 43 MB로 설정하면",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_483611bb61519640",
+      "source": "で MLE になるため、44 MB が要ります。",
+      "target": "이므로 MLE가 발생합니다. 따라서 44 MB가 필요합니다.",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_5dff69e79a651a7f",
+      "source": "どの言語も 8 MB 程度が下限になります。計測値には実行を包む仕組みの分が含まれるためで、 何もしないプログラムでもこれを下回りません。この付近に並んでいる言語は、 実質「言語による差が無い」と読んでください。",
+      "target": "모든 언어의 하한은 약 8 MB입니다. 측정값에는 프로그램 실행을 감싸는 시스템의 메모리 사용량도 포함되므로, 아무 작업도 하지 않는 프로그램도 이보다 적게 사용할 수는 없습니다. 이 값 근처에 모여 있는 언어들은 사실상 언어에 따른 차이가 없다고 보면 됩니다.",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_21bb5cdaa26d1f73",
+      "source": "コンパイルで使うメモリはメモリ制限の対象外なので、この表には入っていません。",
+      "target": "컴파일에 사용하는 메모리는 메모리 제한의 적용 대상이 아니므로 이 표에 포함하지 않습니다.",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_abba8bacd66aee53",
+      "source": "計測値は実行ごとに多少ぶれます。",
+      "target": "측정값은 실행할 때마다 조금씩 달라집니다.",
+      "reviewStatus": "approved"
+    },
+    {
+      "id": "ui_30e506a1715bbeee",
+      "source": "マイページの練習モードが「ノーマル」または「ガチ」なので、解いてない問題は検索されません。",
+      "target": "마이 페이지의 연습 모드가 '노멀' 또는 '열심'이므로, 풀지 않은 문제는 검색되지 않습니다.",
+      "reviewStatus": "approved"
     }
   ]
 }

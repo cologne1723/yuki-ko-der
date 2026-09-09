@@ -11,11 +11,12 @@ export function createContentNotices(
   notice.style.cssText = "font:inherit;font-size:0.9em;margin:0.5em 0";
   let noticeText = "";
   let showOriginal: (() => void) | undefined;
+  let actionLabel = "원문 보기";
 
   function renderNotice() {
     const text = [...notices.values()].map((value) => value.text).join(" ");
     const retry = [...notices.values()].some((value) => value.retry);
-    const identity = text + retry + Boolean(showOriginal);
+    const identity = text + retry + Boolean(showOriginal) + actionLabel;
     if (!text && !showOriginal) {
       notice.remove();
       noticeText = "";
@@ -37,7 +38,7 @@ export function createContentNotices(
     if (showOriginal) {
       const button = document.createElement("button");
       button.type = "button";
-      button.textContent = "원문 보기";
+      button.textContent = actionLabel;
       if (text || retry) button.style.marginInlineStart = "0.5em";
       button.onclick = () => showOriginal?.();
       notice.append(button);
@@ -61,8 +62,9 @@ export function createContentNotices(
       else notices.delete(part);
       renderNotice();
     },
-    setOriginalAction(action: () => void) {
+    setOriginalAction(action: () => void, label = "원문 보기") {
       showOriginal = action;
+      actionLabel = label;
       renderNotice();
     },
     clear() {

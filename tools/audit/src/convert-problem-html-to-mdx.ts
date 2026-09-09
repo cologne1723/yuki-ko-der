@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { parseReviewState } from "translation-core/review-state";
 import { cliOptions } from "translation-core/cli-options";
 
 import { atomicNewFile } from "./operations/source-store.ts";
@@ -29,6 +30,7 @@ export function convertProblemHtmlToMarkdown(html: string): string {
       .replace(/^\[기계 번역\]\s*/u, "")
       .replace(/^No\.\d+\s*/u, "")
       .trim();
+    const reviews = parseReviewState(html).reviews;
     const metadata = [
       "---",
       `schemaVersion: ${root.dataset.schemaVersion}`,
@@ -37,7 +39,14 @@ export function convertProblemHtmlToMarkdown(html: string): string {
       `problemId: ${root.dataset.problemId}`,
       `sourceTitle: ${JSON.stringify(root.dataset.sourceTitle)}`,
       `sourceHtmlSha256: ${root.dataset.sourceHtmlSha256}`,
-      `reviewStatus: ${heading.textContent?.trim().startsWith("[기계 번역]") ? "machine" : root.dataset.reviewStatus}`,
+      ...(reviews
+        ? [
+            `humanReview: ${reviews.human ?? "null"}`,
+            `machineReview: ${reviews.machine}`,
+          ]
+        : [
+            `reviewStatus: ${heading.textContent?.trim().startsWith("[기계 번역]") ? "machine" : root.dataset.reviewStatus}`,
+          ]),
       `title: ${JSON.stringify(title)}`,
       "---",
     ];

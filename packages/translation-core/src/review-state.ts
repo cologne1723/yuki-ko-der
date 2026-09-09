@@ -1,3 +1,8 @@
+import {
+  problemReviewStatusSchema,
+  effectiveProblemStatus,
+  type ProblemReviews,
+} from "./problem-review-status.ts";
 import { JSDOM } from "jsdom";
 import { sampleWarnings } from "./problem-samples.ts";
 export type ReviewStatus = "unreviewed" | "approved";
@@ -18,6 +23,7 @@ export function parseReviewState(html: string): {
   koreanTitle: string;
   machineTranslated: boolean;
   reviewStatus: ReviewStatus;
+  reviews?: ProblemReviews;
 } {
   const dom = new JSDOM(html);
   try {
@@ -74,12 +80,31 @@ export function parseReviewState(html: string): {
         "Problem HTML must contain exactly one review status",
       );
     }
+    const hasReviews =
+      root.hasAttribute("data-human-review") ||
+      root.hasAttribute("data-machine-review");
+    const reviews = hasReviews
+      ? problemReviewStatusSchema.parse({
+          human:
+            root.dataset.humanReview === "pending"
+              ? null
+              : root.dataset.humanReview,
+          machine: root.dataset.machineReview,
+        })
+      : undefined;
+    if (
+      reviews &&
+      reviewStatus !==
+        (reviews.human === "approved" ? "approved" : "unreviewed")
+    )
+      throw new ReviewError("Public review status must reflect human approval");
     return {
       koreanTitle: heading
         .replace(/^\[기계 번역\]\s*/u, "")
         .replace(/^No\.\d+\s*/u, ""),
       machineTranslated: pageIsMachine,
-      reviewStatus,
+      reviewStatus: reviews ? effectiveProblemStatus(reviews) : reviewStatus,
+      ...(reviews ? { reviews } : {}),
     };
   } finally {
     dom.window.close();

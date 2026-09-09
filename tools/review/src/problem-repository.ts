@@ -8,11 +8,18 @@ import { z } from "translation-core/validation";
 import type { ProblemReview, ProblemSummary } from "./problem-review.ts";
 import { validateProblem } from "./problem-validation.ts";
 const metadataSchema = z.looseObject({
-  No: z.number().int().nonnegative(),
-  ProblemId: z.number().int().nonnegative(),
+  No: z.number().int().positive(),
+  ProblemId: z.number().int().positive(),
   Title: z.string(),
 });
-const indexSchema = z.looseObject({ problems: z.array(metadataSchema) });
+const indexSchema = z
+  .looseObject({ problems: z.array(metadataSchema) })
+  .refine(
+    ({ problems }) =>
+      new Set(problems.map((p) => p.No)).size === problems.length &&
+      new Set(problems.map((p) => p.ProblemId)).size === problems.length,
+    "Source index contains duplicate public problem numbers or internal IDs",
+  );
 type ProblemMetadata = z.infer<typeof metadataSchema>;
 export class ProblemRepository {
   constructor(
@@ -42,8 +49,8 @@ export class ProblemRepository {
     koreanHtml: string;
     koreanMdx: string;
   } {
-    if (!Number.isSafeInteger(problemNo) || problemNo < 0) {
-      throw new ReviewError("Problem number must be a non-negative integer");
+    if (!Number.isSafeInteger(problemNo) || problemNo < 1) {
+      throw new ReviewError("Problem number must be a positive integer");
     }
     return {
       japanese: join(this.sourceDirectory, `${problemNo}.html`),

@@ -1,3 +1,7 @@
+import {
+  legacyProblemStatus,
+  metadataReviewStatus,
+} from "translation-core/problem-review-status";
 import { readFile, readdir } from "node:fs/promises";
 import { basename, join } from "node:path";
 import { checkCatalog, readCatalog } from "translation-core/catalog-files";
@@ -68,11 +72,12 @@ export async function inputRevision(
     for (const file of await readdir(directory))
       if (file.endsWith(".json")) paths.push(join(directory, file));
   }
-  if (input.operation === "audit-problems") {
+  if (["audit-problems", "validate-problems"].includes(input.operation)) {
     const directory = join(context.dataRoot, "problems-source");
     const selected = paths.map((path) => parseInt(basename(path)));
     paths.push(join(directory, "index.json"));
-    for (const no of selected) paths.push(join(directory, `${no}.html`));
+    if (input.operation === "audit-problems")
+      for (const no of selected) paths.push(join(directory, `${no}.html`));
   }
   if (input.operation === "audit-translations" && input.page)
     paths.push(join(context.dataRoot, "pages", input.page));
@@ -222,7 +227,9 @@ export async function runOperation(
             id: String(input.problemNo ?? "upload"),
             status: "passed",
             message: "Conversion preview validated; no repository file changed",
-            reviewStatus: parseProblemMarkdown(content).metadata.reviewStatus,
+            reviewStatus: legacyProblemStatus(
+              metadataReviewStatus(parseProblemMarkdown(content).metadata),
+            ),
           },
         ],
         artifact: {

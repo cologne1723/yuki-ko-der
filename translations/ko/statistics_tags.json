@@ -3,14 +3,41 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
-    { "selector": "#content h4", "ref": "ui_c40e96bcc43974bc" },
-    { "selector": "#content label", "ref": "ui_544c57badb1326b9" },
-    { "selector": "#content label", "ref": "ui_b35abd8aec5b464a" },
-    { "selector": "#content th", "ref": "ui_5af55e3d31eb7b2c" },
-    { "selector": "#content th", "ref": "ui_dbbaa127ff469b25" },
-    { "selector": "#content div", "ref": "ui_4253d7f59c1517b4" },
-    { "selector": "#content b", "ref": "ui_c5c6848a45c60bd6" },
-    { "selector": "#content div", "ref": "ui_abf762b6fa32847b" },
-    { "selector": "#content div", "ref": "ui_b724e5aed839ad49" }
+    {
+      "selector": "#content h4",
+      "ref": "ui_c40e96bcc43974bc"
+    },
+    {
+      "selector": "#content label",
+      "ref": "ui_544c57badb1326b9"
+    },
+    {
+      "selector": "#content label",
+      "ref": "ui_b35abd8aec5b464a"
+    },
+    {
+      "selector": "#content th",
+      "ref": "ui_5af55e3d31eb7b2c"
+    },
+    {
+      "selector": "#content th",
+      "ref": "ui_dbbaa127ff469b25"
+    },
+    {
+      "selector": "#content div",
+      "ref": "ui_4253d7f59c1517b4"
+    },
+    {
+      "selector": "#content b",
+      "ref": "ui_c5c6848a45c60bd6"
+    },
+    {
+      "selector": "#content div",
+      "ref": "ui_abf762b6fa32847b"
+    },
+    {
+      "selector": "#content div",
+      "ref": "ui_b724e5aed839ad49"
+    }
   ]
 }

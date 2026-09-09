@@ -1,3 +1,7 @@
+import {
+  legacyProblemStatus,
+  metadataReviewStatus,
+} from "translation-core/problem-review-status";
 import { JSDOM } from "jsdom";
 import { mkdir, readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
@@ -30,6 +34,7 @@ export async function expectedProblems(
 ): Promise<Expected[]> {
   const root = join(context.repositoryRoot, "problem-translations/ko/problems");
   const results: Expected[] = [];
+  const errors: string[] = [];
   for (const file of (await readdir(root)).sort(
     (a, b) => parseInt(a) - parseInt(b),
   )) {
@@ -38,52 +43,69 @@ export async function expectedProblems(
       (context.problems && !context.problems.includes(parseInt(file)))
     )
       continue;
-    const path = join(root, file),
-      raw = await readFile(path, "utf8");
-    if (file.endsWith(".mdx")) {
-      const m = parseProblemMarkdown(raw).metadata;
-      results.push({
-        metadata: {
-          No: m.problemNo,
-          ProblemId: m.problemId,
-          Title: m.sourceTitle,
-        },
-        reviewStatus: m.reviewStatus,
-        hash: m.sourceHtmlSha256,
-        file: path,
-        revision: sha256(raw),
-      });
-    } else {
-      const dom = new JSDOM(raw);
-      try {
-        const m = dom.window.document.querySelector<HTMLElement>(
-          "main[data-yukicoder-ko-problem]",
-        )?.dataset;
-        if (!m?.sourceHtmlSha256)
-          throw new Error(`${file}: missing source metadata`);
-        const state = parseReviewState(raw);
+    try {
+      const path = join(root, file),
+        raw = await readFile(path, "utf8");
+      if (file.endsWith(".mdx")) {
+        const m = parseProblemMarkdown(raw).metadata;
+        if (m.problemNo !== parseInt(file))
+          throw new Error(
+            `filename No ${parseInt(file)} differs from problemNo ${m.problemNo}`,
+          );
         results.push({
-          reviewStatus: state.machineTranslated
-            ? "machine"
-            : state.reviewStatus,
           metadata: {
-            No: Number(m.problemNo),
-            ProblemId: Number(m.problemId),
-            Title: m.sourceTitle!,
+            No: m.problemNo,
+            ProblemId: m.problemId,
+            Title: m.sourceTitle,
           },
+          reviewStatus: legacyProblemStatus(metadataReviewStatus(m)),
           hash: m.sourceHtmlSha256,
           file: path,
           revision: sha256(raw),
         });
-      } finally {
-        dom.window.close();
+      } else {
+        const dom = new JSDOM(raw);
+        try {
+          const m = dom.window.document.querySelector<HTMLElement>(
+            "main[data-yukicoder-ko-problem]",
+          )?.dataset;
+          if (!m?.sourceHtmlSha256)
+            throw new Error(`${file}: missing source metadata`);
+          if (
+            Number(m.problemNo) !== parseInt(file) ||
+            !Number.isSafeInteger(Number(m.problemId)) ||
+            Number(m.problemId) < 1
+          )
+            throw new Error(
+              `invalid public number or internal ID (problemNo=${m.problemNo}, problemId=${m.problemId})`,
+            );
+          const state = parseReviewState(raw);
+          results.push({
+            reviewStatus: state.machineTranslated
+              ? "machine"
+              : state.reviewStatus,
+            metadata: {
+              No: Number(m.problemNo),
+              ProblemId: Number(m.problemId),
+              Title: m.sourceTitle!,
+            },
+            hash: m.sourceHtmlSha256,
+            file: path,
+            revision: sha256(raw),
+          });
+        } finally {
+          dom.window.close();
+        }
       }
+    } catch (error) {
+      errors.push(`${file}: ${String(error)}`);
     }
   }
   if (context.problems)
     for (const no of context.problems)
       if (!results.some((e) => e.metadata.No === no))
-        throw new Error(`Problem ${no} has no translation`);
+        errors.push(`Problem ${no} has no valid translation`);
+  if (errors.length) throw new Error(errors.join("\n"));
   return results;
 }
 async function download(context: OperationContext, url: string) {

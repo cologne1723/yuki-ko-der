@@ -5,7 +5,8 @@ problemNo: 24
 problemId: 69
 sourceTitle: "数当てゲーム"
 sourceHtmlSha256: 2be2fc742b17c3cfc1a1bf8716743b28a2fcc3e36059e5f8682381c011c9b9b4
-reviewStatus: unreviewed
+humanReview: approved
+machineReview: unreviewed
 title: "숫자 맞히기 게임"
 ---
 
@@ -24,12 +25,13 @@ title: "숫자 맞히기 게임"
 $N$
 $A_1\ B_1\ C_1\ D_1\ R_1$
 $A_2\ B_2\ C_2\ D_2\ R_2$
-$\dots$
+$\vdots$
 $A_N\ B_N\ C_N\ D_N\ R_N$
 ```
 
 첫째 줄에 턴 수 $N$이 주어집니다.
-이후 $N$개의 줄에 타로가 제시한 서로 다른 숫자 $A_i,B_i,C_i,D_i$와 지로의 답 $R_i$가 공백으로 구분되어 주어집니다.
+이후 $N$개의 줄에 타로가 제시한 숫자 $4$개 $A_i,B_i,C_i,D_i$와 지로의 답인 문자열 $R_i$ (`YES` 또는 `NO`)가 공백으로 구분되어 주어집니다.
+($A_i,B_i,C_i,D_i$는 서로 다릅니다.)
 
 ## 제한
 
@@ -54,13 +56,7 @@ $A_N\ B_N\ C_N\ D_N\ R_N$
 0 1 2 3 NO
 ```
 
-#### 제한
-
-- $2 \le N \le 6$
-- $0 \le A_i,B_i,C_i,D_i \le 9$ $(1 \le i \le N)$
-- $R_i$는 `YES` 또는 `NO`입니다.
-
-## 출력
+#### 출력
 
 ```text
 9
@@ -78,13 +74,7 @@ $0$부터 $8$까지는 모두 제시되었고 답이 `NO`였으므로 제외됩�
 4 5 6 7 YES
 ```
 
-#### 제한
-
-- $2 \le N \le 6$
-- $0 \le A_i,B_i,C_i,D_i \le 9$ $(1 \le i \le N)$
-- $R_i$는 `YES` 또는 `NO`입니다.
-
-## 출력
+#### 출력
 
 ```text
 4
@@ -104,13 +94,7 @@ $0$부터 $8$까지는 모두 제시되었고 답이 `NO`였으므로 제외됩�
 7 1 9 8 NO
 ```
 
-#### 제한
-
-- $2 \le N \le 6$
-- $0 \le A_i,B_i,C_i,D_i \le 9$ $(1 \le i \le N)$
-- $R_i$는 `YES` 또는 `NO`입니다.
-
-## 출력
+#### 출력
 
 ```text
 4

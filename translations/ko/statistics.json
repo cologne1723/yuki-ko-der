@@ -27,6 +27,10 @@
       "variant": 0
     },
     { "selector": "#submissionLangTable td", "ref": "ui_09a81b127c54895b" },
-    { "selector": "#submissionLangTable td", "ref": "ui_d01d656346ce7e50" }
+    { "selector": "#submissionLangTable td", "ref": "ui_d01d656346ce7e50" },
+    {
+      "selector": "#toplinks a",
+      "ref": "ui_da5f620ea008549d"
+    }
   ]
 }

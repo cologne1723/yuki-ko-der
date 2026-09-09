@@ -17,6 +17,7 @@ import { Shell } from "./shell.tsx";
 import { Problems } from "./problems.tsx";
 import { Failure } from "./shared.tsx";
 import { Tools } from "./tasks.tsx";
+import { Tags } from "./tags.tsx";
 
 export class ErrorBoundary extends Component<
   { children: ReactNode },
@@ -61,6 +62,7 @@ export function createReviewRouter() {
       children: [
         { path: "/", element: <Problems /> },
         { path: "/ui", element: <Ui /> },
+        { path: "/tags", element: <Tags /> },
         { path: "/tools", element: <Tools /> },
       ],
     },

@@ -1,3 +1,8 @@
+import { setProblemMarkdownReviews } from "translation-core/problem-frontmatter";
+import {
+  problemReviews,
+  type ProblemReviews,
+} from "translation-core/problem-review-status";
 import { mkdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { convertProblemHtmlToMarkdown } from "translation-audit/convert-problem-html-to-mdx";
@@ -9,11 +14,7 @@ import {
 import { pLimit } from "translation-core/concurrency";
 import { sha256 } from "translation-core/node-hash";
 import { defaultDataDirectory } from "translation-core/paths";
-import {
-  compileProblemMarkdown,
-  removeProblemMarkdownMachineLabel,
-  setProblemMarkdownReviewStatus,
-} from "translation-core/problem-markdown";
+import { compileProblemMarkdown } from "translation-core/problem-markdown";
 import { sampleWarnings } from "translation-core/problem-samples";
 import { ProblemConversionRecovery } from "./problem-conversion-recovery.ts";
 import { ProblemRepository } from "./problem-repository.ts";
@@ -27,6 +28,7 @@ export interface ProblemSummary {
   koreanTitle: string;
   reviewStatus: ReviewStatus;
   machineTranslated: boolean;
+  reviews?: ProblemReviews;
   validationErrors?: string[];
 }
 
@@ -121,9 +123,16 @@ export class ProblemReviewStore {
     submittedSource: string,
     expectedRevision: string,
     action: "save" | "approve" | "unapprove",
+    reviewer: "human" | "machine" = "human",
   ): Promise<ProblemReview> {
     return this.withSaveLock(problemNo, () =>
-      this.saveOnce(problemNo, submittedSource, expectedRevision, action),
+      this.saveOnce(
+        problemNo,
+        submittedSource,
+        expectedRevision,
+        action,
+        reviewer,
+      ),
     );
   }
 
@@ -189,6 +198,7 @@ export class ProblemReviewStore {
     submittedSource: string,
     expectedRevision: string,
     action: "save" | "approve" | "unapprove",
+    reviewer: "human" | "machine" = "human",
   ): Promise<ProblemReview> {
     const current = await this.get(problemNo);
     if (current.revision !== expectedRevision) {
@@ -204,25 +214,35 @@ export class ProblemReviewStore {
         : "unreviewed";
     let nextSource = submittedSource;
     if (current.sourceFormat === "mdx") {
-      if (action === "save") {
-        nextSource = setProblemMarkdownReviewStatus(
-          removeProblemMarkdownMachineLabel(nextSource),
-          savedReviewStatus,
+      const reviews =
+        current.reviews ??
+        problemReviews(
+          current.machineTranslated ? "machine" : current.reviewStatus,
         );
-      } else if (action === "approve") {
-        nextSource = setProblemMarkdownReviewStatus(
-          removeProblemMarkdownMachineLabel(nextSource),
-          "approved",
-        );
+      if (reviewer === "machine") {
+        if (action === "save" || submittedSource !== current.koreanSource)
+          throw new ReviewError(
+            "Machine review must target the saved translation",
+          );
+        nextSource = setProblemMarkdownReviews(current.koreanSource, {
+          ...reviews,
+          machine: action === "approve" ? "approved" : "unreviewed",
+        });
       } else {
-        if (submittedSource !== current.koreanSource) {
+        if (action === "unapprove" && submittedSource !== current.koreanSource)
           throw new ReviewError("Save editor changes before unapproving");
-        }
-        nextSource = setProblemMarkdownReviewStatus(
-          current.koreanSource,
-          "unreviewed",
-        );
+        const nextReviews: ProblemReviews =
+          submittedSource === current.koreanSource
+            ? { ...reviews }
+            : { human: "unreviewed", machine: "unreviewed" };
+        if (action === "approve") nextReviews.human = "approved";
+        else if (action === "unapprove") nextReviews.human = "unreviewed";
+        nextSource = setProblemMarkdownReviews(nextSource, nextReviews);
       }
+    } else if (reviewer === "machine") {
+      throw new ReviewError(
+        "Convert the translation to MDX before machine review",
+      );
     } else if (action === "save") {
       nextSource = setReviewStatus(
         removeMachineLabel(nextSource),

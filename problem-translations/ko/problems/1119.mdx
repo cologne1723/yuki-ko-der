@@ -1,0 +1,67 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1119
+problemId: 4629
+sourceTitle: "Division 3"
+sourceHtmlSha256: "9a98ad96260415f64e54e6553e59fe9adeb332064ad15932af99bfc5872d8ab7"
+humanReview: null
+machineReview: unreviewed
+title: "3의 배수 판정"
+---
+
+## 문제 설명
+
+$X \times Y \times Z$가 $3$의 배수인지 판정하세요.
+
+## 입력
+
+```text
+$X\ Y\ Z$
+```
+
+첫 번째 줄에 정수 $X$, $Y$, $Z$가 공백으로 구분되어 주어집니다.
+
+## 제한
+
+$1 \le X, Y, Z \le 1\,000\,000\,000$
+
+입력은 모두 정수입니다.
+
+## 출력
+
+$X \times Y \times Z$가 $3$의 배수라면 `Yes`를, 그렇지 않다면 `No`를 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+1 2 3
+```
+
+#### 출력
+
+```text
+Yes
+```
+
+$1 \times 2 \times 3 = 6$이므로 $3$의 배수입니다. 따라서 `Yes`를 출력하면 정답입니다.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+5 2 5
+```
+
+#### 출력
+
+```text
+No
+```
+
+$5 \times 2 \times 5 = 50$이므로 $3$의 배수가 아닙니다. 따라서 `No`를 출력하면 정답입니다.

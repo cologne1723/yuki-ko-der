@@ -30,6 +30,7 @@ const pageDictionaries: Record<string, string[]> = {
   "/statistics": ["statistics"],
   "/statistics/code_holders": ["statistics", "statistics_code_holders"],
   "/statistics/language_speed": ["statistics", "statistics_language_speed"],
+  "/statistics/language_memory": ["statistics", "statistics_language_memory"],
   "/statistics/tags": ["statistics", "statistics_tags"],
   "/statistics/wait_problems": ["statistics", "statistics_wait_problems"],
   "/submissions": ["submissions"],

@@ -1,0 +1,114 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1026
+problemId: 4046
+sourceTitle: "OGAWA's New Keyboard"
+sourceHtmlSha256: "d065ae519117f1bc32323de792ea437b358dd53aa33187788932ea18535b8221"
+humanReview: null
+machineReview: unreviewed
+title: "OGAWA의 새로운 키보드"
+---
+
+## 문제 설명
+
+OGAWA 씨는 새로운 키보드를 만들었습니다. 이 키보드에는 HEAD 키가 있습니다. HEAD 키를 누르고 있는 동안 캐럿은 줄의 맨 앞으로 이동합니다. HEAD 키를 놓으면 캐럿은 줄의 맨 뒤로 돌아갑니다.
+
+OGAWA 씨가 $N$번 타이핑한 뒤 생성되는 문자열을 구하세요.
+
+$i$번째($1 \leq i \leq N$) 타이핑에서는 문자 $S_i$를 입력합니다. 또한 다음과 같이 동작합니다.
+
+- $T_i = 0$일 때는 HEAD 키를 놓은 채로 입력합니다($S_i$는 줄의 맨 뒤에 추가됩니다).
+- $T_i = 1$일 때는 HEAD 키를 누른 채로 입력합니다($S_i$는 줄의 맨 앞에 추가됩니다).
+
+## 입력
+
+```text
+$N$
+$T_1\ S_1$
+$T_2\ S_2$
+\vdots
+$T_N\ S_N$
+```
+
+## 제한
+
+- $1 \leq N \leq 2 \times 10^5$
+- $T_i = 0$ 또는 $1$
+- $S_i$는 반각 영문 알파벳 소문자 $26$종류 중 하나입니다.
+
+## 출력
+
+최종적으로 생성되는 문자열을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+6
+0 e
+0 l
+0 f
+1 h
+1 s
+0 y
+```
+
+#### 출력
+
+```text
+shelfy
+```
+
+다음과 같이 문자열이 입력됩니다.
+
+type1 : e  
+type2 : el  
+type3 : elf  
+type4 : helf  
+type5 : shelf  
+type6 : shelfy
+
+### 예제 2 {file="01_sample_02.txt"}
+
+#### 입력
+
+```text
+5
+0 p
+0 o
+0 c
+0 h
+0 a
+```
+
+#### 출력
+
+```text
+pocha
+```
+
+### 예제 3 {file="01_sample_03.txt"}
+
+#### 입력
+
+```text
+8
+1 a
+1 w
+1 a
+1 s
+1 o
+1 r
+1 i
+1 h
+```
+
+#### 출력
+
+```text
+hirosawa
+```

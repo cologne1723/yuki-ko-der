@@ -76,6 +76,31 @@ export class ProblemTitleTranslator {
   }
 
   apply(document: Document, history: TranslationHistory): void {
+    for (const option of document.querySelectorAll<HTMLOptionElement>(
+      "select#contest-problem-selector option",
+    )) {
+      const entry = this.byId.get(Number(option.value));
+      if (!entry || !option.hasAttribute("value")) continue;
+      const raw = option.textContent ?? "";
+      const prefix = raw.match(
+        /^\s*(?:[✅⏳❌]\s*)?[A-Z]+\.\s+(?:No\.(?<problemNo>\d+)|ID\s+(?<problemId>\d+))\s+/u,
+      );
+      if (
+        !prefix ||
+        (prefix.groups?.problemNo !== undefined &&
+          Number(prefix.groups.problemNo) !== entry.problemNo) ||
+        (prefix.groups?.problemId !== undefined &&
+          Number(prefix.groups.problemId) !== entry.problemId)
+      )
+        continue;
+      const end = raw.length - raw.match(/\s*$/u)![0].length;
+      if (
+        normalizeTranslationText(raw.slice(prefix[0].length, end)) !==
+        normalizeTranslationText(entry.source)
+      )
+        continue;
+      replaceTextRange(option, prefix[0].length, end, entry.target, history);
+    }
     const editorial = new URL(document.URL).pathname.match(
       /^\/problems\/no\/(\d+)\/editorial\/?$/u,
     );

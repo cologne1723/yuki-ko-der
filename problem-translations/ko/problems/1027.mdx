@@ -1,0 +1,69 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1027
+problemId: 4138
+sourceTitle: "U+1F4A0"
+sourceHtmlSha256: "36ce0b117e794f6025b1ea4113685c081d826cc61f28551fe328448f5ea5b640"
+humanReview: null
+machineReview: unreviewed
+title: "U+1F4A0"
+---
+
+## 문제 설명
+
+이차원 좌표 평면 위에 중심이 $(0,0)$이고 반지름이 $\sqrt{D_1}$인 원과, 꼭짓점이 $(\sqrt{D_2},0)$, $(0,\sqrt{D_2})$, $(-\sqrt{D_2},0)$, $(0,-\sqrt{D_2})$인 정사각형이 있습니다. 두 도형의 공유점 개수를 구하세요.
+
+## 입력
+
+```text
+$D_1\ D_2$
+```
+
+## 제한
+
+$1 \leq D_1, D_2 \leq 100$
+
+입력은 모두 정수입니다.
+
+## 출력
+
+공유점 개수를 한 줄에 출력하세요.
+
+마지막에 줄 바꿈을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+3 4
+```
+
+#### 출력
+
+```text
+8
+```
+
+이 경우 두 도형은 다음과 같이 됩니다.
+
+공유점은 $\left(\pm(1+\frac{1}{\sqrt{2}}),\pm(1-\frac{1}{\sqrt{2}})\right)$ 및 $\left(\pm(1-\frac{1}{\sqrt{2}}),\pm(1+\frac{1}{\sqrt{2}})\right)$의 $8$개입니다.
+
+### 예제 2 {file="01_sample_02.txt"}
+
+#### 입력
+
+```text
+3 100
+```
+
+#### 출력
+
+```text
+0
+```
+
+공유점이 없는 경우에는 $0$을 출력하세요.

@@ -24,6 +24,7 @@ import { ReviewTasks } from "./tasks.ts";
 import { UiImportStore } from "./ui-imports.ts";
 import { UiReviewStore } from "./ui-review.ts";
 import { uiRoutes } from "./ui-routes.ts";
+import { tagsRoutes } from "./tags-routes.ts";
 
 export function createReviewApp(options: {
   repositoryRoot: string;
@@ -108,11 +109,13 @@ export function createReviewApp(options: {
     .route("/", collectionsRoutes(collections, uiStore))
     .route("/", importsRoutes(imports))
     .route("/", uiRoutes(uiStore))
+    .route("/", tagsRoutes(options.repositoryRoot))
     .route("/", problemsRoutes(store));
   app.get("/collections", (c) => c.redirect("/ui?view=imports", 302));
   const staticFiles: Record<string, string> = {
     "/": "index.html",
     "/ui": "index.html",
+    "/tags": "index.html",
     "/tools": "index.html",
     "/app.js": "app.js",
     "/app.css": "app.css",

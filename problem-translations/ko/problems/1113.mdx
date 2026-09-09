@@ -1,0 +1,72 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1113
+problemId: 4689
+sourceTitle: "二つの整数 / Two Integers"
+sourceHtmlSha256: "fd8d6319fe8a23a748259fefb7dc659d194129f85ecd9a6d6d9fa0344d8948e6"
+humanReview: null
+machineReview: unreviewed
+title: "두 정수"
+---
+
+(출제자 공지) 7/18 0:33 리저지하여 일부 제출이 실패했습니다.
+
+## 문제 설명
+
+정수 $A,B$가 주어집니다. $A$와 $B$의 공약수 개수를 $X$라고 합니다. $X$가 짝수인지 홀수인지 판정하세요.
+
+여기서 $A$와 $B$의 공약수란 $A$와 $B$의 공통 약수를 의미합니다.
+
+## 입력
+
+```text
+$A\ B$
+```
+
+$A$와 $B$가 공백으로 구분되어 주어집니다.
+
+## 제한
+
+- $A,B$는 정수입니다.
+- $1 \le A,B \le 10^{18}$
+
+## 출력
+
+$X$가 짝수이면 `Even`을, 홀수이면 `Odd`를 출력하세요.
+
+마지막에 개행을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="sample1.in"}
+
+#### 입력
+
+```text
+12 18
+```
+
+#### 출력
+
+```text
+Even
+```
+
+$12,18$의 공약수는 $1,2,3,6$으로, 짝수 개입니다.
+
+### 예제 2 {file="sample2.in"}
+
+#### 입력
+
+```text
+2 3
+```
+
+#### 출력
+
+```text
+Odd
+```
+
+$2,3$의 공약수는 $1$뿐입니다.

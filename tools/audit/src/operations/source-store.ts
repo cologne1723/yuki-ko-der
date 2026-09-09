@@ -119,7 +119,9 @@ export async function readSourceIndex(
         typeof item.Title !== "string",
     ) ||
     new Set(index.problems.map((item: SourceMetadata) => item.No)).size !==
-      index.problems.length
+      index.problems.length ||
+    new Set(index.problems.map((item: SourceMetadata) => item.ProblemId))
+      .size !== index.problems.length
   )
     throw new Error(
       "Invalid original source index; existing data was preserved",
@@ -140,6 +142,19 @@ export async function activateSource(
     const source = await optionalFile(sourcePath),
       indexBytes = await optionalFile(indexPath);
     const index = await readSourceIndex(root);
+    if (
+      !Number.isSafeInteger(metadata.No) ||
+      metadata.No < 1 ||
+      !Number.isSafeInteger(metadata.ProblemId) ||
+      metadata.ProblemId < 1 ||
+      typeof metadata.Title !== "string" ||
+      index.problems.some(
+        (p) => p.No !== metadata.No && p.ProblemId === metadata.ProblemId,
+      )
+    )
+      throw new Error(
+        "Invalid or duplicate original problem identity; existing data was preserved",
+      );
     const old = index.problems.find((p) => p.No === metadata.No);
     if (source && old) await preserveSource(root, old, source);
     await preserveSource(root, metadata, html);

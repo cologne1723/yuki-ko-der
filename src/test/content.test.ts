@@ -6,6 +6,55 @@ const titles = [
   { problemNo: 1, problemId: 18, source: "題名", target: "제목" },
 ];
 const code = await bundle("src/content.ts", titles);
+test("dynamic contest problem options translate titles and preserve selection, values and restoration", async () => {
+  const { dom, close } = page('<body><main id="content"></main></body>');
+  let changed!: Change;
+  Object.assign(dom.window, {
+    chrome: {
+      runtime: {
+        getURL: (p: string) => p,
+        sendMessage: async () => statusCatalog("제목"),
+      },
+      storage: {
+        local: { get: async () => ({}) },
+        onChanged: {
+          addListener: (fn: Change) => {
+            changed = fn;
+          },
+        },
+      },
+    },
+    fetch: async () => Response.json({ translations: [] }),
+  });
+  try {
+    dom.window.eval(code);
+    await settle();
+    const select = dom.window.document.createElement("select");
+    select.id = "contest-problem-selector";
+    select.innerHTML =
+      '<option value="18" selected>✅ A. No.1 題名</option><option value="18">⏳ B. ID 18 題名</option><option value="18">❌ C. No.2 題名</option><option value="99">D. No.1 題名</option>';
+    dom.window.document.querySelector("#content")!.append(select);
+    await settle();
+    assert.deepEqual(
+      [...select.options].map((o) => o.textContent),
+      [
+        "✅ A. No.1 제목",
+        "⏳ B. ID 18 제목",
+        "❌ C. No.2 題名",
+        "D. No.1 題名",
+      ],
+    );
+    assert.equal(select.value, "18");
+    assert.equal(select.selectedIndex, 0);
+    changed({ translationEnabled: { newValue: false } }, "local");
+    await settle();
+    assert.equal(select.options[0].textContent, "✅ A. No.1 題名");
+    assert.equal(select.options[1].textContent, "⏳ B. ID 18 題名");
+    assert.equal(select.selectedIndex, 0);
+  } finally {
+    close();
+  }
+});
 const statusCatalog = (target: string) => ({
   ok: true,
   source: "remote",
@@ -292,7 +341,7 @@ test("problem loading and background verification keep an original action and ig
     dom.window.document.querySelector("#body")!.textContent = "Korean";
     finishLoad({ status: "applied", verification });
     await settle();
-    assert.match(status().textContent!, /변경 여부를 확인/);
+    assert.equal(status().firstChild?.textContent, "한국어 번역본 입니다.");
     assert.equal(
       dom.window.document.querySelector("#body")!.textContent,
       "Korean",
@@ -304,9 +353,26 @@ test("problem loading and background verification keep an original action and ig
       dom.window.document.querySelector("#body")!.textContent,
       "Japanese",
     );
-    assert.match(status().textContent!, /원문을 표시/);
+    assert.equal(status().firstChild?.textContent, "일본어 원문입니다");
     assert.doesNotMatch(status().textContent!, /달라졌습니다/);
-    assert.ok(original());
+    const korean = status().querySelector("button")!;
+    assert.equal(korean.textContent, "한국어 번역 보기");
+    korean.click();
+    await settle();
+    dom.window.document.querySelector("#body")!.textContent = "Korean";
+    finishLoad({ status: "applied" });
+    await settle();
+    assert.equal(status().firstChild?.textContent, "한국어 번역본 입니다.");
+    assert.equal(
+      dom.window.document.querySelector("#body")!.textContent,
+      "Korean",
+    );
+    original().click();
+    assert.equal(status().firstChild?.textContent, "일본어 원문입니다");
+    assert.equal(
+      dom.window.document.querySelector("#body")!.textContent,
+      "Japanese",
+    );
   } finally {
     close();
   }
@@ -355,7 +421,7 @@ for (const verificationStatus of ["verified", "changed", "unavailable"]) {
         assert.equal(
           (notice.querySelector("button") as HTMLButtonElement).style
             .marginInlineStart,
-          "",
+          "0.5em",
         );
       if (verificationStatus === "changed")
         assert.match(notice.textContent!, /번역 시점과 문제가 달라졌습니다/);

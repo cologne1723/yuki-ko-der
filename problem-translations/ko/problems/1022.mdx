@@ -1,0 +1,62 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1022
+problemId: 4002
+sourceTitle: "Power Equation"
+sourceHtmlSha256: "4d091575b0eea04bbf58fbc8880dba7b51b8f2eff615c2adefdff570916b1b73"
+humanReview: null
+machineReview: unreviewed
+title: "거듭제곱 방정식"
+---
+
+## 문제 설명
+
+다음 $T$개의 질문에 답하세요.
+
+$i$번째 질문에서는 양의 정수 $N_i$가 주어집니다. $a^b=c^d$를 만족하는 $N_i$ 이하의 양의 정수 순서쌍 $(a,b,c,d)$의 개수를 구하세요.
+
+## 입력
+
+```text
+$T$
+$N_1$
+$N_2$
+$\vdots$
+$N_T$
+```
+
+## 제한
+
+- $1 \le T \le 50$
+- $1 \le N_i \le 10^9$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+$T$개의 줄에 출력하세요. $i$번째 줄($1 \le i \le T$)에는 $i$번째 질문의 답을 출력하세요. 또한 이 문제의 제한 아래에서 답이 부호 있는 $64$비트 정수형의 범위에 들어옴을 보일 수 있습니다.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+4
+1
+2
+5
+314
+```
+
+#### 출력
+
+```text
+1
+6
+49
+206958
+```
+
+예를 들어 $2^4=4^2$이므로, $3$번째와 $4$번째 질문에서 $(a, b, c, d)=(2, 4, 4, 2)$는 조건을 만족합니다.

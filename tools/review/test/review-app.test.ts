@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { reactPage } from "./react-fixture.ts";
 import type { ProblemReview } from "../src/problem-review.ts";
@@ -110,6 +111,108 @@ for (const fails of [false, true])
       /Draft 2/,
     );
   });
+for (const modifier of ["ctrlKey", "metaKey"])
+  test(`${modifier}+S saves the current source and prevents browser saving`, async (t) => {
+    const requests: any[] = [];
+    let settle!: (response: Response) => void;
+    const page = reactPage(t, async (path, init) => {
+      if (init?.method === "PUT") {
+        assert.equal(path, "/api/problems/1");
+        requests.push(JSON.parse(String(init.body)));
+        return new Promise<Response>((resolve) => {
+          settle = resolve;
+        });
+      }
+      return Response.json(
+        path === "/api/problems" ? { problems } : problems[0],
+      );
+    });
+    await page.screen.findByRole("heading", { name: "1. Draft 1" });
+    page.edit("<p>단축키로 저장</p>");
+    await page.screen.findByText("저장하지 않음");
+    const editor = page.dom.window.document.querySelector(".cm-content")!;
+    const press = () =>
+      page.fireEvent.keyDown(editor, { key: "s", [modifier]: true });
+    assert.equal(press(), false);
+    await page.waitFor(() => assert.equal(requests.length, 1));
+    assert.equal(requests[0].html, "<p>단축키로 저장</p>");
+    assert.equal(editor.getAttribute("contenteditable"), "true");
+    assert.equal(press(), false);
+    assert.equal(requests.length, 1);
+    settle(
+      Response.json({
+        ...problems[0],
+        koreanSource: requests[0].html,
+        revision: "r2",
+      }),
+    );
+    await page.waitFor(() =>
+      assert.equal(Boolean(page.screen.queryByText("저장하지 않음")), false),
+    );
+  });
+
+for (const typeDuringSave of [false, true])
+  test(`saving preserves the source cursor and in-flight typing (${typeDuringSave})`, async (t) => {
+    let settle!: (response: Response) => void;
+    let submitted = "";
+    const page = reactPage(t, async (path, init) => {
+      if (init?.method === "PUT") {
+        submitted = JSON.parse(String(init.body)).html;
+        return new Promise<Response>((resolve) => {
+          settle = resolve;
+        });
+      }
+      return Response.json(
+        path === "/api/problems" ? { problems } : problems[0],
+      );
+    });
+    await page.screen.findByRole("heading", { name: "1. Draft 1" });
+    const draft = "<p>첫 문장</p>\n<p>여기에서 계속 입력</p>";
+    page.edit(draft);
+    const view = page.editorView();
+    const cursor = draft.indexOf("계속");
+    view.dispatch({ selection: { anchor: cursor } });
+    view.focus();
+    page.fireEvent.keyDown(view.contentDOM, { key: "s", metaKey: true });
+    await page.waitFor(() => assert.equal(submitted, draft));
+    assert.equal(view.contentDOM.getAttribute("contenteditable"), "true");
+    assert.equal(view.hasFocus, true);
+    if (typeDuringSave) view.dispatch(view.state.replaceSelection("추가 "));
+    const normalized = "<!-- saved -->\n" + submitted;
+    settle(
+      Response.json({
+        ...problems[0],
+        koreanSource: normalized,
+        revision: "r2",
+      }),
+    );
+    await page.waitFor(() =>
+      assert.equal(
+        page.screen.getByRole("button", { name: "저장", exact: true }).disabled,
+        false,
+      ),
+    );
+    await page.waitFor(() =>
+      assert.equal(
+        view.state.doc.toString(),
+        typeDuringSave
+          ? draft.slice(0, cursor) + "추가 " + draft.slice(cursor)
+          : normalized,
+      ),
+    );
+    assert.equal(
+      view.state.selection.main.head,
+      cursor + (typeDuringSave ? 3 : "<!-- saved -->\n".length),
+    );
+    assert.equal(view.hasFocus, true);
+    assert.equal(
+      Boolean(page.screen.queryByText("저장하지 않음")),
+      typeDuringSave,
+    );
+    view.dispatch(view.state.replaceSelection("다음"));
+    assert.match(view.state.doc.toString(), /다음계속/);
+  });
+
 test("problem status distinguishes machine, unreviewed and approved independently of validation", async (t) => {
   const page = reactPage(t, async (path) =>
     Response.json(path === "/api/problems" ? { problems } : problems[0]),
@@ -597,6 +700,32 @@ test("editing a problem preserves preview scroll while switching problems resets
   );
 });
 
+test("incomplete Markdown keeps the last valid preview until editing recovers", async (t) => {
+  const source = await readFile(
+    "problem-translations/ko/problems/1.mdx",
+    "utf8",
+  );
+  const frontmatter = source.slice(0, source.indexOf("## "));
+  const problem = {
+    ...problems[0],
+    sourceFormat: "mdx",
+    koreanSource: frontmatter + "## 문제\n\n첫 설명",
+  };
+  const page = reactPage(t, async (path) =>
+    Response.json(path === "/api/problems" ? { problems: [problem] } : problem),
+  );
+  await page.screen.findByRole("heading", { name: "1. Draft 1" });
+  const frame = page.screen.getByTitle("한국어 번역");
+  const valid = frame.srcdoc;
+  assert.match(valid, /첫 설명/);
+  page.edit(frontmatter + "##\n\n첫 설명");
+  await page.screen.findByRole("alert");
+  assert.equal(frame.srcdoc, valid);
+  page.edit(frontmatter + "## 문제\n\n수정한 설명");
+  await page.waitFor(() => assert.match(frame.srcdoc, /수정한 설명/));
+  assert.equal(page.screen.queryByRole("alert"), null);
+});
+
 test("glossary prefers observed pages and preserves a manual preview while editing", async (t) => {
   const data = {
     ...glossary(),
@@ -875,6 +1004,8 @@ test("Japanese and Korean math use identical embedded fonts and HTML rendering",
     new page.dom.window.DOMParser().parseFromString(frame.srcdoc, "text/html"),
   );
   assert.equal(docs.length, 2);
+  assert.equal(docs[0].body.firstElementChild?.tagName, "H3");
+  assert.equal(docs[0].body.firstElementChild?.textContent, "No.1 Original 1");
   const styles = docs.map(
     (doc) => doc.querySelector("style[data-review-math]")?.textContent,
   );
@@ -889,4 +1020,175 @@ test("Japanese and Korean math use identical embedded fonts and HTML rendering",
     docs[0].querySelector(".katex")?.outerHTML ===
       docs[1].querySelector(".katex")?.outerHTML,
   );
+});
+
+test("next unreviewed navigation includes machine approval, skips human approval and wraps", async (t) => {
+  const items = [
+    { ...problems[0], reviews: { human: null, machine: "unreviewed" } },
+    { ...problems[1], reviews: { human: "approved", machine: "unreviewed" } },
+    {
+      ...problems[0],
+      problemNo: 3,
+      koreanTitle: "Draft 3",
+      reviewStatus: "approved",
+      reviews: { human: null, machine: "approved" },
+    },
+  ];
+  const page = reactPage(t, async (path) =>
+    Response.json(
+      path === "/api/problems"
+        ? { problems: items }
+        : items.find((p) => p.problemNo === Number(path.split("/").at(-1))),
+    ),
+  );
+  await page.screen.findByRole("heading", { name: "1. Draft 1" });
+  await page.user.click(
+    page.screen.getByRole("button", { name: "다음 미검수 문제로" }),
+  );
+  await page.screen.findByRole("heading", { name: "3. Draft 3" });
+  await page.user.click(
+    page.screen.getByRole("button", { name: "다음 미검수 문제로" }),
+  );
+  await page.screen.findByRole("heading", { name: "1. Draft 1" });
+});
+
+for (const succeeds of [false, true])
+  test(`automatic next waits for successful human approval (${succeeds})`, async (t) => {
+    const items = problems.map((p) => ({
+      ...p,
+      reviewStatus: "unreviewed",
+      machineTranslated: false,
+    }));
+    let finish!: (r: Response) => void;
+    const page = reactPage(t, async (path, init) => {
+      if (init?.method === "POST" && path.endsWith("/approve"))
+        return new Promise((r) => {
+          finish = r;
+        });
+      return Response.json(
+        path === "/api/problems"
+          ? { problems: items }
+          : items[Number(path.split("/").at(-1)) - 1],
+      );
+    });
+    await page.screen.findByRole("heading", { name: "1. Draft 1" });
+    await page.user.click(
+      page.screen.getByRole("checkbox", {
+        name: "검수 승인 후 자동으로 다음으로 넘어가기",
+      }),
+    );
+    await page.user.click(
+      page.screen.getByRole("button", { name: "검수 승인", exact: true }),
+    );
+    assert.ok(page.screen.getByRole("heading", { name: "1. Draft 1" }));
+    items[0] = {
+      ...items[0],
+      reviewStatus: succeeds ? "approved" : "unreviewed",
+    };
+    finish(
+      succeeds
+        ? Response.json(items[0])
+        : Response.json({ error: "Approval failed" }, { status: 500 }),
+    );
+    if (succeeds)
+      await page.screen.findByRole("heading", { name: "2. Draft 2" });
+    else {
+      await page.screen.findByText("Approval failed");
+      assert.ok(page.screen.getByRole("heading", { name: "1. Draft 1" }));
+    }
+  });
+
+test("review options let a human override machine approval without erasing its record", async (t) => {
+  let current = {
+    ...problems[0],
+    reviewStatus: "approved",
+    machineTranslated: false,
+    reviews: {
+      human: null as "unreviewed" | null,
+      machine: "approved" as const,
+    },
+  };
+  let cancelled = false;
+  const page = reactPage(t, async (path, init) => {
+    if (path === "/api/problems/1/unapprove" && init?.method === "POST") {
+      cancelled = true;
+      current = {
+        ...current,
+        reviewStatus: "unreviewed",
+        reviews: { ...current.reviews, human: "unreviewed" },
+      };
+      return Response.json(current);
+    }
+    return Response.json(
+      path === "/api/problems" ? { problems: [current] } : current,
+    );
+  });
+  await page.screen.findByRole("heading", { name: "1. Draft 1" });
+  await page.user.click(page.screen.getByRole("button", { name: "검수 옵션" }));
+  await page.user.click(
+    await page.screen.findByRole("menuitem", { name: "기계 승인 무효화" }),
+  );
+  await page.screen.findByText("사람 검수: 미승인");
+  assert.ok(page.screen.getByText("기계 검수: 승인"));
+  assert.equal(cancelled, true);
+});
+
+test("problem review filters expose all six independent human and machine combinations", async (t) => {
+  const states = [
+    { human: null, machine: "unreviewed" },
+    { human: "unreviewed", machine: "approved" },
+    { human: "approved", machine: "unreviewed" },
+    { human: "approved", machine: "approved" },
+  ];
+  const items = states.map((reviews, i) => ({
+    ...problems[0],
+    problemNo: i + 1,
+    koreanTitle: `Draft ${i + 1}`,
+    reviews,
+  }));
+  const page = reactPage(t, async (path) =>
+    Response.json(
+      path === "/api/problems"
+        ? { problems: items }
+        : items[Number(path.split("/").at(-1)) - 1],
+    ),
+  );
+  await page.screen.findByRole("heading", { name: "1. Draft 1" });
+  page.edit("<p>Unsaved filter draft</p>");
+  for (const [label, expected] of [
+    ["사람 미검수", [1, 2]],
+    ["사람 미검수 / 기계 검수", [2]],
+    ["사람 미검수 / 기계 미검수", [1]],
+    ["사람 검수 / 기계 미검수", [3]],
+    ["사람 검수 / 기계 검수", [4]],
+    ["사람 검수", [3, 4]],
+  ] as const) {
+    await page.user.click(
+      page.screen.getByRole("combobox", { name: "검수 상태" }),
+    );
+    await page.user.click(
+      await page.screen.findByRole("option", { name: label, exact: true }),
+    );
+    await page.screen.findByText(`${expected.length}개 문제`);
+    const links = [
+      ...page.dom.window.document.querySelectorAll(
+        '#review-problem-navigation a[href*="?problem="]',
+      ),
+    ];
+    assert.deepEqual(
+      links.map((a) =>
+        Number(
+          new URL(a.getAttribute("href")!, "http://localhost").searchParams.get(
+            "problem",
+          ),
+        ),
+      ),
+      [...expected],
+    );
+    assert.ok(page.screen.getByRole("heading", { name: "1. Draft 1" }));
+    assert.match(
+      page.dom.window.document.querySelector(".cm-content")!.textContent!,
+      /Unsaved filter draft/,
+    );
+  }
 });

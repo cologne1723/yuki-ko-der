@@ -83,6 +83,10 @@ function fixture() {
       if (state.offline) throw new Error("offline");
       if (path.startsWith("https://translations.test/"))
         return new Response(state.body, { status: state.bodyStatus });
+      assert.match(
+        path,
+        /^https:\/\/yukicoder\.me\/api\/v1\/problems\/18(?:\/html)?$/,
+      );
       if (path.endsWith("/html")) return new Response(state.canonical);
       return Response.json({ No: 1, ProblemId: 18, Title: "題名" });
     },
@@ -110,6 +114,10 @@ function fixture() {
 test("problem replacement preserves exact sample copying, independent formulas and original node restoration", async () => {
   const f = fixture();
   try {
+    f.state.body = f.state.body.replace(
+      "data-yukicoder-ko-problem",
+      'data-yukicoder-ko-problem data-review-status="unreviewed"',
+    );
     const doc = f.dom.window.document;
     const original = doc.querySelector(".block")!;
     const copy = doc.createElement("button");
@@ -126,6 +134,7 @@ test("problem replacement preserves exact sample copying, independent formulas a
     copy.click();
     assert.equal(copied, "1  2\n");
     assert.ok(doc.querySelector(".katex"));
+    assert.equal(doc.querySelector(".yukicoder-ko-machine-notice"), null);
     assert.equal(original.isConnected, false);
     f.engine.restoreProblem();
     assert.equal(doc.querySelector(".block"), original);

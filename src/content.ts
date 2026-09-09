@@ -1,3 +1,5 @@
+import { TagTranslator, type TagTranslation } from "./tag-translations.ts";
+declare const __YUKICODER_TAG_TRANSLATIONS__: TagTranslation[];
 import {
   applyTranslations,
   TranslationHistory,
@@ -33,6 +35,7 @@ declare global {
   const { loadTranslations, loadCatalog } = createContentResources(runtime);
 
   const history = new TranslationHistory();
+  const tagTranslator = new TagTranslator(__YUKICODER_TAG_TRANSLATIONS__);
   const titleHistory = new TranslationHistory();
   let problemTitles = new ProblemTitleTranslator([]);
   let titlesReady = false;
@@ -49,6 +52,7 @@ declare global {
   function applyReadyTranslations() {
     if (!globallyEnabled || !settingsReady || suspended) return;
     if (entries) applyTranslations(document, entries, history);
+    tagTranslator.apply(document, history);
     if (titlesReady) problemTitles.apply(document, titleHistory);
   }
   let scheduled = false;
@@ -79,7 +83,10 @@ declare global {
         titlesReady = false;
         titleHistory.restore();
         globalThis.yukicoderProblemTranslations?.restoreProblem();
-        notices.notifyText("problem", "원문을 표시하고 있습니다.");
+        notices.notifyText("problem", "일본어 원문입니다");
+        notices.setOriginalAction(() => {
+          void render(false);
+        }, "한국어 번역 보기");
       });
       notices.notifyText("problem", "문제 번역을 불러오고 있습니다.");
     }
@@ -138,7 +145,7 @@ declare global {
           );
         }
         if (outcome?.status === "applied") {
-          notices.notifyText("problem", "원문 변경 여부를 확인하고 있습니다.");
+          notices.notifyText("problem", "한국어 번역본 입니다.");
           void outcome.verification?.then((result) => {
             if (!live() || result.status === "cancelled") return;
             notices.notifyText(
@@ -147,10 +154,9 @@ declare global {
                 ? "번역 시점과 문제가 달라졌습니다. 원문을 확인해 주세요."
                 : result.status === "unavailable"
                   ? "원문 변경 여부를 확인하지 못했습니다. 원문을 확인해 주세요."
-                  : "",
+                  : "한국어 번역본 입니다.",
             );
           });
-          if (!outcome.verification) notices.notifyText("problem", "");
         } else if (outcome?.status === "unavailable") {
           notices.notifyText(
             "problem",

@@ -1,0 +1,66 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 939
+problemId: 2417
+sourceTitle: "and or"
+sourceHtmlSha256: "b2461cbbdf3ccafadb32783d35fb7ed877ae3ac37d38bc99dc863542aac2867e"
+humanReview: null
+machineReview: unreviewed
+title: "and or"
+---
+
+## 문제 설명
+
+음이 아닌 정수의 순서쌍 $(X, Y)$ 중 $X \le Y$, $X \land Y = A$, $X \lor Y = B$를 만족하는 것의 개수를 구하세요.
+
+여기서 $\land$는 비트별 논리곱을, $\lor$는 비트별 논리합을 의미합니다.
+
+## 입력
+
+```text
+$A \; B$
+```
+
+## 제한
+
+- $0 \le A, B < 2^{31}$
+- $A$, $B$는 정수입니다.
+
+## 출력
+
+조건을 만족하는 $(X, Y)$의 개수를 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+4 7
+```
+
+#### 출력
+
+```text
+2
+```
+
+조건을 만족하는 $(X, Y)$는 $(4, 7)$, $(5, 6)$입니다.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+12345 54321
+```
+
+#### 출력
+
+```text
+0
+```
+
+조건을 만족하는 $(X, Y)$가 존재하지 않는 경우도 있습니다.

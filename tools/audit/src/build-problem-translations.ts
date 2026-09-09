@@ -1,6 +1,6 @@
 import MarkdownIt from "markdown-it";
 import { build } from "esbuild";
-import { buildDirectory } from "translation-core/paths";
+import { buildDirectory, defaultDataDirectory } from "translation-core/paths";
 
 import { createHash } from "node:crypto";
 import { cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
@@ -19,6 +19,10 @@ const sourceRoot = join(repositoryRoot, "problem-translations");
 const sourceProblems = join(sourceRoot, "ko", "problems");
 const outputRoot = buildDirectory("problems");
 const outputProblems = join(outputRoot, "ko", "problems");
+const problemTitles = await readProblemTitleCatalog(
+  sourceProblems,
+  join(defaultDataDirectory(repositoryRoot), "problems-source/index.json"),
+);
 const readme = await readFile(join(repositoryRoot, "README.md"), "utf8");
 const noticeStart = readme.indexOf("# 콘텐츠 권리 및 삭제 요청 안내");
 if (noticeStart < 0) throw new Error("README content-rights notice is missing");
@@ -80,9 +84,10 @@ for (const [problemNo, filename] of sourceProblemsByNumber) {
   await writeFile(join(outputProblems, `${problemNo}.html`), published, "utf8");
   hashes.set(problemNo, createHash("sha256").update(published).digest("hex"));
 }
-const entries = (await readProblemTitleCatalog(sourceProblems)).map(
-  (entry) => ({ ...entry, htmlSha256: hashes.get(entry.problemNo)! }),
-);
+const entries = problemTitles.map((entry) => ({
+  ...entry,
+  htmlSha256: hashes.get(entry.problemNo)!,
+}));
 const catalog = parseProblemCatalog({
   schemaVersion: 1,
   revision: createHash("sha256").update(JSON.stringify(entries)).digest("hex"),

@@ -57,6 +57,10 @@
       "selector": "#content i.my_tooltip",
       "attribute": "title",
       "ref": "ui_5d4d02d66210cc45"
+    },
+    {
+      "selector": "#content div, #content p",
+      "ref": "ui_30e506a1715bbeee"
     }
   ]
 }

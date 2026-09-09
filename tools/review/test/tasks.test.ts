@@ -1,3 +1,7 @@
+import {
+  legacyProblemStatus,
+  metadataReviewStatus,
+} from "translation-core/problem-review-status";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { once } from "node:events";
@@ -78,7 +82,9 @@ test("real task worker persists progress, rejects simultaneous tasks and detects
     assert.equal(complete.result?.items[0].status, "passed");
     assert.equal(
       complete.result?.items[0].reviewStatus,
-      parseProblemMarkdown(f.source).metadata.reviewStatus,
+      legacyProblemStatus(
+        metadataReviewStatus(parseProblemMarkdown(f.source).metadata),
+      ),
     );
     assert.equal(complete.stale, false);
     const restarted = new ReviewTasks(f.root, f.dataRoot);
@@ -239,7 +245,12 @@ test("explicit conversion preserves approval and unsupported or ambiguous previe
       (await f.request(`/api/tasks/${start.body.id}/convert`, {})).status,
       200,
     );
-    assert.match(await readFile(mdxPath, "utf8"), /reviewStatus: approved/);
+    assert.deepEqual(
+      metadataReviewStatus(
+        parseProblemMarkdown(await readFile(mdxPath, "utf8")).metadata,
+      ),
+      { human: "approved", machine: "approved" },
+    );
     await assert.rejects(readFile(path), { code: "ENOENT" });
     await setTimeout(100);
     const failed = await f.tasks.start({
@@ -247,7 +258,12 @@ test("explicit conversion preserves approval and unsupported or ambiguous previe
       html: "<script>not supported</script>",
     });
     assert.equal((await terminal(f.tasks, failed.id)).status, "failed");
-    assert.match(await readFile(mdxPath, "utf8"), /reviewStatus: approved/);
+    assert.deepEqual(
+      metadataReviewStatus(
+        parseProblemMarkdown(await readFile(mdxPath, "utf8")).metadata,
+      ),
+      { human: "approved", machine: "approved" },
+    );
     const retry = await f.tasks.start({
       operation: "validate-problems",
       problems: "1",

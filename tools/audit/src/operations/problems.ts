@@ -69,7 +69,7 @@ export async function checkProblems(
     items: OperationItem[] = [],
     audit: Record<string, unknown>[] = [];
   const index =
-    mode === "audit"
+    mode === "audit" || mode === "validate"
       ? await readSourceIndex(join(context.dataRoot, "problems-source"))
       : undefined;
   const emit = (item: OperationItem) => {
@@ -115,6 +115,17 @@ export async function checkProblems(
           document.querySelector<HTMLElement>("main[data-yukicoder-ko-problem]")
             ?.dataset.problemId ?? "";
       const translated = parseTranslationDocument(html, no, id, parse);
+      if (mode === "validate") {
+        const original = index?.problems.find((p) => p.No === no);
+        if (
+          original &&
+          (original.ProblemId !== Number(id) ||
+            original.Title !== translated.root.dataset.sourceTitle)
+        )
+          throw new Error(
+            `Source index No ${no} expects problemId=${original.ProblemId}, sourceTitle=${JSON.stringify(original.Title)}; received problemId=${id}, sourceTitle=${JSON.stringify(translated.root.dataset.sourceTitle)}`,
+          );
+      }
       reviewMarkers(translated.blocks);
       let warnings: string[] = [];
       let record: Record<string, unknown> | undefined;

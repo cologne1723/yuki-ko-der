@@ -1,3 +1,7 @@
+import {
+  legacyProblemStatus,
+  metadataReviewStatus,
+} from "../src/problem-review-status.ts";
 import { strict as assert } from "node:assert";
 import { access, readFile } from "node:fs/promises";
 import test from "node:test";
@@ -18,7 +22,9 @@ test("problem MDX compiles formulas, fences, and component-free samples", async 
   assert.equal(parseProblemMarkdown(source).metadata.problemNo, 1);
   assert.ok(
     ["machine", "unreviewed", "approved"].includes(
-      parseProblemMarkdown(source).metadata.reviewStatus,
+      legacyProblemStatus(
+        metadataReviewStatus(parseProblemMarkdown(source).metadata),
+      ),
     ),
   );
   assert.doesNotMatch(source, /machineTranslated/u);
@@ -139,4 +145,43 @@ test("sample fences preserve literal headings, initial blank lines and trailing 
   assert.equal(doc.querySelector(".sample pre")!.textContent, sample);
   assert.equal(doc.querySelectorAll(".block").length, 2);
   assert.equal(doc.querySelectorAll(".sample h6").length, 1);
+});
+
+test("author notices render before sections without changing sample data", async () => {
+  const source = await readFile(
+    "problem-translations/ko/problems/15.mdx",
+    "utf8",
+  );
+  const doc = new JSDOM(compileProblemMarkdown(source)).window.document;
+  const statement = doc.querySelector(".problem-statement")!;
+  assert.equal(statement.firstElementChild?.tagName, "P");
+  assert.equal(
+    statement.firstElementChild?.textContent,
+    "(출제자 공지) 2014/12/16 17:45에 테스트 케이스의 입력 형식 오류를 수정했습니다.",
+  );
+  assert.equal(
+    statement.children[1].querySelector("h4")?.textContent,
+    "문제 설명",
+  );
+  assert.equal(
+    doc.querySelector(".sample pre")?.textContent,
+    "3 220\n180\n220\n280\n",
+  );
+  const { body } = parseProblemMarkdown(source);
+  const frontmatter = source.slice(0, source.length - body.length);
+  const multiple = new JSDOM(
+    compileProblemMarkdown(
+      `${frontmatter}첫 공지\n\n둘째 공지\n\n## 설명\n\n본문\n`,
+    ),
+  ).window.document;
+  assert.equal(multiple.querySelectorAll(".problem-statement > p").length, 2);
+  assert.throws(
+    () => compileProblemMarkdown(`${frontmatter}공지뿐\n`),
+    /## sections/u,
+  );
+  assert.throws(
+    () =>
+      compileProblemMarkdown(`${frontmatter}# 잘못된 제목\n\n## 설명\n본문\n`),
+    /before ## sections/u,
+  );
 });

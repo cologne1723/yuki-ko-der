@@ -27,6 +27,10 @@ export function parseTranslationDocument(
     blocks.length === 0 ||
     root.dataset.schemaVersion !== "1" ||
     root.dataset.locale !== "ko" ||
+    !Number.isSafeInteger(problemNo) ||
+    problemNo < 1 ||
+    !/^[1-9]\d*$/u.test(pageProblemId) ||
+    !Number.isSafeInteger(Number(pageProblemId)) ||
     Number(root.dataset.problemNo) !== problemNo ||
     root.dataset.problemId !== pageProblemId ||
     !root.dataset.sourceTitle ||

@@ -32,6 +32,10 @@ async function fixture() {
     title = metadata.Title,
     calls = 0;
   const request: typeof fetch = async (url) => {
+    assert.match(
+      String(url),
+      /^https:\/\/yukicoder\.me\/api\/v1\/problems\/(18|19)(\/html)?$/,
+    );
     calls++;
     return String(url).endsWith("/html")
       ? new Response(html)
@@ -98,6 +102,50 @@ test("setup checks source identity/title/hash, refreshes mismatches and preserve
       "review-required",
     );
     assert.equal(await readFile(f.path, "utf8"), f.text);
+  } finally {
+    await f.cleanup();
+  }
+});
+
+test("local validation reports every No/ID mix-up using the exact public-number index entry", async () => {
+  const { checkProblems } = await import("../src/operations/problems.ts");
+  const f = await fixture();
+  try {
+    await activateSource(
+      f.sourceRoot,
+      metadata,
+      new TextEncoder().encode(canonical),
+    );
+    await activateSource(
+      f.sourceRoot,
+      { No: 18, ProblemId: 42, Title: "Other" },
+      new TextEncoder().encode(canonical),
+    );
+    await writeFile(f.path, f.text.replace("problemId: 18", "problemId: 1"));
+    await writeFile(
+      join(f.root, "problem-translations/ko/problems/18.mdx"),
+      f.text.replace("problemNo: 1", "problemNo: 18"),
+    );
+    const result = await checkProblems(
+      { repositoryRoot: f.root, dataRoot: f.dataRoot },
+      "validate",
+    );
+    assert.equal(result.items.length, 2);
+    assert.ok(result.items.every((i) => i.status === "failed"));
+    assert.match(result.items[0].message, /expects problemId=18/);
+    assert.match(result.items[1].message, /expects problemId=42/);
+    await assert.rejects(
+      activateSource(
+        f.sourceRoot,
+        { ...metadata, No: 2 },
+        new TextEncoder().encode("wrong"),
+      ),
+      /duplicate original problem identity/,
+    );
+    assert.equal(
+      await readFile(join(f.sourceRoot, "1.html"), "utf8"),
+      canonical,
+    );
   } finally {
     await f.cleanup();
   }

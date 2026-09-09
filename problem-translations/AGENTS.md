@@ -4,6 +4,7 @@
   translation. Its Korean style, terminology, TeX, number-formatting, typo, and
   constraint-organization rules take precedence over the source text's style,
   never over its meaning.
+- `problemNo` is the public number (`No` in the source index), used in filenames and `/problems/no/{problemNo}`. `problemId` is the internal ID (`ProblemId`), used in `/api/v1/problems/{problemId}` and `/problems/{problemId}`. Look up metadata by exact `No`, never by a text search that can match `ProblemId`, and copy the ID and source title from that same record. Never substitute one identifier for the other.
 - Problem statements live in `problem-translations/ko/problems/`, one source
   file per problem. Prefer editable `{problem-number}.mdx` sources; legacy HTML
   remains supported during migration. Never keep both formats for the same
@@ -24,11 +25,22 @@
   translations and revisions; do not infer requirements from example problems.
 - Write Korean directly from the source meaning. Follow the guideline's rules
   for preserved source-language data and for avoiding phrase-substitution scripts.
-- Problem translations never use `📝 `. Generated HTML uses `[기계 번역]` in
-  `<title>` and `<h3>`; MDX stores only `reviewStatus`, using `machine`,
-  `unreviewed`, or `approved`.
-- The first human Save removes `[기계 번역]` but does not approve the file.
-  Approval is explicit, and later saves preserve an approved status.
+- Problem translations never use `📝 `. New review writes store independent
+  decisions in separate frontmatter fields: `humanReview: null` and
+  `machineReview: unreviewed`. `humanReview` is `null` (no decision), `approved`, or `unreviewed` (explicitly not approved);
+  `machineReview` is `approved` or `unreviewed`. A human decision always overrides the
+  machine decision, including an explicit human cancellation of machine approval.
+- Legacy scalar statuses remain readable: `approved` means human approval,
+  `unreviewed` and `machine` mean no recorded human decision.
+  None of these implies machine approval. Review saves migrate to the independent format.
+- Only human approval removes the public machine-translation notice. Machine
+  approval remains visibly distinct from human approval. Saving edited translation
+  content resets both reviews; saving unchanged content preserves both decisions.
+- Machine review is a semantic review, not compilation or lint success. Record an
+  actual review with `pnpm review:machine --problem NUMBER --revision SHA256 --status approved`.
+  The revision is the SHA-256 of the exact MDX source that was reviewed. Use
+  `--status unreviewed` to clear machine approval. This command preserves human
+  decisions and rejects stale revisions; it does not perform a review itself.
 - The validator checks review status, public number, internal problem ID, source
   title, and exact canonical HTML SHA-256. Only sample input/output differences must be reported as detailed non-blocking
   warnings that name the differing values. Do not compare translated prose,
@@ -42,4 +54,3 @@
   and Pages URL are configured. Set `problemTranslationBaseUrl` in
   `src/config.ts` and add that exact origin to `manifest.json` permissions; do
   not use a wildcard origin.
-

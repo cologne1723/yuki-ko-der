@@ -108,3 +108,12 @@ input; conflicting navigation is locked while saving, and discarding unsaved edi
 requires confirmation. Late snapshots cannot replace another task's context.
 Matching is cached independently of wording and approval edits; initial indexing
 of a large import can take longer than subsequent reads.
+
+## Tag review
+
+Open **태그 번역** at `/tags` to search original/Korean names or solved.ac keys,
+filter by approval status, and edit translations alongside problem counts and
+source links. Changes are saved only to `translations/tags/ko.json`.
+Saving changed wording resets approval; unchanged saves preserve it. Approval and
+withdrawal are explicit actions. Unsaved edits block navigation, and stale or
+concurrent saves are rejected without overwriting the draft or the file.

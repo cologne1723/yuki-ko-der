@@ -17,6 +17,7 @@
     "convert:problem": "pnpm --filter translation-audit convert:problem",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "review:machine": "node --import tsx tools/review/src/review-machine.ts",
     "review": "pnpm review:build && pnpm --filter translation-review start",
     "review:build": "pnpm --filter translation-review build",
     "test": "pnpm test:extension && pnpm --filter translation-core --filter translation-review --filter ui-collector-internal test",

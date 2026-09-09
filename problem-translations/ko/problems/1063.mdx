@@ -1,0 +1,85 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1063
+problemId: 4241
+sourceTitle: "ルートの計算 / Sqrt Calculation"
+sourceHtmlSha256: "141d1a64da332a17e8e6210301564194eab98d4c6a886151512e2f0097970765"
+humanReview: null
+machineReview: unreviewed
+title: "루트 계산"
+---
+
+## 문제 설명
+
+$\sqrt{n} = a \sqrt{b}$가 되는 양의 정수 $(a, b)$ 중 $b$가 가장 작은 것을 구하세요.
+
+## 입력
+
+```text
+$n$
+```
+
+정수 $n$이 주어집니다.
+
+## 제한
+
+$1 \le n \le 10^9$
+
+입력은 모두 정수입니다.
+
+## 출력
+
+$a$, $b$를 공백으로 구분하여 한 줄에 출력하세요.
+
+마지막에 줄 바꿈을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+12
+```
+
+#### 출력
+
+```text
+2 3
+```
+
+$\sqrt{12} = \sqrt{2^2 \times 3} = 2 \sqrt{3}$입니다.
+
+### 예제 2 {file="01_sample_02.txt"}
+
+#### 입력
+
+```text
+10
+```
+
+#### 출력
+
+```text
+1 10
+```
+
+$1 \times \sqrt{10}$보다 더 이상 $b$를 작게 만들 수 없습니다.
+
+### 예제 3 {file="01_sample_03.txt"}
+
+#### 입력
+
+```text
+1024
+```
+
+#### 출력
+
+```text
+32 1
+```
+
+$\sqrt{1024} = \sqrt{2^{10}} = 2^5 \sqrt{1}$입니다.

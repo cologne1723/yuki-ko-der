@@ -75,7 +75,8 @@ export function createProblemLoader(host: Window & typeof globalThis) {
         );
         if (
           expected &&
-          (expected.problemId !== Number(pageProblemId) ||
+          (expected.problemNo !== problemNo ||
+            expected.problemId !== Number(pageProblemId) ||
             translation.root.dataset.sourceTitle !== expected.source)
         )
           throw new Error(

@@ -1,0 +1,187 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 953
+problemId: 2386
+sourceTitle: "席"
+sourceHtmlSha256: "15ae87f8ee5aa79ef76546ec75019fe244c67ce6c5283d55a36954e11c1f3596"
+humanReview: null
+machineReview: unreviewed
+title: "좌석"
+---
+
+## 문제 설명
+
+음식점 「유키야」에는 $N$개의 좌석이 있으며, 이 좌석들은 일직선 위에 같은 간격으로 놓여 있습니다. 각 좌석에는 한쪽 끝부터 차례로 $1$부터 $N$까지 번호가 붙어 있습니다.
+
+유키야에는 입구가 하나뿐이며, 입구에서 가장 가까운 좌석은 $K_1$번 좌석입니다. 입구에서 두 번째로 가까운 좌석은 $K_2$번 좌석 하나뿐입니다($K_2$번 좌석은 $K_1$번 좌석의 옆 좌석입니다).
+
+유키야에 오는 모든 손님은 다음 조건에 따라 좌석에 앉습니다(빈 좌석이 있으면 즉시 앉습니다).
+
+- 다른 손님과 이웃하지 않도록 앉을 수 있는 빈 좌석이 있으면, 그중 입구에서 가장 가까운 좌석에 앉습니다.
+- 다른 손님과 이웃하지 않도록 앉을 수 있는 빈 좌석이 없으면, 빈 좌석 중 입구에서 가장 가까운 좌석에 앉습니다.
+- 빈 좌석이 없으면 빈 좌석이 생길 때까지 기다린 뒤, 위 조건에 따라 좌석에 앉습니다.
+
+유키야에 $Q$명의 손님이 왔습니다. $i$번째 손님의 도착 시각은 $a_i$이고, 좌석에 앉은 뒤 일어날 때까지의 시간은 $b_i$입니다. 각 손님이 어느 좌석에 앉았는지 답하세요.
+
+시각 $0$에는 모든 좌석이 비어 있고, 손님은 도착 순서대로 좌석에 앉습니다. $x$번 손님이 도착하는 동시에 $y$번 손님이 일어나는 경우, $y$번 손님이 앉아 있던 좌석은 $x$번 손님에게 빈 좌석으로 간주된다는 점에 주의하세요.
+
+## 입력
+
+```text
+$N \; K_1 \; K_2$
+$Q$
+$a_1 \; b_1$
+$a_2 \; b_2$
+$\vdots$
+$a_Q \; b_Q$
+```
+
+## 제한
+
+- $2 \le N \le 10^5$
+- $1 \le K_1, K_2 \le N$
+- $|K_1 - K_2| = 1$
+- $1 \le Q \le 10^5$
+- $1 \le a_1 < a_2 < \dots < a_Q \le 10^9$
+- $1 \le b_i \le 10^9$ ($1 \le i \le Q$)
+- 입력은 모두 정수입니다.
+
+## 출력
+
+$Q$줄을 출력하세요. $i$번째 줄에는 $i$번째 손님이 앉은 좌석의 번호를 출력하세요. $1 \le i \le Q$입니다.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+5 3 4
+7
+1 49
+2 48
+3 47
+5 40
+8 42
+13 100
+21 100
+```
+
+#### 출력
+
+```text
+3
+5
+1
+4
+2
+4
+2
+```
+
+좌석과 입구의 위치 관계는 다음 그림과 같습니다.
+
+![좌석과 입구의 위치 관계](<data:image/png;base64,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>)
+
+입구에서 가까운 순서로 좌석 번호를 나열하면 $3(=K_1), 4(=K_2), 2, 5, 1$입니다.
+
+시각 $1$에는 모든 좌석이 비어 있습니다. $1$번 손님은 입구에서 가장 가까운 좌석인 $3$번 좌석에 앉습니다.
+
+시각 $2$에는 $1$번 손님과 이웃하지 않도록 앉을 수 있는 좌석이 $5$, $1$번 좌석입니다. $5$번 좌석과 $1$번 좌석 중에서는 $5$번 좌석이 입구에서 더 가까우므로 $2$번 손님은 $5$번 좌석에 앉습니다.
+
+시각 $3$에는 $1$, $2$번 손님와 이웃하지 않도록 앉을 수 있는 좌석이 $1$번 좌석뿐입니다. 따라서 $3$번 손님은 $1$번 좌석에 앉습니다.
+
+시각 $5$에는 $1$, $2$, $3$번 손님과 이웃하지 않도록 앉을 수 있는 좌석이 없고, 빈 좌석은 $4$, $2$번 좌석입니다. $4$번 좌석과 $2$번 좌석 중에서는 $4$번 좌석이 입구에서 더 가까우므로 $4$번 손님은 $4$번 좌석에 앉습니다.
+
+시각 $8$에는 빈 좌석이 $2$번 좌석뿐입니다. 따라서 $5$번 손님은 $2$번 좌석에 앉습니다.
+
+시각 $13$에는 빈 좌석이 없습니다. $6$번 손님은 빈 좌석이 생길 때까지 기다립니다.
+
+시각 $21$에는 빈 좌석이 없습니다. $7$번 손님은 빈 좌석이 생길 때까지 기다립니다.
+
+시각 $45$에 $4$번 손님이 앉아 있던 $4$번 좌석이 비므로 $6$번 손님은 $4$번 좌석에 앉습니다.
+
+시각 $50$에 $1$, $2$, $3$, $5$번 손님이 앉아 있던 $3$, $5$, $1$, $2$번 좌석이 비므로 $7$번 손님은 $6$번 손님과 이웃하지 않는 $2$번 좌석에 앉습니다.
+
+그림으로 나타내면 다음과 같습니다.
+
+```text
+           K_1 K_2
+    1   2   3   4   5 
+
+ 0 [ ] [ ] [ ] [ ] [ ]
+
+ 1 [ ] [ ] [1] [ ] [ ]
+
+ 2 [ ] [ ] [1] [ ] [2]
+
+ 3 [3] [ ] [1] [ ] [2]
+
+ 5 [3] [ ] [1] [4] [2]
+
+ 8 [3] [5] [1] [4] [2]
+
+13 [3] [5] [1] [4] [2]  6
+
+21 [3] [5] [1] [4] [2]  6 7
+
+45 [3] [5] [1] [6] [2]  7
+
+50 [ ] [7] [ ] [6] [ ]
+```
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+10 5 6
+20
+1 15
+5 117
+10 60
+27 11
+35 43
+38 16
+41 97
+50 124
+61 106
+82 70
+86 79
+92 144
+96 71
+108 17
+126 27
+127 18
+131 5
+133 119
+181 38
+192 4
+```
+
+#### 출력
+
+```text
+5
+7
+3
+5
+9
+5
+1
+6
+5
+3
+9
+4
+8
+2
+7
+2
+10
+10
+6
+8
+```
