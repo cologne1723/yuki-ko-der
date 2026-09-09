@@ -2,6 +2,7 @@ import { katexStylePlugin } from "../src/katex-style-plugin.ts";
 import { build } from "esbuild";
 import { JSDOM } from "jsdom";
 import type { TestContext } from "node:test";
+import { MessageChannel } from "node:worker_threads";
 const bundle = await build({
   plugins: [katexStylePlugin],
   stdin: {
@@ -9,7 +10,7 @@ const bundle = await build({
     loader: "tsx",
     contents: `
 import React from 'react';
-import { render, screen, fireEvent, waitFor, within, cleanup } from '@testing-library/react';
+import { act, configure, render, screen, fireEvent, waitFor, within, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MantineProvider } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
@@ -24,6 +25,8 @@ import { Tags } from './public/app/tags.tsx';
 import { Comparison } from './public/app/preview.tsx';
 import { EditorView } from 'codemirror';
 export { screen, fireEvent, waitFor, within };
+// Shared runners can take more than one second to complete real disk-backed UI requests.
+configure({asyncUtilTimeout:10_000});
 let client, router;
 export function cachedUi(){return client.getQueryData(["/api/ui"]);}
 function Ui(){const [params]=useSearchParams();return params.get("view")==="imports"?<Imports/>:<Glossary/>;}
@@ -35,7 +38,7 @@ export function mount(path, kind) {
 }
 export function edit(source){const view=EditorView.findFromDOM(document.querySelector('.cm-editor'));view.dispatch({changes:{from:0,to:view.state.doc.length,insert:source}});}
 export function editorView(){return EditorView.findFromDOM(document.querySelector('.cm-editor'));}
-export function navigate(path){return router.navigate(path);}
+export async function navigate(path){await act(async()=>{await router.navigate(path);});}
 export function unmount(){cleanup();router.dispose();client.clear();}
 `,
   },
@@ -59,7 +62,15 @@ export function reactPage(
     pretendToBeVisual: true,
   });
   const w = dom.window;
+  const channels = new Set<MessageChannel>();
   Object.assign(w, {
+    // React's async act uses MessageChannel, which JSDOM does not provide.
+    MessageChannel: class extends MessageChannel {
+      constructor() {
+        super();
+        channels.add(this);
+      }
+    },
     fetch: (requestPath: string, init?: RequestInit) =>
       requestPath === "/api/tasks" &&
       kind === "shell" &&
@@ -98,6 +109,10 @@ export function reactPage(
   t.after(() => {
     fixture.unmount();
     w.close();
+    for (const channel of channels) {
+      channel.port1.close();
+      channel.port2.close();
+    }
   });
   return { dom, user, ...fixture } as {
     dom: JSDOM;

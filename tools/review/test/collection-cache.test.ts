@@ -59,7 +59,8 @@ test(
     await p.screen.findByLabelText("한국어 번역");
     assert.equal(p.cachedUi().pages.length, 0);
     await p.navigate("/ui?view=imports");
-    await p.screen.findByLabelText("수집한 ZIP 파일");
+    // navigate() must flush React's route transition before it resolves.
+    p.screen.getByLabelText("수집한 ZIP 파일");
     const archive = fixture();
     archive.occurrences[0].category = "interface";
     archive.occurrences[0].liveCssSelectorHint = "button";
@@ -107,6 +108,7 @@ test(
     await p.navigate(
       "/ui?view=imports&collection=" + collections.collections[0].id,
     );
+    p.screen.getByRole("heading", { name: "ZIP 가져오기", exact: true });
     await p.user.click(
       await p.screen.findByRole("button", { name: "자료 삭제", exact: true }),
     );
