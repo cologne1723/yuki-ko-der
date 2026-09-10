@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1641
+problemId: 6667
+sourceTitle: "Tree Xor Query"
+sourceHtmlSha256: "bcd687f521d2434dcc6f01876157c77c13f52eb3a5522ffd124770e4f23dbd75"
+humanReview: null
+machineReview: unreviewed
+title: "트리 XOR 질의"
+---
+
+정점 `1`을 루트로 하는 트리가 주어지고, 정점 `i`의 비용은 `C_i`입니다. 질의를 처리하세요.
+
+## 질의
+
+- `T_j=1`: `C_{x_j}`를 `C_{x_j} XOR y_j`로 바꿉니다.
+- `T_j=2`: `x_j`를 루트로 하는 서브트리의 모든 비용의 XOR를 출력합니다.
+
+## 제약
+
+- `2 <= N,Q <= 10^5`
+- `0 <= C_i,y_j < 2^10`
+- `T_j`는 1 또는 2입니다.
+- 2번 질의가 하나 이상 포함됩니다.
+
+## 입력
+
+트리와 정점 비용, `Q`개의 질의가 주어집니다.
+
+## 출력
+
+각 2번 질의의 답을 한 줄에 하나씩 출력하세요.

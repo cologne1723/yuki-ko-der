@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2429
+problemId: 10010
+sourceTitle: Happiest Tabehodai Ways
+sourceHtmlSha256: 1153907d9c11d017f3fa10f787a2e71f3203411c8c1892ec58a81035f7c10dcc
+humanReview: null
+machineReview: unreviewed
+title: 가장 행복한 무한 리필 방법
+---
+
+$N$종류의 음식이 있고 음식 $i$의 칼로리는 $C_i$, 맛은 $D_i$입니다. 포만도가 처음 0일 때, 포만도가 $K$ 이하가 되도록 음식을 원하는 횟수만큼 먹을 수 있습니다. 가능한 최대 행복도와, 그 최대 행복도를 얻는 먹는 방법의 수를 구하세요. 방법은 먹은 음식 수 또는 순서가 다르면 다릅니다.
+
+## 조건
+
+- $1\le N,K\le1000$
+- $1\le C_i,D_i\le1000$
+
+## 입력
+
+```text
+N K
+C1 C2 ... CN
+D1 D2 ... DN
+```
+
+## 출력
+
+첫 줄에 최대 행복도, 둘째 줄에 방법 수를 $998244353$로 나눈 나머지를 출력하세요.

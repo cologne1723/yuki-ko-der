@@ -1,0 +1,65 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1201
+problemId: 4783
+sourceTitle: "お菓子配り-4"
+sourceHtmlSha256: "2ec851be508abae71a4a06c0440372dd05231548533ddf30d9a0b4e38eed102b"
+humanReview: null
+machineReview: unreviewed
+title: "과자 나누기-4"
+---
+
+## 문제 설명
+
+양의 정수 $N,M$과 길이 $N$의 정수 수열 $A$, 길이 $M$의 정수 수열 $B$가 주어집니다. 수열 $B$의 최댓값을 $C$라 하고, $C$명의 아이에게 $1$부터 $C$까지 번호를 붙입니다.
+
+수열 $A$와 $B$에서 원소를 하나씩 고르는 모든 $NM$가지 경우에 대해 다음 작업을 합니다. 선택한 원소가 $A_i,B_j$일 때, $1$번부터 $B_j$번까지의 모든 아이에게, $k$번 아이는
+
+$2\times\left\lfloor\frac{A_i\times k}{B_j}\right\rfloor$
+
+개의 과자를 받습니다.
+
+이 작업을 모두 수행하기 위해 필요한 과자 수의 최솟값을 $10^9+7$로 나눈 나머지를 출력하세요.
+
+## 입력
+
+```text
+N M
+A_1 A_2 \ldots A_N
+B_1 B_2 \ldots B_M
+```
+
+- $1\leq N,M\leq 2000$
+- $0\leq A_i\leq 10^8$
+- $1\leq B_j\leq 10^8$
+
+## 출력
+
+필요한 과자 수의 최솟값을 $10^9+7$로 나눈 나머지를 출력하세요. 마지막에 줄바꿈을 넣으세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+1 1
+3
+4
+```
+#### 출력
+```text
+12
+```
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+6 9
+234523 35645 223 3563 234 346
+346 467568 234141 457 235235 465 1 2 3
+```
+#### 출력
+```text
+0
+```

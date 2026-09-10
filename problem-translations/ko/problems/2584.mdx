@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2584
+problemId: 10313
+sourceTitle: "The University of Tree"
+sourceHtmlSha256: 515c6a8bdb482a630c0dcd2b85dae0071dec27ebd11c6dfb17193658026f06b0
+humanReview: null
+machineReview: unreviewed
+title: "트리 대학교"
+---
+
+연결된 $N$개 정점 $N-1$개 간선의 트리가 주어집니다. 각 정점 $k$의 원형 통로는 반시계 방향으로만 이동할 수 있고, 간선들은 거점 방향에서 시작해 반시계 방향 순서로 주어집니다. 두 거점 $s,t$ 사이를 다른 거점 없이 이동할 때 지나는 노점들의 타입 번호 곱을 $p(s,t)$라 하고 $p(s,s)=0$으로 합니다. 각 $s$에 대해 $Q_s=\sum_t p(s,t)$를 구하세요.
+
+## 조건
+
+- $2\le N\le200000$
+- 각 간선 번호는 정확히 두 번 나타나며 모든 정점은 연결되어 있습니다.
+
+## 입력
+
+```text
+$N$
+$C_1$ $E_{1,1}$ $\cdots$ $E_{1,C_1}$
+\vdots
+$C_N$ $E_{N,1}$ $\cdots$ $E_{N,C_N}$
+```
+
+## 출력
+
+각 $Q_s$를 $998244353$으로 나눈 나머지로 한 줄에 하나씩 출력하세요.
+

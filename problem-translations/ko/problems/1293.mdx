@@ -1,0 +1,35 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1293
+problemId: 3941
+sourceTitle: "2種類の道路"
+sourceHtmlSha256: "a2a5c8ce5baf3f2ae02715f859fc3994d3e0e32ef37901880184e2eb26d88684"
+humanReview: null
+machineReview: unreviewed
+title: "두 종류의 도로"
+---
+
+## 문제 설명
+
+도시 $N$개와 자동차 전용 도로 $D$개, 보행자 전용 도로 $W$개가 있습니다. 자동차 도로를 0개 이상 통과한 뒤 보행자 도로를 0개 이상 통과하는 순서로 도시 $u$에서 $v$로 갈 수 있는 순서 있는 쌍 $(u,v)$의 개수를 구하세요.
+
+## 입력
+
+```text
+N D W
+a_1 b_1
+\vdots
+a_D b_D
+c_1 d_1
+\vdots
+c_W d_W
+```
+
+- $2\leq N\leq10^5$
+- $1\leq D,W\leq\min(10^5,N(N-1)/2)$
+- 각 도로의 양 끝점은 서로 다르고 같은 도로가 중복되지 않습니다.
+
+## 출력
+
+답을 출력하세요.

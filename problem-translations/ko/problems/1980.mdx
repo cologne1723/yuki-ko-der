@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1980
+problemId: 4681
+sourceTitle: "[Cherry 4th Tune D] 停止距離"
+sourceHtmlSha256: "337ee483488e109b4c03b166a8a07766cd3c200c2a3f71f529dd398fa90c4d83"
+humanReview: null
+machineReview: unreviewed
+title: "정지 거리"
+---
+
+차량의 속도가 $v$ m/s, 공주 시간은 $t$초, 타이어와 노면의 동마찰 계수는 $m$일 때 정지 거리를 $S(v,t,m)=vt+v^2/(20m)$로 정의합니다. 장애물까지의 거리가 $l$이면 $S\le l$일 때 충돌하지 않습니다.
+
+정지 거리 $L$, 공주 시간 $T$, 마찰 계수 $\mu$가 주어질 때 충돌하지 않을 수 있는 순간 속도의 최댓값을 시속 $V$ km/h로 구하고, 소수 셋째 자리 이하는 버려 소수 둘째 자리까지 출력하세요.
+
+## 입력
+
+```text
+N
+T_1 μ_1 L_1
+...
+T_N μ_N L_N
+```
+
+$1\le N\le2\times10^5$입니다. $T,\mu,L$은 소수 둘째 자리까지 주어집니다.
+
+## 출력
+
+각 테스트 케이스의 최댓값을 한 줄에 출력하세요.

@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2563
+problemId: 8680
+sourceTitle: "色ごとのグループ"
+sourceHtmlSha256: cec2124ff4898de8f0eade0a7e253f9bb67ad21d7c768049ca95d0a27fa6efc6
+humanReview: null
+machineReview: unreviewed
+title: "색별 그룹"
+---
+
+정점 $N$개와 간선 $M$개가 있는 단순 무방향 그래프가 주어집니다. 정점 $i$의 색은 $C_i$입니다. 간선을 추가하는 조작을 0회 이상 수행해, 같은 색의 모든 정점 쌍이 같은 색 정점만 거쳐 서로 도달 가능하도록 만들 때 필요한 최소 조작 횟수를 구하세요.
+
+## 조건
+
+- $1\le N\le2\times10^5$, $0\le M\le\min(2\times10^5,N(N-1)/2)$
+- $1\le C_i\le N$
+
+## 입력
+
+```text
+$N$ $M$
+$C_1$ $C_2$ $\cdots$ $C_N$
+$u_1$ $v_1$
+$\vdots$
+$u_M$ $v_M$
+```
+
+## 출력
+
+답을 출력하세요.
+

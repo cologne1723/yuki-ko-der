@@ -1,0 +1,38 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2712
+problemId: 9989
+sourceTitle: "Play more!"
+sourceHtmlSha256: "e45d4f64635e031512d96bbfb740a45e422ca3c2348aafd21c3ed890ca4c53b7"
+humanReview: null
+machineReview: unreviewed
+title: "더 플레이하자!"
+---
+
+## 문제
+
+`N`개의 던전과 일방통행 도로가 있습니다. 던전 `i`를 공략하는 데 `A_i`시간, 도로 `j`를 이동하는 데 `c_j`시간이 걸립니다. 던전을 공략하면 그 던전에서 출발하는 도로 중 하나를 골라 이동할 수 있습니다. 같은 던전과 도로를 여러 번 이용할 수 있습니다.
+
+던전 1에서 시작해 던전 `N`을 공략하며 게임을 끝낼 때, 만족도(공략 시간 합 − 이동 시간 합)의 최댓값을 구하세요. 만족도를 무한히 크게 만들 수 있으면 `inf`를 출력합니다.
+
+## 제약
+
+- `2 ≤ N ≤ 2500`, `1 ≤ M ≤ min(N(N-1),5000)`
+- `1 ≤ A_i,c_j ≤ 10^9`
+- 1에서 `N`으로 가는 경로가 존재합니다.
+
+## 입력
+
+```text
+N M
+A_1 A_2 ... A_N
+a_1 b_1 c_1
+⋮
+a_M b_M c_M
+```
+
+## 출력
+
+최댓값 또는 `inf`를 출력하세요.
+

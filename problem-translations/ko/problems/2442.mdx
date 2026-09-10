@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2442
+problemId: 9634
+sourceTitle: 線形写像
+sourceHtmlSha256: 8aff708d04cde34717f96a0b3e80dca3a4e1d8b9c7defa265121cd6cc00b53b7
+humanReview: null
+machineReview: unreviewed
+title: 선형 사상
+---
+
+길이 $2^N$인 수열 $A$가 주어집니다. 각 원소는 $2^{64}$ 미만의 음이 아닌 정수입니다. 모든 $0\le i,j<2^N$에 대해
+
+$$A_{i\mathbin{\mathrm{XOR}}j}=A_i\mathbin{\mathrm{XOR}}A_j$$
+
+를 만족하면 좋은 수열입니다. 좋은 수열인지 판정하세요.
+
+## 조건
+
+- $N$은 문제의 제한을 만족하는 음이 아닌 정수입니다.
+- 수열의 길이는 $2^N$입니다.
+
+## 입력
+
+```text
+N
+A0 A1 ... A(2^N-1)
+```
+
+## 출력
+
+좋은 수열이면 `Yes`, 아니면 `No`를 출력하세요.

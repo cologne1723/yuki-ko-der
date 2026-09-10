@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2478
+problemId: 10060
+sourceTitle: Disjoint-Sparse-Table Optimization
+sourceHtmlSha256: 92e7e08419b614b160aed1224cd3b84f7d066a813e1c664f229536563efdcf97
+humanReview: null
+machineReview: unreviewed
+title: 분할 희소 테이블 최적화
+---
+
+길이 $2Q-1$의 수열 $A$와 $Q$개의 구간 $[L_i,R_i)$가 주어집니다. 각 구간 자체를 선택하거나, 어떤 $x$로 두 부분 구간을 모두 선택해야 합니다. 모든 구간에 대해 이 조건을 만족하는 집합의 비용을, 선택한 구간들의 원소 합 총합으로 정의합니다. 최소 비용을 구하세요.
+
+## 조건
+
+- $1\le Q\le100$
+- 양 끝점은 1부터 $2Q$까지를 정확히 한 번씩 이룹니다.
+- $1\le A_i\le10^9$
+
+## 입력
+
+```text
+Q
+L1 R1
+...
+LQ RQ
+A1 A2 ... A(2Q-1)
+```
+
+## 출력
+
+최소 비용을 출력하세요.

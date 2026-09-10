@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2281
+problemId: 9190
+sourceTitle: "K → K-1 01 Flip"
+sourceHtmlSha256: cc7a1e86a66e7b3fd805dde7edf2e30e6b2435b30bca696eb03ab1b0fca9a762
+humanReview: null
+machineReview: unreviewed
+title: "K → K-1 01 뒤집기"
+---
+
+0과 1로 이루어진 길이 $N$의 문자열 $S$가 주어집니다. $Q$개의 쿼리가 주어집니다.
+
+쿼리 $(L_i,R_i,K_i)$에서는 $S$의 $L_i$번째부터 $R_i$번째까지의 연속 부분 문자열 $X$에 대해 다음 연산을 0회 이상 수행할 수 있습니다. $K_i$개의 연속한 0을 $K_i-1$개의 1로 바꾸거나, $K_i$개의 연속한 1을 $K_i-1$개의 0으로 바꿉니다.
+
+연산 후 문자열 $X$의 길이의 최솟값을 구하세요.
+
+## 조건
+
+- $2\le N,Q\le 2\times10^5$
+- $1\le L_i<R_i\le N$
+- $2\le K_i\le R_i-L_i+1$
+- $S$는 0과 1로 이루어집니다.
+
+## 입력
+
+첫째 줄에 $N,Q$, 둘째 줄에 $S$, 그 다음 $Q$개의 줄에 $L_i,R_i,K_i$가 주어집니다.
+
+## 출력
+
+$i$번째 쿼리의 답을 $i$번째 줄에 출력하세요.

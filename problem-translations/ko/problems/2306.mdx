@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2306
+problemId: 9019
+sourceTitle: "[Cherry 5th Tune C] ウソツキタマシイ"
+sourceHtmlSha256: 3dbe4e30236f19d1f5be992e2c97692915b26db417a46ae5d3f032d1c9efa3cd
+humanReview: null
+machineReview: unreviewed
+title: "[Cherry 5th Tune C] 거짓말쟁이 영혼"
+---
+
+$N$개의 영혼은 $1$부터 $M$까지의 색 중 하나를 가집니다. 색 $i$인 영혼의 수를 $x_i$라 할 때 소울 파워를 $\sum_i x_i^2$로 정의합니다.
+
+처음 색별 개수가 $A_i$로 주어집니다. 이후 정보 $(C_q,K_q,D_q)$가 주어지면 현재 색 $C_q$인 영혼 중 $K_q$개가 사실은 색 $D_q$였다는 내용에 따라 색을 수정합니다. 수정은 누적됩니다.
+
+각 정보 처리 후 소울 파워를 출력하세요.
+
+## 조건
+
+- $1\le N\le10^9$
+- $2\le M\le10^5$
+- $\sum_i A_i=N$
+- $1\le Q\le10^5$
+- $1\le K_q\le x_{C_q}$, $C_q\ne D_q$
+
+## 입력
+
+$N,M$, 초기 개수 배열, $Q$, 그리고 각 쿼리 $C_q,K_q,D_q$가 주어집니다.
+
+## 출력
+
+각 쿼리 후의 소울 파워를 한 줄에 하나씩 출력하세요.

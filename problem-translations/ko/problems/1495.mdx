@@ -1,0 +1,45 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1495
+problemId: 6189
+sourceTitle: "パンの仕入れ"
+sourceHtmlSha256: "15022efca0778176417ce5158d63481b9f68892fc7adc317e3cc8cbdc357cb46"
+humanReview: null
+machineReview: unreviewed
+title: "빵 구매"
+---
+## 문제
+
+빵은 $N$종류가 있고, 그중 정확히 $K$개를 구매합니다. 같은 종류를 여러 개 구매해도 되고, 구매하지 않는 종류가 있어도 됩니다.
+
+설문조사에서 $M$개의 요청을 받았습니다. $i$번째 요청은 $x_i$종류의 빵을 정확히 $y_i$개 구매해 달라는 것입니다.
+
+$i$종류 빵의 구매 개수를 $B_i$라 할 때, 다음 값을 최소화하세요.
+
+\[
+\sum_{i=1}^{M}(B_{x_i}-y_i)^2
+\]
+
+$B_i$는 음이 아닌 정수이고, 모든 $B_i$의 합은 $K$여야 합니다.
+
+## 입력
+
+첫째 줄에 테스트 케이스 수 $T$가 주어집니다. 이후 $T$개의 테스트 케이스가 주어집니다.
+
+```text
+$N$ $M$ $K$
+$x_1$ $y_1$
+$x_2$ $y_2$
+$\vdots$
+$x_M$ $y_M$
+```
+
+- $1\leq T\leq 100$
+- $1\leq N,M\leq 2\times 10^5$, $1\leq K\leq 10^9$
+- 전체 테스트 케이스에서 $N$의 합과 $M$의 합은 각각 $2\times 10^5$ 이하입니다.
+- $1\leq x_i\leq N$, $1\leq y_i\leq 10^9$
+
+## 출력
+
+각 테스트 케이스에 대해 최소값을 한 줄에 출력하세요.

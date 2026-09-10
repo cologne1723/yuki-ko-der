@@ -1,0 +1,38 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2571
+problemId: 10386
+sourceTitle: "列辞書順列"
+sourceHtmlSha256: 48a5ab0120fe733422fd4ea875db4b0a190ab369a50a1a10d0f4d8084181b32f
+humanReview: null
+machineReview: unreviewed
+title: "수열 사전순 나열"
+---
+
+모든 원소가 $1$ 이상 $M$ 이하이고 길이가 $1$ 이상 $K$ 이하인 정수열을 사전순으로 나열한 열 $S$가 있습니다. 수열 $A$가 주어질 때 쿼리를 처리하세요.
+
+## 쿼리
+
+- `1 l r`: $B=(A_l,\ldots,A_r)$라 할 때 $S_i=B$인 $i$를 $998244353$으로 나눈 나머지를 출력합니다.
+- `2 x y`: $A_x$를 $y$로 바꿉니다.
+
+## 조건
+
+- $1\le N,M,Q\le10^5$, $N\le K\le10^9$
+- $1\le A_i\le M$
+
+## 입력
+
+```text
+$N$ $M$ $K$ $Q$
+$A_1$ $A_2$ $\cdots$ $A_N$
+쿼리 $1$
+\vdots
+쿼리 $Q$
+```
+
+## 출력
+
+첫 번째 종류 쿼리의 답을 순서대로 출력하세요.
+

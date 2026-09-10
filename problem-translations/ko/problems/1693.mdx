@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1693
+problemId: 6643
+sourceTitle: "Invasion"
+sourceHtmlSha256: "6ce8206ecc39705298d53e789eb265703586f08953aade3070dc5cb01e0c1af7"
+humanReview: null
+machineReview: unreviewed
+title: "침공"
+---
+
+일렬로 놓인 `M`개 칸에 코인을 놓습니다. 비어 있는 칸 수가 `x`일 때 `A_i <= x`인 `i`를 골라, 비어 있는 칸 `A_i`개를 선택하되 가장 왼쪽 빈칸은 반드시 포함해야 합니다.
+
+이 작업을 원하는 횟수만큼 수행한 뒤 가능한 코인 배치의 개수를 `998244353`으로 나눈 나머지를 구하세요.
+
+## 제약
+
+- `1 <= N <= 100`
+- `N <= M <= 10^5`
+- `A_i`는 `1` 이상 `M` 이하이며 서로 다릅니다.
+
+## 입력
+
+`N M`과 `A_1,...,A_N`이 주어집니다.
+
+## 출력
+
+가능한 코인 배치의 개수를 출력하세요.

@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2003
+problemId: 7716
+sourceTitle: "Frog on Grid"
+sourceHtmlSha256: "4dd7122b87dd1e06d3346e20840436b7e9f9280ac24f1b4483ceed3f072ce707"
+humanReview: null
+machineReview: unreviewed
+title: "격자 위의 개구리"
+---
+
+개구리는 한 번의 점프로 현재 칸 $(x,y)$에서 $(x+a,y+b)$로 이동할 수 있습니다. $a,b$는 음이 아닌 정수이고 $1\le a+b\le K$입니다. 구멍인 칸은 이동할 수 없습니다.
+
+$(1,1)$에서 $(H,W)$까지 이동하는 경로의 수를 $998244353$으로 나눈 나머지를 구하세요.
+
+## 입력
+
+```text
+H W K
+c_{1,1}...c_{1,W}
+...
+c_{H,1}...c_{H,W}
+```
+
+$2\le HW\le10^6$이며 `#`은 구멍, `.`은 빈 칸입니다.
+
+## 출력
+
+경로의 수를 출력하세요.

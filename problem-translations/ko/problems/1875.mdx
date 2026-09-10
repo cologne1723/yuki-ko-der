@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1875
+problemId: 7287
+sourceTitle: "Flip Cards"
+sourceHtmlSha256: "65ce16dd74b40134a92ef8e889a3a95b2f6706eb10b3102dac6ee167af95c0a2"
+humanReview: null
+machineReview: unreviewed
+title: "카드 뒤집기"
+---
+
+$N$종류의 카드가 각각 $C_i$장 있고, 앞면에는 검은색으로 $A_i$, 뒷면에는 빨간색으로 $B_i$가 적혀 있습니다. 카드 앞면 숫자의 총곱을 점수라 합니다.
+
+## 문제
+
+$k=1,\ldots,M$에 대해 카드를 $k$번 선택해 뒤집는 모든 방법의 조작 후 점수 합을 $998244353$으로 나눈 나머지를 구하세요. 같은 종류라도 카드는 서로 구별합니다.
+
+## 입력
+
+```text
+N M
+A_1 B_1 C_1
+...
+A_N B_N C_N
+```
+
+$1\le N,M\le10^5$, $1\le A_i,B_i,C_i\le998244352$입니다.
+
+## 출력
+
+$k=1,\ldots,M$의 답을 각각 한 줄에 출력하세요.

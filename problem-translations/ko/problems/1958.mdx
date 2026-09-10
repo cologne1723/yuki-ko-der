@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1958
+problemId: 7829
+sourceTitle: "Bit Game"
+sourceHtmlSha256: "6782e06867595de22e3bc1a5dc05a96cf31486760e84c7262649ebf3a958299c"
+humanReview: null
+machineReview: unreviewed
+title: "비트 게임"
+---
+
+수열 $A=(A_1,\ldots,A_X),B=(B_1,\ldots,B_Y)$가 주어집니다. 처음 $P=0$에서 시작해 $N$번 반복합니다. 매번 A에서 원소를 균등하게 하나 골라 $P=P\,\mathrm{or}\,Q$로 바꾸고, B에서 하나 골라 $P=P\,\mathrm{and}\,R$로 바꿉니다.
+
+## 문제
+
+가능한 모든 $(XY)^N$개의 조작에 대한 종료 시점 $P$의 합을 $998244353$으로 나눈 나머지를 구하세요.
+
+## 입력
+
+```text
+N X Y
+A_1 ... A_X
+B_1 ... B_Y
+```
+
+$1\le N\le2\times10^5$, $1\le X,Y\le2^{18}$, $0\le A_i,B_j<2^{18}$입니다.
+
+## 출력
+
+답을 출력하세요.

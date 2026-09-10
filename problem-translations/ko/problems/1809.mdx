@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1809
+problemId: 7032
+sourceTitle: "Divide NCK"
+sourceHtmlSha256: "1e0571108aae2e1c46977d784d4b2e048e6b07bba54cac75de84307c7632a425"
+humanReview: null
+machineReview: unreviewed
+title: "NCK 나누기"
+---
+
+양의 정수 $N,K,M$이 주어집니다. ${}_NC_K$를 $M^x$로 나눈 나머지가 0이 되도록 하는 음이 아닌 정수 $x$의 최댓값을 구하세요.
+
+${}_NC_K$는 다음과 같이 정의합니다.
+
+$$
+{}_NC_K=\frac{N\times(N-1)\times\cdots\times(N-K+1)}{K\times(K-1)\times\cdots\times1}
+$$
+
+## 입력
+
+```text
+N K M
+```
+
+$1\le K\le N\le10^{18}$, $2\le M\le10^{12}$이고 입력은 모두 정수입니다.
+
+## 출력
+
+답을 한 줄에 출력하세요.

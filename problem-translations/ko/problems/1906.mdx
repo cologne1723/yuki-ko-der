@@ -1,0 +1,35 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1906
+problemId: 7731
+sourceTitle: "Twinkle Town"
+sourceHtmlSha256: "058f8312e27b9c83894f1a1fa8fd60f9ea815e86b9f2480d5ef40e5f1eeb10c8"
+humanReview: null
+machineReview: unreviewed
+title: "반짝반짝 마을"
+---
+
+$10^9$개의 가로등이 모두 꺼져 있고, 이를 조작하는 마법 지팡이 $N$개가 있습니다. 지팡이 $i$의 파워는 $A_i$입니다. 전등 켜기 담당과 절전 담당이 번갈아 지팡이를 하나씩 사용합니다.
+
+## 조작
+
+전등 켜기 담당이 파워 $A$를 사용하면 1번부터 $A$번까지 켜고, 절전 담당이 사용하면 같은 전등을 끕니다. 지팡이는 한 번 사용하면 사라집니다.
+
+## 문제
+
+모든 지팡이를 사용한 뒤 두 사람이 최적으로 행동할 때 켜진 가로등 수를 구하세요.
+
+## 입력
+
+```text
+T
+N
+A_1 A_2 ... A_N
+```
+
+$1\le T\le2\times10^4$, $1\le N\le2\times10^5$, $1\le A_i\le10^9$이고 $N$의 총합은 $2\times10^5$ 이하입니다.
+
+## 출력
+
+각 테스트 케이스의 답을 출력하세요.

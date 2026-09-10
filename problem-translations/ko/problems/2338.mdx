@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2338
+problemId: 5985
+sourceTitle: "Range AtCoder Query"
+sourceHtmlSha256: 26c474b9dcd93a9f55e621b570f91d24de0ad2fb3577ea7aa51c88cc60366623
+humanReview: null
+machineReview: unreviewed
+title: "구간 AtCoder 쿼리"
+---
+
+길이 $N$인 수열 $P$와 각 기록의 결과가 `AC` 또는 `WA`인 문자열 $S$가 주어집니다.
+
+쿼리 $(L,R)$에서는 $P_L$번째부터 $P_R$번째 문제에 제출했다고 할 때, AC를 한 번 이상 받은 문제 수와 각 문제의 첫 AC 전 WA 제출 수의 합을 구하세요.
+
+## 조건
+
+- $1\le N,M,Q\le2\times10^5$
+- $1\le P_i\le M$
+- $S_i$는 `AC` 또는 `WA`입니다.
+- $1\le L_i\le R_i\le N$
+
+## 입력
+
+$N,M,Q$, $N$개의 $P_i,S_i$, 그리고 $Q$개의 구간 $L_i,R_i$가 주어집니다.
+
+## 출력
+
+각 쿼리에 대해 정답 수와 페널티 수를 공백으로 구분하여 출력하세요.

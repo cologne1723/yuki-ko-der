@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1823
+problemId: 7306
+sourceTitle: "Tricolor Dango"
+sourceHtmlSha256: "25247745ceae51081a7fd555529b9ae4422474f145c2d342d6a43aee7d5fb7ed"
+humanReview: null
+machineReview: unreviewed
+title: "삼색 당고"
+---
+
+색이 $1,2,\ldots,N$ 중 하나인 당고가 색 $i$마다 $A_i$개 있습니다. 서로 다른 색 당고 3개를 골라 꼬치 하나에 꽂아 삼색 당고를 만들 수 있으며, 당고는 한 번만 사용할 수 있습니다.
+
+당고를 하나도 남기지 않고 삼색 당고를 만들 수 있는지 판정하세요.
+
+## 입력
+
+첫째 줄에 테스트 케이스 수 $T$가 주어집니다. 각 테스트 케이스는 $N$과 $A_1,\ldots,A_N$으로 이루어집니다.
+
+```text
+T
+N
+A_1 A_2 ... A_N
+```
+
+$1\le T\le10^4$, $3\le N\le2\times10^5$, $1\le A_i\le10^9$이며 한 입력에서 $N$의 총합은 $2\times10^5$ 이하입니다.
+
+## 출력
+
+각 테스트 케이스에 대해 가능하면 `Yes`, 불가능하면 `No`를 출력하세요.

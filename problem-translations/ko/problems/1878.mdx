@@ -1,0 +1,25 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1878
+problemId: 7551
+sourceTitle: "union-find の数え上げ"
+sourceHtmlSha256: "560e0b872e79fcb2c2e9bf2e26f3dbecbd3415951a4acc9fac4327e60387f4dd"
+humanReview: null
+machineReview: unreviewed
+title: "Union-Find 세기"
+---
+
+경로 압축 없이 얻어진 루트 트리 $T$가 있습니다. 같은 union과 root 연산을 경로 압축과 함께 수행했을 때 얻을 수 있었던 루트 트리 $S$의 개수를 구하세요.
+
+## 문제
+
+$T$는 정점 1을 루트로 하는 $N$개 정점의 트리이며, $2\le i\le N$에서 정점 $i$의 부모는 $p_i$입니다. 각 단일 정점 트리에서 `union(a,b)`는 루트 $a$를 $b$의 부모로 연결하고, `root(a)`는 조상 루트를 찾습니다. 경로 압축이 있으면 탐색한 경로의 루트 제외 정점들의 부모를 루트로 바꿉니다.
+
+## 입력
+
+문제에서 정의한 트리 $T$의 정보가 주어집니다.
+
+## 출력
+
+경로 압축이 있을 때 가능했던 트리 $S$의 개수를 $998244353$으로 나눈 나머지를 출력하세요.

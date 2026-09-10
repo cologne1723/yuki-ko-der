@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1289
+problemId: 5025
+sourceTitle: "RNG and OR"
+sourceHtmlSha256: "d295a788f3616c44fda7faa9c1dbde23f03b7cde0ecb9368e76a7f6a329e4129"
+humanReview: null
+machineReview: unreviewed
+title: "RNG와 OR"
+---
+
+## 문제 설명
+
+한 번 뽑을 때 $0$ 이상 $2^N-1$ 이하의 정수 하나를 무작위로 얻습니다. 정수 $i$를 얻을 확률은 $A_i/S$이고 $S=\sum_{i=0}^{2^N-1}A_i$입니다. 각 추첨은 독립입니다.
+
+지금까지 얻은 모든 정수의 비트별 OR가 처음으로 $2^N-1$이 될 때까지 뽑는 횟수의 기댓값을 구하세요. 기댓값을 기약분수 $X/Y$라 할 때 $X\equiv YZ\pmod{998244353}$인 $Z$를 출력하세요.
+
+## 입력
+
+```text
+N
+A_0 A_1 \ldots A_{2^N-1}
+```
+
+- $1\leq N\leq18$
+- $1\leq A_i\leq1000$
+
+## 출력
+
+문제 설명의 방법으로 기댓값을 출력하세요.

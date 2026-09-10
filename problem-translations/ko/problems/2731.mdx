@@ -1,0 +1,36 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2731
+problemId: 10757
+sourceTitle: "Two Colors"
+sourceHtmlSha256: "3e241a12091f742f55f1c49d55060ce75bb6beae9c1855a227392c40a4faadeb"
+humanReview: null
+machineReview: unreviewed
+title: "두 색"
+---
+
+## 문제
+
+`H × W` 격자의 각 칸에 서로 다른 음이 아닌 정수 `A_{i,j}`가 쓰여 있습니다. 처음 `(1,1)`은 색 1, `(H,W)`는 색 0이고 나머지는 무색입니다.
+
+색 1과 색 0의 인접한 칸이 더 이상 없을 때까지, `i`번째 작업에서 색 `i mod 2`와 인접한 무색 칸 중 숫자가 가장 작은 칸을 그 색으로 칠합니다. 작업 횟수를 구하세요.
+
+## 제약
+
+- `2 ≤ H,W ≤ 10^3`
+- `1 ≤ A_{i,j} ≤ 10^9`이며 모두 서로 다릅니다.
+
+## 입력
+
+```text
+H W
+A_{1,1} ... A_{1,W}
+⋮
+A_{H,1} ... A_{H,W}
+```
+
+## 출력
+
+작업 횟수를 출력하세요.
+

@@ -1,0 +1,38 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1278
+problemId: 5404
+sourceTitle: "どんな級数？"
+sourceHtmlSha256: "9c48a26056642fa11a1cd89bb4db10983e192ffd18b4a4f35bc0b695b22aa1a9"
+humanReview: null
+machineReview: unreviewed
+title: "어떤 급수일까?"
+---
+## 문제
+
+양의 정수열에 대해 다음 함수 $f$를 정의합니다.
+
+\[
+f(1)=\frac12
+\]
+
+마지막 원소가 2 이상이면
+\[
+f(a_1,\ldots,a_n)=\sum_{1<k_1<\cdots<k_n}\frac1{\prod k_i^{a_i}}-f(a_1,\ldots,a_n-1)
+\]
+
+마지막 원소가 1이고 $n\ne1$이면 $f(a_1,\ldots,a_n)=f(a_1,\ldots,a_{n-1})$입니다.
+
+$X,K$가 주어질 때, $X=1$이면 길이가 $K$인 모든 양의 정수열의 $f$ 합을, $X=2$이면 원소 합이 $K$인 모든 양의 정수열의 $f$ 합을 출력하세요.
+
+## 입력
+
+$X,K$가 주어집니다.
+
+- $X$는 1 또는 2입니다.
+- $1\leq K\leq10^5$
+
+## 출력
+
+요구된 값을 절대 오차 또는 상대 오차 $10^{-6}$ 이하로 출력하세요.

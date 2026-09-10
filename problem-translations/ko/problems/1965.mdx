@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1965
+problemId: 7894
+sourceTitle: "Heavier"
+sourceHtmlSha256: "c659dac7204e190a90a4e09df5524d48eb8b6ecaa6be9d17ff69f90cfdf6296c"
+humanReview: null
+machineReview: unreviewed
+title: "더 무거운 사람"
+---
+
+$1$부터 $N$까지 번호가 붙은 사람과 짐이 각각 $N$개 있습니다. 사람 $i$의 체중은 $A_i$, 짐 $i$의 무게는 $B_i$입니다. 사람은 체중이 가벼운 순서로 번호가 붙어 있어 $A_i<A_{i+1}$입니다.
+
+사람 $i<j$의 대결에서는 두 사람이 각자 자신의 번호와 같은 짐을 듭니다. $B_i<B_j$이면 짐을 서로 바꿉니다. 자신의 체중과 현재 든 짐의 무게 합이 더 큰 사람이 이기며, 같으면 무승부입니다.
+
+구간 $[L,R]$의 모든 쌍에서 사람 $j$가 사람 $i$를 이기면 그 구간을 좋은 구간이라 합니다. 좋은 구간의 개수를 구하세요.
+
+## 입력
+
+```text
+N
+A_1 A_2 ... A_N
+B_1 B_2 ... B_N
+```
+
+$2\le N\le2\times10^5$, $1\le A_1<\cdots<A_N\le10^9$, $1\le B_i\le10^9$입니다.
+
+## 출력
+
+좋은 구간의 개수를 출력하세요.

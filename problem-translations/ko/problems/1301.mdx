@@ -1,0 +1,35 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1301
+problemId: 5114
+sourceTitle: "Strange Graph Shortest Path"
+sourceHtmlSha256: "caa4abb98cee4db2d593871c58170112cc6bbf7ff563fb4e9a5b6540142fbc43"
+humanReview: null
+machineReview: unreviewed
+title: "이상한 그래프 최단 경로"
+---
+
+## 문제 설명
+
+단순 연결 무방향 그래프가 있습니다. 간선 $i$의 길이는 처음 $c_i$이고, 한 번 지나면 $d_i$로 바뀝니다. 같은 간선은 최대 두 번 지나갈 수 있습니다.
+
+정점 1에서 정점 $N$을 거쳐 다시 정점 1로 돌아오는 경로의 길이 최솟값을 구하세요.
+
+## 입력
+
+```text
+N M
+u_1 v_1 c_1 d_1
+\vdots
+u_M v_M c_M d_M
+```
+
+- $2\leq N\leq10^5$
+- $N-1\leq M\leq\min(10^5,N(N-1)/2)$
+- $1\leq u_i<v_i\leq N$
+- $1\leq c_i\leq d_i\leq10^9$
+
+## 출력
+
+최단 경로의 길이를 출력하세요.

@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1167
+problemId: 4965
+sourceTitle: "Graduation Trip"
+sourceHtmlSha256: "d89fc6ac8ce9566dc6de425f366d671d12da6148b4675f4cedd5658f99c36572"
+humanReview: null
+machineReview: unreviewed
+title: "졸업 여행"
+---
+## 문제
+
+$N$일 동안 여행합니다. 매일 정수 $A_i$를 사용할지 결정하고, 사용하면 현재 위치 $j$를 $j\mathbin{\mathrm{XOR}}A_i$로 옮기며 사용하지 않으면 그대로 있습니다.
+
+$Q$개의 질의가 주어집니다. 각 질의의 오름차순 날짜 $B_{i1},\ldots,B_{iM_i}$와 여행 마지막 날이 끝났을 때 모두 위치 $0$에 있도록 하는 행동 방법의 수를 $10^9+7$로 나눈 나머지를 구하세요.
+
+## 입력
+
+$N,Q,A_1,\ldots,A_N$과 각 질의의 $M_i,B_{i1},\ldots,B_{iM_i}$가 주어집니다.
+
+- $2\leq N,Q\leq10^4$
+- $0\leq A_i<2^{32}$
+- $1\leq M_i\leq\min(N-1,10)$
+- $1\leq B_{ij}<B_{i,j+1}\leq N-1$
+
+## 출력
+
+각 질의의 답을 한 줄에 출력하세요.

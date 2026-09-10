@@ -1,0 +1,38 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1221
+problemId: 4639
+sourceTitle: "木 *= 3"
+sourceHtmlSha256: "3aabedb34b838283df4f40b6b3004869061bb77fd9b9f86ca8b06000d2bc2257"
+humanReview: null
+machineReview: unreviewed
+title: "트리 *= 3"
+---
+## 문제
+
+$N$개 정점의 트리에서 정점을 원하는 만큼 삭제할 수 있습니다. 각 선택에 대해 점수를 다음과 같이 계산합니다.
+
+- 삭제된 정점 $i$에는 $a_i$를 더합니다.
+- 남은 정점 $i$에는 남은 인접 정점 수를 $d_i$라 할 때 $d_i b_i$를 더합니다.
+
+가능한 모든 선택 중 점수의 최댓값을 구하세요.
+
+## 입력
+
+```text
+$N$
+$a_1$ $\ldots$ $a_N$
+$b_1$ $\ldots$ $b_N$
+$u_1$ $v_1$
+$\vdots$
+$u_{N-1}$ $v_{N-1}$
+```
+
+- $1\leq N\leq10^5$
+- $-10^9\leq a_i,b_i\leq10^9$
+- 주어지는 그래프는 트리입니다.
+
+## 출력
+
+얻을 수 있는 점수의 최댓값을 출력하세요.

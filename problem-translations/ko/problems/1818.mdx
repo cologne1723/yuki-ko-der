@@ -1,0 +1,38 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1818
+problemId: 7267
+sourceTitle: "6 Operations"
+sourceHtmlSha256: "f13e07e1786828928c1d8c74879d045de418b09bea83f0d24d35e0b8220fa0ae"
+humanReview: null
+machineReview: unreviewed
+title: "6가지 조작"
+---
+
+길이 $N$인 음이 아닌 정수열 $A$와 길이 $M$인 음이 아닌 정수열 $B$가 주어집니다. 다음 6가지 조작을 원하는 순서와 횟수로 반복할 수 있습니다.
+
+## 조작
+
+- $1\le i\le|A|$를 골라 $A_i$를 $A_i+1$로 바꿉니다.
+- $1\le i\le|A|$를 골라 $A_i$를 $A_i-1$로 바꿉니다.
+- $1\le i<|A|$를 골라 $A_i$를 $A_i+A_{i+1}$로 바꾸고 $A_{i+1}$을 삭제합니다.
+- $1\le i<|A|$를 골라 $A_i$를 $A_i+A_{i+1}+1$로 바꾸고 $A_{i+1}$을 삭제합니다.
+- $1\le i\le|A|$와 음이 아닌 정수 $x$를 골라 $A_i$를 $A_i-x$로 바꾸고 바로 뒤에 $x$를 삽입합니다.
+- $1\le i\le|A|$와 음이 아닌 정수 $x$를 골라 $A_i$를 $A_i-x-1$로 바꾸고 바로 뒤에 $x$를 삽입합니다.
+
+어떤 순간에도 $A$의 모든 원소는 음이 아니어야 합니다. $A$를 $B$와 같게 만드는 데 필요한 최소 조작 횟수를 구하세요.
+
+## 입력
+
+```text
+N M
+A_1 A_2 ... A_N
+B_1 B_2 ... B_M
+```
+
+$1\le N,M\le10^3$, $A_i,B_i\ge0$, $\sum A_i\le3\times10^3$, $\sum B_i\le3\times10^3$입니다.
+
+## 출력
+
+최소 조작 횟수를 출력하세요.

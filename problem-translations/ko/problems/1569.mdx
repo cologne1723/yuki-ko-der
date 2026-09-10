@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1569
+problemId: 6334
+sourceTitle: "Nixoracci's Number"
+sourceHtmlSha256: "5bcee228137b2bbce5fc4502382f2ac480560120b210e3dd8eac72641fe73006"
+humanReview: null
+machineReview: unreviewed
+title: "Nixoracci의 수"
+---
+## 문제
+
+처음 $N$개의 항 $A_1,\ldots,A_N$이 주어집니다. 이후 항은
+\[
+A_x=A_{x-1}\mathbin{\mathrm{xor}}A_{x-2}\mathbin{\mathrm{xor}}\cdots\mathbin{\mathrm{xor}}A_{x-N}
+\]
+으로 정의됩니다. $A_K$를 구하세요.
+
+## 입력
+
+$N,K$와 초기 항들이 주어집니다.
+
+- $2\leq N\leq200$
+- $1\leq K\leq10^{18}$
+- $0\leq A_i\leq10^{18}$
+
+## 출력
+
+$A_K$를 출력하세요.

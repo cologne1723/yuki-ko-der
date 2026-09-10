@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2680
+problemId: 10429
+sourceTitle: "研究室配属"
+sourceHtmlSha256: be352312b4a9f492b8161c72574c89b97fbef9b934ded9e554861bac11349257
+humanReview: null
+machineReview: unreviewed
+title: "연구실 배정"
+---
+
+$N$명의 학생을 정원 $A_i$인 $M$개 연구실에 배정합니다. 성적순 학생 $j$의 $k$번째 희망 연구실은 $T_{j,k}$입니다. 각 단계에서 해당 희망 연구실에 임시 배정하고 정원을 초과하면 성적이 낮은 학생부터 탈락시키는 과정을 반복한 뒤 최종 배정을 출력하세요.
+
+## 조건
+
+- $1\le M\le N\le1000$
+- 연구실 정원의 합은 $N$이고 각 희망 순서는 순열입니다.
+
+## 입력
+
+```text
+$N$ $M$
+$A_0$ $\cdots$ $A_{M-1}$
+$T_{0,0}$ $\cdots$ $T_{0,M-1}$
+\vdots
+$T_{N-1,0}$ $\cdots$ $T_{N-1,M-1}$
+```
+
+## 출력
+
+성적순으로 각 학생의 배정 연구실 번호를 출력하세요.
+

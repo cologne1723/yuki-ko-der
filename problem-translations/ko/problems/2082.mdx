@@ -1,0 +1,25 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2082
+problemId: 8523
+sourceTitle: "AND OR XOR"
+sourceHtmlSha256: "229a3e7af93979d57c4b8f56c6502c9bb01d83a2554519968038677566837c4d"
+humanReview: null
+machineReview: unreviewed
+title: "AND OR XOR"
+---
+
+비음이 아닌 정수에 대해 $x*y=(A(x\mathbin{\mathrm{AND}}y)+B(x\mathbin{\mathrm{OR}}y)+C(x\mathbin{\mathrm{XOR}}y))\bmod4$로 정의합니다. 원소가 $0,1,2,3$인 수열 $X$ 중 왼쪽에서 오른쪽으로 누적한 결과와 오른쪽에서 왼쪽으로 누적한 결과가 같은 좋은 수열의 개수를 구하세요.
+
+## 입력
+
+```text
+N A B C
+```
+
+$3\le N\le5000$, $0\le A,B,C\le3$입니다.
+
+## 출력
+
+좋은 수열의 개수를 $998244353$으로 나눈 나머지를 출력하세요.

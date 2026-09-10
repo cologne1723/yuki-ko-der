@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2291
+problemId: 9136
+sourceTitle: "Union Find Estimate"
+sourceHtmlSha256: 55a04f64e4016ac4d0a351c5dd221fcdb8db0687b4362c5be7a6a43bcea04ecf
+humanReview: null
+machineReview: unreviewed
+title: "Union Find Estimate"
+---
+
+0부터 9까지의 숫자로 이루어진 $W$자리 비밀번호를 잊어버렸습니다. $H$번 문의하여 각 자리의 정보가 담긴 문자열을 받습니다.
+
+문자열의 숫자는 해당 자리의 숫자를 뜻하고, 알파벳은 같은 문의 문자열 안에서 같은 알파벳인 자리들이 같은 숫자임을 뜻합니다. `?`는 정보가 없음을 뜻합니다. 이전 문의의 정보는 계속 유지됩니다.
+
+각 문의의 답을 받은 시점에 가능한 비밀번호의 개수를 $998244353$으로 나눈 나머지를 출력하세요.
+
+## 조건
+
+- $1\le W,H\le 2\times10^5$
+- $W\times H\le 2\times10^5$
+- 각 문자열의 길이는 $W$입니다.
+
+## 입력
+
+첫째 줄에 $W,H$, 다음 $H$개 줄에 문의 결과 문자열이 주어집니다.
+
+## 출력
+
+$i$번째 문의 후 가능한 비밀번호 개수를 한 줄에 하나씩 출력하세요.

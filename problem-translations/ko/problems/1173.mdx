@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1173
+problemId: 4255
+sourceTitle: "Endangered Species"
+sourceHtmlSha256: "a22d195f1cb954e3a90e67c97645d43c706d78ea42f4379f6c6511a89e90c25e"
+humanReview: null
+machineReview: unreviewed
+title: "멸종 위기종"
+---
+## 문제
+
+각 개체는 태어날 때 개체값 $1,\ldots,N$ 중 하나를 부여받고, 정확히 하루 뒤 $0$마리 이상을 낳은 뒤 사라집니다. 새 개체의 값이 $i$일 확률은 $p_i$이고, 값이 $i$인 개체가 낳는 수가 $k$일 확률은 $(1-q_i)q_i^k$입니다.
+
+처음에 개체값 $i$인 개체가 $A_i$마리씩 있습니다. $10^{10^{100}}$일 후 개체 수가 $0$일 확률을 $P$라 할 때, $\log P$를 출력하세요.
+
+## 입력
+
+```text
+$N$
+$p_1$ $\ldots$ $p_N$
+$q_1$ $\ldots$ $q_N$
+$A_1$ $\ldots$ $A_N$
+```
+
+- $1\leq N\leq10^5$, $0\leq A_i\leq10^4$
+- $p_i,q_i$는 소수점 이하 6자리입니다.
+- $p_i>0$, $\sum p_i=1$, $0.6\leq q_i\leq0.9$
+
+## 출력
+
+$\log P$를 절대 오차 또는 상대 오차 $10^{-5}$ 이하로 출력하세요.

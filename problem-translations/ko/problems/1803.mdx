@@ -1,0 +1,34 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1803
+problemId: 7514
+sourceTitle: "Remainder of Sum"
+sourceHtmlSha256: "0b843f88aa33a54b44d848b9f84425660f4240c7b9f1cc5bafa12b1a9ae5bbf3"
+humanReview: null
+machineReview: unreviewed
+title: "합의 나머지"
+---
+
+수열 $A=(1,2,\ldots,N)$이 있습니다.
+
+## 조작
+
+$A$의 원소 수가 2 이상인 동안 다음 조작을 반복합니다.
+
+1. $A$의 원소 하나를 $x$로 고릅니다.
+2. $x$ 이외의 원소 하나를 $y$로 고릅니다.
+3. 비용 $(x+y)\bmod M$을 지불하고 $y$를 $A$에서 삭제합니다.
+
+지불하는 비용의 합을 최소화하세요. $T$개의 테스트 케이스에 대해 최소 비용을 구합니다.
+
+## 입력
+
+첫째 줄에 $T$가 주어지고, 이어서 각 테스트 케이스에 $N,M$이 주어집니다.
+
+```text
+T
+N M
+```
+
+입력은 모두 정수입니다.

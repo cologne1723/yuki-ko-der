@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2622
+problemId: 10499
+sourceTitle: "Dam"
+sourceHtmlSha256: ea462b4420a51522957efd21f1f241ca7ddd0f6f3ff23dfff12c9b19c95700d3
+humanReview: null
+machineReview: unreviewed
+title: "댐"
+---
+
+용량 $V$인 댐에 처음 물 $X$가 있습니다. 매초 $F_o$만큼 물이 빠지고, 시각 $kQ\le t\le kQ+R$에는 매초 $F_i$만큼 물이 들어옵니다. 물이 용량을 초과하는 시점과 물이 0이 되는 시점 중 어느 것이 먼저인지 판정하세요. $10^{100}$초까지 둘 다 일어나지 않으면 `Safe`입니다.
+
+## 조건
+
+- $1\le T\le1000$
+- $1\le X\le V\le10^{18}$
+- $1\le F_o,F_ile10^9$, $1\le R<Q\le10^9$
+
+## 입력
+
+```text
+$T$
+$V$ $X$ $F_o$ $F_i$ $Q$ $R$
+```
+
+## 출력
+
+넘치면 `Overflow`, 바닥나면 `Zero`, 둘 다 아니면 `Safe`를 출력하세요.
+

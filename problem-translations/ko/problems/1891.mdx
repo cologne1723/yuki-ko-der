@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1891
+problemId: 7923
+sourceTitle: "Static Xor Range Composite Query"
+sourceHtmlSha256: "e1ec9f280138a86d9741509e03c27fb81d24686a21c86fd8a0f2b3e63cb46ad7"
+humanReview: null
+machineReview: unreviewed
+title: "정적 XOR 구간 합성 질의"
+---
+
+일차함수 $f_i(x)=a_ix+b_i$ $(0\le i<N)$가 주어집니다. 각 질의 $(l,r,p,x)$에 대해 다음 값을 출력하세요.
+
+$$f_{(r-1)\oplus p}(f_{(r-2)\oplus p}(\cdots f_{l\oplus p}(x)\cdots))\bmod998244353$$
+
+## 입력
+
+```text
+N Q
+a_0 b_0
+...
+a_{N-1} b_{N-1}
+l_0 r_0 p_0 x_0
+...
+l_{Q-1} r_{Q-1} p_{Q-1} x_{Q-1}
+```
+
+$N$은 2의 거듭제곱이고 $1\le N\le2^{18}$, $1\le Q\le2\times10^5$입니다.
+
+## 출력
+
+각 질의의 답을 한 줄에 출력하세요.

@@ -1,0 +1,26 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1857
+problemId: 6789
+sourceTitle: "Gacha Addiction"
+sourceHtmlSha256: "c8e1c9f35b6fabedf9481886ea11b1ed01dd9ff05dc549cd6d614322b839e817"
+humanReview: null
+machineReview: unreviewed
+title: "가챠 중독"
+---
+
+$N$종류의 상품이 나오는 가챠가 있습니다. 한 번의 시행에서 상품 $i$가 나올 확률은 $P_i/S$이며 시행은 서로 독립입니다. 어떤 상품이 중복될 때까지 가챠를 반복해서 뽑을 때, 종료까지 뽑은 횟수의 기댓값을 구하세요.
+
+## 입력
+
+```text
+N S
+P_1 P_2 ... P_N
+```
+
+$1\le N\le1.5\times10^5$, $N\le S<998244353$, $P_i\ge1$, $\sum P_i=S$입니다.
+
+## 출력
+
+기댓값을 기약분수의 모듈러 표현으로 출력하세요.

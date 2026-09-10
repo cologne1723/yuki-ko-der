@@ -1,0 +1,36 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1251
+problemId: 4709
+sourceTitle: "絶対に間違ってはいけない最小化問題"
+sourceHtmlSha256: "33c426866b4f931c3725cc20916220dbe11f648077dbf861b80d94d21cece066"
+humanReview: null
+machineReview: unreviewed
+title: "절대 틀리면 안 되는 최솟값 문제"
+---
+
+## 문제 설명
+
+정수 $A_1,\ldots,A_N$과 양의 정수 $B_1,\ldots,B_N$으로 실수 함수
+
+$\displaystyle f(X)=\sum_{i=1}^N B_i|X-A_i|$
+
+를 정의합니다. $f$를 최소로 하는 실수 $X$와 그때의 $f(X)$를 구하세요. 최솟값이 여러 개면 그중 하나를 출력해도 됩니다. 최솟값은 정수임이 보장됩니다.
+
+## 입력
+
+```text
+N
+A_1 B_1
+\vdots
+A_N B_N
+```
+
+- $1\leq N\leq2\times10^5$
+- $-10^6\leq A_i\leq10^6$
+- $1\leq B_i\leq10^6$
+
+## 출력
+
+첫 줄에 조건을 만족하는 $X$, 둘째 줄에 그때의 최솟값을 출력하세요. 마지막에 줄바꿈을 넣으세요.

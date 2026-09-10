@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1263
+problemId: 5323
+sourceTitle: "ご注文は数学ですか？"
+sourceHtmlSha256: "19c5847a81dbd86468ec242b216b4bcc5f38728001f00c6c0b2daaf1ef6912b2"
+humanReview: null
+machineReview: unreviewed
+title: "주문은 수학인가요?"
+---
+## 문제
+
+정수 $x$가 주어집니다. $x$의 분할 수를 $p(x)$라 하겠습니다. 각 $y>1$에 대해, $S_{x,y}$는 깊이 1이고 인덱스가 모두 $y$의 배수인 제타값들의 곱 중 weight가 $xy$인 것들로 이루어진 수열입니다.
+
+유리수열 $f=(f_1,\ldots,f_{p(x)})$가 다음을 만족한다고 합니다.
+
+\[
+\sum_{i=1}^{p(x)}(S_{x,y})_i f_i=\zeta(y,y,\ldots,y),\qquad \sum_{i=1}^{p(x)}f_i=0
+\]
+
+첫 식의 우변에는 $y$가 $x$개 있습니다. 가능한 모든 $f$에 대해 $f$의 모든 원소의 곱에 $x!^{p(x)}$를 곱한 값의 합을 $10^9+7$로 나눈 나머지를 구하세요.
+
+## 입력
+
+정수 $x$가 주어집니다.
+
+- $2\leq x\leq8$
+
+## 출력
+
+문제의 합을 출력하세요.

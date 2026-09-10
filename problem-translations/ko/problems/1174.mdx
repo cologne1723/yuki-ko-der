@@ -1,0 +1,38 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1174
+problemId: 4980
+sourceTitle: "盆栽の剪定"
+sourceHtmlSha256: "ecda3d6bb430777b21932b0363a9728ab46b1fbcb270f8c2da3faa75f1ed6e46"
+humanReview: null
+machineReview: unreviewed
+title: "분재 가지치기"
+---
+## 문제
+
+분재는 완전 이진 트리로 표현됩니다. 정점 $1$이 루트이고, 정점 $i\ne1$의 부모는 $\lfloor i/2\rfloor$입니다. 정점 $i$의 가중치는 $A_i$입니다.
+
+$L_i$를 정점 $2i$와 그 자손의 가중치 합, $R_i$를 정점 $2i+1$과 그 자손의 가중치 합으로 정의합니다. 없는 정점의 합은 $0$이며, 분재의 가치는
+
+\[
+V=\sum_{1\leq i\leq N}|L_i-R_i|
+\]
+
+입니다.
+
+간선 하나를 삭제하면 루트를 포함하지 않는 연결 요소가 사라집니다. 이 작업을 원하는 횟수만큼 수행했을 때 얻을 수 있는 가치의 최댓값을 구하세요.
+
+## 입력
+
+```text
+$N$
+$A_1$ $\ldots$ $A_N$
+```
+
+- $1\leq N\leq10^5$
+- $0\leq A_i\leq10^9$
+
+## 출력
+
+가치의 최댓값을 출력하세요.

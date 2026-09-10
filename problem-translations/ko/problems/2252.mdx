@@ -1,0 +1,21 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2252
+problemId: 9074
+sourceTitle: "Find Zero"
+sourceHtmlSha256: "f1337dd8001a6ec70e8deaa1a8b558d16ac564599d0a661e31e4806a3b0f0fb3"
+humanReview: null
+machineReview: unreviewed
+title: "0 찾기"
+---
+
+$(0,1,\ldots,N-1)$의 순열 $P$가 숨겨져 있다냥. 질의 $(x,y)$를 하면 $P_z=(P_x+P_y)\bmod N$을 만족하는 위치 $z$를 알 수 있고, 질의는 최대 $\lfloor N/2\rfloor$번 할 수 있다냥. $P_k=0$인 $k$를 찾아 출력하라냥.
+
+## 조건
+
+- $3\le N\le1000$
+
+## 입출력
+
+먼저 $N$을 읽고, 질의는 `? x y`로 출력한 뒤 응답을 읽는다냥. 답을 알면 `! k`를 출력하고 즉시 종료하라냥. 매 출력 후 flush해야 한다냥.

@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2025
+problemId: 8243
+sourceTitle: "Select $k$-th Submultiset"
+sourceHtmlSha256: "842be0274e5f18ad1eefc72b37d44d98a5ba8b4503075a451123f47111edfdb6"
+humanReview: null
+machineReview: unreviewed
+title: "$k$번째 부분 멀티셋 선택"
+---
+
+오름차순으로 정렬된 수열 $S$에는 $1$ 이상 $N$ 이하의 정수 $v$가 정확히 $c_v$개씩 있습니다. $S$의 길이 $L$인 부분 수열들을 열로 보았을 때, 사전순 $k_i$번째로 작은 부분 수열에 포함된 각 숫자의 개수를 질의마다 출력하세요. 같은 열이면 선택한 인덱스가 달라도 하나로 셉니다.
+
+## 입력
+
+```text
+N L
+c_1 c_2 ... c_N
+Q
+k_1
+...
+k_Q
+```
+
+$1\le N\le4$, $1\le L,Q\le100000$, $1\le k_i\le10^{18}$입니다.
+
+## 출력
+
+각 답에 대해 $1,2,\ldots,N$의 개수를 출력하세요. 존재하지 않으면 `-1`을 출력하세요.

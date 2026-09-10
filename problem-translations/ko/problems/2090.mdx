@@ -1,0 +1,25 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2090
+problemId: 8441
+sourceTitle: "否定論理積と充足可能性"
+sourceHtmlSha256: "f10ba4b7a30e21af785087b83e3904af6bf3f081c76c2a5c2cc2ae4fdeffa932"
+humanReview: null
+machineReview: unreviewed
+title: "부정 논리곱과 만족 가능성"
+---
+
+비음이 아닌 정수 $A_0,A_1,\ldots,A_5$가 주어집니다. 셰퍼 기호 `|`는 NAND를 뜻합니다. 다음 명제 논리식이 만족 가능한지 판정하세요.
+
+$$((P_{A_0}\mid P_{A_1})\mid P_{A_2})\mid((P_{A_3}\mid P_{A_4})\mid P_{A_5})$$
+
+## 입력
+
+```text
+A_0 A_1 A_2 A_3 A_4 A_5
+```
+
+## 출력
+
+만족 가능하면 `Yes`, 불가능하면 `No`를 출력하세요.

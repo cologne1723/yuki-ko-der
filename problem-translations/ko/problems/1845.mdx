@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1845
+problemId: 6904
+sourceTitle: "Long Substrings"
+sourceHtmlSha256: "bb5b28a9a100ba89462efd1209ab28dc048ff879fb9f24ab27a07c3675096641"
+humanReview: null
+machineReview: unreviewed
+title: "긴 부분 문자열"
+---
+
+정수 $N$, 길이 $N$의 정수열 $A$, 길이 $N$의 소문자 문자열 $S$가 주어집니다. 문자열 $T$는 빈 문자열에서 시작해 $i=1,2,\ldots,N$ 순서로 $S$의 $i$번째 문자를 $A_i$번 뒤에 붙인 문자열입니다.
+
+## 문제
+
+문자열 $T$의 비어 있지 않은 부분 수열로 가능한 서로 다른 문자열의 개수를 $10^9+7$로 나눈 나머지를 구하세요. 부분 수열은 문자를 삭제한 뒤 순서를 유지해 얻는 문자열입니다.
+
+## 입력
+
+```text
+N
+A_1 A_2 ... A_N
+S
+```
+
+$1\le N\le2\times10^5$, $1\le A_i\le10^9$이고 인접한 $S_i$는 서로 다릅니다.
+
+## 출력
+
+답을 출력하세요.

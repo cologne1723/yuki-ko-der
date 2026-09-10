@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2296
+problemId: 9158
+sourceTitle: "Union Path Query (Hard)"
+sourceHtmlSha256: bf19386ab3c46048a6d4a5b99ef5c0c1333c5c11542faf4fdde8d89ac8493fad
+humanReview: null
+machineReview: unreviewed
+title: "Union Path Query (Hard)"
+---
+
+정점이 $0$부터 $N-1$까지인 가중치 무방향 그래프와 변수 $X$가 주어집니다. $X$는 처음에 $X_0$입니다.
+
+두 정점 사이의 거리는 단순 경로에 포함된 모든 변 가중치의 합이며, 같은 정점 사이의 거리는 0입니다. `1 v w`는 정점 $v$와 현재 정점 $X$를 가중치 $w$인 변으로 연결합니다.
+
+`2 u v`는 연결되지 않았으면 $-1$, 연결되어 있으면 거리를 출력하고 $X$에 더한 뒤 $N$으로 나눈 나머지를 취합니다. `3 v`는 해당 연결 요소의 트리 지름을 출력합니다. `4 value`는 $X$에 더한 뒤 $N$으로 나눈 나머지를 취합니다.
+
+## 조건
+
+- $1\le N\le2\times10^5$
+- $1\le Q\le3\times10^5$
+- $0\le X_0<N$, $0\le u_i,v_i,value_i<N$
+- $0\le w_i\le10^9$
+- 유형 1 쿼리 후 그래프에 사이클이 생기지 않습니다.
+
+## 입력
+
+첫째 줄에 $N,X_0,Q$, 다음 $Q$개 줄에 쿼리가 주어집니다.
+
+## 출력
+
+유형 2 또는 3 쿼리의 답을 순서대로 출력하세요.

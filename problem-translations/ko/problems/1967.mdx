@@ -1,0 +1,27 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1967
+problemId: 7469
+sourceTitle: "Sugoroku Optimization"
+sourceHtmlSha256: "23995336ca8b3f548e4fd7bc1ca587fa58d7b5232ffb9f326751ba1e8b217fa7"
+humanReview: null
+machineReview: unreviewed
+title: "주사위 놀이 최적화"
+---
+
+무한히 이어진 칸에 $0,1,2,\ldots$가 순서대로 붙어 있고, 처음에는 $0$번 칸에 있습니다. 매 턴 양의 정수 $a$를 고른 뒤 $1$ 이상 $a$ 이하가 같은 확률로 나오는 룰렛을 돌리고, 나온 수만큼 이동합니다.
+
+$K$턴 이내에 정확히 $N$번 칸에 도착하면 승리합니다. 매 턴 최적으로 선택할 때의 승률을 구하세요.
+
+## 입력
+
+```text
+N K
+```
+
+$2\le N\le2000$, $1\le K\le N$입니다.
+
+## 출력
+
+승률을 기약분수 $P/Q$로 나타냈을 때 $P\equiv Q\times R\pmod {998244353}$를 만족하는 $R$을 출력하세요.

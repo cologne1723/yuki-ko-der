@@ -1,0 +1,34 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2438
+problemId: 10003
+sourceTitle: Double Least Square
+sourceHtmlSha256: ecc390d1100b227b4fbe58a3711762be82dc623ce06140cca155317ae84ba99f
+humanReview: null
+machineReview: unreviewed
+title: 두 직선 회귀
+---
+
+평면의 $N$개 점 $(x_i,y_i)$가 주어집니다. $f(x)=a_1x+H$, $g(x)=a_2x$라 할 때 다음 값의 최솟값을 구하세요.
+
+$$L(a_1,a_2)=\sum_i\min\{(y_i-f(x_i))^2,(y_i-g(x_i))^2\}$$
+
+## 조건
+
+- $1\le N\le2000$
+- $1\le H\le500$, $1\le x_i,y_i\le500$
+
+## 입력
+
+```text
+N
+H
+x1 y1
+...
+xN yN
+```
+
+## 출력
+
+$L$의 최솟값을 절대 오차 또는 상대 오차 $10^{-5}$ 이하로 출력하세요.

@@ -1,0 +1,28 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2013
+problemId: 8027
+sourceTitle: "Can we meet?"
+sourceHtmlSha256: "1e07bac545f5109a3ff232548051fde2b179f1f917810c4cfff7d85396473f91"
+humanReview: null
+machineReview: unreviewed
+title: "만날 수 있을까?"
+---
+
+로미오와 줄리엣은 각각 $(x_1,y_1)$, $(x_2,y_2)$에 있습니다. 두 사람은 동시에 인접한 격자점으로 이동하며, 만날 때까지 또는 $N$번째 행동이 끝날 때까지 진행합니다.
+
+각 행동 후 만났다면 점수 $a_i$를 얻고 종료하며, 끝까지 만나지 못하면 점수는 $0$입니다. 이동 확률은 가로 방향 각각 $A/(2(A+B))$, 세로 방향 각각 $B/(2(A+B))$입니다. 점수의 기댓값을 $998244353$으로 나눈 값을 출력하세요.
+
+## 입력
+
+```text
+N
+x_1 y_1 x_2 y_2
+A B
+a_1 a_2 ... a_N
+```
+
+## 출력
+
+기댓값을 출력하세요.

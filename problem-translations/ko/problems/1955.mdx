@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1955
+problemId: 7888
+sourceTitle: "Not Prime"
+sourceHtmlSha256: "5378304a770f24a2da31a759b55bcbabfea8205ee152486a4df16e02f10f686f"
+humanReview: null
+machineReview: unreviewed
+title: "소수가 아니게"
+---
+
+$N$개의 양의 정수쌍 $(A_i,B_i)$가 주어집니다. 각 쌍에서 하나를 집합 $S$, 다른 하나를 집합 $T$에 배치하세요.
+
+## 문제
+
+어떤 $s\in S,t\in T$를 골라도 $s$와 $t$를 이어 붙인 십진수가 소수가 아니도록 배치할 수 있는지 판정하세요.
+
+## 입력
+
+```text
+N
+A_1 B_1
+...
+A_N B_N
+```
+
+$1\le N\le500$, $1\le A_i,B_i<1000$입니다.
+
+## 출력
+
+가능하면 `Yes`, 불가능하면 `No`를 출력하세요.

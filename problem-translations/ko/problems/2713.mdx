@@ -1,0 +1,39 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2713
+problemId: 10584
+sourceTitle: "Just Solitaire"
+sourceHtmlSha256: "64a7661db0fe10afac74a0f3214f0b68869ff69b5e00a2521783b8e5399760e4"
+humanReview: null
+machineReview: unreviewed
+title: "그저 솔리테어"
+---
+
+## 문제
+
+번호 `1`부터 `N`까지의 카드를 가지고 있습니다. 카드 `i`를 사용하는 데 `A_i`원이 듭니다. 보너스 `i`는 지정된 카드들이 모두 사용되면 `B_i`원을 줍니다.
+
+카드 사용으로 얻는 보너스 합에서 카드 비용 합을 뺀 이익의 최댓값을 구하세요.
+
+## 제약
+
+- `1 ≤ N,M ≤ 100`
+- `1 ≤ A_i,B_i ≤ 10^9`
+- 각 보너스에 포함되는 카드 번호는 오름차순입니다.
+
+## 입력
+
+```text
+N M
+A_1 A_2 ... A_N
+B_1 B_2 ... B_M
+K_1 C_{1,1} ... C_{1,K_1}
+⋮
+K_M C_{M,1} ... C_{M,K_M}
+```
+
+## 출력
+
+얻을 수 있는 최대 이익을 출력하세요.
+

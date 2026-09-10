@@ -1,0 +1,38 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2163
+problemId: 8567
+sourceTitle: "LCA Sum Query"
+sourceHtmlSha256: "6ebe5fd1def1ca8da80fc96f5ff379137cbcb08d383f14fb047afc046c2633ae"
+humanReview: null
+machineReview: unreviewed
+title: "LCA 합 쿼리"
+---
+
+$N$개 정점의 트리 $T$가 주어진다냥. 처음에 빈 집합 $S$가 있고, 쿼리마다 $u$가 $S$에 있으면 제거하고 없으면 추가한다냥. 이어서 $X=\{x\in S\mid\mathrm{LCA}_T(r,v,x)=v\}$를 정의하고, $\sum_{a\in X}\sum_{a<b,\ b\in X}\mathrm{LCA}_T(r,a,b)$를 출력하라냥. LCA는 $r$을 루트로 했을 때의 최소 공통 조상이다냥.
+
+## 조건
+
+- $1\le N\le5\times10^4$
+- $1\le Q\le10^5$
+
+## 입력
+
+```text
+N Q
+A_1 B_1
+\vdots
+A_{N-1} B_{N-1}
+U_1 R_1 V_1
+\vdots
+U_Q R_Q V_Q
+```
+
+## 출력
+
+각 쿼리의 답을 한 줄에 하나씩 출력하라냥.
+
+## 예제
+
+예제는 원문을 참고하라냥.

@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1531
+problemId: 6444
+sourceTitle: "く2"
+sourceHtmlSha256: "3f1e8c2ee314dc9e14600c13afececc432bd3c1dfe7044d4f0c37dce295ce04f"
+humanReview: null
+machineReview: unreviewed
+title: "く2"
+---
+## 문제
+
+오른쪽 아래로 무한히 펼쳐진 격자에서 $(i,j)$ 칸의 수를 $A_{i,j}$라 합니다. 처음에는 $K\mathbin{\mathrm{and}}i=i$를 만족하는 음이 아닌 $i$에 대해 $A_{0,i}=1$이고 나머지는 0입니다.
+
+다음 작업을 $N$번 동시에 수행합니다.
+\[
+A_{i,j}\leftarrow A_{i,j}\mathbin{\mathrm{xor}}A_{i-1,j}\mathbin{\mathrm{xor}}A_{i,j-1}
+\]
+경계 밖의 값은 0입니다.
+
+$N$번 후 1이 쓰인 칸의 수를 $998244353$으로 나눈 나머지를 구하세요.
+
+## 입력
+
+$N,K$가 주어집니다.
+
+- $0\leq N,K\leq10^{18}$
+
+## 출력
+
+답을 출력하세요.

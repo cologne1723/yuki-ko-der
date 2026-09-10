@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1920
+problemId: 7947
+sourceTitle: "Territory"
+sourceHtmlSha256: "5c97a708652ce220245cd1f15c40264b9da731e3365968540ae6e0b20ddbcd5d"
+humanReview: null
+machineReview: unreviewed
+title: "영역"
+---
+
+$N+M$개의 울타리가 왕국을 나눕니다. 처음 $N$개는 수평 선분 $(b_i,a_i)$에서 $(c_i,a_i)$이고, 나머지 $M$개는 수직 선분 $(p_i,q_i)$에서 $(p_i,r_i)$입니다.
+
+## 문제
+
+울타리로 나뉜 영역 중 넓이가 유한한 것의 개수를 구하세요.
+
+## 입력
+
+```text
+N M
+a_i b_i c_i
+...
+p_i q_i r_i
+```
+
+$1\le N,M\le10^5$, 모든 좌표는 $1$ 이상 $2\times10^5$ 이하이며 같은 방향 선분의 좌표는 서로 다릅니다.
+
+## 출력
+
+유한한 영역의 개수를 출력하세요.

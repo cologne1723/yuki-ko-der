@@ -1,0 +1,25 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1885
+problemId: 7290
+sourceTitle: "Flat Permutation"
+sourceHtmlSha256: "6498b69a18b22f57e13e5f8cfccc094f8a96c262083711b338a005729c66b164"
+humanReview: null
+machineReview: unreviewed
+title: "평평한 순열"
+---
+
+$(1,2,\ldots,N)$의 순열 $P$ 중 $P_1=X$, $P_N=Y$, 모든 $i$에 대해 $|P_{i+1}-P_i|\le2$를 만족하는 것의 개수를 구하세요.
+
+## 입력
+
+```text
+N X Y
+```
+
+$2\le N\le2\times10^5$, $1\le X,Y\le N$, $X\ne Y$입니다.
+
+## 출력
+
+조건을 만족하는 순열의 개수를 $998244353$으로 나눈 나머지를 출력하세요.

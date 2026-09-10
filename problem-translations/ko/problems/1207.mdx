@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1207
+problemId: 4847
+sourceTitle: "グラフX"
+sourceHtmlSha256: "6a328b769c03e7f5ce17dd671e6fc825ca622ffd2dd3dc44b6b96e88808dbc45"
+humanReview: null
+machineReview: unreviewed
+title: "그래프 X"
+---
+## 문제
+
+$N$개의 도시와 $M$개의 도로가 있습니다. 도로 $i$는 도시 $x_i,y_i$를 연결하며 길이는 $X^{z_i}$입니다. 도로 길이는 모두 다르고 $z_1<z_2<\cdots<z_M$입니다. 그래프는 연결되어 있습니다.
+
+모든 도시 쌍 $i<j$ 사이의 최단 거리 합을 $10^9+7$로 나눈 나머지를 구하세요.
+
+## 입력
+
+```text
+$N$ $M$ $X$
+$x_1$ $y_1$ $z_1$
+$\vdots$
+$x_M$ $y_M$ $z_M$
+```
+
+- $2\leq N,M\leq2\times10^5$, $N-1\leq M$
+- $2\leq X\leq10^9$
+- $0\leq z_i\leq10^9$, $z_i<z_{i+1}$
+
+## 출력
+
+모든 도시 쌍의 최단 거리 합을 출력하세요.

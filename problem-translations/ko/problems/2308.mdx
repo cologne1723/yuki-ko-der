@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2308
+problemId: 5202
+sourceTitle: "[Cherry 5th Tune B] もしかして、真?"
+sourceHtmlSha256: 5d3c4d30015bf433fa47bbd8e20701c8558f943e1124def026c3f8fd771b5706
+humanReview: null
+machineReview: unreviewed
+title: "[Cherry 5th Tune B] 혹시, 참?"
+---
+
+$N$개의 명제 상수와 $N-1$개의 논리 연산자가 번갈아 있는 식이 주어집니다. 명제는 `True` 또는 `False`이고, 연산자는 `and`, `or`, `xor`, `imp` 중 하나입니다.
+
+연산을 $N-1$번 수행합니다. 매번 현재 식에서 $S_j$번째 명제와 그 다음 연산자 및 명제를 계산해 결과 하나로 바꿉니다.
+
+최종 명제가 참인지 거짓인지 출력하세요.
+
+## 조건
+
+- $1\le T\le10^5$
+- $2\le N$
+- 모든 테스트 케이스의 $N$의 합은 $2\times10^5$ 이하입니다.
+
+## 입력
+
+각 테스트 케이스에 $N$, 명제값 $X_1,\ldots,X_N$, 연산자 $Y_1,\ldots,Y_{N-1}$, 위치 $S_1,\ldots,S_{N-1}$가 주어집니다.
+
+## 출력
+
+최종 명제가 참이면 `True`, 거짓이면 `False`를 출력하세요.

@@ -1,0 +1,44 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2272
+problemId: 8595
+sourceTitle: "多項式乗算 mod 258280327"
+sourceHtmlSha256: b514235368e426d1a74ef7fb53ba916aaeb7f246bb5768ed00ca93197b902537
+humanReview: null
+machineReview: unreviewed
+title: "다항식 곱셈 mod 258280327"
+---
+
+계수가 음이 아닌 정수인 두 다항식 $F,G$가 주어집니다.
+
+$F\times G$의 계수를 $258280327$로 나눈 나머지를 출력하세요.
+
+## 조건
+
+- $0\le N,M\le 2\times 10^5$
+- $0\le F_i,G_i\le 10^{18}$
+- $N>0$이면 $F_N>0$이고, $M>0$이면 $G_M>0$
+- $F$ 또는 $G$가 영다항식이면 그 차수는 $0$으로 정의합니다.
+
+## 입력
+
+입력은 다음 형식으로 주어집니다.
+
+```text
+N
+F_0 F_1 ... F_N
+M
+G_0 G_1 ... G_M
+```
+
+## 출력
+
+곱 $F\times G$의 차수를 $L$이라 할 때, 다음 형식으로 출력하세요.
+
+```text
+L
+H_0 H_1 ... H_L
+```
+
+여기서 $H_i$는 $F\times G$의 $x^i$의 계수를 $258280327$로 나눈 나머지입니다.

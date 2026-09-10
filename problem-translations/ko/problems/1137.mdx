@@ -1,0 +1,59 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1137
+problemId: 4778
+sourceTitle: "Circles"
+sourceHtmlSha256: "db243d0cff22cbf9069cc0518d0449547b628373350e46abf40084aad16dfb22"
+humanReview: null
+machineReview: unreviewed
+title: "원"
+---
+
+## 문제 설명
+
+NaN 군은 $xy$ 좌표평면을 산책하다가 $x$축을 중심으로 하는 원을 $N$개 발견했습니다. 원 $C_i$의 중심 좌표는 $(x_i,0)$이고 반지름은 $r_i$입니다.
+
+NaN 군은 가장 많은 원의 내부에 있는 좌표가 몇 개의 원 내부에 있는지 알고 싶어 합니다. 원주 위의 점은 원의 내부에 포함되지 않는 것으로 합니다.
+
+## 입력
+
+```text
+$N$
+$x_1\ r_1$
+$x_2\ r_2$
+$\vdots$
+$x_N\ r_N$
+```
+
+- $1 \leq N \leq 100\,000$
+- $-100\,000 \leq x_i \leq 100\,000$
+- $1 \leq r_i \leq 100\,000$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+가장 많은 원의 내부에 있는 좌표가 몇 개의 원 내부에 포함되는지 출력하고 마지막에 줄바꿈을 넣으세요.
+
+## 예제
+
+### 예제 1 {file=""}
+#### 입력
+```text
+7
+2 1
+4 2
+5 1
+3 1
+7 2
+9 2
+6 1
+```
+#### 출력
+```text
+4
+```
+
+## 출처
+
+[HackerRank 문제](https://www.hackerrank.com/contests/epsf001/challenges/epsf-k/problem)를 일부 수정했습니다.

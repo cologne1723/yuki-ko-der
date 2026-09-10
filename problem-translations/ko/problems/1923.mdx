@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1923
+problemId: 8083
+sourceTitle: "Divisor Array"
+sourceHtmlSha256: "50c9a419eb6fa582d49a7ec3d67db2c85532b56362497e1aa074952551f4b781"
+humanReview: null
+machineReview: unreviewed
+title: "약수 배열"
+---
+
+양의 정수 $N,M,K$가 주어집니다. $D$를 작은 순서로 $K$개의 소수를 곱한 값이라 합니다.
+
+## 조건
+
+길이 $N+1$ 수열 $A$ 중 다음 조건을 만족하는 개수를 구하세요.
+
+- $A_0=D$
+- $1\le i\le N$에서 $A_i$는 $\prod_{j=0}^{i-1}A_j$의 양의 약수입니다.
+- $\prod_{i=1}^{N}A_i$의 약수 개수는 $M$ 이하입니다.
+
+## 입력
+
+```text
+N M K
+```
+
+$1\le N\le10^9$, $1\le M\le2000$, $1\le K\le10^9$입니다.
+
+## 출력
+
+답을 $998244353$으로 나눈 나머지를 출력하세요.

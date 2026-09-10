@@ -1,0 +1,36 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2694
+problemId: 10611
+sourceTitle: "The Early Bird Catches The Worm"
+sourceHtmlSha256: "78cb315fa3bc93c361252d0d3130f68d606571566ed805c6a922fdb1fe3fa589"
+humanReview: null
+machineReview: unreviewed
+title: "일찍 일어나는 새가 벌레를 잡는다"
+---
+
+## 문제
+
+`N`일 중 연속한 기간 `[L,R]`을 골라 매일 일찍 일어납니다. `i`일에 일찍 일어나면 만족도 `A_i`를 얻고, 일찍 일어나지 않으면 만족도는 0입니다.
+
+`L`일부터 `R`일까지 일찍 일어날 때, `j`일에 누적되는 피로도는 그날까지 일찍 일어난 일수와 난이도 `B_j`의 곱인 `(j-L+1) × B_j`입니다. 전체 피로도가 `H` 이하가 되도록 기간을 골랐을 때 만족도 합의 최댓값을 구하세요. 가능한 기간이 없으면 0을 출력합니다.
+
+## 제약
+
+- `1 ≤ N ≤ 2 × 10^5`
+- `1 ≤ H ≤ 10^9`
+- `1 ≤ A_i, B_i ≤ 10^12`
+
+## 입력
+
+```text
+N H
+A_1 A_2 ... A_N
+B_1 B_2 ... B_N
+```
+
+## 출력
+
+답을 출력하세요.
+

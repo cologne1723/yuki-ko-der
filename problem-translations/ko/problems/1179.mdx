@@ -1,0 +1,65 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1179
+problemId: 4811
+sourceTitle: "Quadratic Equation"
+sourceHtmlSha256: "b9d9bab93db7f4623b7db3fd7dba3c850f72b383dc5b3b40f5d2c2a7f6fc74b0"
+humanReview: null
+machineReview: unreviewed
+title: "이차방정식"
+---
+
+## 문제 설명
+
+이차방정식 $ax^2+bx+c=0$의 해를 구하세요.
+
+## 입력
+
+```text
+a b c
+```
+
+- 입력은 모두 정수입니다.
+- $-100 \leq a,b,c \leq 100$
+- $a \neq 0$
+
+## 출력
+
+이차방정식의 모든 해를 한 줄에 출력하세요. 실수해가 존재하지 않아 허근이 생기는 경우 `imaginary`를 출력하세요. 예상 답과의 절대 오차 또는 상대 오차가 $10^{-4}$ 이하이면 정답으로 인정합니다. 해가 여러 개라면 작은 순서대로 공백으로 구분해 출력하세요. 마지막에 줄바꿈을 넣으세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+1 2 -5
+```
+#### 출력
+```text
+-3.449489742783178 1.449489742783178
+```
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+1 -4 4
+```
+#### 출력
+```text
+2.000000000000000
+```
+
+중근입니다.
+
+### 예제 3 {file="01_sample_03.txt"}
+#### 입력
+```text
+1 3 4
+```
+#### 출력
+```text
+imaginary
+```
+
+실수해가 존재하지 않습니다.

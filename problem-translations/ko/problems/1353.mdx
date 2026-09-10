@@ -1,0 +1,28 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1353
+problemId: 5775
+sourceTitle: "Limited Sequence"
+sourceHtmlSha256: "a307696784ec0e6a34a7552a1b0ab84ffb81e75be39c3472bb16646b0ddbbdc8"
+humanReview: null
+machineReview: unreviewed
+title: "제한된 수열"
+---
+
+## 문제
+
+`1` 이상 `N` 이하의 원소로 이루어진 양의 정수 수열 `B_1,...,B_K` 중 다음 조건을 만족하는 수의 개수를 `998244353`으로 나눈 나머지를 구하세요.
+
+- `L\le\sum_{i=1}^K B_i\le R`
+- `x\le y`이고 `B_x`부터 `B_y`까지 모두 같다면, 그 길이 `y-x+1`은 `A_{B_x}` 이하입니다.
+
+## 입력
+
+`N L R`과 수열 `A_1,...,A_N`이 주어집니다.
+
+`2\le N\le2000`, `1\le A_i\le2000`, `1\le L\le R\le2000`입니다.
+
+## 출력
+
+조건을 만족하는 수열의 개수를 출력하세요.

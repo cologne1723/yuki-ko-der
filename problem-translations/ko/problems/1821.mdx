@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1821
+problemId: 7539
+sourceTitle: "LEQ-GEQ Permutations"
+sourceHtmlSha256: "186c0b8edbc6a1abcb64f6d8ee483a30c6948e16d5c54adc10728c4d234df6f7"
+humanReview: null
+machineReview: unreviewed
+title: "LEQ-GEQ 순열"
+---
+
+0과 1로 이루어진 길이 $N$의 문자열 $S$가 주어집니다. 다음 조건을 만족하는 길이 $N$의 두 순열의 순서쌍 $(P,Q)$의 개수를 $998244353$으로 나눈 나머지를 구하세요.
+
+## 조건
+
+모든 $i$에 대해 $S_i=0$이면 $P_i\le Q_i$, $S_i=1$이면 $P_i\ge Q_i$이어야 합니다.
+
+## 입력
+
+```text
+N
+S
+```
+
+$1\le N\le5000$이고 $S$는 0과 1로 이루어진 길이 $N$의 문자열입니다.
+
+## 출력
+
+조건을 만족하는 순서쌍의 개수를 $998244353$으로 나눈 나머지를 출력하세요.

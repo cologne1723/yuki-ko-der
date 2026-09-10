@@ -1,0 +1,60 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1236
+problemId: 4941
+sourceTitle: "長針と短針"
+sourceHtmlSha256: "d52b121072fa0f32f180809f0916b205a160e27e1ea692a0d098b1cbb150d489"
+humanReview: null
+machineReview: unreviewed
+title: "분침과 시침"
+---
+
+## 문제 설명
+
+일반적인 아날로그 시계가 있습니다. 현재 시각은 $A$시 $B$분 $0$초입니다. 분침과 시침이 같은 위치에 겹칠 때까지 걸리는 최소 시간을 초 단위로 구하세요. 소수점 이하는 버립니다.
+
+## 입력
+
+```text
+A B
+```
+
+- $0\leq A<24$, $0\leq B<60$
+- 두 수는 항상 두 자리로 맞춰 입력됩니다.
+
+## 출력
+
+최소 시간을 소수점 이하 버림하여 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+11 59
+```
+#### 출력
+```text
+60
+```
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+12 34
+```
+#### 출력
+```text
+1887
+```
+
+### 예제 3 {file="01_sample_03.txt"}
+#### 입력
+```text
+12 00
+```
+#### 출력
+```text
+0
+```

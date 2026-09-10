@@ -1,0 +1,73 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1136
+problemId: 4746
+sourceTitle: "Four Points Tour"
+sourceHtmlSha256: "38c74ac7f3b47ac5ed4cba2baaf51dff92614620da16393d266e00d102b6873e"
+humanReview: null
+machineReview: unreviewed
+title: "네 점 여행"
+---
+
+## 문제 설명
+
+네 점 $m A,B,C,D$가 있고, null 군은 현재 점 $m A$에 있습니다. 편의상 현재를 $0$초라고 합니다.
+
+null 군이 매초 현재 있지 않은 세 점 중 하나로 이동하는 것을 반복할 때, $N$초 후 점 $m A$에 있는 이동 방법의 수를 구하세요.
+
+답은 매우 커질 수 있으므로 $10^9+7$로 나눈 나머지를 출력하세요.
+
+## 입력
+
+```text
+$N$
+```
+
+- $1 \leq N \leq 10^{18}$
+- $N$은 정수입니다.
+- $10^6 < N$인 테스트 케이스는 정오 판정에 영향을 주지 않습니다(`evil` 케이스로 존재합니다.)
+
+## 출력
+
+답을 $10^9+7$로 나눈 나머지를 출력하고 마지막에 줄바꿈을 넣으세요.
+
+## 예제
+
+### 예제 1 {file=""}
+#### 입력
+```text
+3
+```
+#### 출력
+```text
+6
+```
+
+가능한 이동 방법은 $\rm A\to B\to C\to A$, $\rm A\to B\to D\to A$, $\rm A\to C\to B\to A$, $\rm A\to C\to D\to A$, $\rm A\to D\to B\to A$, $\rm A\to D\to C\to A$의 $6$가지입니다.
+
+### 예제 2 {file=""}
+#### 입력
+```text
+334
+```
+#### 출력
+```text
+724282422
+```
+
+### 예제 3 {file=""}
+#### 입력
+```text
+1000000000000000000
+```
+#### 출력
+```text
+561584175
+```
+
+$10^6 < N \leq 10^{18}$인 테스트 케이스의 정오 여부는 이 문제의 정오 판정에 영향을 주지 않습니다.
+
+## 출처
+
+[HackerRank 문제](https://www.hackerrank.com/contests/epsf001/challenges/epsf001-m/problem)를 일부 수정했습니다.

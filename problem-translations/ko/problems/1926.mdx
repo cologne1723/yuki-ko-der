@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1926
+problemId: 7825
+sourceTitle: "Sequence of Remainders"
+sourceHtmlSha256: "a27b58f91d37cdc69a9e10268d0a941c3769e5281764d00cef01f3995404dc6e"
+humanReview: null
+machineReview: unreviewed
+title: "나머지 수열"
+---
+
+다음과 같이 길이 $N+1$의 수열 $a=(a_0,\ldots,a_N)$를 정의합니다.
+
+$$a_0=K\%M,\qquad a_i=a_{i-1}\%(M-i)\ (1\le i\le N)$$
+
+## 문제
+
+$a_N$을 구하세요.
+
+## 입력
+
+```text
+T
+N M K
+```
+
+$1\le T\le10^5$, $1\le N<M\le10^9$, $1\le K\le10^9$입니다.
+
+## 출력
+
+각 테스트 케이스의 답을 출력하세요.

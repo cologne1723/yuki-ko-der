@@ -1,0 +1,36 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2701
+problemId: 10272
+sourceTitle: "A cans -> B cans"
+sourceHtmlSha256: "83d41874a59e0a19dcb0c5ec2e2964369fad863ba1a5b974561197cbd2969af2"
+humanReview: null
+machineReview: unreviewed
+title: "A캔 → B캔"
+---
+
+## 문제
+
+각 `p=1,...,M`에 대해 독립적으로 문제를 풉니다. 처음에 빈 0번 캔 `p`개가 있습니다. `i`번 가게에서는 빈 0번 캔 또는 빈 `i`번 캔을 합쳐 `A_i`개 내면 주스가 든 `i`번 캔 `B_i`개로 바꿔 줍니다. 항상 `A_i>B_i`입니다.
+
+주스 캔 하나를 마시면 빈 `i`번 캔 하나가 되고 기쁨 `C_i`를 얻습니다. 얻을 수 있는 기쁨 합의 최댓값을 각 `p`에 대해 구하세요.
+
+## 제약
+
+- `1 ≤ N ≤ 5000`, `2 ≤ M ≤ 5000`
+- `1 ≤ B_i < A_i ≤ M`, `1 ≤ C_i ≤ 10^9`
+
+## 입력
+
+```text
+N M
+A_1 B_1 C_1
+⋮
+A_N B_N C_N
+```
+
+## 출력
+
+`p=1,...,M`에 대한 답을 한 줄에 하나씩 출력하세요.
+

@@ -1,0 +1,28 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1786
+problemId: 7276
+sourceTitle: "Maximum Suffix Median (Online)"
+sourceHtmlSha256: "b2d853ab7fa98f258e9d617c4e4d4fe76daf5a6d1d6b675194b22022938b2cf1"
+humanReview: null
+machineReview: unreviewed
+title: "최대 접미사 중앙값 (온라인)"
+---
+
+수열 `A`에 대해 `ans_i = max_{1<=j<=i} med(A_j,...,A_i)`를 구합니다. 중앙값은 정렬했을 때 `floor((n+1)/2)`번째 값입니다.
+
+입력에는 `A'_1=A_1`, `A'_i=A_i XOR ans_{i-1}`가 주어집니다. 모든 `ans_i`를 복원해 출력하세요.
+
+## 제약
+
+- `1 <= N <= 2 * 10^5`
+- `0 <= A_i < 2^30`
+
+## 입력
+
+`N`과 `A'_1,...,A'_N`이 주어집니다.
+
+## 출력
+
+각 `ans_i`를 출력하세요.

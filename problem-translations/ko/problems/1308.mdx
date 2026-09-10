@@ -1,0 +1,37 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1308
+problemId: 2354
+sourceTitle: "ジャンプビーコン"
+sourceHtmlSha256: "bf93ea05d3af1bb0f76906492547d4c26f95b5abe18193209e3a490cccbb7fb1"
+humanReview: null
+machineReview: unreviewed
+title: "점프 비콘"
+---
+
+## 문제 설명
+
+길이 $l_i$인 간선으로 이루어진 $N$개 정점의 트리가 있습니다. 양의 정수 $C$와 방문할 정점열 $(x_1,\ldots,x_Q)$가 주어집니다. 현재 $x_1$에서 시작해 순서대로 방문하세요.
+
+다음 세 행동을 반복할 수 있습니다.
+
+1. 인접 정점으로 이동합니다. 간선 길이만큼 시간이 걸립니다.
+2. 현재 정점에 점프 비콘을 설치합니다. 기존 비콘은 사라지고 시간은 걸리지 않습니다.
+3. 비콘이 설치된 정점으로 이동합니다. 비콘은 사라지고 $C$ 시간이 걸립니다.
+
+모든 방문을 완료하는 최소 시간을 구하세요.
+
+## 입력
+
+```text
+N Q C
+u_1 v_1 l_1
+\vdots
+u_{N-1} v_{N-1} l_{N-1}
+x_1 \ldots x_Q
+```
+
+## 출력
+
+최소 시간을 출력하세요.

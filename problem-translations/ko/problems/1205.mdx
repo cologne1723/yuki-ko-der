@@ -1,0 +1,62 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1205
+problemId: 4850
+sourceTitle: "Eye Drops"
+sourceHtmlSha256: "d98c451d0d6b3390f8590cb1465cc427335bd8e08acb3f88d07fe337753d9a87"
+humanReview: null
+machineReview: unreviewed
+title: "안약"
+---
+
+## 문제 설명
+
+$N$개의 구역이 일렬로 있고 $0$부터 $N-1$까지 번호가 붙어 있습니다. kaage 군은 현재 구역 $0$, 시각 $0$에 있습니다. 인접한 구역으로 1 단위 시간에 이동할 수 있습니다. 즉 시각 $t$에 구역 $i$에 있다면 시각 $t+1$에는 그대로 있거나, 존재한다면 $i-1$ 또는 $i+1$로 이동할 수 있습니다.
+
+이제 시각 $T_i$에 구역 $P_i$로 안약이 떨어진다는 정보가 $M$개 주어집니다. 적절히 이동하여 모든 안약을 떨어지는 순간에 받을 수 있는지 판정하세요. 어떤 구역에 정확히 도착한 순간에도 그곳에 떨어진 안약을 받을 수 있습니다.
+
+## 입력
+
+```text
+N M
+T_1 P_1
+T_2 P_2
+\vdots
+T_M P_M
+```
+
+- $1\leq N,M\leq 10^5$
+- $0\leq P_i\leq N-1$
+- $0\leq T_i\leq 10^{10}$
+- $T_i\leq T_{i+1}$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+모든 안약을 받을 수 있으면 `Yes`, 받을 수 없으면 `No`를 한 줄에 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+3 2
+1 0
+4 2
+```
+#### 출력
+```text
+Yes
+```
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+2 1
+0 1
+```
+#### 출력
+```text
+No
+```

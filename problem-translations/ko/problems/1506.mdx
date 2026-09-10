@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1506
+problemId: 6261
+sourceTitle: "Unbalanced Pocky Game"
+sourceHtmlSha256: "8a243d693cb835121f05da50b1e653115e31c36187d3badd859ff7d3806db34a"
+humanReview: null
+machineReview: unreviewed
+title: "불균형 포키 게임"
+---
+## 문제
+
+양의 정수 수열 $A$가 있습니다. Alice와 Bob은 수열이 빌 때까지 번갈아 게임합니다.
+
+매 턴 마지막 원소를 $k$라 하고, 이를 $0$ 이상 $k$ 미만의 정수로 바꿉니다. 0이 된 원소는 수열에서 제거됩니다. 자신의 차례에 조작할 수 없으면 패배합니다.
+
+Alice가 선공이고 두 사람이 최선으로 플레이할 때 승자를 구하세요.
+
+## 입력
+
+```text
+$N$
+$A_1$ $\ldots$ $A_N$
+```
+
+- $1\leq N\leq2\times10^5$
+- $1\leq A_i\leq10^9$
+
+## 출력
+
+Alice가 이기면 `Alice`, Bob이 이기면 `Bob`을 출력하세요.

@@ -1,0 +1,24 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2165
+problemId: 8188
+sourceTitle: "Let's Play Nim!"
+sourceHtmlSha256: "ed4c74fb36a17656326d0d3b4f2e16e3e2a0188dcda986c6b2a5a9d081d51ef9"
+humanReview: null
+machineReview: unreviewed
+title: "님 게임을 하자!"
+---
+
+저지와 님 게임을 하여 승리하라냥. $n$개의 더미 크기 $a_i$가 주어진다냥. 선공 또는 후공을 선택한 뒤 번갈아 가며, $a_i\ne0$인 더미 하나에서 $1$개 이상 원하는 수만큼 제거한다냥. 제거할 수 없는 플레이어가 패배한다냥.
+
+## 조건
+
+- $1\le n\le10^4$
+- $1\le a_i\le10^4$
+- $\sum a_i\le10^4$
+
+## 입출력
+
+먼저 $n$과 배열이 주어지고, 선공이면 `1`, 후공이면 `0`을 출력한다냥. 이후 자신의 차례에는 $i,k$를 출력해 $a_i$에서 $k$를 제거하고, 저지의 차례에는 저지의 $i,k$가 입력된다냥. 매번 반환값이 주어지며 $-1$이면 즉시 종료해야 한다냥. 각 출력 뒤에는 개행하고 flush하라냥.
+

@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1503
+problemId: 5711
+sourceTitle: "Bitwise And Convolution Twisted"
+sourceHtmlSha256: "7610ce5a35e295fea505a2faa8ba64449d819b2627065135d4f00c01ebc470f3"
+humanReview: null
+machineReview: unreviewed
+title: "비트 AND 컨볼루션 변형"
+---
+## 문제
+
+길이 $2^N$인 정수열 $A,B$가 주어집니다. 다음으로 정의되는 길이 $2^N$인 수열 $C$를 계산하세요.
+
+\[
+C_k=\left(\sum_{i=0}^{2^N-1}A_iB_{i\mathbin{\&}k}\right)\bmod 998244353
+\]
+
+## 입력
+
+```text
+$N$
+$A_0$ $\ldots$ $A_{2^N-1}$
+$B_0$ $\ldots$ $B_{2^N-1}$
+```
+
+- $0\leq N\leq20$
+- 모든 $A_i,B_i$는 $0$ 이상 $998244353$ 미만입니다.
+
+## 출력
+
+$C_0,C_1,\ldots,C_{2^N-1}$을 한 줄에 공백으로 구분해 출력하세요.

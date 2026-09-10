@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2583
+problemId: 10349
+sourceTitle: "Differential Equation (Enhanced version)"
+sourceHtmlSha256: a240af738d30d9e6e8b811fd0218b591e68b275e40cded4e7b5811eadf1a4855
+humanReview: null
+machineReview: unreviewed
+title: "미분방정식 (강화판)"
+---
+
+정수 $N$과 다항식 $A(x)=\sum_{i=0}^{M-1}a_ix^i$가 주어집니다. $F_0(x)=x$이고 $k>0$일 때 $F_k(x)=A(x)F_{k-1}(x)+(x^2-1)F'_{k-1}(x)$로 정의합니다. $F_N(x)=\sum b_ix^i$라 할 때 $b_0$부터 $b_{N+1}$까지를 구하세요.
+
+## 조건
+
+- $0\le N\le10^5$, $1\le M\le10^5$
+- $0\le a_i<998244353$
+
+## 입력
+
+```text
+$N$ $M$
+$a_0$ $a_1$ $\cdots$ $a_{M-1}$
+```
+
+## 출력
+
+$b_0,b_1,\ldots,b_{N+1}$를 공백으로 출력하세요.
+

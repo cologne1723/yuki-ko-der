@@ -1,0 +1,43 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2551
+problemId: 10246
+sourceTitle: "2, 3, 5, 7 Game"
+sourceHtmlSha256: 0170d205fb0c9bb668d991d96a163be842437dfbdc184b63b68c1da771fc03e2
+humanReview: null
+machineReview: unreviewed
+title: "2, 3, 5, 7 게임"
+---
+
+수 $X$가 있고, sepa와 ryota는 이 수 $X$를 사용해 게임을 합니다. 게임이 시작하기 전에는 $X=1$입니다.
+
+sepa가 선공, ryota가 후공으로 게임이 끝날 때까지 다음 조작을 차례로 반복합니다.
+
+## 조작
+
+차례인 사람은 $2,3,5,7$ 중 하나를 고릅니다. 고른 수를 $a$라고 할 때, $X$를 $aX$로 바꿉니다.
+
+조작한 뒤 $X$가 $N$ 이상이 되면 게임을 끝내고, 마지막으로 조작한 사람이 패배합니다.
+
+$T$개의 $N_i$가 주어집니다. 서로 최적으로 행동할 때 각각 누가 이기는지 구하세요.
+
+## 조건
+
+- $1 \le T \le 2 \times 10^5$
+- $2 \le N_i \le 10^{16}$
+- 입력은 모두 정수입니다.
+
+## 입력
+
+```text
+$T$
+$N_1$
+$\vdots$
+$N_T$
+```
+
+## 출력
+
+서로 최적으로 행동했을 때 sepa가 이기면 `sepa`, ryota가 이기면 `ryota`를 출력하세요.
+

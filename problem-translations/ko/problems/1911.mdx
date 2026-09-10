@@ -1,0 +1,34 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1911
+problemId: 7294
+sourceTitle: "Alternately Coloring"
+sourceHtmlSha256: "ef38d3648e2535cf0d5f9830137bfba173beeb1d1c222f1efac456c0b1b61ced"
+humanReview: null
+machineReview: unreviewed
+title: "번갈아 색칠하기"
+---
+
+단순 연결 무방향 그래프가 주어지고 정점 $i$를 빨강으로 칠했을 때의 점수 $R_i$, 파랑으로 칠했을 때의 점수 $B_i$가 주어집니다. 시작 정점을 원하는 색으로 칠한 뒤, 현재 정점의 이웃으로 이동하며 반대 색으로 칠할 수 있습니다. 이미 칠한 정점은 덮어씁니다.
+
+## 문제
+
+적절히 이동한 뒤 얻는 점수의 최댓값을 구하세요. 칠하지 않은 정점의 점수는 0입니다.
+
+## 입력
+
+```text
+N M
+u_1 v_1
+...
+u_M v_M
+R_1 ... R_N
+B_1 ... B_N
+```
+
+$2\le N\le1000$, $N-1\le M\le1000$, $1\le R_i,B_i\le10^9$입니다.
+
+## 출력
+
+최댓값을 출력하세요.

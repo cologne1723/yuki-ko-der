@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2282
+problemId: 9167
+sourceTitle: "Boxed Nim"
+sourceHtmlSha256: ccdca323b229b88e72e46223a0284c9ae0ebe092c1e2e427dfd35af435377b86
+humanReview: null
+machineReview: unreviewed
+title: "상자 님"
+---
+
+$N$개의 상자가 있고, $i$번째 상자에는 $A_i$개의 돌이 들어 있습니다. 처음에는 모든 상자의 뚜껑이 닫혀 있습니다.
+
+선공부터 번갈아 다음 중 하나를 수행합니다. 닫힌 상자 하나를 골라 뚜껑을 열거나, 뚜껑이 열려 있고 돌이 하나 이상 있는 상자 하나에서 돌을 하나 이상 제거할 수 있습니다.
+
+더 이상 조작할 수 없는 사람이 패배합니다. 두 사람이 최적으로 행동할 때 승자를 구하세요.
+
+## 조건
+
+- $1\le N\le 10^5$
+- $0\le A_i\le 10^9$
+
+## 입력
+
+첫째 줄에 $N$, 둘째 줄에 $A_1,A_2,\ldots,A_N$이 주어집니다.
+
+## 출력
+
+선공이 이기면 `First`, 후공이 이기면 `Second`를 출력하세요.

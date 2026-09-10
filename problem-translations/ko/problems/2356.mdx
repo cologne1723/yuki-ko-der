@@ -1,0 +1,28 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2356
+problemId: 9405
+sourceTitle: "Back Door Tour in Four Seasons"
+sourceHtmlSha256: 7581694cc21c1d66b6acb788563eb7681aebc0f5e18f1b1e5ffd7d718be0ba2e
+humanReview: null
+machineReview: unreviewed
+title: "사계절 뒷문 여행"
+---
+
+$N$개의 도시와 각 도시의 계절 `U`(여름), `F`(가을), `W`(겨울), `P`(봄)가 주어집니다. 도시 $i$에는 다른 특정 도시로 순간이동하는 일방통행 문이 $A_i$개 있습니다.
+
+처음 도시를 하나 고르고 문을 세 번 사용해 방문한 네 도시의 계절이 `여름 → 가을 → 겨울 → 봄`이 되도록 하는 방문 방법의 수를 모든 문 도착지 배치에 대해 합산한 값을 $998244353$으로 나눈 나머지를 구하세요. 방문한 도시 순서가 다르면 다른 방법입니다.
+
+## 조건
+
+- $2\le N\le3\times10^5$
+- 각 $A_i$는 $1$ 이상 $10^5$ 이하입니다.
+
+## 입력
+
+첫째 줄에 $N$, 다음 $N$개 줄에 도시의 계절과 문 개수 $S_i,A_i$가 주어집니다.
+
+## 출력
+
+답을 출력하세요.

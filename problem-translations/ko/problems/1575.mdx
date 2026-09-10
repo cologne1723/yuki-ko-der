@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1575
+problemId: 6345
+sourceTitle: "Divisor Function Hard"
+sourceHtmlSha256: "255c5516ce20cc950b5290e73de05302006411e92ebf16b76148910714589a2d"
+humanReview: null
+machineReview: unreviewed
+title: "약수 함수 Hard"
+---
+## 문제
+
+양의 정수 $x,y$에 대해
+\[
+f_{u,v}(x,y)=\sum_{i\mid x,,1\leq i\leq y}(ux+vi)^P
+\]
+로 정의합니다.
+
+수열 $A,B,C$와 질의 $U_q$가 주어집니다. $A,B,C$에서 하나씩 고르는 모든 $NMK$가지 방법에 대해 $\sum_{p=1}^{U_q}f_{B_j,C_k}(p,A_i)$를 더한 값을 각 질의마다 $998244353$으로 나눈 나머지를 구하세요.
+
+## 입력
+
+$N,M,K,P,Q$와 세 수열, 질의가 주어집니다.
+
+- $1\leq N,M,K,P,Q\leq10^5$
+- $1\leq A_i,U_q\leq10^5$
+- $1\leq B_j,C_k\leq10^9$
+
+## 출력
+
+각 질의의 답을 출력하세요.

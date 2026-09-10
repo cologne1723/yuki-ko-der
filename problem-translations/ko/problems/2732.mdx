@@ -1,0 +1,36 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2732
+problemId: 10758
+sourceTitle: "Similar Permutations"
+sourceHtmlSha256: "0bef6a12cbd2ef7ffaa21ade8d7874a7c26875c8cc9a26e77bd78c1843be90fa"
+humanReview: null
+machineReview: unreviewed
+title: "비슷한 순열"
+---
+
+## 문제
+
+`1,...,N`의 서로 다른 두 순열 `P'`, `P''`가 존재하여
+
+`⊕(P'_i + A_i) = ⊕(P''_i + A_i)`
+
+를 만족하는지 판정하고, 존재하면 하나 출력하세요. `⊕`는 전체 XOR입니다.
+
+## 제약
+
+- `1 ≤ N ≤ 2×10^5`
+- `0 ≤ A_i ≤ 2×10^5`
+
+## 입력
+
+```text
+N
+A_1 A_2 ... A_N
+```
+
+## 출력
+
+조건을 만족하는 순열 두 개를 각각 한 줄에 출력하세요. 없으면 `-1`을 출력하세요.
+

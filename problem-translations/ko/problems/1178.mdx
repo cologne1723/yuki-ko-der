@@ -1,0 +1,58 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1178
+problemId: 4813
+sourceTitle: "Can you draw a Circle?"
+sourceHtmlSha256: "ae2246bd41dedfddd76ddfca46e77fa6f6beda22614f15f3a116adf957fd8b63"
+humanReview: null
+machineReview: unreviewed
+title: "원을 그릴 수 있나요?"
+---
+
+## 문제 설명
+
+xy평면 위의 원이 다음 방정식으로 주어집니다.
+
+$a x^2 + b y^2 + c x + d y + e = f$
+
+이 원의 반지름을 구하세요.
+
+## 입력
+
+```text
+a b c d e f
+```
+
+- 모든 입력은 정수입니다.
+- $-100 \leq a,b,c,d,e,f \leq 100$
+- $a \neq 0$, $b \neq 0$, $a=b$입니다.
+- 주어지는 방정식은 양의 반지름을 갖는 원을 나타냅니다.
+
+## 출력
+
+원의 반지름을 한 줄에 출력하세요. 예상 답과의 절대 오차 또는 상대 오차가 $10^{-4}$ 이하이면 정답으로 인정합니다. 마지막에 줄바꿈을 넣으세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+1 1 -2 4 1 0
+```
+#### 출력
+```text
+2.000000000000000
+```
+
+원의 중심은 $(1,-2)$입니다.
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+1 1 0 -6 1 0
+```
+#### 출력
+```text
+2.828427124746190
+```

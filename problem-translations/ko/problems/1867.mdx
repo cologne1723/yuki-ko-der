@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1867
+problemId: 7356
+sourceTitle: "Partitions and Inversions"
+sourceHtmlSha256: "89b5f7f0acebb28659249b536014e81ed8924522940142ce452a7c7dd3a4f6cc"
+humanReview: null
+machineReview: unreviewed
+title: "분할과 역전"
+---
+
+순열 $P=(P_1,\ldots,P_N)$가 주어집니다. 각 $k=1,\ldots,N$에 대해 한 번의 조작을 합니다. $1=A_1<A_2<\cdots<A_{k+1}=N+1$인 분할을 만들고, 각 구간 $[A_i,A_{i+1})$ 안의 $P$를 오름차순으로 정렬합니다.
+
+## 문제
+
+조작 후 역전 수의 가능한 최솟값을 각 $k$에 대해 구하세요. 역전 수는 $a<b$이고 $P_a>P_b$인 쌍의 개수입니다.
+
+## 입력
+
+```text
+N
+P_1 P_2 ... P_N
+```
+
+$1\le N\le3000$이고 $P$는 $(1,2,\ldots,N)$의 순열입니다.
+
+## 출력
+
+$k=1,\ldots,N$의 답을 각각 한 줄에 출력하세요.

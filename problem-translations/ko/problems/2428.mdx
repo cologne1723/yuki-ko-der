@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2428
+problemId: 10012
+sourceTitle: Returning Shuffle
+sourceHtmlSha256: e8dff5c6624e3b24a4c8f0025e053853b978510ba95587f1772b1e54a01e40fd
+humanReview: null
+machineReview: unreviewed
+title: 돌아오는 셔플
+---
+
+길이 $N$인 수열 $P=(1,2,\ldots,N)$에 $M$개의 순환 치환을 순서대로 적용합니다. 이 작업을 한 번 이상 반복하면 $P$가 원래 수열로 돌아온다고 할 때, 원래대로 돌아오기 위해 필요한 최소 반복 횟수를 $998244353$로 나눈 나머지를 구하세요.
+
+## 조건
+
+- $2\le N\le10^6$, $1\le M\le5\times10^5$
+- 각 순환 치환의 길이는 2 이상 $N$ 이하입니다.
+- 모든 순환 치환 원소는 서로 다릅니다.
+- 전체 원소 수의 합은 $10^6$ 이하입니다.
+
+## 입력
+
+```text
+N M
+T1 S1,1 ... S1,T1
+...
+TM SM,1 ... SM,TM
+```
+
+## 출력
+
+최소 반복 횟수를 출력하세요.

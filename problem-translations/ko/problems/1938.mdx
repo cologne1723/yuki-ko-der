@@ -1,0 +1,28 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1938
+problemId: 6856
+sourceTitle: "Lagrange Sum"
+sourceHtmlSha256: "1370b419e3a39c0784a07bc492a187ac468af8a4560dfb83e1bdff3750f8512f"
+humanReview: null
+machineReview: unreviewed
+title: "라그랑주 합"
+---
+
+정수쌍 $(x_i,y_i)$가 $N$개 주어집니다. 각 $i$에 대해 $j\ne i$인 모든 점에서 $F_i(x_j)=y_j$가 되는 $x$의 $N-2$차 이하 다항식 $F_i$를 정합니다. $F(x)=\sum_iF_i(x)$라 할 때 $F(X)$를 $998244353$에서의 값으로 구하세요.
+
+## 입력
+
+```text
+N X
+x_1 y_1
+...
+x_N y_N
+```
+
+$2\le N\le10^4$, $0\le X,x_i,y_i<998244353$이고 $x_i$는 서로 다릅니다.
+
+## 출력
+
+$F(X)$를 출력하세요.

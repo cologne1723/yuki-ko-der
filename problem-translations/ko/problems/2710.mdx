@@ -1,0 +1,38 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2710
+problemId: 9987
+sourceTitle: "How many more?"
+sourceHtmlSha256: "2da7ab38dce5dca955f193b8112cca6111a2a5d0e0a996e207e9b6d98915e317"
+humanReview: null
+machineReview: unreviewed
+title: "몇 명 더 추월해야 하는가?"
+---
+
+## 문제
+
+마라톤 참가자 `i`는 결승선에서 `A_i`만큼 떨어져 있습니다. 질의 `(x,y)`마다 참가자 `x`가 참가자 `y`를 따라잡기 위해 추월해야 하는 사람 수를 구하세요. 이미 `x`가 `y`와 같거나 더 결승선에 가까우면 0입니다.
+
+즉, `A_y < A_z < A_x`를 만족하는 `z`의 개수를 출력하세요.
+
+## 제약
+
+- `2 ≤ N,Q ≤ 10^5`
+- `1 ≤ A_i ≤ 10^9`
+- 질의의 두 번호는 서로 다르고, 질의 쌍도 서로 다릅니다.
+
+## 입력
+
+```text
+N Q
+A_1 A_2 ... A_N
+x_1 y_1
+⋮
+x_Q y_Q
+```
+
+## 출력
+
+각 질의의 답을 한 줄에 하나씩 출력하세요.
+

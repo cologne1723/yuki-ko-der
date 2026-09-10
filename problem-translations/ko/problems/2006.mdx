@@ -1,0 +1,27 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2006
+problemId: 7758
+sourceTitle: "Decrease All to Zero"
+sourceHtmlSha256: "7c3549cf5a9605900f32130a9b95800e98ad38c341a1c885a0070c2d1b261f08"
+humanReview: null
+machineReview: unreviewed
+title: "모두 0으로 줄이기"
+---
+
+버튼 $i$를 한 번 누르면 $A_i$가 $1$ 감소합니다. 같은 버튼을 연속해서 누를 수 없습니다. 모든 원소를 $0$으로 만들 수 있는지 판정하고, 가능하면 첫 버튼을 누른 시점부터 마지막 버튼을 누를 때까지 이동한 거리의 최솟값을 구하세요.
+
+## 입력
+
+```text
+N
+X_1 X_2 ... X_N
+A_1 A_2 ... A_N
+```
+
+$1\le N\le200$, $1\le X_1<\cdots<X_N\le10^9$, $1\le A_i\le5000$입니다.
+
+## 출력
+
+불가능하면 `-1`, 가능하면 최소 이동 거리를 출력하세요.

@@ -1,0 +1,34 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1820
+problemId: 6932
+sourceTitle: "NandShift"
+sourceHtmlSha256: "23cd5ecd462ee11780ed37b9411a54fa1e07e579a343dc0b8b7ea106a4419e3f"
+humanReview: null
+machineReview: unreviewed
+title: "NandShift"
+---
+
+길이 $10^9+1$인 $M$비트 정수열 $B=(B_0,B_1,\ldots,B_{10^9})$가 있습니다. 처음에는 $1\le i\le N$에 대해 $B_i=A_i$이고, $i=0$ 및 $N<i\le10^9$에 대해서는 $B_i=0$입니다. 최종적으로 $B_0=X$가 되게 하는 것이 목표입니다.
+
+## 조작
+
+$(0\le x,i,j\le10^9)$에서 다음 조작을 최대 1000번 수행할 수 있습니다.
+
+- `1 x i`: $B_x$를 $2B_i\bmod2^M$으로 바꿉니다.
+- `2 x i j`: $B_x$를 $B_i$와 $B_j$의 bitwise NAND로 바꿉니다.
+
+가능하면 실제 조작 순서 하나를 출력하고, 불가능하면 불가능하다고 판정하세요. NAND는 $M$비트 안에서 두 비트가 모두 1일 때 0, 그 외에는 1이며 $M$번째 비트 이상은 모두 0입니다.
+
+## 입력
+
+```text
+N M
+X
+A_1
+...
+A_N
+```
+
+$1\le N,M\le100$, $1\le X<2^M$, $0\le A_i<2^M$입니다. $X,A_i$는 길이 $M$의 이진 표기입니다.

@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1719
+problemId: 7010
+sourceTitle: "Tree and Permutation"
+sourceHtmlSha256: "c011b91925c0b01c97f89b5970f335f72e8c819344701141eea53fc105bbb87e"
+humanReview: null
+machineReview: unreviewed
+title: "트리와 순열"
+---
+
+`N`개 정점의 트리가 주어집니다. 순열 `P`가 존재하여, 서로 다른 정점 `i,j,k`에 대해 다음 두 조건 중 하나 이상이 항상 성립하는지 판정하세요.
+
+## 조건
+
+- `i`에서 `j`로 가는 단순 경로에 `k`가 포함되지 않습니다.
+- `P_i`에서 `P_j`로 가는 단순 경로에 `P_k`가 포함되지 않습니다.
+
+## 제약
+
+- `1 <= T <= 10^5`, `3 <= N <= 10^5`
+- 모든 테스트 케이스에서 `N`의 합은 `5 * 10^5` 이하입니다.
+- 주어지는 그래프는 트리입니다.
+
+## 입력
+
+테스트 케이스마다 트리의 간선이 주어집니다.
+
+## 출력
+
+조건을 만족하는 순열이 존재하면 `Yes`, 아니면 `No`를 출력하세요.

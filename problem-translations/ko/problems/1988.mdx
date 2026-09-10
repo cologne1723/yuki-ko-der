@@ -1,0 +1,25 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1988
+problemId: 7954
+sourceTitle: "Divisor Tiling"
+sourceHtmlSha256: "3461262a733bb5cf0b5231ee8848ff76cb916777406372443e578bc2ed4f7962"
+humanReview: null
+machineReview: unreviewed
+title: "약수 타일링"
+---
+
+완전수 $N$과 그 약수 $H$가 주어집니다. $N$의 자기 자신을 제외한 양의 약수마다 넓이가 그 약수이고 변의 길이가 정수인 직사각형 하나를 골라, 겹치지 않게 타일링하여 높이 $H$, 넓이 $N$인 직사각형을 만드세요.
+
+## 입력
+
+```text
+N H
+```
+
+$N$은 $6,28,496,8128$ 중 하나이고 $H$는 $N$의 약수입니다.
+
+## 출력
+
+가능하면 $H$행 $N/H$열의 격자를 출력하세요. 각 직사각형이 차지하는 칸에는 그 넓이를 출력해야 합니다. 불가능하면 `-1`을 출력하세요.

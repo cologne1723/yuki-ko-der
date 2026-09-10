@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2202
+problemId: 9114
+sourceTitle: "贅沢てりたまチキン"
+sourceHtmlSha256: "670f7335b421618d4b233b245894d2498b19c2f7fd974a8c84b2c60578f0b01c"
+humanReview: null
+machineReview: unreviewed
+title: "호화 데리타마 치킨"
+---
+
+$N$개의 역이 있고, $M$개의 선로 쌍이 있다냥. 각 쌍은 서로 다른 역 $A_i,B_i$의 지상역과 지하역을 교차 연결하는 두 개의 양방향 선로로 이루어진다냥. 선로만 이용해 각 역의 지상과 지하 사이를 오갈 수 있는지 판정하라냥.
+
+## 조건
+
+- $1\le N\le2\times10^5$
+- $0\le M\le\min(2\times10^5,N(N-1)/2)$
+- $A_i\ne B_i$이고 역 쌍은 중복되지 않는다냥.
+
+## 입력
+
+```text
+N M
+A_1 B_1
+\vdots
+A_M B_M
+```
+
+## 출력
+
+모든 역에서 지상과 지하를 오갈 수 있으면 `Yes`, 아니면 `No`를 출력하라냥.

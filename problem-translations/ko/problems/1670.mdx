@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1670
+problemId: 5828
+sourceTitle: "Many Gacha"
+sourceHtmlSha256: "50d5e8cc0d3014bb42c87e56e6eeda5e1edd1ca8a7ba685d195453dd057e6bf9"
+humanReview: null
+machineReview: unreviewed
+title: "많은 가챠"
+---
+
+`N`종류의 피규어를 모읍니다. `M`종류의 가챠 중 `i`번째를 뽑으면 피규어 `1`부터 `A_i` 중 하나를 같은 확률로 얻습니다.
+
+모든 종류를 하나 이상 얻을 때까지 가챠를 뽑되, 기대 횟수가 최소가 되도록 선택합니다. 이때 기대 횟수를 `998244353`으로 나눈 값을 출력하세요.
+
+## 제약
+
+- `1 <= N <= 2 * 10^5`
+- `1 <= M <= N`
+- `1 <= A_i <= N`, `A_i < A_{i+1}`, `A_M=N`
+
+## 입력
+
+`N M`과 `A_1,...,A_M`이 주어집니다.
+
+## 출력
+
+기대 횟수를 `998244353`으로 나눈 값을 출력하세요.

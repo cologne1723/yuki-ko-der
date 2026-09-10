@@ -1,0 +1,58 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1189
+problemId: 4874
+sourceTitle: "Sum is XOR"
+sourceHtmlSha256: "b72416bc1711c54c0a8de24bb80312d2f429fef6fe4f60a4a80fa11d29db7c91"
+humanReview: null
+machineReview: unreviewed
+title: "합은 XOR"
+---
+
+## 문제 설명
+
+길이 $N$인 양의 정수 수열 $A$가 주어집니다. 다음 조건을 만족하는 길이 $K$의 수열 $B$가 몇 개인지 구하세요. 조건을 만족하는 수열이 없으면 $0$을 출력합니다.
+
+$1\leq B_1<B_2<\cdots<B_K\leq N$
+
+$A_{B_1}+A_{B_2}+\cdots+A_{B_K}=A_{B_1}\mathbin{\mathrm{xor}}A_{B_2}\mathbin{\mathrm{xor}}\cdots\mathbin{\mathrm{xor}}A_{B_K}$
+
+양의 정수 $a,b$에 대해 $a\mathbin{\mathrm{xor}}b$는 비트별 배타적 논리합입니다. 답을 $998244353$으로 나눈 나머지를 출력하세요.
+
+## 입력
+
+```text
+N K A_1 A_2 \ldots A_N
+```
+
+- $2\leq N\leq 2\times10^5$
+- $2\leq K\leq N$
+- $1\leq A_i\leq 2^{10}-1$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+답을 $998244353$으로 나눈 나머지를 출력하세요. 마지막에 줄바꿈을 넣으세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+3 2 1 2 5
+```
+#### 출력
+```text
+2
+```
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+2 2 1 2
+```
+#### 출력
+```text
+1
+```

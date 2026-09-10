@@ -1,0 +1,41 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2577
+problemId: 9689
+sourceTitle: "Simple Permutation Guess"
+sourceHtmlSha256: 972d3775e3f5cc7251beafe980caf2e75c0aeb1a6d045b3c3d85620cbf9a9670
+humanReview: null
+machineReview: unreviewed
+title: "간단한 순열 추측"
+---
+
+저지는 길이 $n$인 순열 $P$를 가지고 있습니다. $n$만 주어질 때 다음 쿼리를 최대 $\lfloor\lfloor(n-1)\log_2n\rfloor-(n-1)/2+1\rfloor$번 사용해 $P$를 맞히세요. 쿼리는 순열 $Q$를 보내고 $Q\le P$인지 받는 것입니다.
+
+## 쿼리
+
+```text
+? Q_1 Q_2 \cdots Q_n
+```
+
+$Q\le P$이면 `1`, $Q>P$이면 `0`을 받습니다. 답을 제출할 때는 다음 형식을 사용합니다.
+
+```text
+! Q_1 Q_2 \cdots Q_n
+```
+
+## 조건
+
+- $1\le n\le250$
+- $P$는 순열입니다.
+
+## 입력
+
+```text
+$n$
+```
+
+## 출력
+
+쿼리마다 줄바꿈하고 flush하세요. 순열을 알아내면 `!` 형식으로 출력하세요.
+

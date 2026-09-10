@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1939
+problemId: 7473
+sourceTitle: "Numbered Colorful Balls"
+sourceHtmlSha256: "0ad496ec5317b55876acd58d23740991dde38dd9f319116c827af6dd06bf50ed"
+humanReview: null
+machineReview: unreviewed
+title: "번호가 붙은 색 공"
+---
+
+색과 숫자가 적힌 공들을 일렬로 놓습니다. $1\le i\le M$인 $i$를 골라 색이 $l_i$이고 숫자가 왼쪽부터 $1,2,\ldots,l_i$인 연속 구간을 삭제하고 빈 곳을 당깁니다.
+
+## 문제
+
+이 조작을 반복해 빈 열로 만들 수 있는 길이 $N$의 공 배열 개수를 $998244353$으로 나눈 나머지를 구하세요.
+
+## 입력
+
+```text
+N M
+l_1 l_2 ... l_M
+```
+
+$1\le N\le10^5$, $1\le M\le100$, $1\le l_i\le N$이며 $l_i$는 서로 다릅니다.
+
+## 출력
+
+답을 출력하세요.

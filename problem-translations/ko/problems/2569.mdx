@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2569
+problemId: 10317
+sourceTitle: "はじめてのおつかいHard"
+sourceHtmlSha256: ad3491eb995bb453b4c445b33f82cdcccb89d3fc6109545142a581ce42105c3a
+humanReview: null
+machineReview: unreviewed
+title: "첫 심부름 Hard"
+---
+
+일방통행 도로가 있는 $N$개의 마을에서, 각 $k=1,\ldots,N-2$에 대해 마을 $k$를 출발해 마을 $N-1$과 $N$을 모두 방문한 뒤 다시 $k$로 돌아오는 최소 시간을 구하세요. 도로 $u_i\to v_i$의 이동 시간은 $t_i$분입니다. 불가능하면 $-1$입니다.
+
+## 조건
+
+- $3\le N\le2\times10^5$, $0\le M\le\min(2\times10^5,N(N-1))$
+- $1\le u_i,v_i\le N$, $1\le t_i\le10^9$, $u_i\ne v_i$
+
+## 입력
+
+```text
+$N$ $M$
+$u_1$ $v_1$ $t_1$
+$\vdots$
+$u_M$ $v_M$ $t_M$
+```
+
+## 출력
+
+$k=1,\ldots,N-2$에 대한 답을 순서대로 한 줄에 하나씩 출력하세요.
+

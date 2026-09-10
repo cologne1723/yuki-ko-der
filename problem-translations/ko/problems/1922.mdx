@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1922
+problemId: 8084
+sourceTitle: "Separate and Attach"
+sourceHtmlSha256: "b7321cab187981973a42056a710c5bde62d3efa59b21fca9e01800a7646fd94f"
+humanReview: null
+machineReview: unreviewed
+title: "분리와 연결"
+---
+
+순열 $P,Q$가 주어집니다. $P$에서 연속일 필요 없는 부분 수열 $S$를 골라 제거하고, 남은 원소를 순서대로 이은 $T$를 만든 뒤 $P$를 $S,T$의 연결로 바꾸는 조작을 반복할 수 있습니다.
+
+## 문제
+
+최소 몇 번의 조작으로 $P$를 $Q$와 같게 만들 수 있는지 구하세요.
+
+## 입력
+
+```text
+N
+P_1 ... P_N
+Q_1 ... Q_N
+```
+
+$1\le N\le10^5$이고 $P,Q$는 길이 $N$의 순열입니다.
+
+## 출력
+
+최소 조작 횟수를 출력하세요.

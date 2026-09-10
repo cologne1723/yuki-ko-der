@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2325
+problemId: 9524
+sourceTitle: "Skill Tree"
+sourceHtmlSha256: 735efe0169ae10c39cf3ed472b2d2563a209850f32dae0e821e3d9bcdd178dcd
+humanReview: null
+machineReview: unreviewed
+title: "스킬 트리"
+---
+
+슬라임이 배울 수 있는 $N$개의 기술이 있습니다. 슬라임은 이미 기술 1을 배웠고, $i\ge2$인 기술 $i$를 배우려면 레벨이 $L_i$ 이상이고 기술 $A_i$를 배워야 합니다.
+
+쿼리 `1 x`에서는 레벨 $x$로 배울 수 있는 기술 종류의 최댓값을, `2 y`에서는 기술 $y$를 배우는 데 필요한 최소 레벨을 출력합니다. 배울 수 없으면 $-1$을 출력하세요.
+
+## 조건
+
+- $2\le N,Q\le2\times10^5$
+- $1\le L_i,x\le10^9$
+- $1\le A_i\le N$, $A_i\ne i$
+
+## 입력
+
+기술 $2$부터 $N$까지의 $L_i,A_i$, 그리고 $Q$개의 쿼리가 주어집니다.
+
+## 출력
+
+각 쿼리의 답을 한 줄에 하나씩 출력하세요.

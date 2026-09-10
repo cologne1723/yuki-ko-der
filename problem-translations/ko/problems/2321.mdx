@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2321
+problemId: 9200
+sourceTitle: "Continuous Flip"
+sourceHtmlSha256: 30746412d2c974c19f0dc3a1054c6986725aa853e84c69272d8fe2df74a993be
+humanReview: null
+machineReview: unreviewed
+title: "Continuous Flip"
+---
+
+뒤집힌 상태의 $N$개 카드가 있고, 카드 $i$의 앞면에는 $A_i$가 적혀 있습니다. $M$개의 구간 $[L_i,R_i]$ 중 하나를 골라 해당 구간의 카드를 모두 뒤집는 조작을 원하는 횟수만큼 할 수 있습니다.
+
+조작 횟수를 $X$, 앞면 카드의 숫자 합을 $S$라 할 때 행복도 $S-XC$의 최댓값을 구하세요.
+
+## 조건
+
+- $1\le N,M\le2\times10^5$
+- $1\le A_i,C\le10^9$
+- $1\le L_i\le R_i\le N$
+
+## 입력
+
+첫째 줄에 $N,M,C$, 둘째 줄에 $A_i$, 다음 $M$개 줄에 $L_i,R_i$가 주어집니다.
+
+## 출력
+
+행복도의 최댓값을 출력하세요.

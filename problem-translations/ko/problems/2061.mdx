@@ -1,0 +1,26 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2061
+problemId: 8340
+sourceTitle: "XOR Sort"
+sourceHtmlSha256: "1762112af2811b0f3e90c881163ecc7e59bbc2d1c8e76289b1848b92351e12fd"
+humanReview: null
+machineReview: unreviewed
+title: "XOR 정렬"
+---
+
+비음이 아닌 정수 $X$를 고르고, $B_i=A_i\mathbin{\mathrm{XOR}}X$로 바꾼 뒤 $B$를 오름차순 정렬하고 다시 각 원소에 $X$를 XOR합니다. 최종적으로 가능한 서로 다른 $B$의 개수를 $998244353$으로 나눈 나머지를 구하세요.
+
+## 입력
+
+```text
+N
+A_1 A_2 ... A_N
+```
+
+$1\le N\le2\times10^5$, $0\le A_i<2^{30}$입니다.
+
+## 출력
+
+가능한 결과의 개수를 출력하세요.

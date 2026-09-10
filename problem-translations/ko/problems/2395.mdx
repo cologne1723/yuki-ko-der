@@ -1,0 +1,28 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2395
+problemId: 9427
+sourceTitle: "区間二次変換一点取得"
+sourceHtmlSha256: 178c09a3a23f33244e26c9b00565e628c16269f39b307184caf405f513c627f2
+humanReview: null
+machineReview: unreviewed
+title: "구간 이차 변환과 한 점 조회"
+---
+
+길이 $N$인 배열 $X,Y,Z$가 모두 처음에는 1입니다. 쿼리 $(L,M,R)$마다 구간 $[L,R]$에서 순서대로 $X_i\leftarrow X_i+1$, $Y_i\leftarrow3Y_i+2X_iZ_i$, $Z_i\leftarrow3Z_i$를 수행합니다.
+
+각 쿼리 후 $X_M,Y_M,Z_M$을 $B$로 나눈 나머지를 출력하세요.
+
+## 조건
+
+- $1\le N,Q\le10^5$
+- $1\le B\le10^9$
+
+## 입력
+
+첫째 줄에 $N,B,Q$, 다음 $Q$개 줄에 $L,M,R$이 주어집니다.
+
+## 출력
+
+각 쿼리의 세 나머지를 공백으로 구분해 출력하세요.

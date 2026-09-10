@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1945
+problemId: 7810
+sourceTitle: "Go Push!"
+sourceHtmlSha256: "d8bc11c6feb8376a8834b5e9694fdc31a519279ea9088f184c3d3390281a12cf"
+humanReview: null
+machineReview: unreviewed
+title: "Go Push!"
+---
+
+버튼이 여러 열에 배치된 장난감이 있습니다. 버튼은 모두 누를 수 있는 상태에서 시작하며, 누른 버튼은 다시 누를 수 없습니다. 매번 누를 수 있는 버튼이 남은 열을 골라 그 열의 버튼을 누르고, 연속한 미누름 버튼은 한 번에 여러 개 누를 수 있습니다.
+
+## 문제
+
+열 수가 $N$이고 열 $i$의 버튼 수가 $A_i$이며 앞뒤 대칭일 때, 선공과 후공이 최적으로 플레이하면 누가 이기는지 출력하세요.
+
+## 입력
+
+```text
+N
+A_1 A_2 ... A_N
+```
+
+$1\le N\le2\times10^5$, $1\le A_i\le10^9$입니다.
+
+## 출력
+
+선공이 이기면 `First`, 후공이 이기면 `Second`를 출력하세요.

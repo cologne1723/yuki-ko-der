@@ -1,0 +1,35 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1284
+problemId: 5079
+sourceTitle: "Flip Game"
+sourceHtmlSha256: "b6641903ba89c3d7999b10dc689a5cfe253c9fe4f1b25c1e1dd29b6ea1989204"
+humanReview: null
+machineReview: unreviewed
+title: "뒤집기 게임"
+---
+
+## 문제 설명
+
+$N$개의 칸에 앞면이 빨강, 뒷면이 흰색인 카드가 하나씩 있고 처음에는 모두 빨강입니다.
+
+처음에 A 군이 원하는 칸 하나를 골라 카드를 뒤집습니다. 이후 A 군은 빨강인 칸 하나를 골라 흰색으로 뒤집고, 직전 선택 칸을 $p$, 이번 선택 칸을 $q$라 할 때 비용 $c_{p,q}$가 듭니다. 그 뒤 B 군은 직전 선택 칸 $p$를 다시 뒤집어 빨강으로 만듭니다. 단, 이전에 $p$의 카드를 뒤집은 적이 있으면 아무 일도 하지 않습니다.
+
+모든 카드가 흰색이고 B 군이 아무 일도 하지 않은 시점에 게임이 끝납니다. 게임 종료까지 비용 합의 최솟값을 구하세요. $c_{i,j}$는 대칭일 필요가 없고 $c_{i,i}=0$입니다.
+
+## 입력
+
+```text
+N
+c_{1,1} \ldots c_{1,N}
+\vdots
+c_{N,1} \ldots c_{N,N}
+```
+
+- $2\leq N\leq9$
+- $c_{i,i}=0$, $1\leq c_{i,j}\leq10^8$ ($i\neq j$)
+
+## 출력
+
+게임 종료까지 비용 합의 최솟값을 출력하세요.

@@ -1,0 +1,44 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1233
+problemId: 3265
+sourceTitle: "割り切れない気持ち"
+sourceHtmlSha256: "fc32806a73bac1c46a8a9cac6b8b5e3c19855be3694f2dbe466b8f0a813cd04b"
+humanReview: null
+machineReview: unreviewed
+title: "나누어지지 않는 마음"
+---
+
+## 문제 설명
+
+길이 $N$인 수열 $A$가 있습니다. 모든 $1\leq i,j\leq N$에 대해 $A_i$를 $A_j$로 나눈 나머지를 구하고, 그 합을 출력하세요. 두 수 $(x,y)$에 대한 나누어지지 않는 마음의 세기를 $x$를 $y$로 나눈 나머지로 정의합니다.
+
+## 입력
+
+```text
+N
+A_1 A_2 \ldots A_N
+```
+
+- $1\leq N\leq2\times10^5$
+- $1\leq A_i\leq2\times10^5$
+
+## 출력
+
+나누어지지 않는 마음의 세기 총합을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+3
+1 5 3
+```
+#### 출력
+```text
+7
+```
+
+각 순서 있는 쌍의 나머지 합이 $7$입니다.

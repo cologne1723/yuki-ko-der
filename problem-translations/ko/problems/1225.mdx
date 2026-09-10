@@ -1,0 +1,39 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1225
+problemId: 4833
+sourceTitle: "I hate I hate Matrix Construction"
+sourceHtmlSha256: "c5ed60790319299194157ddf79dcc3d29ab75de9f1465474c073a773c5ecfd6f"
+humanReview: null
+machineReview: unreviewed
+title: "나는 행렬 구성이 싫어요"
+---
+
+## 문제 설명
+
+정수 $N$과 길이 $N$인 배열 $S,T$가 주어집니다. $0,1$로 이루어진 $N\times N$ 행렬 $a$를 생각합니다.
+
+- $S_i=0$이면 $i$행의 논리합은 $0$입니다.
+- $S_i=1$이면 $i$행의 논리합은 $1$입니다.
+- $S_i=2$이면 $i$행의 논리곱은 $1$입니다.
+- $T_j=0$이면 $j$열의 논리합은 $0$입니다.
+- $T_j=1$이면 $j$열의 논리합은 $1$입니다.
+- $T_j=2$이면 $j$열의 논리곱은 $1$입니다.
+
+조건을 만족하는 행렬이 존재함이 보장됩니다. $\sum_{i=1}^N\sum_{j=1}^N a_{i,j}$의 최솟값을 구하세요.
+
+## 입력
+
+```text
+N
+S_1 S_2 \ldots S_N
+T_1 T_2 \ldots T_N
+```
+
+- $1\leq N\leq500$
+- $0\leq S_i,T_i\leq2$
+
+## 출력
+
+답을 한 줄에 출력하세요. 마지막에 줄바꿈을 넣으세요.

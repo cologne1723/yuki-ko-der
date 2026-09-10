@@ -1,0 +1,44 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1316
+problemId: 5410
+sourceTitle: "Maximum Minimum Spanning Tree"
+sourceHtmlSha256: "914e6edde4859922f0e026d0215025f3add1d300c4fb4da10251e5e722e671ac"
+humanReview: null
+machineReview: unreviewed
+title: "최대 최소 신장 트리"
+---
+
+## 문제
+
+`N`개의 정점과 `M`개의 간선을 가진 단순 연결 무방향 그래프가 있습니다. `i`번째 간선은 정점 `a_i`와 `b_i`를 잇고, 양의 정수 `c_i`, `d_i`를 가집니다.
+
+각 간선에 대해 실수 `x_i \ge 0`를 선택하고, 간선의 가중치를 `c_i+x_i`로 정합니다. 이 가중치에서 그래프의 최소 신장 트리 가중치 합을 `W`라고 할 때, 다음 값을 최대화하세요.
+
+\[
+K W-\sum_{i=1}^{M} d_i x_i
+\]
+
+최댓값이 존재하면 그 값을 출력하고, 위 값에 유한한 최댓값이 존재하지 않으면 `-1`을 출력하세요.
+
+## 입력
+
+첫째 줄에 정점 수 `N`, 간선 수 `M`, 양의 정수 `K`가 주어집니다.
+
+이후 `M`개 줄에 네 정수 `a_i`, `b_i`, `c_i`, `d_i`가 주어집니다.
+
+제한은 다음과 같습니다.
+
+- `2 \le N \le 50`
+- `N-1 \le M \le 200`
+- `1 \le K \le 10^8`
+- `1 \le a_i,b_i \le N`, `a_i \ne b_i`
+- `1 \le c_i,d_i \le 10^8`
+
+입력 그래프는 연결되어 있습니다.
+
+## 출력
+
+최댓값이 존재하면 그 값을 정수로 출력하세요. 존재하지 않으면 `-1`을 출력하세요.
+

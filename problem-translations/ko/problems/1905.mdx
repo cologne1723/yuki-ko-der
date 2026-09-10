@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1905
+problemId: 7039
+sourceTitle: "PURE PHRASE"
+sourceHtmlSha256: "e8dc393d940a2efe332b69882b1acd05a88e8795b8576e46abe0469794cb40c4"
+humanReview: null
+machineReview: unreviewed
+title: "PURE PHRASE"
+---
+
+샘플링 레이트 44100Hz로 기록한 1초 길이의 파형 $A$가 주어집니다. 이 소리는 C4, D4, E4, F4, G4, A4, B4 중 하나이며 기본 주파수는 각각 261.6, 294.3, 327.0, 348.8, 392.4, 436.0, 490.5Hz입니다.
+
+## 문제
+
+어떤 음이 울리는지 판정하세요.
+
+## 입력
+
+```text
+N
+A_1 A_2 ... A_N
+```
+
+$N=44100$, $-32768\le A_i\le32767$입니다.
+
+## 출력
+
+`C4`, `D4`, `E4`, `F4`, `G4`, `A4`, `B4` 중 하나를 출력하세요.

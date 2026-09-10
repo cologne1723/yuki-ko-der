@@ -1,0 +1,36 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2770
+problemId: 10360
+sourceTitle: "Coupon Optimization"
+sourceHtmlSha256: "d23fea93400f180ea7f973ea53fb829cf95d9d8e5d36e34c08a0ed836c6fd720"
+humanReview: null
+machineReview: unreviewed
+title: "쿠폰 최적화"
+---
+
+## 문제
+
+타코야키 기계 `i`의 가격은 `A_i`엔이며 모두 100의 배수입니다. 쿠폰 `i`를 사용하면 가격에서 `B_i%` 할인됩니다. 한 기계에는 쿠폰 하나만 사용할 수 있고, 쿠폰은 한 번만 사용할 수 있습니다.
+
+각 `k=1,...,N`에 대해 쿠폰을 적절히 사용해 기계 `k`개를 사는 최소 금액을 구하세요.
+
+## 제약
+
+- `1 ≤ N,M ≤ 2×10^5`
+- `100 ≤ A_i ≤ 10^9`, `A_i`는 100의 배수입니다.
+- `1 ≤ B_i ≤ 99`
+
+## 입력
+
+```text
+N M
+A_1 ... A_N
+B_1 ... B_M
+```
+
+## 출력
+
+`k`개를 사는 최소 금액을 각 줄에 하나씩 출력하세요.
+

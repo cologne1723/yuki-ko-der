@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2215
+problemId: 9032
+sourceTitle: "Slide Subset Sum"
+sourceHtmlSha256: "62dee866d20d503b9985e3b4d39395063182df42186d072f0ee0ab7254969f58"
+humanReview: null
+machineReview: unreviewed
+title: "슬라이드 부분합"
+---
+
+길이 $N$의 비음이 아닌 정수열 $A$와 양의 정수 $M,K$가 주어진다냥. 각 $k=1,\ldots,N-M+1$에 대해 구간 $(A_k,\ldots,A_{k+M-1})$의 비연속 부분 수열 중 합이 $K$의 배수인 것의 개수를 구하라냥. 선택 위치가 다르면 다르게 센다냥.
+
+## 조건
+
+- $1\le M\le N\le2\times10^5$
+- $1\le K\le100$
+- $0\le A_i<K$
+
+## 입력
+
+```text
+N M K
+A_1 A_2 \cdots A_N
+```
+
+## 출력
+
+각 $k$에 대한 답을 한 줄에 하나씩 출력하라냥.

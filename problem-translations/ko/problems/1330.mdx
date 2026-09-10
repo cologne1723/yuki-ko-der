@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1330
+problemId: 5191
+sourceTitle: "Multiply or Divide"
+sourceHtmlSha256: "d2788900d53ca54a5c15fef86f0ad9c8cd99370142259af1c3d0edc631b51776"
+humanReview: null
+machineReview: unreviewed
+title: "곱하기 또는 나누기"
+---
+
+## 문제
+
+소수 `P`, 수열 `A`의 길이 `N`, 정수 `M`이 주어집니다. `x=1`에서 시작해 `x\le M`인 동안 다음을 반복합니다.
+
+- `x`가 `P`로 나누어떨어지면 `x`를 `P`로 나눕니다.
+- 그렇지 않으면 `A_i` 하나를 골라 `x`에 곱합니다.
+
+연산 횟수를 최소화했을 때의 횟수를 구하세요. 어떤 선택을 해도 연산이 무한히 계속되면 `-1`을 출력하세요.
+
+## 입력
+
+`N M P`와 `A_1,...,A_N`이 주어집니다.
+
+`1\le N\le2\times10^5`, `1\le M,P\le10^9`, `1\le A_i\le10^9`이고 `P`는 소수입니다.
+
+## 출력
+
+최소 연산 횟수 또는 `-1`을 출력하세요.

@@ -1,0 +1,36 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1296
+problemId: 4597
+sourceTitle: "OR or NOR"
+sourceHtmlSha256: "05209c996f87fe26b1bf99005e340544b558cbadb79f4a185bb0ef83dcef4a74"
+humanReview: null
+machineReview: unreviewed
+title: "OR 또는 NOR"
+---
+
+## 문제 설명
+
+처음 $x=0$입니다. $i=1,2,\ldots,N$ 순서로 다음 두 작업 중 하나를 선택합니다.
+
+- 작업 1: $x$를 $x$와 $a_i$의 비트별 OR로 바꿉니다.
+- 작업 2: $x$와 $a_i$의 OR를 60자리 이진수로 표현한 뒤 모든 비트를 반전한 값으로 $x$를 바꿉니다.
+
+$N$번 작업 후 $x=b$가 되도록 하면서 작업 2의 횟수를 최소화하세요. 각 질의는 독립입니다.
+
+## 입력
+
+```text
+N
+a_1 \ldots a_N
+Q
+b_1 \ldots b_Q
+```
+
+- $1\leq N,Q\leq2\times10^5$
+- $0\leq a_i,b_i<2^{60}$
+
+## 출력
+
+각 질의에 대한 최소 횟수를 출력하세요. 만들 수 없으면 $-1$을 출력합니다.

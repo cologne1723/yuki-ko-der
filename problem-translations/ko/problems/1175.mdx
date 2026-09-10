@@ -1,0 +1,55 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1175
+problemId: 4810
+sourceTitle: "Simultaneous Equations"
+sourceHtmlSha256: "d653f125536da106c114aec2bc1a89b0ca4386de757093ccca030626def32032"
+humanReview: null
+machineReview: unreviewed
+title: "연립방정식"
+---
+
+## 문제 설명
+
+다음 연립방정식을 풀어 주세요.
+
+$\begin{cases} ax+by=c \\ dx+ey=f \end{cases}$
+
+## 입력
+
+```text
+$a\ b\ c\ d\ e\ f$
+```
+
+- 입력은 모두 정수입니다.
+- $1 \leq a,b,c,d,e,f \leq 100$
+- 주어지는 입력에는 반드시 해가 존재하고 해가 유일합니다.
+
+## 출력
+
+연립방정식의 해 $(x,y)$를 공백으로 구분해 한 줄에 출력하세요. 예상 답과의 절대 오차 또는 상대 오차가 $10^{-4}$ 이하이면 정답으로 인정합니다. 마지막에 줄바꿈을 넣으세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+1 1 2 1 2 3
+```
+#### 출력
+```text
+1.000000000000000 1.000000000000000
+```
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+2 1 5 1 2 2
+```
+#### 출력
+```text
+2.666666666666667 -0.333333333333333
+```
+
+해가 음수일 수도 있습니다.

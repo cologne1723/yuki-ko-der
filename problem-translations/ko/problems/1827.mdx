@@ -1,0 +1,36 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1827
+problemId: 6027
+sourceTitle: "最長部分スーパーリッチ門松列列"
+sourceHtmlSha256: "7b45b733612b04d165f12cf9d77385f66ef5d7d5284f9b2a36ae4bcb5fc36816"
+humanReview: null
+machineReview: unreviewed
+title: "최장 부분 슈퍼리치 카도마츠 열열"
+---
+
+## 정의
+
+길이 2 이상인 수열 $a_1,\ldots,a_n$이 다음을 만족하면 슈퍼리치 카도마츠 열열이라고 합니다.
+
+- 모든 원소가 서로 다릅니다.
+- $\min_{i\text{ 짝수}}a_i>\max_{i\text{ 홀수}}a_i$ 또는 $\max_{i\text{ 짝수}}a_i<\min_{i\text{ 홀수}}a_i$입니다.
+
+## 문제
+
+순열 $P_1,\ldots,P_N$의 부분 수열 중 슈퍼리치 카도마츠 열열인 것의 최장 길이를 출력하세요.
+
+## 입력
+
+```text
+T
+N
+P_1 ... P_N
+```
+
+$1\le T\le10^5$, $3\le N\le5\times10^5$이며 모든 테스트 케이스에서 $N$의 합은 $5\times10^5$ 이하입니다.
+
+## 출력
+
+각 테스트 케이스의 답을 출력하세요.

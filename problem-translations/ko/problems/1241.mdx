@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1241
+problemId: 5076
+sourceTitle: "Eternal Tours"
+sourceHtmlSha256: "1388027f1d3b7eabdbdc79102f78ab033f3d656e27434e96a5f31e709a48ae83"
+humanReview: null
+machineReview: unreviewed
+title: "영원한 여행"
+---
+
+## 문제 설명
+
+남북 $2^X-1$칸, 동서 $2^Y-1$칸의 도시에서 북쪽 $a$번째, 서쪽 $b$번째 칸에 있습니다. 매번 아무것도 하지 않거나 남·북·동·서로 한 칸 이동하는 행동을 $T$번 합니다. 도시 밖으로 나가는 행동은 금지됩니다.
+
+최종적으로 북쪽 $c$번째, 서쪽 $d$번째 칸에 있는 행동 방법의 수를 $998244353$으로 나눈 나머지를 구하세요.
+
+## 입력
+
+```text
+X Y T a b c d
+```
+
+- $1\leq X,Y\leq17$, $X+Y\leq18$
+- $1\leq T\leq10^{18}$
+- $1\leq a,c\leq2^X-1$, $1\leq b,d\leq2^Y-1$
+
+## 출력
+
+답을 출력하세요.

@@ -1,0 +1,34 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1805
+problemId: 6958
+sourceTitle: "Approaching Many Typhoon"
+sourceHtmlSha256: "d76a9da8afd55a20525c82d1a9e5a51a1215bdd0a97534627943bf374351d1f9"
+humanReview: null
+machineReview: unreviewed
+title: "다가오는 많은 태풍"
+---
+
+작은 섬 yuki섬에 matcharate가 살고 있습니다. 주변 바다에는 $N$개의 섬과 $M$개의 배편이 있습니다. 섬에는 $1,2,\ldots,N$의 번호가 붙고, $i$번째 배편은 섬 $F_i$와 섬 $T_i$ 사이를 왕복합니다.
+
+오늘 밤 $U$개의 태풍이 다가와 내일이 되기 전에 $I_j$번째 섬을 거치는 것은 위험하다고 판단했습니다. 해당 섬들이 폐쇄되었을 때, $I_j$를 거치지 않고 섬 $S$에서 섬 $G$로 갈 수 있는지 판정하세요.
+
+## 입력
+
+```text
+N M
+S G
+F_1 T_1
+F_2 T_2
+...
+F_M T_M
+U
+I_1 I_2 ... I_U
+```
+
+$2\le N\le2000$, $1\le S\ne G\le N$, $1\le M\le\min(N(N-1)/2,2000)$, $1\le F_i\ne T_i\le N$, $0\le U\le500$입니다. $I_j$는 $S,G$가 아닌 섬입니다.
+
+## 출력
+
+가능하면 `Yes`, 불가능하면 `No`를 출력합니다.

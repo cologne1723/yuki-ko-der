@@ -1,0 +1,35 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1496
+problemId: 6191
+sourceTitle: "不思議な数え上げ"
+sourceHtmlSha256: "385d667d69da87efe7f3401bbab6e4e836a1e998d7a7d4639d60481d331c58e6"
+humanReview: null
+machineReview: unreviewed
+title: "이상한 세기"
+---
+## 문제
+
+길이 $N$인 순열 $P$와 정수 $A_1,\ldots,A_N$이 주어집니다.
+
+각 $i=1,2,\ldots,N$에 대해 다음 조건을 모두 만족하는 비어 있지 않은 연속 부분 배열의 개수를 세세요.
+
+- 부분 배열에 포함된 원소의 최솟값이 $i$입니다.
+- 부분 배열에 포함된 원소의 합이 $A_i$ 이하입니다.
+
+## 입력
+
+```text
+$N$
+$P_1$ $P_2$ $\ldots$ $P_N$
+$A_1$ $A_2$ $\ldots$ $A_N$
+```
+
+- $1\leq N\leq 2\times 10^5$
+- $P$는 $1$부터 $N$까지의 순열입니다.
+- $1\leq A_i\leq N(N+1)/2$
+
+## 출력
+
+$N$줄에 걸쳐 출력합니다. $k$번째 줄에는 $i=k$일 때의 답을 출력하세요.

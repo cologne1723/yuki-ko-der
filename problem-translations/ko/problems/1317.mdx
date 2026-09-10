@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1317
+problemId: 5493
+sourceTitle: "月曜日の朝、WAを出した"
+sourceHtmlSha256: "37acf5c5a282781b8c9aa6edd4e0e113d720aada35904d53cf3b8e101da77df8"
+humanReview: null
+machineReview: unreviewed
+title: "월요일 아침, WA를 냈다"
+---
+
+## 문제 설명
+
+처음 제출 결과가 AC $A$개, WA $W$개, TLE $T$개, MLE $M$개, OLE $O$개, RE $R$개였습니다. 조건 $\alpha$를 만족할 때 결과 $X$를 강제로 일으키는 프로그램을 다시 제출했더니 결과가 각각 $A',W',T',M',O',R'$개가 되었습니다.
+
+각 테스트 케이스가 조건 $\alpha$를 만족하지 않으면 결과는 바뀌지 않는다고 할 때, 처음 제출에서 오답이었던 모든 테스트 케이스가 조건 $\alpha$를 만족한다고 확실히 말할 수 있는지 판정하세요.
+
+## 입력
+
+```text
+N
+A W T M O R
+A' W' T' M' O' R'
+X
+\vdots
+```
+
+각 케이스의 $X$는 `WA`, `TLE`, `MLE`, `OLE`, `RE` 중 하나입니다.
+
+## 출력
+
+각 케이스에 대해 확실히 말할 수 있으면 `Yes`, 그렇지 않으면 `No`를 출력하세요.

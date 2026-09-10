@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2096
+problemId: 8442
+sourceTitle: "Rage With Our Friends"
+sourceHtmlSha256: "f16af30f148359e6527f22573e222b06eb71dfc3f98e5f5e20918914724272e0"
+humanReview: null
+machineReview: unreviewed
+title: "친구들과 함께 분노하기"
+---
+
+소년이 격자에서 이동합니다. 일반 점프는 $x'\le x+1+\lfloor E/2\rfloor$, 부스트 점프는 $x'\le x+1+E$인 인접 열의 발판으로 이동하며, 이동 후 에너지는 $\max(0,x-x')$가 됩니다. 시작점에서 골까지 가는 데 필요한 부스트 점프의 최소 횟수를 구하세요.
+
+## 입력
+
+```text
+H W
+s_x s_y g_x g_y
+S_1
+...
+S_H
+```
+
+$2\le H,W\le2000$, $s_x=1$, $g_x=H$입니다.
+
+## 출력
+
+필요한 부스트 점프의 최소 횟수를 출력하세요.

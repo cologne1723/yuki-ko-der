@@ -1,0 +1,27 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1504
+problemId: 3708
+sourceTitle: "ヌメロニム"
+sourceHtmlSha256: "8472c96f745b1318a5625f584bba8d841018ccfb842156e060d9b9711f213d4f"
+humanReview: null
+machineReview: unreviewed
+title: "누메로님"
+---
+## 문제
+
+누메로님은 길이 2 이상인 문자열의 첫 문자와 마지막 문자만 남기고, 그 사이 문자 수를 숫자로 바꾼 문자열입니다. 예를 들어 `internationalization`은 `i18n`입니다.
+
+문자 `i`와 `n`으로 이루어진 길이 $N$의 문자열 $S$가 주어집니다. $S$의 부분 수열 중 길이 2 이상이고 누메로님이 `ikn`이 되는 선택의 수를 $X_k$라 합니다. 모든 $k=0,\ldots,N-2$에 대한 $X_k$의 XOR을 구하세요. 같은 문자열이어도 선택한 위치가 다르면 별도로 셉니다.
+
+## 입력
+
+$N$과 문자열 $S$가 주어집니다.
+
+- $2\leq N\leq300000$
+- $S$는 `i`, `n`으로만 이루어집니다.
+
+## 출력
+
+답을 출력하세요.

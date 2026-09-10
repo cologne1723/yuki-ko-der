@@ -1,0 +1,36 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2265
+problemId: 9333
+sourceTitle: "Xor Range Substring Sum Query"
+sourceHtmlSha256: "eb6bafdc9731665eaeda64eb1080f319e492a737b7de81ca6e6853ab6c3689b7"
+humanReview: null
+machineReview: unreviewed
+title: "XOR 구간 부분 문자열 합 쿼리"
+---
+
+숫자열 $s$의 비어 있지 않은 모든 부분 문자열을 정수로 해석한 합을 $f(s)$라 하자냥. 길이 $2^n$의 숫자열 $S$에 대해 점 업데이트와, $S_{L\oplus X},\ldots,S_{R\oplus X}$로 만든 문자열의 $f$를 묻는 쿼리를 처리하라냥.
+
+## 조건
+
+- $1\le n\le18$
+- $|S|=2^n$, $1\le S_i\le9$
+- $1\le Q\le10^5$
+
+## 입력
+
+```text
+n
+S
+Q
+query_1
+\vdots
+query_Q
+```
+
+쿼리는 `1 x y` 또는 `2 L R X` 형식이다냥.
+
+## 출력
+
+두 번째 쿼리의 답을 $998244353$으로 나눈 나머지로 출력하라냥.

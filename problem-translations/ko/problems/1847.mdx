@@ -1,0 +1,28 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1847
+problemId: 6892
+sourceTitle: "Good Sequence"
+sourceHtmlSha256: "62e7a66b7fdb22e5c4dc0bc64417b66f9854c0c9eed66e7e17174158e12924c0"
+humanReview: null
+machineReview: unreviewed
+title: "좋은 수열"
+---
+
+정수 $N$과 $1$ 이상 $N$ 이하의 서로 다른 정수로 이루어진 수열 $K=(K_1,\ldots,K_M)$가 주어집니다. 길이 $L$의 수열 $A$가 다음 조건을 만족하면 좋은 수열이라고 합니다.
+
+어떤 $K_i$에 대해 $A$ 안에 $K_i$가 정확히 $K_i$번 연속으로 나타나는 구간이 존재합니다. 즉 경계 밖이거나 양 끝의 원소가 $K_i$가 아닌 연속 구간입니다.
+
+## 입력
+
+```text
+L N M
+K_1 K_2 ... K_M
+```
+
+$1\le L\le10^{18}$, $1\le N\le10$, $1\le M\le N$, $1\le K_i\le N$입니다.
+
+## 출력
+
+좋은 수열의 개수를 $10^9+7$로 나눈 나머지를 출력하세요.

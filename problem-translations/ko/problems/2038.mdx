@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2038
+problemId: 7826
+sourceTitle: "Strange Arrange"
+sourceHtmlSha256: "16dd39d5f30703d8935416126a7764234cb37ea13292798b9dcb318603896d45"
+humanReview: null
+machineReview: unreviewed
+title: "이상한 배열"
+---
+
+ $N$자리 양의 정수 $X$가 다음 조건을 모두 만족하면 이상한 수라 합니다.
+
+## 조건
+
+- $i<j\le N-1$, $i+j\le N$, $X_i=X_j$이면 $X_i<X_{i+j}$입니다.
+- 인접한 두 자리의 숫자는 서로 다릅니다.
+- 모든 자리는 $1$ 이상 $9$ 이하입니다.
+
+이상한 수 하나를 출력하세요.
+
+## 입력
+
+```text
+N
+```
+
+$3\le N\le500$입니다.
+
+## 출력
+
+조건을 만족하는 $N$자리 수를 출력하세요.

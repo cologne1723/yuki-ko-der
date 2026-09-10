@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1826
+problemId: 5346
+sourceTitle: "Fruits Collecting"
+sourceHtmlSha256: "2a7a7084ed39619a2d11bf2eee2d8f8298cc7fb34b5b537cf9b52fe18b0e005e"
+humanReview: null
+machineReview: unreviewed
+title: "과일 수집"
+---
+
+umg는 1차원 좌표 0에 시각 0부터 있습니다. 매 시각마다 좌표를 1 증가시키거나 1 감소시키거나 그 자리에 머무를 수 있습니다.
+
+과일은 $N$개이고, 과일 $i$의 가치와 낙하 시각 및 위치는 각각 $V_i,T_i,X_i$입니다. 시각 $T_i$에 위치 $X_i$에 있을 때(그 시각에 도착한 경우 포함) 과일 $i$를 얻을 수 있습니다.
+
+적절히 이동했을 때 얻을 수 있는 과일 가치 합의 최댓값을 구하세요.
+
+## 입력
+
+```text
+N
+T_1 X_1 V_1
+...
+T_N X_N V_N
+```
+
+$1\le N\le2\times10^5$, $1\le T_i\le10^9$, $-10^9\le X_i\le10^9$, $1\le V_i\le10^9$입니다.
+
+## 출력
+
+최댓값을 한 줄에 출력하세요.

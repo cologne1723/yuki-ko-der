@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1548
+problemId: 6147
+sourceTitle: "[Cherry 2nd Tune B] 貴方と私とサイクルとモーメント"
+sourceHtmlSha256: "4aba0f7c9d160331c638b3e88226a8bfac315e9d49bf0113c44a63f36cbde0a3"
+humanReview: null
+machineReview: unreviewed
+title: "사이클 위의 모멘트"
+---
+## 문제
+
+사이클의 정점 $1,\ldots,N$에 정수 $A_i$가 쓰여 있습니다. 다음 질의를 순서대로 처리하세요.
+
+- Type 0: $P(U,V,W)$ 위의 모든 값을 $B$로 바꿉니다.
+- Type $k$ ($1\leq k\leq4$): 해당 정점 값들의 $k$차 중심 모멘트를 $998244353$으로 나눈 값을 출력합니다.
+
+$P(U,V,W)$는 사이클에서 $U,V$를 잇는 두 경로 중 $W$를 포함하는 경로입니다. 중심 모멘트는 평균을 $M$이라 할 때 $\frac1L\sum(X_i-M)^k$입니다.
+
+## 입력
+
+$N$, 초기 수열, 질의가 주어집니다. 각 질의에는 타입과 $U,V,W$ (갱신이면 $B$)가 포함됩니다.
+
+- $3\leq N\leq2\times10^5$
+- $1\leq Q\leq2.5\times10^4$
+- 값은 $998244353$ 미만입니다.
+
+## 출력
+
+각 Type 1~4 질의의 답을 한 줄에 출력하세요.

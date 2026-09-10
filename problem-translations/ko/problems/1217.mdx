@@ -1,0 +1,65 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1217
+problemId: 4734
+sourceTitle: "せしすせそ"
+sourceHtmlSha256: "1f81270d66cbe9e456f8c4873de30828ce4a105221557e002cf67a762cda2b57"
+humanReview: null
+machineReview: unreviewed
+title: "문자 치환"
+---
+
+## 문제 설명
+
+`abcdefghijklmnopqrstuvwxyz`에서 정확히 한 문자가 다른 문자로 치환된 문자열 $S$가 주어집니다.
+
+원래 문자열에서 $X$가 $Y$로 치환되어 $S$가 되었다면 `XtoY`를 출력하세요. 자세한 내용은 예제를 참고하세요.
+
+## 입력
+
+```text
+S
+```
+
+- $|S|=26$
+- $S$는 영문 소문자로만 이루어집니다.
+- $S$와 `abcdefghijklmnopqrstuvwxyz`의 편집 거리는 1입니다.
+
+## 출력
+
+문제 설명의 형식으로 한 줄에 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+abcdefghijklmnopqrituvwxyz
+```
+#### 출력
+```text
+stoi
+```
+
+`abcdefghijklmnopqrstuvwxyz`의 `s`가 `i`로 치환되었습니다.
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+abcdefghujklmnopqrstuvwxyz
+```
+#### 출력
+```text
+itou
+```
+
+### 예제 3 {file="01_sample_03.txt"}
+#### 입력
+```text
+abcdefghijklmnnpqrstuvwxyz
+```
+#### 출력
+```text
+oton
+```

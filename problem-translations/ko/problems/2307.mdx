@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2307
+problemId: 6002
+sourceTitle: "[Cherry 5 th Tune *] Cool 46"
+sourceHtmlSha256: 1b726f956144103f3a256c2ecd4aadeb50adce60ed9abbd0c70b2c4b3144c4c1
+humanReview: null
+machineReview: unreviewed
+title: "[Cherry 5 th Tune *] Cool 46"
+---
+
+빨간 카드 $N$장과 파란 카드 $M$장이 있습니다. 빨간 카드에는 서로 다른 정수 $A_i$, 파란 카드에는 서로 다른 정수 $B_j$가 적혀 있습니다.
+
+처음에는 원하는 카드 하나를 먹고, 이후에는 직전에 먹은 카드와 색 또는 숫자가 같은 카드를 먹습니다. 모든 카드를 먹을 수 있다면, 인접한 두 카드의 색이 다른 횟수인 멋짐의 최댓값을 달성하는 순서를 출력하세요.
+
+## 조건
+
+- $1\le T\le10^5$
+- $0\le N,M$
+- $1\le A_i,B_j\le10^9$
+- 각 색의 카드에 적힌 수는 서로 다릅니다.
+- 모든 테스트 케이스의 카드 수 합은 $2\times10^5$ 이하입니다.
+
+## 입력
+
+첫째 줄에 $T$, 각 테스트 케이스에 $N,M$, 빨간 카드의 수열, 파란 카드의 수열이 주어집니다.
+
+## 출력
+
+모든 카드를 먹을 수 없으면 `No`를 출력하세요. 가능하면 `Yes`와 함께 멋짐이 최대가 되는 순서를 한 줄에 카드 하나씩 출력하세요. 빨간 카드는 `Red X`, 파란 카드는 `Blue X` 형식으로 출력합니다.

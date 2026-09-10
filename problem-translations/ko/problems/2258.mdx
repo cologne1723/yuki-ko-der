@@ -1,0 +1,26 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2258
+problemId: 8986
+sourceTitle: "The Jikka Tree"
+sourceHtmlSha256: "25f3f57502ee5c8eedd4c49b49edd23b5f947b93635e0d1c819671fa871d749f"
+humanReview: null
+machineReview: unreviewed
+title: "Jikka 트리"
+---
+
+트리와 수열 $A$가 주어진다냥. 구간 $[l,r)$, 정점 $v,\delta$, 비음이 아닌 정수 $k$에 대해 $f(l,r,v,\delta,k)=10^{-100}\mathrm{dist}(v,\delta)+\sum_{w=l}^{r-1}(A_w+k)\mathrm{dist}(v,w)$로 정의한다냥. 각 쿼리에서 주어진 구간, $\delta$, $k$에 대해 이를 최소화하는 정점 번호를 구하라냥. 질의 입력은 이전 답으로 복원된다냥.
+
+## 조건
+
+- $1\le N,Q\le150000$
+- $0\le A_i,k_i\le150000$
+
+## 입력
+
+트리의 간선, 수열 $A$, 그리고 암호화된 질의가 원문 형식으로 주어진다냥.
+
+## 출력
+
+각 질의의 최적 정점 번호를 한 줄에 하나씩 출력하라냥.

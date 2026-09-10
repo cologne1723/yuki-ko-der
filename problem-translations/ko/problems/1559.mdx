@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1559
+problemId: 6033
+sourceTitle: "Next Rational"
+sourceHtmlSha256: "0cdca400352d78857eabdc2045180d8323d19496efbac6341328f7bf463162a3"
+humanReview: null
+machineReview: unreviewed
+title: "다음 유리수"
+---
+## 문제
+
+양의 정수 $N,A,B,K$가 주어집니다. 수열을
+\[
+a_1=A,\quad a_2=B,\quad a_i=\frac{a_{i-1}^2+K}{a_{i-2}}\ (i\geq3)
+\]
+로 정의합니다. $a_N$을 $10^9+7$에서의 유리수 나머지로 출력하세요.
+
+## 입력
+
+$N,A,B,K$가 주어집니다.
+
+- $1\leq N\leq10^{18}$
+- $1\leq A,B,K\leq10^9$
+
+## 출력
+
+$a_N$을 문제의 유리수 나머지 정의에 따라 출력하세요.

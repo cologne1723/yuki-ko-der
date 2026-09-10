@@ -1,0 +1,36 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1290
+problemId: 4669
+sourceTitle: "Addition and Subtraction Operation"
+sourceHtmlSha256: "58bbdd0f44cd55ea4c9df20b4fdd78a563f8042cad0223aca6e592976fa3af0b"
+humanReview: null
+machineReview: unreviewed
+title: "덧셈과 뺄셈 연산"
+---
+
+## 문제 설명
+
+길이 $N$인 정수 수열 $B$와 $M$개의 구간 $(L_i,R_i)$가 주어집니다. 처음에 길이 $N$인 수열 $A$의 모든 원소는 $0$입니다.
+
+각 구간에 대해 정수 $K_i$를 하나 정하고, 모든 작업을 정확히 한 번씩 수행해 $A=B$로 만들 수 있는지 판정하세요. 작업 $i$는 $L_i\leq j\leq R_i$인 모든 $j$에 대해 $A_j$에 $K_i(-1)^{j-L_i}$를 더합니다.
+
+## 입력
+
+```text
+N M
+B_1 B_2 \ldots B_N
+L_1 R_1
+\vdots
+L_M R_M
+```
+
+- $1\leq N,M\leq10^5$
+- $-10^9\leq B_i\leq10^9$
+- $1\leq L_i\leq R_i\leq N$
+- 구간은 서로 다릅니다.
+
+## 출력
+
+가능하면 `YES`, 불가능하면 `NO`를 출력하세요.

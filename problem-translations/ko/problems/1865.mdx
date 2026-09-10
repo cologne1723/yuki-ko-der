@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1865
+problemId: 7763
+sourceTitle: "Make Cycle"
+sourceHtmlSha256: "943b027d79a7963090f212c9935d2d56dca069a60c9bcb89d19e0cc599ffeb75"
+humanReview: null
+machineReview: unreviewed
+title: "사이클 만들기"
+---
+
+정점 $N$개, 간선 0개인 그래프에 $Q$번 연산을 수행합니다. $i$번째 연산에서 $A_i$에서 $B_i$로 향하는 유향 간선을 추가합니다.
+
+## 문제
+
+연산을 순서대로 수행할 때 그래프에 처음 사이클이 생기는 연산 번호를 출력하세요. 끝까지 사이클이 생기지 않으면 `-1`을 출력합니다.
+
+## 입력
+
+```text
+N Q
+A_1 B_1
+...
+A_Q B_Q
+```
+
+$1\le N,Q\le10^5$, $1\le A_i,B_i\le N$, $A_i\ne B_i$입니다.
+
+## 출력
+
+답을 출력하세요.

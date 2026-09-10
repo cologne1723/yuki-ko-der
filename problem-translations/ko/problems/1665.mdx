@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1665
+problemId: 6855
+sourceTitle: "quotient replace"
+sourceHtmlSha256: "7c01a0d44d6b24c3a7a099c45748c2fefac532bc6cef1e4bd4c4c802f7fa2ccc"
+humanReview: null
+machineReview: unreviewed
+title: "몫 치환"
+---
+
+화이트 군과 블랙 군이 게임을 합니다. 처음에 양의 정수 `N`개가 칠판에 적혀 있고 화이트 군부터 번갈아 다음 작업을 합니다.
+
+1이 아닌 정수 `a`를 하나 고르고, `a`의 2 이상인 약수 `b`를 고른 뒤 `a`를 지우고 `a/b`를 적습니다. 더 이상 고를 수 없는 사람이 패배합니다.
+
+현재 상태에서 두 플레이어가 최적으로 플레이할 때 승자를 출력하세요.
+
+## 제약
+
+- `1 <= N <= 10^6`
+- `1 <= A_i <= 10^6`
+
+## 입력
+
+`N`과 수열 `A_1,...,A_N`이 주어집니다.
+
+## 출력
+
+화이트 군이 이기면 `white`, 블랙 군이 이기면 `black`을 소문자로 출력하세요.

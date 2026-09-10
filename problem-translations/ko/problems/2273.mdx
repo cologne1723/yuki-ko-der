@@ -1,0 +1,42 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2273
+problemId: 9078
+sourceTitle: "一点乗除区間積"
+sourceHtmlSha256: 548953836e3d228d22bb50a06d9cddcabd78cdbbe507dd884f7a996b111ffefc
+humanReview: null
+machineReview: unreviewed
+title: "한 점 곱셈 나눗셈과 구간 곱"
+---
+
+길이 $N$인 배열 $A$와 정수 $B$가 주어집니다.
+
+여기서 $P_B(a,l,r)$는 $a_l a_{l+1}\cdots a_r$를 $B$로 나눈 나머지이고, $R_B(k,m)$은 $B\mid k$이고 $m=B$이면 $k/B$, 그렇지 않으면 $mk$입니다.
+
+각 쿼리 $(j,m,l,r)$마다 먼저 $A_j$를 $R_B(A_j,m)$으로 바꾼 뒤, $P_B(A,l,r)$를 출력하세요.
+
+## 조건
+
+- $1\le N,Q\le 10^5$
+- $2\le B\le 10^9$
+- $0\le A_ile 10^{18}$
+- $0\le mle 10^{18}$
+- $0\le j<N$
+- $0\le l\le r<N$
+
+## 입력
+
+입력은 다음 형식으로 주어집니다.
+
+```text
+N B Q
+A_0 A_1 ... A_{N-1}
+j_1 m_1 l_1 r_1
+...
+j_Q m_Q l_Q r_Q
+```
+
+## 출력
+
+각 쿼리에 대해 갱신 후의 $P_B(A,l,r)$를 한 줄에 하나씩 출력하세요.

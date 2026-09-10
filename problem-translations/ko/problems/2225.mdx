@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2225
+problemId: 8910
+sourceTitle: "Treasure Searching Rod (Easy)"
+sourceHtmlSha256: "5ec3d5d7cdaa6c06843ccf643112189a79282f0bc7f263c8f1c86ae0d04f5cd7"
+humanReview: null
+machineReview: unreviewed
+title: "보물 탐색 막대 (Easy)"
+---
+
+$H\times W$ 격자의 칸 $(x_k,y_k)$에 각각 가치가 $v_k$인 보물이 $10^{100}$개씩 놓여 있다냥. 칸 $(i,j)$에 대한 조작으로 $x+y\ge i+j$ 및 $x-y\ge i-j$를 만족하는 모든 칸의 보물을 하나씩 얻는다냥. 모든 칸에 대해 조작을 한 번씩 했을 때 얻은 가치 합을 구하라냥.
+
+## 조건
+
+- $1\le H,W\le50$
+- $0\le K\le HW$
+- $0\le v_k\le10^9$
+
+## 입력
+
+```text
+H W K
+x_1 y_1 v_1
+\vdots
+x_K y_K v_K
+```
+
+## 출력
+
+얻은 가치 합을 $998244353$으로 나눈 나머지를 출력하라냥.

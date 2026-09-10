@@ -1,0 +1,39 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1802
+problemId: 7244
+sourceTitle: "Range Score Query for Bracket Sequence"
+sourceHtmlSha256: "503ab264555e8e022a31ca22cc4eeecf332a7824933ff4d2b3e1200e28d6eab9"
+humanReview: null
+machineReview: unreviewed
+title: "괄호열의 구간 점수 질의"
+---
+
+## 정의
+
+좌우 대칭 괄호열을 다음 조건 중 하나를 만족하는 비어 있지 않은 문자열로 정의합니다.
+
+- `()`
+- 좌우 대칭 괄호열 $s$가 존재하고, `(`, $s$, `)`를 이 순서로 이어 붙인 문자열
+
+`(`와 `)`로 이루어진 문자열 $s$의 점수를 다음 조작을 반복할 수 있는 횟수로 정의합니다. $s$의 연속 부분 문자열 중 좌우 대칭 괄호열인 것 가운데 가장 긴 것을 하나 골라 삭제합니다. 삭제 순서와 관계없이 이 횟수는 일정함을 증명할 수 있습니다.
+
+길이 $N$인 문자열 $S$가 주어집니다. $S$에 대해 $Q$개의 질의를 순서대로 처리하세요.
+
+## 질의
+
+- `1 i`: $S$의 $i$번째 문자를 현재와 반대 괄호로 변경합니다.
+- `2 l r`: $S$의 $l$번째부터 $r$번째까지의 부분 문자열 점수를 출력합니다.
+
+## 입력
+
+입력은 다음 형식입니다.
+
+```text
+N Q
+S
+query_1
+\vdots
+query_Q
+```

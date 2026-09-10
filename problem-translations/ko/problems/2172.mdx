@@ -1,0 +1,40 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2172
+problemId: 8881
+sourceTitle: "SEARCH in the Text Editor"
+sourceHtmlSha256: "c572bc71c77c48ec5edfaf61bf7e587a39aacc66ec8f37d2f73f074758bd9c6a"
+humanReview: null
+machineReview: unreviewed
+title: "텍스트 에디터에서 SEARCH"
+---
+
+문자열 $T$와 $N$개의 문자열 $S_1,\ldots,S_N$의 생성 과정이 주어진다냥. 각 단계는 문자열을 직접 지정하거나, 이전 문자열 $S_j,S_k$를 이 순서로 연결해 $S_i$를 만드는 방식이다냥. 최종 문자열 $S_N$에서 $T$와 일치하는 연속 부분 문자열의 개수 $K$를 구하라냥.
+
+## 조건
+
+- $1\le N\le10^5$
+- $1\le|T|\le50$
+- 직접 주어지는 문자열 길이의 합은 $10^5$ 이하이다냥.
+- 사용 문자는 영문 대소문자와 숫자이다냥.
+
+## 입력
+
+```text
+N
+T
+step_1
+\vdots
+step_N
+```
+
+단계는 문자열 하나 또는 `~ j k` 형식이다냥.
+
+## 출력
+
+$K$를 $998244353$으로 나눈 나머지를 출력하라냥.
+
+## 예제
+
+예제는 원문을 참고하라냥.

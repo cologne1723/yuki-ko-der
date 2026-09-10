@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1648
+problemId: 6790
+sourceTitle: "Sum of Powers"
+sourceHtmlSha256: "33c303008dcc33b4c686bb025c199b437d431c34e8e5734812fd0f8ac2a503a9"
+humanReview: null
+machineReview: unreviewed
+title: "거듭제곱의 합"
+---
+
+정수 `A,B,P,Q`가 주어집니다. 실수 `X <= Y`가 존재하고 `X+Y=A`, `XY=B`라고 하겠습니다.
+
+`X^N + Y^N = P`, `X^(N-1) + Y^(N-1) = Q (mod 998244353)`를 만족하는 `2 <= N <= 10^18`인 정수 `N` 하나를 구하세요.
+
+## 제약
+
+- `X,Y`는 유일하게 존재합니다.
+- 모든 양의 정수 `N`에 대해 `X^N+Y^N`은 정수입니다.
+- 조건을 만족하는 `2 <= N <= 10^10`인 정수가 존재합니다.
+
+## 입력
+
+`A B P Q`가 주어집니다.
+
+## 출력
+
+조건을 만족하는 `N`을 출력하세요.

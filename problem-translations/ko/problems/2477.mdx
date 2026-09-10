@@ -1,0 +1,35 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2477
+problemId: 9863
+sourceTitle: Drifting
+sourceHtmlSha256: 278e56c72c8eb5ac3faa2e6b7d50753c550a7cab8d663c30fe0a405054cd75e2
+humanReview: null
+machineReview: unreviewed
+title: 드리프팅
+---
+
+정점 번호가 증가하는 방향의 가중 유향 그래프에서 1에서 $N$으로 이동합니다. 특정 경로 $a_i\to b_i$를 이용한 직후에는 다음 정점으로 $c_i$ 이외를 선택해야 합니다. $N$에 도달 가능한지, 가능하면 간선 가중치 합의 최솟값을 구하세요.
+
+## 조건
+
+- $3\le N\le2\times10^5$, $0\le M,K\le2\times10^5$
+- 모든 간선은 $u_i<v_i$이고 가중치는 양수입니다.
+
+## 입력
+
+```text
+N M
+u1 v1 w1
+...
+uM vM wM
+K
+a1 b1 c1
+...
+aK bK cK
+```
+
+## 출력
+
+도달할 수 없으면 `-1`, 가능하면 최소 비용을 출력하세요.

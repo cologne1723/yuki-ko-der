@@ -1,0 +1,34 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2195
+problemId: 8886
+sourceTitle: "AND Set"
+sourceHtmlSha256: "425bb1942b5b960c12ed79baa0ebf8df834f245c88c35769b015b453ec47645b"
+humanReview: null
+machineReview: unreviewed
+title: "AND 집합"
+---
+
+처음에 빈 집합 $S$가 있다냥. 쿼리 1은 $x$를 추가하고, 쿼리 2는 $x$를 삭제하며, 쿼리 3은 현재 집합에 포함된 모든 원소의 비트 AND를 출력한다냥. 빈 집합의 AND는 $-1$이다냥.
+
+## 조건
+
+- $1\le Q\le4\times10^5$
+- $0\le x_i<2^{30}$
+- 쿼리 3은 적어도 한 번 주어진다냥.
+
+## 입력
+
+```text
+Q
+query_1
+\vdots
+query_Q
+```
+
+쿼리는 `1 x`, `2 x`, `3` 중 하나이다냥.
+
+## 출력
+
+쿼리 3마다 답을 한 줄에 하나씩 출력하라냥.

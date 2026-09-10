@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1913
+problemId: 7209
+sourceTitle: "Periodic Comparison"
+sourceHtmlSha256: "59214d86a3b4dde50a7122b5d476de447673bd478ecbe08908e301fbe27a62bb"
+humanReview: null
+machineReview: unreviewed
+title: "주기적 비교"
+---
+
+음이 아닌 정수에서 음이 아닌 정수로 가는 전단사 함수 $f$가 있습니다. 서로 다른 $i,j$에 대해 $f(i)<f(j)\iff f(i+N)<f(j+N)$입니다. 또한 $f(NX_i+i)=Y_i$ $(0\le i<N)$를 알고 있습니다.
+
+## 문제
+
+$f(0),f(1),\ldots,f(N-1)$로 가능한 값을 하나 출력하세요. 존재하지 않으면 `-1`을 출력합니다.
+
+## 입력
+
+```text
+N
+X_0 ... X_{N-1}
+Y_0 ... Y_{N-1}
+```
+
+$1\le N\le2\times10^5$, $0\le X_i,Y_i\le10^6$입니다.
+
+## 출력
+
+가능한 수열을 공백으로 출력하세요.

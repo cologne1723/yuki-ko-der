@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2568
+problemId: 9438
+sourceTitle: "列辞書順列列"
+sourceHtmlSha256: a921cfc61c52a0296eb0e31e14902b0b78d7b04680af72aadffa18526143732f
+humanReview: null
+machineReview: unreviewed
+title: "수열 사전순 나열"
+---
+
+각 길이 $i$에 대해, 모든 원소가 $1$ 이상 $M$ 이하인 길이 $i$의 정수열을 사전순으로 나열한 수열의 열 $S_i$를 생각합니다. $A$의 부분 구간 $B=(A_l,\ldots,A_r)$가 $S_{|B|}$에서 몇 번째인지 구하는 쿼리를 처리하세요.
+
+## 조건
+
+- $1\le N,M\le2\times10^5$, $1\le Q\le10^5$
+- $1\le A_i\le M$, $1\le l_i\le r_i\le N$
+
+## 입력
+
+```text
+$N$ $M$ $Q$
+$A_1$ $A_2$ $\cdots$ $A_N$
+$l_1$ $r_1$
+$\vdots$
+$l_Q$ $r_Q$
+```
+
+## 출력
+
+각 쿼리의 답을 $998244353$으로 나눈 나머지로 한 줄에 하나씩 출력하세요.
+

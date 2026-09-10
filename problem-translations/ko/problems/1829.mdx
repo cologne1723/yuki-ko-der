@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1829
+problemId: 7500
+sourceTitle: "Möbius Tunnelling"
+sourceHtmlSha256: "d7d08a75bafc22ca9fc4377f9842e674bacf1862a0465bfd015f36967cc90c35"
+humanReview: null
+machineReview: unreviewed
+title: "뫼비우스 터널링"
+---
+
+긴 종이 한 장이 경계선으로 일렬의 $N$개 칸으로 나뉘어 있습니다. 종이는 앞뒷면이 있고 뒷면도 같은 위치의 경계선으로 $N$개 칸으로 나뉩니다. 각 면의 칸에는 왼쪽부터 $1$부터 $N$까지 번호가 붙으며, 뒷면의 $i$번 칸은 앞면의 $i$번 칸 바로 뒤에 있습니다.
+
+처음에 앞면 $a$번 칸에 A, 앞면 $b$번 칸에 B, 뒷면 $c$번 칸에 C가 있습니다. 종이를 뫼비우스 띠로 만든 뒤 원하는 경계에서 한 번 자르는 조작으로 A와 C를 같은 면에, A와 B를 다른 면에 둘 수 있는지 판정하세요.
+
+## 조작
+
+종이를 반 바퀴 비틀어 앞면 $N$번과 뒷면 1번, 뒷면 $N$번과 앞면 1번을 이어 붙인 뒤, 임의의 경계 하나에서 잘라 다시 평평한 종이로 되돌립니다.
+
+## 입력
+
+```text
+N
+a b c
+```
+
+$2\le N\le10^9$, $1\le a,b,c\le N$, $a\ne b$입니다.
+
+## 출력
+
+가능하면 `Yes`, 불가능하면 `No`를 출력하세요.

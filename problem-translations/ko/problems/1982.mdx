@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1982
+problemId: 4531
+sourceTitle: "[Cherry 4th Tune B] 絶険"
+sourceHtmlSha256: "008ed6a3febc789b704334ce3258358f135f33ca5bf08feea30e9fb9ffcdf8ad"
+humanReview: null
+machineReview: unreviewed
+title: "절험"
+---
+
+$N$개의 구획이 일렬로 있고, 처음에는 모든 벽의 높이가 $0$입니다. $k=1,2,\ldots,K$ 순서로 구간 $[L_k,R_k]$의 모든 구획에 높이 $H_k$, 색 $C_k$인 벽을 현재 벽 위에 새로 세웁니다.
+
+모든 조작 후, 구획 $I_q$에서 지면으로부터 높이 $X_q-0.5$인 지점의 벽 색을 각 질의에 대해 답하세요. 그 높이에 벽이 없으면 $-1$을 출력합니다.
+
+## 입력
+
+```text
+N K Q
+L_1 R_1 C_1 H_1
+...
+L_K R_K C_K H_K
+I_1 X_1
+...
+I_Q X_Q
+```
+
+$1\le N,K,Q\le2\times10^5$이며 $K$는 $0$일 수도 있습니다. $1\le H_k,C_k\le2\times10^5$이고 $X_q\le2\times10^{14}$입니다.
+
+## 출력
+
+각 질의의 답을 한 줄에 출력하세요.

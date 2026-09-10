@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2465
+problemId: 8117
+sourceTitle: Dilated Water Simulation
+sourceHtmlSha256: 41f4f6dfd77d5a8dd59b44a1863dd68d62a4f2e82b0cf085c1e8577d0989dcbd
+humanReview: null
+machineReview: unreviewed
+title: 확장된 물 시뮬레이션
+---
+
+$L$개의 용기가 있고 용기 $i$의 용량은 $V_i$입니다. 처음에는 용기 1이 가득 차 있습니다. $t$번째 작업에서는 용기 $1+(t-1)\bmod L$의 물을 다음 용기가 가득 차거나 원래 용기가 빌 때까지 붓습니다. $N$번 작업 후 각 용기의 물의 양을 출력하세요.
+
+## 조건
+
+- $4\le L\le200000$, $1\le N\le10^{18}$
+- $1\le V_i\le10^9$
+
+## 입력
+
+```text
+L
+V1 V2 ... VL
+N
+```
+
+## 출력
+
+각 용기의 물의 양을 공백으로 구분해 출력하세요.

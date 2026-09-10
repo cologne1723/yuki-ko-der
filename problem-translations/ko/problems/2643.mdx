@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2643
+problemId: 10660
+sourceTitle: "Many Range Sums Problems"
+sourceHtmlSha256: 6d12d7c21042927122d87e4126dee70dc9b8eb588fbcd4cd83ce0bdb7ecd8043
+humanReview: null
+machineReview: unreviewed
+title: "많은 구간 합 문제"
+---
+
+각 $i=1,\ldots,N$에 대해 $i$번째 조건만 제외하고, 모든 $j$에 대해 $0\le A_j\le K$이고 $\sum_{k=j}^{R_j}A_k=X_j$인 정수열 $A$가 존재하는지 판정하세요.
+
+## 조건
+
+- $1\le N\le5000$, $0\le K\le10^9$
+- $i\le R_i\le N$, $0\le X_i\le NK$
+
+## 입력
+
+```text
+$N$ $K$
+$R_1$ $X_1$
+\vdots
+$R_N$ $X_N$
+```
+
+## 출력
+
+각 $i$에 대한 답을 한 줄에 하나씩 `Yes` 또는 `No`로 출력하세요.
+

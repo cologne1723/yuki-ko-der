@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1976
+problemId: 7942
+sourceTitle: "Cut then Connect"
+sourceHtmlSha256: "88d121373cab516f239c27c40e8071df87cae4de928f479fc74b02117ed170ce"
+humanReview: null
+machineReview: unreviewed
+title: "자른 뒤 연결하기"
+---
+
+$N$개의 정점을 가진 트리가 주어집니다. 정점에는 $1$부터 $N$, 간선에는 $1$부터 $N-1$까지 번호가 붙어 있습니다. 간선 $i$는 정점 $u_i,v_i$를 연결합니다.
+
+트리의 무향 간선 하나를 삭제한 뒤, 두 연결 요소에서 정점을 하나씩 골라 둘을 새 간선으로 연결합니다. 결과도 트리입니다.
+
+이렇게 만든 트리의 지름으로 가능한 최솟값을 구하세요. 지름은 두 정점을 잇는 경로의 간선 수 최댓값입니다.
+
+## 입력
+
+```text
+N
+u_1 v_1
+u_2 v_2
+...
+u_{N-1} v_{N-1}
+```
+
+$2\le N\le10^5$이고 입력 그래프는 트리입니다.
+
+## 출력
+
+가능한 지름의 최솟값을 출력하세요.

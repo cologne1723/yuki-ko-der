@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2666
+problemId: 10495
+sourceTitle: "Decreasing Modulo Nim"
+sourceHtmlSha256: d1566ff00477b2cedd83e9c9339170741e8e92762013fb8753968ca48921eb69
+humanReview: null
+machineReview: unreviewed
+title: "감소하는 나머지 님"
+---
+
+양의 정수열 $A$와 $m$이 주어집니다. $x=m-1$에서 시작해, $1\le k\le A_i$이고 $k\bmod m\le x$인 $(i,k)$를 골라 $A_i$에서 $k$를 빼고 $x$를 $k\bmod m$으로 바꿉니다. 최적으로 플레이할 때 승자를 판정하세요.
+
+## 조건
+
+- $1\le n\le2\times10^5$
+- $1\le m,A_i\le10^9$
+
+## 입력
+
+```text
+$n$ $m$
+$A_1$ $A_2$ $\cdots$ $A_n$
+```
+
+## 출력
+
+Alice가 이기면 `Alice`, Bob이 이기면 `Bob`을 출력하세요.
+

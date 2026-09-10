@@ -1,0 +1,40 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2762
+problemId: 10913
+sourceTitle: "Counting and Deleting"
+sourceHtmlSha256: "f3b012687c78e076abea653e183a01a48c31a98a73e6c1f881a11dd2493abb2e"
+humanReview: null
+machineReview: unreviewed
+title: "세고 삭제하기"
+---
+
+## 문제
+
+`0`과 `1`로 이루어진 문자열 `S`에 대해 다음 질의를 처리하세요.
+
+- `1 l r`: `l ≤ i ≤ r`인 모든 문자를 `_`로 바꿉니다.
+- `2 l r`: `S[l:r]`의 부분 수열로 나타나는 자연수 문자열의 종류 수를 `998244353`으로 나눈 나머지로 출력합니다.
+
+자연수 문자열은 공백이 아니고 첫 문자가 0이 아니며 모든 문자가 `_`가 아닌 문자열입니다.
+
+## 제약
+
+- `1 ≤ N,Q ≤ 6×10^4`
+- 초기 문자열은 `0`과 `1`만 포함합니다.
+
+## 입력
+
+```text
+N Q
+S
+query_1
+⋮
+query_Q
+```
+
+## 출력
+
+2번 질의의 답을 순서대로 출력하세요.
+

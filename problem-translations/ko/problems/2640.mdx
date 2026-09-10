@@ -1,0 +1,38 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2640
+problemId: 10669
+sourceTitle: "traO Stamps"
+sourceHtmlSha256: 9bf3debd7122470e4d3c779472180f306109a82c7cdffc9ff652d44caffd6808
+humanReview: null
+machineReview: unreviewed
+title: "traO 우표"
+---
+
+가중치가 있는 연결 무방향 그래프에 번호가 연속된 $K+1$개의 우표가 각 영지에 놓여 있습니다. 우표 위치 변경 쿼리와, 연속된 번호의 우표를 순서대로 누르는 최소 이동 시간 질의를 처리하세요.
+
+## 조건
+
+- $2\le N\le200$, $1\le M\le N(N-1)/2$
+- $1\le K,Q\le2\times10^5$
+- 간선 비용은 $10^9$ 이하입니다.
+
+## 입력
+
+```text
+$N$ $M$ $K$
+$S_0$ $S_1$ $\cdots$ $S_K$
+$A_1$ $B_1$ $C_1$
+\vdots
+$A_M$ $B_M$ $C_M$
+$Q$
+쿼리 $1$
+\vdots
+쿼리 $Q$
+```
+
+## 출력
+
+두 번째 종류 쿼리의 답을 순서대로 출력하세요.
+

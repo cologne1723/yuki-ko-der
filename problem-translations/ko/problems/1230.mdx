@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1230
+problemId: 4945
+sourceTitle: "Hall_and_me"
+sourceHtmlSha256: "00150be331521adfe49bee763d7d134049cfc65503e9c8a1af867c47f25d76ba"
+humanReview: null
+machineReview: unreviewed
+title: "Hall과 나"
+---
+
+## 문제 설명
+
+보물상자 3개와 다이아몬드 1개가 있습니다. Hall 씨는 다이아몬드를 상자에 숨기고, 당신은 상자 하나를 열어 다이아몬드를 얻으려고 합니다.
+
+Hall 씨는 확률 $P/(P+Q+R)$, $Q/(P+Q+R)$, $R/(P+Q+R)$로 각각 상자 1, 2, 3 중 하나를 골라 다이아몬드를 숨깁니다. 당신은 다이아몬드가 어디 있는지 보지 못합니다. 그 뒤 상자 하나를 골라 열었을 때 다이아몬드를 얻을 확률을 최대로 하는 전략을 세우세요.
+
+## 입력
+
+```text
+P Q R
+```
+
+- $P,Q,R$은 음이 아닌 정수입니다.
+- 적어도 하나는 양수입니다.
+
+## 출력
+
+최적 전략으로 다이아몬드를 얻을 확률을 출력하세요. 예상 답과의 절대 오차 또는 상대 오차가 $10^{-6}$ 이하이면 정답으로 인정합니다.

@@ -1,0 +1,28 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2010
+problemId: 5554
+sourceTitle: "Magical Floor"
+sourceHtmlSha256: "0cccd92d09475aa099512f1467d247096b407a33e6fad979818e40a12824f79f"
+humanReview: null
+machineReview: unreviewed
+title: "마법의 바닥"
+---
+
+$xy$ 평면에서 $i$번째 마법의 바닥은 $H_{i-1}\le y<H_i$ 영역을 차지하고, 그 위에서는 거리 $1$ 이동에 $A_i$의 시간이 걸립니다. $0\le y<H$ 영역을 지나 $(0,0)$에서 $(X,0)$으로 이동하는 최소 시간을 구하세요.
+
+## 입력
+
+```text
+T
+N X
+H_1 ... H_N
+A_1 ... A_N
+```
+
+$1\le T\le100$, $1\le N\le100$, $1\le X\le10^9$입니다.
+
+## 출력
+
+각 테스트 케이스의 최소 시간을 출력하세요. 절대 오차 또는 상대 오차 $10^{-8}$ 이하이면 정답입니다.

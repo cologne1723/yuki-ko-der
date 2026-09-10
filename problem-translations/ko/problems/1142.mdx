@@ -1,0 +1,87 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1142
+problemId: 4608
+sourceTitle: "XOR と XOR"
+sourceHtmlSha256: "3d58bf7c56c1b71a6100536772289f9b69cf4f6dd5d2239cf217eb731dfc1d33"
+humanReview: null
+machineReview: unreviewed
+title: "XOR와 XOR"
+---
+
+## 문제 설명
+
+정수열 $a$와 정수 쌍 $(l,r)$에 대해 다음과 같이 정의합니다.
+
+$\displaystyle \bigoplus_{i=l}^{r}a_i=a_l\mathbin{\mathrm{xor}}a_{l+1}\mathbin{\mathrm{xor}}\dots\mathbin{\mathrm{xor}}a_r$
+
+여기서 $a\mathbin{\mathrm{xor}}b$는 $a$와 $b$의 비트별 XOR입니다.
+
+길이 $N$인 수열 $a_1,a_2,\ldots,a_N$과 길이 $M$인 수열 $b_1,b_2,\ldots,b_M$이 주어집니다. 다음 조건을 만족하는 정수 쌍 $(n,u,l_1,l_2)$의 개수를 구하세요.
+
+$\displaystyle \bigoplus_{x=n}^{u}a_x\mathbin{\mathrm{xor}}\displaystyle \bigoplus_{y=l_1}^{l_2}b_y=K$
+
+단, $1 \leq n \leq u \leq N$, $1 \leq l_1 \leq l_2 \leq M$입니다.
+
+답은 매우 커질 수 있으므로 $(10^9+7)$로 나눈 나머지를 출력하세요.
+
+## 입력
+
+```text
+$N\ M\ K$
+$a_1\ a_2\ \cdots\ a_N$
+$b_1\ b_2\ \cdots\ b_M$
+```
+
+- $1 \leq N,M \leq 2 \times 10^5$
+- $0 \leq a_i,b_j,K < 1024 = 2^{10}$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+조건을 만족하는 정수 쌍의 개수를 $10^9+7$로 나눈 나머지를 한 줄에 출력하고 마지막에 줄바꿈을 넣으세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+3 3 0
+1 2 3
+3 4 5
+```
+#### 출력
+```text
+5
+```
+
+$(1,2,1,1)$, $(2,2,1,3)$, $(3,3,1,1)$, $(1,1,2,3)$, $(2,3,2,3)$의 $5$가지입니다.
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+10 10 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+```
+#### 출력
+```text
+3025
+```
+
+모든 선택이 조건을 만족합니다.
+
+### 예제 3 {file="01_sample_03.txt"}
+#### 입력
+```text
+14 15 213
+363 836 692 58 166 525 170 143 844 457 761 36 395 191
+441 941 303 945 986 379 588 946 808 262 672 10 503 901 806
+```
+#### 출력
+```text
+21
+```
+
+$(10^9+7)$로 나눈 나머지를 출력한다는 점에 주의하세요.

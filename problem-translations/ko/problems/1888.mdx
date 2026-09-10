@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1888
+problemId: 7008
+sourceTitle: "Odd Insertion"
+sourceHtmlSha256: "4b9b94198149b9bc6190bdd5ea6794555fd3a16e84ed5f2990981c767aa3f8d4"
+humanReview: null
+machineReview: unreviewed
+title: "홀수 삽입"
+---
+
+miscalc은 $S=\{1,2,\ldots,N\}$와 빈 수열 $A$를 가지고 있습니다. 총 $N$번의 조작을 수행합니다. $i$번째 조작에서 $S$에 남아 있는 가장 작은 원소 또는 두 번째로 작은 원소 중 하나를 $x$로 고른 뒤, $1\le y\le i$인 홀수 $y$를 골라 $x$를 $S$에서 삭제하고 $A$의 앞에서 $y$번째 위치에 삽입합니다.
+
+## 문제
+
+조작 후 $A=P$가 될 수 있는지 판정하고, 가능하면 조작 순서 하나를 출력하세요.
+
+## 입력
+
+```text
+N
+P_1 P_2 ... P_N
+```
+
+$1\le N\le2\times10^5$이고 $P$는 순열입니다.
+
+## 출력
+
+불가능하면 `No`를 출력하세요. 가능하면 `Yes`와 각 조작에서 선택한 $x_i,y_i$를 출력하세요.

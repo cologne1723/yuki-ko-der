@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1220
+problemId: 3888
+sourceTitle: "yukipoker"
+sourceHtmlSha256: "6f6ff1e22055d7fdf558296d185cd9975ee3557d0ce75ba76854838f7b0fbf0b"
+humanReview: null
+machineReview: unreviewed
+title: "유키 포커"
+---
+## 문제
+
+카드는 무늬 $M$종류, 숫자 $1$부터 $N$까지가 각 무늬마다 한 장씩 있어 총 $NM$장입니다. $K$장으로 포커를 하며 플러시와 스트레이트를 판정합니다.
+
+플러시는 모든 카드의 무늬가 같을 때, 스트레이트는 어떤 $i$에 대해 숫자 $i,i+1,\ldots,i+K-1$가 각각 한 장씩 있을 때 성립합니다. 두 역은 독립적으로 판정합니다.
+
+무작위로 $K$장을 뽑을 때 플러시 확률을 $F$, 스트레이트 확률을 $S$라 하면 $F<S$일 때 `Flush`, $F>S$일 때 `Straight`를 출력하세요.
+
+## 입력
+
+$Q$개의 테스트 케이스 $(N_i,M_i,K_i)$가 주어집니다.
+
+- $1\leq Q,N_i,M_i\leq10^5$
+- $1\leq K_i\leq N_i$
+- 두 확률의 비율 중 큰 값이 작은 값의 2배 이상입니다.
+
+## 출력
+
+각 테스트 케이스에 대해 `Flush` 또는 `Straight`를 출력하세요.

@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1969
+problemId: 7744
+sourceTitle: "XOR Equation"
+sourceHtmlSha256: "e7026a85a073b9fdaf4e51c60ca3948d985475c84cb4d63bed423232a07a160d"
+humanReview: null
+machineReview: unreviewed
+title: "XOR 방정식"
+---
+
+비음이 아닌 정수 $x,y$에 대해 $x\oplus y$는 비트별 XOR입니다. 비음이 아닌 정수 $N$개 $A_i$와 비음이 아닌 정수 $Y$가 주어집니다.
+
+$(X+A_1)\oplus(X+A_2)\oplus\cdots\oplus(X+A_N)=Y$를 만족하는 비음이 아닌 정수 $X$가 존재하는지 판정하고, 존재하면 최솟값을 구하세요.
+
+## 입력
+
+```text
+T
+N Y
+A_1 A_2 ... A_N
+```
+
+$1\le T\le10^4$, $1\le N\le10^4$, $0\le Y,A_i<2^{60}$이고 모든 테스트 케이스의 $N$ 합은 $10^4$ 이하입니다.
+
+## 출력
+
+각 테스트 케이스에 대해 조건을 만족하는 $X$가 없으면 $-1$, 있으면 최솟값을 출력하세요.

@@ -1,0 +1,38 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2690
+problemId: 10760
+sourceTitle: "A present from B (Hard)"
+sourceHtmlSha256: "a5408046396e9ed26fdc48e4427b142b8cfc19a95c321fcaaca39f4151b21fc8"
+humanReview: null
+machineReview: unreviewed
+title: "B가 주는 선물 (Hard)"
+---
+
+## 문제
+
+`N`명이 선물 교환회를 합니다. 의자는 일렬로 `1`번부터 `N`번까지 있고 Alice는 1번 의자에 앉습니다. 나머지 사람들은 나머지 의자에 앉습니다.
+
+길이 `M`인 수열 `A`가 주어집니다. `A_i`를 순서대로 처리하며, `A_i`번 의자와 `A_i+1`번 의자에 앉은 두 사람의 선물을 교환합니다.
+
+Alice는 수열에 원하는 만큼 원소를 삽입할 수 있습니다. 한 번의 삽입에서는 원하는 위치에 `1` 이상 `N-1` 이하의 정수를 하나 삽입합니다.
+
+Bob이 `i`번 의자에 앉았을 때 Alice가 Bob의 선물을 최종적으로 얻기 위해 필요한 삽입 횟수의 최솟값을 모든 `i=2,...,N`에 대해 구하세요.
+
+## 제약
+
+- `2 ≤ N, M ≤ 10^5`
+- `1 ≤ A_i ≤ N-1`
+
+## 입력
+
+```text
+N M
+A_1 A_2 ... A_M
+```
+
+## 출력
+
+`i=2,3,...,N`에 대한 답을 공백으로 구분해 한 줄에 출력하세요.
+

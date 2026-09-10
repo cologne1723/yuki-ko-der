@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2432
+problemId: 9918
+sourceTitle: Flip and Move
+sourceHtmlSha256: f9690205c0c9777797ace3d4e27f6939990169e651ad3032d24687a06ffd9787
+humanReview: null
+machineReview: unreviewed
+title: 뒤집고 이동하기
+---
+
+$H\times W$ 격자의 모든 칸은 흰색으로 시작합니다. 로봇은 $(1,1)$에서 시작하고 상하 방향은 아래쪽, 좌우 방향은 오른쪽을 향합니다.
+
+한 번의 동작에서 현재 칸의 색을 뒤집고, 상하 방향으로 한 칸 이동하거나 경계라면 방향을 뒤집고 제자리에 머뭅니다. 이어서 좌우 방향으로도 같은 동작을 합니다. 로봇을 $K$번 움직인 뒤의 격자를 출력하세요.
+
+## 조건
+
+- $H,W\ge1$, $H\times W\le10^6$
+- $1\le K\le10^{18}$
+
+## 입력
+
+```text
+H W
+K
+```
+
+## 출력
+
+흰 칸은 `.`, 검은 칸은 `#`으로 나타내어 격자를 출력하세요.

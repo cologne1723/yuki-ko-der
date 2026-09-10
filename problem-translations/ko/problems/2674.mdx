@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2674
+problemId: 10651
+sourceTitle: "k-Walk on Bipartite"
+sourceHtmlSha256: 13683b5d6d91c4c5b6c9d97cf240755bfa20566423f0087cadd3eec8685fb9ce
+humanReview: null
+machineReview: unreviewed
+title: "이분 그래프의 k-보행"
+---
+
+이분 그래프에서 간선 집합의 일부만 주어집니다. 주어진 간선을 포함하는 모든 $N$정점 단순 무방향 이분 그래프를 고려할 때, 모든 그래프에 길이 $k$의 $s$에서 $t$로 가는 보행이 존재하면 `Yes`, 모든 그래프에 존재하지 않으면 `No`, 그 외에는 `Unknown`을 출력하세요.
+
+## 조건
+
+- $1\le N,M\le2\times10^5$, $1\le k\le10^9$
+- 주어진 그래프 $(V,F)$는 이분 그래프입니다.
+
+## 입력
+
+```text
+$N$ $M$ $s$ $t$ $k$
+$A_1$ $B_1$
+\vdots
+$A_M$ $B_M$
+```
+
+## 출력
+
+조건에 따라 `Yes`, `No`, `Unknown` 중 하나를 출력하세요.
+

@@ -1,0 +1,38 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2555
+problemId: 10403
+sourceTitle: "Intriguing Triangle"
+sourceHtmlSha256: d6f5a10e0dfe23e7cd946c0e3a549ea0a95de8e3ae0a447b14a1484f44278494
+humanReview: null
+machineReview: unreviewed
+title: "흥미로운 삼각형"
+---
+
+양의 정수 $a,b,c$가 주어집니다. 다음 조건을 만족하는 비퇴화 삼각형 $ABC$가 존재하는지 판정하세요.
+
+## 조건
+
+- $AB=b$, $AC=c$입니다.
+- 변 $BC$ 위에 $B,D,E,C$ 순서로 점 $D,E$를 잡아 $DE=a$가 되게 할 수 있습니다.
+- $BD$와 $EC$의 길이는 양의 정수이고 $\angle BAD=\angle EAC$입니다.
+
+$XY$는 선분 $XY$의 길이를 뜻합니다. 비퇴화 삼각형은 세 꼭짓점이 한 직선 위에 있지 않은 삼각형입니다.
+
+## 조건
+
+- $1 \le a,b,c \le 100$
+- $a<b+c$
+- 입력은 모두 정수입니다.
+
+## 입력
+
+```text
+$a$ $b$ $c$
+```
+
+## 출력
+
+삼각형이 존재하면 `Yes`, 존재하지 않으면 `No`를 출력하세요.
+

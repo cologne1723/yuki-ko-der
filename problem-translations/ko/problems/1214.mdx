@@ -1,0 +1,34 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1214
+problemId: 5034
+sourceTitle: "Market"
+sourceHtmlSha256: "632a5fe59dfd9313f613f6b34cc3df2de69714a0c8a431ee6f9384f464db64c3"
+humanReview: null
+machineReview: unreviewed
+title: "시장"
+---
+
+## 문제 설명
+
+시장에 $N$명의 손님과 $M$개의 상품이 있습니다. 상품 $i$의 가격은 $A_i$, 가치는 $B_i$이며 모든 상품의 가치는 서로 다릅니다. 각 손님은 $0$ 이상 $K$ 이하의 정수를 같은 확률로 가져옵니다. 손님은 가진 돈으로 살 수 있는 상품 중 가치가 가장 높은 상품 하나를 사고, 상품은 즉시 사라집니다.
+
+각 손님이 가져온 금액을 안 뒤, 상품 가치 합이 최대가 되도록 손님이 시장에 오는 순서를 정할 수 있습니다. 상품 가치 합의 기댓값을 $P/Q$라 할 때, $R Q\equiv P\pmod {10^9+7}$인 $R$을 출력하세요.
+
+## 입력
+
+```text
+N M K
+A_1 B_1
+\vdots
+A_M B_M
+```
+
+- $1\leq N,M\leq40$
+- $1\leq K\leq10^9$
+- $1\leq A_i\leq K$, $1\leq B_i\leq10^9$
+
+## 출력
+
+조건을 만족하는 $0\leq R\leq10^9+6$를 출력하세요. 마지막에 줄바꿈을 넣으세요.

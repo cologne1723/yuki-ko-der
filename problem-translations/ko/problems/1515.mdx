@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1515
+problemId: 6366
+sourceTitle: "Making Many Multiples"
+sourceHtmlSha256: "5f7819ea1831e84591421f6064ca3a52bd97e52468e0531ded57610f7dea929c"
+humanReview: null
+machineReview: unreviewed
+title: "여러 배수 만들기"
+---
+## 문제
+
+$N+2$장의 카드와 양의 정수 $K$가 있습니다. 덱의 $N$장에는 위에서부터 $A_1,\ldots,A_N$이 쓰여 있고, 손에는 $X,Y$가 쓰인 카드가 있습니다.
+
+다음 작업을 $N$번 반복합니다. 덱 맨 위 카드를 뽑고, 손에 든 카드의 합이 $K$의 배수이면 1점을 얻은 뒤 손의 카드 하나를 버립니다. 덱의 내용을 알고 있을 때 최적으로 행동하여 얻을 수 있는 최대 점수를 구하세요.
+
+## 입력
+
+```text
+$N$ $K$ $X$ $Y$
+$A_1$ $\ldots$ $A_N$
+```
+
+- $1\leq N,K\leq2000$
+- $1\leq X,Y,A_i\leq10^9$
+
+## 출력
+
+얻을 수 있는 최대 점수를 출력하세요.

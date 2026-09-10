@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1208
+problemId: 4854
+sourceTitle: "anti primenumber game"
+sourceHtmlSha256: "73dce1480de75cbfb4bac7846028e3b996552a8de0695ccfa4070d08fec9c455"
+humanReview: null
+machineReview: unreviewed
+title: "반소수 게임"
+---
+## 문제
+
+$N$개의 돌 더미가 일렬로 놓여 있고, 왼쪽에서 $i$번째 더미에는 $A_i$개의 돌이 있습니다. 선공과 후공이 번갈아 돌을 가져가며, 점수가 더 높은 쪽이 승리합니다. 동점이면 후공이 승리합니다.
+
+돌이 남아 있는 더미 중 가장 왼쪽 더미에서 돌을 하나 이상 원하는 만큼 동시에 가져갑니다. 돌을 가져간 뒤 그 더미에 남은 돌의 수는 소수가 될 수 없습니다. 돌 하나마다 1점을 얻고, 더미의 마지막 돌을 가져가면 $M$점을 잃습니다. 점수는 음수가 될 수 있습니다.
+
+두 사람이 최선으로 플레이할 때 누가 이기는지 출력하세요.
+
+## 입력
+
+```text
+$N$ $M$
+$A_1$ $\ldots$ $A_N$
+```
+
+- $1\leq N\leq2\times10^5$
+- $0\leq M\leq10^{12}$
+- $1\leq A_i\leq10^{12}$
+
+## 출력
+
+선공이 이기면 `First`, 후공이 이기면 `Second`를 출력하세요.

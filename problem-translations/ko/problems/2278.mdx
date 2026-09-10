@@ -1,0 +1,37 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2278
+problemId: 8294
+sourceTitle: "Time Bomb Game 2"
+sourceHtmlSha256: 06c1296f1911067339a376a51c250e859f969d701cce9f113485d55cc83ae329
+humanReview: null
+machineReview: unreviewed
+title: "Time Bomb Game 2"
+---
+
+왼쪽부터 번호가 $1$부터 $N$까지인 $N$개의 칸이 한 줄로 놓여 있습니다. 각 칸에는 `A` 또는 `B`가 쓰여 있고, 칸 $i$의 문자를 $c_i$라 합니다. 코인은 칸 $K$에 놓여 있습니다.
+
+코인이 놓인 칸의 문자가 `A`이면 Alice의 차례이고, `B`이면 Bob의 차례입니다. 차례인 사람은 코인을 왼쪽 또는 오른쪽 인접 칸으로 이동할 수 있습니다.
+
+두 사람이 합쳐 $T$번 행동한 뒤 코인이 놓인 칸의 문자가 `A`이면 Alice가 패배하고, `B`이면 Bob이 패배합니다. 패배하지 않은 사람이 승리합니다.
+
+두 사람이 최적으로 행동할 때 누가 승리하는지 출력하세요.
+
+## 조건
+
+- $2\le N\le 2\times10^5$
+- $1\le K\le N$
+- $1\le T\le 10^9$
+- 각 $c_i$는 `A` 또는 `B`입니다.
+
+## 입력
+
+```text
+N K T
+c_1 c_2 ... c_N
+```
+
+## 출력
+
+Alice가 이기면 `Alice`, Bob이 이기면 `Bob`을 출력하세요.

@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2292
+problemId: 9177
+sourceTitle: "Interval Union Find"
+sourceHtmlSha256: ee386e4dd381381a20ad8f4de30330782fe06616121c1ea99e3c1ea8cbf44ea3
+humanReview: null
+machineReview: unreviewed
+title: "구간 Union Find"
+---
+
+$N$개의 정점과 변이 없는 무방향 그래프가 주어집니다. 다음 쿼리를 순서대로 처리하세요.
+
+`1 L R`은 $L\le u<v\le R$인 모든 정점쌍을 변으로 연결합니다. `2 L R`은 $1\le u<R$, $L<v\le N$인 정점쌍을 끝점으로 하는 모든 변을 삭제합니다. `3 u v`는 두 정점의 연결 여부를, `4 v`는 $v$가 속한 연결 요소의 정점 수를 출력합니다.
+
+## 조건
+
+- $2\le N\le 10^9$
+- $1\le Q\le 2\times10^5$
+- 모든 입력은 정수입니다.
+
+## 입력
+
+첫째 줄에 $N,Q$, 다음 $Q$개 줄에 쿼리가 주어집니다.
+
+## 출력
+
+세 번째 또는 네 번째 유형 쿼리의 답을 주어진 순서대로 한 줄에 하나씩 출력하세요.

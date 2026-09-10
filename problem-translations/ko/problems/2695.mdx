@@ -1,0 +1,35 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2695
+problemId: 10615
+sourceTitle: "Warp Zone"
+sourceHtmlSha256: "b9f40fa02e5982d7d5970d590778087b937520516af7efaa494b0340c0171d10"
+humanReview: null
+machineReview: unreviewed
+title: "워프 존"
+---
+
+## 문제
+
+`H × W` 격자에서 `(1,1)`에서 `(H,W)`까지 이동하는 최소 횟수를 구하세요. 한 번에 상하좌우로 한 칸 이동하거나, 워프를 이용할 수 있습니다. `i`번째 워프는 `(a_i,b_i)`에서 `(c_i,d_i)`로 연결되며 역방향으로 이용할 수 없습니다. 워프의 시작점에서도 걸어서 이동할 수 있습니다.
+
+## 제약
+
+- `2 ≤ H,W ≤ 10^9`
+- `0 ≤ N ≤ min(10^3,(H×W-2)/2)`
+- 모든 좌표는 격자 안에 있고, 시작점·도착점·워프의 양 끝점은 서로 다릅니다.
+
+## 입력
+
+```text
+H W N
+a_1 b_1 c_1 d_1
+⋮
+a_N b_N c_N d_N
+```
+
+## 출력
+
+최소 횟수를 출력하세요.
+

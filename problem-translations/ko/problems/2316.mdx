@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2316
+problemId: 9210
+sourceTitle: "Freight Train"
+sourceHtmlSha256: 16891f07950ec00adcc93955bca75c8efb7544b48f82464d75a484f869360398
+humanReview: null
+machineReview: unreviewed
+title: "Freight Train"
+---
+
+$N$마리의 캐릭터가 여러 줄로 나란히 걷습니다. $P_i=-1$이면 $i$번째 캐릭터가 줄의 선두이고, 아니면 $i$번째 캐릭터는 $P_i$번째 캐릭터 뒤에 있습니다.
+
+각 쿼리 $(A_i,B_i)$에 대해 두 캐릭터가 같은 줄에 있는지 판정하세요.
+
+## 조건
+
+- $1\le N,Q\le2\times10^5$
+- $P_i=-1$ 또는 $1\le P_i\le N$
+- 각 줄에는 선두가 있습니다.
+
+## 입력
+
+첫째 줄에 $N,Q$, 둘째 줄에 $P_1,\ldots,P_N$, 다음 $Q$개 줄에 $A_i,B_i$가 주어집니다.
+
+## 출력
+
+같은 줄이면 `Yes`, 아니면 `No`를 출력하세요.

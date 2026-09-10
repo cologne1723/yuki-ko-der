@@ -1,0 +1,38 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2688
+problemId: 10417
+sourceTitle: "Cell Proliferation (Hard)"
+sourceHtmlSha256: "6167f46edf99af7c84b7f69230bd9409897bd6dbe19d381fe8a68a6e58841eab"
+humanReview: null
+machineReview: unreviewed
+title: "세포 증식 (Hard)"
+---
+
+## 문제
+
+이 문제는 `Cell Proliferation (Easy)`와 문제의 제약 및 실행 시간 제한만 다릅니다.
+
+AIC 세포는 태어난 뒤 `t = 1, 2, ...`초가 되면 확률 `P1/P2`로 새 세포 하나를 낳습니다. 태어난 뒤 `t+0.5`초가 되면 확률 `1-(Q1/Q2)^t`로 죽습니다. 그 밖의 변화는 없습니다.
+
+처음에 세포 하나가 있습니다. `T+0.9`초 뒤 세포 수의 기댓값을 `998244353`로 나눈 나머지를 구하세요.
+
+기댓값을 기약분수 `P/Q`로 나타냈을 때 `Q`는 `998244353`의 배수가 아니며, 답은 `P ≡ QR (mod 998244353)`인 유일한 `0 ≤ R < 998244353`입니다.
+
+## 제약
+
+- `0 ≤ P1 ≤ P2 < 998244353`, `P2 ≠ 0`
+- `0 ≤ Q1 ≤ Q2 < 998244353`, `Q2 ≠ 0`
+- `1 ≤ T ≤ 10^6`
+
+## 입력
+
+```text
+P1 P2 Q1 Q2 T
+```
+
+## 출력
+
+답을 출력하세요.
+

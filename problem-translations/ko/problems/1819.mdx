@@ -1,0 +1,34 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1819
+problemId: 7547
+sourceTitle: "Mirrored 2"
+sourceHtmlSha256: "c651dfc9cc95a381d1222261e0bcb0249db7c3c0788162c0fd52e844b5f64d2e"
+humanReview: null
+machineReview: unreviewed
+title: "거울 2"
+---
+
+양의 정수 $n$의 십진 표기를 좌우로 뒤집어 얻는 정수를 $\mathrm{rev}(n)$이라 합니다. 예를 들어 $\mathrm{rev}(1234)=4321$, $\mathrm{rev}(5000)=5$입니다.
+
+소수 $P,Q$와 양의 정수 $x,y$가 주어집니다. $P=90007$입니다. 다음 두 조건을 모두 만족하는 $10^{100000}$ 이하의 양의 정수 $N$을 하나 출력하세요.
+
+## 조건
+
+- $N\bmod P=x$
+- $\mathrm{rev}(N)\bmod Q=y$
+
+조건을 만족하는 $N$은 항상 존재함이 보장됩니다.
+
+## 입력
+
+```text
+P Q x y
+```
+
+$P=90007$, $2\le Q<10^{12}$, $1\le x<P$, $1\le y<Q$이고 $P,Q$는 소수입니다.
+
+## 출력
+
+조건을 만족하는 $N$을 출력하세요. 줄바꿈 없이 출력하거나 앞에 불필요한 0을 붙이면 오답입니다.

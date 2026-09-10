@@ -1,0 +1,53 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1231
+problemId: 2651
+sourceTitle: "Make a Multiple of Ten"
+sourceHtmlSha256: "e556fad2430b0e6788708537ceb250361a71d75680b2b97feabb9309a2bd964d"
+humanReview: null
+machineReview: unreviewed
+title: "10의 배수 만들기"
+---
+
+## 문제 설명
+
+양의 정수가 적힌 $N$장의 카드가 있고, $i$번째 카드에는 $A_i$가 적혀 있습니다. 카드에 적힌 정수의 합이 10의 배수가 되도록 카드를 고를 때 고를 수 있는 카드 수의 최댓값을 구하세요. 카드를 하나도 고르지 않으면 합은 $0$이고, 이 역시 10의 배수로 셉니다.
+
+## 입력
+
+```text
+N
+A_1 A_2 \ldots A_N
+```
+
+- $1\leq N\leq2\times10^5$
+- $1\leq A_i\leq10^9$
+
+## 출력
+
+조건을 만족하도록 고른 카드 수의 최댓값을 출력하세요. 마지막에 줄바꿈을 넣으세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+5
+1 3 5 7 9
+```
+#### 출력
+```text
+4
+```
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+9
+1 1 1 1 1 1 1 1 1
+```
+#### 출력
+```text
+0
+```

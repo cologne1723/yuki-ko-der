@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2592
+problemId: 8238
+sourceTitle: "おでぶなおばけさん 2"
+sourceHtmlSha256: 7c3405218f775db02c5d6f180370b96f2401faa200433a5eece7d9c08bcf4107
+humanReview: null
+machineReview: unreviewed
+title: "뚱뚱한 유령 2"
+---
+
+상점 $i$는 $a_i\ge0$이면 한 번에 $a_i$칼로리의 음식만 제공하고, $a_i<0$이면 한 번에 $|a_i|$칼로리를 소비하는 운동을 제공합니다. 구간 $[l,r]$을 방문하며 $i$번째 상점에서 $x^{i-l}$번 음식이나 운동을 할 때 최종 칼로리는 $\sum_{i=l}^r a_ix^{i-l}$입니다. 이 값이 $x-k$의 배수가 되지 않는 $x$가 존재하는지 쿼리마다 판정하세요.
+
+## 조건
+
+- $1\le n,q\le10^5$, $2\le k\le10^{18}$
+- $-10^{18}\le a_i\le10^{18}$
+
+## 입력
+
+```text
+$n$ $q$ $k$
+$a_1$ $a_2$ $\cdots$ $a_n$
+$l_1$ $r_1$
+\vdots
+$l_q$ $r_q$
+```
+
+## 출력
+
+조건을 만족하는 $x$가 존재하면 `Yes`, 없으면 `No`를 출력하세요.
+

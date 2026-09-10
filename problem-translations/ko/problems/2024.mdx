@@ -1,0 +1,26 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2024
+problemId: 8133
+sourceTitle: "Xer"
+sourceHtmlSha256: "1a855cdba4c42ed6b4fe5957e8a59d07b63d00cc3ce5f095be3fbb369fdb01cd"
+humanReview: null
+machineReview: unreviewed
+title: "Xer"
+---
+
+길이 $N$의 비음이 아닌 정수열 $A$와 비음이 아닌 정수 $X$가 주어집니다. $A$를 자유롭게 재배열하여 모든 $1\le i<N$에 대해 $A_i<A_{i+1}\mathbin{\mathrm{xor}}X$와 $A_i\mathbin{\mathrm{xor}}X<A_{i+1}$를 동시에 만족시킬 수 있는지 판정하세요.
+
+## 입력
+
+```text
+N X
+A_1 A_2 ... A_N
+```
+
+$2\le N\le2\times10^5$, $0\le X,A_i<2^{30}$입니다.
+
+## 출력
+
+가능하면 `Yes`, 아니면 `No`를 출력하세요.

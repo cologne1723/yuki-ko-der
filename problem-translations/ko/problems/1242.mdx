@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1242
+problemId: 4583
+sourceTitle: "高橋君とすごろく"
+sourceHtmlSha256: "c5744cf0cc277be16c5b237e84fbe4a561421bb0237545fbf6a8195cd04ee54e"
+humanReview: null
+machineReview: unreviewed
+title: "타카하시 군과 주사위 게임"
+---
+
+## 문제 설명
+
+1부터 $N$까지의 칸이 있는 게임에서 처음 1번 칸에 있습니다. 주사위 눈을 $x$라 할 때 $x$칸 전진하거나, 주사위를 뒤집어 $7-x$칸 전진할 수 있습니다. $N$을 넘으면 $N$에 멈춥니다.
+
+그중 $K$개는 게임 오버 칸입니다. 이동 후 정확히 게임 오버 칸에 멈추면 패배합니다. 최적 전략으로 주사위 눈과 관계없이 안전하게 $N$에 도착할 수 있는지 판정하세요. 각 선택 시 미래 주사위 눈은 알 수 없습니다.
+
+## 입력
+
+```text
+N K
+A_1 A_2 \ldots A_K
+```
+
+- $3\leq N\leq10^{18}$
+- $1\leq K\leq100$
+- $2\leq A_i\leq N-1$, $A_i<A_{i+1}$
+
+## 출력
+
+가능하면 `Yes`, 불가능하면 `No`를 출력하세요.

@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2366
+problemId: 6674
+sourceTitle: "登校"
+sourceHtmlSha256: b17df0ebe0ed990e3999a0f64f0723e4dacd099e637747bfacf81a020e6a4052
+humanReview: null
+machineReview: unreviewed
+title: "등교"
+---
+
+상하좌우로 이동할 수 있는 $N\times M$ 격자에서 $(1,1)$에 살고 $(N,M)$에 학교가 있습니다. 특수 칸 $(A_i,B_i)$에서는 그 자리에 머문 채 $C_i$초 시간을 되돌릴 수 있지만, 피로도가 $D_i$ 증가하고 이후 1초 동안 움직일 수 없습니다.
+
+현재 시각 0에서 시작해 $T$초 이내에 학교에 도착할 때 가능한 피로도의 최솟값을 구하세요. 불가능하면 $-1$을 출력하세요.
+
+## 조건
+
+- $1\le N,M\le80$
+- $0\le K\le NM-2$
+- $1\le T,C_i,D_i\le10^9$
+- 특수 칸은 시작점과 도착점이 아니며 서로 다릅니다.
+
+## 입력
+
+$N,M,K,T$, 다음 $K$개 줄에 특수 칸의 $A_i,B_i,C_i,D_i$가 주어집니다.
+
+## 출력
+
+최소 피로도를 출력하세요.

@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2615
+problemId: 7660
+sourceTitle: "ペアの作り方"
+sourceHtmlSha256: 3ba3d2438035ea56b084ba42c418f1b7153184c6e5ad93e82ca576ad55175fa4
+humanReview: null
+machineReview: unreviewed
+title: "쌍 만드는 방법"
+---
+
+정수열 $X,Y$와 순열 $P$에 대해 $f(P)=\sum_i\min(X_i,Y_{P_i})$라 합니다. $f(P)$가 최솟값이 되는 순열의 개수를 구하세요.
+
+## 조건
+
+- $1\le N\le10^5$
+- $1\le X_i,Y_i\le10^9$, 모든 $2N$개 값은 서로 다릅니다.
+
+## 입력
+
+```text
+$N$
+$X_1$ $\cdots$ $X_N$
+$Y_1$ $\cdots$ $Y_N$
+```
+
+## 출력
+
+답을 $998244353$으로 나눈 나머지를 출력하세요.
+

@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2300
+problemId: 9279
+sourceTitle: "Substring OR Sum"
+sourceHtmlSha256: e0d455b7bbd7b371e2c469645e71b40fc44f125a8e2617a9542058d6650eb40b
+humanReview: null
+machineReview: unreviewed
+title: "부분 문자열 OR 합"
+---
+
+길이 $N$인 음이 아닌 정수열 $A=(A_1,\ldots,A_N)$가 주어집니다. $f(L,R)=A_L\lor A_{L+1}\lor\cdots\lor A_R$로 정의할 때, 모든 $1\le L\le R\le N$에 대한 $f(L,R)$의 합을 구하세요.
+
+여기서 $\lor$는 비트별 OR입니다.
+
+## 조건
+
+- $1\le N\le2\times10^5$
+- $0\le A_i<2^{28}$
+- 답은 $2^{63}$ 미만입니다.
+
+## 입력
+
+첫째 줄에 $N$, 둘째 줄에 $A_1,A_2,\ldots,A_N$이 주어집니다.
+
+## 출력
+
+답을 출력하세요.

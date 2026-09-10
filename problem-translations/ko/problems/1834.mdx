@@ -1,0 +1,28 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1834
+problemId: 7628
+sourceTitle: "1D Gravity"
+sourceHtmlSha256: "1ada9d450aa07f7db30255c89e82cca8a43e088875e538d8d4bbfe9964529db3"
+humanReview: null
+machineReview: unreviewed
+title: "1차원 중력"
+---
+
+시각 0에 수직선의 $x=1,2,\ldots,N$에 질량 $m_1,m_2,\ldots,m_N$인 별이 하나씩 있습니다. 질량은 $1,2,\ldots,N$의 순열입니다. 매 시각마다 모든 별은 양옆 중 더 무거운 별이 있는 좌표로 동시에 이동합니다. 한쪽에 별이 없으면 그쪽 최대 질량은 0이며, 두 값이 같지 않음이 보장됩니다.
+
+충분한 시간이 지나면 별들은 인접한 두 좌표를 번갈아 오가는 그룹으로 나뉩니다. 모든 별이 이후 항상 어떤 $x$와 $x+1$ 중 하나에 있도록 되는 최소 시각과, 그때의 그룹 수를 구하세요.
+
+## 입력
+
+```text
+N
+m_1 m_2 ... m_N
+```
+
+$2\le N\le2\times10^5$이고 $m_i$는 $1$부터 $N$의 순열입니다.
+
+## 출력
+
+종료 상태에 도달하는 최소 시각과 그룹 수를 출력하세요.

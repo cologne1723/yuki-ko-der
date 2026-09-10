@@ -1,0 +1,66 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1159
+problemId: 4957
+sourceTitle: "Sashiming String"
+sourceHtmlSha256: "3fd550a022ead4a2a7695732b1d643dc52a5ac1621c7d375f5f85d6b85a2d2b2"
+humanReview: null
+machineReview: unreviewed
+title: "Sashiming 문자열"
+---
+
+## 문제 설명
+
+영문 문자열 $S$의 첫 번째 문자가 대문자 `S`이고 마지막 $3$문자가 `ing`이면 $S$를 Sashiming 문자열이라고 합니다.
+
+예를 들어 `Snapping`과 `String`은 Sashiming 문자열이지만 `sashiming`과 `SAMPLING`은 Sashiming 문자열이 아닙니다.
+
+문자열 $S$가 주어질 때, $S$의 비어 있지 않은 연속 부분 문자열 중 Sashiming 문자열인 것의 개수를 구하세요. 문자열이 같아도 시작 위치가 다르면 따로 셉니다.
+
+## 입력
+
+```text
+$S$
+```
+
+- $1 \leq |S| \leq 2 \times 10^5$
+- $S$는 영문 대문자 또는 소문자로 이루어집니다.
+
+## 출력
+
+답을 한 줄에 출력하고 마지막에 줄바꿈을 넣으세요.
+
+## 예제
+
+### 예제 1 {file=""}
+#### 입력
+```text
+SingingSashiming
+```
+#### 출력
+```text
+4
+```
+
+조건을 만족하는 부분 문자열은 `Sing`, `Singing`, `Sashiming`, `SingingSashiming`의 $4$개입니다.
+
+### 예제 2 {file=""}
+#### 입력
+```text
+SomethingISNOTSashiming
+```
+#### 출력
+```text
+4
+```
+
+`Something`과 `Sashiming`은 비슷하게 보입니다.
+
+## 출처
+
+[Sashiming String](https://www.hackerrank.com/contests/75th/challenges/sashiming-string)
+
+writer: Sashiming
+
+tester: Mitarushi

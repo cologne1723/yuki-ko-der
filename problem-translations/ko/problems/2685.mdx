@@ -1,0 +1,42 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2685
+problemId: 10444
+sourceTitle: "Cell Proliferation (Easy)"
+sourceHtmlSha256: "9cd2f56943d34d7eaceb7f6da3bf86699eadef5ac6f24e25a36d2d2bf99884dc"
+humanReview: null
+machineReview: unreviewed
+title: "세포 증식 (Easy)"
+---
+
+## 문제
+
+AIC 세포는 다음과 같이 행동합니다.
+
+- 나이가 `t = 1, 2, ...`일 때, 확률 `P1/P2`로 즉시 새로운 세포 하나를 낳습니다.
+- 나이가 `t + 0.5`일 때, 확률 `1 - (Q1/Q2)^t`로 즉시 죽습니다.
+- 그 밖의 변화는 일어나지 않습니다.
+
+처음에 세포 하나가 있습니다. 시간 `T + 0.9`일 때 존재하는 세포 수의 기댓값을 `998244353`로 나눈 나머지를 구하세요.
+
+## 제약
+
+- `0 ≤ P1 ≤ P2 < 998244353`
+- `P2 ≠ 0`
+- `0 ≤ Q1 ≤ Q2 < 998244353`
+- `Q2 ≠ 0`
+- `1 ≤ T ≤ 10^3`
+
+## 입력
+
+입력은 다음 형식으로 주어집니다.
+
+```text
+P1 P2 Q1 Q2 T
+```
+
+## 출력
+
+답을 한 줄에 출력하세요.
+

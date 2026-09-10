@@ -1,0 +1,35 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1265
+problemId: 5097
+sourceTitle: "Balloon Survival"
+sourceHtmlSha256: "1956e6ba0c216ce23814fda576285f5afbaa2902d993d916bf0ae7b22e3fee2d"
+humanReview: null
+machineReview: unreviewed
+title: "풍선 생존"
+---
+
+## 문제 설명
+
+좌표평면에 $N$개의 풍선이 놓여 있습니다. 처음 반지름은 0이고, 신호를 보내면 모든 풍선의 반지름이 매초 1.0씩 동시에 커집니다. 두 풍선이 접촉하면 둘 다 터져 사라지며, 풍선이 1개 이하가 될 때까지 팽창을 계속합니다.
+
+신호를 보내기 전에 풍선을 몇 개 제거할 수 있습니다. 신호를 보낸 뒤 첫 번째 풍선만 남기기 위해 제거해야 하는 풍선 수의 최솟값을 구하세요.
+
+## 입력
+
+```text
+N
+x_1 y_1
+\vdots
+x_N y_N
+```
+
+- $1\leq N\leq1000$
+- $|x_i|,|y_i|\leq10^8$
+- 풍선 중심은 서로 다릅니다.
+- 세 개 이상의 풍선이 동시에 접촉하지 않습니다.
+
+## 출력
+
+첫 번째 풍선만 남기기 위해 제거해야 하는 풍선 수의 최솟값을 출력하세요.

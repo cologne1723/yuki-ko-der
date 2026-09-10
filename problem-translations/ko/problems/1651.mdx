@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1651
+problemId: 2877
+sourceTitle: "Removing Cards"
+sourceHtmlSha256: "3f06a06f65804b48d5b3b284d6b386cafd3f7e43444e1c134a63b6da3e8a3bb5"
+humanReview: null
+machineReview: unreviewed
+title: "카드 제거"
+---
+
+`1,2,...,N`이 적힌 카드가 왼쪽부터 순서대로 놓여 있습니다. 카드가 한 장 남을 때까지 다음 작업을 반복합니다.
+
+남은 카드 중 왼쪽에서 `Kx+1`번째인 카드(`x`는 음이 아닌 정수)에 표시한 뒤, 표시된 카드를 모두 제거합니다.
+
+각 질의의 `N_i`에 대해 마지막까지 남는 카드의 숫자를 구하세요.
+
+## 제약
+
+- `2 <= K <= 10^4`
+- `1 <= Q <= 10^5`
+- `1 <= N_i <= 10^18`
+
+## 입력
+
+첫째 줄에 `K Q`, 다음 `Q`개 줄에 `N_i`가 주어집니다.
+
+## 출력
+
+각 질의의 답을 한 줄에 하나씩 출력하세요.

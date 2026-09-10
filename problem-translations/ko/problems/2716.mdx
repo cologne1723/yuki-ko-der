@@ -1,0 +1,37 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2716
+problemId: 10596
+sourceTitle: "Falcon Method"
+sourceHtmlSha256: "7d635055b4be97c22600440e379ec00e7d60c5db9767aacf8f7be5794c9e3062"
+humanReview: null
+machineReview: unreviewed
+title: "팔콘 방법"
+---
+
+## 문제
+
+`D`와 `R`로 이루어진 길이 `N`의 문자열 `S=S_0...S_{N-1}`가 있습니다. 절차 `F(h,w,p)`는 `(0,0)`에서 시작해 `(h,w)`에 도착할 때까지 이동합니다. 현재 좌표가 경계에 있으면 가능한 방향으로 이동하고, 내부에서는 `S_i`가 `D`면 아래, `R`이면 오른쪽으로 이동한 뒤 카운터를 `(i+1) mod N`으로 바꿉니다.
+
+각 질의 `(H_i,W_i,P_i)`에 대해 절차 종료 후 카운터 값을 구하세요.
+
+## 제약
+
+- `1 ≤ N ≤ 2×10^5`, `1 ≤ Q ≤ 10^5`
+- `1 ≤ H_i,W_i ≤ 10^9`, `0 ≤ P_i < N`
+
+## 입력
+
+```text
+N Q
+S
+H_1 W_1 P_1
+⋮
+H_Q W_Q P_Q
+```
+
+## 출력
+
+각 답을 한 줄에 하나씩 출력하세요.
+

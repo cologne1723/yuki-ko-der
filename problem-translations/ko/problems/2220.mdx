@@ -1,0 +1,34 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2220
+problemId: 9116
+sourceTitle: "Range Insert & Point Mex"
+sourceHtmlSha256: "4f6d09b99daa0ea0e3c2f2068dda571cce6ff3124d6d2f5fd3688c93a589a2b8"
+humanReview: null
+machineReview: unreviewed
+title: "구간 삽입과 점 Mex"
+---
+
+$10^9$개의 집합 $S_1,\ldots,S_{10^9}$가 처음에 모두 비어 있다냥. 각 조작 $(l_i,r_i,a_i)$에 대해 $l_i\le j\le r_i$인 모든 $j$의 집합에 $a_i$를 추가한다냥. 이후 주어진 위치의 집합에 대한 Mex를 구하라냥. Mex는 집합에 포함되지 않는 가장 작은 비음이 아닌 정수이다냥.
+
+## 조건
+
+- $1\le N,Q\le10^5$
+- $1\le l_i\le r_i,x_i\le10^9$
+- $0\le a_i\le10^9$
+
+## 입력
+
+```text
+N
+l_1 r_1 a_1
+\vdots
+l_N r_N a_N
+Q
+x_1 \cdots x_Q
+```
+
+## 출력
+
+각 질의 위치의 Mex를 한 줄에 하나씩 출력하라냥.

@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1840
+problemId: 6872
+sourceTitle: "Random Painting"
+sourceHtmlSha256: "cd3df0c14e3008c552a321040e3fd795017489216980b41ef13a64eb9745c992"
+humanReview: null
+machineReview: unreviewed
+title: "무작위 칠하기"
+---
+
+$1,2,\ldots,N$번 타일이 원형으로 배치되어 있습니다. 타일 1을 포함한 일부 타일은 검은색이고, 색 상태는 0과 1로 이루어진 문자열 $s$로 주어집니다.
+
+처음에 타일 1에 있는 유키는 모든 타일이 검은색이 될 때까지 매번 현재 타일의 양옆 중 하나를 같은 확률로 골라 이동합니다. 이동한 타일이 아직 칠해지지 않았다면 검게 칠합니다.
+
+## 문제
+
+모든 타일이 검게 칠해질 때까지의 이동 횟수의 기댓값을 구하세요.
+
+## 입력
+
+```text
+N
+s
+```
+
+$2\le N\le10^6$, $s_1=1$이고 $s$는 0을 하나 이상 포함합니다.
+
+## 출력
+
+기댓값을 출력하세요.

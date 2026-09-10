@@ -1,0 +1,87 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1132
+problemId: 4826
+sourceTitle: "凸凹"
+sourceHtmlSha256: "988ef899967ea1617b0fbdb37c14a3189ceb2869b72020cf248ee69eeef083d7"
+humanReview: null
+machineReview: unreviewed
+title: "울퉁불퉁"
+---
+
+## 문제 설명
+
+null 군은 높은 곳과 낮은 곳을 매우 좋아합니다.
+
+null 군은 좌표평면 위의 산 $f(x)=ax^3+bx^2+cx+d$을 $p$부터 $q$까지 오르려고 합니다. $p \leq x \leq q$에서 가장 높은 곳과 가장 낮은 곳에서 기념사진을 찍기 위해 그 위치($x$좌표)와 높이($y$좌표)를 미리 알고 싶습니다. 딱 떨어지는 곳을 좋아하므로 $x$가 정수인 점만 조사합니다.
+
+null 군을 대신해 이를 조사하세요.
+
+등산을 시작한 곳에 가까운 쪽이 좋으므로 최댓값 또는 최솟값을 갖는 곳이 여러 개라면 $p$에 가까운 쪽을 출력하세요.
+
+## 제한
+
+- $-1\,000 \leq a,b,c,d \leq 1\,000$
+- $-100 \leq p \leq q \leq 100$
+- 입력은 모두 정수입니다.
+
+## 입력
+
+```text
+$a\ b\ c\ d\ p\ q$
+```
+
+## 출력
+
+$p \leq x \leq q$에서 최댓값을 $M$, 최솟값을 $m$, 최댓값을 갖는 $x$좌표를 $X_M$, 최솟값을 갖는 $x$좌표를 $X_m$이라고 합니다. 이 값들은 어떤 정수 $t$, $s$($p \leq t,s \leq q$)에 대해 $f(X_M)=f(t)$, $f(X_m)=f(s)$가 되도록 해야 합니다.
+
+$X_M$, $X_m$이 여러 개라면 $p$에 가까운 쪽을 선택하세요.
+
+공백으로 구분해 다음 형식으로 출력하고 마지막에 줄바꿈을 넣으세요.
+
+```text
+$M\ X_M\ m\ X_m$
+```
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+1 3 3 0 -10 10
+```
+
+#### 출력
+
+```text
+1330 10 -730 -10
+```
+
+### 예제 2 {file="01_sample_02.txt"}
+
+#### 입력
+
+```text
+0 0 1 1000 -10 0
+```
+
+#### 출력
+
+```text
+1000 0 990 -10
+```
+
+계수가 $0$일 수도 있다는 점에 주의하세요.
+
+## 출처
+
+[Beginners After Typhoon Contest#01: F - 울퉁불퉁](https://www.hackerrank.com/contests/epsf001/challenges/epsf001-f)
+
+writer: null
+
+tester: leafirby, QCFium
+
+HackerRank의 규칙에 따라 이식했으며 일부를 수정했습니다.

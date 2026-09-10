@@ -1,0 +1,72 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1135
+problemId: 4777
+sourceTitle: "RPN"
+sourceHtmlSha256: "1ee2422f5ac178f87b0213dd4b33717dc7f6b81d0c90e3f3e0f9b80493f61ff9"
+humanReview: null
+machineReview: unreviewed
+title: "RPN"
+---
+
+## 문제 설명
+
+$N$개의 원소로 이루어진 어떤 표기법의 수식이 주어집니다. 이 수식을 계산한 결과를 출력하세요.
+
+이 표기법에서는 연산자를 피연산자 뒤에 씁니다. 그 외의 부분은 일반적인 [중위 표기법](https://ja.wikipedia.org/wiki/中置記法)과 같습니다. 예를 들어 `a b -`는 $a-b$를, `a b + c d + -`는 $a+b-(c+d)$를 뜻합니다.
+
+## 입력
+
+```text
+$N$
+$A_1\ A_2\ \cdots\ A_N$
+```
+
+- $3 \leq N < 1\,000$
+- $N$은 홀수입니다.
+- $A_i$는 `+`, `-`, 또는 $1$ 이상 $100$ 이하의 정수 중 하나입니다.
+- $A$는 문제의 표기법으로 올바른 수식입니다. 구체적으로 $i$번째 원소까지 정수인 원소의 개수는 `+`, `-` 중 하나인 원소의 개수보다 항상 많고, 전체 정수 원소의 개수는 정확히 $(N+1)/2$개입니다.
+
+## 출력
+
+주어진 수식을 계산한 결과를 출력하고 마지막에 줄바꿈을 넣으세요.
+
+## 예제
+
+### 예제 1 {file=""}
+#### 입력
+```text
+3
+75 94 +
+```
+#### 출력
+```text
+169
+```
+
+### 예제 2 {file=""}
+#### 입력
+```text
+5
+3 3 4 + +
+```
+#### 출력
+```text
+10
+```
+
+### 예제 3 {file=""}
+#### 입력
+```text
+5
+5 7 - 5 +
+```
+#### 출력
+```text
+3
+```
+
+## 출처
+
+[HackerRank 문제](https://www.hackerrank.com/contests/epsf001/challenges/epsf-o/problem)를 일부 수정했습니다.

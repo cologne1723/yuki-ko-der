@@ -1,0 +1,26 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1668
+problemId: 6312
+sourceTitle: "Grayscale"
+sourceHtmlSha256: "92dfb090eaaa1ca2752f9c0649f7c2821957571f889c074cb9554e9491da4908"
+humanReview: null
+machineReview: unreviewed
+title: "회색조"
+---
+
+`H x W` 이미지의 각 칸에 회색 농도 `C_{ij}`가 주어집니다. 변환 후 농도 `D_{ij}`가 다음 조건을 만족하도록 이미지를 변환할 때, 변환 후 나타나는 색 종류 수의 최솟값을 구하세요.
+
+## 변환 조건
+
+- `C_{ij} <= C_{kl}`이면 `D_{ij} <= D_{kl}`입니다.
+- 변환 전 서로 다른 농도의 인접한 두 칸은 변환 후에도 서로 다른 농도입니다.
+
+## 입력
+
+`H W N`과 이미지의 농도가 주어집니다.
+
+## 출력
+
+가능한 색 종류 수의 최솟값을 출력하세요.

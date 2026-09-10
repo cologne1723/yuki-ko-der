@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1557
+problemId: 6279
+sourceTitle: "Binary Variable"
+sourceHtmlSha256: "9fe09ac30ed0024db07684f0fd0a87a2dc03909f92b56f0b511b722c00b1542b"
+humanReview: null
+machineReview: unreviewed
+title: "이진 변수"
+---
+## 문제
+
+각각 0 또는 1인 이진 변수 $B_1,\ldots,B_N$이 있습니다. 다음 조건을 만족할 때 $S=\sum B_k$의 최댓값을 구하세요.
+\[
+\sum_{i=1}^{M}\prod_{j=L_i}^{R_i}B_j=0
+\]
+
+## 입력
+
+$N,M$과 구간 $[L_i,R_i]$가 주어집니다.
+
+- $1\leq N\leq10^9$
+- $1\leq M\leq2\times10^5$
+- $1\leq L_i\leq R_i\leq N$
+
+## 출력
+
+$S$의 최댓값을 출력하세요.

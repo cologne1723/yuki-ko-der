@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1872
+problemId: 7336
+sourceTitle: "Dictionary Order"
+sourceHtmlSha256: "384b860029100da18e46aae06fa16c72643a43fedd414adbe7291e08d009afb4"
+humanReview: null
+machineReview: unreviewed
+title: "사전순"
+---
+
+정수 $N,M$, 수열 $A$, 순열 $P$가 주어집니다. $1\le B_1<\cdots<B_K\le N$이고 $\sum A_{B_i}=M$이면 $B$를 좋은 수열이라 합니다. 좋은 수열의 표제 수열을 $(P_{B_1},\ldots,P_{B_K})$로 정의합니다.
+
+## 문제
+
+표제 수열이 사전순으로 가장 작은 좋은 수열을 구하세요. 없으면 `-1`을 출력합니다.
+
+## 입력
+
+```text
+N M
+A_1 ... A_N
+P_1 ... P_N
+```
+
+$1\le N,M\le2000$, $1\le A_i\le M$이고 $P$는 순열입니다.
+
+## 출력
+
+가능하면 $K$와 $B_1,\ldots,B_K$를 출력하세요.

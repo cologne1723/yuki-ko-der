@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2057
+problemId: 8341
+sourceTitle: "Ising Model"
+sourceHtmlSha256: "0e8c84e3e89769e071a74d1b8a4816dd2cbe17e7d854db1da590e0824be14076"
+humanReview: null
+machineReview: unreviewed
+title: "Ising 모델"
+---
+
+양의 정수 $N,A,B$가 주어집니다. $S_i\in\{-1,1\}$인 수열 $S$에 대해
+
+$$f(S)=A\sum_{i=1}^{N-1}S_iS_{i+1}-B\sum_{i=1}^N S_i$$
+
+로 정의할 때 $f(S)$의 최솟값을 구하세요.
+
+## 입력
+
+```text
+N A B
+```
+
+$2\le N\le10^{10}$, $1\le A,B\le1000$입니다.
+
+## 출력
+
+최솟값을 출력하세요.

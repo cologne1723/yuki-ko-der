@@ -1,0 +1,36 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1245
+problemId: 4335
+sourceTitle: "ANDORゲーム(calc)"
+sourceHtmlSha256: "a0454c157123f87d283d987697057c4e4ff72ef86cfe00c3f5482d5c9c98a143"
+humanReview: null
+machineReview: unreviewed
+title: "ANDOR 게임(calc)"
+---
+
+## 문제 설명
+
+게임 시작 시 음이 아닌 정수 $T$를 가지고 있고 점수는 $0$입니다. 길이 $N$인 수열 $A$에 대해 $N$번 작업합니다.
+
+$i$번째 작업에서는 현재 정수 $X$를 $X\mathbin{and}A_i$ 또는 $X\mathbin{or}A_i$ 중 하나로 바꿉니다. 작업 후 점수에 바뀌기 전후 값의 차의 절댓값을 더합니다.
+
+고정된 작업 순서 $S$에 대해, 각 쿼리의 초기값 $T=t_i$에서 시작했을 때 최종 점수를 구하세요. $S$의 $i$번째 문자가 `0`이면 AND, `1`이면 OR을 선택합니다.
+
+## 입력
+
+```text
+N Q
+A_1 A_2 \ldots A_N
+S
+t_1 t_2 \ldots t_Q
+```
+
+- $1\leq N,Q\leq10^5$
+- $0\leq A_i\leq10^9$
+- $S$는 `0`,`1`로 이루어진 길이 $N$의 문자열입니다.
+
+## 출력
+
+각 쿼리의 답을 한 줄에 출력하세요.

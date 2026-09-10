@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2337
+problemId: 5648
+sourceTitle: "Equidistant"
+sourceHtmlSha256: 426fe2965b1aea3f0f91d859226b0b3c1f9f927af81e9324d0e1448d6ca853aa
+humanReview: null
+machineReview: unreviewed
+title: "등거리"
+---
+
+$N$개 정점의 트리가 주어집니다. 두 정점 $u,v$ 사이의 거리 $d(u,v)$는 최단 경로의 변 개수입니다.
+
+각 쿼리 $(S_i,T_i)$에 대해 $d(X,S_i)=d(X,T_i)$를 만족하는 정점 $X$의 개수를 구하세요.
+
+## 조건
+
+- $2\le N,Q\le2\times10^5$
+- 그래프는 트리입니다.
+- $S_i\ne T_i$
+
+## 입력
+
+첫째 줄에 $N,Q$, 다음 $N-1$개 줄에 트리의 변, 이어서 $Q$개 줄에 $S_i,T_i$가 주어집니다.
+
+## 출력
+
+각 쿼리의 답을 한 줄에 하나씩 출력하세요.

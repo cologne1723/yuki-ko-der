@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2320
+problemId: 9212
+sourceTitle: "Game World for PvP"
+sourceHtmlSha256: 09848e55cea22dad9fad45adcef517564bcae0110f869cc66887f4d4cde5892c
+humanReview: null
+machineReview: unreviewed
+title: "PvP를 위한 게임 월드"
+---
+
+$N$명의 사용자를 두 팀으로 나눕니다. 일부 사용자는 이미 에토와뉴 팀에, 일부는 라타류르 팀에 속해 있습니다.
+
+사용자 $i,j$가 같은 팀이면 협력력 $C_{ij}$를 얻습니다. 아직 정해지지 않은 사용자를 적절히 배치하여 협력력 총합을 최대로 하세요.
+
+## 조건
+
+- $2\le N\le60$
+- $1\le S,T\le N-1$, $S+T\le N$
+- $0\le C_{ij}\le10^9$
+- $C_{ij}=C_{ji}$, $C_{ii}=0$
+
+## 입력
+
+에토 팀 사용자 목록, 라타류르 팀 사용자 목록, 협력력 행렬이 주어집니다.
+
+## 출력
+
+협력력 총합의 최댓값을 출력하세요.

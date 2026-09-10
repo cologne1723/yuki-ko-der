@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2311
+problemId: 5296
+sourceTitle: "[Cherry 5th Tune] Cherry Month"
+sourceHtmlSha256: ffbdc66bf7082fb6c561085d31f7bc45bd5242017f1b8b5f9642c77767f5be2a
+humanReview: null
+machineReview: unreviewed
+title: "[Cherry 5th Tune] Cherry Month"
+---
+
+벚나무 $N$그루에 각각 $A_i$개의 꽃잎이 있습니다. 꽃잎 길로 연결된 두 나무는 처음에 없습니다. 이벤트가 시간 $1$부터 $T$까지 하나씩 발생하고, 각 이벤트는 $t-0.8$부터 $t-0.2$ 사이에 일어납니다.
+
+유형 1 `X Y`는 두 나무를 연결하고, 유형 2 `X K`는 $X$의 꽃잎을 $K$개 떨어뜨립니다. 유형 3은 $X$와 한 번의 길로 도달 가능한 나무 전체에서, 유형 4는 $X$와 같은 연결 요소 전체에서 $K$개씩 꽃잎을 떨어뜨립니다. 꽃잎 수는 음수가 되지 않습니다.
+
+각 질문 $(S_q,I_q)$에 대해 시간 $S_q$ 시점의 나무 $I_q$의 꽃잎 수를 출력하세요.
+
+## 조건
+
+- $2\le N\le1.5\times10^5$
+- $1\le A_i\le4\times10^{14}$
+- $1\le T,Q\le4\times10^5$
+- $T+Q\le4\times10^5$
+- $0\le S_q\le T$
+
+## 입력
+
+$N$, 초기 배열, $T$개의 이벤트, $Q$개의 질문이 주어집니다.
+
+## 출력
+
+각 질문의 답을 한 줄에 하나씩 출력하세요.

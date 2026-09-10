@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1540
+problemId: 6319
+sourceTitle: "級数おもちゃ"
+sourceHtmlSha256: "386b27839b6d573e3806f9570989935e66462bbe71d8a1f4c9202e781f28ef42"
+humanReview: null
+machineReview: unreviewed
+title: "급수 장난감"
+---
+## 문제
+
+양의 정수열 $A$에 대해 장난감이 다음 값을 계산합니다.
+\[
+\sum_{i=0}^{\infty}\binom{2i}{i}\frac1{16^i}\sum_{j=1}^{N}\frac{A_j}{2i+j}
+\]
+
+이 값은 항상 유리수 $a,b,c$를 사용해 $a+b\sqrt3+c\pi$로 나타낼 수 있습니다. 세 유리수를 문제의 방식으로 $998244353$에서 출력하세요.
+
+## 입력
+
+$N$과 $A_1,\ldots,A_N$이 주어집니다.
+
+- $1\leq N\leq10^5$
+- $1\leq A_i\leq10^6$
+
+## 출력
+
+$a,b,c$를 공백으로 구분해 출력하세요.

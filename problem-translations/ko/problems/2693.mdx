@@ -1,0 +1,38 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2693
+problemId: 10604
+sourceTitle: "Sword"
+sourceHtmlSha256: "04a542d3dde7e47bfa51228c8ddf7fd654ee22a870817b8bedd39921b0edf9af"
+humanReview: null
+machineReview: unreviewed
+title: "검"
+---
+
+## 문제
+
+Kamikazee의 검의 현재 공격력은 양의 정수 `P`입니다. 아이템 `i`를 장착하면 `T_i=1`일 때 공격력이 정확히 `B_i`만큼 증가하고, `T_i=2`일 때 공격력이 2배가 됩니다(`B_i`는 사용하지 않습니다).
+
+정확히 `K`개의 아이템을 장착했을 때 공격력의 최댓값을 구하세요. 아이템 효과는 인덱스 오름차순으로 적용됩니다. 최댓값이 `10^18`을 초과하면 `-1`을 출력하세요.
+
+## 제약
+
+- `1 ≤ K ≤ N ≤ 1000`
+- `1 ≤ P ≤ 10^18`
+- `T_i`는 1 또는 2입니다.
+- `T_i=1`이면 `1 ≤ B_i ≤ 10^9`, `T_i=2`이면 `B_i=0`입니다.
+
+## 입력
+
+```text
+N P K
+T_1 B_1
+⋮
+T_N B_N
+```
+
+## 출력
+
+최대 공격력을 출력하세요. `10^18`을 초과하면 `-1`을 출력하세요.
+

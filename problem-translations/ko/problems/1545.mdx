@@ -1,0 +1,28 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1545
+problemId: 6142
+sourceTitle: "[Cherry 2nd Tune N] Anthem"
+sourceHtmlSha256: "80fe60c637171032e9daaa2f95dcd071ddf04334c8b3be8df13836f919d00f5d"
+humanReview: null
+machineReview: unreviewed
+title: "앤섬"
+---
+## 문제
+
+$N$개의 프레이즈가 있고 프레이즈 $i$를 부르는 데 $X_i$초가 걸립니다. 곡은 프레이즈 $S$로 시작하고 $T$로 끝나며, 전체 프레이즈 수가 $K$개 이상이어야 합니다.
+
+연속한 프레이즈 $(A_j,B_j)$ 사이에는 $Y_j$초가 걸립니다. 조건을 만족하는 곡이 존재하는지 판정하고, 존재하면 총 소요 시간의 최솟값과 그 곡 하나를 출력하세요.
+
+## 입력
+
+$N,S,T,K$, 각 $X_i$와 $M$개의 전이 $(A_j,B_j,Y_j)$가 주어집니다.
+
+- $1\leq N\leq10^5$, $1\leq K\leq3\times10^4$
+- $1\leq M\leq\min(N^2,2\times10^5)$
+- $1\leq X_i,Y_j\leq10^9$
+
+## 출력
+
+불가능하면 `-1`을 출력하세요. 가능하면 최솟값과 이를 달성하는 프레이즈열을 출력하세요.

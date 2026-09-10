@@ -1,0 +1,27 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1328
+problemId: 5572
+sourceTitle: "alligachi-problem"
+sourceHtmlSha256: "8153215dcea5400f5325d2f6fd1673c8c7b7920dc8c5419d8c3ac2ed86cfc850"
+humanReview: null
+machineReview: unreviewed
+title: "공 배치"
+---
+
+## 문제
+
+`N`개의 공이 있고 공 `i`의 색 `C_i`는 빨강 또는 파랑입니다. 공을 원하는 순서로 한 줄에 배치하려 합니다.
+
+모든 `i`에 대해 공 `i`의 왼쪽에 색 `X_i`인 공이 정확히 `Y_i`개 있도록 배치할 수 있는지 판정하고, 가능하면 한 가지 배치를 출력하세요.
+
+## 입력
+
+`N`과 각 공의 `C_i X_i Y_i`가 주어집니다.
+
+`1 \le N \le 2\times10^5`, `C_i,X_i`는 `R` 또는 `B`, `0\le Y_i<N`입니다.
+
+## 출력
+
+가능하면 `Yes`와 왼쪽부터 놓인 공 번호를 출력하세요. 불가능하면 `No`를 출력하세요.

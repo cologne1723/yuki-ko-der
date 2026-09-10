@@ -1,0 +1,40 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2697
+problemId: 10622
+sourceTitle: "Range LIS Query"
+sourceHtmlSha256: "5b1a5b177ea791bc0fbe2e47eb1577391081516b8f6b986744fcfa3beac62d7b"
+humanReview: null
+machineReview: unreviewed
+title: "구간 LIS 질의"
+---
+
+## 문제
+
+`1` 이상 `4` 이하의 정수로 이루어진 수열 `A`가 주어집니다. 다음 두 종류의 질의를 순서대로 처리하세요.
+
+- `1 l r`: 연속 부분 수열 `(A_l,...,A_r)`의 최장 넓은 단조 증가 부분 수열 길이를 출력합니다.
+- `2 l r x`: `l ≤ i ≤ r`인 모든 `i`에 대해 `A_i`를 `x`로 변경합니다.
+
+## 제약
+
+- `1 ≤ N,Q ≤ 10^5`
+- `1 ≤ A_i ≤ 4`
+- 질의의 범위는 `1 ≤ l ≤ r ≤ N`, 갱신값은 `1 ≤ x ≤ 4`입니다.
+
+## 입력
+
+```text
+N
+A_1 A_2 ... A_N
+Q
+query_1
+⋮
+query_Q
+```
+
+## 출력
+
+1번 질의의 답을 순서대로 한 줄에 하나씩 출력하세요.
+

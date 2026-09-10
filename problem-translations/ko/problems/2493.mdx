@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2493
+problemId: 9454
+sourceTitle: K-th in L2 with L1
+sourceHtmlSha256: 9ec976f1b296928e9032d9278fda2c61c764b8a82c8ac4948a2c0582b93d80d1
+humanReview: null
+machineReview: unreviewed
+title: L1 거리에서 K번째 L2 거리
+---
+
+맨해튼 거리가 $D$인 격자점을 좋은 점이라 합니다. 좋은 점 중 원점과의 유클리드 거리가 작은 순서로 $K$번째인 점이 존재하는지 판정하고, 존재하면 하나 출력하세요.
+
+## 조건
+
+- $1\le Q\le100$
+- $0\le D_i\le100$, $1\le K_i\le1000$
+
+## 입력
+
+```text
+Q
+D1 K1
+...
+DQ KQ
+```
+
+## 출력
+
+각 질의에 대해 불가능하면 `No`, 가능하면 `Yes`와 좌표를 출력하세요.

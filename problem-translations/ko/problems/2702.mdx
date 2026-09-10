@@ -1,0 +1,46 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2702
+problemId: 10421
+sourceTitle: "Nand Nor Matrix"
+sourceHtmlSha256: "03879e184ba9ad18d2c0231033bf944ab6ec071bb65f49c8f25b60c901308931"
+humanReview: null
+machineReview: unreviewed
+title: "NAND NOR 행렬"
+---
+
+## 문제
+
+`nand(x,y)`는 `x=y=1`일 때 0, 그 외에는 1입니다. `nor(x,y)`는 `x=y=0`일 때 1, 그 외에는 0입니다.
+
+`N × N` 이진 행렬 `X`가 시간에 따라 변합니다. 시간 0에는 첫 행이 `A_j`, 첫 열의 나머지가 `B_i`, 나머지 칸이 0입니다. 시간 `t>0`에는 첫 행과 첫 열은 유지됩니다.
+
+나머지 칸 `(i,j)`에서 이전 값이 0이면 `nand(X_{t-1,i-1,j},X_{t-1,i,j-1})`, 이전 값이 1이면 `nor(X_{t-1,i-1,j},X_{t-1,i,j-1})`로 갱신됩니다.
+
+`Q`개의 질문 `(T_i,R_i,C_i)`에 대해 `X_{T_i,R_i,C_i}`를 출력하세요.
+
+## 제약
+
+- `1 ≤ N,Q ≤ 2 × 10^5`
+- `A_i,B_i`는 0 또는 1입니다.
+- `0 ≤ T_i ≤ 10^18`, `1 ≤ R_i,C_i ≤ N`
+
+## 입력
+
+```text
+N
+A_1 A_2 ... A_N
+B_2
+⋮
+B_N
+Q
+T_1 R_1 C_1
+⋮
+T_Q R_Q C_Q
+```
+
+## 출력
+
+각 질문의 답을 한 줄에 하나씩 출력하세요.
+

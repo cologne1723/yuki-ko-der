@@ -1,0 +1,61 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1229
+problemId: 3976
+sourceTitle: "ラグビーの得点パターン"
+sourceHtmlSha256: "c11393ca5333fcc7d032d8c19a3772fb6a770c0bd03bd0e8bab80858435562aa"
+humanReview: null
+machineReview: unreviewed
+title: "럭비 득점 패턴"
+---
+
+## 문제 설명
+
+한 팀의 럭비 점수 $N$이 주어집니다. 트라이(T: 5점), 컨버전(G: 2점), 페널티 골(PG: 3점)의 합으로 $N$점이 되는 조합의 수를 구하세요.
+
+컨버전은 트라이 후의 킥이므로 컨버전 수가 트라이 수를 초과할 수 없습니다. 드롭 골과 인정 트라이는 없다고 합니다.
+
+## 입력
+
+```text
+N
+```
+
+- $0\leq N\leq100$
+
+## 출력
+
+패턴 수를 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+0
+```
+#### 출력
+```text
+1
+```
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+5
+```
+#### 출력
+```text
+1
+```
+
+### 예제 3 {file="01_sample_03.txt"}
+#### 입력
+```text
+20
+```
+#### 출력
+```text
+4
+```

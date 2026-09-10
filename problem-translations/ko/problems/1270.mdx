@@ -1,0 +1,34 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1270
+problemId: 5223
+sourceTitle: "Range Arrange Query"
+sourceHtmlSha256: "c7575da7752826b22bf2931c476911db2902ff5cdbef8d2d4d137eba710515a2"
+humanReview: null
+machineReview: unreviewed
+title: "구간 배열 질의"
+---
+## 문제
+
+길이 $N$인 수열 $A$가 주어집니다. 각 질의 $(l,r)$에 대해 $a_l,\ldots,a_r$를 각각 $1$ 이상 $N$ 이하의 원하는 정수로 바꿀 때 수열의 역전 수의 최솟값을 구하세요. 각 질의는 독립적이며, 원소를 원래 값으로 둘 수도 있습니다.
+
+역전 수는 $i<j$이고 $a_i>a_j$인 쌍의 개수입니다.
+
+## 입력
+
+```text
+$N$ $Q$
+$a_1$ $\ldots$ $a_N$
+$l_1$ $r_1$
+$\vdots$
+$l_Q$ $r_Q$
+```
+
+- $1\leq N,Q\leq2\times10^4$
+- $1\leq a_i\leq N$
+- $1\leq l_i\leq r_i\leq N$
+
+## 출력
+
+각 질의의 답을 한 줄에 출력하세요.

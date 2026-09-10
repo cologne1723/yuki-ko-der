@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2573
+problemId: 10401
+sourceTitle: "moving up"
+sourceHtmlSha256: 59e9df5c84b98791d7df45afa98f82f6e773bef7c1b2a7f1aac0e4b125191434
+humanReview: null
+machineReview: unreviewed
+title: "위로 이동"
+---
+
+행마다 칸 수가 다른 육각 격자판이 있습니다. $(i,j)$의 칸은 존재하는 경우 $(i-1,j-1),(i-1,j),(i,j-1),(i,j+1),(i+1,j),(i+1,j+1)$과 인접합니다. $W$개의 말을 주어진 위치에서 시작해 한 번 이동할 때 비용 1을 지불하고, 각 말을 첫 번째 행의 $W$개 칸에 하나씩 배치하는 최소 비용을 구하세요.
+
+## 조건
+
+- $1\le H,W\le200$
+- $1\le x_i\le H$, $1\le y_i\le W+x_i-1$
+- 시작 칸은 서로 다릅니다.
+
+## 입력
+
+```text
+$H$ $W$
+$x_1$ $y_1$
+\vdots
+$x_W$ $y_W$
+```
+
+## 출력
+
+최소 비용을 출력하세요.
+

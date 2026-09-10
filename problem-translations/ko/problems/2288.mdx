@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2288
+problemId: 9172
+sourceTitle: "Somen Sliders"
+sourceHtmlSha256: 32358fd328438f11c8f198d6816cc894353bce8eba0e6b303f840e841e33be36
+humanReview: null
+machineReview: unreviewed
+title: "Somen Sliders"
+---
+
+정점 $0,1,\ldots,N,N+1$로 이루어진 유향 그래프에서, 양 끝점 이외의 정점을 공유하지 않는 $0$에서 $N+1$까지의 경로 집합 $\mathcal P,\mathcal Q$가 주어집니다. $\mathcal P$와 $\mathcal Q$의 경로는 공통 변을 갖지 않습니다.
+
+각 $R\in\mathcal R$에 대해 어떤 정점 $u$가 존재하여 $R$에서 $u$ 이전의 변은 $\mathcal P$의 변이고 이후의 변은 $\mathcal Q$의 변인 경로 집합 $\mathcal R$를 만들고자 합니다. 또한 모든 $P\in\mathcal P$의 첫 변과 모든 $Q\in\mathcal Q$의 마지막 변이 각각 $\mathcal R$에 포함되어야 합니다.
+
+이러한 $\mathcal R$이 존재하는지 판정하고, 존재한다면 $|E(\mathcal P)\cap E(\mathcal R)|$의 최댓값을 구하세요.
+
+## 조건
+
+- $1\le N\le 10^5$
+- $1\le X,Y\le N$
+- 각 경로의 길이는 2 이상입니다.
+- 경로 내부 정점은 각 집합 안에서 서로 다릅니다.
+
+## 입력
+
+첫째 줄에 $N,X,Y$가 주어지고, 이어서 $\mathcal P$의 $X$개 경로와 $\mathcal Q$의 $Y$개 경로가 주어집니다. 각 경로는 길이와 정점 열로 주어집니다.
+
+## 출력
+
+조건을 만족하는 $\mathcal R$이 존재하면 교집합 변 개수의 최댓값을, 존재하지 않으면 $-1$을 출력하세요.

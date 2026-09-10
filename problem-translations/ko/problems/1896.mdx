@@ -1,0 +1,36 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1896
+problemId: 7406
+sourceTitle: "Arrays and XOR Procedure 2"
+sourceHtmlSha256: "a1171038a448f5254beede0f76d45a39a9e371bb329e4e9062c4532d85f4170b"
+humanReview: null
+machineReview: unreviewed
+title: "배열과 XOR 절차 2"
+---
+
+길이 $N$의 수열 $A,B$가 주어집니다.
+
+## 조작
+
+다음 두 조작을 합쳐 최대 10000번 수행해 $\max(A)<\min(B)$를 만족시키세요.
+
+- $(P,Q)$를 골라 $A_P$를 $A_P\oplus B_Q$로 바꿉니다.
+- $(P,Q)$를 골라 $B_Q$를 $A_P\oplus B_Q$로 바꿉니다.
+
+항상 조건을 만족하는 방법이 존재하며 최소 횟수일 필요는 없습니다.
+
+## 입력
+
+```text
+N
+A_1 ... A_N
+B_1 ... B_N
+```
+
+$1\le N\le3000$, $1\le A_i,B_i<2^{30}$입니다.
+
+## 출력
+
+조건을 만족하는 조작 순서를 출력하세요.

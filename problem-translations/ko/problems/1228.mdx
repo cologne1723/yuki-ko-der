@@ -1,0 +1,69 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1228
+problemId: 4613
+sourceTitle: "I hate XOR Matching"
+sourceHtmlSha256: "a002fabd167f88196f0f8b4819b0730da87fd12f22ae0f98ddb991afa2032a7c"
+humanReview: null
+machineReview: unreviewed
+title: "나는 XOR 매칭이 싫어요"
+---
+
+## 문제 설명
+
+다음 조건을 만족하는 정수 수열 $a=(a_1,\ldots,a_N)$을 하나 구성하세요.
+
+- $1\leq N\leq40$
+- $0\leq a_i<2^{20}$
+- 각 정수는 수열에 최대 2번 등장합니다.
+- $a$의 공집합이 아닌 부분수열 $2^N-1$개 중 비트별 XOR가 $K$인 부분수열이 정확히 $X$개입니다.
+
+## 입력
+
+```text
+K X
+```
+
+- $0\leq K<2^{20}$
+- $0\leq X\leq10^9$
+
+## 출력
+
+조건을 만족하는 수열이 없으면 `No`를 한 줄에 출력하세요. 존재하면 `Yes`, 수열의 길이 $N$, 수열을 각각 다음 줄에 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+3 2
+```
+#### 출력
+```text
+Yes
+2
+0 3
+```
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+5 8
+```
+#### 출력
+```text
+Yes
+4
+5 0 0 5
+```
+
+### 예제 3 {file="01_sample_03.txt"}
+#### 입력
+```text
+0 2
+```
+#### 출력
+```text
+No
+```

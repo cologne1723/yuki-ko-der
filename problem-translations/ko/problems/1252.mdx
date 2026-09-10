@@ -1,0 +1,51 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1252
+problemId: 4692
+sourceTitle: "数字根D"
+sourceHtmlSha256: "f383a8c242e14a0ad987f0eee3cfdc778757c71a4f5fd4b6e5cfb08d9f3b6f49"
+humanReview: null
+machineReview: unreviewed
+title: "진법 D의 수근"
+---
+
+## 문제 설명
+
+비음이 아닌 정수 $N$의 $d$진법 자릿수 합을 $f(N)$이라 합니다. $N$의 $d$진법 표현의 각 자릿수 합을 뜻합니다. $f^0(N)=N$, $f^m(N)=f(f^{m-1}(N))$으로 정의하고, $N$의 $d$진법 수근을 $N^*=\lim_{m\to\infty}f^m(N)$으로 정의합니다.
+
+각 테스트 케이스의 $d,A,B$에 대해 $\sum_{k=A}^B k^*$를 구하세요. 입력과 출력은 모두 십진 표기입니다.
+
+## 입력
+
+```text
+T
+d A B
+\vdots
+d A B
+```
+
+- $1\leq T\leq2000$
+- $2\leq d\leq10^9$
+- $0\leq A\leq B\leq10^9$
+
+## 출력
+
+각 답을 한 줄에 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+3
+10 99 101
+9 9 18
+16 12345 67890
+```
+#### 출력
+```text
+12
+39
+444375
+```

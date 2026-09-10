@@ -1,0 +1,28 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1549
+problemId: 6020
+sourceTitle: "[Cherry 2nd Tune] BANning Tuple"
+sourceHtmlSha256: "aaa530bd275205a129c96d19e8dc4b31760d4fd1a6f6876ceecd7d95b8a31f7d"
+humanReview: null
+machineReview: unreviewed
+title: "튜플 금지"
+---
+## 문제
+
+$N$개의 음이 아닌 정수 $(X_1,\ldots,X_N)$를 생각합니다. 조건 $i$는 $A_i\leq X_{K_i}\leq B_i$를 만족하지 않는 것입니다.
+
+질의 $q$마다 조건 1부터 $q$까지를 모두 만족하면서 $S_q\leq X_1+\cdots+X_N\leq T_q$인 튜플의 개수를 $998244353$으로 나눈 나머지를 구하세요.
+
+## 입력
+
+$N,Q$와 $Q$개의 $K_i,A_i,B_i,S_i,T_i$가 주어집니다.
+
+- $1\leq N\leq10^{18}$, $1\leq Q\leq100$
+- $1\leq K_i\leq N$
+- $0\leq A_i\leq B_i,S_i\leq T_i\leq3000$
+
+## 출력
+
+각 질의의 답을 한 줄에 출력하세요.

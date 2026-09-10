@@ -1,0 +1,38 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2735
+problemId: 10759
+sourceTitle: "Demarcation"
+sourceHtmlSha256: "e91dc2cc9596264e7a181c1cc515ca0c5984f11b1e6539ea3261fd6afd61ce7f"
+humanReview: null
+machineReview: unreviewed
+title: "구분선"
+---
+
+## 문제
+
+수열 `A`를 하나 이상의 공집합이 아닌 연속 부분 수열로 나누는 방법 중, 모든 부분 수열이 `k`종류 이하의 값으로 이루어진 방법의 수를 `f(k)`라 합니다.
+
+각 구간 `X_l,...,X_r`에 대해 `f(k) ≤ S`인 양의 정수 `k`의 최대값을 구하세요. 그런 `k`가 없으면 0, 존재하지만 최대값이 없으면 -1을 출력합니다.
+
+## 제약
+
+- `1 ≤ N ≤ 10^6`, `1 ≤ Q ≤ 10^4`
+- `0 ≤ X_i ≤ N`, `1 ≤ S ≤ 2^60`
+
+## 입력
+
+```text
+N
+X_1 ... X_N
+Q
+l_1 r_1 S_1
+⋮
+l_Q r_Q S_Q
+```
+
+## 출력
+
+각 질의의 답을 출력하세요.
+

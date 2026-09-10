@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1355
+problemId: 5759
+sourceTitle: "AND OR GAME"
+sourceHtmlSha256: "66dd6270f5974268db2cfa3a88b8f2c4958475b806776c72bdf85a12bd637ada"
+humanReview: null
+machineReview: unreviewed
+title: "AND OR 게임"
+---
+
+## 문제
+
+비트 연산을 수행할 비음이 아닌 정수 `X`와 `Y`, 수열 `A_1,...,A_N`이 주어집니다. 각 `i`에 대해 `P_i`를 `1`, `2`, `3` 중 하나로 정해 순서대로 처리합니다.
+
+- `P_i=1`: `X`를 `X AND A_i`로 바꿉니다.
+- `P_i=2`: `X`를 `X OR A_i`로 바꿉니다.
+- `P_i=3`: `X`를 `A_i`로 바꿉니다.
+
+최종 `X`가 `Y`가 되도록 하는 수열 `P`가 존재하는지 판정하고, 존재하면 하나를 출력하세요.
+
+## 입력
+
+`N X Y`와 `A_1,...,A_N`이 주어집니다.
+
+## 출력
+
+가능하면 `Yes`와 수열 `P`를, 불가능하면 `No`를 출력하세요.

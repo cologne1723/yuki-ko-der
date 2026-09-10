@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1246
+problemId: 4320
+sourceTitle: "ANDORゲーム(max)"
+sourceHtmlSha256: "dbb969d9796af90779de521b94518db479c495a2e7db6c3baa1db86ef808d93e"
+humanReview: null
+machineReview: unreviewed
+title: "ANDOR 게임(max)"
+---
+## 문제
+
+처음에 음이 아닌 정수 $T$를 가지고 있고 점수는 0입니다. 길이 $N$인 수열 $A$에 대해 다음 작업을 $N$번 반복합니다.
+
+$i$번째 작업에서 현재 정수를 $X$라 할 때, $X$를 $X$와 $A_i$의 bitwise AND 또는 bitwise OR 중 하나로 바꿉니다. 작업 후 점수에 바뀐 값과 이전 값의 차이의 절댓값을 더합니다.
+
+최종 점수의 최댓값을 구하세요.
+
+## 입력
+
+```text
+$N$ $T$
+$A_1$ $\ldots$ $A_N$
+```
+
+- $1\leq N\leq10^5$
+- $0\leq T,A_i\leq10^9$
+
+## 출력
+
+점수의 최댓값을 출력하세요.

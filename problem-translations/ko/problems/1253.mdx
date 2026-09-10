@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1253
+problemId: 4691
+sourceTitle: "雀見椪"
+sourceHtmlSha256: "2ee1f0bbd701bdabb90f23eab8e1314d4816b9834aa8ef9ffdc41903f1854247"
+humanReview: null
+machineReview: unreviewed
+title: "가위바위보 무승부"
+---
+
+## 문제 설명
+
+$N$명이 가위바위보를 합니다. 각 참가자가 바위, 가위, 보를 낼 확률은 각각 $A_G/B_G$, $A_C/B_C$, $A_P/B_P$이며 서로 독립입니다. 무승부가 될 확률 $R$을 $10^9+7$에서의 유한체 표현으로 출력하세요.
+
+즉 $R=P/Q$일 때 $S Q\equiv P\pmod{10^9+7}$인 $S$를 출력합니다.
+
+## 입력
+
+```text
+T
+N A_G B_G A_C B_C A_P B_P
+\vdots
+```
+
+- $1\leq T\leq10^4$, $2\leq N\leq10^{18}$
+- 각 분수의 분자와 분모는 $0\leq A\leq B\leq10^9$, 분모는 0이 아닙니다.
+- 세 확률의 합은 1입니다.
+
+## 출력
+
+각 답을 한 줄에 출력하세요.

@@ -1,0 +1,45 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2409
+problemId: 9874
+sourceTitle: Strange Werewolves
+sourceHtmlSha256: 7f14fd8a6ab15c46f3df2a76b32d7763f591db2c760426cbdafb2a4ca8316ddf
+humanReview: null
+machineReview: unreviewed
+title: 이상한 늑대인간
+---
+
+$X$명의 인간과 $Y$마리의 늑대가 회의를 합니다. 아직 추방되지 않은 참가자 중 인간 한 명 또는 늑대 한 마리를 골라 추방하는 일을, 인간 또는 늑대 중 한 종류가 모두 추방될 때까지 반복합니다.
+
+회의가 끝났을 때 남은 인간은 $Z$명, 남은 늑대는 $W$마리입니다. $Z$와 $W$ 중 하나는 0입니다. 가능한 추방 순서의 수를 $998244353$으로 나눈 나머지를 구하세요. 참가자가 다르면 추방 순서도 다르게 셉니다.
+
+## 조건
+
+- $1\le X,Y\le3\times10^5$
+- $0\le Z\le X$, $0\le W\le Y$
+- $Z=0$ 또는 $W=0$이며 $(Z,W)\ne(0,0)$
+
+## 입력
+
+```text
+X Y Z W
+```
+
+## 출력
+
+답을 출력하세요.
+
+## 예제
+
+### 입력 1
+
+```text
+2 2 1 0
+```
+
+### 출력 1
+
+```text
+8
+```

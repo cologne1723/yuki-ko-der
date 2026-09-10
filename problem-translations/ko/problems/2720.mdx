@@ -1,0 +1,36 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2720
+problemId: 10587
+sourceTitle: "Sum of Subarray of Subsequence of..."
+sourceHtmlSha256: "28b63c7c075ca1443d3e1d3cf94c8b9007027193fee280629e879143e617d702"
+humanReview: null
+machineReview: unreviewed
+title: "부분 수열의 부분 배열 합..."
+---
+
+## 문제
+
+수열 `B`에 대해 `f_0(B)`를 원소 합으로 정의합니다. 문자열 `S`의 각 문자를 순서대로 처리하며, 문자가 `a`이면 `B`의 모든 공집합이 아닌 연속 부분 수열 `C`에 대한 `f_{i-1}(C)`의 합을 `f_i(B)`로 정의하고, `s`이면 모든 공집합이 아닌 부분 수열 `C`에 대한 합으로 정의합니다. `f_M(A)`를 `998244353`으로 나눈 나머지를 구하세요.
+
+부분 수열은 인덱스 집합이 다르면 서로 다르게 셉니다.
+
+## 제약
+
+- `1 ≤ N,M ≤ 10^5`
+- `0 ≤ A_i < 998244353`
+- `S`는 `a`와 `s`로만 이루어집니다.
+
+## 입력
+
+```text
+N M
+A_1 ... A_N
+S
+```
+
+## 출력
+
+답을 출력하세요.
+

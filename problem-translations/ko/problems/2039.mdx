@@ -1,0 +1,26 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2039
+problemId: 8192
+sourceTitle: "Copy and Avoid"
+sourceHtmlSha256: "b2fe3c081dc57214c529cf37de3f2ff4aa17b6e31f06e5e81e491e336a86b830"
+humanReview: null
+machineReview: unreviewed
+title: "복사하며 피하기"
+---
+
+처음 $x=y=1$입니다. 조작 a는 $x$를 $x+y$로 바꾸고 $A$원이 들며, 조작 b는 $y$를 $x$로 바꾸고 $B$원이 듭니다. 과정 중 $x$가 싫어하는 수 $C_i$가 되지 않게 하면서 $x=N$으로 만드는 최소 비용을 구하세요.
+
+## 입력
+
+```text
+N M A B
+C_1 C_2 ... C_M
+```
+
+$3\le N\le10^9$, $1\le M\le\min(N-2,5000)$입니다.
+
+## 출력
+
+가능하면 최소 비용, 불가능하면 `-1`을 출력하세요.

@@ -1,0 +1,34 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2744
+problemId: 10839
+sourceTitle: "Power! or +1"
+sourceHtmlSha256: "4561be840e128809dfd761e9b2883ded923363fa0c1b57b8d3b3d3be42d46d1c"
+humanReview: null
+machineReview: unreviewed
+title: "거듭제곱! 또는 +1"
+---
+
+## 문제
+
+처음 `X=1`입니다. 다음 연산을 0회 이상 수행해 `X`를 `N`의 배수로 만들 때 비용 합의 최솟값을 구하세요.
+
+- `X←X+1`, 비용 `A`
+- 양의 정수 `k`를 골라 `X←X^k`, 비용 `B^k`
+- `X←X!`, 비용 `C`
+
+## 제약
+
+- `2 ≤ N,A,B,C ≤ 2×10^5`
+
+## 입력
+
+```text
+N A B C
+```
+
+## 출력
+
+최소 비용을 출력하세요.
+

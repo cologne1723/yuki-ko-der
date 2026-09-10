@@ -1,0 +1,38 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2630
+problemId: 10435
+sourceTitle: "Colorful Vertices and Cheapest Paths "
+sourceHtmlSha256: c113b10c711dba586db348e0ea976d344ea1eef8957f92257abb28ea5d8439bd
+humanReview: null
+machineReview: unreviewed
+title: "색칠된 정점과 가장 저렴한 경로"
+---
+
+무방향 그래프의 각 정점은 색 $1$부터 $10$ 중 하나입니다. 처음에는 모든 정점이 통행 불가능하고, 색 $i$의 정점을 모두 통행 가능하게 하는 데 비용 $W_i$가 듭니다. 각 쿼리에서 두 정점을 잇는 경로가 존재하도록 지불해야 하는 최소 비용을 구하세요. 불가능하면 $-1$입니다.
+
+## 조건
+
+- $2\le N\le10^4$, $0\le M\le10^4$, $1\le Q\le10^4$
+- $1\le W_i\le10^9$, 정점 색은 $1$ 이상 $10$ 이하입니다.
+
+## 입력
+
+```text
+$N$ $M$
+$A_1$ $B_1$
+\vdots
+$A_M$ $B_M$
+$C_1$ $\cdots$ $C_N$
+$W_1$ $\cdots$ $W_{10}$
+$Q$
+$u_1$ $v_1$
+\vdots
+$u_Q$ $v_Q$
+```
+
+## 출력
+
+각 쿼리의 답을 한 줄에 하나씩 출력하세요.
+

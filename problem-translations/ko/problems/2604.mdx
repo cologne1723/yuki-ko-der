@@ -1,0 +1,34 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2604
+problemId: 10321
+sourceTitle: "Initial Motion"
+sourceHtmlSha256: 836e47049244c1a3fdfaf06b2d0534f48d26444ed16252cfa6ffd5bfee2950e9
+humanReview: null
+machineReview: unreviewed
+title: "초기 이동"
+---
+
+연결된 가중 무방향 그래프에서 $K$명의 사용자가 시작 정점 $A_i$에서 출발합니다. 정점 $v$에는 무기 $B_v$개가 있고, 각 사용자는 무기 하나를 주울 수 있으며 먼저 주운 사람의 무기는 사라집니다. 모든 사용자가 무기를 하나씩 줍는 데 필요한 이동 거리 합의 최솟값을 구하세요.
+
+## 조건
+
+- $1\le K,N,M\le2000$
+- $K\le\sum B_i$, 간선 가중치는 $10^{12}$ 이하입니다.
+
+## 입력
+
+```text
+$K$ $N$ $M$
+$A_1$ $\cdots$ $A_K$
+$B_1$ $\cdots$ $B_N$
+$U_1$ $V_1$ $D_1$
+\vdots
+$U_M$ $V_M$ $D_M$
+```
+
+## 출력
+
+최솟값을 출력하세요.
+

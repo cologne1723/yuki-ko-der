@@ -1,0 +1,27 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2009
+problemId: 5497
+sourceTitle: "Drunkers' Contest"
+sourceHtmlSha256: "b53cdb42c7c95c8048f5268a83b66b9ae8ae2c69d9c8a512d23d91e9e4b96095"
+humanReview: null
+machineReview: unreviewed
+title: "음주자의 대회"
+---
+
+문제 $1$부터 $N$까지를 순서대로 풉니다. 누적 음주량이 $x$일 때 문제 $i$의 발상 시간은 $A_i/(1+x)$분, 구현 시간은 $B_i(1+x)$분입니다. 각 문제를 시작하기 전에 원하는 만큼 술을 마실 수 있을 때, 모든 문제를 끝내는 최소 시간을 구하세요.
+
+## 입력
+
+```text
+N
+A_1 ... A_N
+B_1 ... B_N
+```
+
+$1\le N\le2\times10^5$, $1\le A_i,B_i\le10^9$입니다.
+
+## 출력
+
+최소 시간을 절대 오차 또는 상대 오차 $10^{-6}$ 이하로 출력하세요.

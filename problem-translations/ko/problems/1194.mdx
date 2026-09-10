@@ -1,0 +1,85 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1194
+problemId: 4900
+sourceTitle: "Replace"
+sourceHtmlSha256: "3742eec3f81cf543fa5ccde0e8c2833df94a13c15a9b32b94ef78d8ac50704cd"
+humanReview: null
+machineReview: unreviewed
+title: "치환"
+---
+
+## 문제 설명
+
+정수로 이루어진 길이 $N$인 수열 $A$가 있습니다. 처음에는 $A_i=i$ ($1\leq i\leq N$)입니다.
+
+이 수열에 대해 $M$개의 작업 후보가 있습니다.
+
+$i$번째 작업은 $A_j=B_i$인 모든 $j$에 대해 $A_j=C_i$로 바꾸는 것입니다.
+
+각 작업은 횟수 제한 없이 수행할 수 있고, 한 번도 수행하지 않아도 됩니다. 작업 순서에도 제한이 없으며, 언제든 작업을 끝낼 수 있습니다.
+
+작업을 끝낸 뒤 $A$의 원소 합으로 가능한 최댓값을 구하세요.
+
+## 입력
+
+```text
+N M
+B_1 C_1
+\vdots
+B_M C_M
+```
+
+- $2\leq N\leq 10^9$
+- $1\leq M\leq 2\times10^5$
+- $1\leq B_i,C_i\leq N$
+- $B_i\neq C_i$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+작업 후 $A$의 원소 합의 최댓값을 한 줄에 출력하세요. 마지막에 줄바꿈을 넣으세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+5 5
+2 3
+1 2
+4 5
+3 4
+5 4
+```
+#### 출력
+```text
+25
+```
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+4 3
+4 3
+3 2
+2 1
+```
+#### 출력
+```text
+10
+```
+
+### 예제 3 {file="01_sample_03.txt"}
+#### 입력
+```text
+3 3
+1 2
+2 3
+3 1
+```
+#### 출력
+```text
+9
+```

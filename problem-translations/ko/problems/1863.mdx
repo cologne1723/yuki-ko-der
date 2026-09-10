@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1863
+problemId: 6234
+sourceTitle: "Xor Sum 2...?"
+sourceHtmlSha256: "c6bf8b90a4a00ca39ec5838db1b1b97aaf7077e581a5053f80f279a32b491e87"
+humanReview: null
+machineReview: unreviewed
+title: "XOR 합 2...?"
+---
+
+길이 $N$의 양의 정수열 $A,B$가 주어지며 $B$의 원소는 0 또는 1입니다. 다음을 만족하는 $1\le l\le r\le N$의 개수를 구하세요.
+
+$$\sum_{i=l}^{r}A_i\;\mathbin{-}\;(A_l\oplus\cdots\oplus A_r)=B_l\oplus\cdots\oplus B_r$$
+
+## 입력
+
+```text
+N
+A_1 A_2 ... A_N
+B_1 B_2 ... B_N
+```
+
+$1\le N\le10^5$, $1\le A_i\le10^9$, $B_i\in\{0,1\}$입니다.
+
+## 출력
+
+조건을 만족하는 구간 수를 출력하세요.

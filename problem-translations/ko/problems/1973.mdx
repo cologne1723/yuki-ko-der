@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1973
+problemId: 5501
+sourceTitle: "Divisor Sequence"
+sourceHtmlSha256: "c85034833fedcc5441318a527ed3d47802bf7c687d147dbf2c24b563b3d111f3"
+humanReview: null
+machineReview: unreviewed
+title: "약수 수열"
+---
+
+양의 정수 $N,M$이 주어집니다. 다음 조건을 모두 만족하는 수열 $A$의 개수를 $10^9+7$로 나눈 나머지를 구하세요.
+
+## 조건
+
+- 원소 수는 $N$입니다.
+- 모든 원소는 양의 정수입니다.
+- $1\le i\le N-1$인 모든 $i$에 대해 $A_iA_{i+1}$은 $M$의 약수입니다.
+
+## 입력
+
+```text
+N M
+```
+
+$2\le N\le5\times10^5$, $1\le M\le10^{12}$입니다.
+
+## 출력
+
+조건을 만족하는 수열의 개수를 출력하세요.

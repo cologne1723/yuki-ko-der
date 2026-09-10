@@ -1,0 +1,54 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1240
+problemId: 5046
+sourceTitle: "Or Sum of Xor Pair"
+sourceHtmlSha256: "414bb99717805240db36e7a076f525dff76bea77c6ca6d97b7a360babfce8d72"
+humanReview: null
+machineReview: unreviewed
+title: "XOR 조건 쌍의 OR 합"
+---
+
+## 문제 설명
+
+$N$개의 음이 아닌 정수 $A_i$와 음이 아닌 정수 $X$가 주어집니다. $1\leq i<j\leq N$이고 $A_i\mathbin{xor}A_j<X$인 모든 쌍에 대해 $A_i\mathbin{or}A_j$의 합을 구하세요. 조건을 만족하는 쌍이 없으면 $0$을 출력하세요.
+
+## 입력
+
+```text
+N X
+A_1 A_2 \ldots A_N
+```
+
+- $2\leq N\leq2\times10^5$
+- $1\leq X\leq2^{18}$
+- $0\leq A_i<2^{18}$
+
+## 출력
+
+답을 출력하세요. 마지막에 줄바꿈을 넣으세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+4 4
+1 2 3 4
+```
+#### 출력
+```text
+9
+```
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+4 2
+11 13 15 32
+```
+#### 출력
+```text
+0
+```

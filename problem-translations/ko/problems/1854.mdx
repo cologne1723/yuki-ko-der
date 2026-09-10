@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1854
+problemId: 6727
+sourceTitle: "Limited Bubble Sort"
+sourceHtmlSha256: "e4992b0fbc529a73be9580afa4ed1ba0a38278c828fc3ac1e49b5f1e5011898c"
+humanReview: null
+machineReview: unreviewed
+title: "제한된 버블 정렬"
+---
+
+$(1,2,\ldots,N)$의 순열 $p$가 주어집니다. 다음 조작을 사용해 $p$를 오름차순으로 정렬하세요. 위치 $i$와 $i+1$의 값이 각각 $i,i+1$이 아닐 때에만 두 값을 교환할 수 있습니다. 조작은 최대 $N^2$번 할 수 있습니다.
+
+## 문제
+
+정렬할 수 있는지 판정하고, 가능하면 조작 순서 하나를 출력하세요.
+
+## 입력
+
+```text
+T
+N p_1 p_2 ... p_N
+```
+
+$1\le T\le250$, $2\le N\le500$이고 모든 테스트 케이스에서 $N$의 합은 500 이하입니다.
+
+## 출력
+
+각 테스트 케이스에 대해 불가능하면 불가능하다고 출력하고, 가능하면 교환 조작의 수와 각 교환 위치를 출력하세요.

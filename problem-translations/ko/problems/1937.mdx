@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1937
+problemId: 7563
+sourceTitle: "Various Tournament"
+sourceHtmlSha256: "0d609421340ec510120fe9fd7d16c86b37a3047e0266ae042548c4f1fcc5af27"
+humanReview: null
+machineReview: unreviewed
+title: "다양한 토너먼트"
+---
+
+$N$명의 참가자가 일렬로 서서 인접한 참가자끼리 경기하고, 승자만 남기는 과정을 한 명이 남을 때까지 반복합니다. 참가자 $i<j$에서 $S_{i,j}=1$이면 $i$가 반드시 이기고, 0이면 집니다.
+
+## 문제
+
+$N\in\{2,4,8,16\}$일 때 참가자 $k$가 우승자가 되는 배치의 수를 모든 $k$에 대해 구하세요.
+
+## 입력
+
+```text
+N
+S_{1,1} ... S_{1,N}
+...
+S_{N,1} ... S_{N,N}
+```
+
+## 출력
+
+각 참가자의 배치 수를 한 줄에 출력하세요.

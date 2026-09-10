@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2305
+problemId: 8628
+sourceTitle: "[Cherry 5th Tune N] Until That Day..."
+sourceHtmlSha256: 039150d776b5cbb0dc9b6b5e964ca8051b7ee4a958e002bbcc00556ae4202cd4
+humanReview: null
+machineReview: unreviewed
+title: "[Cherry 5th Tune N] Until That Day..."
+---
+
+정점 $0$부터 $N$까지의 rooted tree가 있고, 루트는 $0$이며 정점 $i$의 부모는 $P_i$입니다. 체리짱은 처음 정점 $0$에 있습니다.
+
+현재 정점이 잎이 아니면 자식으로 이동하며, 자식 $u$를 고를 확률은 $W_u$에 비례합니다. 현재 정점이 잎이면 루트 $0$으로 이동합니다.
+
+정점 $A_q$가 이동 목적지로 선택되는 횟수의 기댓값을 $E$라 할 때, $E\pmod{998244353}$를 구하는 쿼리를 처리하세요.
+
+## 조건
+
+- $1\le N\le5000$
+- $0\le P_i<i$
+- $1\le W_i\le10^5$
+- $1\le Q\le20$
+- $0\le A_q\le N$, $0\le K_q\le10^9$
+
+## 입력
+
+$N$, 부모 배열, 가중치 배열, $Q$개의 $A_q,K_q$가 주어집니다.
+
+## 출력
+
+각 쿼리의 답을 한 줄에 하나씩 출력하세요.

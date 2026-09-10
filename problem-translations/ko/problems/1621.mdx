@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1621
+problemId: 6712
+sourceTitle: "Sequence Inversions"
+sourceHtmlSha256: "043231a63c8ebeaa8d31edfa9045a10710d685b63762c019b4506a7bd34f90ae"
+humanReview: null
+machineReview: unreviewed
+title: "수열의 역전 수"
+---
+
+수열 `A_1, A_2, ..., A_N`을 재배열하여 수열 `B`를 만들 때, 다음 조건을 만족하는 재배열의 개수를 구하세요.
+
+`i < j`이고 `B_i > B_j`인 순서쌍 `(i, j)`의 개수가 정확히 `K`개여야 합니다. 이러한 순서쌍을 역전이라고 합니다.
+
+## 입력
+
+입력은 표준 입력으로 주어집니다.
+
+- 첫째 줄에 `N`, `K`가 주어집니다.
+- 둘째 줄에 `A_1, A_2, ..., A_N`이 주어집니다.
+
+## 제약
+
+- `2 <= N <= 100`
+- `0 <= K <= N(N-1)/2`
+- `1 <= A_i <= 10^9`
+
+## 출력
+
+조건을 만족하는 재배열의 개수를 출력하세요.

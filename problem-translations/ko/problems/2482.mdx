@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2482
+problemId: 10143
+sourceTitle: Sandglasses
+sourceHtmlSha256: 924c950cffe32a183a0d3791f1078849c2b20b8f9b947415344311af31d65886
+humanReview: null
+machineReview: unreviewed
+title: 모래시계
+---
+
+각각 최대 $K$그램을 담는 모래시계 $N$개가 있습니다. 모래시계 $i$는 위쪽 부품이 A 또는 B이고, A에 $b_i$그램, 다른 부품에 $K-b_i$그램이 있습니다. 모래는 초당 1그램씩 아래로 떨어집니다.
+
+아래 부품이 가득 차면 뒤집고, A의 모래 양이 같은 두 모래시계가 있으면 둘 다 뒤집습니다. $T$초 후 각 모래시계의 A에 있는 모래 양을 출력하세요.
+
+## 조건
+
+- $1\le N\le2\times10^5$, $2\le K,T\le10^9$
+- $0<b_i<K$이고 $b_i$는 서로 다릅니다.
+
+## 입력
+
+```text
+N K T
+a1 a2 ... aN
+b1 b2 ... bN
+```
+
+## 출력
+
+각 모래시계의 A에 있는 모래 양을 출력하세요.

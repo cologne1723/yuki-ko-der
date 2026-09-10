@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2518
+problemId: 10062
+sourceTitle: Adjacent Larger
+sourceHtmlSha256: 30e539bbe0b3d94c02c94a80a7df3744fd6ee98da125a1845e2eab50312ec531
+humanReview: null
+machineReview: unreviewed
+title: 양옆의 더 큰 원소
+---
+
+$1$부터 $N$까지의 순열 $P$가 존재하는지 판정하세요. 각 $i$에 대해 양옆 원소 $P_{i-1},P_{i+1}$ 중 $P_i$보다 큰 원소의 개수가 $A_i$여야 합니다. 인덱스는 원형으로 연결됩니다.
+
+## 조건
+
+- $1\le T\le10^4$, $2\le N\le2\times10^5$
+- $A_i$는 0, 1, 2 중 하나입니다.
+- 모든 테스트 케이스의 $N$ 합은 $2\times10^5$ 이하입니다.
+
+## 입력
+
+```text
+T
+N
+A1 A2 ... AN
+```
+
+## 출력
+
+가능하면 `Yes`, 불가능하면 `No`를 출력하세요.

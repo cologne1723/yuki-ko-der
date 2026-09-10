@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1660
+problemId: 6778
+sourceTitle: "Matrix Exponentiation"
+sourceHtmlSha256: "6597fb21b290d78fc386e58b817eb64b3f60491b6d70d74fe870ad571e237f07"
+humanReview: null
+machineReview: unreviewed
+title: "행렬 거듭제곱"
+---
+
+`N x N` 행렬 `A`가 있습니다. `K`개의 위치 `(r_i,c_i)`의 원소는 1이고 나머지는 0입니다.
+
+어떤 양의 정수 `m`에 대해 `A^m`이 영행렬이 되는지 판정하고, 가능하면 그러한 `m`의 최솟값을 구하세요.
+
+## 제약
+
+- `1 <= N <= 10^5`
+- `0 <= K <= min(N^2,10^5)`
+- `1 <= r_i,c_i <= N`
+- 입력된 위치는 서로 다릅니다.
+
+## 입력
+
+`N K`와 1인 원소들의 위치가 주어집니다.
+
+## 출력
+
+조건을 만족하는 `m`의 최솟값을 출력하고, 존재하지 않으면 문제의 출력 형식에 따라 불가능함을 출력하세요.

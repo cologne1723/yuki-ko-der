@@ -1,0 +1,57 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1320
+problemId: 5567
+sourceTitle: "Two Type Min Cost Cycle"
+sourceHtmlSha256: "bec58a808f185f528cab7381b0394a2a2e7f9c9933b8dd2339581c88e86c7f47"
+humanReview: null
+machineReview: unreviewed
+title: "두 종류 최소 비용 사이클"
+---
+
+## 문제
+
+정수 `T`와 `N`개의 정점, `M`개의 가중치가 있는 그래프가 주어집니다. 같은 두 정점을 잇는 간선은 최대 하나이고, 자기 자신으로 향하는 간선은 없습니다.
+
+`T=0`이면 무방향 그래프이며, `T=1`이면 유향 그래프입니다. 각 간선에는 방향과 가중치가 주어집니다.
+
+그래프에 존재하는 사이클 중 크기가 가장 작은 것을 구하세요. 사이클의 크기는 간선 가중치의 합입니다. 사이클이 없으면 `-1`을 출력하세요.
+
+## 입력
+
+첫째 줄에 `T N M`이 주어지고, 이후 `M`개 줄에 간선의 양 끝점과 가중치가 주어집니다.
+
+## 출력
+
+최소 사이클 크기를 출력하세요. 사이클이 없으면 `-1`을 출력하세요.
+
+*** Add File: /Users/hyea/yukicoder/problem-translations/ko/problems/1321.mdx
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1321
+problemId: 5633
+sourceTitle: "塗るめた"
+sourceHtmlSha256: "a5be4c658ee91c12c86e09444e9e021071c71bbafe6464da72211b2b9581cf5"
+humanReview: null
+machineReview: unreviewed
+title: "색칠하기"
+---
+
+## 문제
+
+서로 구별되는 `N`개의 공을 `M`가지 색 중 하나로 각각 칠합니다.
+
+하나 이상의 공을 선택했을 때 선택한 공에 사용된 색의 종류가 정확히 `K`개가 되는 선택 방법의 수를 생각합니다. 가능한 모든 색칠 방법에 대해 이 값을 계산한 총합을 `998244353`으로 나눈 나머지를 출력하세요.
+
+## 입력
+
+`N M K`가 주어집니다.
+
+`1 \le K \le M \le N \le 10^5`입니다.
+
+## 출력
+
+답을 `998244353`으로 나눈 나머지를 출력하세요.
+

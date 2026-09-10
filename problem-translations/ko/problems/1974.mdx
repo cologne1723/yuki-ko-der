@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1974
+problemId: 7934
+sourceTitle: "2x2 Flipper"
+sourceHtmlSha256: "eb295478c8b3effd44b9a9c1724b387f36527944716d64c8c8652d6a2dc8c578"
+humanReview: null
+machineReview: unreviewed
+title: "2x2 뒤집기"
+---
+
+세로 $H$행, 가로 $W$열의 격자가 있으며 처음에는 모든 칸이 흰색입니다. $(i,j)$는 $i$행 $j$열의 칸을 뜻합니다.
+
+다음 조작을 유한 번 수행했을 때 검은 칸 수의 최댓값과, 그 최댓값을 달성하는 구체적인 격자 상태를 구하세요.
+
+## 조작
+
+$1\le i<H$, $1\le j<W$인 $i,j$를 고릅니다. $(i,j),(i+1,j),(i,j+1),(i+1,j+1)$의 색을 각각 반전합니다.
+
+## 입력
+
+```text
+H W
+```
+
+$1\le H,W\le1000$입니다.
+
+## 출력
+
+첫 줄에 검은 칸 수의 최댓값 $ans$를 출력하고, 다음 $H$줄에 격자 상태를 출력하세요. $0$은 흰색, $1$은 검은색을 뜻합니다. 답이 여러 가지면 그중 하나를 출력하면 됩니다.

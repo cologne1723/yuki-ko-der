@@ -1,0 +1,27 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1344
+problemId: 5764
+sourceTitle: "Typical Shortest Path Sum"
+sourceHtmlSha256: "f45f8492dfe7d7a57f9ed126d24b8ab696414aa6fd739768a37e7f49f4c5b415"
+humanReview: null
+machineReview: unreviewed
+title: "전형적인 최단 경로 합"
+---
+
+## 문제
+
+음의 사이클과 자기 루프가 없는 가중치 유향 그래프가 주어집니다. 정점 `i`에서 정점 `j`로 갈 수 있을 때 최단 경로 길이를 `D_{i,j}`라 하고, `i=j`이거나 도달할 수 없으면 `D_{i,j}=0`으로 정의합니다.
+
+각 `i`에 대해 `\sum_{j=1}^N D_{i,j}`를 구하세요.
+
+## 입력
+
+`N M`과 `M`개의 간선 `s_i t_i d_i`가 주어집니다.
+
+`2\le N\le100`, `1\le M\le9900`, `-10^{12}\le d_i\le10^{12}`입니다.
+
+## 출력
+
+각 정점에 대한 합을 한 줄에 출력하세요.

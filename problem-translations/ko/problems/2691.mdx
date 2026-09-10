@@ -1,0 +1,35 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2691
+problemId: 9897
+sourceTitle: "Longest Infection Sequence"
+sourceHtmlSha256: "a7fdae80cadbc4e38e990514778d93f0ca758f4f090aa06a5fdfec4021c64a5f"
+humanReview: null
+machineReview: unreviewed
+title: "가장 긴 감염 순서"
+---
+
+## 문제
+
+환자는 혈액형별로 A형 `A`명, B형 `B`명, O형 `O`명, AB형 `W`명이 있습니다. A형은 A형 또는 AB형에게, B형은 B형 또는 AB형에게, O형은 누구에게나, AB형은 AB형에게만 수혈할 수 있습니다.
+
+처음 한 번, 원하는 환자 한 명에게 바이러스를 주입해 감염시킵니다. 이후 원하는 횟수만큼(0회도 가능) 혈액형이 맞는 환자에게 수혈할 수 있습니다. 감염된 환자가 수혈하면 수혈받은 환자도 감염됩니다. 각 환자는 최대 한 번만 수혈할 수 있습니다.
+
+감염되는 환자 수의 최댓값을 구하세요.
+
+## 제약
+
+- `0 ≤ A, B, O, W ≤ 1000`
+- 환자는 적어도 한 명 있습니다.
+
+## 입력
+
+```text
+A B O W
+```
+
+## 출력
+
+최댓값을 출력하세요.
+

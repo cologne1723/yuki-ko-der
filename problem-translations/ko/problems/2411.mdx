@@ -1,0 +1,34 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2411
+problemId: 9896
+sourceTitle: Reverse Directions
+sourceHtmlSha256: 62210506d31c4f326953804db5c910982c5d09ce372e6590edffb766d13dc598
+humanReview: null
+machineReview: unreviewed
+title: 방향 뒤집기
+---
+
+$H\times W$ 격자에서 Alice는 $(1,1)$에서 출발해 정확히 $K$번 이동한 뒤 $(H,W)$에 도착해야 합니다. 가시가 있는 칸과 격자 밖으로는 이동할 수 없습니다.
+
+Alice가 이동 방법을 정한 뒤 Bob은 $L$번째부터 $R$번째 이동까지 각 방향을 상하좌우 반전할 수 있습니다. Bob이 반전했을 때와 반전하지 않았을 때 모두 정확히 $K$번 만에 목적지에 도착하는 이동 방법이 존재하는지 판정하고, 존재하면 하나 출력하세요.
+
+## 조건
+
+- $3\le H,W\le500$, $4\le K\le5\times10^5$
+- $1\le L\le R\le K$
+- 시작 칸과 도착 칸은 가시가 없습니다.
+
+## 입력
+
+```text
+H W K L R
+S1
+...
+SH
+```
+
+## 출력
+
+가능하지 않으면 `No`, 가능하면 `Yes`와 `L`, `R`, `U`, `D`로 이루어진 길이 $K$의 문자열을 출력하세요.

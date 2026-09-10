@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2472
+problemId: 9827
+sourceTitle: Tea time in the grand garden
+sourceHtmlSha256: 6322afb7b6e349ed43f400059452261d93630e2b0704cb382f0aa356b9fa23fe
+humanReview: null
+machineReview: unreviewed
+title: 대정원의 티타임
+---
+
+길이 $N+2$의 음이 아닌 정수열 레시피 $A=(a_0,\ldots,a_{N+1})$가 있습니다. $a_0=a_{N+1}=0$이고 온도를 올리는 양의 합
+
+$$f(A)=\sum_{i=0}^N\max(0,a_{i+1}-a_i)$$
+
+이 $K$인 레시피의 개수를 $998244353$으로 나눈 나머지를 구하세요.
+
+## 조건
+
+- $1\le N\le2\times10^5$
+- $0\le K\le2\times10^5$
+
+## 입력
+
+```text
+N K
+```
+
+## 출력
+
+답을 출력하세요.

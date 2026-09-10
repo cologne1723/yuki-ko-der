@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1331
+problemId: 5203
+sourceTitle: "Moving Penguin"
+sourceHtmlSha256: "c1b7b1e87ecca10071391716023721e2513e678715005714ed535be14d3019a4"
+humanReview: null
+machineReview: unreviewed
+title: "이동하는 펭귄"
+---
+
+## 문제
+
+일렬로 놓인 `N`개의 칸에 왼쪽부터 번호가 붙어 있고, 칸 `i`에는 `A_i`가 적혀 있습니다. 펭귄맨은 1번 칸에서 `N`번 칸으로 이동합니다.
+
+`i`번 칸에서는 `i<j\le N`이고 다음 조건 중 하나 이상을 만족하는 `j`번 칸으로 이동할 수 있습니다.
+
+- `i\equiv j\pmod{A_i}`
+- `j=i+1`
+
+`N`번 칸에 도착하는 방법의 수를 `10^9+7`로 나눈 나머지를 구하세요. 이동 방법은 지나간 칸들의 집합만으로 구별합니다.
+
+## 입력
+
+`N`과 `A_1,...,A_N`이 주어집니다.
+
+`2\le N\le10^5`, `1\le A_i\le N`입니다.
+
+## 출력
+
+방법의 수를 `10^9+7`로 나눈 나머지를 출력하세요.

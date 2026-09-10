@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2464
+problemId: 9697
+sourceTitle: To DAG
+sourceHtmlSha256: f792115e7e871d920cc3d52df42935afaf936397d423ddffa55c535d33bc271d
+humanReview: null
+machineReview: unreviewed
+title: DAG로 만들기
+---
+
+자기 루프가 없는 유향 그래프가 주어집니다. 간선을 일부 제거해 각 정점의 나가는 간선 수와 들어오는 간선 수의 차 $d_x$를 원래와 같게 유지하면서 사이클이 없는 그래프를 만들 수 있는지 판정하고, 가능하면 하나 출력하세요.
+
+## 조건
+
+- $1\le N,M\le3\times10^5$
+- 자기 루프가 없습니다.
+
+## 입력
+
+```text
+N M
+U1 V1
+...
+UM VM
+```
+
+## 출력
+
+불가능하면 `-1`, 가능하면 남긴 그래프를 입력과 같은 형식으로 출력하세요.

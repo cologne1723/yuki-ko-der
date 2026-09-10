@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1838
+problemId: 7183
+sourceTitle: "Modulo Straight"
+sourceHtmlSha256: "b148b8df7c4f13df327637956e8bd250625c9d666464f1dfb91982dd279b0f61"
+humanReview: null
+machineReview: unreviewed
+title: "모듈러 직선"
+---
+
+수열 $A=(A_1,\ldots,A_{MK})$에는 $M$ 미만의 음이 아닌 정수가 각각 $K$개씩 포함되어 있습니다. 인접한 두 항을 바꾸는 조작을 원하는 횟수만큼 할 수 있습니다.
+
+## 문제
+
+모든 $1\le i<MK$에 대해 $A_{i+1}\equiv A_i+1\pmod M$이 되도록 만드는 최소 조작 횟수를 구하세요.
+
+## 입력
+
+```text
+M K
+A_1 A_2 ... A_{MK}
+```
+
+$M\ge2$, $2\le MK\le4\times10^5$입니다.
+
+## 출력
+
+최소 조작 횟수를 출력하세요.

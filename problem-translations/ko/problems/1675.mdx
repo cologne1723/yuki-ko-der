@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1675
+problemId: 4295
+sourceTitle: "Strange Minimum Query"
+sourceHtmlSha256: "44f29c6b2cfd478238da032a8d5fd851c7783df6efafa03b47dfa95f5660d2da"
+humanReview: null
+machineReview: unreviewed
+title: "이상한 최솟값 질의"
+---
+
+길이 `N`인 수열 `A`에 대해 구간 최솟값 질의를 처리합니다. `i`번째 질의는 `A_{l_i},...,A_{r_i}`의 최솟값을 묻고, 그 답이 `B_i`였다고 합니다.
+
+모든 질의의 답이 주어진 값과 일치하는 수열 `A`를 하나 구성하세요. 그런 수열이 없으면 `-1`을 출력하세요.
+
+## 제약
+
+- `1 <= N,Q <= 2 * 10^5`
+- `1 <= A_i <= 10^9`
+- `1 <= l_i <= r_i <= N`
+
+## 입력
+
+`N Q`, 수열 `B`와 `Q`개의 질의 구간이 주어집니다.
+
+## 출력
+
+가능하면 조건을 만족하는 수열 `A`를 출력하고, 불가능하면 `-1`을 출력하세요.

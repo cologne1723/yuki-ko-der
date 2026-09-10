@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2002
+problemId: 7715
+sourceTitle: "Range Swap Query"
+sourceHtmlSha256: "1d4107f910d19188667a999321da3991c6da06a41cf89d4fcece290f1bbd04d7"
+humanReview: null
+machineReview: unreviewed
+title: "구간 교환 질의"
+---
+
+수열 $P=(1,2,\ldots,N)$이 있습니다. 조작 $i$는 $P_{A_i}$와 $P_{B_i}$를 교환합니다. 각 질의에 대해 수열을 초기 상태로 되돌린 뒤 조작 $L_j,L_j+1,\ldots,R_j$를 순서대로 수행하고 $P_{X_j}$를 구하세요.
+
+## 입력
+
+```text
+N K Q
+A_1 B_1
+...
+A_K B_K
+L_1 R_1 X_1
+...
+L_Q R_Q X_Q
+```
+
+$2\le N\le4\times10^5$, $1\le K,Q\le2\times10^5$입니다.
+
+## 출력
+
+각 질의의 $P_{X_j}$를 한 줄에 출력하세요.

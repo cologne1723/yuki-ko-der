@@ -1,0 +1,28 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1844
+problemId: 6887
+sourceTitle: "Divisors Sum Sum"
+sourceHtmlSha256: "18b72484745cc79412259c1b6962ce58b37d95dbd5b012b10aedff4c31c78226"
+humanReview: null
+machineReview: unreviewed
+title: "약수의 합의 합"
+---
+
+문제 X를 생각합니다. 주어진 정수의 양의 약수의 합을 구하는 문제입니다. 서로 다른 소수로 이루어진 길이 $L$의 수열 $P$와 지수 $e$가 주어지고 $N=\prod_{i=1}^{L}P_i^{e_i}$라 할 때, $N$의 모든 양의 약수 $d$에 대해 문제 X의 답을 구한 뒤 그 합을 출력하세요.
+
+## 입력
+
+```text
+L
+P_1 e_1
+...
+P_L e_L
+```
+
+$1\le L\le2\times10^5$, $1\le P_i,e_i\le10^9$입니다. $P_i$는 서로 다른 소수입니다.
+
+## 출력
+
+답을 $10^9+7$로 나눈 나머지를 출력하세요.

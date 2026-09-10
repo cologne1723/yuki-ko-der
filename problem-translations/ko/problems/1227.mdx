@@ -1,0 +1,62 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1227
+problemId: 4455
+sourceTitle: "I hate ThREE"
+sourceHtmlSha256: "f9e81119c1c556c40364d57c6fcde333b78975de953e35a2ead2b11f7b0671a3"
+humanReview: null
+machineReview: unreviewed
+title: "나는 ThREE가 싫어요"
+---
+
+## 문제 설명
+
+$N$개 정점의 트리가 있습니다. 각 정점은 $1$부터 $N$까지 번호가 붙어 있습니다. 인접한 정점 $i,j$에 대해 $|p_i-p_j|=3$이 되도록 $1$ 이상 $C$ 이하의 정수 수열 $p_1,\ldots,p_N$을 만드는 방법의 수를 $10^9+7$로 나눈 나머지를 구하세요.
+
+## 입력
+
+```text
+N C
+a_1 b_1
+\vdots
+a_{N-1} b_{N-1}
+```
+
+- $2\leq N\leq1000$
+- $4\leq C\leq10^9$
+- 입력 그래프는 트리입니다.
+
+## 출력
+
+방법의 수를 $10^9+7$로 나눈 나머지를 출력하세요. 마지막에 줄바꿈을 넣으세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+5 4
+1 2
+1 3
+3 4
+3 5
+```
+#### 출력
+```text
+2
+```
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+5 5
+1 2
+1 3
+3 4
+3 5
+```
+#### 출력
+```text
+8
+```

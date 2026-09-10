@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1864
+problemId: 7343
+sourceTitle: "Shortest Paths Counting"
+sourceHtmlSha256: "c79bec39e7298b1545d03a831393d2b796d1c539600731c3da01c7727de49e1e"
+humanReview: null
+machineReview: unreviewed
+title: "최단 경로 세기"
+---
+
+2차원 평면에 서로 다른 $N$개의 점이 있고 점 $i$의 좌표는 $(X_i,Y_i)$입니다. 두 점 사이 거리는 체비쇼프 거리 $\max(|x_0-x_1|,|y_0-y_1|)$로 정의합니다.
+
+## 문제
+
+점 1에서 점 $N$까지 여러 점을 거쳐 이동하는 경로 중 총 이동 거리가 최소인 것의 개수를 $998244353$으로 나눈 나머지를 구하세요.
+
+## 입력
+
+```text
+N
+X_1 Y_1
+...
+X_N Y_N
+```
+
+$2\le N\le2\times10^5$, $-10^9\le X_i,Y_i\le10^9$이며 점은 서로 다릅니다.
+
+## 출력
+
+최단 경로 수를 출력하세요.

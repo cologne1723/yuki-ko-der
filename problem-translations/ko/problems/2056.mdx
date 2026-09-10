@@ -1,0 +1,28 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2056
+problemId: 8419
+sourceTitle: "非力なレッド"
+sourceHtmlSha256: "5b0c2a90640511421ca3c0e7193d72d5e6adc4bf2b4c6625b8bbf4373e458be5"
+humanReview: null
+machineReview: unreviewed
+title: "힘이 약한 레드"
+---
+
+전사 taiga의 전투력은 $X$, MP는 $M$이고, 몬스터 $i$의 전투력은 $A_i$입니다. 전투 전에 $1\le k\le\min(N,M)$을 골라 처음 $k$개 몬스터의 전투력을 각각 $\lfloor A_i/2\rfloor$로 줄이고 MP를 $k$만큼 소비하는 마법을 반복할 수 있습니다.
+
+전투력 $X$가 모든 몬스터보다 클 때만 전부 쓰러뜨릴 수 있습니다. 가능한지 판정하세요.
+
+## 입력
+
+```text
+N X M
+A_1 A_2 ... A_N
+```
+
+$1\le N\le2\times10^5$, $1\le X\le10^9$, $0\le M\le10^9$입니다.
+
+## 출력
+
+가능하면 `Yes`, 아니면 `No`를 출력하세요.

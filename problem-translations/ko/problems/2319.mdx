@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2319
+problemId: 9355
+sourceTitle: "Friends+"
+sourceHtmlSha256: 7012576d269464b63f735835013dd7da7a064f2194de36e41e8074c0f5863972
+humanReview: null
+machineReview: unreviewed
+title: "Friends+"
+---
+
+$N$명의 캐릭터가 $N$개의 월드에 있고, 캐릭터 $i$는 처음 월드 $P_i$에 있습니다. 친구 관계 $M$개가 주어집니다.
+
+캐릭터 $X$가 $Y$에게 `join`할 때, 서로 다른 월드에 있고 $Y$의 월드에 $X$의 친구가 한 명 이상 있으면 성공하여 $X$가 그 월드로 이동합니다. 그렇지 않으면 실패합니다.
+
+각 명령의 성공 여부를 출력하세요.
+
+## 조건
+
+- $1\le N\le2\times10^4$
+- $0\le M\le\min(2\times10^5,N(N+1)/2)$
+- $1\le Q\le2\times10^5$
+
+## 입력
+
+$N,M$, 초기 월드, 친구 관계, $Q$개의 명령 $(X_i,Y_i)$가 주어집니다.
+
+## 출력
+
+성공하면 `Yes`, 실패하면 `No`를 각 줄에 출력하세요.

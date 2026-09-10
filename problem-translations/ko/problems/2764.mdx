@@ -1,0 +1,37 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2764
+problemId: 10881
+sourceTitle: "Warp Drive Spacecraft"
+sourceHtmlSha256: "43cbcef738191932f61b230e2241997eb43b86f0fbdde0c8a96206c3edfd1bb4"
+humanReview: null
+machineReview: unreviewed
+title: "워프 항법 우주선"
+---
+
+## 문제
+
+`N`개 행성이 있고 1번에서 시작해 `N`번에 도착해야 합니다. 항로 `i`는 `U_i,V_i`를 양방향으로 시간 `T_i`에 연결합니다. 각 행성 `i`의 왜곡도는 `W_i`이며, 워프 티켓 하나를 사용해 임의의 행성 `j`로 `W_iW_j` 시간에 이동할 수 있습니다. 티켓은 하나뿐입니다.
+
+도착 최소 시간을 구하세요.
+
+## 제약
+
+- `2 ≤ N ≤ 2×10^5`, `0 ≤ M ≤ 2×10^5`
+- `1 ≤ W_i ≤ 10^9`, `1 ≤ T_i ≤ 10^12`
+
+## 입력
+
+```text
+N M
+W_1 ... W_N
+U_1 V_1 T_1
+⋮
+U_M V_M T_M
+```
+
+## 출력
+
+최소 시간을 출력하세요.
+

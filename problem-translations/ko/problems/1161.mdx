@@ -1,0 +1,63 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1161
+problemId: 4959
+sourceTitle: "Many Powers"
+sourceHtmlSha256: "74533ccf828cbda68e1ebff6b8414a8f8eef7911fb315fa34c302c5feb72c67b"
+humanReview: null
+machineReview: unreviewed
+title: "많은 거듭제곱"
+---
+
+## 문제 설명
+
+$1$ 이상의 정수 $A$, $B$, $C$가 주어집니다. $1^B+2^B+3^B+\cdots+A^B$를 $C$로 나눈 나머지를 구하세요.
+
+## 입력
+
+```text
+$A\ B\ C$
+```
+
+- $1 \leq A,B \leq 10^{12}$
+- $1 \leq C \leq 100\,000$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+답을 한 줄에 출력하고 마지막에 줄바꿈을 넣으세요.
+
+## 예제
+
+### 예제 1 {file=""}
+#### 입력
+```text
+2 4 5
+```
+#### 출력
+```text
+2
+```
+
+$1^4+2^4=17$이므로 $5$로 나눈 나머지인 $2$를 출력합니다.
+
+### 예제 2 {file=""}
+#### 입력
+```text
+6 5 83
+```
+#### 출력
+```text
+0
+```
+
+$1^5+2^5+3^5+4^5+5^5+6^5=12201$이고 $83$으로 나누어떨어지므로 $0$을 출력합니다.
+
+## 출처
+
+[Many Powers](https://www.hackerrank.com/contests/75th/challenges/many-powers)
+
+writer: Mitsubachi
+
+tester: Mitarushi

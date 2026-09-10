@@ -1,0 +1,37 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2696
+problemId: 10606
+sourceTitle: "Sign Creation"
+sourceHtmlSha256: "01d8a4d173d5806b3fc2b9a2177aff496cf2a89eb4cebdde84094e1370c8661c"
+humanReview: null
+machineReview: unreviewed
+title: "별자리 만들기"
+---
+
+## 문제
+
+별 두 개 이상이 선으로 연결된 것을 별자리라고 합니다. `H × W` 격자에 별 `N`개가 있고, 두 별의 맨해튼 거리가 `D` 이하이면 선으로 연결됩니다. 별이 없는 좌표 하나에 새 별을 추가할 때, 관측되는 별자리 수의 최솟값과 최댓값을 구하세요. 별자리가 이미 다른 별과 연결될 수도 있습니다.
+
+맨해튼 거리는 `|X_i-X_j|+|Y_i-Y_j|`입니다.
+
+## 제약
+
+- `1 ≤ H,W ≤ 10^5`, `H×W ≤ 10^5`
+- `0 ≤ N ≤ H×W-1`, `1 ≤ D ≤ 5`
+- 좌표는 격자 안의 정수이고 서로 다릅니다.
+
+## 입력
+
+```text
+H W N D
+X_1 Y_1
+⋮
+X_N Y_N
+```
+
+## 출력
+
+가능한 별자리 수의 최솟값과 최댓값을 공백으로 출력하세요.
+

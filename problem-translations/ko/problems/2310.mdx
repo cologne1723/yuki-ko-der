@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2310
+problemId: 9152
+sourceTitle: "[Cherry 5th Tune A] Against Regret"
+sourceHtmlSha256: a0391543e6485e838b98f67487adeed4ccdd8802ad3974de3213a13781138732
+humanReview: null
+machineReview: unreviewed
+title: "[Cherry 5th Tune A] Against Regret"
+---
+
+정점 $0,1,\ldots,N$인 유향 그래프가 주어집니다. $u<v$일 때 정점 $u$에서 $v$로 향하는 변이 $X_{u,v}$개 있습니다.
+
+각 쿼리에서는 여러 번 변을 추가한 뒤, 정점 $0$에서 정점 $N$으로 가는 경로 수를 $998244353$으로 나눈 나머지를 구합니다. 쿼리는 서로 독립적이며, 서로 다른 변을 사용하면 같은 정점열이어도 다른 경로로 셉니다.
+
+## 조건
+
+- $1\le N\le400$
+- $0\le X_{u,v}\le998244353$
+- $1\le Q\le3\times10^4$
+- $1\le K_q\le30$
+- 추가 변은 항상 $A_{q,k}<B_{q,k}$입니다.
+
+## 입력
+
+첫째 줄에 $N$, 다음 $N+1$개 줄에 인접 행렬이 주어집니다. 그 뒤 $Q$와 각 쿼리의 $K_q$ 및 추가할 변 $A_{q,k},B_{q,k},C_{q,k}$가 주어집니다.
+
+## 출력
+
+각 쿼리의 경로 수를 한 줄에 하나씩 출력하세요.

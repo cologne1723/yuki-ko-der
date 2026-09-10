@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1307
+problemId: 4366
+sourceTitle: "Rotate and Accumulate"
+sourceHtmlSha256: "3d9ee44d3fbe79572923f304f9d4a7e343340b73e79d65e9916dcfd743d2e9bf"
+humanReview: null
+machineReview: unreviewed
+title: "회전하고 누적하기"
+---
+
+## 문제 설명
+
+0-index 수열 $A=(a_i),B=(b_i)$가 있고 처음에 $B$의 모든 원소는 0입니다. $j$번째 작업에서 모든 $i=0,1,\ldots,N-1$에 대해 $b_i$에 $a_{(i+r_j)\bmod N}$을 더합니다.
+
+$Q$번 작업 후의 $B$를 구하세요.
+
+## 입력
+
+```text
+N Q
+a_0 a_1 \ldots a_{N-1}
+r_1 r_2 \ldots r_Q
+```
+
+- $1\leq N\leq10^5$
+- $1\leq Q\leq2\times10^5$
+- $0\leq a_i\leq10^3$, $0\leq r_i<N$
+
+## 출력
+
+작업 후 $B$를 공백으로 구분해 출력하세요.

@@ -1,0 +1,44 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2406
+problemId: 9822
+sourceTitle: Difference of Coordinate Squared
+sourceHtmlSha256: 3f6e46a0f941305a7d7b93d02f0a475bdafa11704ec2eebedc35c826d528a381
+humanReview: null
+machineReview: unreviewed
+title: 좌표 제곱의 차
+---
+
+각각 $1/4$의 확률로 $1,2,3,4$가 나오는 주사위가 있습니다. 원점 $(0,0)$에서 시작해 주사위를 $N$번 굴립니다.
+
+1이 나오면 $x$좌표를 1 증가시키고, 2가 나오면 1 감소시킵니다. 3이 나오면 $y$좌표를 1 증가시키고, 4가 나오면 1 감소시킵니다. 도착점이 $(X,Y)$일 때 $X^2-Y^2=M$일 확률을 $998244353$로 나눈 나머지를 구하세요.
+
+## 조건
+
+- $1\le N\le 10^6$
+- $-10^{12}\le M\le 10^{12}$
+
+## 입력
+
+```text
+N M
+```
+
+## 출력
+
+구한 확률을 $998244353$로 나눈 나머지를 출력하세요.
+
+## 예제
+
+### 입력 1
+
+```text
+5 3
+```
+
+### 출력 1
+
+```text
+803274753
+```

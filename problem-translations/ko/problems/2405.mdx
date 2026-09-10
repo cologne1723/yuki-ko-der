@@ -1,0 +1,64 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2405
+problemId: 9948
+sourceTitle: Minimal Matrix Decomposition
+sourceHtmlSha256: e83ee59f28b945a45ad0268a9c9b5009ecc521e7107c97d0238d52f8d0f8c34a
+humanReview: null
+machineReview: unreviewed
+title: 최소 행렬 분해
+---
+
+소수 $P$와 양의 정수 $N,M$, $N\times M$ 행렬 $A$가 주어집니다. 모든 성분은 $P$ 미만의 음이 아닌 정수입니다.
+
+$A=B^{(1)}B^{(2)}\cdots B^{(L)}$이 되도록, 공집합이 아닌 행렬열 $B^{(1)},\ldots,B^{(L)}$을 선택합니다. 곱셈과 덧셈은 $P$를 법으로 계산합니다. $\sum_{k=1}^L N_kM_k$가 최소가 되는 분해 하나를 출력하세요.
+
+## 조건
+
+- $P$는 소수이고 $2\le P\le 10^9$
+- $1\le N,M\le 400$
+- $0\le A_{ij}<P$
+
+## 입력
+
+```text
+P
+N M
+A11 A12 ... A1M
+...
+AN1 AN2 ... ANM
+```
+
+## 출력
+
+먼저 $L$을 출력한 뒤, 각 $k=1,\ldots,L$에 대해 $N_k,M_k$와 행렬 $B^{(k)}$의 성분을 순서대로 출력하세요. 모든 성분은 $0$ 이상 $P$ 미만이어야 합니다.
+
+## 예제
+
+### 입력 1
+
+```text
+998244353
+5 4
+21 17 13 9
+18 16 14 12
+15 15 15 15
+12 14 16 18
+9 13 17 21
+```
+
+### 출력 1
+
+```text
+2
+5 2
+1 5
+2 4
+3 3
+4 2
+5 1
+2 4
+1 2 3 4
+4 3 2 1
+```

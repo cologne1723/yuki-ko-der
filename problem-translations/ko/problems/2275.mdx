@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2275
+problemId: 9530
+sourceTitle: "→↑↓"
+sourceHtmlSha256: 83701725bd8835691d4ae667c7e27f1474fffec0288cb8629df4b06e91361f87
+humanReview: null
+machineReview: unreviewed
+title: "→↑↓"
+---
+
+무한히 넓은 2차원 격자가 있습니다. 각 칸은 흰색 또는 검은색이며, $i=1,2,\ldots,N$에 대해 $(i,1)$부터 $(i,A_i)$까지의 칸만 흰색입니다.
+
+처음에 마그스타 군은 $(1,1)$에 있습니다. 현재 칸이 $(i,j)$이면 그 칸을 검게 칠한 뒤, $(i+1,j),(i,j+1),(i,j-1)$ 중 흰색인 칸 하나를 골라 이동합니다.
+
+$(N,1)$에 도착하는 방법의 수를 $998244353$으로 나눈 나머지를 구하세요.
+
+## 조건
+
+- $2\le N\le 2\times10^5$
+- $1\le A_i\le 10^9$
+
+## 입력
+
+```text
+N
+A_1 A_2 ... A_N
+```
+
+## 출력
+
+답을 출력하세요.

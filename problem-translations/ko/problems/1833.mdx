@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1833
+problemId: 7447
+sourceTitle: "Subway Planning"
+sourceHtmlSha256: "c2639640d7ee6ae961a773a771785278e853e92c56bcb061c06817cf103b1e47"
+humanReview: null
+machineReview: unreviewed
+title: "지하철 계획"
+---
+
+yukicoder시에는 $N$개의 교차로와 이를 잇는 $N-1$개의 양방향 도로가 있으며, 도시는 트리입니다. 도로 $i$는 $A_i,B_i$를 잇고 혼잡도는 $C_i$입니다. 도로 혼잡도의 최댓값을 도시 전체 교통 혼잡도 $D$라 합니다.
+
+두 교차로를 골라 지하철 하나를 건설하면, 두 교차로 사이 경로의 도로 혼잡도는 그 경로의 최소 혼잡도만큼 모두 감소합니다. $D$의 가능한 최솟값을 구하세요.
+
+## 입력
+
+```text
+N
+A_1 B_1 C_1
+...
+A_{N-1} B_{N-1} C_{N-1}
+```
+
+$2\le N\le2\times10^5$, $1\le C_i\le10^9$입니다.
+
+## 출력
+
+가능한 최소 $D$를 출력하세요.

@@ -1,0 +1,62 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1195
+problemId: 4683
+sourceTitle: "数え上げを愛したい（文字列編）"
+sourceHtmlSha256: "0328ace02c54a891564f21ac617bb57b89a5df3ac21a81e0c7b0ab67dcd1dce0"
+humanReview: null
+machineReview: unreviewed
+title: "개수를 세는 일을 사랑하고 싶어 (문자열 편)"
+---
+
+## 문제 설명
+
+영문 소문자로만 이루어진 문자열 $S$가 주어집니다. $S$에서 하나 이상의 문자를 골라 적절히 재배열해 만들 수 있는 문자열은 몇 종류인지 구하세요. 답을 $998244353$으로 나눈 나머지를 출력하세요.
+
+## 입력
+
+```text
+S
+```
+
+- $1\leq |S|\leq 3\times10^5$
+- $S$는 영문 소문자로만 이루어집니다.
+
+## 출력
+
+답을 $998244353$으로 나눈 나머지를 한 줄에 출력하세요. 마지막에 줄바꿈을 넣으세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+yuu
+```
+#### 출력
+```text
+8
+```
+
+만들 수 있는 문자열은 `y`, `u`, `yu`, `uy`, `uu`, `yuu`, `uyu`, `uuy`입니다.
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+sanada
+```
+#### 출력
+```text
+363
+```
+
+### 예제 3 {file="01_sample_03.txt"}
+#### 입력
+```text
+kaguyasamaloveiswar
+```
+#### 출력
+```text
+634980099
+```

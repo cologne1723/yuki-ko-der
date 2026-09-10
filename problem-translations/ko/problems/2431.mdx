@@ -1,0 +1,39 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2431
+problemId: 10013
+sourceTitle: Viral Hotel
+sourceHtmlSha256: 01dc096abde59c495fb21018f7deb8ca65ad0155b53436e79444dec7ce05772b
+humanReview: null
+machineReview: unreviewed
+title: 바이러스 호텔
+---
+
+$N$개의 방과 복도가 있는 호텔에서 처음 $K$명의 투숙객이 감염됩니다. 감염 후 $s_j$일이 지나면 방 $j$의 감염자가 이웃 방에 바이러스를 전파합니다. 감염 후 $P$일이 지나면 회복해 면역을 얻습니다. 회복 전 다시 감염된 방에서는 격리가 이루어지고 투숙객이 호텔에서 사라집니다.
+
+감염자가 호텔에서 모두 사라졌을 때 격리된 방의 개수를 구하세요.
+
+## 조건
+
+- $1\le N\le10^5$, $1\le K\le N$, $1\le P\le1000$
+- $1\le s_j\le P$
+
+## 입력
+
+```text
+N K M P
+u1 v1
+...
+uM vM
+s1
+...
+sN
+x1
+...
+xK
+```
+
+## 출력
+
+격리된 방의 개수를 출력하세요.

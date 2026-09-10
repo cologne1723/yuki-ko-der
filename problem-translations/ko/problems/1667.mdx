@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1667
+problemId: 6687
+sourceTitle: "Forest"
+sourceHtmlSha256: "a79bb564271701a09479a56871c6e7e6ac8b95ec7b30d9b61b5d2072f797e39d"
+humanReview: null
+machineReview: unreviewed
+title: "숲"
+---
+
+정점이 구별되고 간선은 구별되지 않는 `N`개 정점의 단순 무향 그래프 중 사이클이 없는 그래프의 개수를 구하세요.
+
+`M=0,1,...,N-1` 각각에 대해 간선이 `M`개인 그래프의 개수를 `MOD`로 나눈 나머지를 출력하세요.
+
+## 제약
+
+- `1 <= N <= 300`
+- `10^8 <= MOD <= 10^9+9`
+- `MOD`는 소수입니다.
+
+## 입력
+
+`N MOD`가 주어집니다.
+
+## 출력
+
+`N`줄을 출력하세요. `i`번째 줄에는 `M=i-1`일 때의 답을 출력하세요.

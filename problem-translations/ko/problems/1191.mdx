@@ -1,0 +1,68 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1191
+problemId: 4390
+sourceTitle: "数え上げを愛したい（数列編）"
+sourceHtmlSha256: "561b3ff9a977f16a98f2a9fdf02279f8e76dbad784717833bda026a827fc8552"
+humanReview: null
+machineReview: unreviewed
+title: "개수를 세는 일을 사랑하고 싶어 (수열 편)"
+---
+
+## 문제 설명
+
+다음 조건을 만족하는 길이 $N$인 수열 $S$의 개수를 $998244353$으로 나눈 나머지를 구하세요.
+
+- 수열의 각 원소는 $1$ 이상 $M$ 이하인 정수입니다.
+- 모든 $1\leq i<j\leq N$에 대해 $A\leq |S_i-S_j|\leq B$입니다.
+
+## 입력
+
+```text
+N M A B
+```
+
+- $2\leq N\leq 10^5$
+- $2\leq M\leq 3\times10^5$
+- $1\leq A\leq B\leq M-1$
+
+## 출력
+
+답을 $998244353$으로 나눈 나머지를 한 줄에 출력하세요. 마지막에 줄바꿈을 넣으세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+2 2 1 1
+```
+#### 출력
+```text
+2
+```
+
+$(1,2)$와 $(2,1)$의 2가지입니다.
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+3 5 1 1
+```
+#### 출력
+```text
+0
+```
+
+조건을 만족하는 수열은 존재하지 않습니다.
+
+### 예제 3 {file="01_sample_03.txt"}
+#### 입력
+```text
+4 19 3 15
+```
+#### 출력
+```text
+11088
+```

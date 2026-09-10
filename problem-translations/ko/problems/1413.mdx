@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1413
+problemId: 5888
+sourceTitle: "Dynamic Sushi"
+sourceHtmlSha256: "5f1da0da8b6bb2b494392b438b5ab4fdaf49b2d4211b9779fcd4d81819739eb5"
+humanReview: null
+machineReview: unreviewed
+title: "동적 초밥"
+---
+
+## 문제
+
+초밥 `i`는 시각 `t`에
+
+\[
+(X_i+R_i\cos((V_it+A_i)\pi/180),Y_i+R_i\sin((V_it+A_i)\pi/180))
+\]
+
+에 있습니다. 룬룬은 `(0,0)`에서 시작해 초속 `W` 이하로 이동하며 초밥과 같은 위치에서 즉시 먹을 수 있습니다. 이동 속도는 모든 초밥의 회전 속도보다 빠릅니다.
+
+초밥을 모두 먹는 데 필요한 최소 시간을 구하세요.
+
+## 입력
+
+`N W`와 각 초밥의 `X_i Y_i R_i V_i A_i`가 주어집니다.
+
+## 출력
+
+최소 시간을 출력하세요.

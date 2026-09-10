@@ -1,0 +1,36 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1932
+problemId: 3994
+sourceTitle: "動く点 P / Moving Point P"
+sourceHtmlSha256: "c18b6abd99e1797c6b34c73783e36d003b3c1b30c12af3dd7ba8a6fa575dd3e0"
+humanReview: null
+machineReview: unreviewed
+title: "움직이는 점 P"
+---
+
+좌표평면의 점 $P_j=(x_j,y_j)$가 주어집니다. $i$번째 조작은 점을 $(p_i,q_i)$를 중심으로 $r_i$도 반시계 방향 회전시키는 것입니다.
+
+## 문제
+
+각 점에 대해 $s_j$번째부터 $t_j$번째 조작만 순서대로 적용한 최종 좌표를 구하세요.
+
+## 입력
+
+```text
+N
+p_1 q_1 r_1
+...
+p_N q_N r_N
+Q
+s_1 t_1 x_1 y_1
+...
+s_Q t_Q x_Q y_Q
+```
+
+$1\le N,Q\le10^5$이며 실수는 소수점 이하 최대 6자리입니다.
+
+## 출력
+
+각 최종 좌표를 출력하세요. 절대 또는 상대 오차 $10^{-3}$ 이하를 허용합니다.

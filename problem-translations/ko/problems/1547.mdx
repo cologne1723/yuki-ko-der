@@ -1,0 +1,26 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1547
+problemId: 6275
+sourceTitle: "[Cherry 2nd Tune *] 偶然の勝利の確率"
+sourceHtmlSha256: "7087c3adc7fd85fc65d2e65a81fb1cdf0fdef3baf5699d08466577d1d5cc2fd9"
+humanReview: null
+machineReview: unreviewed
+title: "동전 던지기 게임"
+---
+## 문제
+
+A와 B가 각자 앞면 확률이 $M_A/N_A$, $M_B/N_B$인 동전을 사용해 게임합니다. $X=Y=0$에서 시작해 A가 동전을 던지고, 앞면이면 $X$를 1 증가시키며 $X=S$이면 A 승리입니다. 뒷면이면 B의 차례입니다.
+
+B가 앞면을 내면 $X$를 1 감소시키고 $X=-T$이면 B 승리입니다. B가 뒷면을 내면 라운드 수 $Y$를 1 증가시킵니다. $Y=K$가 되면 양쪽 모두 패배하고, 아니면 다시 A의 차례입니다.
+
+A와 B가 이길 확률을 각각 $\alpha,\beta$라 할 때 두 확률을 $998244353$에서 출력하세요.
+
+## 입력
+
+게임의 매개변수 $N_A,M_A,N_B,M_B,S,T,K$가 주어집니다.
+
+## 출력
+
+$\alpha\bmod998244353$와 $\beta\bmod998244353$를 출력하세요.

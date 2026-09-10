@@ -1,0 +1,28 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1882
+problemId: 7081
+sourceTitle: "Areas of Triangle"
+sourceHtmlSha256: "8e1a87a7ac11470ee7928e2cba2bac8fbd5684c1b9360d135c2c23effb174c2f"
+humanReview: null
+machineReview: unreviewed
+title: "삼각형의 넓이"
+---
+
+수열 $A$가 주어집니다. $1\le i,j\le N$인 두 정수(같아도 됨)를 골라 세로 $A_i$, 가로 $A_j$인 직각삼각형을 만들 때 넓이가 $K$ 이상이 되는 선택의 수를 구하세요. $i\ne j$이면 $(i,j)$와 $(j,i)$는 다릅니다.
+
+직각삼각형의 넓이는 $ab/2$입니다.
+
+## 입력
+
+```text
+N K
+A_1 A_2 ... A_N
+```
+
+$2\le N\le10^5$, $1\le K\le5\times10^{17}$, $1\le A_i\le10^9$입니다.
+
+## 출력
+
+조건을 만족하는 선택의 수를 출력하세요.

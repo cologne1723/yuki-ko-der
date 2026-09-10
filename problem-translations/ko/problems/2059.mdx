@@ -1,0 +1,26 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2059
+problemId: 7753
+sourceTitle: "Odd Move Nim"
+sourceHtmlSha256: "8bfa05b0a6fb6b6d5ee38f3c62e4c8de3fce3aec4865df1415489ffe15ba547d"
+humanReview: null
+machineReview: unreviewed
+title: "홀수 이동 님"
+---
+
+돌 더미 $N$개가 있고 처음 더미 $i$에는 $A_i$개의 돌이 있습니다. $2\le i\le N$인 더미와 $1\le x<i$인 홀수 $x$를 골라, 선택한 더미에서 하나 이상을 더미 $i-x$로 옮기는 조작을 번갈아 합니다. 조작할 수 없는 사람이 패배할 때 승자를 구하세요.
+
+## 입력
+
+```text
+N
+A_1 A_2 ... A_N
+```
+
+$A_1=0$, $2\le N\le2\times10^5$, $0\le A_i<2^{30}$입니다.
+
+## 출력
+
+Alice가 이기면 `Alice`, Bob이 이기면 `Bob`을 출력하세요.

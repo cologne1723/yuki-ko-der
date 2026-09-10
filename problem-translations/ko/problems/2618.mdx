@@ -1,0 +1,34 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2618
+problemId: 7738
+sourceTitle: "除霊"
+sourceHtmlSha256: cf6735985d9b8d1b568d0c583b42aac03284ebe3e6d7b792f986ff5616e65389
+humanReview: null
+machineReview: unreviewed
+title: "제령"
+---
+
+트리의 $M$개 정점에 유령이 나타납니다. 유령은 나타난 정점에서 거리 $1$ 이하인 모든 정점을 괴롭힙니다. 한 번 제령할 정점 $v$를 선택하면 $v$에서 거리 $1$ 이하인 유령이 사라집니다. 각 $v$를 선택했을 때 괴롭힘을 받는 정점 수를 구하세요.
+
+## 조건
+
+- $2\le N\le200000$, $1\le M\le N$
+- 그래프는 트리이며 유령 정점은 오름차순으로 주어집니다.
+
+## 입력
+
+```text
+$N$
+$A_1$ $B_1$
+\vdots
+$A_{N-1}$ $B_{N-1}$
+$M$
+$V_1$ $\cdots$ $V_M$
+```
+
+## 출력
+
+각 정점 $v$에서 제령했을 때 괴롭힘을 받는 정점 수를 한 줄에 하나씩 출력하세요.
+

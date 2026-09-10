@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2662
+problemId: 9294
+sourceTitle: "Installing Cell Towers"
+sourceHtmlSha256: d7c0d0d410b5268f9f1a2c4ab6808dff49c9f27ec3325a6e78cbcaf78f54c1a0
+humanReview: null
+machineReview: unreviewed
+title: "기지국 설치"
+---
+
+처음에 모두 0인 수열 $A$에 대해 각 쿼리 $(p_i,q_i)$를 처리합니다. 모든 $j$에 대해 $d=|p_i-j|$라 하고 $A_j$에 $\max(0,q_i-d)$를 더합니다. 모든 쿼리 후의 $A$를 출력하세요.
+
+## 조건
+
+- $1\le N,M\le10^5$
+- $1\le p_i\le N$, $1\le q_i\le10^9$
+
+## 입력
+
+```text
+$N$ $M$
+$p_1$ $q_1$
+\vdots
+$p_M$ $q_M$
+```
+
+## 출력
+
+$A_1,A_2,\ldots,A_N$을 공백으로 출력하세요.
+

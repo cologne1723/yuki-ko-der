@@ -1,0 +1,59 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2399
+problemId: 9814
+sourceTitle: This Is Truly Final Edition
+sourceHtmlSha256: 3f8a0712770afac63f39587fe4c2978b639a2b3e7c1c53522db01fa40b72a3b4
+humanReview: null
+machineReview: unreviewed
+title: 진정한 최종판
+---
+
+문자열 $S$, $T$와 양의 정수 $N$이 주어집니다. 다음 연산을 정확히 $N$번 수행한 결과를 출력하세요.
+
+문자열 $S$의 끝에 `_`와 문자열 $T$를 차례로 붙입니다.
+
+## 조건
+
+- $1 \le |S|, |T| \le 10$
+- $1 \le N \le 10$
+- $S$와 $T$는 영문 알파벳으로만 이루어져 있습니다.
+
+## 입력
+
+입력은 다음 형식으로 주어집니다.
+
+```text
+S T N
+```
+
+## 출력
+
+연산을 모두 수행한 뒤의 문자열을 출력하세요.
+
+## 예제
+
+### 입력 1
+
+```text
+shiyosho saishuban 3
+```
+
+### 출력 1
+
+```text
+shiyosho_saishuban_saishuban_saishuban
+```
+
+### 입력 2
+
+```text
+update latest 4
+```
+
+### 출력 2
+
+```text
+update_latest_latest_latest_latest
+```

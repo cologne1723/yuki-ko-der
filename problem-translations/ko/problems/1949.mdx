@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1949
+problemId: 7930
+sourceTitle: "足し算するだけのパズルゲーム(2)"
+sourceHtmlSha256: "ebf8dd2871169b744bfa2a5bc60747fd655d79266ce816b4c53c42284b217224"
+humanReview: null
+machineReview: unreviewed
+title: "더하기만 하는 퍼즐 게임 (2)"
+---
+
+플레이어는 $(Y,X)$에서 시작해 격자의 상하좌우로 이동합니다. 이동한 칸의 적을 이기면 공격력이 적의 공격력만큼 증가하고, 한 번 쓰러뜨린 적은 부활하지 않습니다.
+
+## 문제
+
+모든 적을 쓰러뜨려 게임을 클리어할 수 있는지 판정하세요.
+
+## 입력
+
+```text
+H W Y X
+A_{1,1} ... A_{1,W}
+...
+A_{H,1} ... A_{H,W}
+```
+
+$2\le H,W\le500$, $1\le Y\le H$, $1\le X\le W$, $1\le A_{i,j}\le10^9$입니다.
+
+## 출력
+
+클리어 가능하면 `Yes`, 불가능하면 `No`를 출력하세요.

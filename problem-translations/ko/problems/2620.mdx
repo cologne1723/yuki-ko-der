@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2620
+problemId: 10452
+sourceTitle: "Sieve of Coins"
+sourceHtmlSha256: d96dfcedc84b2f0a17e79012a5ae18c5f07aa2a5a9f819e6a15be820ea2666f4
+humanReview: null
+machineReview: unreviewed
+title: "동전의 체"
+---
+
+왼쪽부터 $i$번째 동전 중 일부가 앞면입니다. $i=1$부터 차례로, 동전 $i$가 앞면이면 $2i,3i,\ldots$번째 동전의 앞뒤를 뒤집습니다. 모든 조작 후 앞면인 동전의 수를 구하세요.
+
+## 조건
+
+- $1\le L\le10^{12}$, $1\le N\le534$
+- $1\le A_1<\cdots<A_N\le L$
+- 각 $A_i$는 $5$ 이상의 소인수를 갖지 않습니다.
+
+## 입력
+
+```text
+$L$ $N$ $A_1$ $\cdots$ $A_N$
+```
+
+## 출력
+
+앞면인 동전의 수를 출력하세요.
+

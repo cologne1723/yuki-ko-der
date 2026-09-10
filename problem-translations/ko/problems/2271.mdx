@@ -1,0 +1,40 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2271
+problemId: 8608
+sourceTitle: "平方根の１３桁精度近似計算"
+sourceHtmlSha256: ed35edfec86f863c772386b31d8496263eb5a39f8d9849e0752ac87cacd06da8
+humanReview: null
+machineReview: unreviewed
+title: "제곱근의 13자리 정밀도 근사 계산"
+---
+
+정수 $n$의 5로 나눈 인수의 개수를 $v_5(n)$이라고 하며, 다음과 같이 정의합니다.
+
+$$
+d_5(n_0,n_1)=\begin{cases}5^{-v_5(n_0-n_1)}&(n_0\ne n_1)\\0&(n_0=n_1)\end{cases}
+$$
+
+정수 $r$이 $N$의 $E$자리 정밀도 5진 제곱근 근사라는 것은 $d_5(N,r^2)\le 5^{-E}$를 만족한다는 뜻입니다.
+
+주어진 범위 안에 이러한 $r$이 존재하는지 판정하고, 존재한다면 하나를 출력하세요.
+
+## 조건
+
+- $-2^{29}\le N\le 2^{29}$
+- $0\le E\le 13$
+
+## 입력
+
+입력은 다음 형식으로 주어집니다.
+
+```text
+N E
+```
+
+## 출력
+
+조건을 만족하는 정수 $r$이 $-2^{29}\le r\le 2^{29}$의 범위에 존재한다면 그중 하나를 출력하세요.
+
+존재하지 않는다면 `NaN`을 출력하세요.

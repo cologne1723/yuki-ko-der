@@ -1,0 +1,56 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2408
+problemId: 9477
+sourceTitle: Lakes and Fish
+sourceHtmlSha256: 5f56156e9fb0a05297c5a77d283269d9a6c5ce13cf2a378f4c468ed759182b08
+humanReview: null
+machineReview: unreviewed
+title: 호수와 물고기
+---
+
+무한히 긴 수직선 위에 $N$개의 호수와 $M$마리의 물고기가 있습니다. $i$번째 호수의 범위는 $[L_i-0.5,L_i+0.5)$이고, $i$번째 물고기의 처음 위치는 $F_i$입니다.
+
+물고기는 호수 안에 있으면 수중, 그렇지 않으면 지상에 있습니다. 지상에서의 힘은 $B_i$, 수중에서의 힘은 $W_i$이며 $B_i\le W_i$입니다.
+
+각 물고기를 양의 방향 또는 음의 방향으로 1만큼 움직일 수 있고, 한 번 움직일 때 비용 1이 듭니다. 최종 힘의 합을 $S$, 총 비용을 $C$라 할 때 $S-C$의 최댓값을 구하세요.
+
+## 조건
+
+- $1\le N,M\le10^5$
+- $0\le L_1<\cdots<L_N\le10^9$
+- $0\le F_i\le10^9$
+- $0\le B_i\le W_i\le10^9$
+
+## 입력
+
+```text
+N M
+L1 L2 ... LN
+F1 B1 W1
+...
+FM BM WM
+```
+
+## 출력
+
+$S-C$의 최댓값을 출력하세요.
+
+## 예제
+
+### 입력 1
+
+```text
+4 3
+8 11 14 2023
+7 10 12
+14 14 14
+2013 8 12
+```
+
+### 출력 1
+
+```text
+33
+```

@@ -1,0 +1,28 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1691
+problemId: 6496
+sourceTitle: "Badugi"
+sourceHtmlSha256: "dada6a29ee14769d72825bed96899b96ce0f4c95e6e74881bdc7244fc0ba01b9"
+humanReview: null
+machineReview: unreviewed
+title: "바둑이"
+---
+
+색이 `N`종류이고 각 색마다 숫자 `1`부터 `M`까지가 하나씩 적힌 카드가 있어 총 `NM`장입니다.
+
+카드 `K`장을 골랐을 때, 같은 색도 같은 숫자도 포함하지 않도록 고를 수 있는 카드의 최대 개수를 스코어라 합니다. 스코어가 `K-2`가 되는 선택 방법의 수를 `998244353`으로 나눈 나머지를 구하세요.
+
+## 제약
+
+- `2 <= N,M <= 5 * 10^5`
+- `3 <= K <= min(N,M)+2`
+
+## 입력
+
+`N M K`가 주어집니다.
+
+## 출력
+
+조건을 만족하는 선택 방법의 개수를 출력하세요.

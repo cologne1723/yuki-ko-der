@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2389
+problemId: 9742
+sourceTitle: "Cheating Code Golf"
+sourceHtmlSha256: 0a1c65d748acf8dbc051296a9938d3802abe8b1f4edf4982278432ce08b9d0c9
+humanReview: null
+machineReview: unreviewed
+title: "부정행위 코드 골프"
+---
+
+$N$개의 문제에 소스 코드를 제출합니다. 전체 오답 제출은 $M$번까지 허용되며, 정답을 맞힌 문제에는 다시 제출할 수 없습니다. 길이 $x$인 코드로 정답을 맞히면 점수 $1/x$를 얻습니다.
+
+문제 $i$에는 항상 정답인 길이 $A_i$ 코드와, 확률 $1/P_i$로 정답인 길이 $B_i$ 랜덤 코드가 있습니다. 매 제출 결과를 확인하며, 모든 문제를 맞힐 수 있고 기대 점수가 최대가 되도록 전략을 세울 때 기대 점수를 구하세요.
+
+## 조건
+
+- $1\le N\le12$
+- $0\le M\le40$
+- $1\le A_i,B_i,P_i\le10^6$
+
+## 입력
+
+첫째 줄에 $N,M$, 다음 $N$개 줄에 $A_i,B_i,P_i$가 주어집니다.
+
+## 출력
+
+최대 기대 점수를 출력하세요.

@@ -1,0 +1,27 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2107
+problemId: 8330
+sourceTitle: "Entangled LIS"
+sourceHtmlSha256: "1e282acf9a3e8ae3499514b2541358f1fa7af1df4bb360f1795369758902e04f"
+humanReview: null
+machineReview: unreviewed
+title: "얽힌 LIS"
+---
+
+문자 `a`, `b`로 이루어진 문자열 $s$와 $A,B$가 주어집니다. $a,b$ 두 수열이 $1$부터 $2N$까지의 수를 정확히 한 번씩 사용하고, 각각의 최장 증가 부분 수열 길이가 $A,B$이며 $s_i$가 `a`이면 $a_i>b_i$, `b`이면 $a_i<b_i$가 되도록 구성할 수 있는지 판정하고 하나 출력하세요.
+
+## 입력
+
+```text
+T
+N A B
+s
+```
+
+$N\le2\times10^5$이고 모든 테스트 케이스의 $N$ 합은 $2\times10^5$ 이하입니다.
+
+## 출력
+
+가능하면 수열 $a,b$를, 불가능하면 `-1`을 출력하세요.

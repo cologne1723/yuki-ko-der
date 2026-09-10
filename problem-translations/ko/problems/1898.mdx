@@ -1,0 +1,39 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1898
+problemId: 7427
+sourceTitle: "Battle and Exchange"
+sourceHtmlSha256: "4a3fb30deb7e416ca4e18f1e5683d2fdf47bd73c998e1c692fe69f866e577adc"
+humanReview: null
+machineReview: unreviewed
+title: "전투와 교환"
+---
+
+$N$개 정점의 연결 단순 무방향 그래프가 있고, 정점 $i$의 사람은 카드 $A_i,B_i,C_i$를 가집니다. 당신은 정점 1에서 시작하며 카드 $A,B,C$를 가집니다.
+
+## 시험
+
+현재 정점의 상대 카드 합보다 자신의 카드 합이 클 때 이깁니다. 이기면 카드 한 장을 서로 교환할 수 있고 인접 정점으로 이동합니다. 정점 $N$의 상대에게 이기면 성공합니다. 실패하면 종료됩니다.
+
+## 문제
+
+시험을 성공시킬 수 있는 양의 정수 $A,B,C$ 중 합이 최소인 하나를 구하세요.
+
+## 입력
+
+```text
+N M
+U_1 V_1
+...
+U_M V_M
+A_1 B_1 C_1
+...
+A_N B_N C_N
+```
+
+$2\le N\le10^5$, $N-1\le M\le10^5$, 카드 값은 $1$ 이상 $10^8$ 이하입니다.
+
+## 출력
+
+조건을 만족하는 $A,B,C$를 출력하세요.

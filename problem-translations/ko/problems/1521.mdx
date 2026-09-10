@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1521
+problemId: 5892
+sourceTitle: "Playing Musical Chairs Alone"
+sourceHtmlSha256: "08f48a1effd6cd89a164d5d0c0bfc7c03ba5d00f66dec0972b121198bf43b0c2"
+humanReview: null
+machineReview: unreviewed
+title: "혼자 하는 뮤지컬 체어"
+---
+## 문제
+
+$N$개의 의자가 원형으로 놓여 시계 방향으로 $0$부터 $N-1$까지 번호가 붙어 있습니다. 처음에 의자 0에 앉아 있고, 다음 행동을 정확히 $K$번 반복합니다.
+
+$1\leq x\leq L$인 정수 $x$를 골라 시계 방향으로 $x$칸 이동합니다.
+
+각 의자 $i$에 대해, 가능한 $L^K$가지 이동 방법 중 최종적으로 의자 $i$에 앉는 방법의 수를 $10^9+7$로 나눈 나머지를 출력하세요.
+
+## 입력
+
+$N,K,L$이 주어집니다.
+
+- $1\leq L\leq N\leq100$
+- $1\leq K\leq10^6$
+
+## 출력
+
+의자 $0$부터 $N-1$까지 답을 한 줄에 하나씩 출력하세요.

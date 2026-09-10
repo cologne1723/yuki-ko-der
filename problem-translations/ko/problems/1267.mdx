@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1267
+problemId: 5365
+sourceTitle: "Stop and Coin Game"
+sourceHtmlSha256: "3b5dd87f160a50b28a4896960b2a185dd07be6794f89c602556fd794cea926e0"
+humanReview: null
+machineReview: unreviewed
+title: "Stop과 동전 게임"
+---
+
+## 문제 설명
+
+물의 든 유리잔과 $N$개의 동전이 있습니다. 유리잔의 남은 용량은 $V$ mL이고, $i$번째 동전의 부피는 $A_i$ mL입니다.
+
+선공인 stop 군부터 번갈아 아직 선택하지 않은 동전 하나를 골라 유리잔에 넣습니다. 남은 용량이 $x$ mL일 때 부피 $y$ mL인 동전을 넣으면 남은 용량은 $x-y$ mL가 됩니다. 유리잔은 충분히 커서 동전이 들어가지 않는 경우는 없습니다.
+
+동전을 넣어 물이 넘치면, 즉 남은 용량이 음수가 되면 그 동전을 넣은 사람이 패배합니다. 끝까지 넘치지 않으면 무승부입니다.
+
+두 사람이 최적으로 행동할 때 선공이 이기면 `First`, 후공이 이기면 `Second`, 무승부면 `Draw`를 출력하세요.
+
+## 입력
+
+```text
+N V
+A_1 A_2 \ldots A_N
+```
+
+## 출력
+
+게임 결과를 출력하세요.

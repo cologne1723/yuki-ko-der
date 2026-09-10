@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1304
+problemId: 4326
+sourceTitle: "あなたは基本が何か知っていますか？私は知っています．"
+sourceHtmlSha256: "3f5412efdc5319ed7e85fd17da87fbbd7487d09d7b68722661217c64ef6bfd44"
+humanReview: null
+machineReview: unreviewed
+title: "기본이 무엇인지 알고 있나요? 저는 알고 있습니다"
+---
+
+## 문제 설명
+
+길이 $K$인 수열 $A$가 주어집니다. 모든 원소가 $A$의 원소이고 인접한 두 원소가 다른 길이 $N$인 수열 중, 모든 원소의 bitwise XOR가 $X$ 이상 $Y$ 이하인 수열의 개수를 $998244353$으로 나눈 나머지를 구하세요.
+
+## 입력
+
+```text
+N K X Y
+A_1 A_2 \ldots A_K
+```
+
+- $N$은 $2\leq N\leq30$인 짝수
+- $1\leq K\leq1024$
+- $0\leq A_i,X,Y<1024$, $X\leq Y$
+- $K^N\leq2\times10^9$
+- $A_i$는 서로 다릅니다.
+
+## 출력
+
+답을 출력하세요.

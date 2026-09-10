@@ -1,0 +1,36 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2703
+problemId: 10242
+sourceTitle: "FizzBuzz Letter Counting"
+sourceHtmlSha256: "1b560922aaea997963606a0bacc78f83547e4a9e310f2d06e1a811b3f4ae83a5"
+humanReview: null
+machineReview: unreviewed
+title: "FizzBuzz 글자 수 세기"
+---
+
+## 문제
+
+`1` 이상 `N` 이하에서 FizzBuzz를 했을 때 출력되는 글자 수의 합을 `998244353`으로 나눈 나머지를 구하세요. 3의 배수(단 5의 배수 제외)는 4, 5의 배수(단 3의 배수 제외)는 4, 15의 배수는 8글자로 세고, 그 외의 수는 십진수 표기의 자릿수로 셉니다.
+
+`N`은 직접 주어지지 않고, 십진수 `N`을 연속 길이 압축한 `M`개의 쌍 `(v_i,l_i)`로 주어집니다. 각 숫자 `v_i`를 `l_i`번 이어 붙인 수가 `N`입니다.
+
+## 제약
+
+- `1 ≤ M ≤ 10^5`, `0 ≤ v_i ≤ 9`, `v_1 ≠ 0`
+- `1 ≤ l_i ≤ 10^12`
+
+## 입력
+
+```text
+M
+v_1 l_1
+⋮
+v_M l_M
+```
+
+## 출력
+
+답을 출력하세요.
+

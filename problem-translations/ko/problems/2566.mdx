@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2566
+problemId: 9348
+sourceTitle: "美しい整数列"
+sourceHtmlSha256: bcb4046f6164403d8554a2cc7cf8c7728937cd815f9da2791d4a49097d296d0d
+humanReview: null
+machineReview: unreviewed
+title: "아름다운 정수열"
+---
+
+길이 $N$인 정수열 $A$와 길이 $M$인 정수열 $B$가 주어집니다. 모든 $i$에 대해 $A_{i+1}-A_i=B_{i\bmod M}$이면 $A$를 아름답다고 합니다. $A_i$를 원하는 정수로 바꾸는 조작의 비용이 $C_i$일 때, $A$를 아름답게 만드는 최소 비용을 구하세요.
+
+## 조건
+
+- $1\le M<N\le2\times10^5$
+- $-10^9\le A_i,B_i\le10^9$
+- $1\le C_i\le10^9$
+
+## 입력
+
+```text
+$N$ $M$
+$A_0$ $A_1$ $\cdots$ $A_{N-1}$
+$B_0$ $B_1$ $\cdots$ $B_{M-1}$
+$C_0$ $C_1$ $\cdots$ $C_{N-1}$
+```
+
+## 출력
+
+답을 출력하세요.
+

@@ -1,0 +1,78 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1197
+problemId: 4862
+sourceTitle: "モンスターショー"
+sourceHtmlSha256: "447d141ba5bedf05cfc4e8e0dd34630f7811cf9f043a1c5223c24aa904889993"
+humanReview: null
+machineReview: unreviewed
+title: "몬스터 쇼"
+---
+
+## 문제 설명
+
+$1,2,\ldots,N$으로 번호가 붙은 $N$개의 마을이 $N-1$개의 길로 연결되어 있습니다. 각 길의 길이는 $1$이고, 그래프는 모든 마을을 연결하는 트리입니다.
+
+Paken 군은 $K$마리의 슬라임을 기르고 있으며, $i$번째 슬라임은 처음에 마을 $C_i$에 있습니다.
+
+다음 두 종류의 쿼리를 처리하세요.
+
+- `1 p d`: $p$번째 슬라임이 마을 $d$로 이동합니다.
+- `2 e`: 모든 슬라임을 마을 $e$로 모을 때 필요한 이동 거리의 합을 출력합니다.
+
+## 입력
+
+```text
+N K Q
+C_1 C_2 \ldots C_K
+A_1 B_1
+\vdots
+A_{N-1} B_{N-1}
+Query_1
+\vdots
+Query_Q
+```
+
+- $1\leq N,K,Q\leq 10^5$
+- $1\leq C_i,A_i,B_i,d,e\leq N$
+- 입력 그래프는 트리입니다.
+
+## 출력
+
+두 번째 종류의 쿼리가 주어질 때마다 이동 거리의 합을 한 줄에 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+3 2 2
+1 3
+2 1
+3 2
+2 2
+```
+#### 출력
+```text
+1
+3
+```
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+4 2 3
+4 3
+2 1
+3 1
+4 2
+2 2
+1 2 1
+2 1
+```
+#### 출력
+```text
+3
+2
+```

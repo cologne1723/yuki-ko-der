@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2633
+problemId: 10015
+sourceTitle: "Subsequence Combination Score"
+sourceHtmlSha256: d49bf1453ae735c16396f024b2bc6c16c6d4b91d23e47ed742c8223d3541ebb0
+humanReview: null
+machineReview: unreviewed
+title: "부분 수열 조합 점수"
+---
+
+넓은 의미에서 감소하는 수열 $A$가 주어집니다. 길이 $L$인 비어 있지 않은 수열 $B$의 점수를 $L=1$이면 $1$, 아니면 $\prod_{i=2}^L\binom{B_{i-1}}{B_i}$로 정의합니다. $A$의 모든 비어 있지 않은 부분 수열에 대한 점수 합을 구하세요.
+
+## 조건
+
+- $1\le N\le10^5$
+- $10^5\ge A_1\ge A_2\ge\cdots\ge A_N\ge0$
+
+## 입력
+
+```text
+$N$
+$A_1$ $A_2$ $\cdots$ $A_N$
+```
+
+## 출력
+
+답을 $998244353$으로 나눈 나머지를 출력하세요.
+

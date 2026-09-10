@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1948
+problemId: 7917
+sourceTitle: "足し算するだけのパズルゲーム(1)"
+sourceHtmlSha256: "a9b5f8911d0a3e520baef29f5d63accfba391638ded9c91f9ce650dce180b7e1"
+humanReview: null
+machineReview: unreviewed
+title: "더하기만 하는 퍼즐 게임 (1)"
+---
+
+격자 게임에서 플레이어는 $(1,1)$에서 시작해 아래 또는 오른쪽으로 이동합니다. 각 칸의 적을 이기면 적 공격력만큼 자신의 공격력이 증가하고, 자신의 공격력이 낮거나 같으면 패배합니다. 한 번만 컨티뉴해 패배한 칸의 전투를 건너뛸 수 있지만 보스 칸에서는 사용할 수 없습니다.
+
+## 문제
+
+적절히 이동해 게임을 클리어할 수 있는지 판정하세요.
+
+## 입력
+
+```text
+H W
+A_{1,1} ... A_{1,W}
+...
+A_{H,1} ... A_{H,W}
+```
+
+$2\le H,W\le500$, $1\le A_{i,j}\le10^9$입니다.
+
+## 출력
+
+클리어 가능하면 `Yes`, 불가능하면 `No`를 출력하세요.

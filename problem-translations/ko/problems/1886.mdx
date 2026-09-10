@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1886
+problemId: 6947
+sourceTitle: "Sum of Slide Max"
+sourceHtmlSha256: "213c7686946296fd71a6cce79a88d558f962dbb14804b3ae2a3c2c776c74c1cf"
+humanReview: null
+machineReview: unreviewed
+title: "슬라이드 최댓값의 합"
+---
+
+순열 $P$에 대해 $1\le K\le N$일 때
+
+$$f_K(P)=\sum_{i=1}^{N-K+1}\max(P_i,P_{i+1},\ldots,P_{i+K-1})$$
+
+로 정의합니다.
+
+## 문제
+
+모든 $N!$개의 순열에 대해 $f_K(P)$를 계산한 총합을 $K=1,\ldots,N$ 각각에 대해 $998244353$으로 나눈 나머지로 출력하세요.
+
+## 입력
+
+```text
+N
+```
+
+$1\le N\le2\times10^5$입니다.
+
+## 출력
+
+$K=1,\ldots,N$의 답을 각각 한 줄에 출력하세요.

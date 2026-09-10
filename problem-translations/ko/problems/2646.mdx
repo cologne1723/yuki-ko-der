@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2646
+problemId: 10585
+sourceTitle: "Cycle Maze"
+sourceHtmlSha256: ea64e898f70c13aee9c3ea934fa7c28939a38983929aeb40dbcf44d704729815
+humanReview: null
+machineReview: unreviewed
+title: "순환 미로"
+---
+
+$H\times W$ 격자에 $0$부터 $9$까지의 숫자가 쓰여 있습니다. 매 턴 모든 칸의 숫자를 $(현재 값-1)\bmod(A_{i,j}+1)$로 바꾼 뒤, 숫자가 1 이상인 인접 칸 또는 현재 칸으로 이동합니다. 시작점에서 목표점에 $T$턴 미만으로 도달할 수 있는지 판정하세요.
+
+## 조건
+
+- $1\le H,W\le200$, $H\times W>1$, $1\le T\le600$
+- 각 숫자는 $0$ 이상 $9$ 이하이고 시작 칸의 숫자는 0이 아닙니다.
+
+## 입력
+
+```text
+$H$ $W$ $T$ $S_Y$ $S_X$ $G_Y$ $G_X$
+$A_{1,1}$ $\cdots$ $A_{1,W}$
+\vdots
+$A_{H,1}$ $\cdots$ $A_{H,W}$
+```
+
+## 출력
+
+도달 가능하면 `Yes`, 불가능하면 `No`를 출력하세요.
+

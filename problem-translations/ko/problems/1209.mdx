@@ -1,0 +1,72 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1209
+problemId: 4462
+sourceTitle: "XOR Into You"
+sourceHtmlSha256: "693080a63cbdbf0a3ef2f25138e7556028ed53eb3fe15a221677ebb6d6b99469"
+humanReview: null
+machineReview: unreviewed
+title: "XOR Into You"
+---
+
+## 문제 설명
+
+길이 $N$인 수열 $A$가 있습니다. 다음 작업을 원하는 만큼 수행할 수 있습니다.
+
+정수 $i$ ($1\leq i\leq N-2$)를 골라 $A_{i+1}$을 $A_i\mathbin{\oplus}A_{i+1}\mathbin{\oplus}A_{i+2}$로 바꿉니다. 여기서 $\oplus$는 비트별 배타적 논리합입니다.
+
+수열을 $B$와 같게 만들 수 있는지 판정하고, 가능하다면 필요한 최소 작업 횟수를 구하세요.
+
+## 입력
+
+```text
+N
+A_1 A_2 \ldots A_N
+B_1 B_2 \ldots B_N
+```
+
+- $3\leq N\leq 10^5$
+- $0\leq A_i,B_i<2^{30}$
+
+## 출력
+
+만들 수 없으면 $-1$, 만들 수 있으면 최소 작업 횟수를 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+3
+1 2 3
+1 0 3
+```
+#### 출력
+```text
+1
+```
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+3
+1 2 3
+1 4 3
+```
+#### 출력
+```text
+-1
+```
+
+### 예제 3 {file="01_sample_03.txt"}
+#### 입력
+```text
+8
+1 7 3 2 0 5 0 8
+1 7 3 2 0 5 0 8
+```
+#### 출력
+```text
+0
+```

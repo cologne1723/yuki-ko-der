@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2285
+problemId: 9191
+sourceTitle: "Make A Unit Square"
+sourceHtmlSha256: afe790da4d94a1ea3515f33d023b320cc0e46685698455dbd8df43126366b7d8
+humanReview: null
+machineReview: unreviewed
+title: "단위 정사각형 만들기"
+---
+
+양의 정수 $a,b$가 주어집니다. 처음에 좌표평면에는 직선 $x=0,x=a,y=0,y=b$가 그어져 있습니다.
+
+선공부터 번갈아 정수 $0<k<a$ 중 아직 $x=k$가 없는 것을 골라 직선을 긋거나, 정수 $0<l<b$ 중 아직 $y=l$이 없는 것을 골라 직선을 긋습니다.
+
+어떤 플레이어가 조작한 직선들로 $1\times1$ 정사각형이 처음 만들어지면 그 플레이어가 승리합니다. 최적으로 행동할 때 승자를 구하세요.
+
+## 조건
+
+- $1\le T\le 10^5$
+- $2\le a,b\le 10^9$
+
+## 입력
+
+첫째 줄에 $T$가 주어지고, 다음 $T$개 줄에 $a,b$가 주어집니다.
+
+## 출력
+
+각 테스트 케이스에서 선공이 이기면 `First`, 후공이 이기면 `Second`를 한 줄에 하나씩 출력하세요.

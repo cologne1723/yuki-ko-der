@@ -1,0 +1,27 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1373
+problemId: 5306
+sourceTitle: "Directed Operations"
+sourceHtmlSha256: "737a8b2fd43622212b52e4840514257f5c36ad20f1499738b74c97e764ec4e50"
+humanReview: null
+machineReview: unreviewed
+title: "유향 연산"
+---
+
+## 문제
+
+`N`개 정점과 간선이 없는 그래프가 있습니다. 순서대로 각 연산 `i`에서 `1\le x\le N-a_i`를 골라 `x`에서 `x+a_i`로 향하는 간선을 추가합니다.
+
+모든 연산 후 정점 1에서 모든 정점에 도달할 수 있도록 할 수 있는지 판정하고, 가능하면 선택한 `x`들을 출력하세요.
+
+## 입력
+
+`N`과 `a_1,...,a_{N-1}`이 주어집니다.
+
+`2\le N\le10^5`, `1\le a_i\le N-1`입니다.
+
+## 출력
+
+가능하면 연산 순서의 선택을, 불가능하면 `No`를 출력하세요.

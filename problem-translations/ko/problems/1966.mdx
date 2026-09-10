@@ -1,0 +1,28 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1966
+problemId: 7667
+sourceTitle: "Median of Divisors"
+sourceHtmlSha256: "a5e75fa7dda39b4d91ba67725d8f3f798cc96ddd1d02554383da764e6aacfc1c"
+humanReview: null
+machineReview: unreviewed
+title: "약수의 중앙값"
+---
+
+양의 정수 $N,M$이 주어집니다. $M$은 짝수입니다. $1\le x\le N^M$인 정수 중 약수의 중앙값을 $f(x)$라 할 때 $f(x)>\sqrt{x}$를 만족하는 모든 $x$의 합을 구하세요.
+
+약수의 개수가 $k$개이고 양의 약수를 오름차순으로 $a_1,\ldots,a_k$라 하면, $k$가 홀수일 때 $f(x)=a_{(k+1)/2}$이고 짝수일 때 $f(x)=(a_{k/2}+a_{(k+2)/2})/2$입니다.
+
+## 입력
+
+```text
+T
+N M
+```
+
+$1\le T\le10^5$, $1\le N,M\le10^9$이고 $M$은 짝수입니다.
+
+## 출력
+
+각 테스트 케이스의 답을 한 줄에 출력하세요. 답은 $10^9+7$로 나눈 나머지입니다.

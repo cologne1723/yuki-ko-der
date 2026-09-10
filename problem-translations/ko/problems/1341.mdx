@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1341
+problemId: 3651
+sourceTitle: "真ん中を入れ替えて門松列"
+sourceHtmlSha256: "ed246aaf3cf23845c1d76f12df40ee390eb672393c895b81008161c0dfe32430"
+humanReview: null
+machineReview: unreviewed
+title: "가운데를 바꿔 카도마쓰 수열"
+---
+
+## 문제
+
+세 정수 `A,B,C`가 카도마쓰 수열이라는 것은 세 값이 모두 다르고 두 번째로 큰 값이 `A` 또는 `C`인 경우입니다. 카도마쓰 포인트는 세 값의 최댓값입니다.
+
+`N`개의 양의 정수 삼쌍 `(A_i,B_i,C_i)`가 주어집니다. 두 삼쌍 사이에서 가운데 값 `B`만 바꾸는 연산을 최대 `N`번 할 수 있습니다.
+
+모든 삼쌍을 카도마쓰 수열로 만들 수 있는지 판정하세요. 가능하다면 카도마쓰 포인트 총합을 `M` 이상으로 만들 수 있는지도 판정하세요.
+
+## 입력
+
+`N M`과 `N`개의 `A_i B_i C_i`가 주어집니다.
+
+`1\le N\le3000`, `0\le M\le3\times10^{12}`, `1\le A_i,B_i,C_i\le10^9`, `A_i\ne C_i`입니다.
+
+## 출력
+
+불가능하면 `NO`를 한 줄에 출력하세요. 가능하면 첫 줄에 `YES`를 출력하고, 둘째 줄에 조건을 만족하면 `KADOMATSU!`, 아니면 `NO`를 출력하세요.

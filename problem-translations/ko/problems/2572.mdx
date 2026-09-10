@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2572
+problemId: 10312
+sourceTitle: "Midori on the grid"
+sourceHtmlSha256: feffa95b68aa3991ca7c79b5367b1da4cc75a36de621a2a3bcefc996d03b913b
+humanReview: null
+machineReview: unreviewed
+title: "격자 위의 Midori"
+---
+
+$(0,0)$부터 $(H,W)$까지 격자 변을 따라 최단 거리로 이동하는 경로를 생각합니다. 각 $t_i$에 대해 직선 $y=x+t_i$ 위의 점을 지나지 않는 경로의 수를 구하세요.
+
+## 조건
+
+- $1\le H,W\le10^5$, $1\le Q\le10^6$
+- $-10^6\le t_i\le10^6$
+- 주어진 직선은 시작점과 도착점을 지나지 않습니다.
+
+## 입력
+
+```text
+$H$ $W$ $Q$
+$t_1$
+\vdots
+$t_Q$
+```
+
+## 출력
+
+각 답을 $998244353$으로 나눈 나머지로 한 줄에 하나씩 출력하세요.
+

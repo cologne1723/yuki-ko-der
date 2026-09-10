@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1508
+problemId: 6213
+sourceTitle: "Avoid being hit"
+sourceHtmlSha256: "bbd31a823de33e095e252c3bab1d45b6e4cdebc892f06abdabda035488b999bc"
+humanReview: null
+machineReview: unreviewed
+title: "맞지 않기"
+---
+## 문제
+
+일렬로 놓인 $N$개의 칸과 말 하나가 있습니다. 처음에 원하는 칸에 말을 놓고, 당신부터 번갈아 $Q$번 행동합니다.
+
+당신은 말을 현재 칸의 양옆 또는 현재 칸에 해당하는 칸으로 이동합니다. 양 끝에서는 범위를 벗어나지 않는 칸만 선택할 수 있습니다. 이후 상대는 $A_i$번 칸과 $B_i$번 칸을 차례로 두드리며, 말이 두드린 칸에 있으면 상대가 승리합니다.
+
+모든 행동이 끝날 때까지 맞지 않도록 할 수 있는지 판정하고, 가능하면 시작 칸과 각 차례의 이동 칸을 출력하세요.
+
+## 입력
+
+```text
+$N$ $Q$
+$A_1$ $\ldots$ $A_Q$
+$B_1$ $\ldots$ $B_Q$
+```
+
+- $2\leq N,Q\leq10^5$
+
+## 출력
+
+가능하면 `YES`, 시작 칸, 각 이동 칸을 차례로 출력하세요. 불가능하면 `NO`를 출력하세요.

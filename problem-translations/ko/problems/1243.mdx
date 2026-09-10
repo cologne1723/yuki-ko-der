@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1243
+problemId: 4442
+sourceTitle: "約数加算"
+sourceHtmlSha256: "72cf65f17a2c06ef9face967e701981b5973589c0d3861a07599713cf2f99509"
+humanReview: null
+machineReview: unreviewed
+title: "약수 더하기"
+---
+
+## 문제 설명
+
+정수 $A,B$가 주어집니다. 현재 $A$의 양의 약수 하나를 골라 $A$에 더하는 작업을 최대 120번 수행할 수 있습니다. $A$를 $B$로 만드는 작업 순서를 하나 구성하세요. 조건을 만족하는 순서가 항상 존재함이 보장됩니다.
+
+## 입력
+
+```text
+T
+A_1 B_1
+\vdots
+A_T B_T
+```
+
+- $1\leq T\leq100$
+- $1\leq A_i<B_i\leq10^{18}$
+
+## 출력
+
+각 테스트 케이스마다 작업 횟수 $K$를 한 줄에 출력하고, 다음 줄에 각 작업에서 더할 약수를 순서대로 출력하세요. $1\leq K\leq120$이어야 합니다.

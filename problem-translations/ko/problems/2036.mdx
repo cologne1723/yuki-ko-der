@@ -1,0 +1,28 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2036
+problemId: 8254
+sourceTitle: "Max Middle"
+sourceHtmlSha256: "da4235a21b349851c0267d23acfdbbab2932da6ab3093e59e02e6cbe828c8676"
+humanReview: null
+machineReview: unreviewed
+title: "가운데 최댓값"
+---
+
+인접한 원소가 서로 다른 정수열 $A$가 주어집니다. $A_i<A_{i+1}$이고 $A_{i+1}>A_{i+2}$인 $i$를 골라 $A_{i+1}$을 $\min(A_i,A_{i+2})-1$로 바꾸는 조작을 반복할 수 있습니다.
+
+가능한 조작 횟수의 최댓값을 구하세요.
+
+## 입력
+
+```text
+N
+A_1 A_2 ... A_N
+```
+
+$3\le N\le2\times10^5$, $|A_i|\le10^9$입니다.
+
+## 출력
+
+조작 횟수의 최댓값을 출력하세요.

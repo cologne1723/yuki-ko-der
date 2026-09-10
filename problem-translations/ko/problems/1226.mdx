@@ -1,0 +1,42 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1226
+problemId: 5075
+sourceTitle: "I hate Robot Arms"
+sourceHtmlSha256: "58761cafe5ee6910cef0e9c351c79319d3164897dfd0c6aa7bf29f3a7574f722"
+humanReview: null
+machineReview: unreviewed
+title: "나는 로봇 팔이 싫어요"
+---
+
+## 문제 설명
+
+로봇 팔 EX는 $N$개의 팔과 $N+1$개의 관절로 이루어집니다. 팔 $i$는 관절 $i-1$과 $i$를 연결합니다. 팔 $i$의 길이를 $d_i$, 각도를 $\theta_i$라 하고 $\phi_i=\theta_1+\cdots+\theta_i$라 하면,
+
+$(x_0,y_0)=(0,0)$, $(x_i,y_i)=(x_{i-1}+d_i\cos\phi_i,y_{i-1}+d_i\sin\phi_i)$입니다.
+
+처음에는 모든 팔의 각도가 $0$도, 길이가 $1$입니다. 다음 쿼리를 처리하세요.
+
+- `0 i x`: 팔 $i$의 각도를 $x$도로 바꿉니다.
+- `1 i x`: 팔 $i$의 길이를 $x$로 바꿉니다.
+- `2 i`: 관절 $i$의 좌표를 출력합니다.
+
+## 입력
+
+```text
+N Q
+query_1
+\vdots
+query_Q
+```
+
+- $1\leq N,Q\leq10^5$
+- $1\leq i\leq N$
+- 각도 쿼리의 $0\leq x<360$
+- 길이 쿼리의 $1\leq x\leq10$
+- 좌표 쿼리가 적어도 하나 주어집니다.
+
+## 출력
+
+좌표 쿼리마다 좌표를 한 줄에 출력하세요. 예상 답과의 절대 오차 또는 상대 오차가 $10^{-5}$ 이하이면 정답으로 인정합니다.

@@ -1,0 +1,33 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1870
+problemId: 7089
+sourceTitle: "Xor Matrix"
+sourceHtmlSha256: "9a5b4bbabd8888f66ee935181543080ccdc456df40031b17cc85027d9c70dfc4"
+humanReview: null
+machineReview: unreviewed
+title: "XOR 행렬"
+---
+
+다음 조건을 만족하는 $N\times M$ 정수 행렬 $C$의 개수를 $998244353$으로 나눈 나머지를 구하세요.
+
+## 조건
+
+- $0\le C_{i,j}<2^{20}$
+- 모든 $i$에 대해 $C_{i,1}\oplus\cdots\oplus C_{i,M}=A_i$
+- 모든 $j$에 대해 $C_{1,j}\oplus\cdots\oplus C_{N,j}=B_j$
+
+## 입력
+
+```text
+N M
+A_1 A_2 ... A_N
+B_1 B_2 ... B_M
+```
+
+$1\le N,M\le2\times10^5$, $0\le A_i,B_j<2^{20}$입니다.
+
+## 출력
+
+답을 출력하세요.

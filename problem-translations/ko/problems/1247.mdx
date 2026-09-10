@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1247
+problemId: 4458
+sourceTitle: "ブロック登り"
+sourceHtmlSha256: "650f91beebd8ecf0c91375c823a4baefdf110348f97a31f2af8ed9c0b33a317d"
+humanReview: null
+machineReview: unreviewed
+title: "블록 오르기"
+---
+## 문제
+
+$N$개의 칸이 일렬로 있고 처음 높이는 모두 0입니다. 시작 칸 하나를 고른 뒤 다음 행동을 $K$번 합니다.
+
+현재 칸과 인접한 칸 하나를 골라, $i$번째 행동에서 그 칸의 높이가 $i$가 되도록 블록을 쌓고 그 칸으로 이동합니다. 번호 차이가 1인 두 칸만 인접합니다.
+
+최종 높이를 $H_i$라 할 때 점수는 $\sum A_iH_i$입니다. 시작 칸을 각각 $1,\ldots,N$으로 했을 때 점수의 최댓값을 구하세요.
+
+## 입력
+
+```text
+$N$ $K$
+$A_1$ $\ldots$ $A_N$
+```
+
+- $2\leq N,K\leq300$
+- $-10000\leq A_i\leq10000$
+
+## 출력
+
+각 시작 칸에 대한 최댓값을 한 줄에 출력하세요.

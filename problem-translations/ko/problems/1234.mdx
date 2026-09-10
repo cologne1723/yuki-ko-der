@@ -1,0 +1,41 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1234
+problemId: 1379
+sourceTitle: "典型RMQ"
+sourceHtmlSha256: "209d3073a521e2c141abd158b7d98e2112b9e1850db1f1857671db1d9be28d4e"
+humanReview: null
+machineReview: unreviewed
+title: "전형적인 RMQ"
+---
+
+## 문제 설명
+
+배열에 대해 다음 두 종류의 쿼리를 처리하세요.
+
+- 구간에 값 더하기
+- 구간 최솟값 구하기
+
+## 입력
+
+```text
+N
+a_1 a_2 \ldots a_N
+Q
+k_1 l_1 r_1 c_1
+\vdots
+k_Q l_Q r_Q c_Q
+```
+
+- $1\leq N,Q\leq100000$
+- $-10^{10}\leq a_i\leq10^{10}$
+- $k_i$는 $1$ 또는 $2$
+- $1\leq l_i\leq r_i\leq N$
+- $-10000\leq c_i\leq10000$
+
+$k_i=1$이면 $l_i$번째부터 $r_i$번째까지 $c_i$를 더합니다. $k_i=2$이면 해당 구간의 최솟값을 출력합니다.
+
+## 출력
+
+각 최솟값 쿼리의 결과를 한 줄에 출력하세요.

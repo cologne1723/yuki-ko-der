@@ -1,0 +1,51 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1218
+problemId: 4732
+sourceTitle: "Something Like a Theorem"
+sourceHtmlSha256: "98af5be40a67152017ebdf83cb055657c088bfcf5f49c32bee02521fb6dc725f"
+humanReview: null
+machineReview: unreviewed
+title: "무언가 정리 같은 것"
+---
+
+## 문제 설명
+
+양의 정수 $n,z$가 주어집니다. $x^n+y^n=z^n$을 만족하는 양의 정수쌍 $(x,y)$가 존재하는지 판정하세요.
+
+## 입력
+
+```text
+n z
+```
+
+- $1\leq n\leq100$
+- $1\leq z$
+- $z^n\leq10^6$
+
+## 출력
+
+조건을 만족하는 양의 정수쌍이 존재하면 `Yes`, 존재하지 않으면 `No`를 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+2 5
+```
+#### 출력
+```text
+Yes
+```
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+3 100
+```
+#### 출력
+```text
+No
+```

@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1501
+problemId: 6270
+sourceTitle: "酔歩"
+sourceHtmlSha256: "c3e7a90430980663f2886eddd38f4a8a2dc8d43bf58b1492bbe5c7d9b04af5e0"
+humanReview: null
+machineReview: unreviewed
+title: "취한 보행"
+---
+## 문제
+
+$1$부터 $N$까지 번호가 붙은 $N$개의 칸과 말 하나가 있습니다. 처음에 말은 칸 $K$에 있습니다. 칸 $i$에는 정수 $A_i$가 쓰여 있습니다.
+
+말이 칸 $1$ 또는 칸 $N$에 도착할 때까지 다음 행동을 반복합니다. 현재 말이 칸 $j$에 있다면, 상자에 빨간 공 $A_{j-1}$개와 파란 공 $A_{j+1}$개를 넣고 섞은 뒤 공 하나를 무작위로 꺼냅니다. 빨간 공이면 칸 $j-1$로, 파란 공이면 칸 $j+1$로 이동합니다.
+
+말이 최종적으로 칸 $N$에 있을 확률을 기약분수로 나타내 출력하세요.
+
+## 입력
+
+```text
+$N$ $K$
+$A_1$ $A_2$ $\ldots$ $A_N$
+```
+
+- $1\leq K\leq N\leq 10^5$
+- $1\leq A_i\leq 10$
+
+## 출력
+
+확률을 서로소인 정수 $p,q$로 나타냈을 때 $p/q$를 출력하세요. 확률이 $0$이면 `0`만 출력하세요.

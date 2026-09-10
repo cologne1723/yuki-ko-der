@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2284
+problemId: 9169
+sourceTitle: "Assembly"
+sourceHtmlSha256: a3253b0284995d247d3b5730de14760f0d34a38d0ecf07ed69585a77ab168157
+humanReview: null
+machineReview: unreviewed
+title: "Assembly"
+---
+
+$N$개의 의자가 앞뒤로 한 줄에 놓여 있고, 처음에는 아무도 앉지 않았습니다. $i$번째 학생에게 양의 정수 $A_i,B_i$가 주어지며, 학생들은 순서대로 가장 앞 또는 가장 뒤의 빈 의자에 앉습니다.
+
+최종적으로 학생 $i$가 앞에서 $P_i$번째 의자에 앉았을 때, 그 학생의 기쁨을 $f_P(i)=\sum_{j:P_j<P_i}A_iB_j$로 정의합니다.
+
+가능한 모든 앉는 방법 중 $\sum_i f_P(i)$의 최댓값을 구하세요.
+
+## 조건
+
+- $1\le N\le 2\times10^5$
+- $1\le A_i,B_i\le 10^4$
+
+## 입력
+
+첫째 줄에 $N$, 다음 $N$개 줄에 $A_i,B_i$가 주어집니다.
+
+## 출력
+
+답을 출력하세요.

@@ -1,0 +1,73 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1222
+problemId: 3252
+sourceTitle: "-101"
+sourceHtmlSha256: "f2f03c1de2ee12b04a7d69494de48626997719735c1724d15d2562e25592460f"
+humanReview: null
+machineReview: unreviewed
+title: "-101"
+---
+
+## 문제 설명
+
+$-1\leq A_i\leq1$인 길이 $N$의 정수 수열 중 다음 조건을 만족하는 수열의 개수를 $10^9+7$로 나눈 나머지를 구하세요.
+
+$\displaystyle\prod_{i=L_j}^{R_j}A_i=P_j\quad(1\leq j\leq M)$
+
+## 입력
+
+```text
+N M
+L_1 R_1 P_1
+\vdots
+L_M R_M P_M
+```
+
+- $1\leq N\leq2\times10^5$
+- $0\leq M\leq N$
+- $1\leq L_i\leq R_i\leq N$
+- $-1\leq P_i\leq1$
+- 서로 다른 제약은 $R_i$가 서로 다릅니다.
+
+## 출력
+
+답을 한 줄에 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+3 2
+1 2 -1
+2 3 0
+```
+#### 출력
+```text
+2
+```
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+4 3
+1 2 1
+2 3 0
+3 4 -1
+```
+#### 출력
+```text
+0
+```
+
+### 예제 3 {file="01_sample_03.txt"}
+#### 입력
+```text
+100 0
+```
+#### 출력
+```text
+886041711
+```

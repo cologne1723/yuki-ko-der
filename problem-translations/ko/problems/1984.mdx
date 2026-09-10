@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1984
+problemId: 7814
+sourceTitle: "[Cherry 4th Tune *] Dilemma"
+sourceHtmlSha256: "e193631f09920b05a90423f31bbf30ba9985d25bf43edd558d9889bae973a296"
+humanReview: null
+machineReview: unreviewed
+title: "딜레마"
+---
+
+목표 $N$개, 행동 $M$개, 준비 $K$개가 있습니다. 목표 $i$는 준비 $A_{i,1},\ldots,A_{i,L_i}$를 모두 끝내야 달성되며 경험치 $E_i$를 얻습니다. 행동 $j$를 하면 경험치 $F_j$를 얻고, 준비 $k$를 끝내려면 기력 $V_k$를 소비합니다.
+
+목표 $I_p$를 달성한 뒤에는 행동 $J_p$를 할 수 없고, 행동 $J_p$를 한 뒤에는 목표 $I_p$를 달성할 수 없습니다. 선택한 목표, 행동, 준비를 적절한 순서로 수행했을 때 경험치 합에서 기력 소비 합을 뺀 값의 최댓값과 그 방법을 구하세요.
+
+## 입력
+
+```text
+N M K P
+E_1 ... E_N
+F_1 ... F_M
+V_1 ... V_K
+```
+
+이후 목표별 준비 목록과 $P$개의 제한 $(I_p,J_p)$가 주어집니다. 각 제한과 준비 목록의 형식은 문제의 입력 형식을 따릅니다.
+
+## 출력
+
+최댓값과 이를 달성하는 수행 방법을 출력하세요.

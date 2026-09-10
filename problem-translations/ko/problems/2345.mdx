@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2345
+problemId: 9500
+sourceTitle: "max(l,r)"
+sourceHtmlSha256: 8a046419ba32e89395ff2b6ce2b6598e506d8fc0f7c7b55365b83a194279c551
+humanReview: null
+machineReview: unreviewed
+title: "max(l,r)"
+---
+
+수직선 위에 $N$명을 배치하는 방법 중 모든 좌표가 $1$ 이상 $M$ 이하의 정수이고, 사람 $i$보다 왼쪽 사람 수를 $l$, 오른쪽 사람 수를 $r$라 할 때 $\max(l,r)=A_i$인 방법의 개수를 $998244353$으로 나눈 나머지를 구하세요.
+
+두 배치에서 어떤 사람의 좌표가 다르면 서로 다른 방법으로 셉니다.
+
+## 조건
+
+- $1\le T\le2\times10^5$
+- $1\le N,M\le2\times10^5$
+- $0\le A_i\le N-1$
+- 모든 테스트 케이스의 $N$의 합은 $2\times10^5$ 이하입니다.
+
+## 입력
+
+각 테스트 케이스에 $N,M$과 $A_1,\ldots,A_N$이 주어집니다.
+
+## 출력
+
+각 테스트 케이스의 답을 출력하세요.

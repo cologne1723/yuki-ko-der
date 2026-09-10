@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1277
+problemId: 5402
+sourceTitle: "級数入り級数"
+sourceHtmlSha256: "d11ae5e219e3f763ad4753b1ebec14f277590b05d8dff624d0a8a2072bf95fa1"
+humanReview: null
+machineReview: unreviewed
+title: "급수가 들어간 급수"
+---
+## 문제
+
+다음 급수를 $S_n$이라 정의합니다.
+
+\[
+S_n=\sum_{a_1,\ldots,a_n>0}\frac{1}{\prod_{k=1}^n a_k\left(\left(\sum_{k=1}^n a_k\right)-1\right)}
+\]
+
+$S_n=\sum_{i=1}^m b_i\zeta(c_i)$를 만족하는 양의 정수 $m$과 정수열 $b,c$ 중 $m$이 최소인 것을 구하세요.
+
+## 입력
+
+정수 $n$이 주어집니다. 이 문제는 미해결 가정을 포함합니다.
+
+- $1<n\leq10^7$
+
+## 출력
+
+세 줄에 걸쳐 $m$, $\prod b_i$의 $10^9+7$ 나머지, $\prod c_i$의 $10^9+7$ 나머지를 출력하세요.

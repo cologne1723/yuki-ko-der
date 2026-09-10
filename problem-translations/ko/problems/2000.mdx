@@ -1,0 +1,21 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2000
+problemId: 8204
+sourceTitle: "Distanced Characters"
+sourceHtmlSha256: "64fa96910b0cdf5b5acb9d4beb9b91b0daacfd873d0df1b2279337bdea1d64a6"
+humanReview: null
+machineReview: unreviewed
+title: "간격이 있는 문자"
+---
+
+소문자 문자열 $S$가 주어집니다. 모든 문자쌍 $(\alpha,\beta)$에 대해, $S_i=\alpha$, $S_j=\beta$, $i<j$인 모든 경우에 $i+D_{\alpha,\beta}\le j$가 성립하는지 판정하세요.
+
+## 입력
+
+문자열 $S$와 알파벳 순서의 $26\times26$ 정수 행렬 $D$가 주어집니다. $1\le|S|\le2\times10^5$, $0\le D_{\alpha,\beta}\le2\times10^5$입니다.
+
+## 출력
+
+조건을 만족하면 `Y`, 만족하지 않으면 `N`을 각 문자쌍에 대해 공백으로 구분해 26줄 출력하세요.

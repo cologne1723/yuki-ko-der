@@ -1,0 +1,73 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1169
+problemId: 4809
+sourceTitle: "Row and Column and Diagonal"
+sourceHtmlSha256: "8e70a66a0cde485d06e2d25a026e6c4adbd206f00f2e1b891b7764463fb24c64"
+humanReview: null
+machineReview: unreviewed
+title: "행과 열과 대각선"
+---
+
+## 문제 설명
+
+양의 홀수 $N$이 주어집니다. 다음 조건을 모두 만족하는 정수 배열 $(a_{i,j})_{1 \leq i,j \leq N}$ 하나를 구하세요.
+
+- 모든 $i=1,\ldots,N$에 대해 $(a_{i,1},a_{i,2},\ldots,a_{i,N})$은 $(1,2,\ldots,N)$의 순열입니다.
+- 모든 $i=1,\ldots,N$에 대해 $(a_{1,i},a_{2,i},\ldots,a_{N,i})$은 $(1,2,\ldots,N)$의 순열입니다.
+- 모든 $i=1,\ldots,N$에 대해 $a_{i,i}=i$입니다.
+
+이러한 배열은 반드시 존재합니다.
+
+## 입력
+
+```text
+$N$
+```
+
+- $N$은 홀수입니다.
+- $1 \leq N < 500$
+
+## 출력
+
+조건을 만족하는 정수 배열 $(a_{i,j})_{1 \leq i,j \leq N}$을 다음 형식으로 출력하세요.
+
+```text
+$a_{1,1}\ a_{1,2}\ \cdots\ a_{1,N}$
+$a_{2,1}\ a_{2,2}\ \cdots\ a_{2,N}$
+$\vdots$
+$a_{N,1}\ a_{N,2}\ \cdots\ a_{N,N}$
+```
+
+마지막에 줄바꿈을 넣으세요. 조건을 만족하는 배열이 여러 개라면 어느 것이나 출력할 수 있습니다.
+
+## 예제
+
+### 예제 1 {file=""}
+#### 입력
+```text
+5
+```
+#### 출력
+```text
+1 5 2 3 4
+4 2 1 5 3
+5 4 3 1 2
+2 3 5 4 1
+3 1 4 2 5
+```
+
+이 출력은 세 조건을 모두 만족하므로 정답입니다.
+
+### 예제 2 {file=""}
+#### 입력
+```text
+1
+```
+#### 출력
+```text
+1
+```
+
+세 조건을 모두 만족합니다.

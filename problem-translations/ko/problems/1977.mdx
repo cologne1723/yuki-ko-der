@@ -1,0 +1,28 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1977
+problemId: 8121
+sourceTitle: "Extracting at Constant Intervals"
+sourceHtmlSha256: "4d5a358f32c37237816bb9d702cfc3461be0a7479cabffc611ca6256df6d5d8d"
+humanReview: null
+machineReview: unreviewed
+title: "일정한 간격으로 추출하기"
+---
+
+정수열 $A_1,A_2,\ldots,A_N$을 $M$개 이어 붙여 길이 $NM$인 수열 $B$를 만듭니다.
+
+$1\le i\le L$인 각 $i$에 대해, $j\equiv i\pmod L$, $1\le j\le NM$인 모든 $j$의 $B_j$ 합을 $C_i$라 합니다. $C_i$의 최댓값을 구하세요.
+
+## 입력
+
+```text
+N M L
+A_1 A_2 ... A_N
+```
+
+$1\le N\le10^5$, $1\le M\le10^9$, $1\le L\le NM$, $-10^4\le A_i\le10^4$입니다.
+
+## 출력
+
+$C_i$의 최댓값을 출력하세요.

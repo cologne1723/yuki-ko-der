@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1523
+problemId: 5133
+sourceTitle: "+/- Tree"
+sourceHtmlSha256: "779e6e848e4a71700a58cca541b1f38f7c0777340c8a2cb8258ed79b9581ba3b"
+humanReview: null
+machineReview: unreviewed
+title: "+/- 트리"
+---
+## 문제
+
+다음 조건을 만족하는 가중 무방향 트리가 존재하는지 판정하고, 존재하면 하나 구성하세요.
+
+- 각 간선 가중치의 절댓값은 $10^9$ 이하인 정수입니다.
+- 모든 간선 가중치의 합은 양수입니다.
+- 정확히 $K$개의 간선을 지나는 단순 경로가 하나 이상 존재합니다.
+- 정확히 $K$개의 간선을 지나는 모든 단순 경로의 가중치 합은 음수입니다.
+
+## 입력
+
+$N,K$가 주어집니다.
+
+- $2\leq N\leq2000$
+- $1\leq K\leq N-1$
+
+## 출력
+
+구성할 수 없으면 `No`를 출력하세요. 가능하면 `Yes`와 $N-1$개 간선의 양 끝점 및 가중치를 출력하세요.

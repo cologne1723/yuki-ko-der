@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2327
+problemId: 9608
+sourceTitle: "Inversion Sum"
+sourceHtmlSha256: 696c245b6710060bddb729159e0dae8a949a4a8552fb1521b6226b62253aa272
+humanReview: null
+machineReview: unreviewed
+title: "Inversion Sum"
+---
+
+$(1,2,\ldots,N)$의 순열 중 $M$개의 조건을 만족하는 것들을 생각합니다. $i$번째 조건은 $P_i$가 조건을 만족하는 순열들을 사전순으로 보았을 때 앞에서 $K_i$번째라는 뜻입니다.
+
+조건을 만족하는 모든 순열의 전도 수 합을 $998244353$으로 나눈 나머지를 출력하세요.
+
+## 조건
+
+- $1\le N\le10^5$
+- $0\le M\le N$
+- $1\le P_i,K_i\le N$
+- $P_i$와 $K_i$는 각각 서로 다릅니다.
+
+## 입력
+
+첫째 줄에 $N,M$, 다음 $M$개 줄에 $P_i,K_i$가 주어집니다.
+
+## 출력
+
+답을 출력하세요.

@@ -1,0 +1,27 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2301
+problemId: 9357
+sourceTitle: "Namorientation"
+sourceHtmlSha256: 07553928fd0344485658eaefd993d652efd5d8027dc5260647b513312db20532
+humanReview: null
+machineReview: unreviewed
+title: "Namorientation"
+---
+
+$N$개의 정점과 $N$개의 변을 가진 연결 단순 무방향 그래프가 주어집니다. 각 변에 방향을 정해 모든 정점의 진출 차수가 1인 유향 그래프로 만드세요.
+
+## 조건
+
+- $3\le N\le2\times10^5$
+- $1\le A_i<B_i\le N$
+- 그래프는 연결된 단순 그래프입니다.
+
+## 입력
+
+첫째 줄에 $N$, 다음 $N$개 줄에 변 $(A_i,B_i)$가 주어집니다.
+
+## 출력
+
+$i$번째 변을 $A_i\to B_i$로 정하면 `->`, $A_i\leftarrow B_i$로 정하면 `<-`를 $i$번째 줄에 출력하세요.

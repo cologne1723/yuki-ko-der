@@ -1,0 +1,51 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2418
+problemId: 9684
+sourceTitle: 情報通だよ！Nafmoくん
+sourceHtmlSha256: cbe03c288b0c1f6aed33d96d64ebf61005e72b853889b956c767a11cf255eecd
+humanReview: null
+machineReview: unreviewed
+title: 정보통이야! Nafmo 군
+---
+
+반에 Nafmo 군을 포함한 $2N$명이 있고, 모든 학생은 서로 다른 출석번호를 가집니다. 학생들은 모두 짝을 이루며, 서로 모르는 사람끼리의 짝을 최소화했습니다.
+
+Nafmo 군은 $A_i$번 학생과 $B_i$번 학생이 아는 사이라는 정보 $M$개를 알고 있습니다. 아는 사이라는 관계는 전이됩니다. 주어진 정보만으로 보아 서로 모르는 사람끼리의 짝이 최대 몇 쌍일 수 있는지 구하세요.
+
+## 조건
+
+- $1\le N\le10^5$
+- $0\le M\le10^5$
+- $1\le A_i,B_i\le2N$
+- 항상 $N$쌍을 만들 수 있습니다.
+
+## 입력
+
+```text
+N M
+A1 B1
+...
+AM BM
+```
+
+## 출력
+
+서로 모르는 사람끼리의 최대 짝 수를 출력하세요.
+
+## 예제
+
+### 입력 1
+
+```text
+2 2
+1 2
+3 4
+```
+
+### 출력 1
+
+```text
+0
+```

@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1848
+problemId: 7436
+sourceTitle: "Long Prefixes"
+sourceHtmlSha256: "ab07b2a9c9be1951718f9e8cccbc4784c306eb1dcf9e424bd77bd0338880c6b9"
+humanReview: null
+machineReview: unreviewed
+title: "긴 접두사"
+---
+
+정수 $N$, 길이 $N$의 정수열 $A$, 길이 $N$의 소문자 문자열 $S$가 주어집니다. $S_i$를 $A_i$번씩 이어 붙인 문자열을 $T$라 합니다.
+
+문자열 $T_i$를 $T$의 $i$번째 문자부터 끝까지의 접미사라 하고, $f(i)$를 $T$와 $T_i$의 최장 공통 접두사 길이라 합니다. $\sum_{i=1}^{|T|}f(i)$를 $10^9+7$로 나눈 나머지를 구하세요.
+
+## 입력
+
+```text
+N
+A_1 A_2 ... A_N
+S
+```
+
+$1\le N\le2\times10^5$, $1\le A_i\le10^9$이고 인접한 $S_i$는 서로 다릅니다.
+
+## 출력
+
+답을 출력하세요.

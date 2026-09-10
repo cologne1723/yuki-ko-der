@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1742
+problemId: 7162
+sourceTitle: "Binary Indexed Train"
+sourceHtmlSha256: "2cb3a7aea75e346646617e9c5e125818f4794a50a34493eb987918ef034510a0"
+humanReview: null
+machineReview: unreviewed
+title: "이진 인덱스 열차"
+---
+
+역 `0`부터 `2^N`까지 일렬로 있고, `i`번 열차는 역 번호가 `2^i`의 배수인 역에만 정차합니다. 모든 열차는 서쪽에서 동쪽으로만 운행합니다.
+
+각 승객의 출발역 `S_i`에서 도착역 `T_i`까지 최적으로 환승할 때, 도착역을 포함해 이동 중 정차하는 역 수의 최솟값을 구하세요.
+
+## 제약
+
+- `1 <= N <= 60`
+- `1 <= Q <= 10^5`
+- `0 <= S_i < T_i <= 2^N`
+
+## 입력
+
+`N Q`와 각 승객의 `S_i T_i`가 주어집니다.
+
+## 출력
+
+각 승객의 최솟값을 한 줄에 하나씩 출력하세요.

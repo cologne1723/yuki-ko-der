@@ -1,0 +1,31 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1814
+problemId: 7106
+sourceTitle: "Uribo Road (Easy)"
+sourceHtmlSha256: "46d4d87dc4e50e116dfd80b7613293e05b5aa04b7756a309988e5d4dc99c0740"
+humanReview: null
+machineReview: unreviewed
+title: "우 리보 로드 (Easy)"
+---
+
+이 문제는 `Uribo Road`와 문제문이 같고 제약과 실행 시간 제한이 다릅니다.
+
+핫코산에는 $1,2,\ldots,N$번 장소와 양방향 도로가 있습니다. $i$번 도로는 장소 $A_i,B_i$를 잇고 거리 $C_i$입니다. 장소 1에서 장소 $N$으로 이동하면서 지정된 $K$개 도로 $R_1,\ldots,R_K$를 모두 한 번 이상 지나야 할 때, 가능한 최소 거리를 구하세요. 같은 도로와 장소 $N$을 여러 번 방문해도 됩니다.
+
+## 입력
+
+```text
+N M K
+R_1 R_2 ... R_K
+A_1 B_1 C_1
+...
+A_M B_M C_M
+```
+
+$2\le N\le200$, $N-1\le M\le N(N-1)/2$, $1\le K\le\min(5,M)$입니다. 모든 도로의 거리는 $1$ 이상 $10^4$ 이하이며, 모든 두 장소 사이를 이동할 수 있습니다.
+
+## 출력
+
+최소 이동 거리를 출력하세요.

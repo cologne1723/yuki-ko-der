@@ -1,0 +1,58 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2401
+problemId: 9816
+sourceTitle: Dirty Shoes and Stairs
+sourceHtmlSha256: 40cd9054c6e6fb31e9c6fbf562ddfc2d51c63859b23d4e10d7db67d4ab31c231
+humanReview: null
+machineReview: unreviewed
+title: 더러운 신발과 계단
+---
+
+$N$단 계단이 있습니다. 처음에는 0번 단에 있고, $N$번 단까지 올라간 뒤 다시 내려옵니다.
+
+올라갈 때는 $M_1$번 착지가 있으며, 각 착지 사이에서 $A_i$단씩 올라갑니다. 내려갈 때는 $M_2$번 착지가 있으며, 각 착지 사이에서 $B_i$단씩 내려갑니다. 0번 단과 $N$번 단을 포함해 착지한 단은 더러워집니다.
+
+깨끗한 상태로 남는 단의 수를 출력하세요.
+
+## 조건
+
+- $1 \le N \le 2\times 10^5$
+- $1 \le M_1,M_2 \le N$
+- $A_i$와 $B_i$는 양의 정수입니다.
+- $\sum A_i=\sum B_i=N$입니다.
+
+## 입력
+
+입력은 다음 형식으로 주어집니다.
+
+```text
+N
+M1
+A1 A2 ... AM1
+M2
+B1 B2 ... BM2
+```
+
+## 출력
+
+깨끗한 단의 수를 출력하세요.
+
+## 예제
+
+### 입력 1
+
+```text
+4
+2
+2 2
+3
+1 1 2
+```
+
+### 출력 1
+
+```text
+1
+```

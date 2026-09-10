@@ -1,0 +1,44 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1239
+problemId: 5123
+sourceTitle: "Multiplication -2"
+sourceHtmlSha256: "2b208d514465644580746dc0f83c37783b13f1afebdef092e15eb990b37b7d85"
+humanReview: null
+machineReview: unreviewed
+title: "곱셈 -2"
+---
+
+## 문제 설명
+
+길이 $N$인 정수 수열 $a$를 비어 있지 않은 하나 이상의 연속 부분수열로 나누는 방법 중 하나를 무작위로 고릅니다. 나누어진 부분수열 중 모든 원소의 곱이 $-2$인 것의 개수의 기댓값을 구하세요.
+
+나누는 방법은 $2^{N-1}$가지입니다. 답을 $\bmod 998244353$로 나타내어 출력하세요.
+
+## 입력
+
+```text
+N
+a_1 \ldots a_N
+```
+
+- $1\leq N\leq2\times10^5$
+- $|a_i|\leq2$
+
+## 출력
+
+기댓값을 $998244353$로 나눈 형태로 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+3
+-2 1 -2
+```
+#### 출력
+```text
+499122178
+```

@@ -1,0 +1,34 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1558
+problemId: 6433
+sourceTitle: "Derby Live"
+sourceHtmlSha256: "e467dfce2f6972e658181dfc8996d081cc1f17662c369578c1f2e240a710f51d"
+humanReview: null
+machineReview: unreviewed
+title: "더비 라이브"
+---
+## 문제
+
+$N$마리의 말이 $M$개의 구간을 차례로 달립니다. 각 구간에 들어갈 때와 나올 때 순위는 서로 다르고, 구간 1의 순서는 말 번호 순서입니다.
+
+구간 $l$에 $i$번째로 들어간 말이 구간 $r$에서 $T_i$번째로 나왔다면 레이스의 재미를 $E_{l,r}=\sum_i|i-T_i|$로 정의합니다.
+
+다음 질의를 처리하세요.
+
+- Type 1: 구간 $D$의 순위 대응을 $P$로 갱신합니다.
+- Type 2: 구간 $S$를 나온 말의 순서를 출력합니다.
+- Type 3: $E_{L,R}$를 출력합니다.
+
+## 입력
+
+문제에서 설명한 순위 갱신 및 질의가 주어집니다.
+
+- $2\leq N\leq18$
+- $2\leq M\leq10^4$
+- $2\leq Q\leq5\times10^4$
+
+## 출력
+
+각 질의의 답을 출력하세요.

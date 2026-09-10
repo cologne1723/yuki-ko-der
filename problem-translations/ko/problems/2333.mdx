@@ -1,0 +1,29 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2333
+problemId: 9596
+sourceTitle: "Slime Structure"
+sourceHtmlSha256: 87bcac47d515331d89c57a6324d5577dafacd56e87cf5b18938f18fb7330ece1
+humanReview: null
+machineReview: unreviewed
+title: "슬라임 구조"
+---
+
+색이 있는 슬라임이 일렬로 놓여 있습니다. 왼쪽부터 공격력 $A_i$인 슬라임이 $B_i$마리씩 이어집니다. 연속한 하나 이상의 슬라임을 팀으로 묶을 수 있고 팀의 전투력은 공격력 합입니다.
+
+유형 1 `x y`는 왼쪽에서 $x$번째 슬라임의 공격력을 $y$로 바꿉니다. 유형 2 `l r`은 $l$번째부터 $r$번째 슬라임으로 만들 수 있는 팀 전투력의 최댓값을 출력합니다.
+
+## 조건
+
+- $2\le N,Q\le10^5$
+- $|A_i|,|y|\le10^5$
+- $1\le B_i\le10^5$
+
+## 입력
+
+초기 구간별 공격력과 개수, 그리고 $Q$개의 쿼리가 주어집니다.
+
+## 출력
+
+유형 2 쿼리의 답을 순서대로 출력하세요.

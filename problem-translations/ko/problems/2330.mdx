@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2330
+problemId: 9518
+sourceTitle: "Eat Slime"
+sourceHtmlSha256: 78a2454c706c769cf905c738147036049942cac62b33e398f7f986c8c3230c43
+humanReview: null
+machineReview: unreviewed
+title: "슬라임 먹기"
+---
+
+$N$마리의 슬라임이 한 줄로 놓여 있고, 왼쪽부터 $i$번째 슬라임의 색은 $C_i$입니다. 원하는 횟수만큼 가장 왼쪽 슬라임을 먹을 수 있으며, 먹을 때마다 $X$점을 얻습니다.
+
+모든 조작 후 남은 슬라임의 배열에 대해, 왼쪽에서 $A_j$번째 슬라임이 존재하고 색이 $B_j$이면 $Y_j$점을 추가로 얻습니다. 얻을 수 있는 총점의 최댓값을 구하세요.
+
+## 조건
+
+- $1\le N,M\le2\times10^5$
+- $0\le X\le100$
+- $1\le C_i,B_j\le5$
+- $1\le A_j\le N$, $1\le Y_j\le100$
+
+## 입력
+
+첫째 줄에 $N,M,X$, 둘째 줄에 색 배열, 다음 $M$개 줄에 $A_j,B_j,Y_j$가 주어집니다.
+
+## 출력
+
+총점의 최댓값을 출력하세요.

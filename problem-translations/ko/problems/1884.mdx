@@ -1,0 +1,30 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1884
+problemId: 7845
+sourceTitle: "Sequence"
+sourceHtmlSha256: "a5023b0b798e43f3efad8b3bd2b9f2bb71bc52cc095a1e831f9d1d4d5cedea5a"
+humanReview: null
+machineReview: unreviewed
+title: "수열"
+---
+
+왼쪽에서 오른쪽으로 $N$장의 카드가 놓여 있고, 각 카드에는 양의 정수가 쓰였거나 비어 있습니다. 상태는 $A_i$로 표현하며 $A_i=0$이면 비어 있습니다.
+
+## 문제
+
+빈 카드에 원하는 양의 정수를 하나씩 쓴 뒤 모든 카드를 원하는 순서로 재배열할 수 있습니다. 최종 수열 $B$가 등차수열이 되도록 할 수 있는지 판정하세요.
+
+## 입력
+
+```text
+N
+A_1 A_2 ... A_N
+```
+
+$3\le N\le2\times10^5$, $0\le A_i\le10^{15}$입니다.
+
+## 출력
+
+가능하면 `Yes`, 불가능하면 `No`를 출력하세요.

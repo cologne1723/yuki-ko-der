@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2200
+problemId: 8148
+sourceTitle: "Weird Shortest Path"
+sourceHtmlSha256: "4008b4eb256948ad75a5415c3057e122fbc9a0ae833b8ebffead10daf21368eb"
+humanReview: null
+machineReview: unreviewed
+title: "이상한 최단 경로"
+---
+
+단순 연결 무향 그래프의 각 변에 음이 아닌 가중치가 있다냥. 정점 쌍 $(u,v)$의 비용을 모든 경로에서 경로에 포함된 변 가중치의 최댓값 중 최솟값으로 정의한다냥. 모든 서로 다른 정점 쌍의 비용 합을 구하라냥.
+
+## 조건
+
+- $2\le N\le10^5$
+- $1\le M\le2\times10^5$
+- $1\le w_i\le10^8$
+
+## 입력
+
+```text
+N M
+a_1 b_1 w_1
+\vdots
+a_M b_M w_M
+```
+
+## 출력
+
+모든 정점 쌍의 비용 합을 출력하라냥.

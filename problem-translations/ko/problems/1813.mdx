@@ -1,0 +1,34 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1813
+problemId: 7023
+sourceTitle: "Magical Stones"
+sourceHtmlSha256: "80fe560a345065060029f42c6af4bb0bc85016e4c03ee6035ec3036b2f0ea3fd"
+humanReview: null
+machineReview: unreviewed
+title: "마법의 돌"
+---
+
+코아는 $1,2,\ldots,N$번 마석을 연구합니다. 마석 $i$는 마력 $m_i$를 가지며, 다음 전제들을 모두 만족합니다.
+
+$$m_{A_j}\ge m_{B_j}\quad(1\le j\le M)$$
+
+코아는 서로 다른 정수쌍 $(x,y)$를 골라 감정 마법을 사용할 수 있습니다. $m_x\ge m_y$이면 그 정보를, 그렇지 않으면 $m_x<m_y$라는 정보를 얻습니다.
+
+감정을 $n$번 수행해 얻은 정보와 전제를 바탕으로 $m_1=m_2=\cdots=m_N$임을 확실히 증명할 수 있을 때, 가능한 $n$의 최솟값을 구하세요.
+
+## 입력
+
+```text
+N M
+A_1 B_1
+...
+A_M B_M
+```
+
+$2\le N\le10^5$, $0\le M\le\min(2\times10^5,N(N-1))$이고 입력은 모두 정수입니다.
+
+## 출력
+
+답을 한 줄에 출력하세요.

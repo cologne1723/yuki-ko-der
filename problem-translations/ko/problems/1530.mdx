@@ -1,0 +1,27 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 1530
+problemId: 6368
+sourceTitle: "Permutation and Popcount"
+sourceHtmlSha256: "f184f61f41434347f404b27932e53b048feacf5460a824dd1a12e6b9617cfffe"
+humanReview: null
+machineReview: unreviewed
+title: "순열과 팝카운트"
+---
+## 문제
+
+$\operatorname{popcount}(n)$을 이진 표현에서 1의 개수라 합니다. 양의 정수열 $A$에 대해 $f(A)$를 $\operatorname{popcount}(A_iA_j)$가 짝수인 순서쌍 $(i,j)$의 개수로 정의합니다.
+
+$1,\ldots,N$을 두 수열 $X,Y$로 나누어 $f(X)-f(Y)=M$이 되도록 구성하세요. 불가능하면 그 사실을 보고하세요.
+
+## 입력
+
+$N,M$이 주어집니다.
+
+- $2\leq N\leq300$
+- $0\leq M\leq N^2$
+
+## 출력
+
+조건을 만족하는 두 수열을 출력하세요. 불가능하면 `-1`을 출력하세요.
