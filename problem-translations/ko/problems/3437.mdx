@@ -1,0 +1,116 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3437
+problemId: 10674
+sourceTitle: "[Cherry 8th Tune C] Silhouette"
+sourceHtmlSha256: 319ee690bee1dbe15dc740718967875f2d4b1593e94dd4881f6fb0692f7902b4
+humanReview: null
+machineReview: unreviewed
+title: "[Cherry 8th Tune C] 실루엣"
+---
+
+## 문제 설명
+
+$xyz$ 공간에 $3$개의 점 $A$, $B$, $C$가 있습니다. $A$, $B$, $C$의 좌표는 각각 $(a_x, a_y, a_z)$, $(b_x, b_y, b_z)$, $(c_x, c_y, c_z)$입니다.
+
+좌표 $(l_x, l_y, l_z)$에 있는 점 광원에 의해 만들어지는 삼각형 $ABC$의 $xy$ 평면 위 그림자의 넓이를 $S$라고 합니다. 그림자가 선분이나 점이 되는 경우에는 $S=0$으로 합니다.
+
+$S \pmod{998244353}$를 구하세요.
+
+$T$개의 테스트 케이스에 대해 답하세요.
+
+### 주의
+
+이 문제의 제한 아래에서는 다음 조건을 만족하는 정수의 순서쌍 $(\alpha,\beta)$가 존재함을 증명할 수 있습니다.
+
+- $\beta$는 $998244353$의 배수가 아닙니다.
+- $\beta \times S=\alpha$입니다.
+
+이 조건을 만족하는 정수의 순서쌍 $(\alpha,\beta)$에 대해
+
+$\beta \times \gamma \equiv \alpha \pmod{998244353}$
+
+를 만족하는 $0$ 이상 $998244353$ 미만의 정수 $\gamma$가 유일하게 존재합니다. 이 정수 $\gamma$를 사용해 $S \pmod{998244353}:=\gamma$로 정의합니다.
+
+이 조건을 만족하는 정수의 순서쌍 $(\alpha,\beta)$는 여러 개 생각할 수 있지만, $\gamma$는 $\alpha$, $\beta$의 선택과 관계없이 $S$만으로 결정됨을 증명할 수 있습니다.
+
+## 입력
+
+입력은 다음 형식으로 주어집니다.
+
+```text
+$T$
+$\mathrm{Testcase}_1$
+$\vdots$
+$\mathrm{Testcase}_T$
+```
+
+각 테스트 케이스는 다음 형식으로 주어집니다.
+
+```text
+$a_x\ a_y\ a_z$
+$b_x\ b_y\ b_z$
+$c_x\ c_y\ c_z$
+$l_x\ l_y\ l_z$
+```
+
+## 제한
+
+- $1 \leq T \leq 10^5$
+- 각 테스트 케이스에 대해 다음 제한을 만족합니다.
+  - $\lvert a_x\rvert < 10^6$
+  - $\lvert b_x\rvert < 10^6$
+  - $\lvert c_x\rvert < 10^6$
+  - $\lvert a_y\rvert < 10^6$
+  - $\lvert b_y\rvert < 10^6$
+  - $\lvert c_y\rvert < 10^6$
+  - $1 \leq a_z < 10^6$
+  - $1 \leq b_z < 10^6$
+  - $1 \leq c_z < 10^6$
+  - $\lvert l_x\rvert < 10^6$
+  - $\lvert l_y\rvert < 10^6$
+  - $1 \leq l_z < 10^6$
+  - $\max(a_z,b_z,c_z) < l_z$
+  - $A$, $B$, $C$는 한 직선 위에 있는 $3$개의 점이 아닙니다.
+- 입력은 모두 정수입니다.
+
+## 출력
+
+출력은 $T$줄로 이루어집니다. $t$번째 줄($1 \leq t \leq T$)에는 $t$번째 테스트 케이스의 답을 출력하세요.
+
+마지막에도 개행을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="0_sample_1.txt"}
+
+#### 입력
+
+```text
+3
+9 -2 3
+3 0 4
+4 5 2
+1 2 5
+3 -1 3
+0 9 4
+7 -3 9
+13 -6 18
+8 29 2001
+8 18 2004
+2 17 2003
+4 6 4646
+```
+
+#### 출력
+
+```text
+75
+0
+917747442
+```
+
+[첫 번째 테스트 케이스] $xy$ 평면 위 삼각형 $ABC$의 그림자는 세 꼭짓점 $(6,7)$, $(21,-8)$, $(11,-8)$을 꼭짓점으로 하는 삼각형입니다. 이 그림자의 넓이 $S$는 $S=75$입니다.
+
+[두 번째 테스트 케이스] $xy$ 평면 위 삼각형 $ABC$의 그림자는 $(1,0)$과 $\left(-\dfrac{26}{7},\dfrac{93}{7}\right)$을 양 끝점으로 하는 선분입니다. 따라서 $S=0$입니다.

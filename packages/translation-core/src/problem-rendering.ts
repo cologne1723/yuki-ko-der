@@ -1,11 +1,23 @@
 import createDOMPurify from "dompurify";
 import { renderProblemMath } from "./problem-math.ts";
+import {
+  detectProblemRenderProfile,
+  type ProblemRenderProfile,
+} from "./problem-render-profile.ts";
+import { resolveProblemUrls } from "./problem-urls.ts";
 
 // The layout comparison is not a security boundary. Remote documents must
 // remain inert even when their markup differs from the Japanese statement.
-export function prepareTranslatedBlocks(blocks: Element[]): HTMLElement[] {
+export function sanitizeTranslatedBlocks(
+  blocks: Element[],
+  options: {
+    document?: Document;
+    sourceUrl?: string;
+  } = {},
+): HTMLElement[] {
+  const document = options.document ?? globalThis.document;
   const allowedTags = new Set(
-    "DIV P SPAN BR HR H1 H2 H3 H4 H5 H6 PRE CODE BLOCKQUOTE UL OL LI TABLE THEAD TBODY TFOOT TR TD TH CAPTION A IMG STRONG B EM I U S DEL SUP SUB RUBY RT RP DETAILS SUMMARY".split(
+    "DIV P SPAN BR WBR HR H1 H2 H3 H4 H5 H6 PRE CODE BLOCKQUOTE UL OL LI TABLE THEAD TBODY TFOOT TR TD TH CAPTION A IMG STRONG B EM I U S DEL SUP SUB RUBY RT RP DETAILS SUMMARY".split(
       " ",
     ),
   );
@@ -14,7 +26,7 @@ export function prepareTranslatedBlocks(blocks: Element[]): HTMLElement[] {
       " ",
     ),
   );
-  return blocks.map((block) => {
+  const result = blocks.map((block) => {
     if (
       block.namespaceURI !== "http://www.w3.org/1999/xhtml" ||
       !allowedTags.has(block.tagName)
@@ -47,27 +59,49 @@ export function prepareTranslatedBlocks(blocks: Element[]): HTMLElement[] {
           element.removeAttribute(attribute.name);
           continue;
         }
-        if (attribute.name === "href" || attribute.name === "src") {
-          try {
-            const url = new URL(attribute.value, "https://yukicoder.me/");
-            if (
-              attribute.name === "src" &&
-              element.tagName === "IMG" &&
-              /^data:image\/(?:png|gif|jpeg|webp);base64,[A-Za-z0-9+/]+={0,2}$/u.test(
-                attribute.value,
-              )
-            )
-              continue;
-            if (!new Set(["https:", "http:"]).has(url.protocol))
-              throw new Error("Unsupported URL");
-            element.setAttribute(attribute.name, url.href);
-          } catch {
-            element.removeAttribute(attribute.name);
-          }
-        }
       }
     }
-    renderProblemMath(imported);
+    resolveProblemUrls(imported, options.sourceUrl ?? document.URL);
     return imported;
   });
+  return result;
+}
+
+export async function prepareTranslatedBlocks(
+  blocks: Element[],
+  options: {
+    document?: Document;
+    profile?: ProblemRenderProfile;
+    sourceUrl?: string;
+    fontUrl?: string;
+    renderHost?: HTMLElement;
+  } = {},
+): Promise<HTMLElement[]> {
+  const document = options.document ?? globalThis.document;
+  const profile = options.profile ?? detectProblemRenderProfile(document);
+  if (!profile)
+    throw new Error(
+      "Site math rendering configuration is unavailable or unsupported",
+    );
+  const result = sanitizeTranslatedBlocks(blocks, options);
+  const scope = document.createElement("div");
+  scope.append(...result);
+  // CHTML measures the surrounding font's x-height. Detached nodes have no
+  // computed metrics and silently produce smaller formulas in real browsers.
+  const host = options.renderHost ?? document.body;
+  if (profile.engine === "mathjax" && host?.isConnected) {
+    scope.dataset.yukicoderKoRenderStaging = "";
+    scope.setAttribute("aria-hidden", "true");
+    scope.setAttribute("inert", "");
+    scope.style.cssText =
+      "position:absolute;visibility:hidden;pointer-events:none;left:0;top:0";
+    scope.style.width = `${host.clientWidth}px`;
+    host.append(scope);
+  }
+  try {
+    await renderProblemMath(scope, profile, { fontUrl: options.fontUrl });
+  } finally {
+    scope.remove();
+  }
+  return result;
 }

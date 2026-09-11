@@ -1,0 +1,93 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2945
+problemId: 10800
+sourceTitle: "Namiki Secondary School"
+sourceHtmlSha256: 800de96db096d71933e862ff6a91e650b8e1301631cd579fc97a00045690575b
+humanReview: null
+machineReview: unreviewed
+title: "Namiki Secondary School"
+---
+
+## 문제 설명
+
+### 배경
+
+茨城県立並木中等教育学校은 서기 2008년 10월 1일에 개교하여 올해로 개교 $16$년을 맞이합니다.
+
+또한 茨城県立並木中等教育学校은 茨城県立並木高等学校을 모체 학교로 하고 있으며, 茨城県立並木高等学校은 서기 1984년 11월 6일에 개교했습니다.
+
+양의 정수 $N$이 주어집니다.
+
+서기 $N$년 12월 31일에 다음 조건에 따라 출력하세요.
+
+- 茨城県立並木中等教育学校이 존재하는 경우 `Namiki Secondary School`
+- 茨城県立並木高等学校이 존재하는 경우 `Namiki High School`
+- 애초에 학교가 존재하지 않는 경우 `None`
+
+단, 앞으로는 항상 茨城県立並木中等教育学校이라고 가정합니다.
+
+## 입력
+
+입력은 다음 형식으로 표준 입력에서 주어집니다.
+
+```text
+$N$
+```
+
+$N$은 양의 정수입니다.
+
+## 제한
+
+- $1 \le N \le 10^9$
+
+## 출력
+
+답을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+1990
+```
+
+#### 출력
+
+```text
+Namiki High School
+```
+
+### 예제 2 {file="01_sample_02.txt"}
+
+#### 입력
+
+```text
+2024
+```
+
+#### 출력
+
+```text
+Namiki Secondary School
+```
+
+### 예제 3 {file="01_sample_03.txt"}
+
+#### 입력
+
+```text
+1729
+```
+
+#### 출력
+
+```text
+None
+```
+
+茨城県立並木中等教育学校이 데라코야였던 시대는 없습니다.

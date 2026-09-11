@@ -1,0 +1,107 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2938
+problemId: 11350
+sourceTitle: "Sigma Sigma Distance Distance Problem"
+sourceHtmlSha256: 8d05a8a55379e199398e574430af40b34f3245c3369b8f996262baa6a4e544be
+humanReview: null
+machineReview: unreviewed
+title: "시그마 시그마 거리 거리 문제"
+---
+
+## 문제 설명
+
+길이 $N$인 정수열 $A_1, A_2, \dots, A_N$이 주어집니다.
+
+$\displaystyle\sum_{i=1}^{N}\displaystyle\sum_{j=1}^{N} \left|i-j\right| \times \left|A_i-A_j\right|$을 구하세요.
+
+## 입력
+
+입력은 다음 형식으로 표준 입력에서 주어집니다.
+
+```text
+$N$
+$A_1\ \ A_2\ \dots\ \ A_N$
+```
+
+$N$은 수열의 길이이고, $A_1, A_2, \dots, A_N$은 수열의 각 원소입니다.
+
+## 제한
+
+- $1 \leq N \leq 100$
+- $1 \leq A_i \leq 100$($1 \leq i \leq N$)
+- 입력은 모두 정수입니다.
+
+또한 이 문제에는 AC 판정과 관계없는 evil 케이스가 준비되어 있습니다. 여유가 있는 사람은 도전해 보세요.
+
+evil 케이스의 제한
+
+- $1 \leq N \leq 2 \times 10^5$
+- $1 \leq A_i \leq 500$($1 \leq i \leq N$)
+- 입력은 모두 정수입니다.
+
+evil 케이스에 도전하지 않는 사람은 입력이 일반 제한을 만족하지 않을 때 즉시 프로그램을 종료하면 저지 프로그램이 빠르게 종료됩니다.
+
+## 출력
+
+$\displaystyle\sum_{i=1}^{N}\displaystyle\sum_{j=1}^{N} \left|i-j\right| \times \left|A_i-A_j\right|$을 한 줄에 출력하고, 마지막에 개행을 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+2
+3 2
+```
+
+#### 출력
+
+```text
+2
+```
+
+각 $(i,j)$에 대한 $(|i-j| \times |A_i-A_j|)$는 다음과 같습니다.
+
+$(1,1)=|1-1|\times |A_1-A_1|=0$
+
+$(1,2)=|1-2|\times |A_1-A_2|=1$
+
+$(2,1)=|2-1|\times |A_2-A_1|=1$
+
+$(2,2)=|2-2|\times |A_2-A_2|=0$
+
+따라서 답은 $0+1+1+0=2$입니다.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+3
+1 2 3
+```
+
+#### 출력
+
+```text
+12
+```
+
+### 예제 3 {file=""}
+
+#### 입력
+
+```text
+9
+41 15 76 69 70 58 10 20 34
+```
+
+#### 출력
+
+```text
+7196
+```

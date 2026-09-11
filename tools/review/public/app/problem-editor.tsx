@@ -101,6 +101,22 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
       }),
     onSuccess: setSource,
   });
+  const collectProfile = useMutation({
+    mutationFn: () => reviewApi.collectProblemProfile(String(saved.problemNo)),
+    onSuccess: async (data) => {
+      // Collection may outlast an external source edit. Its verified profile can
+      // update independently without replacing the draft or saved source revision.
+      setSaved((current) => ({
+        ...current,
+        renderProfile: data.renderProfile,
+        renderProfileError: data.renderProfileError,
+        sourceUrl: data.sourceUrl,
+      }));
+      await client.invalidateQueries({
+        queryKey: [`/api/problems/${saved.problemNo}`],
+      });
+    },
+  });
   const save = useMutation({
     mutationFn: async (action: "save" | "approve" | "unapprove") => {
       const submittedSource =
@@ -303,16 +319,51 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
         </Text>
       ))}
       <Failure error={preview.error} />
+      {!saved.renderProfile && (
+        <Stack role="alert" gap="xs">
+          <Text c="orange.8">
+            저장된 원문의 렌더링 프로필이 없어 원문과 같은 수식 표시를 확인할 수
+            없습니다. 이 문제의 원문 페이지에서 프로필을 수집해 다시 시도하세요.
+          </Text>
+          {saved.renderProfileError && (
+            <Text size="sm">{saved.renderProfileError}</Text>
+          )}
+          <Button
+            variant="light"
+            loading={collectProfile.isPending}
+            onClick={() => collectProfile.mutate()}
+          >
+            렌더링 프로필 수집 후 다시 시도
+          </Button>
+          {collectProfile.isPending && (
+            <Text role="status">
+              프로필 수집 중입니다. 서버 요청 간격과 재시도 대기 시간을
+              지킵니다.
+            </Text>
+          )}
+          <Failure error={collectProfile.error} />
+        </Stack>
+      )}
       <SimpleGrid cols={{ base: 1, lg: 3 }} style={{ alignItems: "start" }}>
         <Preview
           html={saved.japaneseHtml}
           title="일본어 원문"
           contentHeading={`No.${saved.problemNo} ${saved.japaneseTitle}`}
+          renderProfile={saved.renderProfile}
+          sourceUrl={
+            saved.sourceUrl ??
+            `https://yukicoder.me/problems/no/${saved.problemNo}`
+          }
           onFrame={(frame) => setJapaneseDocument(frame.contentDocument)}
         />
         <Preview
           html={previewHtml}
           title="한국어 번역"
+          renderProfile={saved.renderProfile}
+          sourceUrl={
+            saved.sourceUrl ??
+            `https://yukicoder.me/problems/no/${saved.problemNo}`
+          }
           onFrame={(frame) => setKoreanDocument(frame.contentDocument)}
         />
         <Stack gap="xs" style={{ minWidth: 0 }}>

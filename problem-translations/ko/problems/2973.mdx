@@ -1,0 +1,132 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2973
+problemId: 8691
+sourceTitle: "シュニレルマン積分入門"
+sourceHtmlSha256: 57e42d0baf6b1a5bb349c03ee1a375a6e793327b76859963001c2a08ee07ae59
+humanReview: null
+machineReview: unreviewed
+title: "シュニレルマン 적분 입문"
+---
+
+## 문제 설명
+
+정수 $N$이 주어집니다.
+
+다음 극한을 구하세요.
+
+$\displaystyle
+\lim_{m \to \infty} \frac{1}{m!} \sum_{k = 0}^{m! - 1} \frac{e^{2 kN \pi i / (m!)}}{e^{4 k \pi i / (m!)} + e^{2 k \pi i / (m!)} + 10}
+$
+
+단, $e$는 자연로그의 밑, $\pi$는 원주율, $i$는 허수 단위입니다.
+
+### 배경
+
+이 극한은 $p$진 해석에서 사용되는 シュニレルマン 적분이라는 적분([1] p. 488, [2] p. 2522)을 복소 해석으로 옮긴 것이지만, 계산에 $p$진 해석 지식은 필요하지 않습니다.
+
+원래 $p$진 해석의 문맥에서는 소수 $p$를 고정하고, 복소수체 $\mathbb{C}$ 대신 $p$진 복소수체 $\mathbb{C}_p$를 생각하며, $e$의 거듭제곱 대신 $\mathbb{C}_p$에서 $1$의 거듭제곱근을 생각합니다. 또한 $m!$ 대신 $m$을 생각하고, $m \to \infty$ 대신 $m$을 $p$와 서로소인 양의 정수 전체에 약수 관계로 방향을 준 유향 집합 위에서 움직이며 [유향 극한](https://ja.wikipedia.org/wiki/%E6%9C%89%E5%90%91%E7%82%B9%E6%97%8F#%E6%9C%89%E5%90%91%E7%82%B9%E6%97%8F%E3%81%A8%E3%81%9D%E3%81%AE%E6%A5%B5%E9%99%90)을 생각합니다.
+
+유향 극한을 이해하려면 위상에 관한 지식이 필요하므로 자세히 설명하지 않지만, 이는 소수 $p$를 고정하고, 복소수체 $\mathbb{C}$ 대신 $p$진 복소수체 $\mathbb{C}_p$를 생각하며, $e$의 거듭제곱 대신 $\mathbb{C}_p$에서 $1$의 거듭제곱근을 생각하고, $m!$ 대신 $m$ 이하인 $p$와 서로소인 양의 정수들의 총적을 생각하여 $m \to \infty$로 한 극한과 동치입니다.
+
+## 입력
+
+입력은 다음 형식으로 표준 입력에서 주어집니다.
+
+```text
+$N$
+```
+
+$N$은 입력으로 주어지는 정수입니다.
+
+## 제한
+
+- $N$은 $-20 \leq N \leq 20$을 만족하는 정수입니다.
+
+## 출력
+
+답은 분모가 $10$의 거듭제곱인 분수로 나타낼 수 있음이 증명되어 있습니다.
+
+즉, 정수 $n$과 $10$의 거듭제곱으로 나타낼 수 있는 정수 $d$를 사용하여 $n/d$로 나타낼 수 있으므로, 그러한 정수쌍 $n,d$를 `/`로 구분하여 한 줄에 출력하세요.
+
+```text
+$n/d$
+```
+
+마지막에 줄 바꿈을 출력하세요.
+
+이 문제는 스페셜 저지 문제입니다. 정답이 되는 정수쌍은 하나로 정해지지 않지만, 어느 것을 출력해도 됩니다.
+
+단, 출력은 위에서 설명한 형식을 엄격하게 따라야 합니다. 예를 들어 불필요한 공백이 있는 경우 저지가 어떻게 동작할지는 보장되지 않습니다.
+
+또한 저지의 사정상 출력은 $100$자 이하로 하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+0
+```
+
+#### 출력
+
+```text
+1/10
+```
+
+$\displaystyle
+\lim_{m \to \infty} \frac{1}{m!} \sum_{k = 0}^{m! - 1} \frac{e^{2 kN \pi i / (m!)}}{e^{4 k \pi i / (m!)} + e^{2 k \pi i / (m!)} + 10} = \lim_{m \to \infty} \frac{1}{m!} \sum_{k = 0}^{m! - 1} \frac{1}{e^{4 k \pi i / (m!)} + e^{2 k \pi i / (m!)} + 10} = \frac{1}{10}
+$
+
+이 됩니다. 이 외에도 `10/100`을 출력해도 정답으로 인정됩니다.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+1
+```
+
+#### 출력
+
+```text
+0/1
+```
+
+$\displaystyle
+\lim_{m \to \infty} \frac{1}{m!} \sum_{k = 0}^{m! - 1} \frac{e^{2 kN \pi i / (m!)}}{e^{4 k \pi i / (m!)} + e^{2 k \pi i / (m!)} + 10} = \lim_{m \to \infty} \frac{1}{m!} \sum_{k = 0}^{m! - 1} \frac{e^{2 k \pi i / (m!)}}{e^{4 k \pi i / (m!)} + e^{2 k \pi i / (m!)} + 10} = 0
+$
+
+이 됩니다. 이 외에도 `0/10`을 출력해도 정답으로 인정됩니다.
+
+### 예제 3 {file=""}
+
+#### 입력
+
+```text
+-20
+```
+
+#### 출력
+
+```text
+-9939764889/1000000000000000000000
+```
+
+이처럼 분모가 매우 커지는 경우가 있습니다.
+
+$\displaystyle
+\lim_{m \to \infty} \frac{1}{m!} \sum_{k = 0}^{m! - 1} \frac{e^{2 kN \pi i / (m!)}}{e^{4 k \pi i / (m!)} + e^{2 k \pi i / (m!)} + 10} = \lim_{m \to \infty} \frac{1}{m!} \sum_{k = 0}^{m! - 1} \frac{e^{-40 k \pi i / (m!)}}{e^{4 k \pi i / (m!)} + e^{2 k \pi i / (m!)} + 10} = - \frac{9\,939\,764\,889}{10^{21}}
+$
+
+이 됩니다. 이 외에도 `-99397648890/10000000000000000000000`을 출력해도 정답으로 인정됩니다.
+
+## 출전
+
+1. Л. Г. Шнирельман (L. G. Schnirelmann), [*О функциях в нормированных алгебраически замкнутых телах*](https://www.mathnet.ru/php/archive.phtml?wshow=paper&jrnid=im&paperid=3608) (프랑스 공식 제목: [*Sur les fonctions dans les corps normés et algébriquement fermés*](https://www.mathnet.ru/php/archive.phtml?wshow=paper&jrnid=im&paperid=3608&option_lang=eng), [2]에서 참조한 영어 제목: *On functions in normed, algebraically closed fields*), Izvestiya Rossiiskoi Akademii Nauk SSSR Seriya Matematicheskaya, 2:5-6, pp. 487--498 (1938). ([프랑스어 요약](https://zbmath.org/?q=an:64.1047.03))
+2. M. M. Vishik, [*Nonarchimedean Spectral Theory*](https://link.springer.com/article/10.1007/BF02249122), Journal of Soviet Mathematics volume 30, pp. 2513--2555 (1985).

@@ -1,7 +1,7 @@
 import { strict as assert } from "node:assert";
 import test from "node:test";
 import { JSDOM } from "jsdom";
-import { sampleWarnings } from "../src/problem-samples.ts";
+import { sampleWarnings, sampleDataValues } from "../src/problem-samples.ts";
 
 test("nested canonical sample wrappers count each code block once", () => {
   const original = blocks(
@@ -198,4 +198,74 @@ test("sample diagnostics include filenames and format-specific repair instructio
   const extra = sampleWarnings([], original, "mdx")[0];
   assert.match(extra, /예제 이름: 원문 없음 \/ 번역문 "Example"/u);
   assert.match(extra, /수정 방법:.*중복.*제거/u);
+});
+
+test("site custom sample headings identify the same raw IO as translated headings", () => {
+  const source = blocks(`<div class="block"><div class="sample">
+    <h6>定数</h6><pre>$N$\n1 2\n</pre>
+    <h6>返すべき値</h6><pre>3\n</pre>
+    <p>Explanation</p><pre>worked trace</pre>
+  </div></div>`);
+  const translation = blocks(`<div class="block"><div class="sample">
+    <h6>입력</h6><pre>$N$\n1 2\n</pre>
+    <h6>출력</h6><pre>3\n</pre>
+    <p>Translated explanation</p><pre>translated worked trace</pre>
+  </div></div>`);
+  assert.deepEqual(sampleDataValues(source), ["$N$\n1 2", "3"]);
+  assert.deepEqual(sampleWarnings(source, translation, "mdx", true), []);
+});
+
+test("raw sample digests preserve significant trailing blank lines and BR boundaries", () => {
+  assert.deepEqual(
+    sampleDataValues(
+      blocks('<div class="block sample"><pre>a<br>b\n\n</pre></div>'),
+    ),
+    ["a\nb\n"],
+  );
+});
+
+test("all confirmed source IO heading aliases retain data without capturing worked explanations", () => {
+  const headings = [
+    "出力例",
+    "入力例1",
+    "出力例1",
+    "回答プログラムの出力",
+    "応答プログラムの出力",
+    "提出プログラムの出力",
+    "ジャッジプログラムの出力",
+    "ジャッジの出力",
+    "저지의 출력",
+    "입력과 답변",
+    "출력과 질문",
+    "入力１",
+    "出力３",
+    "входные данные",
+    "выходные данные",
+    "invoer",
+    "เอาต์พุต",
+    "\u202e入力",
+    "\u202e出力",
+  ];
+  for (const heading of headings) {
+    assert.deepEqual(
+      sampleDataValues(
+        blocks(
+          `<div class="block sample"><h6>${heading}</h6><pre>\u202e1  2\n</pre><pre>worked trace</pre></div>`,
+        ),
+      ),
+      ["\u202e1  2"],
+      heading,
+    );
+  }
+  for (const heading of ["入力 (デコード後)", "不正解の出力", "暗証番号"]) {
+    assert.deepEqual(
+      sampleDataValues(
+        blocks(
+          `<div class="block sample"><h6>入力</h6><pre>data</pre><h6>${heading}</h6><pre>not raw IO</pre></div>`,
+        ),
+      ),
+      ["data"],
+      heading,
+    );
+  }
 });

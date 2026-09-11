@@ -42,7 +42,8 @@
       "resources": [
         "translations/ko/*.json",
         "translations/ko.messages.json",
-        "katex/fonts/*"
+        "katex/fonts/*",
+        "mathjax/fonts/woff-v2/*"
       ],
       "matches": ["https://yukicoder.me/*"]
     }

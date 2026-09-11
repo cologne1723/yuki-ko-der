@@ -1,0 +1,58 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3370
+problemId: 12816
+sourceTitle: "AB → BA"
+sourceHtmlSha256: b895315bf26bf8e7c4c68fec6267f364f4215b12057678a2fbf0bc27a0a1efcf
+humanReview: null
+machineReview: unreviewed
+title: "AB → BA"
+---
+
+## 문제 설명
+
+`A`, `B`로만 이루어진 문자열 $S$가 주어집니다.
+
+임의의 문자열 $X$에 대해 다음 연산을 수행할 수 있습니다.
+
+- $X$에 포함된 부분 문자열 `AB` $1$개를 선택하여 `BA`로 치환합니다.
+
+이 연산을 $0$회 이상 원하는 만큼 수행하여 $S$와 같게 만들 수 있는 문자열의 개수를 구하세요.
+
+답이 매우 커질 수 있으므로, $998\,244\,353$으로 나눈 나머지를 출력하세요.
+
+## 입력
+
+입력은 다음 형식으로 표준 입력에서 주어집니다.
+
+```text
+$S$
+```
+
+## 제한
+
+- $1 \le |S| \le 4 \times 10^5$
+- $S_i \in \{$ `A`, `B` $\} \; \scriptsize (1 \leq i \leq |S|)$
+
+## 출력
+
+답을 구하고, $998\,244\,353$으로 나눈 나머지를 표준 출력에 출력하세요.
+
+## 예제
+
+### 예제 1 {file="00_sample_0000.txt"}
+
+#### 입력
+
+```text
+BBA
+```
+
+#### 출력
+
+```text
+3
+```
+
+`BBA`, `BAB`, `ABB`의 $3$가지입니다.

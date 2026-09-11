@@ -8,6 +8,7 @@ import {
   sourceStatementBlocks,
 } from "translation-core/problem-document";
 import { compileProblemMarkdown } from "translation-core/problem-markdown";
+import { inputFormatErrors } from "translation-core/problem-input-format";
 import { sampleWarnings } from "translation-core/problem-samples";
 import { parseReviewState } from "translation-core/review-state";
 import { atomicFile, readSourceIndex, sha256 } from "./source-store.ts";
@@ -91,6 +92,8 @@ export async function checkProblems(
       const review = parseReviewState(html);
       reviewStatus = review.machineTranslated ? "machine" : review.reviewStatus;
       if (mode === "lint") {
+        const formatErrors = inputFormatErrors(parse(html));
+        if (formatErrors.length) throw new Error(formatErrors.join("\n"));
         const errors: { from: number; to: number }[] = [];
         htmlLanguage.parser.parse(html).iterate({
           enter(node) {
@@ -134,6 +137,10 @@ export async function checkProblems(
         let metadata:
           { No: number; ProblemId: number; Title: string } | undefined;
         if (mode === "live") {
+          if (process.env.GITHUB_ACTIONS === "true" && !context.request)
+            throw new Error(
+              "Live yukicoder verification is forbidden in GitHub Actions",
+            );
           const url = `https://yukicoder.me/api/v1/problems/${id}`;
           const signal = context.signal
             ? AbortSignal.any([context.signal, AbortSignal.timeout(20000)])
@@ -167,6 +174,7 @@ export async function checkProblems(
           sourceStatementBlocks(source.body),
           translated.blocks,
           file.endsWith(".mdx") ? "mdx" : "html",
+          true,
         );
         const resources = (doc: Document) =>
           [...doc.querySelectorAll("img[src],a[href]")].map((el) => ({

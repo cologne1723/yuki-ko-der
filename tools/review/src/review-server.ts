@@ -30,12 +30,13 @@ export function createReviewApp(options: {
   repositoryRoot: string;
   assetRoot: string;
   dataRoot?: string;
+  taskStore?: ReviewTasks;
 }) {
   options = {
     ...options,
     dataRoot: options.dataRoot ?? defaultDataDirectory(options.repositoryRoot),
   };
-  let taskStore: ReviewTasks | undefined;
+  let taskStore = options.taskStore;
   const tasks = () =>
     (taskStore ??= new ReviewTasks(options.repositoryRoot, options.dataRoot!));
   const store = new ProblemReviewStore(
@@ -134,6 +135,18 @@ export function createReviewApp(options: {
     // Sandboxed previews have an opaque origin; public math fonts need CORS.
     c.header("Access-Control-Allow-Origin", "*");
     return serveStatic({ path: join(options.assetRoot, c.req.path) })(c, next);
+  });
+  app.get("/mathjax/fonts/woff-v2/:font", async (c, next) => {
+    if (!/^[A-Za-z0-9._-]+\.woff$/u.test(c.req.param("font")))
+      return c.notFound();
+    c.header("Access-Control-Allow-Origin", "*");
+    return serveStatic({
+      path: join(
+        options.assetRoot,
+        "mathjax/fonts/woff-v2",
+        c.req.param("font"),
+      ),
+    })(c, next);
   });
   app.notFound((c) => c.json({ error: "Not found" }, 404));
   return routed;

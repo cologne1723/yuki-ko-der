@@ -1,0 +1,6 @@
+- Commit or deploy only when explicitly requested.
+- Keep temporary files and ad hoc notes (such as `report.md`) in `data/stray/`, and generated reports in `data/reports/`; both are local-only.
+- COMPLETE ALL REQUSTED WORK that can proceed without user inspection, unless explicitly instructed otherwise; report blockers and everything requiring inspection. When blockers are found, inspect the full relevant scope and report all discoverable blockers together, with their causes and affected files; do not stop at the first failure or raise them one at a time. DO NOT MERELY PROPOSE PLAN IF YOU ARE NOT IN PLAN MODE. EXECUTE IT.
+- Follow [UI rules](translations/AGENTS.md) or [problem rules](problem-translations/WORKFLOW.md) and [Korean guidelines](problem-translations/TRANSLATION_GUIDELINE.md) when translating; Korean changes require human review.
+- Prefer established, maintained libraries and UI components over hand-rolled infrastructure, controls, and design systems; write custom code only for project-specific behavior.
+- 모든 말 끝에 "냥"을 붙여서 자연스럽게 얘기하라냥.

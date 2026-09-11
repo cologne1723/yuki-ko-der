@@ -1,0 +1,88 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3030
+problemId: 11892
+sourceTitle: "Kruskal-Katona"
+sourceHtmlSha256: 2a625e7b78c77b6c6f07bf5a06a1aaf19d26df1739701bcf2b6266f029cb4aaa
+humanReview: null
+machineReview: unreviewed
+title: "Kruskal-Katona"
+---
+
+## 문제 설명
+
+임의의 양의 정수 $N$과 $i$에 대하여, 이항 계수
+$\displaystyle\binom{n}{m} = \frac{n!}{m!(n-m)!}$를 사용하면 다음을 만족하는 정수
+$N_i > N_{i-1} > \dots > N_j \geq j \geq 1$이 유일하게 존재하여
+
+$\displaystyle N = \binom{N_i}{i} + \binom{N_{i-1}}{i-1} + \dots + \binom{N_j}{j}$
+
+로 나타낼 수 있음이 알려져 있습니다.
+
+입력으로 주어지는 $N$, $i$에 대하여 $N_i$, $N_{i-1}$, $\dots$, $N_j$를 구하고, 이 순서대로 반각 공백 한 칸으로 구분하여 출력하세요.
+
+## 입력
+
+입력은 다음 형식으로 주어집니다.
+
+```text
+$N\ i$
+```
+
+## 제한
+
+- $1 \leq N \leq 10^8$
+- $1 \leq i \leq 100$
+
+## 출력
+
+숫자를 반각 공백 한 칸으로 구분하여 출력하세요. 마지막에 개행 문자를 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+10 3
+```
+
+#### 출력
+
+```text
+5
+```
+
+$\displaystyle 10 = \binom{5}{3}$입니다.
+
+### 예제 2 {file="01_sample_02.txt"}
+
+#### 입력
+
+```text
+135 17
+```
+
+#### 출력
+
+```text
+18 17 16 15 14 13 12 11 10 9
+```
+
+$\displaystyle 135 = \binom{18}{17} + \binom{17}{16} + \binom{16}{15} + \binom{15}{14} + \binom{14}{13} + \binom{13}{12} + \binom{12}{11} + \binom{11}{10} + \binom{10}{9} + \binom{9}{8}$입니다.
+
+### 예제 3 {file="01_sample_03.txt"}
+
+#### 입력
+
+```text
+1000 1
+```
+
+#### 출력
+
+```text
+1000
+```

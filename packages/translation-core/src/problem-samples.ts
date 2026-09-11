@@ -21,7 +21,32 @@ export function samplePreText(pre: Element): string {
   return text(pre).replace(/\r\n?/g, "\n").replace(/\n$/, "");
 }
 
-function collectSamples(blocks: Element[]): Sample[] {
+// Headed sample input/output is data; a later unheaded pre may be explanatory
+// prose or a worked trace. Legacy unheaded samples retain the previous behavior.
+export function sampleDataPres(sample: Element): Element[] {
+  const nodes = [...sample.querySelectorAll("h6,pre")].filter(
+    (node) => node.closest(".sample") === sample,
+  );
+  if (!nodes.some((node) => node.tagName === "H6"))
+    return nodes.filter((node) => node.tagName === "PRE");
+  let pending = false;
+  return nodes.filter((node) => {
+    if (node.tagName === "H6") {
+      // These are source-observed IO labels, including interactive/multilingual
+      // statements. Match heading text only; never normalize the sample bytes.
+      pending =
+        /^(?:\u202e)?(?:(?:入力|出力)(?:例)?[0-9０-９]*|定数|返すべき値|입력|출력|입력과 답변|출력과 질문|저지의 출력|input|output|回答プログラムの出力|応答プログラムの出力|提出プログラムの出力|ジャッジプログラムの出力|ジャッジの出力|входные данные|выходные данные|invoer|เอาต์พุต)$/iu.test(
+          node.textContent?.trim() ?? "",
+        );
+      return false;
+    }
+    const data = pending;
+    pending = false;
+    return data;
+  });
+}
+
+function collectSamples(blocks: Element[], ioOnly = false): Sample[] {
   return blocks.flatMap((block) =>
     [
       ...(block.matches(".sample") ? [block] : []),
@@ -29,7 +54,10 @@ function collectSamples(blocks: Element[]): Sample[] {
     ].map((sample) => ({
       name: sample.querySelector("h5")?.textContent?.trim() ?? "",
       file: sample.getAttribute("data-file") ?? "",
-      values: [...sample.querySelectorAll("pre")]
+      values: (ioOnly
+        ? sampleDataPres(sample)
+        : [...sample.querySelectorAll("pre")]
+      )
         .filter((pre) => pre.closest(".sample") === sample)
         .map((pre) => samplePreText(pre)),
     })),
@@ -40,6 +68,20 @@ function collectValues(samples: Sample[]): SampleValue[] {
   return samples.flatMap((sample) =>
     sample.values.map((value, index) => ({ value, sample, index })),
   );
+}
+
+// Publication/runtime digest contract: ordered raw IO, excluding worked prose.
+export function sampleDataElements(blocks: Element[]): Element[] {
+  return blocks.flatMap((block) =>
+    [
+      ...(block.matches(".sample") ? [block] : []),
+      ...block.querySelectorAll(".sample"),
+    ].flatMap(sampleDataPres),
+  );
+}
+
+export function sampleDataValues(blocks: Element[]): string[] {
+  return sampleDataElements(blocks).map(samplePreText);
 }
 
 function sampleIdentity(before?: Sample, after?: Sample): string {
@@ -78,9 +120,10 @@ export function sampleWarnings(
   sourceBlocks: Element[],
   translatedBlocks: Element[],
   sourceFormat?: "mdx" | "html",
+  ioOnly = false,
 ): string[] {
-  const source = collectSamples(sourceBlocks);
-  const translated = collectSamples(translatedBlocks);
+  const source = collectSamples(sourceBlocks, ioOnly);
+  const translated = collectSamples(translatedBlocks, ioOnly);
   // A missing sample wrapper is a structural authoring error. Report it with
   // the format-specific repair instructions before comparing the invariant IO
   // stream. Once both sides contain samples, their wrapper grouping and names

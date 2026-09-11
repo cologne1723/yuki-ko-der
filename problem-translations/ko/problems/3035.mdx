@@ -1,0 +1,86 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3035
+problemId: 11811
+sourceTitle: "文字列のみの反転"
+sourceHtmlSha256: "8edae5207b5d93303b8d3665b076f6bdafd05baef3c52e34ad3547abe24bdfe0"
+humanReview: null
+machineReview: unreviewed
+title: "문자열만 뒤집기"
+---
+
+## 문제 설명
+
+영소문자만으로 이루어진 문자열 $A$와 숫자만으로 이루어진 문자열 $B$를 순서대로 이어 붙인 문자열 $S$가 주어집니다.
+
+$B$는 그대로 두고, 문자열 $A$만 뒤집은 문자열 $T$를 출력하세요.
+
+## 입력
+
+입력은 다음 형식으로 표준 입력에서 주어집니다.
+
+```text
+$S$
+```
+
+## 제한
+
+- $4\le |S|\le100$
+- 문자열 $A$와 $B$는 각각 $2$문자 이상입니다.
+
+## 출력
+
+문자열 $T$를 출력하세요.
+
+마지막에 개행을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+eiram1234
+```
+
+#### 출력
+
+```text
+marie1234
+```
+
+입력 `eiram1234`에서 문자열 $A$는 `eiram`이고 문자열 $B$는 `1234`입니다.
+
+문자열 $A$를 뒤집으면 `marie`가 되므로 $T$는 `marie1234`가 됩니다.
+
+문자열 $B$는 뒤집지 않는다는 점에 주의하세요.
+
+### 예제 2 {file="01_sample_02.txt"}
+
+#### 입력
+
+```text
+abc352
+```
+
+#### 출력
+
+```text
+cba352
+```
+
+### 예제 3 {file="01_sample_03.txt"}
+
+#### 입력
+
+```text
+happynewyear2025
+```
+
+#### 출력
+
+```text
+raeywenyppah2025
+```

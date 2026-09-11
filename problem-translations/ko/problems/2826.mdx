@@ -1,0 +1,137 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2826
+problemId: 10934
+sourceTitle: "Earthwork"
+sourceHtmlSha256: "a4be38b364611a472fc4fb39cb8f9dea2210eaa1b3ea786918e71d1e4376955d"
+humanReview: null
+machineReview: unreviewed
+title: "토목 공사"
+---
+
+## 문제 설명
+
+남북으로 $N$개, 동서로 $N$개, 총 $N^2$개의 **구획**으로 이루어진 도시가 있습니다.
+
+구획 $(i, j)$ ($1 \leq i, j \leq N$)는 북쪽에서 $i$번째 행, 서쪽에서 $j$번째 열에 있는 구획이며, 이 구획의 현재 **표고**는 $H_{i, j}$입니다.
+
+이 도시에서는 각 구획에 대해 토목 공사를 진행할 예정입니다.
+
+구획 $(i, j)$ ($1 \leq i, j \leq N$)에서 진행하는 공사는 다음과 같습니다.
+
+- $X_{i, j} = $ `-`일 때: 절토만 하며, 표고를 $0$ 이상인 적절한 실수만큼 **감소**시킵니다.
+- $X_{i, j} = $ `+`일 때: 성토만 하며, 표고를 $0$ 이상인 적절한 실수만큼 **증가**시킵니다.
+- $X_{i, j} = $ `=`일 때: 아무것도 하지 않고 현재 표고를 유지합니다.
+- $X_{i, j} = $ `?`일 때: 절토 또는 성토를 하고, 표고를 적절히 변경합니다.
+
+위의 내용에 어긋나는 공사는 진행할 수 없습니다.
+
+공사 후 구획 $(i, j)$ ($1 \leq i, j \leq N$)의 표고를 $H'_{i, j}$라고 합니다.
+
+또한 공사 후에는 다음 조건을 모두 만족해야 합니다.
+
+- $1 \leq i < N$ 및 $1 \leq j \leq N$을 만족하는 임의의 두 정수 $i, j$에 대해, $\displaystyle \left| \frac{H'_{i, j} + H'_{i + 1, j}}{H_{i, j} + H_{i + 1, j}} \right| \leq A_{i, j}$입니다.
+- $1 \leq i \leq N$ 및 $1 \leq j < N$을 만족하는 임의의 두 정수 $i, j$에 대해, $\displaystyle \left| \frac{H'_{i, j} + H'_{i, j + 1}}{H_{i, j} + H_{i, j + 1}} \right| \leq B_{i, j}$입니다.
+
+문제의 제한 아래에서는 적절히 공사를 진행해 항상 위의 조건을 만족시킬 수 있습니다.
+
+이때 $Q$개의 서로 독립적인 질문, 질문 $1, 2, \dots, Q$에 각각 답하세요.
+
+> **질문 $k$**
+>
+> 행정 기관에서 구획 $(R_k, C_k)$에 전파탑을 세우고 싶다는 요청이 있었습니다.
+> 이 전파탑의 표고는 $E_k$ 이상이어야 한다고 합니다.
+>
+> 적절히 공사를 진행해 $H'_{R_k, C_k} \geq E_k$로 만들 수 있을까요?
+
+## 입력
+
+입력은 다음 형식으로 표준 입력에서 주어집니다.
+
+```text
+$N$
+$H_{1,1}\ H_{1,2}\ \dots\ H_{1,N}$
+$H_{2,1}\ H_{2,2}\ \dots\ H_{2,N}$
+$\vdots$
+$H_{N,1}\ H_{N,2}\ \dots\ H_{N,N}$
+$X_{1,1}X_{1,2}\dots X_{1,N}$
+$X_{2,1}X_{2,2}\dots X_{2,N}$
+$\vdots$
+$X_{N,1}X_{N,2}\dots X_{N,N}$
+$A_{1,1}\ \enspace A_{1,2}\ \enspace \dots\ \enspace A_{1,N}$
+$A_{2,1}\ \enspace A_{2,2}\ \enspace \dots\ \enspace A_{2,N}$
+$\vdots$
+$A_{N-1,1}\ \enspace A_{N-1,2}\ \enspace \dots\ \enspace A_{N-1,N}$
+$B_{1,1}\ \enspace B_{1,2}\ \enspace \dots\ \enspace B_{1,N-1}$
+$B_{2,1}\ \enspace B_{2,2}\ \enspace \dots\ \enspace B_{2,N-1}$
+$\vdots$
+$B_{N,1}\ \enspace B_{N,2}\ \enspace \dots\ \enspace B_{N,N-1}$
+$Q$
+$R_1\ \enspace C_1\ \enspace E_1$
+$R_2\ \enspace C_2\ \enspace E_2$
+$\vdots$
+$R_Q\ \enspace C_Q\ \enspace E_Q$
+```
+
+## 제한
+
+- $2 \leq N \leq 800$
+- $1 \leq Q \leq 10^4$
+- $\left| H_{i, j} \right| < 2^{30}$ ($1 \leq i, j \leq N$)
+- $H_{i, j} + H_{i + 1, j} \neq 0$ ($1 \leq i < N$ 및 $1 \leq j \leq N$)
+- $H_{i, j} + H_{i, j + 1} \neq 0$ ($1 \leq i \leq N$ 및 $1 \leq j < N$)
+- $1 \leq A_{i, j} < 2^{30}$ ($1 \leq i < N$ 및 $1 \leq j \leq N$)
+- $1 \leq B_{i, j} < 2^{30}$ ($1 \leq i \leq N$ 및 $1 \leq j < N$)
+- $1 \leq R_i, C_i \leq N$ ($1 \leq i \leq Q$)
+- $\left| E_i \right| < 2^{60}$ ($1 \leq i \leq Q$)
+- $X_{i,j}\in\{$ `-` $,$ `+` $,$ `=` $,$ `?` $\}\scriptsize\;(1\leq i,j\leq N)$
+- $N$, $Q$, $H_{i, j}$는 정수입니다 ($1 \leq i, j \leq N$).
+- $A_{i, j}$는 정수입니다 ($1 \leq i < N$ 및 $1 \leq j \leq N$).
+- $B_{i, j}$는 정수입니다 ($1 \leq i \leq N$ 및 $1 \leq j < N$).
+- $R_i$, $C_i$, $E_i$는 정수입니다 ($1 \leq i \leq Q$).
+
+## 출력
+
+질문에 대한 답을 다음 지시에 따라 표준 출력에 $Q$줄로 출력하세요.
+
+$i$번째 줄 ($1 \leq i \leq Q$)에는 질문 $i$에 대해 긍정적인 답이라면 `Yes`를, 그렇지 않다면 `No`를 출력하세요.
+
+## 예제
+
+### 예제 1 {file="00_sample0000.txt"}
+
+#### 입력
+
+```text
+4
+-8 -7 -6 -5
+-1 -2 -3 -4
+0 1 2 3
+7 6 5 4
+-+=?
++=?-
+=?-+
+?-+=
+1 2 3 4
+5 6 7 8
+9 10 11 12
+1 5 9
+2 6 10
+3 7 11
+9 8 12
+4
+1 3 0
+1 4 20
+4 1 40
+2 3 50
+```
+
+#### 출력
+
+```text
+No
+Yes
+Yes
+No
+```

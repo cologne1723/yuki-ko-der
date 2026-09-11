@@ -1,0 +1,111 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2939
+problemId: 11348
+sourceTitle: "Sigma Popcount Problem"
+sourceHtmlSha256: "553a81dbec2f820833a007ddee66f35ad7012ab7c38fe47903675986b76609a3"
+humanReview: null
+machineReview: unreviewed
+title: "시그마 Popcount 문제"
+---
+
+## 문제 설명
+
+$T$개의 테스트 케이스가 주어집니다. 순서대로 처리하세요.
+
+$k$번째 테스트 케이스는 다음과 같습니다.
+
+- 정수 $N_k$가 주어집니다.
+- 다음 식의 값을 구하세요.
+
+$\displaystyle\sum_{i=1}^{N_k} \text{popcount}(i)$
+
+여기서 $\text{popcount}(x)$는 $x$를 이진 표기로 나타냈을 때 $1$의 개수입니다.
+
+## 입력
+
+입력은 다음 형식으로 표준 입력에서 주어집니다.
+
+```text
+$T$
+$N_1$
+$N_2$
+$\vdots$
+$N_T$
+```
+
+## 제한
+
+- $1\leq T \leq 10^5$
+- $1\leq N_k\leq 10^{12}$ $(1\leq k\leq T)$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+$T$줄을 출력하세요.
+
+$k$번째 줄에는 $\displaystyle\sum_{i=1}^{N_k} \text{popcount}(i)$를 한 줄에 출력하세요.
+
+마지막에 줄 바꿈을 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+2
+5
+3
+```
+
+#### 출력
+
+```text
+7
+4
+```
+
+$\text{popcount}(1)=1$, $\text{popcount}(2)=1$, $\text{popcount}(3)=2$, $\text{popcount}(4)=1$, $\text{popcount}(5)=2$입니다.
+
+따라서 첫 번째 테스트 케이스의 답은 $1+1+2+1+2=7$입니다.
+
+두 번째 테스트 케이스의 답은 $1+1+2=4$입니다.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+1
+10
+```
+
+#### 출력
+
+```text
+17
+```
+
+### 예제 3 {file=""}
+
+#### 입력
+
+```text
+4
+901
+483
+269
+499
+```
+
+#### 출력
+
+```text
+4313
+2116
+1063
+2216
+```

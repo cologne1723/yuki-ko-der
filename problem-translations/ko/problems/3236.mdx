@@ -1,0 +1,69 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3236
+problemId: 11855
+sourceTitle: "累乗数大好きbot"
+sourceHtmlSha256: f46cbede39acd04b19e9eb282a8de3da079b482ffec8490c42b5efd452b377b1
+humanReview: null
+machineReview: unreviewed
+title: "거듭제곱수를 좋아하는 봇"
+---
+
+이 문제의 실행 시간 제한은 $4\,000$ms입니다.
+
+## 문제 설명
+
+정수 $a \geq 2$와 양의 정수 $n$을 사용하여 $a^n$으로 나타낼 수 있는 정수를 $n$제곱수라고 합니다.
+
+입력으로 $2$ 이상인 정수 $Q$개 $N_1, \dots, N_Q$가 주어집니다.
+
+각 $q=1, \dots, Q$에 대해 $N_q$가 $n_q$제곱수이고, $n_q$보다 큰 모든 양의 정수 $n$에 대해 $N_q$가 $n$제곱수가 아니도록 하는 양의 정수 $n_q$를 구하세요.
+
+## 입력
+
+```text
+$Q$
+$N_1$
+$\vdots$
+$N_Q$
+```
+
+입력은 다음 제한을 만족합니다.
+
+## 제한
+
+- $1 \leq Q \leq 10^5$
+- $2 \leq N_q \leq 10^{12}$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+$n_q$를 구하고, 다음 형식으로 출력하세요.
+
+```text
+$n_1$
+$\vdots$
+$n_Q$
+```
+
+출력 끝에 개행을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+2
+16
+19
+```
+
+#### 출력
+
+```text
+4
+1
+```

@@ -1,0 +1,105 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2940
+problemId: 11225
+sourceTitle: "Sigma Sigma Div Floor Problem"
+sourceHtmlSha256: ab7582bb289552033bde595bb52daa4a48782dcfa713c4d8763faeabcc3e7a83
+humanReview: null
+machineReview: unreviewed
+title: "시그마 시그마 바닥 나눗셈 문제"
+---
+
+## 문제 설명
+
+양의 정수 $N$이 주어집니다.
+
+$\left(\displaystyle\sum_{i=1}^N\displaystyle\sum_{j=1}^i\left\lfloor \dfrac{i}{j}\right\rfloor \right)\bmod{998\,244\,353}$를 구하세요.
+
+## 입력
+
+```text
+$N$
+```
+
+## 제한
+
+- $1\leq N\leq 1.2 \times 10^6$
+- $N$은 정수입니다.
+
+또한 이 문제에는 AC 판정과 관계없는 `evil` 케이스가 준비되어 있습니다. 여력이 있는 사람은 도전해 보세요.
+
+### `evil` 케이스의 제한
+
+- $1\leq N\leq 10^{15}$
+- $N$은 정수입니다.
+
+`evil` 케이스에 도전하지 않는 사람은 입력이 일반 제약을 만족하지 않을 때 즉시 프로그램을 종료해 주면 저지가 빠르게 끝납니다.
+
+## 출력
+
+식의 답을 한 줄에 출력하세요.
+
+마지막에 개행을 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+2
+```
+
+#### 출력
+
+```text
+4
+```
+
+$\left\lfloor \dfrac{1}{1} \right\rfloor =1,\left\lfloor \dfrac{2}{1} \right\rfloor =2,\left\lfloor \dfrac{2}{2} \right\rfloor =1$이므로 답은 $1+2+1$인 $4$입니다.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+5
+```
+
+#### 출력
+
+```text
+27
+```
+
+### 예제 3 {file=""}
+
+#### 입력
+
+```text
+100
+```
+
+#### 출력
+
+```text
+21803
+```
+
+### 예제 4 {file=""}
+
+#### 입력
+
+```text
+14691
+```
+
+#### 출력
+
+```text
+32934
+```
+
+답을 $998\,244\,353$으로 나눈 나머지를 출력한다는 점에 주의하세요.

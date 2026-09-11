@@ -32,10 +32,17 @@ async function fixture() {
   );
   const dataRoot = join(root, "data"),
     tasks = new ReviewTasks(root, dataRoot);
+  const stores = [tasks];
+  const createTasks = () => {
+    const store = new ReviewTasks(root, dataRoot);
+    stores.push(store);
+    return store;
+  };
   const app = createReviewApp({
     repositoryRoot: root,
     dataRoot,
     assetRoot: "dist/review",
+    taskStore: tasks,
   });
   const request = async (
     path: string,
@@ -53,13 +60,17 @@ async function fixture() {
     });
     return { status: response.status, body: await response.json() };
   };
-  return { root, dataRoot, tasks, request, source };
+  const cleanup = async () => {
+    await Promise.all(stores.map((store) => store.whenIdle()));
+    await rm(root, { recursive: true, force: true });
+  };
+  return { root, dataRoot, tasks, request, source, cleanup, createTasks };
 }
 async function terminal(tasks: ReviewTasks, id: string) {
   for (let i = 0; i < 300; i++) {
     const task = await tasks.get(id);
     if (!["running", "cancelling"].includes(task.status)) {
-      await setTimeout(100);
+      await tasks.whenIdle();
       return task;
     }
     await setTimeout(20);
@@ -87,7 +98,7 @@ test("real task worker persists progress, rejects simultaneous tasks and detects
       ),
     );
     assert.equal(complete.stale, false);
-    const restarted = new ReviewTasks(f.root, f.dataRoot);
+    const restarted = f.createTasks();
     assert.equal((await restarted.get(task.id)).status, "completed");
     await writeFile(
       join(f.root, "problem-translations/ko/problems/1.mdx"),
@@ -95,7 +106,7 @@ test("real task worker persists progress, rejects simultaneous tasks and detects
     );
     assert.equal((await restarted.get(task.id)).stale, true);
   } finally {
-    await rm(f.root, { recursive: true, force: true });
+    await f.cleanup();
   }
 });
 test("cancellation and interrupted-task recovery never report success", async () => {
@@ -113,10 +124,10 @@ test("cancellation and interrupted-task recovery never report success", async ()
       join(f.dataRoot, "reports/review-tasks", `${record.id}.json`),
       JSON.stringify(record),
     );
-    const restarted = new ReviewTasks(f.root, f.dataRoot);
+    const restarted = f.createTasks();
     assert.equal((await restarted.get(record.id)).status, "interrupted");
   } finally {
-    await rm(f.root, { recursive: true, force: true });
+    await f.cleanup();
   }
 });
 test("settings are next-start only and task routes validate origin and supported inputs", async () => {
@@ -177,7 +188,7 @@ test("settings are next-start only and task routes validate origin and supported
       400,
     );
   } finally {
-    await rm(f.root, { recursive: true, force: true });
+    await f.cleanup();
   }
 });
 test("conversion previews are read-only and explicit save rejects stale revisions", async () => {
@@ -203,9 +214,9 @@ test("conversion previews are read-only and explicit save rejects stale revision
     assert.ok(await readFile(path, "utf8"));
     await writeFile(path, (await readFile(path, "utf8")) + "\n");
     assert.equal((await f.request(`/api/tasks/${id}/convert`, {})).status, 409);
-    await setTimeout(100);
+    await f.tasks.whenIdle();
   } finally {
-    await rm(f.root, { recursive: true, force: true });
+    await f.cleanup();
   }
 });
 
@@ -252,7 +263,7 @@ test("explicit conversion preserves approval and unsupported or ambiguous previe
       { human: "approved", machine: "approved" },
     );
     await assert.rejects(readFile(path), { code: "ENOENT" });
-    await setTimeout(100);
+    await f.tasks.whenIdle();
     const failed = await f.tasks.start({
       operation: "convert-problem",
       html: "<script>not supported</script>",
@@ -270,7 +281,7 @@ test("explicit conversion preserves approval and unsupported or ambiguous previe
     });
     assert.equal((await terminal(f.tasks, retry.id)).status, "completed");
   } finally {
-    await rm(f.root, { recursive: true, force: true });
+    await f.cleanup();
   }
 });
 
@@ -296,7 +307,7 @@ test("uploaded conversion stays current when an unrelated repository translation
       result.result?.artifact?.content,
     );
   } finally {
-    await rm(f.root, { recursive: true, force: true });
+    await f.cleanup();
   }
 });
 
@@ -306,7 +317,7 @@ test("a corrupt saved task is reported without disabling healthy history or new 
     const directory = join(f.dataRoot, "reports/review-tasks");
     await mkdir(directory, { recursive: true });
     await writeFile(join(directory, "bad.json"), "{unfinished");
-    const tasks = new ReviewTasks(f.root, f.dataRoot);
+    const tasks = f.createTasks();
     assert.deepEqual(await tasks.list(), []);
     assert.equal((await tasks.recovery())[0].file, "bad.json");
     assert.equal(
@@ -320,7 +331,7 @@ test("a corrupt saved task is reported without disabling healthy history or new 
     const result = await terminal(tasks, task.id);
     assert.equal(result.status, "completed");
   } finally {
-    await rm(f.root, { recursive: true, force: true });
+    await f.cleanup();
   }
 });
 
@@ -366,7 +377,7 @@ test("saved source changes invalidate audit history without invalidating setup o
     await rm(join(f.dataRoot, "pages/main.html"));
     assert.notEqual(await inputRevision(context, inputs[2]), changed[2]);
   } finally {
-    await rm(f.root, { recursive: true, force: true });
+    await f.cleanup();
   }
 });
 
@@ -380,8 +391,35 @@ test("null glossary write bodies return validation errors", async () => {
       assert.doesNotMatch(response.body.error, /TypeError|Cannot read/);
     }
   } finally {
-    await rm(f.root, { recursive: true, force: true });
+    await f.cleanup();
   }
+});
+
+test("unused task stores perform no startup IO after their fixture is removed", async () => {
+  const root = await mkdtemp(join(tmpdir(), "review-task-unused-"));
+  new ReviewTasks(root, join(root, "data"));
+  await rm(root, { recursive: true, force: true });
+  await setTimeout(20);
+  await assert.rejects(
+    readFile(join(root, "data/reports/review-tasks/.owner.sqlite")),
+    { code: "ENOENT" },
+  );
+});
+
+test("task readiness reports filesystem errors and retries after repair", async (t) => {
+  const root = await mkdtemp(join(tmpdir(), "review-task-readiness-"));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const dataRoot = join(root, "data");
+  await writeFile(dataRoot, "not a directory");
+  const tasks = new ReviewTasks(root, dataRoot);
+  const first = tasks.initialize();
+  assert.equal(tasks.initialize(), first);
+  await assert.rejects(first, { code: "ENOTDIR" });
+  await assert.rejects(tasks.list(), { code: "ENOTDIR" });
+  await rm(dataRoot);
+  await tasks.initialize();
+  assert.deepEqual(await tasks.list(), []);
+  await tasks.whenIdle();
 });
 
 test("secondary task stores preserve live ownership, refresh progress, and cannot cancel", async () => {
@@ -391,7 +429,7 @@ test("secondary task stores preserve live ownership, refresh progress, and canno
       operation: "validate-problems",
       problems: "1",
     });
-    const other = new ReviewTasks(f.root, f.dataRoot);
+    const other = f.createTasks();
     assert.equal((await other.get(task.id)).status, "running");
     await assert.rejects(
       other.start({ operation: "validate-ui" }),
@@ -400,12 +438,15 @@ test("secondary task stores preserve live ownership, refresh progress, and canno
     await assert.rejects(other.cancel(task.id), /server that started/);
     assert.equal((await f.tasks.get(task.id)).status, "running");
     const completed = await terminal(other, task.id);
+    // A terminal record can be observed before the owning worker's exit handler
+    // releases its SQLite lock. Drain the owner, not the read-only observer.
+    await f.tasks.whenIdle();
     assert.equal(completed.status, "completed");
     assert.ok(completed.progress.length);
     const next = await other.start({ operation: "validate-ui" });
     assert.equal((await terminal(other, next.id)).status, "completed");
   } finally {
-    await rm(f.root, { recursive: true, force: true });
+    await f.cleanup();
   }
 });
 
@@ -443,7 +484,7 @@ test("task ownership survives a second process and recovers after owner terminat
         throw new Error("Owner did not start");
       }),
     ])) as [{ id: string }];
-    const observer = new ReviewTasks(f.root, f.dataRoot);
+    const observer = f.createTasks();
     assert.equal((await observer.get(id)).status, "running");
     await assert.rejects(
       observer.start({ operation: "validate-ui" }),
@@ -463,13 +504,13 @@ test("task ownership survives a second process and recovers after owner terminat
     if (child.exitCode === null && child.signalCode === null)
       child.kill("SIGKILL");
     await exited;
-    await rm(f.root, { recursive: true, force: true });
+    await f.cleanup();
   }
 });
 
 test("validated and reloaded task inputs preserve revision-sensitive property order", async (t) => {
   const f = await fixture();
-  t.after(() => rm(f.root, { recursive: true, force: true }));
+  t.after(f.cleanup);
   const { operationInput, inputRevision } =
     await import("translation-audit/operations/run");
   const input = { html: "uploaded", operation: "convert-problem" as const };

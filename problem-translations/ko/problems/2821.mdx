@@ -1,0 +1,84 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2821
+problemId: 10087
+sourceTitle: "A[i] ← 2A[j] - A[i]"
+sourceHtmlSha256: "3c6b7103f9a945d0d5f5bbe72542f5965e276ed508122d0da8a24f7c17c70bdb"
+humanReview: null
+machineReview: unreviewed
+title: "A[i] ← 2A[j] - A[i]"
+---
+
+## 문제 설명
+
+정수 $N$개 $A_1, A_2, \dots, A_N$이 있습니다.
+
+서로 독립적인 $N$개의 문제 $1\text{-gathering}, 2\text{-gathering}, \dots, N\text{-gathering}$을 해결하세요.
+
+### $k\text{-gathering}$
+
+길이 $k$인 정수열 $B=(B_1,B_2,\dots,B_k)$가 있고, 처음에는 $B=(A_1,A_2,\dots,A_k)$입니다.
+
+다음 연산을 $0$회 이상 원하는 만큼 수행할 수 있습니다.
+
+- $1\leq i,j\leq k$를 만족하는 두 정수 $i,j$를 자유롭게 선택하고, $B_i$를 $2B_j-B_i$로 바꿉니다.
+
+연산을 적절히 수행해 얻을 수 있는 $V_k\coloneqq\max B-\min B$의 최솟값 $V'_k$를 구하세요. 이 최솟값은 반드시 존재합니다.
+
+## 입력
+
+입력은 다음 형식으로 주어집니다.
+
+```text
+$N$
+$A_1\ \cdots\ A_N$
+```
+
+$N$은 정수의 개수이고, $A_1,A_2,\dots,A_N$은 정수입니다.
+
+## 제한
+
+- $1\leq N\leq 3\times 10^5$
+- $|A_i|<2^{60}\ (1\leq i\leq N)$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+$V'_1,V'_2,\dots,V'_N$의 값을 다음 형식으로 표준 출력에 출력하세요.
+
+```text
+$V'_1$
+$V'_2$
+$\vdots$
+$V'_N$
+```
+
+## 예제
+
+### 예제 1 {file="00_sample0000.txt"}
+
+#### 입력
+
+```text
+4
+2 6 5 -4
+```
+
+#### 출력
+
+```text
+0
+4
+1
+1
+```
+
+예를 들어 문제 $3\text{-gathering}$에서는 다음과 같이 연산을 수행하면 $V_3=1$이 됩니다.
+
+- 처음에는 $B=(2,6,5)$입니다.
+- $(i,j)=(2,3)$으로 연산을 수행하면 $B=(2,4,5)$가 됩니다.
+- $(i,j)=(3,2)$로 연산을 수행하면 $B=(2,4,3)$이 됩니다.
+- $(i,j)=(1,3)$으로 연산을 수행하면 $B=(4,4,3)$이 됩니다. 이때 $\max B-\min B=4-3=1$입니다.
+
+또한 어떤 방식으로 연산을 수행해도 $V_3<1$로 만들 수 없으므로 $V'_3=1$입니다.

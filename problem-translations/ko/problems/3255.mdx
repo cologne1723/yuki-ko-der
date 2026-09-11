@@ -1,0 +1,116 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3255
+problemId: 12660
+sourceTitle: "01 Matrix Counting"
+sourceHtmlSha256: "7b3b8b87c79055c4bdef9610179e49fb28b0217c45a09c870b6f5ad4304269d2"
+humanReview: null
+machineReview: unreviewed
+title: "01 행렬 세기"
+---
+
+## 문제 설명
+
+양의 정수 $H$, $W$가 주어집니다.
+
+모든 원소가 $0$ 또는 $1$인 $H$행 $W$열 행렬 $A$ 중 다음 조건을 만족하는 행렬의 개수를 $998\,244\,353$으로 나눈 나머지를 구하세요.
+
+- 모든 $1 \leq i \leq H-1$, $1 \leq j \leq W-1$를 만족하는 정수쌍 $(i,j)$에 대하여, $A$의 $(1,1)$을 왼쪽 위, $(i,j)$를 오른쪽 아래로 하는 직사각형 영역의 합과 $A$의 $(i+1,j+1)$을 왼쪽 위, $(H,W)$를 오른쪽 아래로 하는 직사각형 영역의 합의 홀짝이 서로 달라야 합니다.
+
+더 엄밀하게는 다음을 만족해야 합니다.
+
+$
+\sum_{k=1}^{i}\sum_{l=1}^{j} A_{k,l}
+\not\equiv
+\sum_{k=i+1}^{H}\sum_{l=j+1}^{W} A_{k,l}
+\pmod 2
+$
+
+## 입력
+
+입력은 다음 형식으로 주어집니다.
+
+```text
+$H\ W$
+```
+
+입력은 모두 다음 제한을 만족합니다.
+
+## 제한
+
+- $2 \leq H,W \leq 10^9$
+- $H$, $W$는 정수입니다.
+
+## 출력
+
+조건을 만족하는 $A$의 개수를 $998\,244\,353$으로 나눈 나머지를 출력하고 개행하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+2 2
+```
+
+#### 출력
+
+```text
+8
+```
+
+다음 $8$개의 행렬만 조건을 만족합니다.
+
+$
+\begin{pmatrix}
+0 & 0\\
+0 & 1
+\end{pmatrix},
+\begin{pmatrix}
+0 & 0\\
+1 & 1
+\end{pmatrix},
+\begin{pmatrix}
+0 & 1\\
+0 & 1
+\end{pmatrix},
+\begin{pmatrix}
+0 & 1\\
+1 & 1
+\end{pmatrix},
+\begin{pmatrix}
+1 & 0\\
+0 & 0
+\end{pmatrix},
+\begin{pmatrix}
+1 & 0\\
+1 & 0
+\end{pmatrix},
+\begin{pmatrix}
+1 & 1\\
+0 & 0
+\end{pmatrix},
+\begin{pmatrix}
+1 & 1\\
+1 & 0
+\end{pmatrix}
+$
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+1000000000 1000000000
+```
+
+#### 출력
+
+```text
+545791284
+```
+
+출력은 $998\,244\,353$으로 나눈 나머지입니다.

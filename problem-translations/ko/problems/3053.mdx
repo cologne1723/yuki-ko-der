@@ -1,0 +1,83 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3053
+problemId: 11852
+sourceTitle: '$((0 \And 1)\mathop{|}2)\oplus 3$'
+sourceHtmlSha256: c77e294dabf7cb7584d5d151752614d47da385dc4d265a3ffd83657fe0ca0aa1
+humanReview: null
+machineReview: unreviewed
+title: '$((0 \And 1)\mathop{|}2)\oplus 3$'
+---
+
+## 문제 설명
+
+양의 정수 $N$이 주어집니다.
+
+각 원소가 $\And$, $|$, $\oplus$ 중 하나인 길이 $N$의 이항 연산자열 $\mathrm{op} = (\mathrm{op}_1, \mathrm{op}_2, \ldots, \mathrm{op}_N)$에 대해 $f(\mathrm{op})$를 다음과 같이 정의합니다.
+
+$f(\mathrm{op}) \coloneqq (\cdots ((0 \mathop{\mathrm{op}_1} 1) \mathop{\mathrm{op}_2} 2) \cdots) \mathop{\mathrm{op}_N} N$입니다.
+
+여기서 $\And$는 비트별 논리곱, $|$는 비트별 논리합, $\oplus$는 비트별 배타적 논리합을 나타냅니다.
+
+예를 들어 $N=3$이고 $\mathrm{op}=(\And,|,\oplus)$이면 다음과 같습니다.
+
+$f(\mathrm{op}) = ((0 \mathop{\And} 1) \mathop{|} 2) \oplus 3 = (0 \mathop{|} 2) \oplus 3 = 2 \oplus 3 = 1$입니다.
+
+각 원소가 $\And$, $|$, $\oplus$ 중 하나인 길이 $N$의 이항 연산자열 $\mathrm{op}$는 $3^N$개 있습니다. 모든 $\mathrm{op}$에 대한 $f(\mathrm{op})$의 합을 $998\,244\,353$으로 나눈 나머지를 구하세요.
+
+## 입력
+
+입력은 다음 형식으로 표준 입력에서 주어집니다.
+
+```text
+$N$
+```
+
+$N$은 이진 표기로 주어지는 양의 정수입니다. 입력에는 불필요한 앞쪽 $0$이 포함되지 않습니다.
+
+## 제한
+
+- $1 \le N < 2^{1\,000\,000}$
+
+## 출력
+
+$f(\mathrm{op})$의 합을 $998\,244\,353$으로 나눈 나머지를 십진 표기로 한 줄에 출력하고 줄바꿈하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+10
+```
+
+#### 출력
+
+```text
+16
+```
+
+$N$은 이진 표기로 주어지므로 이 입력은 $N=10_{(2)}=2_{(10)}$를 나타냅니다. 즉, 십진 표기로 $N=2$입니다.
+
+이하에서는 수치를 십진 표기로 나타냅니다.
+
+예를 들어 $\mathrm{op}=(\And,|)$이면 $f(\mathrm{op})=(0\And 1)\mathop{|}2=0\mathop{|}2=2$입니다. $3^2$개의 $\mathrm{op}$에 대한 $f(\mathrm{op})$의 합은 $16$입니다.
+
+따라서 $998\,244\,353$으로 나눈 나머지인 $16$을 십진 표기로 출력합니다.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+10101100101011001010001001
+```
+
+#### 출력
+
+```text
+354528097
+```

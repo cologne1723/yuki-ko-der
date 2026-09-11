@@ -52,6 +52,10 @@ export const reviewApi = {
   },
   glossary: (signal?: AbortSignal) =>
     responseData(api.ui.$get({}, requestOptions(signal))),
+  collectProblemProfile: (number: string) =>
+    responseData(
+      api.problems[":number"]["render-profile"].$post({ param: { number } }),
+    ),
   page: (name: string, signal?: AbortSignal) =>
     responseData(
       api["ui-pages"][":name"].$get(

@@ -1,0 +1,286 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3278
+problemId: 10319
+sourceTitle: "Avoid Division"
+sourceHtmlSha256: "704e9ba7d82aee7d20893b10cf5474efa168647fec33c568564fd14336711095"
+humanReview: null
+machineReview: unreviewed
+title: "나눗셈 피하기"
+---
+
+## 문제 설명
+
+소수 $P$와 $\mathrm{mod}\ P$에서의 덧셈·곱셈·나눗셈을 수행할 수 있는 프로그래밍 언어가 있습니다. $P$는 입력으로 주어지지 않으며, $10^8<P<10^9$를 만족합니다. ($P$는 미리 결정되어 있습니다.)
+
+이 언어를 사용해 덧셈을 최대 $100$회, 곱셈을 최대 $100$회, 나눗셈을 최대 $1$회 수행하여 다음 문제의 답을 구하는 프로그램을 작성하세요.
+
+> $N$개의 연산 명령과 변수 $x$가 있습니다. 처음에 $x=0$으로 초기화되어 있습니다. 이제 $i=1,2,\ldots,N$에 대해 다음 연산을 순서대로 수행합니다.
+>
+> - $op_i=+$인 경우, $x$를 $x+A_i\pmod P$로 바꿉니다. ($1\leq A_i<10^8$)
+> - $op_i=*$인 경우, $x$를 $x\times A_i\pmod P$로 바꿉니다. ($1\leq A_i<10^8$)
+> - $op_i=/$인 경우, $x$를 $x/A_i\pmod P$로 바꿉니다. ($1\leq A_i<10^8$)
+>
+> 여기서 $a/b\pmod P$ $(0\leq a<P,\ 1\leq b<P)$는 $a\equiv bc\pmod P$를 만족하는 유일한 정수 $c$ $(0\leq c<P)$를 뜻합니다.
+
+이 연산들을 수행한 뒤의 $x$의 값을 구하세요.
+
+### 프로그램 사양
+
+이 프로그램에서는 영소문자로 표현되는 $a,b,\ldots,z$의 $26$개 변수를 사용할 수 있습니다.
+
+각 변수에는 $0$ 이상 $P$ 미만인 정숫값을 저장할 수 있습니다.
+
+프로그램 실행을 시작할 때 모든 변수에는 $0$이 대입되어 있습니다.
+
+또한 프로그램 시작 시점에 길이 $N$인 배열 $A$가 주어져 있으며, 이 배열을 참조할 수 있습니다. (배열의 값을 변경할 수는 없습니다.)
+
+프로그램 실행이 끝났을 때 변수 $a$에 답이 저장되어 있어야 합니다.
+
+### 프로그램 형식
+
+프로그램의 $1$번째 줄에는 프로그램의 명령 수를 나타내는 정수 $M$ $(M\geq0)$이 주어집니다.
+
+$2$번째 줄부터 $M+1$번째 줄까지 $M$개의 명령이 주어집니다. 명령은 위에서부터 아래로 순서대로 실행됩니다.
+
+명령은 다음 $3$가지 종류 중 $1$가지입니다.
+
+- $\mathrm{add}\ X\ Y\ Z$
+
+  $X$에 $Y+Z\pmod P$를 대입합니다. 여기서 $X$는 변수이고, $Y,Z$는 변수 또는 배열 $A$의 원소입니다.
+
+- $\mathrm{mul}\ X\ Y\ Z$
+
+  $X$에 $Y\times Z\pmod P$를 대입합니다. 여기서 $X$는 변수이고, $Y,Z$는 변수 또는 배열 $A$의 원소입니다.
+
+- $\mathrm{div}\ X\ Y\ Z$
+
+  $X$에 $Y/Z\pmod P$를 대입합니다. 여기서 $X$는 변수이고, $Y,Z$는 변수 또는 배열 $A$의 원소이며, $Z\neq0$이어야 합니다.
+
+배열 $A$의 $i$ $(1\leq i\leq N)$번째 원소를 참조할 때는 `A[i]`와 같이 작성합니다.
+
+### 프로그램 실행 코드
+
+코드 테스트 등에서 위 프로그램을 실행할 수 있습니다. 이용해 주세요. 프로그램 실행 코드는 약 $130$줄입니다.
+
+```python
+P = 998244353
+
+import re
+import sys
+
+pattern = re.compile(r"A\[(\-?\d+)\]$")
+
+
+def parse_A(s: str):
+    m = pattern.fullmatch(s)
+    if m:
+        return True, int(m.group(1))
+    else:
+        return False, None
+
+
+def is_lowercase_letter(s: str) -> bool:
+    return len(s) == 1 and "a" <= s <= "z"
+
+
+def add(x, y):
+    return (x + y) % P
+
+
+def mul(x, y):
+    return x * y % P
+
+
+def div(x, y):
+    if y == 0:
+        assert False, "Division by zero is not allowed"
+    return x * pow(y, P - 2, P) % P
+
+
+n = int(input())
+op = [""] * (n + 1)
+A = [0] * (n + 1)
+for i in range(1, n + 1):
+    op[i], A[i] = input().split()
+    A[i] = int(A[i])
+
+
+x = 0
+for i in range(1, n + 1):
+    if op[i] == "+":
+        x = add(x, A[i])
+    elif op[i] == "*":
+        x = mul(x, A[i])
+    elif op[i] == "/":
+        x = div(x, A[i])
+    else:
+        print("op[{}] is not '+', '*' and '/'".format(i))
+        assert 0
+
+vals = {}
+for i in range(26):
+    vals[chr(97 + i)] = 0
+
+m = int(input())
+if m < 0:
+    print("M must be 0 or positive.")
+    assert 0
+add_count = 0
+mul_count = 0
+div_count = 0
+
+for i in range(1, m + 1):
+    OP, X, Y, Z = input().split()
+    Yval = 0
+    if not is_lowercase_letter(X):
+        print("X[{}] is invalid format.".format(i))
+        assert 0
+    if is_lowercase_letter(Y):
+        Yval = vals[Y]
+    else:
+        valid, val = parse_A(Y)
+        if not valid:
+            print("Y[{}] is invalid format.".format(i))
+            assert 0
+        else:
+            if not 1 <= val <= n:
+                print("Y[{}] is invalid format.".format(i))
+                assert 0
+            Yval = A[val]
+    Zval = 0
+    if is_lowercase_letter(Z):
+        Zval = vals[Z]
+    else:
+        valid, val = parse_A(Z)
+        if not valid:
+            print("Z[{}] is invalid format.".format(i))
+            assert 0
+        else:
+            if not 1 <= val <= n:
+                print("Z[{}] is invalid format.".format(i))
+                assert 0
+            Zval = A[val]
+
+    if OP == "add":
+        vals[X] = add(Yval, Zval)
+        add_count += 1
+    elif OP == "mul":
+        vals[X] = mul(Yval, Zval)
+        mul_count += 1
+    elif OP == "div":
+        vals[X] = div(Yval, Zval)
+        div_count += 1
+    else:
+        print("OP[{}] is invalid format.".format(i))
+        assert 0
+
+
+rest = sys.stdin.read().strip()
+if rest:
+    print("Unexpected extra input")
+    assert 0
+
+if add_count > 100:
+    print("number of add is greater than 100")
+    assert 0
+if mul_count > 100:
+    print("number of mul is greater than 100")
+    assert 0
+if div_count > 1:
+    print("number of div is greater than 1")
+    assert 0
+
+print("Problem answer : {}".format(x))
+print("Program 'a'    : {}".format(vals["a"]))
+```
+
+#### 사용법
+
+다음 코드는 Python으로 동작합니다. 문제의 입력과 프로그램의 명령을 순서대로 이어 붙인 것을 Python 코드의 입력으로 전달하세요. Python 코드 첫 부분의 $P$는 원하는 소수로 바꿀 수 있습니다.
+
+예제는 다음과 같습니다.
+
+```text
+4
++ 1
+* 2
+/ 3
++ 4
+4
+add b A[1] b
+mul c A[2] b
+div d c A[3]
+add a A[4] d
+```
+
+## 입력
+
+입력은 다음 형식으로 주어집니다.
+
+```text
+$N$
+$op_1\ A_1$
+$\vdots$
+$op_N\ A_N$
+```
+
+$N$개의 줄에 각각 연산 $op_i$와 정수 $A_i$가 공백으로 구분되어 주어집니다.
+
+## 제한
+
+- $1\leq N\leq100$
+- $op_i$는 $+$, $*$, $/$ 중 $1$가지입니다.
+- $1\leq A_i<10^8$
+- $N,A_i$는 정수입니다.
+
+## 출력
+
+문제 설명에 적힌 사양과 형식에 맞는 프로그램을 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+4
++ 1
+* 2
+/ 3
++ 4
+```
+
+#### 출력
+
+```text
+4
+add b A[1] b
+mul c A[2] b
+div d c A[3]
+add a A[4] d
+```
+
+$P=998\,244\,353$인 경우를 생각합니다.
+
+문제의 답은 다음과 같습니다.
+
+- 처음에 $x=0$으로 초기화되어 있습니다.
+- $i=1$일 때 $x$는 $x+A_1\equiv0+1\equiv1\pmod{998\,244\,353}$이 됩니다.
+- $i=2$일 때 $x$는 $x\times A_2\equiv1\times2\equiv2\pmod{998\,244\,353}$이 됩니다.
+- $i=3$일 때 $x$는 $x/A_3\equiv2/3\equiv665\,496\,236\pmod{998\,244\,353}$이 됩니다.
+- $i=4$일 때 $x$는 $x+A_4\equiv4+665\,496\,236\equiv665\,496\,240\pmod{998\,244\,353}$이 됩니다.
+- 최종적으로 $x=665\,496\,240$이 됩니다.
+
+한편, 프로그램은 다음과 같이 동작합니다.
+
+- 처음에 $a=b=c=\ldots=0$으로 초기화되어 있습니다.
+- $1$번째 명령에서 $b$는 $A_1+b\equiv1+0\equiv1\pmod{998\,244\,353}$이 됩니다.
+- $2$번째 명령에서 $c$는 $A_2\times b\equiv2\times1\equiv2\pmod{998\,244\,353}$이 됩니다.
+- $3$번째 명령에서 $d$는 $c/A_3\equiv2/3\equiv665\,496\,236\pmod{998\,244\,353}$이 됩니다.
+- $4$번째 명령에서 $a$는 $A_4+d\equiv4+665\,496\,236\equiv665\,496\,240\pmod{998\,244\,353}$이 됩니다.
+- 최종적으로 $a=665\,496\,240$이 됩니다.
+
+문제의 답과 프로그램의 $a$가 일치하므로 올바른 출력입니다. 프로그램의 덧셈 횟수, 곱셈 횟수, 나눗셈 횟수 조건도 만족합니다.

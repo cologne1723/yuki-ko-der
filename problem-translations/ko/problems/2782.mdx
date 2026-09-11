@@ -1,0 +1,161 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2782
+problemId: 10725
+sourceTitle: "メルセンヌ数総乗"
+sourceHtmlSha256: "d89fa397c1dba367162190491afb3fc603cbe56fe9e0c0e0c879542be203439e"
+humanReview: null
+machineReview: unreviewed
+title: "메르센 수 총곱"
+---
+
+## 문제 설명
+
+$2$ 이상인 각 정수 $n$에 대해 $M_n = 2^n - 1$로 정의합니다.
+
+양의 정수 $N$이 주어집니다.
+
+$\prod_{n=2}^{N} M_n$이 $M_{N+1}$로 나누어떨어지는지 판정하세요.
+
+### 배경
+
+곱 기호 $\prod$를 모르는 사람을 위한 설명입니다.
+
+양의 정수 $k$에 대해 $\prod_{n=2}^{k} M_n$은 다음과 같이 재귀적으로 정의됩니다.
+
+$\displaystyle
+\prod_{n=2}^{k} M_n = \left\{
+\begin{array}{ll}
+1 & (k = 1) \\
+M_k \prod_{n=2}^{k-1} M_n & (k > 1)
+\end{array}
+\right.$
+
+예를 들어 $k$가 작을 때의 값은 다음과 같이 계산할 수 있습니다.
+
+$\displaystyle
+\begin{array}{rcl}
+\displaystyle \prod_{n=2}^{1} M_n &\displaystyle = &\displaystyle 1 \\
+\displaystyle \prod_{n=2}^{2} M_n &\displaystyle = &\displaystyle M_2 \prod_{n=2}^{1} M_n = M_2 \times 1 = M_2 \\
+\displaystyle \prod_{n=2}^{3} M_n &\displaystyle = &\displaystyle M_3 \prod_{n=2}^{2} M_n = M_3 M_2 \\
+\displaystyle \prod_{n=2}^{4} M_n &\displaystyle = &\displaystyle M_4 \prod_{n=2}^{3} M_n = M_4 M_3 M_2
+\end{array}$
+
+즉, 곱은 수열을 순서대로 곱한 것입니다.
+
+## 입력
+
+입력은 다음 형식으로 표준 입력에서 한 줄로 주어집니다.
+
+```text
+$N$
+```
+
+첫 번째 줄에 $N$이 주어집니다.
+
+## 제한
+
+- $N$은 $1 \leq N \leq 31$을 만족하는 정수입니다.
+
+## 출력
+
+$\prod_{n=2}^{N} M_n$이 $M_{N+1}$로 나누어떨어지면 `Yes`를 출력하고, 그렇지 않으면 `No`를 출력하세요.
+
+마지막에 개행을 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+1
+```
+
+#### 출력
+
+```text
+No
+```
+
+$\displaystyle
+\begin{array}{rcl}
+\displaystyle \prod_{n=2}^{N} M_n &\displaystyle = &\displaystyle \prod_{n=2}^{1} M_n = 1 \\
+& & \\
+\displaystyle M_{N+1} &\displaystyle = &\displaystyle 2^2 - 1 = 3
+\end{array}$
+
+입니다. $1$은 $3$으로 나누어떨어지지 않으므로 `No`를 출력합니다.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+2
+```
+
+#### 출력
+
+```text
+No
+```
+
+$\displaystyle
+\begin{array}{rcl}
+\displaystyle \prod_{n=2}^{N} M_n &\displaystyle = &\displaystyle \prod_{n=2}^{2} M_n = M_2 = 3 \\
+& & \\
+\displaystyle M_{N+1} &\displaystyle = &\displaystyle 2^3 - 1 = 7
+\end{array}$
+
+입니다. $3$은 $7$로 나누어떨어지지 않으므로 `No`를 출력합니다.
+
+### 예제 3 {file=""}
+
+#### 입력
+
+```text
+5
+```
+
+#### 출력
+
+```text
+Yes
+```
+
+$\displaystyle
+\begin{array}{rcl}
+\displaystyle \prod_{n=2}^{N} M_n &\displaystyle = &\displaystyle \prod_{n=2}^{5} M_n = M_5 M_4 M_3 M_2 = 31 \times 15 \times 7 \times 3 = 9\,765 \\
+& & \\
+\displaystyle M_{N+1} &\displaystyle = &\displaystyle 2^6 - 1 = 63
+\end{array}$
+
+입니다. $9\,765$는 $63$으로 나누어떨어지므로 `Yes`를 출력합니다.
+
+### 예제 4 {file=""}
+
+#### 입력
+
+```text
+31
+```
+
+#### 출력
+
+```text
+No
+```
+
+$\displaystyle
+\begin{array}{rcl}
+\displaystyle \prod_{n=2}^{N} M_n &\displaystyle = &\displaystyle \prod_{n=2}^{31} M_n = M_{31} \cdots M_3 M_2 = 59\,082\,264\,910\,556\,218\,588\,927\,381\,962\,395\,959\,089\,984\,146\,823\,674\,634\,884\,348\,598\,265\,548\,922\,511\,678\,684\,778\,107\,833\,428\,139\,502\,347\,122\,884\,103\,295\,800\,680\,569\,054\,115\,129\,568\,844\,774\,601\,953\,125 \\
+& & \\
+\displaystyle M_{N+1} &\displaystyle = &\displaystyle 2^{32} - 1 = 4\,294\,967\,295
+\end{array}$
+
+입니다. $59\,082\,264\,910\,556\,218\,588\,927\,381\,962\,395\,959\,089\,984\,146\,823\,674\,634\,884\,348\,598\,265\,548\,922\,511\,678\,684\,778\,107\,833\,428\,139\,502\,347\,122\,884\,103\,295\,800\,680\,569\,054\,115\,129\,568\,844\,774\,601\,953\,125$는 $4\,294\,967\,295$로 나누어떨어지지 않으므로 `No`를 출력합니다.
+
+이처럼 $64$비트 정수의 범위에 들어오지 않는 경우도 있으므로 주의하세요.

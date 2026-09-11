@@ -1,0 +1,53 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2899
+problemId: 11298
+sourceTitle: "Taffy Permutation"
+sourceHtmlSha256: 14efcf6af884d14226b40854d2ca827bad1bc1906381d7e87dfa6e611dcfd17a
+humanReview: null
+machineReview: unreviewed
+title: "태피 순열"
+---
+
+## 문제 설명
+
+`0`과 `1`로 이루어진 문자열 $s_1s_2\cdots s_N$이 주어집니다. 다음 조건을 만족하는 $[1,2,\dots,N]$의 순열 $p$의 개수를 $998\,244\,353$으로 나눈 나머지를 구하세요.
+
+- $s_i=0$, $s_j=1$이고 $i<j$인 모든 쌍 $(i,j)$에 대해 $p_i<p_j$입니다.
+
+## 입력
+
+```text
+$N$
+$s_1s_2\cdots s_N$
+```
+
+## 제한
+
+- $N$은 정수입니다.
+- $1\le N\le 2\,000$
+- $s_i$는 `0` 또는 `1`입니다.
+
+## 출력
+
+답을 $998\,244\,353$으로 나눈 나머지를 출력하고, 마지막에 개행하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+4
+0101
+```
+
+#### 출력
+
+```text
+5
+```
+
+$[1,2,3,4],[1,3,2,4],[1,4,2,3],[2,3,1,4],[2,4,1,3]$의 $5$개가 조건을 만족합니다.

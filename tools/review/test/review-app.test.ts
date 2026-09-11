@@ -15,6 +15,8 @@ const problems: ProblemReview[] = [1, 2].map((problemNo) => ({
   sourceFormat: "html",
   revision: `r${problemNo}`,
   validationWarnings: [],
+  renderProfile: { engine: "katex", version: "0.17.0" },
+  sourceUrl: `https://yukicoder.me/problems/no/${problemNo}`,
 }));
 test("initial problem loading does not show an empty list", async (t) => {
   let resolveList!: (response: Response) => void;
@@ -305,9 +307,18 @@ test("glossary automatically selects a preview and retains isolated translated f
   );
   await page.screen.findByLabelText("한국어 번역");
   await page.waitFor(() =>
-    assert.equal(page.dom.window.document.querySelectorAll("iframe").length, 2),
+    assert.equal(
+      page.dom.window.document.querySelectorAll<HTMLIFrameElement>(
+        "iframe:not([data-review-math-stage])",
+      ).length,
+      2,
+    ),
   );
-  const frames = [...page.dom.window.document.querySelectorAll("iframe")];
+  const frames = [
+    ...page.dom.window.document.querySelectorAll<HTMLIFrameElement>(
+      "iframe:not([data-review-math-stage])",
+    ),
+  ];
   assert.ok(
     frames.every((f) => f.getAttribute("sandbox") === "allow-same-origin"),
   );
@@ -798,7 +809,12 @@ test("extension messages show live component examples without unrelated page req
     requests.some((path) => path.startsWith("/api/ui-pages/")),
     false,
   );
-  assert.equal(page.dom.window.document.querySelectorAll("iframe").length, 0);
+  assert.equal(
+    page.dom.window.document.querySelectorAll<HTMLIFrameElement>(
+      "iframe:not([data-review-math-stage])",
+    ).length,
+    0,
+  );
 });
 
 test("a page without the selected phrase is not displayed as its preview", async (t) => {
@@ -820,7 +836,12 @@ test("a page without the selected phrase is not displayed as its preview", async
       /선택한 문구와 일치하는 미리보기를 찾지 못했습니다/,
     ),
   );
-  assert.equal(page.dom.window.document.querySelectorAll("iframe").length, 0);
+  assert.equal(
+    page.dom.window.document.querySelectorAll<HTMLIFrameElement>(
+      "iframe:not([data-review-math-stage])",
+    ).length,
+    0,
+  );
 });
 
 test("approval advances only after a successful save without an unsaved prompt", async (t) => {
@@ -989,7 +1010,7 @@ test("problem editor shows both languages beside the source with secondary contr
   await page.screen.findByRole("heading", { name: "2. Draft 2" });
 });
 
-test("Japanese and Korean math use identical embedded fonts and HTML rendering", async (t) => {
+test("Japanese and Korean math use identical embedded fonts and HTML/MathML rendering", async (t) => {
   const problem = {
     ...problems[0],
     japaneseHtml: "<p>\\(N\\)</p>",
@@ -999,7 +1020,14 @@ test("Japanese and Korean math use identical embedded fonts and HTML rendering",
     Response.json(path === "/api/problems" ? { problems: [problem] } : problem),
   );
   await page.screen.findByRole("heading", { name: "1. Draft 1" });
-  const frames = [...page.dom.window.document.querySelectorAll("iframe")];
+  const frames = [
+    ...page.dom.window.document.querySelectorAll<HTMLIFrameElement>(
+      "iframe:not([data-review-math-stage])",
+    ),
+  ];
+  await page.waitFor(() =>
+    assert.ok(frames.every((frame) => frame.srcdoc.includes('class="katex"'))),
+  );
   const docs = frames.map((frame) =>
     new page.dom.window.DOMParser().parseFromString(frame.srcdoc, "text/html"),
   );
@@ -1013,13 +1041,231 @@ test("Japanese and Korean math use identical embedded fonts and HTML rendering",
   assert.ok(styles[0] === styles[1]);
   assert.ok(
     docs.every(
-      (doc) => doc.querySelector(".katex-html") && !doc.querySelector("math"),
+      (doc) => doc.querySelector(".katex-html") && doc.querySelector("math"),
     ),
   );
   assert.ok(
     docs[0].querySelector(".katex")?.outerHTML ===
       docs[1].querySelector(".katex")?.outerHTML,
   );
+});
+
+test("missing render profiles are explicit and retry preserves an edited draft", async (t) => {
+  let available = false;
+  const problem = {
+    ...problems[0],
+    japaneseHtml: "<p>$N$</p>",
+    koreanSource: "<p>$N$</p>",
+  };
+  let collectionRequests = 0;
+  let finishCollection!: () => void;
+  const page = reactPage(t, async (path, init) => {
+    if (path === "/api/problems/1/render-profile") {
+      assert.equal(init?.method, "POST");
+      collectionRequests++;
+      await new Promise<void>((resolve) => {
+        finishCollection = resolve;
+      });
+      available = true;
+      return Response.json(problem);
+    }
+    return Response.json(
+      path === "/api/problems"
+        ? { problems: [problem] }
+        : {
+            ...problem,
+            renderProfile: available ? problem.renderProfile : undefined,
+            revision: available ? "external-revision" : problem.revision,
+            koreanSource: available
+              ? "<p>externally saved source</p>"
+              : problem.koreanSource,
+          },
+    );
+  });
+  await page.screen.findByRole("heading", { name: "1. Draft 1" });
+  assert.match(
+    page.dom.window.document.body.textContent!,
+    /저장된 원문의 렌더링 프로필이 없어/,
+  );
+  const frames = [
+    ...page.dom.window.document.querySelectorAll<HTMLIFrameElement>(
+      "iframe:not([data-review-math-stage])",
+    ),
+  ];
+  await page.waitFor(() =>
+    assert.ok(frames.every((frame) => frame.srcdoc.includes("$N$"))),
+  );
+  assert.ok(frames.every((frame) => !frame.srcdoc.includes('class="katex"')));
+  page.edit("<p>$N + 1$ edited draft</p>");
+  await page.user.click(
+    page.screen.getByRole("button", {
+      name: "렌더링 프로필 수집 후 다시 시도",
+    }),
+  );
+  await page.waitFor(() =>
+    assert.equal(
+      collectionRequests,
+      1,
+      page.dom.window.document.body.textContent ?? "",
+    ),
+  );
+  assert.match(
+    page.dom.window.document.body.textContent!,
+    /프로필 수집 중입니다/,
+  );
+  assert.equal(collectionRequests, 1);
+  assert.equal(available, false);
+  finishCollection();
+  await page.waitFor(() =>
+    assert.ok(frames.every((frame) => frame.srcdoc.includes('class="katex"'))),
+  );
+  assert.match(page.editorView().state.doc.toString(), /edited draft/);
+  await page.waitFor(() =>
+    assert.ok(frames[1].srcdoc.includes("edited draft")),
+  );
+  assert.equal(
+    page.screen.queryByText(/저장된 원문의 렌더링 프로필이 없어/),
+    null,
+  );
+});
+
+test("failed profile collection keeps the unavailable state and draft and permits retry", async (t) => {
+  let failed = true;
+  let collected = false;
+  const problem = { ...problems[0], renderProfile: undefined };
+  const page = reactPage(t, async (path) => {
+    if (path.endsWith("/render-profile")) {
+      if (failed)
+        return Response.json(
+          { error: "Another ground-truth collector owns this data directory" },
+          { status: 500 },
+        );
+      collected = true;
+      return Response.json(problems[0]);
+    }
+    return Response.json(
+      path === "/api/problems"
+        ? { problems: [problem] }
+        : collected
+          ? problems[0]
+          : problem,
+    );
+  });
+  await page.screen.findByRole("heading", { name: "1. Draft 1" });
+  page.edit("<p>keep draft</p>");
+  await page.user.click(
+    page.screen.getByRole("button", {
+      name: "렌더링 프로필 수집 후 다시 시도",
+    }),
+  );
+  await page.waitFor(() =>
+    assert.match(
+      page.dom.window.document.body.textContent!,
+      /Another ground-truth collector/,
+    ),
+  );
+  assert.match(page.editorView().state.doc.toString(), /keep draft/);
+  failed = false;
+  await page.user.click(
+    page.screen.getByRole("button", {
+      name: "렌더링 프로필 수집 후 다시 시도",
+    }),
+  );
+  await page.waitFor(() =>
+    assert.equal(
+      page.screen.queryByText(/저장된 원문의 렌더링 프로필이 없어/),
+      null,
+    ),
+  );
+  assert.match(page.editorView().state.doc.toString(), /keep draft/);
+});
+
+for (const renderProfile of [
+  { engine: "mathjax", version: "3.2.2" },
+  { engine: "katex", version: "0.17.0" },
+])
+  test(`${renderProfile.engine} review preserves inherited and body-root tex2jax_ignore`, async (t) => {
+    const problem = {
+      ...problems[0],
+      renderProfile,
+      japaneseHtml:
+        '<div class="tex2jax_ignore"><div class="block"><pre>$ignoredInput$</pre></div></div><p>$visible$</p>',
+      koreanSource:
+        '<!doctype html><html><body class="tex2jax_ignore"><div class="block"><pre>$ignoredRootInput$</pre></div></body></html>',
+    };
+    const page = reactPage(t, async (path) =>
+      Response.json(
+        path === "/api/problems" ? { problems: [problem] } : problem,
+      ),
+    );
+    await page.screen.findByRole("heading", { name: "1. Draft 1" });
+    const frames = [
+      ...page.dom.window.document.querySelectorAll<HTMLIFrameElement>(
+        "iframe:not([data-review-math-stage])",
+      ),
+    ];
+    const parse = (frame: HTMLIFrameElement) =>
+      new page.dom.window.DOMParser().parseFromString(
+        frame.srcdoc,
+        "text/html",
+      );
+    const selector =
+      renderProfile.engine === "mathjax" ? "mjx-container" : ".katex";
+    await page.waitFor(() => {
+      assert.equal(parse(frames[0]).querySelectorAll(selector).length, 1);
+      assert.ok(frames[1].srcdoc.includes("$ignoredRootInput$"));
+      assert.equal(
+        page.dom.window.document.querySelector('[aria-busy="true"]'),
+        null,
+      );
+    });
+    const [japanese, korean] = frames.map(parse);
+    assert.equal(japanese.querySelector("pre")?.textContent, "$ignoredInput$");
+    assert.equal(
+      korean.querySelector("pre")?.textContent,
+      "$ignoredRootInput$",
+    );
+    assert.equal(korean.body.className, "tex2jax_ignore");
+    assert.equal(korean.querySelectorAll(selector).length, 0);
+    assert.equal(korean.compatMode, "CSS1Compat");
+  });
+
+test("MathJax profile renders both languages with local CHTML CSS and scriptless documents", async (t) => {
+  const problem = {
+    ...problems[0],
+    renderProfile: { engine: "mathjax", version: "3.2.2" },
+    japaneseHtml: "<p>\\(N\\)</p>",
+    koreanSource: "<p>\\(N\\)</p>",
+  };
+  const page = reactPage(t, async (path) =>
+    Response.json(path === "/api/problems" ? { problems: [problem] } : problem),
+  );
+  await page.screen.findByRole("heading", { name: "1. Draft 1" });
+  const frames = [
+    ...page.dom.window.document.querySelectorAll<HTMLIFrameElement>(
+      "iframe:not([data-review-math-stage])",
+    ),
+  ];
+  await page.waitFor(() =>
+    assert.ok(
+      frames.every((frame) => frame.srcdoc.includes("mjx-container")),
+      page.dom.window.document.querySelector('[role="alert"]')?.textContent ??
+        frames.map((frame) => frame.srcdoc.slice(-400)).join("\n"),
+    ),
+  );
+  for (const frame of frames) {
+    const doc = new page.dom.window.DOMParser().parseFromString(
+      frame.srcdoc,
+      "text/html",
+    );
+    assert.ok(doc.querySelector("mjx-container[jax='CHTML']"));
+    assert.match(
+      doc.head.textContent!,
+      /http:\/\/localhost\/mathjax\/fonts\/woff-v2/,
+    );
+    assert.equal(doc.querySelector("script"), null);
+    assert.equal(frame.getAttribute("sandbox"), "allow-same-origin");
+  }
 });
 
 test("next unreviewed navigation includes machine approval, skips human approval and wraps", async (t) => {

@@ -1,0 +1,108 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2950
+problemId: 10992
+sourceTitle: "Max Min Product"
+sourceHtmlSha256: eb9a9f3c1c2fd7ed41047250f9d6b6d02d66868ebd87d266a2018d07961bcb61
+humanReview: null
+machineReview: unreviewed
+title: "최댓값 최솟값 곱"
+---
+
+## 문제 설명
+
+길이가 $N$인 양의 정수 배열 $A=(A_1,A_2,\dots,A_N)$가 주어집니다. 다음 값을 $998\,244\,353$으로 나눈 나머지를 구하세요.
+
+$\displaystyle \sum_{l=1}^{N}\sum_{r=l}^{N}{\max(A_l,A_{l+1},\dots,A_r)\times \min(A_l,A_{l+1},\dots,A_r)}$
+
+## 입력
+
+입력은 다음 형식으로 표준 입력에서 주어집니다.
+
+```text
+$N$
+$A_1\ A_2\ \dots\ A_N$
+```
+
+첫 번째 줄에 배열의 길이 $N$이 주어집니다.
+
+두 번째 줄에 배열 $A$의 원소 $A_1,A_2,\dots,A_N$이 주어집니다.
+
+## 제한
+
+- $1 \le N \le 2\times 10^5$
+- $1 \le A_i \le 10^9$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+답을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+4
+2 1 3 2
+```
+
+#### 출력
+
+```text
+38
+```
+
+$A$의 연속 부분 배열은 다음 $10$가지입니다.
+
+- $\max(A_1)\times\min(A_1)=2\times2=4$
+- $\max(A_2)\times\min(A_2)=1\times1=1$
+- $\max(A_3)\times\min(A_3)=3\times3=9$
+- $\max(A_4)\times\min(A_4)=2\times2=4$
+- $\max(A_1,A_2)\times\min(A_1,A_2)=2\times1=2$
+- $\max(A_2,A_3)\times\min(A_2,A_3)=3\times1=3$
+- $\max(A_3,A_4)\times\min(A_3,A_4)=3\times2=6$
+- $\max(A_1,A_2,A_3)\times\min(A_1,A_2,A_3)=3\times1=3$
+- $\max(A_2,A_3,A_4)\times\min(A_2,A_3,A_4)=3\times1=3$
+- $\max(A_1,A_2,A_3,A_4)\times\min(A_1,A_2,A_3,A_4)=3\times1=3$
+
+따라서
+
+$\displaystyle \sum_{l=1}^{4}\sum_{r=l}^{4}{\max(A_l,A_{l+1},\dots,A_r)\times\min(A_l,A_{l+1},\dots,A_r)}=4+1+9+4+2+3+6+3+3+3=38$
+
+이고, $38$을 $998\,244\,353$으로 나눈 나머지인 $38$이 답입니다.
+
+### 예제 2 {file="01_sample_02.txt"}
+
+#### 입력
+
+```text
+1
+1
+```
+
+#### 출력
+
+```text
+1
+```
+
+### 예제 3 {file="01_sample_03.txt"}
+
+#### 입력
+
+```text
+10
+283946572 281630273 475961938 982637405 293709717 192730741 789163287 987382638 182630462 567839465
+```
+
+#### 출력
+
+```text
+771208723
+```
+
+$998\,244\,353$으로 나눈 나머지를 구하세요.

@@ -1,3 +1,5 @@
+import { verifyProblemRenderMarkup } from "./problem-render-markup.ts";
+
 // Some statements put a sample or a leading Note outside their section blocks.
 // Restrict the leading range to the site's Note heading and prose, so navigation
 // and problem controls before the statement can never become replacement targets.
@@ -62,5 +64,6 @@ export function parseTranslationDocument(
       "Problem translation HTML metadata or structure is invalid",
     );
   }
+  verifyProblemRenderMarkup(root);
   return { root, title, blocks };
 }

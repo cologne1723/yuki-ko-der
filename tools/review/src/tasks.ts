@@ -13,9 +13,14 @@ import { TaskHistory } from "./task-history.ts";
 import { taskSchema } from "./task-schema.ts";
 export type ReviewTask = z.infer<typeof taskSchema> & { stale?: boolean };
 export class ReviewTasks {
-  private active?: { task: ReviewTask; worker: Worker; lock: DatabaseSync };
+  private active?: {
+    task: ReviewTask;
+    worker: Worker;
+    lock: DatabaseSync;
+    finished: Promise<void>;
+  };
   private queue = pLimit(1);
-  private ready: Promise<void>;
+  private ready?: Promise<void>;
   private history: TaskHistory;
   readonly directory: string;
   constructor(
@@ -24,7 +29,24 @@ export class ReviewTasks {
   ) {
     this.directory = join(dataRoot, "reports/review-tasks");
     this.history = new TaskHistory(this.directory);
-    this.ready = this.refresh();
+  }
+  // Construction must not start unobserved filesystem work. Routes that never
+  // use tasks (and fixtures that remove their directory) need no task history.
+  initialize(): Promise<void> {
+    return (this.ready ??= this.refresh().catch((error) => {
+      this.ready = undefined;
+      throw error;
+    }));
+  }
+  async whenIdle(): Promise<void> {
+    // An explicit initialize() may be in flight outside the operation queue.
+    // Its caller receives the error; teardown still waits for it to settle.
+    await this.ready?.catch(() => undefined);
+    // Read the active worker after queued work, then wait outside the queue so
+    // its exit handler can persist the final record and release ownership.
+    const active = await this.queue(async () => this.active);
+    await active?.finished;
+    await this.queue(async () => undefined);
   }
   private refresh(lock?: DatabaseSync, id?: string) {
     return this.history.refresh(lock, id, this.active?.task.id);
@@ -37,7 +59,7 @@ export class ReviewTasks {
   }
   private serial<T>(work: () => Promise<T>) {
     return this.queue(async () => {
-      await this.ready;
+      await this.initialize();
       return work();
     });
   }
@@ -113,7 +135,9 @@ export class ReviewTasks {
           await this.history.persist(task);
           return structuredClone(task);
         }
-        this.active = { task, worker, lock };
+        const { promise: finished, resolve: finish } =
+          Promise.withResolvers<void>();
+        this.active = { task, worker, lock, finished };
         worker.on(
           "message",
           (message) =>
@@ -161,6 +185,7 @@ export class ReviewTasks {
               } finally {
                 if (this.active?.task.id === task.id) this.active = undefined;
                 lock.close();
+                finish();
               }
             }).catch((error) => {
               task.status = "failed";

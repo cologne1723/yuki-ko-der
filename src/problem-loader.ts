@@ -1,9 +1,17 @@
 import type { PublishedProblem } from "translation-core/problem-catalog";
+import { sourceStatementBlocks } from "translation-core/problem-document";
 import { parseTranslationDocument as parseDocument } from "translation-core/problem-document";
 import { fetchBuffered } from "translation-core/request";
 import { sha256Hex as hashBytes } from "translation-core/sha256";
 import { cacheReplySchema, runtimeFailureSchema } from "./runtime-contracts.ts";
-export class ProblemVerificationError extends Error {}
+export class ProblemVerificationError extends Error {
+  constructor(
+    message: string,
+    readonly sourceHtml?: string,
+  ) {
+    super(message);
+  }
+}
 export function createProblemLoader(host: Window & typeof globalThis) {
   const { DOMParser, location } = host;
   const parseTranslationDocument = (html: string, no: number, id: string) =>
@@ -140,7 +148,9 @@ export function createProblemLoader(host: Window & typeof globalThis) {
     const { problemId, problemNo, sourceTitle, sourceHtmlSha256 } =
       translation.root.dataset;
     const options: RequestInit = { cache: "no-store", credentials: "omit" };
-    const [metadataResponse, htmlResponse] = await Promise.all([
+    // Wait for both requests even on failure so an immediate retry cannot
+    // overlap the remaining request from this attempt.
+    const responses = await Promise.allSettled([
       fetchWithTimeout(
         new URL(`/api/v1/problems/${problemId}`, location.origin),
         options,
@@ -150,25 +160,65 @@ export function createProblemLoader(host: Window & typeof globalThis) {
         options,
       ),
     ]);
+    const [metadataResponse, htmlResponse] = responses.map((response) => {
+      if (response.status === "rejected") throw response.reason;
+      return response.value;
+    });
     if (!metadataResponse.ok || !htmlResponse.ok) {
       throw new Error("Canonical problem source request failed");
     }
 
-    const [metadata, htmlBytes] = await Promise.all([
+    const [metadata, htmlBytes]: [unknown, ArrayBuffer] = await Promise.all([
       metadataResponse.json(),
       htmlResponse.arrayBuffer(),
     ]);
+    if (
+      !metadata ||
+      typeof metadata !== "object" ||
+      !("No" in metadata) ||
+      typeof metadata.No !== "number" ||
+      !Number.isSafeInteger(metadata.No) ||
+      metadata.No < 1 ||
+      !("ProblemId" in metadata) ||
+      typeof metadata.ProblemId !== "number" ||
+      !Number.isSafeInteger(metadata.ProblemId) ||
+      metadata.ProblemId < 1 ||
+      !("Title" in metadata) ||
+      typeof metadata.Title !== "string" ||
+      !metadata.Title.trim()
+    )
+      throw new Error("Canonical problem metadata is unavailable");
+
+    const html = new TextDecoder("utf-8", { fatal: true }).decode(htmlBytes);
+    const blocks = sourceStatementBlocks(parseHtml(html).body);
+    if (
+      !blocks.some(
+        (block) =>
+          block.matches(".block") &&
+          (block.textContent?.trim() || block.querySelector("img, svg, math")),
+      )
+    )
+      throw new Error("Canonical problem statement is unavailable");
+
+    // A malformed HTTP 200 response is not evidence of a source change.
+    // Compare identities and bytes only after both payloads are validated.
     if (
       metadata.No !== Number(problemNo) ||
       metadata.ProblemId !== Number(problemId) ||
       metadata.Title !== sourceTitle
     ) {
-      throw new ProblemVerificationError("Canonical problem metadata changed");
+      throw new ProblemVerificationError(
+        "Canonical problem metadata changed",
+        html,
+      );
     }
     if ((await sha256Hex(htmlBytes)) !== sourceHtmlSha256) {
-      throw new ProblemVerificationError("Canonical problem statement changed");
+      throw new ProblemVerificationError(
+        "Canonical problem statement changed",
+        html,
+      );
     }
-    return new TextDecoder().decode(htmlBytes);
+    return html;
   }
 
   return {

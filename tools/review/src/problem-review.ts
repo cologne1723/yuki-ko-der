@@ -16,6 +16,7 @@ import { pLimit } from "translation-core/concurrency";
 import { sha256 } from "translation-core/node-hash";
 import { defaultDataDirectory } from "translation-core/paths";
 import { compileProblemMarkdown } from "translation-core/problem-markdown";
+import type { ProblemRenderProfile } from "translation-core/problem-render-profile";
 import { sampleWarnings } from "translation-core/problem-samples";
 import { ProblemConversionRecovery } from "./problem-conversion-recovery.ts";
 import { ProblemRepository } from "./problem-repository.ts";
@@ -40,6 +41,9 @@ export interface ProblemReview extends ProblemSummary {
   sourceFormat: "html" | "mdx";
   revision: string;
   validationWarnings: string[];
+  renderProfile?: ProblemRenderProfile;
+  renderProfileError?: string;
+  sourceUrl?: string;
 }
 
 export interface SaveResult extends ProblemReview {}

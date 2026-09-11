@@ -9,8 +9,13 @@ import { readFile, unlink } from "node:fs/promises";
 import { basename, dirname, extname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { compileProblemMarkdown } from "translation-core/problem-markdown";
+import { verifyProblemRenderMarkup } from "translation-core/problem-render-markup";
 import { sampleWarnings } from "translation-core/problem-samples";
-import { renderContent, sampleMarkdown } from "./problem-conversion-rules.ts";
+import {
+  conversionSemantics,
+  renderContent,
+  sampleMarkdown,
+} from "./problem-conversion-rules.ts";
 
 export function convertProblemHtmlToMarkdown(html: string): string {
   const dom = new JSDOM(html);
@@ -26,6 +31,7 @@ export function convertProblemHtmlToMarkdown(html: string): string {
     if (!root || !heading || !blocks?.length) {
       throw new Error("Problem translation HTML structure is invalid");
     }
+    verifyProblemRenderMarkup(root);
     const title = (heading.textContent ?? "")
       .replace(/^\[기계 번역\]\s*/u, "")
       .replace(/^No\.\d+\s*/u, "")
@@ -89,6 +95,15 @@ export function convertProblemHtmlToMarkdown(html: string): string {
         if (warnings.length)
           throw new Error(
             `Sample round-trip failed:\n${warnings.join("\n\n")}`,
+          );
+        if (
+          JSON.stringify(conversionSemantics(root)) !==
+          JSON.stringify(
+            conversionSemantics(compiledDocument.querySelector("main")!),
+          )
+        )
+          throw new Error(
+            "PRE/CODE text or TeX ignore/process scope round-trip failed",
           );
       } finally {
         compiledDom.window.close();

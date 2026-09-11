@@ -1,0 +1,62 @@
+version: 1
+locale: ko
+entries:
+  - id: pending-paken
+    source: [パ研]
+    preferred: パ研
+    forbidden: [파켄, 파研]
+    kind: proper_noun
+    note: 미확정 단체명이다. 한국어 독음을 추정하지 말고 원문을 유지하며 완료 보고에서 확인을 요청한다.
+  - id: pending-koboshi
+    source: [小星]
+    preferred: 小星
+    forbidden: [샤오싱]
+    kind: proper_noun
+    note: 미확정 인명이다. 한국어 독음을 추정하지 말고 원문을 유지하며 완료 보고에서 확인을 요청한다.
+  - id: pill-bug
+    source: [ダンゴムシ, Pill Bug]
+    preferred: 공벌레
+    forbidden: [쥐며느리]
+    kind: term
+    note: "국립생물자원관 InvertebratesVII.pdf의 공벌레와 ITIS TSN 93250의 pillbug 표기를 대조했다."
+  - id: spotted-grasshopper-team
+    source: [斑点グラスホッパー]
+    preferred: 점박이메뚜기
+    forbidden: [얼룩 메뚜기]
+    kind: proper_noun
+    note: 사용자가 확인한 팀명 표기다.
+  - id: hakoboshi-name
+    source: [箱星]
+    preferred: 하코보시
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 독음이다.
+  - id: yozami-name
+    source: [夜佐三]
+    preferred: 야사미
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 독음이다.
+  - id: kadomatsu
+    source:
+      - Kadomatsu
+      - kadomatsu
+      - カドマツ
+      - 門松
+    preferred: 카도마츠
+    forbidden:
+      - 가도마쓰
+      - 카도마쓰
+    kind: proper_noun
+    note: 일본어 고유명사 カドマツ의 표기를 모든 문제에서 통일한다.
+  - id: honorific-kun
+    source:
+      - 군
+      - くん
+      - 君
+    preferred: 원문 표기 유지
+    forbidden:
+      - 임의의 이름 번역
+      - 씨로 일괄 치환
+    kind: honorific
+    note: 원문에 붙은 인물 호칭과 이름의 표기를 유지한다. 한국어 문장에 맞춘 조사만 조정한다.

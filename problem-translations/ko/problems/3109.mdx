@@ -1,0 +1,114 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3109
+problemId: 12193
+sourceTitle: "Swap members"
+sourceHtmlSha256: "65254ba4b6296b2f36bebd3075f777fcaf2f0a0df0c3d72d6765289b826a8990"
+humanReview: null
+machineReview: unreviewed
+title: "부원 교환"
+---
+
+## 문제 설명
+
+$N$명의 traP 부원이 동아리방에서 한 줄로 서 있습니다. 왼쪽에서 $i$번째 $(1 \leq i \leq N)$ 부원의 사용자 이름은 $S_i$입니다.
+
+당신은 CPCTF를 준비하기 위해 왼쪽에서 $i$번째 $(1 \leq i \leq N)$ 부원의 사용자 이름이 $T_i$가 되도록 부원들을 정렬하려고 합니다.
+
+하지만 동아리방이 좁기 때문에 다음 행동만 할 수 있습니다.
+
+$1$ 이상 $N-K$ 이하인 정수 $i$를 골라 왼쪽에서 $i$번째 부원과 $i+K$번째 부원의 위치를 서로 바꿉니다.
+
+이 행동을 원하는 횟수만큼 반복해서 부원들을 목표한 순서로 정렬할 수 있는지 판정하세요.
+
+## 입력
+
+```text
+$N\ K$
+$S_1$
+$S_2$
+$\vdots$
+$S_N$
+$T_1$
+$T_2$
+$\vdots$
+$T_N$
+```
+
+첫 번째 줄에 부원의 수 $N$과 정수 $K$가 공백으로 구분되어 주어집니다.
+
+다음 $N$개의 줄에 초기 순서에서 왼쪽에서 $i$번째 부원의 사용자 이름 $S_i$가 주어집니다.
+
+그다음 $N$개의 줄에 목표 순서에서 왼쪽에서 $i$번째 부원의 사용자 이름 $T_i$가 주어집니다.
+
+## 제한
+
+- $1 \leq K < N \leq 100\,000$
+- $N$, $K$는 정수입니다.
+- $S_i$, $T_i$는 영문 대문자와 영문 소문자로 이루어진 길이 $1$ 이상 $32$ 이하의 문자열입니다.
+- $i \neq j$이면 $S_i \neq S_j$입니다.
+- $T$는 $S$의 원소를 재배열한 수열입니다.
+
+## 출력
+
+부원들을 목표한 순서로 정렬할 수 있다면 `Yes`를, 정렬할 수 없다면 `No`를 한 줄에 출력하고 마지막에 개행 문자를 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+5 2
+Alice
+Bob
+Charlie
+David
+Eve
+Eve
+David
+Alice
+Bob
+Charlie
+```
+
+#### 출력
+
+```text
+Yes
+```
+
+다음과 같이 $3$번 행동하면 부원들을 목표한 순서로 정렬할 수 있습니다.
+
+| 행동 | 부원들의 순서 |
+| --- | --- |
+| (초기 상태) | Alice, Bob, Charlie, David, Eve |
+| $i=3$ | Alice, Bob, Eve, David, Charlie |
+| $i=2$ | Alice, David, Eve, Bob, Charlie |
+| $i=1$ | Eve, David, Alice, Bob, Charlie |
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+4 3
+TechChan
+Picody
+OokayamaSakura
+trapyojo
+trapyojo
+OokayamaSakura
+Picody
+TechChan
+```
+
+#### 출력
+
+```text
+No
+```
+
+어떤 방식으로 행동해도 부원들을 목표한 순서로 정렬할 수 없습니다.

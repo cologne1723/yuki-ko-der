@@ -1,0 +1,72 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2891
+problemId: 11145
+sourceTitle: "Mint"
+sourceHtmlSha256: "fea115ccf136a8f96e7e045019821be020775c883e6e491804cd0fdb58442e95"
+humanReview: null
+machineReview: unreviewed
+title: "민트"
+---
+
+## 문제 설명
+
+정수 $N$, $M$이 주어집니다. 다음 식의 값을 구하세요.
+
+$\displaystyle \sum_{k=1}^N (M \bmod k)$
+
+답은 매우 커질 수 있으므로, $998\,244\,353$으로 나눈 나머지를 출력하세요.
+
+## 입력
+
+```text
+$N\ M$
+```
+
+입력은 정수 $N$, $M$으로 주어집니다.
+
+## 제한
+
+- $1 \le N,M \le 10^{12}$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+답을 한 줄에 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+3 5
+```
+#### 출력
+```text
+3
+```
+
+$(5 \bmod 1) + (5 \bmod 2) + (5 \bmod 3) = 0 + 1 + 2 = 3$입니다.
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+100 1
+```
+#### 출력
+```text
+99
+```
+
+### 예제 3 {file="01_sample_03.txt"}
+#### 입력
+```text
+1000000 1000000
+```
+#### 출력
+```text
+842631082
+```
+
+답을 $998\,244\,353$으로 나눈 나머지를 출력합니다.

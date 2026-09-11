@@ -1,0 +1,81 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3152
+problemId: 12267
+sourceTitle: "neither multiple of A nor B "
+sourceHtmlSha256: "65c1efcfc06bd2df1ddca5b7273f2c70316fae5cacbd078331b77be73f0acb3d"
+humanReview: null
+machineReview: unreviewed
+title: "A의 배수도 B의 배수도 아닌 수"
+---
+
+## 문제 설명
+
+음이 아닌 정수 $N$이 주어집니다. $N$ 이하인 음이 아닌 정수 중에서 $A$의 배수도 아니고 $B$의 배수도 아닌 수가 몇 개인지 구하세요.
+
+## 입력
+
+입력은 다음 형식으로 주어집니다.
+
+```text
+$N\ A\ B$
+```
+
+$N$, $A$, $B$는 정수입니다.
+
+## 제한
+
+- $1 \le N \le 10^{18}$
+- $1 \le A \le B \le 10^9$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+답을 출력하세요. 마지막에 개행을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+6 2 3
+```
+
+#### 출력
+
+```text
+2
+```
+
+$6$ 이하의 음이 아닌 정수 중에서 $2$의 배수도 아니고 $3$의 배수도 아닌 수는 $1$, $5$의 $2$개이므로 $2$를 출력합니다.
+
+### 예제 2 {file="01_sample_02.txt"}
+
+#### 입력
+
+```text
+1 1 1
+```
+
+#### 출력
+
+```text
+0
+```
+
+### 예제 3 {file="01_sample_03.txt"}
+
+#### 입력
+
+```text
+43 12 18
+```
+
+#### 출력
+
+```text
+39
+```

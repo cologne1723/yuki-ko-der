@@ -1,0 +1,89 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3294
+problemId: 12623
+sourceTitle: "UECoder"
+sourceHtmlSha256: e664ab7644b37f876714467ac0df8a8c34269859fe258ec1fcfc7f988c634746
+humanReview: null
+machineReview: unreviewed
+title: "UECoder"
+---
+
+## 문제 설명
+
+길이 $N$인 영소문자 문자열 $S$가 주어집니다. $S$에는 영소문자 `c`가 정확히 $1$개 포함되어 있습니다.
+
+$S$의 $i$번째 문자가 `c`일 때, `UEC`와 $S$의 $i$번째 문자보다 뒤에 있는 부분을 이 순서로 이어 붙인 문자열을 출력하세요.
+
+## 입력
+
+입력은 다음 형식으로 표준 입력에서 주어집니다.
+
+```text
+$N$
+$S$
+```
+
+$1$번째 줄에 문자열의 길이 $N$이 주어집니다.
+
+$2$번째 줄에 길이 $N$인 영소문자 문자열 $S$가 주어집니다.
+
+## 제한
+
+- $N$은 $1$ 이상 $100$ 이하인 정수입니다.
+- $S$는 길이 $N$인 영소문자 문자열입니다.
+- $S$에는 영소문자 `c`가 정확히 $1$개 포함되어 있습니다.
+
+## 출력
+
+$S$의 $i$번째 문자가 `c`일 때, `UEC`와 $S$의 $i$번째 문자보다 뒤에 있는 부분을 이 순서로 이어 붙인 문자열을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+9
+yukicoder
+```
+
+#### 출력
+
+```text
+UECoder
+```
+
+`yukicoder`의 $5$번째 문자가 `c`이므로, `UEC`와 `yukicoder`의 $6$번째 문자 이후인 `oder`를 이어 붙인 문자열 `UECoder`를 출력합니다.
+
+### 예제 2 {file="01_sample_02.txt"}
+
+#### 입력
+
+```text
+14
+summervacation
+```
+
+#### 출력
+
+```text
+UECation
+```
+
+### 예제 3 {file="01_sample_03.txt"}
+
+#### 입력
+
+```text
+6
+campus
+```
+
+#### 출력
+
+```text
+UECampus
+```

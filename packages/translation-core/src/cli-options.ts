@@ -14,6 +14,7 @@ export function cliOptions(args = process.argv.slice(2)) {
       "problems-only": { type: "boolean" },
       refresh: { type: "boolean" },
       "verify-source": { type: "boolean" },
+      "require-render-profiles": { type: "boolean" },
     },
   });
   const first = (name: string) => {

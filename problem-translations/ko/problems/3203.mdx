@@ -1,0 +1,63 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3203
+problemId: 12475
+sourceTitle: "$\\sin{x}$"
+sourceHtmlSha256: "a33a3e6c9f604e977b840ca41376297242adf39cdc2dfab08a843ec4494a4e66"
+humanReview: null
+machineReview: unreviewed
+title: "$\\sin{x}$"
+---
+
+## 문제 설명
+
+정수 $x$가 주어집니다. $\sin{x}$은 정수인가요?
+
+## 입력
+
+```text
+$x$
+```
+
+## 제한
+
+- $-100 \leq x \leq 100$
+
+## 출력
+
+$\sin{x}$이 정수이면 `Yes`를, 그렇지 않으면 `No`를 $1$줄에 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+0
+```
+
+#### 출력
+
+```text
+Yes
+```
+
+$\sin{0}=0$이므로 `Yes`를 출력합니다.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+90
+```
+
+#### 출력
+
+```text
+No
+```
+
+$\sin{90} \approx 0.894$입니다. $\sin{90^\circ}$와는 다르다는 점에 주의하세요.

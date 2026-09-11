@@ -55,6 +55,7 @@ export function validateProblem(
       sourceBlocks,
       translation.blocks,
       sourceFormat,
+      true,
     );
     parseReviewState(koreanHtml);
     return warnings;

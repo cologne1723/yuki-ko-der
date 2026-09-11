@@ -3,6 +3,7 @@ import { build } from "esbuild";
 import { JSDOM } from "jsdom";
 import type { TestContext } from "node:test";
 import { MessageChannel } from "node:worker_threads";
+import { installStagingSrcdoc } from "./iframe-srcdoc-fixture.ts";
 const bundle = await build({
   plugins: [katexStylePlugin],
   stdin: {
@@ -48,7 +49,10 @@ export function unmount(){cleanup();router.dispose();client.clear();}
   globalName: "reviewFixture",
   platform: "browser",
   jsx: "automatic",
-  define: { "process.env.NODE_ENV": '"development"' },
+  define: {
+    "process.env.NODE_ENV": '"development"',
+    __dirname: '"/mathjax/components"',
+  },
 });
 export function reactPage(
   t: TestContext,
@@ -62,6 +66,7 @@ export function reactPage(
     pretendToBeVisual: true,
   });
   const w = dom.window;
+  installStagingSrcdoc(dom);
   const channels = new Set<MessageChannel>();
   Object.assign(w, {
     // React's async act uses MessageChannel, which JSDOM does not provide.

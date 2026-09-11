@@ -3,7 +3,7 @@ import test from "node:test";
 import { JSDOM } from "jsdom";
 import { renderPreviewMath } from "../public/tex.ts";
 
-test("review previews render supported TeX delimiters, including input formats", () => {
+test("review previews render supported TeX delimiters, including input formats", async () => {
   const dom = new JSDOM(`
     <main>
       <p>$x + 1$ \\(y - 1\\) $$z^2$$ \\[w^2\\]</p>
@@ -16,7 +16,10 @@ test("review previews render supported TeX delimiters, including input formats",
   globalThis.document = dom.window.document;
   globalThis.Node = dom.window.Node;
   try {
-    renderPreviewMath(dom.window.document.querySelector("main")!);
+    await renderPreviewMath(dom.window.document.querySelector("main")!, {
+      engine: "katex",
+      version: "0.17.0",
+    });
   } finally {
     globalThis.document = previousDocument;
     globalThis.Node = previousNode;
@@ -30,9 +33,9 @@ test("review previews render supported TeX delimiters, including input formats",
   );
 });
 
-test("Markdown input formulas render while sample data and program code remain literal", () => {
+test("review follows the site's KaTeX code exclusions and renders plain input formulas", async () => {
   const dom = new JSDOM(`<main>
-    <div class="block"><h4>입력</h4><pre><code>$N$\n$S_1$</code></pre>
+    <div class="block"><h4>입력</h4><pre>$N$\n$S_1$</pre>
       <div class="sample"><pre><code>$sample$</code></pre></div>
       <pre><code>echo $HOME</code></pre></div>
     <div class="block"><h4>설명</h4><pre><code>$literal$</code></pre></div>
@@ -42,14 +45,17 @@ test("Markdown input formulas render while sample data and program code remain l
   globalThis.document = dom.window.document;
   globalThis.Node = dom.window.Node;
   try {
-    renderPreviewMath(dom.window.document.querySelector("main")!);
+    await renderPreviewMath(dom.window.document.querySelector("main")!, {
+      engine: "katex",
+      version: "0.17.0",
+    });
     assert.equal(dom.window.document.querySelectorAll(".katex").length, 2);
     assert.equal(
       dom.window.document.querySelector(".sample code")?.textContent,
       "$sample$",
     );
     assert.ok(dom.window.document.body.textContent?.includes("echo $HOME"));
-    assert.ok(dom.window.document.body.textContent?.includes("$literal$"));
+    assert.ok(dom.window.document.querySelector(".block h4 + pre .katex"));
   } finally {
     globalThis.document = previousDocument;
     globalThis.Node = previousNode;

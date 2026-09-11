@@ -1,0 +1,98 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2994
+problemId: 11683
+sourceTitle: "べき内積"
+sourceHtmlSha256: "dcf0a1d22b6eecaf3cc8b29067338e104ed3f991adb75d7d7d7466cdbc851a3a"
+humanReview: null
+machineReview: unreviewed
+title: "거듭제곱 내적"
+---
+
+## 문제 설명
+
+$p=1\,009$라고 합니다.
+
+입력으로 주어지는 $p$ 미만의 음이 아닌 정수 $K_0,K_1,\ldots,K_M$에 대해
+
+$K:=\sum_{j=0}^{M}K_jp^j$
+
+로 정의합니다.
+
+입력으로 주어지는 음이 아닌 정수 $A_{1,0},\ldots,A_{1,N}$에 대해, 다음 점화식으로 $A_{k,0},\ldots,A_{k,N}$을 귀납적으로 정의합니다.
+
+$A_{k+1,n}:=\sum_{i=0}^{n}A_{k,i}A_{1,n-i}$
+
+$A_{K,0},\ldots,A_{K,N}$을 $p$로 나눈 나머지를 순서대로 출력하세요.
+
+## 입력
+
+```text
+$M\ N$
+$K_0\ \cdots\ K_M$
+$A_{1,0}\ \cdots\ A_{1,N}$
+```
+
+입력은 다음 조건을 만족합니다.
+
+## 제한
+
+- $0\leq M<4\times 10^5$
+- $0\leq N<2\times 10^3$
+- $0\leq K_m<p$ ($m=0,\ldots,M$, $K_M\neq 0$)
+- $0\leq A_{1,n}<p$ ($n=0,\ldots,N$)
+
+## 출력
+
+$A_{K,0},\ldots,A_{K,N}$을 $p$로 나눈 나머지를 순서대로 출력하세요. 각 값은 반각 스페이스 하나로 구분하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+0 0
+1
+789
+```
+
+#### 출력
+
+```text
+789
+```
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+0 3
+3
+1 1008 0 0
+```
+
+#### 출력
+
+```text
+1 1006 3 1008
+```
+
+### 예제 3 {file=""}
+
+#### 입력
+
+```text
+1 5
+99 100
+1 2 3 4 5 6
+```
+
+#### 출력
+
+```text
+1 198 530 691 669 390
+```

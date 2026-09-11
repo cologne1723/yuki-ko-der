@@ -1,0 +1,114 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3196
+problemId: 12429
+sourceTitle: "Unique Nickname"
+sourceHtmlSha256: 0137ed17c5b1cc9fe9eb76b2c625e365db2db16cb9fae6fea69be6b4793f9723
+humanReview: null
+machineReview: unreviewed
+title: "고유한 닉네임"
+---
+
+## 문제 설명
+
+$N$명의 참가자가 있습니다. $i$번째 참가자($1\leq i\leq N$)에게는 성 $S_i$와 이름 $T_i$가 주어집니다.
+
+어떤 참가자 $i$가 닉네임으로 사용할 수 있는 것은 그 사람의 성 $S_i$ 또는 이름 $T_i$ 중 다른 모든 참가자의 성이나 이름과 중복되지 않는 것뿐입니다.
+
+$N$명의 모든 참가자가 각각 사용할 수 있는 닉네임을 $1$개 이상 가지고 있는지 판정하세요.
+
+## 입력
+
+```text
+$N$
+$S_1\ T_1$
+$S_2\ T_2$
+$\vdots$
+$S_N\ T_N$
+```
+
+$1$번째 줄에 참가자 수를 나타내는 정수 $N$이 주어집니다.
+이후 $N$개의 줄에 $i$번째 참가자의 성 $S_i$와 이름 $T_i$가 공백으로 구분되어 주어집니다.
+
+## 제한
+
+- $1\leq N\leq 100$
+- $S_i$, $T_i$는 영소문자만으로 이루어진 문자열입니다.
+- $1\leq |S_i|,|T_i|\leq 15$
+- $i\neq j$라면 $(S_i,T_i)\neq (S_j,T_j)$입니다.
+- 각 참가자에 대해 $S_i\neq T_i$입니다.
+
+## 출력
+
+모든 참가자가 사용할 수 있는 닉네임을 $1$개 이상 가지고 있다면 `Yes`를, 그렇지 않은 참가자가 $1$명이라도 있다면 `No`를 출력하세요.
+
+마지막에 개행을 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+3
+tanaka taro
+sato hanako
+tanaka jiro
+```
+
+#### 출력
+
+```text
+Yes
+```
+
+$1$번째 참가자(`tanaka taro`): `tanaka`는 $3$번째 참가자의 성과 중복되므로 사용할 수 없습니다. 그러나 `taro`는 누구와도 중복되지 않으므로 사용할 수 있습니다. → OK
+
+$2$번째 참가자(`sato hanako`): `sato`와 `hanako` 모두 누구와도 중복되지 않습니다. → OK
+
+$3$번째 참가자(`tanaka jiro`): `tanaka`는 $1$번째 참가자의 성과 중복되므로 사용할 수 없습니다. 그러나 `jiro`는 누구와도 중복되지 않으므로 사용할 수 있습니다. → OK
+
+모든 참가자가 사용할 수 있는 닉네임을 $1$개 이상 가지고 있으므로 정답은 `Yes`입니다.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+3
+saito ichiro
+saito jiro
+suzuki ichiro
+```
+
+#### 출력
+
+```text
+No
+```
+
+$1$번째 참가자(`saito ichiro`): `saito`는 $2$번째 참가자의 성과, `ichiro`는 $3$번째 참가자의 이름과 중복됩니다. 이 참가자는 사용할 수 있는 닉네임을 $1$개도 가지고 있지 않습니다.
+
+따라서 정답은 `No`입니다.
+
+### 예제 3 {file=""}
+
+#### 입력
+
+```text
+2
+suzuki sato
+sato suzuki
+```
+
+#### 출력
+
+```text
+No
+```
+
+$1$번째 참가자(`suzuki sato`): `suzuki`는 $2$번째 참가자의 이름과, `sato`는 $2$번째 참가자의 성과 중복됩니다. 사용할 수 있는 닉네임이 없습니다.
+
+따라서 정답은 `No`입니다.

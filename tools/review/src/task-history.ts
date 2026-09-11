@@ -14,6 +14,7 @@ export class TaskHistory {
   recoveryWarnings: { file: string; error: string }[] = [];
 
   async acquireLock() {
+    await mkdir(this.directory, { recursive: true });
     const { DatabaseSync } = await import("node:sqlite");
     const lock = new DatabaseSync(join(this.directory, ".owner.sqlite"));
     try {

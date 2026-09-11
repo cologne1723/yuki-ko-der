@@ -1,5 +1,9 @@
 import { readdir, readFile } from "node:fs/promises";
-import { extname, join } from "node:path";
+import { dirname, extname, join } from "node:path";
+import {
+  problemPublicSourceUrl,
+  readProblemRenderProfileRecord,
+} from "translation-core/problem-render-profile-files";
 import { optionalFile } from "translation-audit/operations/source-store";
 import { pLimit } from "translation-core/concurrency";
 import { sha256 } from "translation-core/node-hash";
@@ -183,6 +187,18 @@ export class ProblemRepository {
       );
     }
     let validationWarnings: string[] = [];
+    let renderProfile: ProblemReview["renderProfile"];
+    let renderProfileError: string | undefined;
+    try {
+      renderProfile = (
+        await readProblemRenderProfileRecord(
+          dirname(this.sourceDirectory),
+          problemNo,
+        )
+      )?.profile;
+    } catch (error) {
+      renderProfileError = String(error);
+    }
     let state: ReturnType<typeof parseReviewState> = {
       koreanTitle: `No.${problemNo}`,
       reviewStatus: "unreviewed",
@@ -206,6 +222,9 @@ export class ProblemRepository {
       problemNo,
       japaneseTitle: metadata.Title,
       japaneseHtml,
+      sourceUrl: problemPublicSourceUrl(problemNo),
+      ...(renderProfile ? { renderProfile } : {}),
+      ...(renderProfileError ? { renderProfileError } : {}),
       koreanSource,
       koreanHtml,
       sourceFormat: extname(koreanPath) === ".mdx" ? "mdx" : "html",

@@ -9,6 +9,7 @@ import { JSDOM } from "jsdom";
 import {
   compileProblemMarkdown,
   parseProblemMarkdown,
+  parseProblemFenceInfo,
 } from "../src/problem-markdown.ts";
 
 test("problem MDX compiles formulas, fences, and component-free samples", async () => {
@@ -184,4 +185,124 @@ test("author notices render before sections without changing sample data", async
       compileProblemMarkdown(`${frontmatter}# 잘못된 제목\n\n## 설명\n본문\n`),
     /before ## sections/u,
   );
+});
+
+const fixtureHeader = `---
+schemaVersion: 1
+locale: ko
+problemNo: 97
+problemId: 1
+sourceTitle: Fixture
+sourceHtmlSha256: ${"a".repeat(64)}
+humanReview: null
+machineReview: unreviewed
+title: Fixture
+---
+
+`;
+
+test("all fence languages produce bare PRE regardless of heading or dollar count", () => {
+  for (const language of ["", "text", "cpp", "python"]) {
+    for (const section of ["입력", "문제 설명", "예제"]) {
+      const content = "\n\n$ A_i \\\\ B_i $\n$C$\nint main() {}\n\n\n";
+      const dom = new JSDOM(
+        compileProblemMarkdown(
+          `${fixtureHeader}## ${section}\n\n~~~${language}\n${content}~~~\n`,
+        ),
+      );
+      const pre = dom.window.document.querySelector("pre")!;
+      assert.equal(pre.querySelector("code"), null);
+      assert.equal(pre.textContent, content);
+      dom.window.close();
+    }
+  }
+});
+
+test("explicit fence metadata preserves CODE, TeX classes and absent final LF", () => {
+  const dom = new JSDOM(
+    compileProblemMarkdown(
+      `${fixtureHeader}## Statement\n\n~~~cpp html="code" class="tex2jax_ignore" code-class="tex2jax_process" eol="none"\n\n$ x_i $\n~~~\n`,
+    ),
+  );
+  const pre = dom.window.document.querySelector("pre")!;
+  assert.equal(pre.className, "tex2jax_ignore");
+  assert.equal(pre.children.length, 1);
+  assert.equal(pre.firstElementChild!.tagName, "CODE");
+  assert.equal(pre.firstElementChild!.className, "tex2jax_process");
+  assert.equal(pre.textContent, "\n$ x_i $");
+  dom.window.close();
+  for (const info of [
+    'text onclick="x"',
+    'text html="pre"',
+    'text class="other"',
+    'text eol="bad"',
+    'text code-class="tex2jax_process"',
+    'text html="code" html="code"',
+  ]) {
+    assert.throws(
+      () => parseProblemFenceInfo(info),
+      /Unsupported|must|requires/,
+    );
+  }
+  assert.equal(parseProblemFenceInfo('html="code"').code, true);
+});
+
+test("nested explicit TeX containers preserve prose and processing scopes", () => {
+  const dom = new JSDOM(
+    compileProblemMarkdown(`${fixtureHeader}## Statement
+
+:::: tex2jax_ignore
+
+$ ignored_i $
+
+::: tex2jax_process
+
+$ processed_i $
+
+:::
+
+~~~~text
+$still_ignored$
+~~~~
+
+::::
+
+$ outside_i $
+`),
+  );
+  const doc = dom.window.document;
+  assert.equal(
+    doc.querySelector(".tex2jax_ignore > p")!.textContent,
+    "$ ignored_i $",
+  );
+  assert.equal(
+    doc.querySelector(".tex2jax_ignore > .tex2jax_process > p")!.textContent,
+    "$ processed_i $",
+  );
+  assert.equal(
+    doc.querySelector("pre")!.parentElement!.className,
+    "tex2jax_ignore",
+  );
+  assert.equal(doc.querySelector(".block > p")!.textContent, "$ outside_i $");
+  dom.window.close();
+});
+
+test("inline math keeps leading whitespace and multiline TeX with the site's delimiters", () => {
+  for (const tex of [
+    String.raw`$  a_i \\ b_i $`,
+    String.raw`\( a_i \\ b_i \)`,
+    String.raw`\[ a_i \\ b_i \]`,
+    String.raw`$$ a_i \\ b_i $$`,
+    "$\n  \\begin{array}{c}\na_i \\\\\nb_i\n\\end{array}\n$",
+  ]) {
+    const dom = new JSDOM(
+      compileProblemMarkdown(`${fixtureHeader}## Statement\n\n${tex}\n`),
+    );
+    assert.equal(
+      dom.window.document.querySelector(".block > p")!.textContent,
+      tex,
+    );
+    assert.equal(dom.window.document.querySelector("em"), null);
+    dom.window.close();
+  }
 });

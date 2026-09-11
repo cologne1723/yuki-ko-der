@@ -1,26 +1,56 @@
 import { prepareTranslatedBlocks } from "translation-core/problem-rendering";
-import { sampleWarnings } from "translation-core/problem-samples";
+import {
+  sampleWarnings,
+  sampleDataValues,
+  sampleDataElements,
+  sampleDataPres,
+} from "translation-core/problem-samples";
+import { sha256Hex } from "translation-core/sha256";
+import type { ProblemRenderProfile } from "translation-core/problem-render-profile";
 
 export function createProblemReplacement(
   document: Document,
-  semanticStatement: (blocks: Element[]) => string,
+  _semanticStatement: (blocks: Element[]) => string,
 ) {
-  function prepareReplacement(
+  async function prepareReplacement(
     translation: { title: Element; blocks: Element[] },
     liveTitle: Element,
     liveBlocks: Element[],
     canonicalBlocks: Element[],
+    options: {
+      profile?: ProblemRenderProfile;
+      sourceUrl?: string;
+      fontUrl?: string;
+      sourceSamplesSha256?: string;
+    } = {},
   ) {
-    if (semanticStatement(canonicalBlocks) !== semanticStatement(liveBlocks)) {
-      throw new Error(
-        "Displayed problem statement differs from canonical source",
+    if (options.sourceSamplesSha256) {
+      const digest = await sha256Hex(
+        new TextEncoder().encode(
+          JSON.stringify(sampleDataValues(translation.blocks)),
+        ),
       );
+      if (digest !== options.sourceSamplesSha256)
+        throw new Error(
+          "Translated sample data differs from the published source samples",
+        );
+    } else {
+      const warnings = sampleWarnings(
+        canonicalBlocks,
+        translation.blocks,
+        undefined,
+        true,
+      );
+      if (warnings.length) throw new Error(warnings.join("\n"));
     }
-    const warnings = sampleWarnings(canonicalBlocks, translation.blocks);
-    if (warnings.length) throw new Error(warnings.join("\n"));
-    const importedBlocks = prepareTranslatedBlocks(translation.blocks);
-    const renderedWarnings = sampleWarnings(canonicalBlocks, importedBlocks);
-    if (renderedWarnings.length) throw new Error(renderedWarnings.join("\n"));
+    const [importedTitle, ...importedBlocks] = await prepareTranslatedBlocks(
+      [translation.title, ...translation.blocks],
+      {
+        ...options,
+        document,
+        renderHost: liveTitle.parentElement ?? undefined,
+      },
+    );
     const anchors = liveBlocks.map(() =>
       document.createComment("yukicoder-ko-original"),
     );
@@ -32,16 +62,15 @@ export function createProblemReplacement(
 
     const copyWrappers: HTMLElement[] = [];
     const originalTitle = [...liveTitle.childNodes];
-    const originalValues = liveBlocks.flatMap((block) => [
-      ...block.querySelectorAll(".sample pre"),
-    ]);
-    const translatedValues = importedBlocks.flatMap((block) => [
-      ...block.querySelectorAll(".sample pre"),
-    ]);
+    const translatedTitle = [...importedTitle.childNodes];
+    const originalParent = liveTitle.parentNode;
+    const originalValues = sampleDataElements(liveBlocks);
+    const translatedValues = sampleDataElements(importedBlocks);
     const controls = liveBlocks
       .flatMap((block) => [...block.querySelectorAll(".copy-sample-input")])
       .map((control) => {
-        const input = control.closest(".sample")?.querySelector("pre");
+        const sample = control.closest(".sample");
+        const input = sample ? sampleDataPres(sample)[0] : undefined;
         const translated = input
           ? translatedValues[originalValues.indexOf(input)]
           : undefined;
@@ -54,6 +83,7 @@ export function createProblemReplacement(
           nextSibling: control.nextSibling,
         };
       });
+    let applying = false;
     const apply = () => {
       // Validate before making any writes, so failure cannot overwrite a page
       // the site has replaced since preparation.
@@ -70,7 +100,8 @@ export function createProblemReplacement(
           "Problem page changed before translation could be applied",
         );
       try {
-        liveTitle.textContent = translation.title.textContent;
+        applying = true;
+        liveTitle.replaceChildren(...translatedTitle);
         liveBlocks.forEach((block, index) => block.replaceWith(anchors[index]));
         anchors[0].before(...importedBlocks);
         for (const { control, translated, parent, nextSibling } of controls) {
@@ -90,9 +121,30 @@ export function createProblemReplacement(
       } catch (error) {
         apply.restore();
         throw error;
+      } finally {
+        applying = false;
       }
     };
+    const ownsBlocks = () =>
+      anchors.every(
+        (anchor) => anchor.isConnected && anchor.parentNode === originalParent,
+      ) &&
+      importedBlocks.every(
+        (block) => block.isConnected && block.parentNode === originalParent,
+      ) &&
+      [...(originalParent?.childNodes ?? [])]
+        .filter(
+          (node) => node.nodeType === 1 && (node as Element).matches(".block"),
+        )
+        .every((node) => importedBlocks.includes(node as HTMLElement));
+    apply.isActive = () =>
+      liveTitle.isConnected &&
+      liveTitle.parentNode === originalParent &&
+      ownsBlocks() &&
+      translatedTitle.length === liveTitle.childNodes.length &&
+      translatedTitle.every((node, i) => liveTitle.childNodes[i] === node);
     apply.restore = () => {
+      const restoreBlocks = applying || ownsBlocks();
       for (const { control, parent, nextSibling } of movedControls.splice(0)) {
         parent.insertBefore(
           control,
@@ -101,10 +153,18 @@ export function createProblemReplacement(
       }
       for (const wrapper of copyWrappers.splice(0))
         wrapper.replaceWith(...wrapper.childNodes);
-      liveTitle.replaceChildren(...originalTitle);
+      // Do not overwrite a title the site replaced while translation was active.
+      if (
+        translatedTitle.length === liveTitle.childNodes.length &&
+        translatedTitle.every((node, i) => liveTitle.childNodes[i] === node)
+      )
+        liveTitle.replaceChildren(...originalTitle);
       importedBlocks.forEach((block) => block.remove());
       anchors.forEach((anchor, index) => {
-        if (anchor.parentNode) anchor.replaceWith(liveBlocks[index]);
+        if (anchor.parentNode) {
+          if (restoreBlocks) anchor.replaceWith(liveBlocks[index]);
+          else anchor.remove();
+        }
       });
     };
     return apply;

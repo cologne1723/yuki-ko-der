@@ -1,0 +1,164 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3031
+problemId: 11868
+sourceTitle: "曲面の向き付け"
+sourceHtmlSha256: 249e224693ef53f2768a8a4e01f7b582060a808f1ad0e41c8f1610364df6d5e1
+humanReview: null
+machineReview: unreviewed
+title: "곡면의 방향 부여 가능성"
+---
+
+`YES` 또는 `NO`를 출력하는 문제입니다.
+
+## 문제 설명
+
+입력으로 $1 \leq A_m < B_m < C_m \leq 10^8$을 만족하는 정수 $A_m$, $B_m$, $C_m$이 각각 $M$개 주어집니다. 
+
+$\Delta_m = \{ A_m, B_m, C_m\}$로 두고, $\mathcal T = \{ \Delta_1, \dots, \Delta_M\}$로 둡니다.
+
+단, $\Delta_m$들은 서로 다르게 주어집니다.
+
+$\Delta = \{ A, B, C \}\ (A < B < C)$의 ‘방향 부여’란 다음 두 함수 중 하나를 뜻합니다.
+
+- $\sigma(A) = B,\ \sigma(B) = C,\ \sigma(C) = A$로 정의되는 함수 $\sigma : \Delta \rightarrow \Delta$
+- $\sigma(A) = C,\ \sigma(B) = A,\ \sigma(C) = B$로 정의되는 함수 $\sigma : \Delta \rightarrow \Delta$
+
+각 $\Delta_m \in \mathcal T$의 방향 부여 $\sigma_m$을 다음 조건을 만족하도록 정할 수 있을 때, ‘$\mathcal T$에 방향 부여가 가능’하다고 합니다.
+
+- 임의의 $A, B \in \Delta_m \cap \Delta_n\ (n \neq m)$에 대하여, $\sigma_m(A) = B \Leftrightarrow \sigma_n(B) = A$입니다.
+
+$\mathcal T$에 방향 부여가 가능하면 `YES`를, 그렇지 않으면 `NO`를 출력하세요.
+
+### 배경
+
+위상기하학에서 곡면의 방향 부여 가능성이란 직관적으로 ‘앞뒷면’을 정할 수 있는지 여부입니다. 예를 들어 뫼비우스의 띠에는 앞면과 뒷면을 정할 수 없습니다. 곡면을 작은 삼각형으로 분할한 ‘삼각형 분할’을 생각해 봅시다.
+
+삼각형에는 앞면과 뒷면이 있으며, 꼭짓점의 회전 방향에 맞춰 오른나사를 회전시켰을 때 오른나사가 이동하는 방향에 있는 면을 앞면이라고 생각합니다. 서로 이웃한 삼각형의 앞면이 일치하도록 정할 수 있을 때 ‘방향 부여 가능’하다고 합니다.
+
+이 문제에서는 삼각형 분할의 꼭짓점 정보만 추출한 데이터로 방향 부여가 가능한지 판별해야 합니다.
+
+![곡면의 삼각형 분할](https://w7.pngwing.com/pngs/364/912/png-transparent-surface-triangulation-monkey-saddle-finite-element-method-triangle-white-triangle-material-thumbnail.png)
+
+## 입력
+
+```text
+$M$
+$A_1\ B_1\ C_1$
+$\vdots$
+$A_M\ B_M\ C_M$
+```
+
+## 제한
+
+- $1 \leq M < 10^5$
+- $1 \leq A_m < B_m < C_m \leq 10^8$
+
+## 출력
+
+$\mathcal T$가 방향 부여 가능하면 `YES`를, 그렇지 않으면 `NO`를 출력하세요.
+
+마지막에 개행을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+1
+1 2 3
+```
+
+#### 출력
+
+```text
+YES
+```
+
+분명히 방향 부여가 가능합니다.
+
+### 예제 2 {file="01_sample_02.txt"}
+
+#### 입력
+
+```text
+3
+1 2 3
+1 2 4
+1 2 5
+```
+
+#### 출력
+
+```text
+NO
+```
+
+정점 $1$과 $2$를 잇는 변을 세 삼각형이 공유하므로 방향 부여가 가능하지 않습니다.
+
+### 예제 3 {file="01_sample_03.txt"}
+
+#### 입력
+
+```text
+18
+1 2 4
+2 4 6
+2 3 6
+3 6 7
+1 3 7
+1 4 7
+4 5 6
+5 6 8
+6 7 8
+7 8 9
+4 7 9
+4 5 9
+1 5 8
+1 2 8
+2 8 9
+2 3 9
+3 5 9
+1 3 5
+```
+
+#### 출력
+
+```text
+YES
+```
+
+토러스라고 불리는 곡면의 삼각형 분할이며, 방향 부여가 가능합니다.
+
+같은 꼭짓점이나 변이 등장하지만, 이는 정사각형의 서로 마주 보는 변을 같은 방향으로 붙인 도형 위의 삼각형 분할을 나타냅니다.
+
+원래는 토러스를 그림으로 나타내야 하지만, 간단하게 하기 위해 전개도 위에 나타냈습니다.
+
+![토러스의 삼각형 분할](https://i.imgur.com/h5ffZwY.jpeg)
+
+### 예제 4 {file="01_sample_04.txt"}
+
+#### 입력
+
+```text
+6
+1 2 3
+2 3 5
+3 4 5
+4 5 6
+2 4 6
+1 2 6
+```
+
+#### 출력
+
+```text
+NO
+```
+
+뫼비우스의 띠의 삼각형 분할입니다. 뫼비우스의 띠에는 방향 부여가 가능하지 않습니다.
+
+![뫼비우스의 띠의 삼각형 분할](https://i.imgur.com/vbMSJga.jpeg)

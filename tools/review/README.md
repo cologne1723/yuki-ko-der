@@ -10,6 +10,31 @@ or both. Select numbers/ranges or all problems; enable refresh to check already
 saved originals. The problem editor also provides **Refresh original** beside
 missing/stale-source notices. Both editors have contextual audit menus.
 
+Problem previews use the saved public-page render profile for both Japanese and
+Korean: MathJax 3.2.2 or KaTeX 0.17.0. Missing or damaged profile evidence is shown
+explicitly; **렌더링 프로필 수집 후 다시 시도** fetches that problem's public page
+through the shared collector lock, persisted request pacing and retry/backoff.
+The editor keeps unsaved text during collection and displays collection failures.
+Ordinary problem reads do not fetch profiles. Math rendering finishes before
+serializing each scriptless sandboxed document, with locally bundled CSS/fonts.
+Newer drafts supersede older rendering jobs; errors retain the last good preview
+and offer retry. Relative links use the public problem URL, and fragment links
+scroll within the preview.
+Both the rendering document and serialized srcdoc use standards mode. Math is
+measured inside a connected, hidden sandbox iframe at the visible preview's size,
+after its styles and fonts load. Successful rendering replaces the preview;
+failure retains the previous document. Loading, font readiness and rendering share
+a 15-second deadline. Draft changes, resizing and unmounting cancel obsolete jobs
+and remove their staging frames.
+
+Run the offline native-MathJax browser metrics regression with
+`REVIEW_BROWSER_TESTS=1 node --import tsx --test tools/review/test/preview-browser.test.ts`
+from the repository root. Set `REVIEW_TEST_BROWSER` if Chrome/Chromium is elsewhere.
+The ordinary test suite skips this browser-only check unless explicitly enabled.
+Parity covers the supported sanitized HTML/TeX boundary. Native source MathML/SVG
+can be treated differently by preview DOMPurify and the extension's stricter block
+allowlist; parity for that input markup is not implied.
+
 The tools page runs saved/live problem audits, validation, lint, UI coverage and
 context checks. For an HTML translation audit, choose a saved page or upload HTML,
 then select dictionaries or upload fixtures. Fixtures remain read-only. Legacy
@@ -25,6 +50,9 @@ completed downloads. The shared navigation reconnects to an active task after
 reloading. SQLite ownership prevents a second server from launching another worker
 or changing its live status. Abandoned work is marked interrupted. Corrupt history
 entries are preserved and reported for inspection without preventing new tasks.
+Task history initializes on first use and reports initialization errors to the
+caller; subsequent requests can retry after repair. Embedders/tests can await
+`ReviewTasks.initialize()` explicitly and `whenIdle()` before deleting task data.
 Results become stale when their translation or saved-source inputs change. Tasks use saved files and preserve unsaved editor text; results for
 another selected problem cannot replace the current preview.
 
@@ -45,7 +73,7 @@ are supported package checks. Writes require loopback/same-origin requests and
 revisions; ordinary request bodies are capped at 8 MiB. Frontend saves track their originating
 problem/revision. The interface uses React, Mantine components, React Router navigation guards,
 and TanStack Query for requests and task polling. CodeMirror uses its React adapter.
-CodeMirror and KaTeX remain browser dependencies. Zod schemas run without dynamic
+CodeMirror, KaTeX and MathJax remain browser dependencies. Zod schemas run without dynamic
 code generation, so the strict CSP needs no unsafe eval or validator build plugin.
 
 ## Collector ZIP imports

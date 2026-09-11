@@ -5,6 +5,8 @@ import {
 import { JSDOM } from "jsdom";
 import { mkdir, readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
+import { problemRenderProfileDirectory } from "translation-core/problem-render-profile-files";
+import { pacedDownload, type CollectionOptions } from "./paced-download.ts";
 import { parseProblemMarkdown } from "translation-core/problem-markdown";
 import { parseReviewState } from "translation-core/review-state";
 import {
@@ -108,35 +110,49 @@ export async function expectedProblems(
   if (errors.length) throw new Error(errors.join("\n"));
   return results;
 }
-async function download(context: OperationContext, url: string) {
-  let failure: unknown;
-  for (let attempt = 0; attempt < 3; attempt++) {
-    context.signal?.throwIfAborted();
-    try {
-      const signal = context.signal
-        ? AbortSignal.any([context.signal, AbortSignal.timeout(20000)])
-        : AbortSignal.timeout(20000);
-      const response = await (context.request ?? fetch)(url, {
-        signal,
-        headers: { "User-Agent": "yukicoder-ko-setup" },
-      });
-      if (!response.ok) throw new Error(`HTTP ${response.status}: ${url}`);
-      return {
-        bytes: new Uint8Array(await response.arrayBuffer()),
-        url: response.url || url,
-      };
-    } catch (error) {
-      context.signal?.throwIfAborted();
-      failure = error;
-    }
-  }
-  throw failure;
-}
 const same = (a: SourceMetadata | undefined, b: SourceMetadata) =>
   a?.No === b.No && a.ProblemId === b.ProblemId && a.Title === b.Title;
 export async function setupData(
   context: OperationContext,
   selection: "problems" | "pages" | "both" = "both",
+  options: CollectionOptions = {},
+): Promise<OperationResult> {
+  // Share ownership and persisted cooldown with the profile/original collectors.
+  const directory = problemRenderProfileDirectory(context.dataRoot);
+  await mkdir(directory, { recursive: true });
+  const { DatabaseSync } = await import("node:sqlite");
+  const lock = new DatabaseSync(join(directory, ".collection-lock.sqlite"));
+  try {
+    try {
+      lock.exec("BEGIN IMMEDIATE");
+    } catch (error) {
+      throw new Error(
+        "Another ground-truth collector owns this data directory",
+        { cause: error },
+      );
+    }
+    const request = await pacedDownload(
+      context,
+      join(directory, ".request-state.json"),
+      { attempts: 3, ...options },
+    );
+    return await setupDataWithDownload(
+      context,
+      selection,
+      async (_context, url) => ({ bytes: await request(url), url }),
+    );
+  } finally {
+    lock.close();
+  }
+}
+
+async function setupDataWithDownload(
+  context: OperationContext,
+  selection: "problems" | "pages" | "both",
+  download: (
+    context: OperationContext,
+    url: string,
+  ) => Promise<{ bytes: Uint8Array; url: string }>,
 ): Promise<OperationResult> {
   const problemsRoot = join(context.dataRoot, "problems-source"),
     pagesRoot = join(context.dataRoot, "pages");

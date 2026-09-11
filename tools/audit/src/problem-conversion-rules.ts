@@ -1,8 +1,48 @@
-import { samplePreText } from "translation-core/problem-samples";
+import { problemTexClasses } from "translation-core/problem-markdown";
 import TurndownService from "turndown";
 
+export function exactPreText(element: Element): string {
+  const text = (node: Node): string => {
+    if (node.nodeType === 3 || node.nodeType === 4) return node.nodeValue ?? "";
+    if (node.nodeType === 1 && (node as Element).tagName === "BR") return "\n";
+    return Array.from(node.childNodes).map(text).join("");
+  };
+  return text(element).replace(/\r\n?/gu, "\n");
+}
+
+export function texClassName(element: Element): string {
+  return problemTexClasses
+    .filter((name) => element.classList.contains(name))
+    .join(" ");
+}
+
+function texContainer(content: string, element: Element): string {
+  const className = texClassName(element);
+  if (className) {
+    const length =
+      Math.max(
+        2,
+        ...[...content.matchAll(/^\s*(:{3,})/gmu)].map(
+          (match) => match[1].length,
+        ),
+      ) + 1;
+    const fence = ":".repeat(length);
+    content = `${fence} ${className}\n\n${content}\n\n${fence}`;
+  }
+  return content;
+}
+
 function preformatted(element: Element): string {
-  const content = samplePreText(element);
+  const content = exactPreText(element);
+  const code = element.querySelector(":scope > code");
+  if (
+    code &&
+    (element.childNodes.length !== 1 ||
+      [...code.children].some((child) => child.tagName !== "BR"))
+  )
+    throw new Error("Unsupported mixed pre/code content");
+  if (!code && [...element.children].some((child) => child.tagName !== "BR"))
+    throw new Error("Unsupported markup inside pre");
   const backticks = Math.max(
     0,
     ...[...content.matchAll(/`+/gu)].map((match) => match[0].length),
@@ -14,13 +54,36 @@ function preformatted(element: Element): string {
   const useBackticks = backticks <= tildes;
   const length = Math.max(useBackticks ? backticks : tildes, 2) + 1;
   const fence = (useBackticks ? "`" : "~").repeat(Math.max(3, length));
-  return `${fence}text\n${content}\n${fence}`;
+  const info = [
+    "text",
+    ...(code ? ['html="code"'] : []),
+    ...(texClassName(element) ? [`class="${texClassName(element)}"`] : []),
+    ...(code && texClassName(code)
+      ? [`code-class="${texClassName(code)}"`]
+      : []),
+    ...(content && !content.endsWith("\n") ? ['eol="none"'] : []),
+  ].join(" ");
+  return `${fence}${info}\n${content}${content && !content.endsWith("\n") ? "\n" : ""}${fence}`;
 }
 
 const converter = new TurndownService({
   headingStyle: "atx",
   codeBlockStyle: "fenced",
   emDelimiter: "*",
+  blankReplacement: (_content, node) => {
+    const element = node as unknown as Element;
+    if (element.tagName === "PRE") return `\n\n${preformatted(element)}\n\n`;
+    if (element.nodeType === 1 && texClassName(element))
+      return `\n\n${texContainer("", element)}\n\n`;
+    return (node as HTMLElement & { isBlock: boolean }).isBlock ? "\n\n" : "";
+  },
+});
+converter.addRule("tex-scope", {
+  filter: (node) =>
+    ["DIV", "P"].includes(node.nodeName) &&
+    !!texClassName(node as unknown as Element),
+  replacement: (content, node) =>
+    `\n\n${texContainer(content.trim(), node as unknown as Element)}\n\n`,
 });
 converter.addRule("strikethrough", {
   filter: ["s", "del"],
@@ -70,7 +133,7 @@ converter.addRule("table", {
           )
             throw new Error("Unsupported merged table cell");
           return converter
-            .turndown(cell.innerHTML)
+            .turndown(cell as HTMLElement)
             .replaceAll("|", "\\|")
             .replaceAll("\n", " ");
         }),
@@ -84,7 +147,7 @@ converter.addRule("table", {
 const standardEscape = converter.escape.bind(converter);
 converter.escape = (text: string) => {
   const formulas =
-    /\\\([\s\S]*?\\\)|\\\[[\s\S]*?\\\]|\$\$[\s\S]*?\$\$|\$(?!\s)[^$\n]+?\$/gu;
+    /\\\([\s\S]*?\\\)|\\\[[\s\S]*?\\\]|\$\$[\s\S]*?\$\$|\$[^$]+?\$/gu;
   let result = "",
     start = 0;
   for (const match of text.matchAll(formulas)) {
@@ -105,6 +168,19 @@ export function renderContent(element: Element): string {
         `Unsupported conversion construct: <${node.tagName.toLowerCase()}>`,
       );
     if (
+      texClassName(node) &&
+      !["DIV", "P", "PRE", "CODE"].includes(node.tagName)
+    )
+      throw new Error(
+        `Unsupported TeX scope on <${node.tagName.toLowerCase()}>`,
+      );
+    if (
+      node.tagName === "CODE" &&
+      texClassName(node) &&
+      node.parentElement?.tagName !== "PRE"
+    )
+      throw new Error("Unsupported TeX scope on inline code");
+    if (
       node.tagName === "A" &&
       !/^(?:https?:|\/|#)/u.test(node.getAttribute("href") ?? "")
     )
@@ -116,7 +192,48 @@ export function renderContent(element: Element): string {
       )
         throw new Error(`Unsupported conversion attribute: ${attribute.name}`);
   }
-  return converter.turndown(element.outerHTML);
+  // Keep the supplied standards DOM: Turndown's string fallback uses a smaller
+  // DOM implementation without classList/children, and reparsing PRE can eat LF.
+  const wrapper = element.ownerDocument.createElement("div");
+  wrapper.append(element.cloneNode(true));
+  return converter.turndown(wrapper);
+}
+
+// Fail closed when conversion would lose CODE skipping or explicit TeX scopes.
+// Prose whitespace/layout can change, but PRE and CODE text must stay exact.
+export function conversionSemantics(element: Element): unknown {
+  const scopeText = (node: Node): string =>
+    node.nodeType === 3
+      ? (node.nodeValue ?? "").replace(/\s+/gu, " ").trim()
+      : Array.from(node.childNodes).map(scopeText).filter(Boolean).join(" ");
+  const lineage = (node: Element): string[] => {
+    const names: string[] = [];
+    for (
+      let current: Element | null = node;
+      current;
+      current = current.parentElement
+    ) {
+      if (texClassName(current)) names.unshift(texClassName(current));
+    }
+    return names;
+  };
+  return {
+    pre: [...element.querySelectorAll("pre")].map((pre) => ({
+      text: exactPreText(pre),
+      code: !!pre.querySelector(":scope > code"),
+      scope: lineage(pre),
+    })),
+    code: [...element.querySelectorAll("code")].map((code) => ({
+      text: exactPreText(code),
+      scope: lineage(code),
+    })),
+    scopes: [element, ...element.querySelectorAll("*")]
+      .filter(texClassName)
+      .map((node) => ({
+        className: texClassName(node),
+        text: scopeText(node),
+      })),
+  };
 }
 
 export function sampleMarkdown(sample: Element): string {

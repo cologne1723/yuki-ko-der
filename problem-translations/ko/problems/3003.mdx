@@ -1,0 +1,62 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3003
+problemId: 11816
+sourceTitle: "多項式の割り算 〜hard〜"
+sourceHtmlSha256: "67a6753707ef306e4547e5c89fe9967d80c97f3e23f69c2ee5cd579f16b9db4e"
+humanReview: null
+machineReview: unreviewed
+title: "다항식의 나눗셈 ~어려움~"
+---
+
+## 문제 설명
+
+입력으로 주어지는 정수 $A$, $B$에 대하여 다항식 $Ax^B$를 $x^2+x+1$로 나눈 나머지를 구하세요.
+
+## 입력
+
+```text
+$A\ B$
+```
+
+$A$, $B$는 정수입니다.
+
+## 제한
+
+- $-10^{18} \leq A \leq 10^{18}$
+- $0 \leq B \leq 10^{18}$
+
+## 출력
+
+나눈 나머지를 $ax+b$로 나타낼 수 있을 때, $a\ b$를 반각 공백 하나로 구분하여 출력하고 마지막에 개행을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+10000 10000
+```
+
+#### 출력
+
+```text
+10000 0
+```
+
+### 예제 2 {file="01_sample_02.txt"}
+
+#### 입력
+
+```text
+20000 20000
+```
+
+#### 출력
+
+```text
+-20000 -20000
+```

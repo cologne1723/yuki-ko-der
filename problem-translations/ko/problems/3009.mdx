@@ -1,0 +1,115 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3009
+problemId: 11729
+sourceTitle: "Union-Find でつながろう！"
+sourceHtmlSha256: "0bf6c6c580f1a326a441e72571eb75f5c638b998798261d24272739f0fcb525c"
+humanReview: null
+machineReview: unreviewed
+title: "Union-Find로 연결하자!"
+---
+
+제한 시간은 $2\,000$밀리초입니다. 제한이 상당히 빡빡하므로 **빠른** 언어를 사용하는 것을 권장합니다.
+
+## 문제 설명
+
+$N$자리 이진수 표기 문자열이 $M$개 $B_1, \cdots, B_M$ 주어집니다. $B_m$의 $n$번째 자리를 $b_{m,n}$이라고 합니다. 이 문제에서는 비트 OR와 비트 AND를 각각 $C\mathbin{|}D$, $C\mathbin{\&}D$로 나타냅니다.
+
+집합 $\{0,1,...,2^N-1\}$의 부분집합 $\mathcal{T}$ 중 다음 조건을 만족하는 것을 **좋은 집합**이라고 합니다.
+
+- $0, B_1, \cdots, B_M, 2^N-1 \in \mathcal{T}$
+- $C,D \in \mathcal{T}$이면 $C\mathbin{\&}D,C\mathbin{|}D \in \mathcal{T}$
+
+원소 수가 가장 적은 좋은 집합은 하나뿐임을 증명할 수 있습니다(모든 좋은 집합의 교집합은 다시 좋은 집합입니다). 이 집합을 $\mathcal{T}$라고 합니다.
+
+$0\leq C<2^N$에 대하여, $C\mathbin{\&}D_1$과 $C\mathbin{\&}D_2$가 각각 $0$도 아니고 $C$도 아닌 $D_1,D_2\in\mathcal{T}$를 적절히 선택하여
+
+- $C\mathbin{\&}(D_1\mathbin{|}D_2)=C$
+- $C\mathbin{\&}(D_1\mathbin{\&}D_2)=0$
+
+으로 만들 수 있을 때 $C$를 **분할 가능**하다고 합니다.
+
+$0\leq C<2^N$이 분할 불가능하고, $C\mathbin{\&}C'=C$를 만족하는 분할 불가능한 $0\leq C'<2^N$가 $C$ 이외에는 존재하지 않을 때 $C$를 **극대 분할 불가능**하다고 합니다. 극대 분할 불가능한 $C$의 개수를 출력하세요.
+
+### 배경
+
+$\mathcal T$는 유한 집합 $X  = \{1, \cdots, N \}$ 위의 위상이라고 하는 구조입니다([Wikipedia](https://ja.wikipedia.org/wiki/%E4%BD%8D%E7%9B%B8%E7%A9%BA%E9%96%93)). 즉, $N$자리 이진수 표기의 수 $b_1 \cdots b_N$와 $X$의 부분집합 $\{ i \in X : b_i = 1 \}$을 동일시하면 다음을 만족합니다.
+
+- $\emptyset,X\in\mathcal{T}$
+- $U,V\in\mathcal{T}\Rightarrow U\cap V\in\mathcal{T}$
+- $U,V\in\mathcal{T}\Rightarrow U\cup V\in\mathcal{T}$
+
+이 문제는 위상 공간으로서의 연결 성분 개수를 구하는 문제입니다.
+
+## 입력
+
+```text
+$M\ N$
+$b_{1,1}b_{1,2}\cdots b_{1,N}$
+$b_{2,1}b_{2,2}\cdots b_{2,N}$
+$\vdots$
+$b_{M,1}b_{M,2}\cdots b_{M,N}$
+```
+
+첫째 줄에 정수 $M,N$이 주어집니다.
+
+다음 $M$개의 줄에 각 $B_m=b_{m,1}b_{m,2}\cdots b_{m,N}$이 공백 없이 주어집니다.
+
+## 제한
+
+- $1\leq M\leq1\,024$
+- $1\leq N\leq4\,096$
+- $b_{i, j} \in \{ 0, 1 \} \ (1 \leq i \leq M, \ 1 \leq j \leq N).$
+- 각 $B_m=b_{m,1}b_{m,2}\cdots b_{m,N}$가 서로 다르다고 보장되지 않습니다.
+
+## 출력
+
+극대 분할 불가능한 $C$의 개수를 출력하세요.
+
+마지막에 개행을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+#### 입력
+```text
+4 4
+1100
+1010
+1001
+1100
+```
+#### 출력
+```text
+1
+```
+
+$\mathcal{T}=\{0000,1000,1001,1010,1011,1100,1101,1110,1111\}$입니다. 극대 분할 불가능한 것은 $1111$뿐이므로 답은 $1$입니다.
+
+### 예제 2 {file="01_sample_02.txt"}
+#### 입력
+```text
+2 3
+100
+011
+```
+#### 출력
+```text
+2
+```
+
+$100$, $011$ 두 개입니다.
+
+### 예제 3 {file="01_sample_03.txt"}
+#### 입력
+```text
+1 16
+0000000000000000
+```
+#### 출력
+```text
+1
+```
+
+$1111111111111111$ 하나입니다.

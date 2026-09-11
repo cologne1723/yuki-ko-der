@@ -1,0 +1,126 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3226
+problemId: 12524
+sourceTitle: "2×2行列累乗"
+sourceHtmlSha256: c09f2a59cafaaf397a31ff4453020fcb2c7eff632e9dd4faf3d7c96456e544fe
+humanReview: null
+machineReview: unreviewed
+title: "2×2 행렬 거듭제곱"
+---
+
+## 문제 설명
+
+입력으로 정수 $A$, $B$, $C$, $D$, $S$, $T$, $N$, $K$가 주어집니다. $2 \times 2$ 행렬 $M$을
+
+$M = \begin{pmatrix} A & B \\ C & D \end{pmatrix}$
+
+로 정의합니다. 또한,
+
+$M^N \begin{pmatrix} S \\ T \end{pmatrix} = \begin{pmatrix} R \\ U \end{pmatrix}$
+
+로 정의합니다. $R$, $U$를 $K$로 나눈 나머지, 즉 $0$ 이상 $K$ 미만인 정수 $R'$, $U'$를 각각 구하세요.
+
+### 배경
+
+$2 \times 2$ 행렬의 곱은
+
+$\begin{pmatrix} a_{1, 1} & a_{1, 2} \\ a_{2, 1} & a_{2, 2} \end{pmatrix} \begin{pmatrix} b_{1, 1} & b_{1, 2} \\ b_{2, 1} & b_{2, 2} \end{pmatrix} = \begin{pmatrix} a_{1, 1}b_{1, 1} + a_{1, 2}b_{2, 1} & a_{1, 1}b_{1, 2} + a_{1, 2}b_{2, 2} \\ a_{2, 1}b_{1, 1} + a_{2, 2}b_{2, 1} & a_{2, 1}b_{1, 2} + a_{2, 2}b_{2, 2} \end{pmatrix}$
+
+로 정의합니다. 거듭제곱은
+
+$M^0 = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix},\quad M^{n+1} = M^nM$
+
+으로 정의합니다. 또한,
+
+$\begin{pmatrix} a_{1, 1} & a_{1, 2} \\ a_{2, 1} & a_{2, 2} \end{pmatrix} \begin{pmatrix} b_1 \\ b_2 \end{pmatrix} = \begin{pmatrix} a_{1, 1}b_1 + a_{1, 2}b_2 \\ a_{2, 1}b_1 + a_{2, 2}b_2 \end{pmatrix}$
+
+으로 정의합니다.
+
+## 입력
+
+입력은 다음 형식으로 주어집니다.
+
+```text
+$A\ B$
+$C\ D$
+$S\ T$
+$N\ K$
+```
+
+## 제한
+
+- $-10^8 \le A, B, C, D, S, T \le 10^8$
+- $0 \le N \le 10^{18}$
+- $2 \le K \le 10^8$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+문제 설명에서 정의한 $R'$, $U'$를
+
+```text
+$R'\ U'$
+```
+
+로 출력하세요. 마지막에 개행을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+1 0
+0 1
+-9 12
+7 5
+```
+
+#### 출력
+
+```text
+1 2
+```
+
+$\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}^7 = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$이고,
+
+$\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} \begin{pmatrix} -9 \\ 12 \end{pmatrix} = \begin{pmatrix} -9 \\ 12 \end{pmatrix}$입니다.
+
+$-9$, $12$를 $5$로 나눈 나머지는 각각 $1$, $2$입니다.
+
+### 예제 2 {file="01_sample_02.txt"}
+
+#### 입력
+
+```text
+1 -2
+3 4
+-5 -6
+7 8
+```
+
+#### 출력
+
+```text
+3 3
+```
+
+### 예제 3 {file="01_sample_03.txt"}
+
+#### 입력
+
+```text
+10000 9797
+1234 9876
+9898 8989
+1717 7777
+```
+
+#### 출력
+
+```text
+2020 1616
+```

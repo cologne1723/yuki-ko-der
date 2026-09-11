@@ -1,0 +1,49 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3177
+problemId: 12336
+sourceTitle: "output only nand problem"
+sourceHtmlSha256: "349bfd6dd535758db7b361ba66cd4e4f2ad266530fa7f4aac6349d8ea2a3725f"
+humanReview: null
+machineReview: unreviewed
+title: "출력 전용 NAND 문제"
+---
+
+## 문제 설명
+
+이 문제는 **output-only** 문제입니다. 입력은 주어지지 않습니다.
+
+NAND 연산은 일반적으로 결합법칙을 만족하지 않습니다. 구체적으로, $A,B,C\in\{0,1\}$인 수 $A,B,C$에 대해 $(A \barwedge B) \barwedge C$와 $A \barwedge (B \barwedge C)$가 일치하지 않을 수 있습니다.
+
+따라서 $(A \barwedge B) \barwedge C \neq A \barwedge (B \barwedge C)$를 만족하는 $A,B,C\in\{0,1\}$의 조합을 $1$개 출력하세요.
+
+### 배경
+
+NAND는 $X,Y\in\{0,1\}$에 대해 정의되는 이항 연산이며, $X \barwedge Y$로 나타냅니다. 연산의 구체적인 값은 다음과 같습니다.
+
+$0\barwedge0=1$, $0\barwedge1=1$, $1\barwedge0=1$, $1\barwedge1=0$
+
+## 입력
+
+이 문제에서는 입력이 주어지지 않습니다.
+
+## 출력
+
+문제 설명의 조건을 만족하는 $A,B,C\in\{0,1\}$를 이 순서대로 공백으로 구분하여 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 출력
+
+```text
+0 1 0
+```
+
+위 출력은 문제 설명의 조건을 만족하지 않으므로 오답입니다.
+
+$(0 \barwedge 1) \barwedge 0=1 \barwedge 0=1$이고,
+
+$0 \barwedge (1 \barwedge 0)=0 \barwedge 1=1$이기 때문입니다.

@@ -7,10 +7,11 @@ import {
 } from "translation-core/fixed-translations";
 import { TranslationMutations } from "translation-core/translation-mutations";
 import { type ProblemCatalog } from "translation-core/problem-catalog";
+import { sourceStatementBlocks } from "translation-core/problem-document";
 import { createContentNotices } from "./content-notices.ts";
 import { createContentResources } from "./content-resources.ts";
 import type { CatalogResult } from "./problem-catalog";
-import type { ProblemOutcome } from "./problem-engine";
+import type { ProblemOutcome, SourceVerification } from "./problem-engine";
 import {
   ProblemTitleTranslator,
   problemTitleSelectors,
@@ -24,7 +25,7 @@ declare global {
         translateProblem(
           shouldApply?: () => boolean,
           catalog?: ProblemCatalog,
-          options?: { refresh?: boolean },
+          options?: { refresh?: boolean; retryVerification?: boolean },
         ): Promise<ProblemOutcome>;
         restoreProblem(): void;
       }
@@ -53,13 +54,27 @@ declare global {
   let entries: Awaited<ReturnType<typeof loadTranslations>> | undefined;
   let uiLoading: ReturnType<typeof loadTranslations> | undefined;
   let catalogLoading: Promise<CatalogResult> | undefined;
+  let retrySource: (() => Promise<void>) | undefined;
+  let retryLoading: Promise<void> | undefined;
+  let checkProblem: (() => void) | undefined;
   const notices = createContentNotices(document, (parts) => {
-    if (parts.every((part) => part === "ui")) {
+    if (parts.every((part) => part === "ui" || part === "source")) {
+      if (retryLoading) return retryLoading;
       const current = revision;
-      return loadUi(
-        () => current === revision && globallyEnabled && !suspended,
-        true,
-      );
+      const request = Promise.all([
+        parts.includes("ui")
+          ? loadUi(
+              () => current === revision && globallyEnabled && !suspended,
+              true,
+            )
+          : undefined,
+        parts.includes("source") ? retrySource?.() : undefined,
+      ]).then(() => {});
+      retryLoading = request;
+      void request.finally(() => {
+        if (retryLoading === request) retryLoading = undefined;
+      });
+      return request;
     }
     return restart(true);
   });
@@ -106,6 +121,7 @@ declare global {
         problemTitles.apply(document, titleHistory, titleScope(scope));
     } finally {
       observer.observe(document.documentElement, mutations.options);
+      checkProblem?.();
     }
   }
   function stopObserving() {
@@ -152,6 +168,9 @@ declare global {
     const live = () =>
       current === revision && globallyEnabled && settingsReady && !suspended;
     const problemLive = () => live() && currentProblem === problemRevision;
+    checkProblem = undefined;
+    retrySource = undefined;
+    retryLoading = undefined;
     stopObserving();
     titlesReady = false;
     pageTitleEnabled = true;
@@ -160,16 +179,21 @@ declare global {
     history.restore();
     notices.clear();
     if (!live()) return;
-    if (isProblemPage) {
+    const showOriginal = () => {
+      problemRevision++;
+      checkProblem = undefined;
+      retrySource = undefined;
+      retryLoading = undefined;
+      globalThis.yukicoderProblemTranslations?.restoreProblem();
+      restorePageTitle();
+      notices.notifyText("source", "");
+      notices.notifyText("problem", "일본어 원문입니다");
       notices.setOriginalAction(() => {
-        problemRevision++;
-        globalThis.yukicoderProblemTranslations?.restoreProblem();
-        restorePageTitle();
-        notices.notifyText("problem", "일본어 원문입니다");
-        notices.setOriginalAction(() => {
-          void render(false);
-        }, "한국어 번역 보기");
-      });
+        void render(false);
+      }, "한국어 번역 보기");
+    };
+    if (isProblemPage) {
+      notices.setOriginalAction(showOriginal);
       notices.notifyText("problem", "문제 번역을 불러오고 있습니다.");
     }
     if (renew) {
@@ -188,51 +212,148 @@ declare global {
         titlesReady = true;
         applyReadyTranslations();
         if (!isProblemPage || !problemLive()) return;
-        const outcome =
-          await globalThis.yukicoderProblemTranslations?.translateProblem(
-            problemLive,
-            result.catalog,
-            { refresh: renew },
-          );
-        if (!problemLive()) return;
-        if (outcome?.status !== "applied") {
-          restorePageTitle();
-          notices.setOriginalAction(undefined);
-          notices.notifyText("problem", "");
-        }
-        if (outcome?.status === "failed") {
-          console.warn(
-            "[yukicoder-ko] Problem translation was not applied",
-            outcome.detail,
-          );
-          notify(
-            "problem",
-            outcome.reason === "network"
-              ? "problemLoadFailed"
-              : "problemVerificationFailed",
-            outcome.reason === "network",
-          );
-        }
-        if (outcome?.status === "applied") {
-          notices.notifyText("problem", "한국어 번역본 입니다.");
-          void outcome.verification?.then((result) => {
-            if (!problemLive() || result.status === "cancelled") return;
-            notices.notifyText(
-              "problem",
-              result.status === "changed"
-                ? "번역 시점과 문제가 달라졌습니다. 원문을 확인해 주세요."
-                : result.status === "unavailable"
-                  ? "원문 변경 여부를 확인하지 못했습니다. 원문을 확인해 주세요."
-                  : "한국어 번역본 입니다.",
-            );
-          });
-        } else if (outcome?.status === "unavailable") {
-          notices.notifyText(
-            "problem",
-            "이 문제의 번역이 없어 원문을 표시합니다.",
-          );
-        }
-        applyReadyTranslations();
+        let applying = false;
+        let generation = 0;
+        let applied: Extract<ProblemOutcome, { status: "applied" }> | undefined;
+        let attemptedTargets: Element[] = [];
+        const targets = () => {
+          const content = document.querySelector("#content[data-problem-id]");
+          const title = content?.querySelector(":scope > h3");
+          const blocks = content ? sourceStatementBlocks(content) : [];
+          return content && title && blocks.length
+            ? [content, title, ...blocks]
+            : [];
+        };
+        const check = () => {
+          if (!problemLive() || applying) return;
+          if (applied && (!applied.isApplied || applied.isApplied())) return;
+          const currentTargets = targets();
+          // A site rebuild may remove and insert its statement in separate tasks.
+          if (!currentTargets.length) return;
+          if (
+            !applied &&
+            currentTargets.length === attemptedTargets.length &&
+            currentTargets.every(
+              (node, index) => node === attemptedTargets[index],
+            )
+          )
+            return;
+          void translateBody(false);
+        };
+        const translateBody = async (refresh: boolean) => {
+          if (!problemLive() || applying) return;
+          applying = true;
+          const attempt = ++generation;
+          const attemptLive = () => problemLive() && attempt === generation;
+          attemptedTargets = targets();
+          applied = undefined;
+          retrySource = undefined;
+          retryLoading = undefined;
+          pageTitleEnabled = true;
+          notices.setOriginalAction(showOriginal);
+          notices.notifyText("source", "");
+          notices.notifyText("problem", "문제 번역을 불러오고 있습니다.");
+          try {
+            const outcome =
+              await globalThis.yukicoderProblemTranslations?.translateProblem(
+                attemptLive,
+                result.catalog,
+                { refresh },
+              );
+            if (!attemptLive()) return;
+            if (outcome?.status !== "applied") {
+              restorePageTitle();
+              notices.setOriginalAction(undefined);
+              notices.notifyText("problem", "");
+            }
+            if (outcome?.status === "failed") {
+              console.warn(
+                "[yukicoder-ko] Problem translation was not applied",
+                outcome.detail,
+              );
+              notify(
+                "problem",
+                outcome.reason === "network"
+                  ? "problemLoadFailed"
+                  : "problemVerificationFailed",
+                outcome.reason === "network",
+              );
+            }
+            if (outcome?.status === "applied") {
+              applied = outcome;
+              notices.notifyText("problem", "한국어 번역본 입니다.");
+              let verificationRevision = 0;
+              const reportVerification = (result: SourceVerification) => {
+                if (!attemptLive() || result.status === "cancelled") return;
+                const warning =
+                  result.status === "changed" ||
+                  result.status === "unavailable";
+                notices.notifyText(
+                  "problem",
+                  warning ? "" : "한국어 번역본 입니다.",
+                );
+                notices.notifyText(
+                  "source",
+                  result.status === "changed"
+                    ? "번역 시점과 문제가 달라졌습니다. 원문을 확인해 주세요."
+                    : result.status === "unavailable"
+                      ? "원문 변경 여부를 확인하지 못했습니다. 원문을 확인해 주세요."
+                      : "",
+                  result.status === "unavailable",
+                );
+              };
+              const watchVerification = async (
+                verification?: Promise<SourceVerification>,
+              ) => {
+                const currentVerification = ++verificationRevision;
+                if (!verification) return;
+                try {
+                  const result = await verification;
+                  if (currentVerification === verificationRevision)
+                    reportVerification(result);
+                } catch {
+                  if (currentVerification === verificationRevision)
+                    reportVerification({ status: "unavailable" });
+                }
+              };
+              retrySource = async () => {
+                if (!attemptLive()) return;
+                try {
+                  const retried =
+                    await globalThis.yukicoderProblemTranslations?.translateProblem(
+                      attemptLive,
+                      result.catalog,
+                      { retryVerification: true },
+                    );
+                  if (!attemptLive() || retried?.status === "cancelled") return;
+                  if (retried?.status === "applied")
+                    await watchVerification(retried.verification);
+                  else reportVerification({ status: "unavailable" });
+                } catch {
+                  reportVerification({ status: "unavailable" });
+                }
+              };
+              void watchVerification(outcome.verification);
+            } else if (outcome?.status === "unavailable") {
+              notices.notifyText(
+                "problem",
+                "이 문제의 번역이 없어 원문을 표시합니다.",
+              );
+            }
+            applyReadyTranslations();
+          } catch (error) {
+            if (!attemptLive()) return;
+            console.warn("[yukicoder-ko] Problem translation failed", error);
+            restorePageTitle();
+            notices.setOriginalAction(undefined);
+            notify("problem", "problemLoadFailed", true);
+          } finally {
+            applying = false;
+            if (attemptLive()) check();
+          }
+        };
+        checkProblem = check;
+        await translateBody(renew);
       })
       .catch((error) => {
         if (!problemLive()) return;

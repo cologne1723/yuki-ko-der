@@ -1,0 +1,65 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3002
+problemId: 11814
+sourceTitle: "多項式の割り算 〜easy〜"
+sourceHtmlSha256: 9278fa5b46c18dd2de2b7f97b45c6e4c06d46d2a0d7f35aa935a2acac8fe2bd5
+humanReview: null
+machineReview: unreviewed
+title: "다항식의 나눗셈 ~쉬움~"
+---
+
+## 문제 설명
+
+입력으로 주어지는 정수 $A$, $B$에 대하여 다항식 $Ax^B$를 $x^2+x+1$로 나눈 나머지를 구하세요.
+
+## 입력
+
+```text
+$A\ B$
+```
+
+## 제한
+
+- $-10^4 \leq A \leq 10^4$
+- $0 \leq B \leq 10^4$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+나눈 나머지를 $ax+b$로 나타낼 수 있을 때, $a\ b$를 반각 공백 하나로 구분하여 출력하고 마지막에 개행을 출력하세요. 답이 $64$비트 정숫값에 들어간다는 것을 증명할 수 있습니다.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+1 3
+```
+
+#### 출력
+
+```text
+0 1
+```
+
+$x^3=(x-1)(x^2+x+1)+1$입니다.
+
+### 예제 2 {file="01_sample_02.txt"}
+
+#### 입력
+
+```text
+2 5
+```
+
+#### 출력
+
+```text
+-2 -2
+```
+
+$2x^5=2(x^3-x^2+1)(x^2+x+1)-2x-2$입니다.

@@ -1,0 +1,98 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3271
+problemId: 12552
+sourceTitle: "PQ Dot Product"
+sourceHtmlSha256: "ef56e59821acc74ddef59632014191f19b3d22f4e9b3d694a2168cd7334dcdd7"
+humanReview: null
+machineReview: unreviewed
+title: "PQ 내적"
+---
+
+## 문제 설명
+
+양의 정수 $N$, $K$가 주어집니다.
+
+$(1,2,\dots,N)$의 순열의 쌍 $(P=(P_1,P_2,\dots,P_N), Q=(Q_1,Q_2,\dots,Q_N))$ 중 다음 조건을 만족하는 것이 존재하는지 판정하고, 존재한다면 그중 $1$쌍을 출력하세요.
+
+- $\displaystyle\sum_{i=1}^{N} P_iQ_i=K$
+
+## 입력
+
+```text
+$N\ K$
+```
+
+입력은 모두 정수입니다.
+
+## 제한
+
+- $1\le N\le 2\times 10^5$
+- $1\le K\le 10^{16}$
+
+## 출력
+
+조건을 만족하는 순열의 쌍 $(P,Q)$가 존재하지 않으면 `No`를 출력하세요.
+
+존재한다면 다음 형식에 따라 $1$번째 줄에 `Yes`, $2$번째 줄에 $P$, $3$번째 줄에 $Q$를 출력하세요.
+
+```text
+Yes
+$P_1\ P_2\ \dots\ P_N$
+$Q_1\ Q_2\ \dots\ Q_N$
+```
+
+조건을 만족하는 순열의 쌍이 여러 개 존재하는 경우, 그중 어느 것을 출력해도 정답으로 인정됩니다.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+4 22
+```
+
+#### 출력
+
+```text
+Yes
+4 2 1 3
+2 4 3 1
+```
+
+$P=(4,2,1,3)$, $Q=(2,4,3,1)$일 때 $\displaystyle\sum_{i=1}^{4}P_iQ_i=4\times2+2\times4+1\times3+3\times1=22$입니다.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+6 8
+```
+
+#### 출력
+
+```text
+No
+```
+
+조건을 만족하는 순열의 쌍은 존재하지 않습니다.
+
+### 예제 3 {file=""}
+
+#### 입력
+
+```text
+7 123
+```
+
+#### 출력
+
+```text
+Yes
+1 2 3 4 5 6 7
+3 2 7 1 4 6 5
+```

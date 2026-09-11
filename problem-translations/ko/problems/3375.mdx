@@ -1,0 +1,86 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3375
+problemId: 12695
+sourceTitle: "Binary Grid"
+sourceHtmlSha256: "662c788d2e14faaf9d24993cb982d756c02d465c741d5421ea4b9949cb1b02bf"
+humanReview: null
+machineReview: unreviewed
+title: "이진 격자"
+---
+
+## 문제 설명
+
+무한히 넓은 이차원 격자가 있습니다. 위에서 $r$번째, 왼쪽에서 $c$번째 칸을 칸 $(r,c)$이라고 합니다.
+
+칸 $(r,c)$는 $r$을 이진수로 나타냈을 때 $2^{c-1}$의 자리 값이 $1$이면 검은 칸이고, $0$이면 흰 칸입니다.
+
+![](data:image/png;base64,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)
+
+당신은 처음에 칸 $(1,1)$에 있습니다. $1$번 이동할 때마다 현재 칸에서 **$8$방향으로 인접한 검은 칸 중 $1$개**를 선택하여 그 칸으로 이동할 수 있습니다.
+
+목적지를 검은 칸 $(R,C)$로 정했을 때, 최소 몇 번 이동하면 도착할 수 있는지 구하세요.
+
+여기서 이 문제의 제한 아래에서는 칸 $(1,1)$에서 어떤 검은 칸으로도 유한 횟수의 이동으로 도달할 수 있음이 증명됩니다.
+
+$T$개의 테스트 케이스가 주어지므로, 각각에 대해 답을 구하세요.
+
+## 입력
+
+입력은 다음 형식으로 표준 입력에서 주어집니다. 여기서 $\mathrm{case}_t\ (1\leq t\leq T)$는 $t$번째 테스트 케이스를 나타냅니다.
+
+```text
+$T$
+$\mathrm{case}_1$
+$\mathrm{case}_2$
+$\vdots$
+$\mathrm{case}_T$
+```
+
+각 테스트 케이스는 다음 형식으로 주어집니다.
+
+```text
+$R\ C$
+```
+
+## 제한
+
+- $1\leq T\leq 10^5$
+- 각 테스트 케이스는 다음 제한을 모두 만족합니다.
+  - $1\leq R,C\leq 10^{17}$
+  - 칸 $(R,C)$는 검은 칸입니다.
+- 입력은 모두 정수입니다.
+
+## 출력
+
+$T$줄 출력하세요. $t$번째 줄에는 $t$번째 테스트 케이스의 답을 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+5
+2 2
+5 1
+111 2
+998244353 24
+99999999999999999 1
+```
+
+#### 출력
+
+```text
+1
+6
+114
+1015021566
+116172782113783824
+```
+
+$1$번째 테스트 케이스에서는 $(1,1)\to(2,2)$로 이동하면 $1$번 이동으로 도착할 수 있습니다.
+
+$2$번째 테스트 케이스에서는 $(1,1)\to(2,2)\to(3,2)\to(4,3)\to(5,3)\to(6,2)\to(5,1)$로 이동하면 $6$번 이동으로 도착할 수 있습니다.

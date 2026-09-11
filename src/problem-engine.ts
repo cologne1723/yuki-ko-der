@@ -1,5 +1,6 @@
 import type { ProblemCatalog } from "translation-core/problem-catalog";
 import { sourceStatementBlocks } from "translation-core/problem-document";
+import { detectProblemRenderProfile } from "translation-core/problem-render-profile";
 import {
   createProblemLoader,
   ProblemVerificationError,
@@ -11,7 +12,11 @@ export type SourceVerification = {
   detail?: string;
 };
 export type ProblemOutcome =
-  | { status: "applied"; verification?: Promise<SourceVerification> }
+  | {
+      status: "applied";
+      verification?: Promise<SourceVerification>;
+      isApplied?: () => boolean;
+    }
   | { status: "unavailable" | "cancelled" }
   | { status: "failed"; reason: "network" | "verification"; detail: string };
 export function createProblemEngine(host: Window & typeof globalThis) {
@@ -32,29 +37,108 @@ export function createProblemEngine(host: Window & typeof globalThis) {
   );
 
   type Translation = Awaited<ReturnType<typeof loadTranslationDocument>>;
-  type CanonicalResult = SourceVerification & { semantic?: string };
-  let session:
-    | {
-        key: string;
-        translation: Promise<Translation>;
-        verification?: Promise<CanonicalResult>;
-      }
-    | undefined;
+  type CanonicalResult = SourceVerification & { sourceHtml?: string };
+  type Session = {
+    key: string;
+    isCurrent: () => boolean;
+    translation: Promise<Translation>;
+    verification?: Promise<CanonicalResult>;
+  };
+  type Replacement = Awaited<ReturnType<typeof prepareReplacement>>;
+  let session: Session | undefined;
   let applicationRevision = 0;
-  let activeOutcome: ProblemOutcome | undefined;
-  let activeReplacement: ReturnType<typeof prepareReplacement> | undefined;
+  let activeReplacement: Replacement | undefined;
   function restoreProblem() {
     applicationRevision++;
-    activeOutcome = undefined;
-    activeReplacement?.restore();
+    const previous = activeReplacement;
     activeReplacement = undefined;
+    previous?.restore();
+  }
+
+  function verifySource(
+    resource: Session,
+    translation: NonNullable<Translation>,
+  ) {
+    if (resource.verification) return resource.verification;
+    const request = (async (): Promise<CanonicalResult> => {
+      try {
+        // Only validated API identity and raw bytes establish source changes.
+        const sourceHtml = await verifyCanonicalSource(translation);
+        return { status: "verified", sourceHtml };
+      } catch (error) {
+        return {
+          status:
+            error instanceof ProblemVerificationError
+              ? "changed"
+              : "unavailable",
+          detail: String(error),
+          sourceHtml:
+            error instanceof ProblemVerificationError
+              ? error.sourceHtml
+              : undefined,
+        };
+      }
+    })();
+    resource.verification = request;
+    void request.then((result) => {
+      if (result.status === "unavailable" && resource.verification === request)
+        resource.verification = undefined;
+    });
+    return request;
+  }
+
+  function appliedOutcome(
+    resource: Session,
+    translation: NonNullable<Translation>,
+    apply: Replacement,
+    shouldApply: () => boolean,
+  ): ProblemOutcome {
+    const isApplied = () =>
+      session === resource &&
+      resource.isCurrent() &&
+      activeReplacement === apply &&
+      apply.isActive();
+    return {
+      status: "applied",
+      isApplied,
+      verification: verifySource(resource, translation).then(
+        (result): SourceVerification => {
+          if (!shouldApply() || !isApplied()) return { status: "cancelled" };
+          return { status: result.status, detail: result.detail };
+        },
+      ),
+    };
   }
 
   async function translateProblem(
     shouldApply = () => true,
     catalog?: ProblemCatalog,
-    options: { refresh?: boolean } = {},
+    options: { refresh?: boolean; retryVerification?: boolean } = {},
   ): Promise<ProblemOutcome> {
+    // Source-only retries never change the current view or cancel preparation.
+    if (options.retryVerification) {
+      const resource = session;
+      const apply = activeReplacement;
+      if (
+        !resource ||
+        !apply ||
+        !apply.isActive() ||
+        !resource.isCurrent() ||
+        !shouldApply()
+      )
+        return { status: "cancelled" };
+      const translation = await resource.translation;
+      if (
+        !translation ||
+        session !== resource ||
+        activeReplacement !== apply ||
+        !apply.isActive() ||
+        !resource.isCurrent() ||
+        !shouldApply()
+      )
+        return { status: "cancelled" };
+      return appliedOutcome(resource, translation, apply, shouldApply);
+    }
     let current = ++applicationRevision;
     const live = () => current === applicationRevision && shouldApply();
     try {
@@ -97,7 +181,10 @@ export function createProblemEngine(host: Window & typeof globalThis) {
         current = applicationRevision;
       }
       if (!live()) return { status: "cancelled" };
-      if (activeReplacement && activeOutcome) return activeOutcome;
+      if (activeReplacement && !activeReplacement.isActive()) {
+        restoreProblem();
+        current = applicationRevision;
+      }
       if (!pageProblemId) {
         throw new ProblemVerificationError(
           "Problem page structure is unavailable",
@@ -105,8 +192,14 @@ export function createProblemEngine(host: Window & typeof globalThis) {
       }
 
       if (!session) {
-        const created = {
+        const created: Session = {
           key,
+          isCurrent: () =>
+            location.pathname === pathMatch[0] &&
+            document.querySelector<HTMLElement>("#content[data-problem-id]")
+              ?.dataset.problemId === pageProblemId &&
+            host.YUKICODER_KO_CONFIG?.problemTranslationBaseUrl?.trim() ===
+              baseUrl,
           translation: loadTranslationDocument(
             baseUrl,
             problemNo,
@@ -121,8 +214,42 @@ export function createProblemEngine(host: Window & typeof globalThis) {
       }
       const resource = session;
       const translation = await resource.translation;
-      if (!live() || session !== resource) return { status: "cancelled" };
+      if (!live() || session !== resource || !resource.isCurrent())
+        return { status: "cancelled" };
       if (!translation) return { status: "unavailable" };
+      if (activeReplacement?.isActive())
+        return appliedOutcome(
+          resource,
+          translation,
+          activeReplacement,
+          shouldApply,
+        );
+      const profile = detectProblemRenderProfile(document);
+      if (!profile) throw new Error("Problem render settings are unavailable");
+      const sourceSamplesSha256 = expected?.sourceSamplesSha256;
+      const hasSamples = (blocks: Element[]) =>
+        blocks.some(
+          (block) => block.matches(".sample") || block.querySelector(".sample"),
+        );
+      let canonicalBlocks: Element[] | undefined;
+      const pageBlocks = sourceStatementBlocks(
+        document.querySelector("#content[data-problem-id]")!,
+      );
+      if (
+        !sourceSamplesSha256 &&
+        (hasSamples(translation.blocks) || hasSamples(pageBlocks))
+      ) {
+        const result = await verifySource(resource, translation);
+        if (!live() || session !== resource || !resource.isCurrent())
+          return { status: "cancelled" };
+        if (!result.sourceHtml)
+          throw new Error(
+            result.detail ?? "Canonical sample source is unavailable",
+          );
+        canonicalBlocks = sourceStatementBlocks(
+          parseHtml(result.sourceHtml).body,
+        );
+      }
       // The site can rebuild the statement while the download is in flight.
       // Re-read the live nodes and identity instead of modifying detached ones.
       const currentContent = document.querySelector<HTMLElement>(
@@ -140,63 +267,40 @@ export function createProblemEngine(host: Window & typeof globalThis) {
         throw new ProblemVerificationError(
           "Problem page structure is unavailable",
         );
-      const displayedSource = semanticStatement(liveBlocks);
-      let apply: ReturnType<typeof prepareReplacement>;
+      let apply: Replacement;
       try {
-        apply = prepareReplacement(
+        apply = await prepareReplacement(
           translation,
           liveTitle,
           liveBlocks,
-          liveBlocks,
+          canonicalBlocks ?? liveBlocks,
+          {
+            profile,
+            sourceUrl: new URL(`/problems/no/${problemNo}`, location.origin)
+              .href,
+            fontUrl: (host.browser ?? host.chrome)?.runtime?.getURL?.(
+              "mathjax/fonts/woff-v2",
+            ),
+            sourceSamplesSha256,
+          },
         );
       } catch (error) {
         throw new ProblemVerificationError(String(error));
       }
-      if (!live() || activeReplacement) return { status: "cancelled" };
+      if (
+        !live() ||
+        session !== resource ||
+        !resource.isCurrent() ||
+        activeReplacement
+      )
+        return { status: "cancelled" };
       try {
         apply();
       } catch (error) {
         throw new ProblemVerificationError(String(error));
       }
       activeReplacement = apply;
-      // Verification belongs to the page resource, not to a particular view.
-      // Switching to Japanese must not cancel a request another view can reuse.
-      resource.verification ??= (async (): Promise<CanonicalResult> => {
-        try {
-          const canonicalHtml = await verifyCanonicalSource(translation);
-          return {
-            status: "verified",
-            semantic: semanticStatement(
-              sourceStatementBlocks(parseHtml(canonicalHtml).body),
-            ),
-          };
-        } catch (error) {
-          return {
-            status:
-              error instanceof ProblemVerificationError
-                ? "changed"
-                : "unavailable",
-            detail: String(error),
-          };
-        }
-      })();
-      const verification = resource.verification.then(
-        (result): SourceVerification => {
-          if (
-            !shouldApply() ||
-            session !== resource ||
-            activeReplacement !== apply
-          )
-            return { status: "cancelled" };
-          if (result.status !== "verified") return result;
-          return {
-            status:
-              result.semantic === displayedSource ? "verified" : "changed",
-          };
-        },
-      );
-      activeOutcome = { status: "applied", verification };
-      return activeOutcome;
+      return appliedOutcome(resource, translation, apply, shouldApply);
     } catch (error) {
       if (!live()) return { status: "cancelled" };
       return {

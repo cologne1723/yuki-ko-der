@@ -1,0 +1,107 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3362
+problemId: 12808
+sourceTitle: "積分!!!"
+sourceHtmlSha256: "69499fc36add0a2abcfc3a886d945b10039c703ca3d9ab9f0d17cf17c6325ccd"
+humanReview: null
+machineReview: unreviewed
+title: "적분!!!"
+---
+
+## 문제 설명
+
+음이 아닌 정수 $N$과 수열 $K_0,K_1,K_2,\dots,K_N$이 주어집니다.
+
+이 수열은 다음과 같은 $x$의 다항식 함수를 나타냅니다.
+
+$f(x)=K_0x^0+K_1x^1+K_2x^2+\dots+K_ix^i+\dots+K_Nx^N$
+
+정수 $A,B$가 $A\leq B$를 만족하도록 주어집니다. $f(x)$를 구간 $[A,B]$에서 정적분한 값을 $X$라고 할 때, $\lfloor X\rfloor$를 출력하세요.
+
+## 입력
+
+입력은 다음 형식으로 주어집니다.
+
+```text
+$N\ A\ B$
+$K_0$
+$K_1$
+$K_2$
+$\vdots$
+$K_N$
+```
+
+$1$번째 줄에 $N$, $A$, $B$가 공백으로 구분되어 주어집니다.
+
+이후 $N+1$개의 줄에 $K_0,K_1,\dots,K_N$이 순서대로 주어집니다.
+
+## 제한
+
+- $N$, $A$, $B$, $K_i$는 모두 정수입니다.
+- $0\leq N\leq 10$
+- $-10\leq A\leq B\leq 10$
+- $-10^5\leq K_i\leq 10^5\ (0\leq i\leq N)$
+
+## 출력
+
+$\lfloor X\rfloor$를 정수로 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+2 0 1
+1
+2
+1
+```
+
+#### 출력
+
+```text
+2
+```
+
+$x^2+2x+1$을 $[0,1]$에서 정적분하면 $7/3=2.3333\dots$가 됩니다.
+
+$\lfloor 2.3333\dots\rfloor=2$이므로 $2$를 출력합니다.
+
+### 예제 2 {file="01_sample_02.txt"}
+
+#### 입력
+
+```text
+5 -1 1
+0
+0
+0
+0
+0
+1
+```
+
+#### 출력
+
+```text
+0
+```
+
+### 예제 3 {file="01_sample_03.txt"}
+
+#### 입력
+
+```text
+0 0 1
+9999
+```
+
+#### 출력
+
+```text
+9999
+```

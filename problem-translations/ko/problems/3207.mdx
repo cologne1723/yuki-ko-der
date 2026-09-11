@@ -1,0 +1,144 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3207
+problemId: 12500
+sourceTitle: "Digital Font "
+sourceHtmlSha256: "26016874ee4285b7942a4d0e518671a0b6859cdfb35a43b056975a9d6d2827b0"
+humanReview: null
+machineReview: unreviewed
+title: "디지털 폰트"
+---
+
+## 이야기
+
+![문제의 폰트 예시](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYQAAAB8CAYAAABpC8cTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAEcUlEQVR4nO3d0YrjOBAF0Otl/3uYL/c+tDKwgRCpR5ZL6XOem7iQ3FwVtqzjPM8zAPx4/9xdAAA1CAQAkggEABqBAEASgQBAIxAASCIQAGj+7f3D4ziurOOPq7ZFvKp/9fVmG61/t7q+Oz+zfm+38ZpNXWN2r0uHAECS5Hi3U3lVgj2btXLvrX/19WZ7V//udfXOz6zf2328ZlPXmF3r0iEAkEQgANAIBACSCAQAGoEAQJKBfQj0eTzFv+stgleq1sWXqseSVK2La+gQAEgysUOY/Z747qrua6ha166qrqB3r2v1/aWuLzoEAJIIBAAagQBAEoEAQCMQAEgiEABoBAIASQQCAI1AACCJbxldpupO3qp1vVO17ll1zd5ZXLWuqj79/uqlQwAgiQ5hOisNvuMxP9VW5FXr4ho6BACS6BCAD7b6HJDdOykdAgBJdAjAB1v97Gz3Zy46BACS6BC217sSqXqm8nP9VeqrOl5VvRuvXVfMV6l6f+kQAEiiQ7jNXSum6mcq/219zqD+ctcZwbt2AruPlzOVAZhKIACQRCAA0AgEAJIIBAAagQBAEoEAQCMQAEgiEABopu1UrvZNjuruOvPWPI3Zdbx2rfsud41XtXnSIQCQxLeMttf7/fVqK5HqjBdXqnp/6RAASCIQAGgEAgBJBAIAjUAAIElynJ0vsq96Kn7ViUurz3qtOl5V65pt1nxXHa+qdc1mHuforUuHAECSgQ4BgM+mQwAgiUAAoBEIACQRCAA0AgGAJAIBgEYgAJBk4DyE4/h9ZR1/nOevS373Vf2rrzfbaP2/F+2M/DW4veVVXaO/M1vVeaxal3ncex51CAAk6dipvCrBns1auffWv/p6s72rf1Vn8OzdyrC3rtUrzKrzWLUu8/h/u86jDgGAJAIBgEYgAJBEIADQCAQAkgzsQ6DP4yn+XW8RVHH3e+e7uWo/DCT2IQAwaFqH0JtAP2XlvOu+Biv7MVVX9v4fx1Qdr9X3lw4BgCQCAYBGIACQRCAA0AgEAJIIBAAagQBAEoEAQCMQAEjiW0aX2XUH6KyT1WbveP7buq7agT1rnmfvSN31/nu26ozmquO1+v7SIQCQRIcwXdWVxmqPlV2VbyM9rzSr1PXwuG+qfhtptXcdYbX7q7re+0uHAEASHQLwwVafT7J7h6dDACCJDgH4YKuf6e3+LEiHAEASHcL2qq5Edn/7o+rZ2FXr4jPoEABIokO4jZX9mN66Zu20fqh6NnbVuna1+5nKs+rSIQCQRCAA0AgEAJIIBAAagQBAEoEAQCMQAEgiEABoBAIASSbuVLbjcUzVs3irnql8l6r3ddW63pm9k3yWquO5ui4dAgBJfMtoe1W/v777mbdWjPxEOgQAkggEABqBAEASgQBAIxAASJIc59n3GsiqtxuuelvmVf2rrzfbaP2r3gMffbvoVV3ffUtp1u9VnceqdVW9v6qOV7W6dAgAJBnoEAD4bDoEAJIIBAAagQBAEoEAQCMQAEgiEABoBAIASZL/AB8wvLIRHe3IAAAAAElFTkSuQmCC)
+
+위 이미지와 같은 폰트에서는 `0`, `1`, `2`, `5`, `8`이 점대칭이므로 $180$도 회전해도 변하지 않습니다.
+
+반면 `6`, `9`는 $180$도 회전하면 각각 `9`, `6`으로 변합니다. `3`, `4`, `7`은 읽을 수 없습니다.
+
+## 문제 설명
+
+$H$행 $W$열인 행렬 $A$가 있습니다. $A_{i,j}$는 $i$행 $j$열의 값을 나타냅니다.
+
+행렬 $A$의 각 원소는 $k=1,2,\ldots,N$에 대해 $A_{i_k,j_k}=x_k$이고, 그 외의 원소는 모두 $0$입니다.
+
+다음 형식의 $Q$개 질의를 순서대로 처리하세요.
+
+- $l\ d\ r\ u$ 형식으로 주어집니다. 행이 $l$ 이상 $r$ 이하이고 열이 $d$ 이상 $u$ 이하인 원소로 이루어진 행렬 $A$의 부분행렬이 점대칭이면 `Yes`, 그렇지 않으면 `No`를 출력하세요.
+
+### 행렬이 점대칭인 조건
+
+$x \ ( x \in \{0, 1, 2, 5, 6, 8, 9 \} )$를 $180$도 회전하는 함수 $f(x)$를 다음과 같이 정의합니다.
+
+$f(x)=\begin{cases}0 & \text{if } x=0 \\ 1 & \text{if } x=1 \\ 2 & \text{if } x=2 \\ 5 & \text{if } x=5 \\ 9 & \text{if } x=6 \\ 8 & \text{if } x=8 \\ 6 & \text{if } x=9\end{cases}$
+
+이렇게 정의한 $f(x)$를 사용하여 모든 $(i,j)$ ($l\leq i\leq r$, $d\leq j\leq u$)에 대해
+
+$A_{i,j}=f(A_{r+l-i,u+d-j})$
+
+가 성립하면 `Yes`, 그렇지 않으면 `No`를 출력하세요.
+
+## 입력
+
+```text
+$H\ W$
+$N$
+$i_1\ j_1\ x_1$
+$i_2\ j_2\ x_2$
+$\vdots$
+$i_N\ j_N\ x_N$
+$Q$
+$l_1\ d_1\ r_1\ u_1$
+$l_2\ d_2\ r_2\ u_2$
+$\vdots$
+$l_Q\ d_Q\ r_Q\ u_Q$
+```
+
+- $1$번째 줄에 행렬의 행 수 $H$와 열 수 $W$가 주어집니다.
+- $2$번째 줄에 값이 주어진 원소의 개수 $N$이 주어집니다.
+- 다음 $N$개 줄에 $i_k$, $j_k$, $x_k$가 주어지며, 각각 $A_{i_k,j_k}=x_k$를 나타냅니다.
+- 그다음 줄에 질의의 개수 $Q$가 주어집니다.
+- 다음 $Q$개 줄에 각 질의의 $l$, $d$, $r$, $u$가 주어집니다.
+
+## 제한
+
+- $1\leq H,W\leq 10^5$
+- $0\leq N\leq\min(HW,10^5)$
+- $1\leq i_k\leq H$
+- $1\leq j_k\leq W$
+- $x_k\in\{0,1,2,5,6,8,9\}$
+- $(i_k,j_k)$의 조합은 서로 다릅니다.
+- $1\leq Q\leq 10^5$
+- $1\leq l\leq r\leq H$
+- $1\leq d\leq u\leq W$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+$Q$줄에 걸쳐 출력하세요. $i$번째 줄에는 $i$번째 질의에 대한 답을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_1.txt"}
+
+#### 입력
+
+```text
+5 7
+14
+1 1 2
+1 3 6
+1 4 9
+1 5 8
+3 1 1
+3 2 5
+3 4 5
+3 5 1
+3 7 2
+5 1 8
+5 2 6
+5 3 9
+5 5 2
+5 7 1
+7
+1 1 5 5
+1 1 5 7
+3 5 5 7
+2 2 2 7
+1 3 5 3
+5 1 5 1
+1 5 3 5
+```
+
+#### 출력
+
+```text
+Yes
+No
+Yes
+Yes
+Yes
+Yes
+No
+```
+
+### 예제 2 {file="01_sample_2.txt"}
+
+#### 입력
+
+```text
+100000 100000
+0
+1
+1 1 100000 100000
+```
+
+#### 출력
+
+```text
+Yes
+```
+
+$N=0$인 경우도 있습니다.

@@ -1,0 +1,107 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3171
+problemId: 6221
+sourceTitle: "Color Restoration"
+sourceHtmlSha256: "60d34e7317c27ed14c7842b43da564bad37ab434434c404ff3bdcae589f91cc1"
+humanReview: null
+machineReview: unreviewed
+title: "색 복원"
+---
+
+## 문제 설명
+
+ゆきこちゃん은 $3$개의 웹 사이트(OneCoder, Twocoder, Threeforces)에서 경쟁 프로그래밍을 하고 있습니다.
+
+각 웹 사이트에는 레이팅에 따라 다음 색이 붙습니다.
+
+- OneCoder에는 `gray`, `brown`, `green`, `cyan`, `blue`, `yellow`, `orange`, `red`의 $8$가지 색이 있습니다.
+- Twocoder에는 `gray`, `green`, `blue`, `yellow`, `red`의 $5$가지 색이 있습니다.
+- Threeforces에는 `gray`, `green`, `cyan`, `blue`, `violet`, `orange`, `red`의 $7$가지 색이 있습니다.
+
+ゆきこちゃん은 자신이 어떤 색이었는지는 기억하지만, 어느 사이트에서 어떤 색이었는지는 잊어버렸습니다. 그래서 $3$개의 색을 보고 어느 사이트의 색인지 추정하려고 합니다.
+
+$3$개의 색이 주어집니다. 이 색들을 OneCoder, Twocoder, Threeforces의 조합으로 볼 수 있는 방법이 정확히 $1$가지라면 `Yes`를, $0$가지 또는 $2$가지 이상이라면 `No`를 출력하세요.
+
+다음은 복사하여 붙여넣을 때 사용할 수 있는 내용입니다.
+
+```text
+"gray","brown","green","cyan","blue","yellow","orange","red"
+"gray","green","blue","yellow","red"
+"gray","green","cyan","blue","violet","orange","red"
+```
+
+```text
+'gray','brown','green','cyan','blue','yellow','orange','red'
+'gray','green','blue','yellow','red'
+'gray','green','cyan','blue','violet','orange','red'
+```
+
+## 입력
+
+입력은 다음 형식으로 주어집니다.
+
+```text
+$S_1\ S_2\ S_3$
+```
+
+$3$개의 문자열 $S_1$, $S_2$, $S_3$는 각각 `gray`, `brown`, `green`, `cyan`, `blue`, `violet`, `yellow`, `orange`, `red` 중 하나입니다.
+
+## 출력
+
+각 웹 사이트의 조건을 만족하도록 색을 배정하는 방법이 정확히 $1$가지라면 `Yes`를, 그렇지 않다면 `No`를 출력하세요.
+
+마지막에 개행을 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+gray green blue
+```
+
+#### 출력
+
+```text
+No
+```
+
+`(OneCoder,Twocoder,Threeforces)=(gray,green,blue),(gray,blue,green),(green,gray,blue),(green,blue,gray),(blue,gray,green),(blue,green,gray)`의 $6$가지 조합이 가능하므로 `No`를 출력합니다.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+violet red orange
+```
+
+#### 출력
+
+```text
+Yes
+```
+
+`violet`은 Threeforces에만 있으므로 `violet`이 Threeforces의 색임을 알 수 있습니다. 남은 `red`, `orange` 중 `orange`는 OneCoder와 Twocoder 중 OneCoder에만 있으므로 `orange`가 OneCoder의 색임을 알 수 있습니다. 따라서 남은 `red`가 Twocoder의 색입니다.
+
+그러므로 `(OneCoder,Twocoder,Threeforces)=(orange,red,violet)`의 $1$가지로 정할 수 있으므로 `Yes`를 출력합니다.
+
+### 예제 3 {file=""}
+
+#### 입력
+
+```text
+red red red
+```
+
+#### 출력
+
+```text
+Yes
+```
+
+`(OneCoder,Twocoder,Threeforces)=(red,red,red)`의 $1$가지로 정할 수 있으므로 `Yes`를 출력합니다.

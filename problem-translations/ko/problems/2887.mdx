@@ -1,0 +1,74 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2887
+problemId: 11178
+sourceTitle: "Minahoshi (Easy)"
+sourceHtmlSha256: "df5191784086db20c90f982605d32e302351b9f40d19b6110a1e80f28728057b"
+humanReview: null
+machineReview: unreviewed
+title: "Minahoshi (쉬움)"
+---
+
+## 이야기
+
+みなほしちゃん은 문자열에 대해 공부하고 있습니다.
+
+LCP array에 대해 공부하던 중, 문자열 `mississippi`가 자신의 이름인 `minahoshi`와 매우 비슷하다는 사실을 깨닫고 LCP array에 대해 더 자세히 알고 싶어졌습니다.
+
+귀여운 みなほしちゃん을 위해 LCP array에 관한 문제를 풀어 주세요.
+
+## 문제 설명
+
+### 배경
+
+길이 $N$인 문자열 $S$의 $N$개 접미사를 사전순으로 정렬한 배열을 $S$의 suffix array라고 합니다.
+
+$i=1,2,\dots,N-1$에 대해, $S$의 suffix array에서 $i$번째 원소와 $i+1$번째 원소의 최장 공통 접두사의 길이를 구해 나열한 배열을 $S$의 LCP array(Longest Common Prefix Array)라고 합니다.
+
+예를 들어, $S=$`abba`의 $4$개 접미사는 `abba`, `bba`, `ba`, `a`입니다. 이를 사전순으로 정렬하면 [`a`, `abba`, `ba`, `bba`]가 됩니다.
+
+서로 이웃한 원소끼리의 최장 공통 접두사의 길이는 $1$, $0$, $1$이므로 문자열 `abba`의 LCP array는 $[1,0,1]$입니다.
+
+양의 정수 $N$이 주어집니다. `a` 또는 `b`로만 이루어진 길이 $N$의 문자열 중 LCP array의 원소 합이 최대가 되는 것을 구성하세요.
+
+## 입력
+
+```text
+$N$
+```
+
+양의 정수 $N$이 주어집니다.
+
+## 제한
+
+- $2 \le N \le 2 \times 10^5$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+`a` 또는 `b`로만 이루어진 길이 $N$의 문자열 중 LCP array의 원소 합이 최대가 되는 문자열을 출력하세요.
+
+주어진 $N$에 대해 조건을 만족하는 문자열이 여러 개라면, 그중 어느 것이든 정답으로 인정됩니다.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+3
+```
+
+#### 출력
+
+```text
+aaa
+```
+
+`aaa`의 LCP array는 $[1,2]$이고 합은 $3$입니다.
+
+이는 길이 $3$의 `a` 또는 `b`로만 이루어진 문자열에서 가능한 LCP array 원소 합의 최댓값입니다.
+
+이 외에도 `bbb` 등을 출력하면 정답으로 인정됩니다.

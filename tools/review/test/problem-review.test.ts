@@ -107,6 +107,156 @@ async function fixtureRoot(): Promise<string> {
   return root;
 }
 
+test("review reads the saved per-problem render profile and exposes unavailable or corrupt evidence", async (t) => {
+  const root = await fixtureRoot();
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const { writeProblemRenderProfile } =
+    await import("translation-core/problem-render-profile-files");
+  const store = new ProblemReviewStore(root);
+  const missing = await store.get(1);
+  assert.equal(missing.renderProfile, undefined);
+  assert.equal(missing.sourceUrl, "https://yukicoder.me/problems/no/1");
+  const page =
+    '<!doctype html><title>No.1 Original - yukicoder</title><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script><div id="content"><div class="block">Original</div></div>';
+  await writeProblemRenderProfile(join(root, "data"), 1, page);
+  const saved = await store.get(1);
+  assert.deepEqual(saved.renderProfile, {
+    engine: "mathjax",
+    version: "3.2.2",
+  });
+  assert.equal(saved.japaneseHtml, missing.japaneseHtml);
+  assert.equal(saved.koreanSource, missing.koreanSource);
+  await writeFile(join(root, "data/problem-render-profiles/1.json"), "{broken");
+  const corrupt = await store.get(1);
+  assert.equal(corrupt.renderProfile, undefined);
+  assert.match(corrupt.renderProfileError!, /SyntaxError/);
+  assert.equal(corrupt.koreanSource, missing.koreanSource);
+  await writeProblemRenderProfile(
+    join(root, "data"),
+    1,
+    page.replace(
+      "mathjax@3.2.2/es5/tex-mml-chtml.js",
+      "katex@0.17.0/dist/katex.min.js",
+    ),
+  );
+  const repaired = await store.get(1);
+  assert.deepEqual(repaired.renderProfile, {
+    engine: "katex",
+    version: "0.17.0",
+  });
+  assert.equal(repaired.renderProfileError, undefined);
+});
+
+for (const initialProfile of ["missing", "corrupt"])
+  test(`explicit profile collection repairs ${initialProfile} evidence for only the selected problem`, async (t) => {
+    const root = await fixtureRoot();
+    const { createReviewApp } = await import("../src/review-server.ts");
+    const store = new ProblemReviewStore(root);
+    const before = await store.get(1);
+    const directory = join(root, "data/problem-render-profiles");
+    await mkdir(directory, { recursive: true });
+    await writeFile(join(directory, "2.json"), "unrelated evidence");
+    if (initialProfile === "corrupt")
+      await writeFile(join(directory, "1.json"), "{broken");
+    const urls: string[] = [];
+    t.mock.method(
+      globalThis,
+      "fetch",
+      async (url: string, init: RequestInit) => {
+        urls.push(url);
+        assert.equal(init.redirect, "error");
+        return new Response(
+          '<!doctype html><title>No.1 Original - yukicoder</title><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script><div id="content"><div class="block">Original</div></div>',
+          { headers: { "content-type": "text/html" } },
+        );
+      },
+    );
+    const app = createReviewApp({ repositoryRoot: root, assetRoot: root });
+    const headers = { host: "localhost", origin: "http://localhost" };
+    const read = await app.request("http://localhost/api/problems/1", {
+      headers,
+    });
+    assert.equal((await read.json()).renderProfile, undefined);
+    assert.deepEqual(urls, []);
+    const response = await app.request(
+      "http://localhost/api/problems/1/render-profile",
+      { method: "POST", headers },
+    );
+    assert.equal(response.status, 200);
+    assert.deepEqual((await response.json()).renderProfile, {
+      engine: "mathjax",
+      version: "3.2.2",
+    });
+    assert.deepEqual(urls, ["https://yukicoder.me/problems/no/1"]);
+    const after = await store.get(1);
+    assert.equal(after.koreanSource, before.koreanSource);
+    assert.equal(after.japaneseHtml, before.japaneseHtml);
+    assert.equal(
+      await readFile(join(directory, "2.json"), "utf8"),
+      "unrelated evidence",
+    );
+    assert.ok(
+      JSON.parse(await readFile(join(directory, ".request-state.json"), "utf8"))
+        .nextRequestAt > Date.now(),
+    );
+    assert.equal(
+      (
+        await app.request("http://localhost/api/problems/1/render-profile", {
+          method: "POST",
+          headers: { ...headers, origin: "https://other.example" },
+        })
+      ).status,
+      403,
+    );
+    assert.equal(
+      (
+        await app.request("http://localhost/api/problems/0/render-profile", {
+          method: "POST",
+          headers,
+        })
+      ).status,
+      400,
+    );
+    assert.equal(urls.length, 1);
+  });
+
+test("profile collection exposes failures and respects the existing collector lock", async (t) => {
+  const root = await fixtureRoot();
+  const { createReviewApp } = await import("../src/review-server.ts");
+  const { DatabaseSync } = await import("node:sqlite");
+  const directory = join(root, "data/problem-render-profiles");
+  await mkdir(directory, { recursive: true });
+  const lock = new DatabaseSync(join(directory, ".collection-lock.sqlite"));
+  lock.exec("BEGIN IMMEDIATE");
+  let requests = 0;
+  t.mock.method(globalThis, "fetch", async () => {
+    requests++;
+    return new Response("missing", { status: 404 });
+  });
+  const app = createReviewApp({ repositoryRoot: root, assetRoot: root });
+  const request = () =>
+    app.request("http://localhost/api/problems/1/render-profile", {
+      method: "POST",
+      headers: { host: "localhost", origin: "http://localhost" },
+    });
+  try {
+    const busy = await request();
+    assert.equal(busy.status, 500);
+    assert.match((await busy.json()).error, /Another ground-truth collector/);
+    assert.equal(requests, 0);
+  } finally {
+    lock.close();
+  }
+  const failed = await request();
+  assert.equal(failed.status, 502);
+  assert.match((await failed.json()).error, /HTTP 404/);
+  assert.equal(requests, 1);
+  assert.equal(
+    (await new ProblemReviewStore(root).get(1)).renderProfile,
+    undefined,
+  );
+});
+
 test("save, approve, approved edits, and unapprove follow review status rules", async () => {
   const root = await fixtureRoot();
   const store = new ProblemReviewStore(root);

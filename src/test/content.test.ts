@@ -1036,3 +1036,161 @@ for (const original of [false, true]) {
     }
   });
 }
+
+for (const finish of [
+  "verified",
+  "changed",
+  "unavailable",
+  "cancelled",
+  "original",
+  "disabled",
+  "pagehide",
+  "combined-ui",
+]) {
+  test(`source-only retry preserves translations, coalesces clicks and respects ${finish}`, async () => {
+    const { dom, close } = page(
+      '<title>No.1 題名 - yukicoder</title><main id="content"><h3>No.1 題名</h3><span id="ui">source</span><div id="translated-body">Translated body</div></main>',
+    );
+    let changed!: Change;
+    let catalogs = 0;
+    let restores = 0;
+    let bodyCalls = 0;
+    let sourceCalls = 0;
+    let uiCalls = 0;
+    let uiOffline = finish === "combined-ui";
+    let release!: (result: { status: string }) => void;
+    const verification = new Promise((resolve) => {
+      release = resolve;
+    });
+    Object.assign(dom.window, {
+      chrome: {
+        runtime: {
+          getURL: (p: string) => p,
+          sendMessage: async () => {
+            catalogs++;
+            return statusCatalog("제목");
+          },
+        },
+        storage: {
+          local: { get: async () => ({}) },
+          onChanged: {
+            addListener(fn: Change) {
+              changed = fn;
+            },
+          },
+        },
+      },
+      fetch: async () => {
+        uiCalls++;
+        if (uiOffline) throw new Error("UI unavailable");
+        return Response.json({
+          translations: [
+            { selector: "#ui", source: "source", target: "target" },
+          ],
+        });
+      },
+      yukicoderProblemTranslations: {
+        restoreProblem() {
+          restores++;
+        },
+        translateProblem: async (
+          _live: unknown,
+          _catalog: unknown,
+          options?: { retryVerification?: boolean; refresh?: boolean },
+        ) => {
+          if (options?.retryVerification) {
+            assert.equal(options.refresh, undefined);
+            sourceCalls++;
+            return {
+              status: "applied",
+              verification:
+                sourceCalls === 1
+                  ? verification
+                  : Promise.resolve({ status: "verified" }),
+            };
+          }
+          bodyCalls++;
+          return {
+            status: "applied",
+            verification: Promise.resolve({ status: "unavailable" }),
+          };
+        },
+      },
+    });
+    try {
+      dom.window.eval(code);
+      await settle();
+      const doc = dom.window.document;
+      const notice = () => doc.querySelector("#yukicoder-ko-status");
+      const body = doc.querySelector("#translated-body");
+      const beforeRestores = restores;
+      const beforeUiCalls = uiCalls;
+      assert.match(notice()!.textContent!, /확인하지 못했습니다/);
+      uiOffline = false;
+      const retry = [...notice()!.querySelectorAll("button")].find(
+        (button) => button.textContent === "다시 시도",
+      )!;
+      retry.click();
+      retry.click();
+      await settle();
+      assert.equal(sourceCalls, 1);
+      assert.equal(bodyCalls, 1);
+      assert.equal(catalogs, 1);
+      assert.equal(restores, beforeRestores);
+      assert.equal(doc.querySelector("#translated-body"), body);
+      assert.equal(doc.querySelector("#ui")!.textContent, "target");
+      if (finish !== "combined-ui") assert.equal(uiCalls, beforeUiCalls);
+      if (finish === "original")
+        [...notice()!.querySelectorAll("button")]
+          .find((button) => button.textContent === "원문 보기")!
+          .click();
+      if (finish === "disabled")
+        changed({ translationEnabled: { newValue: false } }, "local");
+      if (finish === "pagehide")
+        dom.window.dispatchEvent(new dom.window.Event("pagehide"));
+      await settle();
+      const beforeCompletion = notice()?.textContent;
+      release({
+        status: ["verified", "changed", "unavailable", "cancelled"].includes(
+          finish,
+        )
+          ? finish
+          : "verified",
+      });
+      await settle();
+      if (["original", "disabled", "pagehide", "cancelled"].includes(finish))
+        assert.equal(notice()?.textContent, beforeCompletion);
+      else if (finish === "changed")
+        assert.match(notice()!.textContent!, /문제가 달라졌습니다/);
+      else if (finish === "unavailable")
+        assert.match(notice()!.textContent!, /확인하지 못했습니다.*다시 시도/);
+      else
+        assert.equal(
+          notice()!.firstChild!.textContent,
+          "한국어 번역본 입니다.",
+        );
+      if (finish === "cancelled" || finish === "unavailable") {
+        [...notice()!.querySelectorAll("button")]
+          .find((button) => button.textContent === "다시 시도")!
+          .click();
+        await settle();
+        assert.equal(
+          sourceCalls,
+          2,
+          "settled retry must release the click guard",
+        );
+        assert.equal(
+          notice()!.firstChild!.textContent,
+          "한국어 번역본 입니다.",
+        );
+        assert.equal(restores, beforeRestores);
+        assert.equal(doc.querySelector("#translated-body"), body);
+      }
+      assert.equal(bodyCalls, 1);
+      assert.equal(catalogs, 1);
+    } finally {
+      release({ status: "cancelled" });
+      close();
+    }
+  });
+}

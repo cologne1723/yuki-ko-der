@@ -1,0 +1,208 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2974
+problemId: 9370
+sourceTitle: "関数の芽"
+sourceHtmlSha256: d7351e782e53eb5922e90df79b437cdb0d314e255bcc3f2060a942205aa67c88
+humanReview: null
+machineReview: unreviewed
+title: "함수의 싹"
+---
+
+## 문제 설명
+
+먼저 용어를 정의합니다. $f(x)$와 $g(x)$를 정의역이 실수 전체인 실숫값 함수라고 하고, $x_0$를 실수라고 합니다. $f(x)$와 $g(x)$가 $x=x_0$의 근방에서 일치한다는 것은 다음 조건을 만족하는 양의 실수 $\delta$가 존재한다는 뜻입니다.
+
+- $|x-x_0|<\delta$를 만족하는 모든 실수 $x$에 대하여 $f(x)=g(x)$입니다.
+
+즉, 대략적으로 말하면 $x_0$의 충분히 작은 근방으로 범위를 제한하면 $f(x)$와 $g(x)$의 값이 일치한다는 뜻입니다.
+
+입력의 첫 줄에 양의 정수 $Q$가 주어집니다.
+
+정의역이 실수 전체인 $2$개의 실숫값 함수 $F(x)$와 $G(x)$가 모두 항상 $0$의 값을 갖는 상수 함수로 주어집니다.
+
+다음으로 설명하는 $Q$개의 질의를 주어진 순서대로 처리하세요.
+
+각 질의는 $5$개의 정수 $K,L,M,N,X$의 순서 있는 튜플 $(K,L,M,N,X)$입니다.
+
+질의 $(K,L,M,N,X)$는 다음과 같이 처리합니다.
+
+1. 먼저 함수 $F(x)$를, 현재 함수에 $\max \{0,Kx+L\}$을 더한 함수로 바꾸어 갱신합니다.
+2. 다음으로 함수 $G(x)$를, 현재 함수에 $\max \{0,Mx+N\}$을 더한 함수로 바꾸어 갱신합니다.
+3. 마지막으로 갱신된 $F(x)$와 $G(x)$에 대하여 「$F(x)$와 $G(x)$가 $x=X$의 근방에서 일치한다」라는 명제의 참·거짓을 판정하세요. 이하 이 참·거짓을 이 질의에 대한 답이라고 합니다.
+
+### 배경
+
+[함수의 싹](https://ja.wikipedia.org/wiki/%E8%8A%BD_(%E6%95%B0%E5%AD%A6)) 이론을 아는 사람을 대상으로 배경을 설명합니다. $f(x)$와 $g(x)$를 정의역이 실수 전체인 실숫값 함수라고 하고, $x_0$를 실수라고 합니다. $f(x)$와 $g(x)$가 $x=x_0$의 근방에서 일치한다는 것은 $f(x)$와 $g(x)$의 $x=x_0$에서의 싹이 일치한다는 것과 같습니다. 즉, 이 문제는 함수의 싹이 일치하는지 판정하는 문제와 동치입니다.
+
+싹이라는 개념 자체는 함수뿐만 아니라 [층](https://ja.wikipedia.org/wiki/%E5%B1%A4_(%E6%95%B0%E5%AD%A6))의 단면이라는 더 일반적인 개념에도 정의됩니다. 함수의 싹은 주로 해석학이나 복소기하학 등에서 사용되며, 층의 단면의 싹은 대수기하학이나 범주론 등에서 매우 중요한 역할을 합니다.
+
+## 입력
+
+$Q$ 이하의 각 양의 정수 $q$에 대하여, $q$번째 질의를 $(K_q,L_q,M_q,N_q,X_q)$로 나타냅니다.
+
+입력은 다음 형식으로 표준 입력에서 $1+Q$개의 줄에 걸쳐 주어집니다.
+
+```text
+$Q$
+$K_1\ L_1\ M_1\ N_1\ X_1$
+$\vdots$
+$K_Q\ L_Q\ M_Q\ N_Q\ X_Q$
+```
+
+- 첫 번째 줄에 $Q$가 주어집니다.
+- $Q$ 이하의 각 양의 정수 $q$에 대하여, $1+q$번째 줄에 $q$번째 질의 $(K_q,L_q,M_q,N_q,X_q)$의 각 성분이 공백으로 구분되어 주어집니다.
+
+## 제한
+
+입력은 다음 제한을 만족합니다.
+
+- $Q$는 $1 \leq Q \leq 10^5$를 만족하는 정수입니다.
+- $Q$ 이하의 임의의 양의 정수 $q$에 대하여 다음이 성립합니다.
+  - $K_q$는 $-10^9 \leq K_q \leq 10^9$를 만족하는 정수입니다.
+  - $L_q$는 $-10^9 \leq L_q \leq 10^9$를 만족하는 정수입니다.
+  - $M_q$는 $-10^9 \leq M_q \leq 10^9$를 만족하는 정수입니다.
+  - $N_q$는 $-10^9 \leq N_q \leq 10^9$를 만족하는 정수입니다.
+  - $X_q$는 $-10^9 \leq X_q \leq 10^9$를 만족하는 정수입니다.
+
+## 출력
+
+$Q$ 이하의 각 양의 정수 $q$에 대하여, $q$번째 질의에 대한 답이 참이면 `Yes`를, 거짓이면 `No`를 $q$번째 줄에 출력하세요.
+
+마지막에 줄 바꿈을 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+1
+0 1 1 0 0
+```
+
+#### 출력
+
+```text
+No
+```
+
+처음에는 $F(x)$와 $G(x)$가 $0$만을 값으로 갖는 상수 함수로 주어집니다.
+
+질의 $(K_1,L_1,M_1,N_1,X_1)=(0,1,1,0,0)$에 의해 $F(x)$와 $G(x)$는
+
+$\displaystyle
+\begin{array}{rclclcl}
+\displaystyle F(x) &\displaystyle = & \displaystyle 0 + \max \{0,K_1 x+L_1\} &\displaystyle = & \displaystyle 0 + \max \{0,1\} &\displaystyle = & \displaystyle 1 \\
+\displaystyle G(x) &\displaystyle = & \displaystyle 0 + \max \{0,M_1x+N_1\} &\displaystyle = & \displaystyle 0 + \max \{0,x\} &\displaystyle = & \displaystyle \max \{0,x\}
+\end{array}
+$
+
+로 바뀝니다. 갱신된 $F(x)$와 $G(x)$에 대하여
+
+$\displaystyle
+\begin{array}{rclcl}
+\displaystyle F(X_1) &\displaystyle = & \displaystyle F(0) &\displaystyle = & \displaystyle 1 \\
+\displaystyle G(X_1) &\displaystyle = & \displaystyle G(0) &\displaystyle = & \displaystyle 0
+\end{array}
+$
+
+가 성립하므로 $F(X_1) \neq G(X_1)$입니다. 따라서 특히 $X_1$의 근방을 아무리 작게 잡아도 $F(x)$와 $G(x)$의 제한은 일치하지 않습니다. 이번에는 $Q=1$이므로 이것으로 모든 질의를 처리할 수 있습니다.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+1
+0 1 1 0 1
+```
+
+#### 출력
+
+```text
+No
+```
+
+예제 1과 다른 점은 질의의 $X_1$ 부분뿐입니다. 따라서 갱신된 $F(x)$와 $G(x)$는
+
+$\displaystyle
+\begin{array}{rcl}
+\displaystyle F(x) &\displaystyle = & \displaystyle 1 \\
+\displaystyle G(x) &\displaystyle = & \displaystyle \max \{0,x\}
+\end{array}
+$
+
+가 됩니다. 이번에는
+
+$\displaystyle
+\begin{array}{rclcl}
+\displaystyle F(X_1) &\displaystyle = & \displaystyle F(1) &\displaystyle = & \displaystyle 1 \\
+\displaystyle G(X_1) &\displaystyle = & \displaystyle G(1) &\displaystyle = & \displaystyle 1
+\end{array}
+$
+
+가 성립하므로 $F(X_1)=G(X_1)$입니다. 그러나 양의 실수 $\delta$를 아무리 작게 잡아도 $x=X_1+2^{-1}\delta$에서 $|x-X_1|=2^{-1}\delta<\delta$이고,
+
+$\displaystyle
+\begin{array}{rclcl}
+\displaystyle F(x) &\displaystyle = & \displaystyle F(1+2^{-1}\delta) &\displaystyle = & \displaystyle 1 \\
+\displaystyle G(x) &\displaystyle = & \displaystyle G(1+2^{-1}\delta) &\displaystyle = & \displaystyle 1+2^{-1}\delta
+\end{array}
+$
+
+이므로 $F(x) \neq G(x)$입니다. 즉, $X_1$의 근방을 아무리 작게 잡아도 $F(x)$와 $G(x)$의 제한은 일치하지 않습니다. 이번에는 $Q=1$이므로 이것으로 모든 질의를 처리할 수 있습니다.
+
+### 예제 3 {file=""}
+
+#### 입력
+
+```text
+2
+2 0 2 -1 -2
+-1 -1 0 1 1 
+```
+
+#### 출력
+
+```text
+Yes
+Yes
+```
+
+처음에는 $F(x)$와 $G(x)$가 $0$만을 값으로 갖는 상수 함수로 주어집니다.
+
+첫 번째 질의 $(K_1,L_1,M_1,N_1,X_1)=(2,0,2,-1,-2)$에 의해 $F(x)$와 $G(x)$는
+
+$\displaystyle
+\begin{array}{rclclcl}
+\displaystyle F(x) &\displaystyle = & \displaystyle 0 + \max \{0,K_1x+L_1\} &\displaystyle = & \displaystyle 0 + \max \{0,2x\} &\displaystyle = & \displaystyle \max \{0,2x\} \\
+\displaystyle G(x) &\displaystyle = & \displaystyle 0 + \max \{0,M_1x+N_1\} &\displaystyle = & \displaystyle 0 + \max \{0,2x-1\} &\displaystyle = & \displaystyle \max \{0,2x-1\}
+\end{array}
+$
+
+로 바뀝니다. 갱신된 $F(x)$와 $G(x)$는 모두 $x<0$이면 $0$의 값을 갖는다는 점에 주목합니다. 따라서 예를 들어 $\delta=2$로 정하면 $|x-X_1|<\delta$를 만족하는 모든 실수 $x$에 대하여 $x<X_1+\delta=0$이므로 $F(x)=G(x)$가 됩니다.
+
+두 번째 질의 $(K_2,L_2,M_2,N_2,X_2)=(-1,-1,0,1,1)$에 의해 $F(x)$와 $G(x)$는
+
+$\displaystyle
+\begin{array}{rclclcl}
+\displaystyle F(x) &\displaystyle = & \displaystyle \max \{0,2x\} + \max \{0,K_2x+L_2\} &\displaystyle = & \displaystyle \max \{0,2x\} + \max \{0,-x-1\} &\displaystyle = & \displaystyle \max \{0,2x,-x-1,x-1\} \\
+\displaystyle G(x) &\displaystyle = & \displaystyle \max \{0,2x-1\} + \max \{0,M_2x+N_2\} &\displaystyle = & \displaystyle \max \{0,2x-1\} + \max \{0,1\} &\displaystyle = & \displaystyle \max \{1,2x\}
+\end{array}
+$
+
+로 바뀝니다. $\delta=\frac{1}{2}$로 정하면 $|x-X_2|<\delta$를 만족하는 모든 실수 $x$에 대하여 $\frac{1}{2}<x<\frac{3}{2}$이므로
+
+$\displaystyle
+\begin{array}{lclcl}
+\displaystyle 2x - 0 &\displaystyle = & \displaystyle 2x &\displaystyle > & \displaystyle 0 \\
+\displaystyle 2x - (-x-1) &\displaystyle = & \displaystyle 3x+1 &\displaystyle > & \displaystyle 0 \\
+\displaystyle 2x - (x-1) &\displaystyle = & \displaystyle x+1 &\displaystyle > & \displaystyle 0 \\
+\displaystyle 2x - 1 & & &\displaystyle > & \displaystyle 0
+\end{array}
+$
+
+이 됩니다. 따라서 $F(x)=2x$이고 $G(x)=2x$, 즉 $F(x)=G(x)$가 됩니다. 이번에는 $Q=2$이므로 이것으로 모든 질의를 처리할 수 있습니다.

@@ -8,6 +8,7 @@ export const publishedProblemSchema = z.object({
   source: text,
   target: text,
   htmlSha256: hash,
+  sourceSamplesSha256: hash.optional(),
 });
 export const problemCatalogSchema = z
   .object({
@@ -30,7 +31,10 @@ export const problemCatalogSchema = z
     }
   });
 export type PublishedProblem = z.infer<typeof publishedProblemSchema>;
-export type ProblemTitleTranslation = Omit<PublishedProblem, "htmlSha256">;
+export type ProblemTitleTranslation = Omit<
+  PublishedProblem,
+  "htmlSha256" | "sourceSamplesSha256"
+>;
 export type ProblemCatalog = z.infer<typeof problemCatalogSchema>;
 export function parseProblemCatalog(value: unknown): ProblemCatalog {
   const parsed = problemCatalogSchema.safeParse(value);

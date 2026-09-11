@@ -131,6 +131,7 @@ test("HTML workers and retained CLI actions agree on offline results, ranges, fi
       await new Promise((resolve) => setTimeout(resolve, 50));
     }
   } finally {
+    await tasks.whenIdle();
     await rm(data, { recursive: true, force: true });
   }
 });

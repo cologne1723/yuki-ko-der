@@ -89,6 +89,36 @@ test("review starts without ignored data and retains UI dictionary access", asyn
   );
 });
 
+test("locally bundled MathJax fonts are served to sandboxed previews with restricted paths", async (t) => {
+  const root = await mkdtemp(join(tmpdir(), "review-fonts-"));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  await mkdir(join(root, "mathjax/fonts/woff-v2"), { recursive: true });
+  await writeFile(
+    join(root, "mathjax/fonts/woff-v2/MathJax_Main-Regular.woff"),
+    "fixture font",
+  );
+  const app = createReviewApp({ repositoryRoot: root, assetRoot: root });
+  const headers = { host: "localhost" };
+  const response = await app.request(
+    "http://localhost/mathjax/fonts/woff-v2/MathJax_Main-Regular.woff",
+    { headers },
+  );
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get("access-control-allow-origin"), "*");
+  assert.match(response.headers.get("content-type")!, /font\/woff/);
+  assert.equal(await response.text(), "fixture font");
+  for (const name of ["script.js", "..%2F..%2Fpackage.json", "missing.woff"]) {
+    assert.equal(
+      (
+        await app.request(`http://localhost/mathjax/fonts/woff-v2/${name}`, {
+          headers,
+        })
+      ).status,
+      404,
+    );
+  }
+});
+
 test("built browser compiler works with dynamic code generation disabled", async () => {
   const result = await build({
     stdin: {

@@ -1,0 +1,143 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3134
+problemId: 12218
+sourceTitle: "二分探索木"
+sourceHtmlSha256: 9cb74c70ea5800aede676bd9beb0e290ddfe9ab2d19f960f1bbca61e6310d5c2
+humanReview: null
+machineReview: unreviewed
+title: "이진 탐색 트리"
+---
+
+## 문제 설명
+
+$1$부터 $N$까지의 수를 $1$개씩 포함하는 길이 $N$의 수열 $A$를 사용하여 이진 탐색 트리를 구축합니다.
+
+수열 $A$의 $i$번째 원소를 $A_i$라고 합니다. $(1\le i\le N)$
+
+이진 탐색 트리는 다음과 같이 구축합니다.
+
+- $A_1$을 이진 탐색 트리의 루트 노드로 만듭니다.
+- $i=2$부터 $i=N$까지 $i$의 오름차순으로 $A_i$를 다음과 같이 이진 탐색 트리에 배치합니다.
+  1. 이진 탐색 트리의 루트 노드를 현재 노드로 합니다.
+  2. $A_i$가 현재 노드의 값보다 작을 때, 현재 노드의 왼쪽 자식이 존재하면 왼쪽 자식을 현재 노드로 합니다. 왼쪽 자식이 존재하지 않으면 $A_i$를 왼쪽 자식으로 배치합니다. $A_i$가 현재 노드의 값보다 클 때, 현재 노드의 오른쪽 자식이 존재하면 오른쪽 자식을 현재 노드로 합니다. 오른쪽 자식이 존재하지 않으면 $A_i$를 오른쪽 자식으로 배치합니다.
+  3. $A_i$의 배치 위치가 정해질 때까지 위 $2$번 단계를 반복합니다.
+
+구축이 완료된 이진 탐색 트리에서 $A_i$가 배치된 노드의 깊이를 $B_i$, 그 자손 수를 $C_i$라고 합니다.
+
+수열 $A$에 대응하는 깊이의 수열 $B$와 자손 수의 수열 $C$를 구하세요.
+
+깊이는 루트 노드에서 대상 노드까지의 간선 수를 의미합니다. 루트 노드의 깊이는 $0$입니다.
+
+## 입력
+
+```text
+$N$
+$A_1\ A_2\ A_3\ \cdots\ A_{N-1}\ A_N$
+```
+
+$1$번째 줄에 수열 $A$의 길이 $N$이 주어집니다. $2$번째 줄에 수열의 각 원소 $A_i$가 공백으로 구분되어 주어집니다.
+
+## 제한
+
+- $10\le N\le 200\,000=2\times 10^5$
+- $1\le A_i\le N\ (1\le i\le N)$
+- $i\ne j$일 때 $A_i\ne A_j\ (1\le i,j\le N)$
+
+## 출력
+
+```text
+$B_1\ B_2\ B_3\ \cdots\ B_{N-1}\ B_N$
+$C_1\ C_2\ C_3\ \cdots\ C_{N-1}\ C_N$
+```
+
+$1$번째 줄에 깊이의 수열 $B$를, $2$번째 줄에 자손 수의 수열 $C$를 각각 공백으로 구분하여 출력하세요.
+
+마지막에 줄바꿈을 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+10
+6 2 4 7 5 8 10 1 9 3
+```
+
+#### 출력
+
+```text
+0 1 2 1 3 2 3 2 4 3
+9 4 2 3 0 2 1 0 0 0
+```
+
+이진 탐색 트리는 다음 그림과 같이 구축됩니다.
+
+![이진 탐색 트리](data:image/png;base64,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)
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+10
+10 9 8 7 6 5 4 3 2 1
+```
+
+#### 출력
+
+```text
+0 1 2 3 4 5 6 7 8 9
+9 8 7 6 5 4 3 2 1 0
+```
+
+### 예제 3 {file=""}
+
+#### 입력
+
+```text
+10
+5 6 4 7 3 8 2 9 1 10
+```
+
+#### 출력
+
+```text
+0 1 1 2 2 3 3 4 4 5
+9 4 3 3 2 2 1 1 0 0
+```
+
+### 예제 4 {file=""}
+
+#### 입력
+
+```text
+20
+10 7 4 9 16 6 13 15 18 17 3 8 2 20 19 14 12 5 1 11
+```
+
+#### 출력
+
+```text
+0 1 2 2 1 3 2 3 2 3 3 3 4 3 4 4 3 4 5 4
+19 8 5 1 9 1 4 1 3 0 2 0 1 1 0 0 1 0 0 0
+```
+
+### 예제 5 {file=""}
+
+#### 입력
+
+```text
+20
+10 5 15 3 7 13 17 1 4 6 9 11 14 16 19 2 8 12 18 20
+```
+
+#### 출력
+
+```text
+0 1 1 2 2 2 2 3 3 3 3 3 3 3 3 4 4 4 4 4
+19 8 9 3 3 3 4 1 0 0 1 1 0 0 2 0 0 0 0 0
+```

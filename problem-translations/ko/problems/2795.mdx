@@ -1,0 +1,82 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2795
+problemId: 10794
+sourceTitle: "Perfect Number"
+sourceHtmlSha256: "9e3b58aac7b2c01fec241e91f6547d51ad7bfc7d51d6f55bd0fa0c09bf887fda"
+humanReview: null
+machineReview: unreviewed
+title: "완전수"
+---
+
+## 문제 설명
+
+양의 정수 $N$이 주어집니다.
+
+$N$이 완전수인지 판정하세요. 즉, 다음 조건을 만족하는지 판정하세요.
+
+- $N$의 양의 약수의 합이 $2N$입니다.
+
+## 입력
+
+첫째 줄에 $N$이 주어집니다.
+
+```text
+$N$
+```
+
+## 제한
+
+- 입력은 모두 정수입니다.
+- $1\le N\le10^{18}$
+
+## 출력
+
+$N$이 완전수라면 `Yes`를, 그렇지 않다면 `No`를 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+6
+```
+
+#### 출력
+
+```text
+Yes
+```
+
+$6$의 양의 약수의 합은 $1+2+3+6=12=2\times 6$이므로 $6$은 완전수입니다.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+28
+```
+
+#### 출력
+
+```text
+Yes
+```
+
+### 예제 3 {file=""}
+
+#### 입력
+
+```text
+628
+```
+
+#### 출력
+
+```text
+No
+```

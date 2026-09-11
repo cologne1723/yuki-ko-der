@@ -1,0 +1,72 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 2991
+problemId: 10916
+sourceTitle: "Hypercubic Graph Flow"
+sourceHtmlSha256: f012e8b2a502cf29c863ee3322df25037fbe99aa53cbc49198243f98d9b8006b
+humanReview: null
+machineReview: unreviewed
+title: "초입방체 그래프의 플로"
+---
+
+이 문제는 東北大学 그래프 이론 세미나에서 제안되었고 출제자가 해결한 문제입니다.
+
+## 문제 설명
+
+[초입방체 그래프](https://en.wikipedia.org/wiki/Hypercube_graph) $Q_N$의 플로 수 $\phi(Q_N)$를 구하는 문제입니다.
+
+양의 정수 $N$이 주어집니다. 다음 조건을 모두 만족하는 $2^N\times 2^N$ 행렬 $f$가 존재하는지 판정하세요.
+
+- $f(i,j)$ ($0\leq i,j<2^N$)는 정수입니다.
+- $0\leq i,j<2^N$에 대하여 $\mathrm{popcount}(i\ \mathrm{xor}\ j)=1$이면 $f(i,j)\ne 0$이고, 그렇지 않으면 $f(i,j)=0$입니다.
+- $0\leq i,j<2^N$에 대하여 $f(i,j)=-f(j,i)$입니다.
+- 각 $i=0,1,\ldots,2^N-1$에 대하여 $\displaystyle \sum_{j=0}^{2^N-1}f(i,j)=0$입니다.
+
+존재한다면 $\max(|f(i,j)|)$가 최소가 되도록 하는 예를 하나 구성하세요.
+
+## 입력
+
+```text
+$N$
+```
+
+$N$은 정수입니다.
+
+## 제한
+
+- $1\leq N\leq 10$
+
+## 출력
+
+조건을 만족하는 행렬 $f$가 존재하지 않는 경우 첫 번째 줄에 `No`를 출력하세요.
+
+존재하는 경우 첫 번째 줄에 `Yes`를 출력한 뒤, $2^N$개 행에 걸쳐 $f$를 출력하세요.
+
+```text
+$f(0,0)\ \ldots\ f(0,2^N-1)$
+$\vdots$
+$f(2^N-1,0)\ \ldots\ f(2^N-1,2^N-1)$
+```
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+2
+```
+
+#### 출력
+
+```text
+Yes
+0 -1 1 0
+1 0 0 -1
+-1 0 0 1
+0 1 -1 0
+```
+
+$\phi(Q_2)=2$입니다.

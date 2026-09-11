@@ -1,0 +1,99 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3313
+problemId: 12759
+sourceTitle: "Matryoshka"
+sourceHtmlSha256: "21e99ef159ad0151a2cc720ea53a91ee2dafc7ef1a48ed95f856ae27365680a7"
+humanReview: null
+machineReview: unreviewed
+title: "마트료시카"
+---
+
+## 문제 설명
+
+$N$개의 구간 $(L_i,R_i)$($1 \le i \le N$)가 주어집니다.
+
+다음 조건을 모두 만족하는 정수쌍 $(i,j)$가 몇 개인지 구하세요.
+
+- $1 \le i < j \le N$
+- $L_i < L_j < R_j < R_i$
+
+## 입력
+
+입력은 다음 형식으로 표준 입력에서 주어집니다.
+
+```text
+$N$
+$L_1\ R_1$
+$L_2\ R_2$
+$\vdots$
+$L_N\ R_N$
+```
+
+## 제한
+
+- $2 \le N \le 5 \times 10^5$
+- $1 \le L_i < R_i \le 10^6$($1 \le i \le N$)
+- $L_1$, $R_1$, $L_2$, $R_2$, $\dots$, $L_N$, $R_N$은 모두 서로 다릅니다.
+- 입력은 모두 정수입니다.
+
+## 출력
+
+조건을 만족하는 $(i,j)$의 개수를 출력하세요.
+
+마지막에 개행을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+4
+1 8
+2 6
+4 7
+3 5
+```
+
+#### 출력
+
+```text
+4
+```
+
+조건을 만족하는 $(i,j)$의 쌍은 $(1,2)$, $(1,3)$, $(1,4)$, $(2,4)$의 $4$개입니다.
+
+### 예제 2 {file="01_sample_02.txt"}
+
+#### 입력
+
+```text
+2
+2 7
+3 5
+```
+
+#### 출력
+
+```text
+1
+```
+
+### 예제 3 {file="01_sample_03.txt"}
+
+#### 입력
+
+```text
+2
+3 5
+2 7
+```
+
+#### 출력
+
+```text
+0
+```

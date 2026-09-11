@@ -39,8 +39,10 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: 문제 번역 로컬 검증
         run: pnpm validate:problems
+      # publication-data.json is exported from verified LOCAL downloads and committed.
+      # Never collect/download/verify live yukicoder data in GitHub Actions.
       - name: 문제 Markdown 컴파일
-        run: pnpm build:problems
+        run: pnpm build:problems --require-render-profiles
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

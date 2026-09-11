@@ -1,48 +1,40 @@
 import renderMathInElement from "katex/contrib/auto-render";
-
+import {
+  validProblemRenderProfile,
+  type ProblemRenderProfile,
+} from "./problem-render-profile.ts";
+export interface ProblemMathOptions {
+  fontUrl?: string;
+}
 const TEX_OPTIONS: renderMathInElement.RenderMathInElementOptions = {
   delimiters: [
     { left: "$$", right: "$$", display: true },
+    { left: "$", right: "$", display: false },
     { left: "\\(", right: "\\)", display: false },
     { left: "\\[", right: "\\]", display: true },
-    { left: "$", right: "$", display: false },
   ],
-  ignoredTags: ["script", "noscript", "style", "textarea", "code"],
-  ignoredClasses: ["katex", "yukicoder-ko-sample-data"],
-  trust: false,
-  throwOnError: false,
-  strict: "ignore",
+  ignoredTags: ["script", "noscript", "style", "textarea", "code", "option"],
+  ignoredClasses: ["tex2jax_ignore"],
 };
 
-export function renderProblemMath(
+export async function renderProblemMath(
   root: HTMLElement,
-  output: "html" | "htmlAndMathml" = "htmlAndMathml",
-): void {
-  const options = { ...TEX_OPTIONS, output };
-  const samples = [...root.querySelectorAll(".sample pre")];
-  for (const pre of samples) pre.classList.add("yukicoder-ko-sample-data");
-  // Markdown input formats use pre > code; sample data and actual code stay literal.
-  for (const code of root.querySelectorAll<HTMLElement>(".block pre > code")) {
-    if (code.closest(".sample")) continue;
-    const heading = code
-      .closest(".block")
-      ?.querySelector("h4")
-      ?.textContent?.trim();
-    const lines = (code.textContent ?? "")
-      .split("\n")
-      .map((line) => line.trim())
-      .filter(Boolean);
+  profile: ProblemRenderProfile,
+  options: ProblemMathOptions = {},
+): Promise<void> {
+  if (!validProblemRenderProfile(profile))
+    throw new Error(
+      "Site math rendering configuration is unavailable or unsupported",
+    );
+  if (profile.engine === "katex") {
     if (
-      heading &&
-      /^(입력|출력|入力|出力)$/u.test(heading) &&
-      lines.length &&
-      lines.every((line) => /^\$.+\$$/u.test(line))
+      root.closest(".tex2jax_ignore") ||
+      TEX_OPTIONS.ignoredTags?.some((tag) => tag === root.tagName.toLowerCase())
     )
-      renderMathInElement(code, options);
+      return;
+    renderMathInElement(root, { ...TEX_OPTIONS });
+    return;
   }
-  renderMathInElement(root, options);
-  for (const pre of samples) {
-    pre.classList.remove("yukicoder-ko-sample-data");
-    if (!pre.className) pre.removeAttribute("class");
-  }
+  const { renderMathJax } = await import("./problem-mathjax.ts");
+  await renderMathJax(root, options);
 }

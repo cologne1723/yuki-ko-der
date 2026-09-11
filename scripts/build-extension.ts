@@ -6,6 +6,7 @@ import { build } from "esbuild";
 import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { createRequire } from "node:module";
 import { readProblemTitleCatalog } from "translation-core/problem-title-catalog";
 import { extensionMessageIds } from "../src/extension-message-ids";
 import { buildToolbarIcons } from "./build-toolbar-icons.ts";
@@ -59,6 +60,18 @@ await build({
 });
 
 await Promise.all([
+  cp(
+    join(
+      dirname(
+        createRequire(
+          join(repositoryRoot, "packages/translation-core/package.json"),
+        ).resolve("mathjax-full/package.json"),
+      ),
+      "es5/output/chtml/fonts/woff-v2",
+    ),
+    join(outputRoot, "mathjax/fonts/woff-v2"),
+    { recursive: true },
+  ),
   cp(
     join(repositoryRoot, "node_modules/katex/dist/katex.min.css"),
     join(outputRoot, "katex/katex.min.css"),

@@ -1,0 +1,88 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3205
+problemId: 12365
+sourceTitle: "Range Pairwise Xor Query"
+sourceHtmlSha256: "26a9755590dc42337ef88dc2d8b9e22c906499ce1606e358b5c8b52a62aa219c"
+humanReview: null
+machineReview: unreviewed
+title: "구간 쌍별 XOR 질의"
+---
+
+## 문제 설명
+
+길이가 $N$인 정수열 $A=(A_1,A_2,\cdots,A_N)$가 주어집니다.
+
+다음 형식으로 주어지는 $Q$개의 질의에 답하세요.
+
+정수 $L$, $R$이 주어질 때, $\displaystyle\sum_{i=L}^{R-1}\sum_{j=i+1}^{R} A_i\oplus A_j$를 구하세요.
+
+여기서 $A\oplus B$는 $A$와 $B$의 비트별 배타적 논리합을 나타냅니다.
+
+### 비트별 배타적 논리합
+
+음이 아닌 정수 $A$, $B$의 비트별 배타적 논리합 $A\oplus B$를 다음과 같이 정의합니다.
+
+- $A\oplus B$를 이진수로 나타냈을 때 $2^k$ ($k\geq0$) 자리의 수는, $A$와 $B$를 이진수로 나타냈을 때 $2^k$ 자리의 수 중 정확히 하나만 $1$이면 $1$이고, 그렇지 않으면 $0$입니다.
+
+예를 들어 $3\oplus5=6$입니다. (이진수로 나타내면 $011\oplus101=110$입니다.)
+
+## 입력
+
+입력은 다음 형식으로 주어집니다.
+
+```text
+$N\ Q$
+$A_1\ A_2\ \cdots\ A_N$
+$\text{query}_1$
+$\text{query}_2$
+$\vdots$
+$\text{query}_Q$
+```
+
+각 질의는 다음 형식으로 주어집니다.
+
+```text
+$L\ R$
+```
+
+## 제한
+
+- $1\leq N\leq2\times10^5$
+- $1\leq Q\leq2\times10^5$
+- $0\leq A_i<2^{26}$
+- $1\leq L<R\leq N$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+$Q$줄에 걸쳐 출력하세요. $i$번째 줄에는 $i$번째 질의의 답을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_1.txt"}
+
+#### 입력
+
+```text
+5 5
+3 1 4 1 5
+3 5
+1 5
+1 2
+2 4
+4 5
+```
+
+#### 출력
+
+```text
+10
+36
+2
+10
+4
+```
+
+$1$번째 질의에 대해 $4\oplus1=5$, $4\oplus5=1$, $1\oplus5=4$이므로 답은 $10$입니다.
