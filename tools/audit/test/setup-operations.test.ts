@@ -107,6 +107,39 @@ test("setup checks source identity/title/hash, refreshes mismatches and preserve
   }
 });
 
+test("CI lint can omit input-format style while still rejecting invalid HTML", async () => {
+  const { checkProblems } = await import("../src/operations/problems.ts");
+  const f = await fixture();
+  const context = { repositoryRoot: f.root, dataRoot: f.dataRoot };
+  try {
+    await rm(f.path);
+    const path = join(f.root, "problem-translations/ko/problems/1.html");
+    const { compileProblemMarkdown } =
+      await import("translation-core/problem-markdown");
+    const html = compileProblemMarkdown(
+      f.text + "\n## 입력\n\n```text\nN M\n```\n",
+    );
+    await writeFile(path, html);
+    assert.equal(
+      (await checkProblems(context, "lint")).items[0].status,
+      "failed",
+    );
+    assert.equal(
+      (await checkProblems(context, "lint", { inputFormat: false })).items[0]
+        .status,
+      "passed",
+    );
+    await writeFile(path, html.replace("<pre>", "<pre =oops>"));
+    const invalid = await checkProblems(context, "lint", {
+      inputFormat: false,
+    });
+    assert.equal(invalid.items[0].status, "failed");
+    assert.match(invalid.items[0].message, /HTML syntax error/);
+  } finally {
+    await f.cleanup();
+  }
+});
+
 test("local validation reports every No/ID mix-up using the exact public-number index entry", async () => {
   const { checkProblems } = await import("../src/operations/problems.ts");
   const f = await fixture();

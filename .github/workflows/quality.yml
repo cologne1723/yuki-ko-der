@@ -21,6 +21,8 @@ jobs:
       # Use committed fixtures/publication data only; never add downloads from
       # live yukicoder here or in scripts invoked by GitHub Actions.
       # Refresh source data locally and commit the offline publication data.
+      # lint:problems uses GITHUB_ACTIONS=true to skip local input-format style
+      # rules; HTML syntax validation and the remaining checks still run.
       - run: pnpm check
       - run: pnpm review:smoke
       - name: 확장 기능 패키지 생성

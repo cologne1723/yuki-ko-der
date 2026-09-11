@@ -65,6 +65,7 @@ function reviewMarkers(blocks: Element[]) {
 export async function checkProblems(
   context: OperationContext,
   mode: "validate" | "live" | "lint" | "audit",
+  options: { inputFormat?: boolean } = {},
 ): Promise<OperationResult> {
   const files = await problemFiles(context),
     items: OperationItem[] = [],
@@ -92,7 +93,8 @@ export async function checkProblems(
       const review = parseReviewState(html);
       reviewStatus = review.machineTranslated ? "machine" : review.reviewStatus;
       if (mode === "lint") {
-        const formatErrors = inputFormatErrors(parse(html));
+        const formatErrors =
+          options.inputFormat === false ? [] : inputFormatErrors(parse(html));
         if (formatErrors.length) throw new Error(formatErrors.join("\n"));
         const errors: { from: number; to: number }[] = [];
         htmlLanguage.parser.parse(html).iterate({

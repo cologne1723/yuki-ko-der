@@ -5,7 +5,7 @@ import { once } from "node:events";
 import { mkdtemp, mkdir, readFile, writeFile, rm } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
-import test, { after } from "node:test";
+import test, { after, type TestContext } from "node:test";
 import { JSDOM } from "jsdom";
 import { ProblemRepository } from "../src/problem-repository.ts";
 import { compileProblemMarkdown } from "translation-core/problem-markdown";
@@ -147,6 +147,17 @@ test("review reads the saved per-problem render profile and exposes unavailable 
   assert.equal(repaired.renderProfileError, undefined);
 });
 
+// Only call after mocking fetch: exercise local collection without weakening
+// the production GitHub Actions network guard or making any live requests.
+function localCollectionEnvironment(t: TestContext) {
+  const githubActions = process.env.GITHUB_ACTIONS;
+  delete process.env.GITHUB_ACTIONS;
+  t.after(() => {
+    if (githubActions === undefined) delete process.env.GITHUB_ACTIONS;
+    else process.env.GITHUB_ACTIONS = githubActions;
+  });
+}
+
 for (const initialProfile of ["missing", "corrupt"])
   test(`explicit profile collection repairs ${initialProfile} evidence for only the selected problem`, async (t) => {
     const root = await fixtureRoot();
@@ -171,6 +182,7 @@ for (const initialProfile of ["missing", "corrupt"])
         );
       },
     );
+    localCollectionEnvironment(t);
     const app = createReviewApp({ repositoryRoot: root, assetRoot: root });
     const headers = { host: "localhost", origin: "http://localhost" };
     const read = await app.request("http://localhost/api/problems/1", {
@@ -233,6 +245,7 @@ test("profile collection exposes failures and respects the existing collector lo
     requests++;
     return new Response("missing", { status: 404 });
   });
+  localCollectionEnvironment(t);
   const app = createReviewApp({ repositoryRoot: root, assetRoot: root });
   const request = () =>
     app.request("http://localhost/api/problems/1/render-profile", {
