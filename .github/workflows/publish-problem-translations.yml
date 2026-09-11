@@ -41,6 +41,7 @@ jobs:
         run: pnpm validate:problems
       # publication-data.json is exported from verified LOCAL downloads and committed.
       # Never collect/download/verify live yukicoder data in GitHub Actions.
+      # This also applies to invoked scripts: refresh data locally and commit it.
       - name: 문제 Markdown 컴파일
         run: pnpm build:problems --require-render-profiles
       - uses: actions/configure-pages@v5

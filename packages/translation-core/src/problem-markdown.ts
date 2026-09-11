@@ -182,16 +182,21 @@ function renderStatement(body: string): string {
       continue;
     }
     if (!section) {
-      if (token.type !== "paragraph_open" || token.level !== 0)
+      if (
+        !["paragraph_open", "blockquote_open"].includes(token.type) ||
+        token.level !== 0
+      )
         throw new Error(
-          "Problem Markdown may contain only paragraphs before ## sections",
+          "Problem Markdown may contain only paragraphs or blockquotes before ## sections",
         );
+      let end = i + 1;
+      while (end < tokens.length && tokens[end].level !== 0) end++;
       result += markdown.renderer.render(
-        tokens.slice(i, i + 3),
+        tokens.slice(i, end + 1),
         markdown.options,
         environment,
       );
-      i += 2;
+      i = end;
       continue;
     }
     if (

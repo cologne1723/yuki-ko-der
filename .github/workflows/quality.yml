@@ -18,6 +18,9 @@ jobs:
         with:
           node-version: 24
       - run: pnpm install --frozen-lockfile
+      # Use committed fixtures/publication data only; never add downloads from
+      # live yukicoder here or in scripts invoked by GitHub Actions.
+      # Refresh source data locally and commit the offline publication data.
       - run: pnpm check
       - run: pnpm review:smoke
       - name: 확장 기능 패키지 생성

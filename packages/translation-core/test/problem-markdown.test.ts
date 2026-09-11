@@ -201,6 +201,30 @@ title: Fixture
 
 `;
 
+test("blockquote notices preserve nested content before the first section", () => {
+  const doc = new JSDOM(
+    compileProblemMarkdown(
+      `${fixtureHeader}> **Notice**\n>\n> First paragraph.\n>\n> > Nested notice.\n>\n> Last paragraph.\n\nFollowing notice.\n\n## Statement\n\nBody.\n\n## Samples\n\n### Sample 1 {file="sample.txt"}\n\n#### Input\n\n\`\`\`text\n1\n\`\`\`\n`,
+    ),
+  ).window.document;
+  const statement = doc.querySelector(".problem-statement")!;
+  assert.equal(statement.firstElementChild?.tagName, "BLOCKQUOTE");
+  assert.equal(
+    statement.querySelector("blockquote strong")?.textContent,
+    "Notice",
+  );
+  assert.equal(
+    statement.querySelector("blockquote blockquote")?.textContent?.trim(),
+    "Nested notice.",
+  );
+  assert.equal(statement.children[1].textContent, "Following notice.");
+  assert.equal(
+    statement.children[2].querySelector("h4")?.textContent,
+    "Statement",
+  );
+  assert.equal(statement.querySelector(".sample pre")?.textContent, "1\n");
+});
+
 test("all fence languages produce bare PRE regardless of heading or dollar count", () => {
   for (const language of ["", "text", "cpp", "python"]) {
     for (const section of ["입력", "문제 설명", "예제"]) {
