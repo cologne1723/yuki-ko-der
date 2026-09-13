@@ -24,18 +24,27 @@ test("review status edits preserve comments, surrounding metadata and exact samp
         .replace(/^machineReview:.*\r?\n/m, "")
         .replace(/^reviewStatus:.*$/m, `reviewStatus: ${scalar}`)
         .replace(/\r?\n/g, newline);
-      const result = setProblemMarkdownReviewStatus(source, "approved");
-      assert.equal(
-        parseProblemMarkdown(result).metadata.reviewStatus,
+      const result = setProblemMarkdownReviewStatus(
+        source,
         "approved",
+        "human",
+        "cologne",
       );
+      assert.deepEqual(parseProblemMarkdown(result).metadata.humanReview, [
+        "cologne",
+      ]);
       assert.equal(
         parseProblemMarkdown(result).body,
         parseProblemMarkdown(source).body,
       );
       assert.match(result, /# retained/);
+      const {
+        humanReview: _human,
+        machineReview: _machine,
+        ...metadata
+      } = parseProblemMarkdown(result).metadata;
       assert.deepEqual(
-        { ...parseProblemMarkdown(result).metadata, reviewStatus: "machine" },
+        { ...metadata, reviewStatus: "machine" },
         parseProblemMarkdown(source).metadata,
       );
     }

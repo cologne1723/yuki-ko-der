@@ -1309,14 +1309,14 @@ test("MathJax profile renders both languages with local CHTML CSS and scriptless
 
 test("next unreviewed navigation includes machine approval, skips human approval and wraps", async (t) => {
   const items = [
-    { ...problems[0], reviews: { human: null, machine: "unreviewed" } },
-    { ...problems[1], reviews: { human: "approved", machine: "unreviewed" } },
+    { ...problems[0], reviews: { human: [], machine: "unreviewed" } },
+    { ...problems[1], reviews: { human: ["cologne"], machine: "unreviewed" } },
     {
       ...problems[0],
       problemNo: 3,
       koreanTitle: "Draft 3",
       reviewStatus: "approved",
-      reviews: { human: null, machine: "approved" },
+      reviews: { human: [], machine: "approved" },
     },
   ];
   const page = reactPage(t, async (path) =>
@@ -1357,6 +1357,10 @@ for (const succeeds of [false, true])
       );
     });
     await page.screen.findByRole("heading", { name: "1. Draft 1" });
+    await page.user.type(
+      page.screen.getByRole("textbox", { name: "검수자 ID" }),
+      "tester",
+    );
     await page.user.click(
       page.screen.getByRole("checkbox", {
         name: "검수 승인 후 자동으로 다음으로 넘어가기",
@@ -1383,24 +1387,86 @@ for (const succeeds of [false, true])
     }
   });
 
-test("review options let a human override machine approval without erasing its record", async (t) => {
+test("reviewer identity is explicit, remembered between problems and sent for approval", async (t) => {
+  const requests: { reviewerId?: string }[] = [];
+  const items = problems.map((p) => ({
+    ...p,
+    reviews: { human: [] as string[], machine: "unreviewed" as const },
+  }));
+  const page = reactPage(t, async (path, init) => {
+    const number = Number(path.split("/")[3]);
+    if (init?.method === "POST" && /\/(?:approve|unapprove)$/.test(path)) {
+      const body = JSON.parse(String(init.body));
+      requests.push(body);
+      const human = path.endsWith("/approve") ? [body.reviewerId] : [];
+      items[number - 1] = {
+        ...items[number - 1],
+        reviewStatus: human.length ? "approved" : "unreviewed",
+        reviews: { human, machine: "unreviewed" },
+      };
+      return Response.json(items[number - 1]);
+    }
+    return Response.json(
+      path === "/api/problems" ? { problems: items } : items[number - 1],
+    );
+  });
+  await page.screen.findByRole("heading", { name: "1. Draft 1" });
+  assert.equal(
+    page.screen.getByRole("textbox", { name: "검수자 ID" }).value,
+    "",
+  );
+  assert.equal(
+    page.screen.getByRole("button", { name: "검수 승인", exact: true })
+      .disabled,
+    true,
+  );
+  await page.user.type(
+    page.screen.getByRole("textbox", { name: "검수자 ID" }),
+    "alice",
+  );
+  await page.user.click(
+    page.screen.getByRole("button", { name: "검수 승인", exact: true }),
+  );
+  await page.screen.findByText("사람 검수: alice");
+  assert.equal(requests[0].reviewerId, "alice");
+  await page.user.click(page.screen.getByRole("button", { name: "검수 옵션" }));
+  await page.user.click(
+    await page.screen.findByRole("menuitem", { name: "내 검수 승인 취소" }),
+  );
+  await page.screen.findByText("사람 검수: 미검수");
+  assert.equal(requests[1].reviewerId, "alice");
+  assert.equal(
+    JSON.parse(page.dom.window.localStorage.getItem("problem-reviewer-id")!),
+    "alice",
+  );
+  await page.navigate("/?problem=2");
+  await page.screen.findByRole("heading", { name: "2. Draft 2" });
+  assert.equal(
+    page.screen.getByRole("textbox", { name: "검수자 ID" }).value,
+    "alice",
+  );
+});
+
+test("machine invalidation preserves the human reviewer list", async (t) => {
   let current = {
     ...problems[0],
     reviewStatus: "approved",
     machineTranslated: false,
     reviews: {
-      human: null as "unreviewed" | null,
-      machine: "approved" as const,
+      human: ["cologne"],
+      machine: "approved" as "approved" | "unreviewed",
     },
   };
   let cancelled = false;
   const page = reactPage(t, async (path, init) => {
-    if (path === "/api/problems/1/unapprove" && init?.method === "POST") {
+    if (
+      path === "/api/problems/1/invalidate-machine-review" &&
+      init?.method === "POST"
+    ) {
       cancelled = true;
       current = {
         ...current,
-        reviewStatus: "unreviewed",
-        reviews: { ...current.reviews, human: "unreviewed" },
+        reviews: { ...current.reviews, machine: "unreviewed" },
       };
       return Response.json(current);
     }
@@ -1413,17 +1479,17 @@ test("review options let a human override machine approval without erasing its r
   await page.user.click(
     await page.screen.findByRole("menuitem", { name: "기계 승인 무효화" }),
   );
-  await page.screen.findByText("사람 검수: 미승인");
-  assert.ok(page.screen.getByText("기계 검수: 승인"));
+  await page.screen.findByText("기계 검수: 미검수");
+  assert.ok(page.screen.getByText("사람 검수: cologne"));
   assert.equal(cancelled, true);
 });
 
 test("problem review filters expose all six independent human and machine combinations", async (t) => {
   const states = [
-    { human: null, machine: "unreviewed" },
-    { human: "unreviewed", machine: "approved" },
-    { human: "approved", machine: "unreviewed" },
-    { human: "approved", machine: "approved" },
+    { human: [], machine: "unreviewed" },
+    { human: [], machine: "approved" },
+    { human: ["cologne"], machine: "unreviewed" },
+    { human: ["cologne"], machine: "approved" },
   ];
   const items = states.map((reviews, i) => ({
     ...problems[0],

@@ -1,9 +1,11 @@
 import {
   problemReviewStatusSchema,
   effectiveProblemStatus,
+  problemReviews,
   type ProblemReviews,
 } from "./problem-review-status.ts";
 import { JSDOM } from "jsdom";
+import { escape } from "lodash-es";
 import { sampleWarnings } from "./problem-samples.ts";
 export type ReviewStatus = "unreviewed" | "approved";
 const MACHINE_LABEL = "[기계 번역]";
@@ -81,12 +83,14 @@ export function parseReviewState(html: string): {
       );
     }
     const hasReviews =
+      root.hasAttribute("data-human-reviewers") ||
       root.hasAttribute("data-human-review") ||
       root.hasAttribute("data-machine-review");
     const reviews = hasReviews
       ? problemReviewStatusSchema.parse({
-          human:
-            root.dataset.humanReview === "pending"
+          human: root.hasAttribute("data-human-reviewers")
+            ? JSON.parse(root.dataset.humanReviewers!)
+            : root.dataset.humanReview === "pending"
               ? null
               : root.dataset.humanReview,
           machine: root.dataset.machineReview,
@@ -94,8 +98,7 @@ export function parseReviewState(html: string): {
       : undefined;
     if (
       reviews &&
-      reviewStatus !==
-        (reviews.human === "approved" ? "approved" : "unreviewed")
+      reviewStatus !== (reviews.human.length ? "approved" : "unreviewed")
     )
       throw new ReviewError("Public review status must reflect human approval");
     return {
@@ -115,6 +118,27 @@ export function setReviewStatus(
   html: string,
   reviewStatus: ReviewStatus,
 ): string {
+  return setReviewAttributes(html, { "data-review-status": reviewStatus });
+}
+
+export function setProblemHtmlReviews(
+  html: string,
+  input: ProblemReviews,
+): string {
+  const reviews = problemReviews(input);
+  const status = effectiveProblemStatus(reviews);
+  return setReviewAttributes(html, {
+    "data-review-status": status,
+    "data-human-review": status,
+    "data-human-reviewers": JSON.stringify(reviews.human),
+    "data-machine-review": reviews.machine,
+  });
+}
+
+function setReviewAttributes(
+  html: string,
+  attributes: Record<string, string>,
+): string {
   const dom = new JSDOM(html, { includeNodeLocations: true });
   try {
     const root = dom.window.document.querySelector(
@@ -128,14 +152,19 @@ export function setReviewStatus(
       | undefined;
     if (!location?.startTag)
       throw new ReviewError("Problem translation main element is missing");
-    const attribute = location.attrs?.["data-review-status"];
-    const from = attribute?.startOffset ?? location.startTag.endOffset - 1;
-    const to = attribute?.endOffset ?? from;
-    return (
-      html.slice(0, from) +
-      `${attribute ? "" : " "}data-review-status="${reviewStatus}"` +
-      html.slice(to)
-    );
+    const edits = Object.entries(attributes).map(([name, value]) => {
+      const attribute = location.attrs?.[name];
+      const from = attribute?.startOffset ?? location.startTag!.endOffset - 1;
+      const escaped = escape(value);
+      return {
+        from,
+        to: attribute?.endOffset ?? from,
+        value: `${attribute ? "" : " "}${name}="${escaped}"`,
+      };
+    });
+    for (const edit of edits.sort((a, b) => b.from - a.from))
+      html = html.slice(0, edit.from) + edit.value + html.slice(edit.to);
+    return html;
   } finally {
     dom.window.close();
   }

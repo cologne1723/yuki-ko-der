@@ -2,6 +2,7 @@ import {
   jsonBody,
   problemSaveSchema,
   problemVisibilitySchema,
+  problemApprovalSchema,
 } from "./request-schemas.ts";
 
 import { Hono } from "hono";
@@ -55,7 +56,7 @@ export function problemsRoutes(store: ProblemReviewStore) {
     )
     .post(
       "/api/problems/:number/approve",
-      jsonBody(problemSaveSchema, "html and revision must be strings"),
+      jsonBody(problemApprovalSchema),
       async (c) => {
         const body = c.req.valid("json");
         return c.json(
@@ -64,13 +65,15 @@ export function problemsRoutes(store: ProblemReviewStore) {
             body.html,
             body.revision,
             "approve",
+            "human",
+            body.reviewerId,
           ),
         );
       },
     )
     .post(
       "/api/problems/:number/unapprove",
-      jsonBody(problemSaveSchema, "html and revision must be strings"),
+      jsonBody(problemApprovalSchema),
       async (c) => {
         const body = c.req.valid("json");
         return c.json(
@@ -79,6 +82,24 @@ export function problemsRoutes(store: ProblemReviewStore) {
             body.html,
             body.revision,
             "unapprove",
+            "human",
+            body.reviewerId,
+          ),
+        );
+      },
+    )
+    .post(
+      "/api/problems/:number/invalidate-machine-review",
+      jsonBody(problemSaveSchema),
+      async (c) => {
+        const body = c.req.valid("json");
+        return c.json(
+          await store.save(
+            Number(c.req.param("number")),
+            body.html,
+            body.revision,
+            "unapprove",
+            "machine",
           ),
         );
       },

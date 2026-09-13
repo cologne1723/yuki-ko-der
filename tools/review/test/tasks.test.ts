@@ -260,7 +260,7 @@ test("explicit conversion preserves approval and unsupported or ambiguous previe
       metadataReviewStatus(
         parseProblemMarkdown(await readFile(mdxPath, "utf8")).metadata,
       ),
-      { human: "approved", machine: "approved" },
+      { human: ["cologne"], machine: "approved" },
     );
     await assert.rejects(readFile(path), { code: "ENOENT" });
     await f.tasks.whenIdle();
@@ -273,7 +273,7 @@ test("explicit conversion preserves approval and unsupported or ambiguous previe
       metadataReviewStatus(
         parseProblemMarkdown(await readFile(mdxPath, "utf8")).metadata,
       ),
-      { human: "approved", machine: "approved" },
+      { human: ["cologne"], machine: "approved" },
     );
     const retry = await f.tasks.start({
       operation: "validate-problems",

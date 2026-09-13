@@ -14,6 +14,7 @@ import {
   Stack,
   Switch,
   Text,
+  TextInput,
   Title,
 } from "@mantine/core";
 import { useDebouncedValue, useLocalStorage } from "@mantine/hooks";
@@ -44,6 +45,10 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
     defaultValue: false,
   });
   const [advance, setAdvance] = useState(false);
+  const [reviewerId, setReviewerId] = useLocalStorage({
+    key: "problem-reviewer-id",
+    defaultValue: "",
+  });
   const [saved, setSaved] = useState(initial);
   const [source, setSource] = useState(initial.koreanSource);
   const currentSource = useRef(source);
@@ -88,7 +93,7 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
       (p) =>
         p.problemNo !== saved.problemNo &&
         (p.reviews
-          ? p.reviews.human !== "approved"
+          ? p.reviews.human.length === 0
           : p.reviewStatus !== "approved"),
     )
     .sort((a, b) => a.problemNo - b.problemNo);
@@ -120,7 +125,8 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
   });
   const save = useMutation({
     mutationFn: async (
-      action: "save" | "approve" | "unapprove" | "visibility",
+      action:
+        "save" | "approve" | "unapprove" | "visibility" | "invalidate-machine",
     ) => {
       const submittedSource =
         !compiled && editor.current
@@ -133,11 +139,21 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
               saved.visibility === false,
               saved.revision,
             )
-          : await reviewApi.saveProblem(
-              String(saved.problemNo),
-              { html: submittedSource, revision: saved.revision },
-              action,
-            );
+          : action === "invalidate-machine"
+            ? await reviewApi.invalidateProblemMachineReview(
+                String(saved.problemNo),
+                submittedSource,
+                saved.revision,
+              )
+            : await reviewApi.saveProblem(
+                String(saved.problemNo),
+                {
+                  html: submittedSource,
+                  revision: saved.revision,
+                  reviewerId: reviewerId.trim(),
+                },
+                action,
+              );
       return { data, submittedSource };
     },
     onSuccess: async ({ data, submittedSource }, action) => {
@@ -239,7 +255,7 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
             status={
               saved.validationErrors?.length
                 ? "invalid"
-                : reviews.human === null && reviews.machine === "approved"
+                : !reviews.human.length && reviews.machine === "approved"
                   ? "기계 승인"
                   : saved.reviewStatus === "approved"
                     ? "approved"
@@ -248,19 +264,22 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
                       : "unreviewed"
             }
           />
-          <Badge color={reviews.human === "approved" ? "teal" : "gray"}>
+          <Badge color={reviews.human.length ? "teal" : "gray"}>
             사람 검수:{" "}
-            {reviews.human === "approved"
-              ? "승인"
-              : reviews.human === null
-                ? "미검수"
-                : "미승인"}
+            {reviews.human.length ? reviews.human.join(", ") : "미검수"}
           </Badge>
           <Badge color={reviews.machine === "approved" ? "blue" : "gray"}>
             기계 검수: {reviews.machine === "approved" ? "승인" : "미검수"}
           </Badge>
         </Group>
       </Group>
+      <TextInput
+        label="검수자 ID"
+        description="프로젝트 식별자입니다. GitHub 인증이 아니며, 실제 검수한 ID만 기록하세요."
+        value={reviewerId}
+        onChange={(event) => setReviewerId(event.currentTarget.value)}
+        disabled={save.isPending}
+      />
       <Box style={{ overflowX: "auto" }}>
         <Group gap="xs" wrap="nowrap" style={{ minWidth: "max-content" }}>
           <Button
@@ -272,7 +291,9 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
           </Button>
           <Button
             color="teal"
-            disabled={save.isPending || formatting.isPending}
+            disabled={
+              save.isPending || formatting.isPending || !reviewerId.trim()
+            }
             onClick={() => save.mutate("approve")}
           >
             검수 승인
@@ -295,18 +316,14 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
             </Menu.Target>
             <Menu.Dropdown>
               <Menu.Item
-                disabled={dirty || saved.reviewStatus !== "approved"}
+                disabled={dirty || !reviews.human.includes(reviewerId.trim())}
                 onClick={() => save.mutate("unapprove")}
               >
-                승인 취소
+                내 검수 승인 취소
               </Menu.Item>
               <Menu.Item
-                disabled={
-                  dirty ||
-                  reviews.machine !== "approved" ||
-                  reviews.human === "unreviewed"
-                }
-                onClick={() => save.mutate("unapprove")}
+                disabled={dirty || reviews.machine !== "approved"}
+                onClick={() => save.mutate("invalidate-machine")}
               >
                 기계 승인 무효화
               </Menu.Item>

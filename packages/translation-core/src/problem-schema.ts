@@ -1,6 +1,9 @@
 import { z } from "./validation.ts";
 
-import { problemReviewStatusSchema } from "./problem-review-status.ts";
+import {
+  humanReviewSchema,
+  problemReviewStatusSchema,
+} from "./problem-review-status.ts";
 
 export const metadataSchema = z
   .strictObject({
@@ -18,7 +21,7 @@ export const metadataSchema = z
         problemReviewStatusSchema,
       ])
       .optional(),
-    humanReview: z.enum(["unreviewed", "approved"]).nullable().optional(),
+    humanReview: humanReviewSchema.optional(),
     machineReview: z.enum(["unreviewed", "approved"]).optional(),
   })
   .superRefine((metadata, ctx) => {

@@ -82,8 +82,8 @@
 명백한 공유 규칙 위반·오류·모순이나 판정에 필요한 미검증 범위가 남으면 `unreviewed`,
 그렇지 않으면 `approved`다.
 레거시 `reviewStatus: machine`은 미검수로 취급한다. 사람 검수는 `humanReview`로
-별도 관리하며, 기계 검수 결과로 사람 승인을 기록하지 않는다.
-새 번역의 기본 상태는 기존 규칙대로 `humanReview: null`,
+검수자 ID 목록으로 별도 관리하며, 기계 검수 결과로 사람 ID를 추가하지 않는다.
+새 번역의 기본 상태는 `humanReview: []`,
 `machineReview: unreviewed`다.
 
 ## 단계별 증거와 완료 판정

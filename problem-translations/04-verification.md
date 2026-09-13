@@ -117,4 +117,4 @@ Prettier는 `.prettierignore`에서 번역 디렉터리를 제외한다. 실행 
 번역 작업에서는 위의 미승인 강제 옵션을 생략하지 않는다. 승인된 기존 파일이 걸리면 상태를 임의로 바꿔 통과시키지 말고 배정 범위를 확인한다. 별도 검토 작업은 검토 워크플로를 따른다.
 
 자동 검사 통과는 의미 보존이나 사람 검토를 뜻하지 않는다. 새 번역은
-`humanReview: null`, `machineReview: unreviewed`를 유지한다.
+`humanReview: []`, `machineReview: unreviewed`를 유지한다.

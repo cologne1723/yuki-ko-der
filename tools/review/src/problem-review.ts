@@ -1,10 +1,12 @@
 import {
   setProblemMarkdownReviews,
   setProblemMarkdownVisibility,
+  sameProblemReviewContent,
 } from "translation-core/problem-frontmatter";
 import {
   problemReviews,
   type ProblemReviews,
+  reviewerIdSchema,
 } from "translation-core/problem-review-status";
 import { mkdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
@@ -55,7 +57,7 @@ export interface SaveResult extends ProblemReview {}
 import {
   removeMachineLabel,
   ReviewError,
-  setReviewStatus,
+  setProblemHtmlReviews,
 } from "translation-core/review-state";
 export { sha256 } from "translation-core/node-hash";
 export {
@@ -158,6 +160,7 @@ export class ProblemReviewStore {
     expectedRevision: string,
     action: "save" | "approve" | "unapprove",
     reviewer: "human" | "machine" = "human",
+    reviewerId?: string,
   ): Promise<ProblemReview> {
     return this.withStoreLock(() =>
       this.saveOnce(
@@ -166,6 +169,7 @@ export class ProblemReviewStore {
         expectedRevision,
         action,
         reviewer,
+        reviewerId,
       ),
     );
   }
@@ -246,7 +250,17 @@ export class ProblemReviewStore {
     expectedRevision: string,
     action: "save" | "approve" | "unapprove",
     reviewer: "human" | "machine" = "human",
+    reviewerId?: string,
   ): Promise<ProblemReview> {
+    const identity =
+      reviewer === "human" && action !== "save"
+        ? reviewerIdSchema.safeParse(reviewerId)
+        : undefined;
+    if (identity && !identity.success)
+      throw new ReviewError(
+        "A non-empty reviewerId is required for human review",
+      );
+    const id = identity?.success ? identity.data : undefined;
     const metadata = (await this.metadata()).get(problemNo);
     const current = await this.repository.get(problemNo);
     if (current.revision !== expectedRevision) {
@@ -260,17 +274,29 @@ export class ProblemReviewStore {
         "The saved problem index changed; reload before saving",
         409,
       );
-    const savedReviewStatus =
-      submittedSource === current.koreanSource
-        ? current.reviewStatus
-        : "unreviewed";
+    const unchanged =
+      current.sourceFormat === "mdx"
+        ? sameProblemReviewContent(submittedSource, current.koreanSource)
+        : submittedSource.replace(/(?:\r?\n)+$/u, "") ===
+          current.koreanSource.replace(/(?:\r?\n)+$/u, "");
+    const reviews =
+      current.reviews ??
+      problemReviews(
+        current.machineTranslated ? "machine" : current.reviewStatus,
+      );
+    const humanReviews = (): ProblemReviews => {
+      if (action === "unapprove" && !unchanged)
+        throw new ReviewError("Save editor changes before unapproving");
+      const next: ProblemReviews = unchanged
+        ? { human: [...reviews.human], machine: reviews.machine }
+        : { human: [], machine: "unreviewed" };
+      if (action === "approve") next.human = [...new Set([...next.human, id!])];
+      else if (action === "unapprove")
+        next.human = next.human.filter((value) => value !== id);
+      return next;
+    };
     let nextSource = submittedSource;
     if (current.sourceFormat === "mdx") {
-      const reviews =
-        current.reviews ??
-        problemReviews(
-          current.machineTranslated ? "machine" : current.reviewStatus,
-        );
       if (reviewer === "machine") {
         if (action === "save" || submittedSource !== current.koreanSource)
           throw new ReviewError(
@@ -281,32 +307,17 @@ export class ProblemReviewStore {
           machine: action === "approve" ? "approved" : "unreviewed",
         });
       } else {
-        if (action === "unapprove" && submittedSource !== current.koreanSource)
-          throw new ReviewError("Save editor changes before unapproving");
-        const nextReviews: ProblemReviews =
-          submittedSource === current.koreanSource
-            ? { ...reviews }
-            : { human: "unreviewed", machine: "unreviewed" };
-        if (action === "approve") nextReviews.human = "approved";
-        else if (action === "unapprove") nextReviews.human = "unreviewed";
-        nextSource = setProblemMarkdownReviews(nextSource, nextReviews);
+        nextSource = setProblemMarkdownReviews(nextSource, humanReviews());
       }
     } else if (reviewer === "machine") {
       throw new ReviewError(
         "Convert the translation to MDX before machine review",
       );
-    } else if (action === "save") {
-      nextSource = setReviewStatus(
-        removeMachineLabel(nextSource),
-        savedReviewStatus,
-      );
-    } else if (action === "approve") {
-      nextSource = setReviewStatus(removeMachineLabel(nextSource), "approved");
     } else {
-      if (submittedSource !== current.koreanSource) {
-        throw new ReviewError("Save editor changes before unapproving");
-      }
-      nextSource = setReviewStatus(current.koreanSource, "unreviewed");
+      nextSource = setProblemHtmlReviews(
+        removeMachineLabel(nextSource),
+        humanReviews(),
+      );
     }
     const nextHtml =
       current.sourceFormat === "mdx"

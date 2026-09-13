@@ -6,6 +6,9 @@ const text = z.string();
 const target = text.refine((value) => !!value.trim());
 const action = z.enum(["save", "approve", "unapprove"]);
 export const problemSaveSchema = z.looseObject({ html: text, revision: text });
+export const problemApprovalSchema = problemSaveSchema.extend({
+  reviewerId: z.string().trim().min(1),
+});
 export const problemVisibilitySchema = z.strictObject({
   visibility: z.boolean(),
   revision: text,

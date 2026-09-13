@@ -247,12 +247,11 @@ export function compileProblemMarkdown(source: string): string {
   const machineTranslated = metadata.reviewStatus === "machine";
   const label = machineTranslated ? "[기계 번역] " : "";
   const reviews = problemReviews(metadataReviewStatus(metadata));
-  const htmlReviewStatus =
-    reviews.human === "approved" ? "approved" : "unreviewed";
+  const htmlReviewStatus = reviews.human.length ? "approved" : "unreviewed";
   const reviewAttributes =
     (metadata.visibility === false ? ' data-visibility="false"' : "") +
     (typeof metadataReviewStatus(metadata) === "object"
-      ? ` data-human-review="${reviews.human ?? "pending"}" data-machine-review="${reviews.machine}"`
+      ? ` data-human-review="${htmlReviewStatus}" data-human-reviewers="${escapeHtml(JSON.stringify(reviews.human))}" data-machine-review="${reviews.machine}"`
       : "");
   const statement = renderStatement(body);
   return `<!doctype html>

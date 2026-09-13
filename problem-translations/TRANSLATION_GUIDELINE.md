@@ -35,5 +35,5 @@
 - 절 순서·입력/출력·수식·예제: `03-structure-and-format.md`
 - 대조·자동 검사·검토 기록: `04-verification.md`
 
-한국어 변경은 사람 검토가 필요하다. 새 번역은 `humanReview: null`과
+한국어 변경은 사람 검토가 필요하다. 새 번역은 `humanReview: []`와
 `machineReview: unreviewed`를 유지하며, 검토 상태를 임의로 승인으로 바꾸지 않는다.

@@ -37,7 +37,7 @@ export function Problems() {
     const reviews =
       p.reviews ??
       problemReviews(p.machineTranslated ? "machine" : p.reviewStatus);
-    const human = reviews.human === "approved";
+    const human = reviews.human.length > 0;
     const machine = reviews.machine === "approved";
     const matches =
       status === "all" ||
@@ -123,7 +123,7 @@ export function Problems() {
                   status={
                     p.validationErrors?.length
                       ? "invalid"
-                      : p.reviews?.human === null &&
+                      : p.reviews?.human.length === 0 &&
                           p.reviews.machine === "approved"
                         ? "기계 승인"
                         : p.reviewStatus === "approved"

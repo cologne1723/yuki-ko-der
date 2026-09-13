@@ -2,6 +2,10 @@ import { JSDOM } from "jsdom";
 import { verifyProblemRenderMarkup } from "translation-core/problem-render-markup";
 import { resolveProblemUrls } from "translation-core/problem-urls";
 import type { ProblemRenderProfile } from "translation-core/problem-render-profile";
+import {
+  humanReviewSchema,
+  reviewerIdsSchema,
+} from "translation-core/problem-review-status";
 
 export interface PublishedRenderMetadata {
   profile?: ProblemRenderProfile;
@@ -68,6 +72,46 @@ export function labelPublishedProblem(
       notice.textContent = "아래 텍스트는 기계번역 되었습니다";
       heading.before(notice);
     }
+    const legacyHuman = root.dataset.humanReview ?? root.dataset.reviewStatus;
+    const reviewers = root.hasAttribute("data-human-reviewers")
+      ? reviewerIdsSchema.parse(JSON.parse(root.dataset.humanReviewers!))
+      : humanReviewSchema.parse(
+          legacyHuman === "pending" || legacyHuman === "machine"
+            ? null
+            : legacyHuman,
+        );
+    document
+      .querySelectorAll(".translation-reviewers, .translation-contribution")
+      .forEach((node) => node.remove());
+    const credit = document.createElement("p");
+    credit.className = "translation-reviewers";
+    credit.textContent = reviewers.length
+      ? `사람 검수: ${reviewers.join(", ")}`
+      : "사람 검수: 미검수";
+    const participation = document.createElement("p");
+    participation.className = "translation-contribution";
+    const number = root.dataset.problemNo;
+    for (const [text, href] of [
+      ...(/^\d+$/u.test(number ?? "")
+        ? [
+            [
+              "GitHub에서 번역 수정",
+              `https://github.com/cologne1723/yuki-ko-der/edit/main/problem-translations/ko/problems/${number}.mdx`,
+            ],
+          ]
+        : []),
+      [
+        "번역·검수 참여 안내",
+        "https://github.com/cologne1723/yuki-ko-der/blob/main/CONTRIBUTING.md",
+      ],
+    ]) {
+      if (participation.childNodes.length) participation.append(" · ");
+      const link = document.createElement("a");
+      link.textContent = text;
+      link.href = href;
+      participation.append(link);
+    }
+    root.before(credit, participation);
     return dom.serialize();
   } finally {
     dom.window.close();

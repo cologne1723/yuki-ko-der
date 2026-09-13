@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { parseReviewState } from "translation-core/review-state";
+import { problemReviews } from "translation-core/problem-review-status";
 import { cliOptions } from "translation-core/cli-options";
 
 import { atomicNewFile } from "./operations/source-store.ts";
@@ -36,7 +37,10 @@ export function convertProblemHtmlToMarkdown(html: string): string {
       .replace(/^\[기계 번역\]\s*/u, "")
       .replace(/^No\.\d+\s*/u, "")
       .trim();
-    const reviews = parseReviewState(html).reviews;
+    const state = parseReviewState(html);
+    const reviews =
+      state.reviews ??
+      problemReviews(state.machineTranslated ? "machine" : state.reviewStatus);
     const metadata = [
       "---",
       `schemaVersion: ${root.dataset.schemaVersion}`,
@@ -45,14 +49,9 @@ export function convertProblemHtmlToMarkdown(html: string): string {
       `problemId: ${root.dataset.problemId}`,
       `sourceTitle: ${JSON.stringify(root.dataset.sourceTitle)}`,
       `sourceHtmlSha256: ${root.dataset.sourceHtmlSha256}`,
-      ...(reviews
-        ? [
-            `humanReview: ${reviews.human ?? "null"}`,
-            `machineReview: ${reviews.machine}`,
-          ]
-        : [
-            `reviewStatus: ${heading.textContent?.trim().startsWith("[기계 번역]") ? "machine" : root.dataset.reviewStatus}`,
-          ]),
+      `humanReview: ${JSON.stringify(reviews.human)}`,
+      `machineReview: ${reviews.machine}`,
+      ...(root.dataset.visibility === "false" ? ["visibility: false"] : []),
       `title: ${JSON.stringify(title)}`,
       "---",
     ];

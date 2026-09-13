@@ -18,6 +18,210 @@ import {
 } from "../src/problem-review.ts";
 
 const fixtureRoots: string[] = [];
+test("repairing invalid frontmatter remains possible and resets review attribution", async () => {
+  const root = await fixtureRoot();
+  const store = new ProblemReviewStore(root);
+  const valid = await store.get(1);
+  const path = join(root, "problem-translations/ko/problems/1.mdx");
+  await writeFile(
+    path,
+    valid.koreanSource.replace("schemaVersion: 1", "schemaVersion: invalid"),
+  );
+  const broken = await store.get(1);
+  assert.ok(broken.validationErrors?.length);
+  const repaired = await store.save(
+    1,
+    valid.koreanSource,
+    broken.revision,
+    "save",
+  );
+  assert.deepEqual(repaired.reviews, { human: [], machine: "unreviewed" });
+  assert.equal(repaired.validationErrors?.length ?? 0, 0);
+});
+test("HTTP human approval requires identity, isolates machine invalidation and rejects stale requests", async () => {
+  const root = await fixtureRoot();
+  const { createReviewApp } = await import("../src/review-server.ts");
+  const app = createReviewApp({
+    repositoryRoot: root,
+    assetRoot: join(root, "dist/review"),
+  });
+  const store = new ProblemReviewStore(root);
+  let current = await store.get(1);
+  const request = (action: string, body: object, origin = "http://localhost") =>
+    app.request(`http://localhost/api/problems/1/${action}`, {
+      method: "POST",
+      headers: {
+        host: "localhost",
+        origin,
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+  for (const reviewerId of [undefined, "", " "]) {
+    const result = await request("approve", {
+      html: current.koreanSource,
+      revision: current.revision,
+      reviewerId,
+    });
+    assert.equal(result.status, 400);
+  }
+  const initial = current;
+  let result = await request("approve", {
+    html: current.koreanSource,
+    revision: current.revision,
+    reviewerId: "alice",
+  });
+  assert.equal(result.status, 200);
+  current = await result.json();
+  assert.deepEqual(current.reviews?.human, ["alice"]);
+  result = await request("approve", {
+    html: initial.koreanSource,
+    revision: initial.revision,
+    reviewerId: "bob",
+  });
+  assert.equal(result.status, 409);
+  result = await request(
+    "unapprove",
+    {
+      html: current.koreanSource,
+      revision: current.revision,
+      reviewerId: "alice",
+    },
+    "https://example.com",
+  );
+  assert.equal(result.status, 403);
+  current = await store.save(
+    1,
+    current.koreanSource,
+    current.revision,
+    "approve",
+    "machine",
+  );
+  result = await request("invalidate-machine-review", {
+    html: current.koreanSource,
+    revision: current.revision,
+  });
+  assert.equal(result.status, 200);
+  current = await result.json();
+  assert.deepEqual(current.reviews, {
+    human: ["alice"],
+    machine: "unreviewed",
+  });
+  result = await request("unapprove", {
+    html: current.koreanSource,
+    revision: current.revision,
+    reviewerId: "alice",
+  });
+  assert.equal(result.status, 200);
+  assert.deepEqual((await result.json()).reviews.human, []);
+});
+test("reviewer IDs are explicit, additive, individually revocable and tied to content", async () => {
+  const store = new ProblemReviewStore(await fixtureRoot());
+  let current = await store.get(1);
+  for (const id of [undefined, "", "  "])
+    await assert.rejects(
+      store.save(
+        1,
+        current.koreanSource,
+        current.revision,
+        "approve",
+        "human",
+        id,
+      ),
+      /reviewerId/,
+    );
+  assert.equal((await store.get(1)).revision, current.revision);
+  current = await store.save(
+    1,
+    current.koreanSource,
+    current.revision,
+    "approve",
+    "human",
+    "alice",
+  );
+  current = await store.save(
+    1,
+    current.koreanSource,
+    current.revision,
+    "approve",
+    "human",
+    " bob ",
+  );
+  assert.deepEqual(current.reviews?.human, ["alice", "bob"]);
+  const twice = await store.save(
+    1,
+    current.koreanSource,
+    current.revision,
+    "approve",
+    "human",
+    "bob",
+  );
+  assert.equal(twice.revision, current.revision);
+  current = await store.save(
+    1,
+    current.koreanSource,
+    current.revision,
+    "unapprove",
+    "human",
+    "alice",
+  );
+  assert.deepEqual(current.reviews?.human, ["bob"]);
+  assert.equal(current.reviewStatus, "approved");
+  current = await store.save(
+    1,
+    current.koreanSource,
+    current.revision,
+    "approve",
+    "machine",
+  );
+  current = await store.save(
+    1,
+    current.koreanSource + "\n",
+    current.revision,
+    "save",
+  );
+  assert.deepEqual(current.reviews, { human: ["bob"], machine: "approved" });
+  current = await store.setVisibility(1, false, current.revision);
+  assert.deepEqual(current.reviews, { human: ["bob"], machine: "approved" });
+  current = await store.save(
+    1,
+    current.koreanSource,
+    current.revision,
+    "unapprove",
+    "machine",
+  );
+  assert.deepEqual(current.reviews, { human: ["bob"], machine: "unreviewed" });
+  const { setProblemMarkdownReviews } =
+    await import("translation-core/problem-frontmatter");
+  const forged = setProblemMarkdownReviews(current.koreanSource, {
+    human: ["someone-else"],
+    machine: "approved",
+  });
+  current = await store.save(1, forged, current.revision, "save");
+  assert.deepEqual(current.reviews, { human: ["bob"], machine: "unreviewed" });
+  current = await store.save(
+    1,
+    current.koreanSource.replace("마을에는", "도시에는"),
+    current.revision,
+    "approve",
+    "human",
+    "alice",
+  );
+  assert.deepEqual(current.reviews, {
+    human: ["alice"],
+    machine: "unreviewed",
+  });
+  current = await store.save(
+    1,
+    current.koreanSource,
+    current.revision,
+    "unapprove",
+    "human",
+    "alice",
+  );
+  assert.deepEqual(current.reviews?.human, []);
+  assert.equal(current.reviewStatus, "unreviewed");
+});
 test("visibility toggle preserves body and review state, remains in review list and rejects stale writes", async () => {
   const root = await fixtureRoot();
   const store = new ProblemReviewStore(root);
@@ -324,6 +528,8 @@ test("save, approve, approved edits, and unapprove follow review status rules", 
     saved.koreanSource,
     saved.revision,
     "approve",
+    "human",
+    "cologne",
   );
   assert.equal(approved.reviewStatus, "approved");
 
@@ -345,6 +551,8 @@ test("save, approve, approved edits, and unapprove follow review status rules", 
     edited.koreanSource,
     edited.revision,
     "unapprove",
+    "human",
+    "cologne",
   );
   assert.equal(reopened.reviewStatus, "unreviewed");
 });
@@ -439,6 +647,7 @@ test("external translation edits during save or review changes produce a conflic
               initial.revision,
               action,
               reviewer,
+              "cologne",
             ),
             (error: unknown) =>
               error instanceof ReviewError && error.statusCode === 409,
@@ -509,7 +718,14 @@ test("save rejects removed or switched sources and changed validation inputs", a
         { times: 1 },
       );
       await assert.rejects(
-        store.save(1, initial.koreanSource, initial.revision, "approve"),
+        store.save(
+          1,
+          initial.koreanSource,
+          initial.revision,
+          "approve",
+          "human",
+          "cologne",
+        ),
         (error: unknown) =>
           error instanceof ReviewError && error.statusCode === 409,
       );
@@ -552,8 +768,10 @@ test("independent stores reject competing edits and machine approval without los
       current.koreanSource,
       current.revision,
       "approve",
+      "human",
+      "cologne",
     );
-    assert.equal(next.reviews?.human, "approved");
+    assert.deepEqual(next.reviews?.human, ["cologne"]);
   }
 });
 
@@ -699,6 +917,8 @@ test("approval warnings explain how to restore an unrecognized MDX sample", asyn
     missingMarker,
     initial.revision,
     "approve",
+    "human",
+    "cologne",
   );
   assert.equal(approved.reviewStatus, "approved");
   assert.equal(approved.validationWarnings.length, 1);
@@ -843,8 +1063,8 @@ test("human review overrides machine approval and edited content resets both dec
     "approve",
     "machine",
   );
-  assert.deepEqual(current.reviews, { human: null, machine: "approved" });
-  assert.equal(current.reviewStatus, "approved");
+  assert.deepEqual(current.reviews, { human: [], machine: "approved" });
+  assert.equal(current.reviewStatus, "unreviewed");
   assert.match(current.koreanHtml, /data-review-status="unreviewed"/);
   const machineRevision = current.revision;
   current = await store.save(
@@ -852,9 +1072,11 @@ test("human review overrides machine approval and edited content resets both dec
     current.koreanSource,
     current.revision,
     "unapprove",
+    "human",
+    "cologne",
   );
   assert.deepEqual(current.reviews, {
-    human: "unreviewed",
+    human: [],
     machine: "approved",
   });
   assert.equal(current.reviewStatus, "unreviewed");
@@ -871,8 +1093,13 @@ test("human review overrides machine approval and edited content resets both dec
     current.koreanSource,
     current.revision,
     "approve",
+    "human",
+    "cologne",
   );
-  assert.deepEqual(current.reviews, { human: "approved", machine: "approved" });
+  assert.deepEqual(current.reviews, {
+    human: ["cologne"],
+    machine: "approved",
+  });
   assert.match(current.koreanHtml, /data-review-status="approved"/);
   current = await store.save(
     1,
@@ -893,7 +1120,7 @@ test("human review overrides machine approval and edited content resets both dec
     "save",
   );
   assert.deepEqual(current.reviews, {
-    human: "unreviewed",
+    human: [],
     machine: "unreviewed",
   });
   assert.equal(current.reviewStatus, "unreviewed");

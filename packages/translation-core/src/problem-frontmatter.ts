@@ -1,9 +1,10 @@
 import {
   problemReviews,
   metadataReviewStatus,
-  type ProblemReviews,
+  type ProblemReviewsInput,
+  reviewerIdSchema,
 } from "./problem-review-status.ts";
-import { isMap, isScalar, parseDocument, type Document } from "yaml";
+import { isMap, isScalar, isSeq, parseDocument, type Document } from "yaml";
 import {
   metadataSchema,
   type ProblemMarkdownMetadata,
@@ -69,14 +70,48 @@ export function setProblemMarkdownReviewStatus(
   source: string,
   status: "unreviewed" | "approved",
   reviewer: "human" | "machine" = "human",
+  reviewerId?: string,
 ): string {
   const current = metadataReviewStatus(parseProblemMarkdown(source).metadata);
-  if (typeof current === "string" && reviewer === "human")
-    return replaceFrontmatterField(source, "reviewStatus", status);
+  const reviews = problemReviews(current);
+  const id =
+    reviewer === "human" ? reviewerIdSchema.parse(reviewerId) : undefined;
   return setProblemMarkdownReviews(source, {
-    ...problemReviews(current),
-    [reviewer]: status,
+    ...reviews,
+    ...(reviewer === "machine"
+      ? { machine: status }
+      : {
+          human:
+            status === "approved"
+              ? [...new Set([...reviews.human, id!])]
+              : reviews.human.filter((value) => value !== id),
+        }),
   });
+}
+
+// Review attribution/visibility and YAML presentation aren't translated content.
+// Ignore only trailing line breaks in the body, not meaningful spaces in samples.
+export function sameProblemReviewContent(left: string, right: string): boolean {
+  let a: ParsedProblemMarkdown, b: ParsedProblemMarkdown;
+  try {
+    a = parseProblemMarkdown(left);
+    b = parseProblemMarkdown(right);
+  } catch {
+    // A repaired invalid draft must remain saveable; later compilation validates
+    // the submitted replacement before any write.
+    return false;
+  }
+  const content = ({ metadata: m, body }: ParsedProblemMarkdown) => ({
+    schemaVersion: m.schemaVersion,
+    locale: m.locale,
+    problemNo: m.problemNo,
+    problemId: m.problemId,
+    sourceTitle: m.sourceTitle,
+    sourceHtmlSha256: m.sourceHtmlSha256,
+    title: m.title,
+    body: body.replace(/(?:\r?\n)+$/u, ""),
+  });
+  return JSON.stringify(content(a)) === JSON.stringify(content(b));
 }
 
 export function setProblemMarkdownVisibility(
@@ -97,14 +132,15 @@ export function setProblemMarkdownVisibility(
 
 export function removeProblemMarkdownMachineLabel(source: string): string {
   return parseProblemMarkdown(source).metadata.reviewStatus === "machine"
-    ? setProblemMarkdownReviewStatus(source, "unreviewed")
+    ? setProblemMarkdownReviews(source, { human: [], machine: "unreviewed" })
     : source;
 }
 
 export function setProblemMarkdownReviews(
   source: string,
-  reviews: ProblemReviews,
+  input: ProblemReviewsInput,
 ): string {
+  const reviews = problemReviews(input);
   const frontmatter = source.match(FRONTMATTER_PATTERN);
   if (!frontmatter) throw new Error("Problem Markdown frontmatter is missing");
   const doc: Document = parseDocument(frontmatter[1], { uniqueKeys: true });
@@ -131,7 +167,18 @@ export function setProblemMarkdownReviews(
     if (typeof comment === "string") value.comment = comment;
     if (typeof commentBefore === "string") value.commentBefore = commentBefore;
     legacy.value = value;
-  } else doc.set("humanReview", reviews.human);
+  } else {
+    const previous = doc.get("humanReview", true);
+    const value = doc.createNode(reviews.human);
+    if (isScalar(previous) || isSeq(previous)) {
+      value.comment = previous.comment;
+      value.commentBefore = previous.commentBefore;
+      value.spaceBefore = previous.spaceBefore;
+    }
+    doc.set("humanReview", value);
+  }
+  const humanNode = doc.get("humanReview", true);
+  if (isSeq(humanNode)) humanNode.flow = true;
   doc.set("machineReview", reviews.machine);
   const machineIndex = doc.contents.items.findIndex(
     (pair) => isScalar(pair.key) && pair.key.value === "machineReview",

@@ -61,8 +61,24 @@ when the server restarts and never move/delete existing data. CLI `--data-dir`
 overrides the saved repository-local preference, then the default repository `data/`.
 Relative paths resolve from the repository. Startup can recover interrupted explicit
 saves and conversions; new downloads and conversions require an explicit action.
-Saving removes machine labels without approval. Approval is explicit; changing
-problem source or UI wording returns it to unreviewed.
+Saving removes machine labels without approval. Problem human review records a
+list of project reviewer IDs in `humanReview`; IDs are not authenticated GitHub
+accounts. Enter an ID in the editor (remembered in that browser); approval adds
+that ID, and withdrawal removes only that ID. The maintainer verifies attribution
+when reviewing and merging PRs. Existing legacy approvals belong to `cologne`;
+new approvals never default to that identity. Content/title/source changes clear
+human and machine reviews; review metadata, visibility, or trailing-newline-only
+changes do not. Machine invalidation preserves human reviewers. UI wording still
+uses its separate approval model and changing it returns it to unreviewed.
+
+Problem approve/unapprove requests require `{ html, revision, reviewerId }`.
+`POST /api/problems/:number/invalidate-machine-review` takes `{ html, revision }`
+and only withdraws machine approval. Reads expose `reviews.human: string[]`.
+
+Maintainers can inspect legacy migration with
+`node --import tsx scripts/migrate-problem-reviewers.ts` from the repository root.
+`--write` applies it after validating all documents; `--check` checks whether
+another migration would change files. Bodies and non-review metadata are preserved.
 
 CLI equivalents are documented in [the audit package](../audit/README.md).
 Builds, tests, packaging, server startup/port selection, formatting and Git hooks

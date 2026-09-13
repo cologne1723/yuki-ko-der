@@ -15,5 +15,5 @@
 - 반복 용어·고유명사는 `glossary.yaml`을 단일 기준으로 사용한다. 원문 파일에서
   필요한 항목만 표시하려면 `pnpm glossary -- data/problems-source/NUMBER.html`을
   실행한다. glossary 파일이 없으면 이 명령은 아무것도 출력하지 않고 성공한다.
-- 새 번역은 `humanReview: null`, `machineReview: unreviewed`를 유지한다. 검토나
+- 새 번역은 `humanReview: []`, `machineReview: unreviewed`를 유지한다. 검토나
   커밋·배포를 임의로 수행하지 않는다.

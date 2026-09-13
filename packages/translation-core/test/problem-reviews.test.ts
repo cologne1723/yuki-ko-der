@@ -16,13 +16,13 @@ import { labelPublishedProblem } from "../../../tools/audit/src/problem-publicat
 import { effectiveProblemStatus } from "../src/problem-review-status.ts";
 
 const source = await readFile("problem-translations/ko/problems/1.mdx", "utf8");
-test("translation-only gate requires explicit null/unreviewed and never changes review state", () => {
-  for (const human of [null, "unreviewed", "approved"] as const)
+test("translation-only gate requires an empty reviewer list and never changes review state", () => {
+  for (const human of [[], ["cologne"], ["one", "two"]])
     for (const machine of ["unreviewed", "approved"] as const) {
       const mdx = setProblemMarkdownReviews(source, { human, machine });
       const metadata = parseProblemMarkdown(mdx).metadata;
       const snapshot = structuredClone(metadata);
-      if (human === null && machine === "unreviewed")
+      if (!human.length && machine === "unreviewed")
         assert.doesNotThrow(() => assertUnreviewedTranslation(metadata));
       else assert.throws(() => assertUnreviewedTranslation(metadata), /미승인/);
       assert.deepEqual(metadata, snapshot);
@@ -48,7 +48,7 @@ for (const human of [null, "unreviewed", "approved"] as const) {
       );
       assert.equal(
         effectiveProblemStatus(reviews),
-        human === "unreviewed" ? "unreviewed" : "approved",
+        human === "approved" ? "approved" : "unreviewed",
       );
       assert.equal(
         parseProblemMarkdown(changed).body,
@@ -78,7 +78,7 @@ test("independent review edits preserve block metadata, comments, line endings a
     assert.deepEqual(
       metadataReviewStatus(parseProblemMarkdown(changed).metadata),
       {
-        human: "approved",
+        human: ["cologne"],
         machine: "approved",
       },
     );

@@ -52,15 +52,33 @@ export const reviewApi = {
     ),
   saveProblem: (
     number: string,
-    json: InferRequestType<(typeof api.problems)[":number"]["$put"]>["json"],
+    json: InferRequestType<(typeof api.problems)[":number"]["$put"]>["json"] & {
+      reviewerId?: string;
+    },
     action: "save" | "approve" | "unapprove",
   ) => {
     const route = api.problems[":number"];
     const input = { param: { number }, json };
     return responseData(
-      action === "save" ? route.$put(input) : route[action].$post(input),
+      action === "save"
+        ? route.$put(input)
+        : route[action].$post({
+            ...input,
+            json: { ...json, reviewerId: json.reviewerId ?? "" },
+          }),
     );
   },
+  invalidateProblemMachineReview: (
+    number: string,
+    html: string,
+    revision: string,
+  ) =>
+    responseData(
+      api.problems[":number"]["invalidate-machine-review"].$post({
+        param: { number },
+        json: { html, revision },
+      }),
+    ),
   glossary: (signal?: AbortSignal) =>
     responseData(api.ui.$get({}, requestOptions(signal))),
   collectProblemProfile: (number: string) =>
