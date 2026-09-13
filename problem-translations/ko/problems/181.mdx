@@ -5,8 +5,9 @@ problemNo: 181
 problemId: 472
 sourceTitle: "A↑↑N mod M"
 sourceHtmlSha256: b992f6c6712a9909946a155160fa4ffa7064b3fe168585405cb9d8b2c5e997c8
-reviewStatus: unreviewed
-title: "A↑↑N mod M"
+humanReview: null
+machineReview: approved
+title: '$A \upuparrows N \bmod M$'
 ---
 
 ## 문제 설명
@@ -15,29 +16,37 @@ $(A \upuparrows N) \bmod M$을 구하세요.
 
 정수 $a>0$, $n \ge 0$에 대해 $a \upuparrows n$은 다음과 같이 정의합니다.
 
-$$a \upuparrows n=\begin{cases}1 & (n=0) \\ a^{(a \upuparrows (n-1))} & (그 외)\end{cases}$$
+$a \upuparrows n=\begin{cases}1 & (n=0) \\ a^{(a \upuparrows (n-1))} & (\text{그 외})\end{cases}$
 
 ## 입력
 
 ```text
-A N M
+$A\ N\ M$
 ```
+
+$1$번째 줄에 $3$개의 정수 $A$, $N$, $M$이 공백으로 구분되어 주어집니다.
+
+## 제한
 
 - $1 \le A \le 10^9$
 - $0 \le N \le 10^9$
-- $1 \le M \le 2000$
+- $1 \le M \le 2\,000$
 
 ## 출력
 
-$A \upuparrows N$을 $M$으로 나눈 나머지를 한 줄에 출력하세요.
+$A \upuparrows N$을 $M$으로 나눈 나머지를 $1$줄에 출력하고 마지막에 줄바꿈을 출력하세요.
 
 ## 예제
 
 ### 예제 1 {file=""}
 
+#### 입력
+
 ```text
 3 2 100
 ```
+
+#### 출력
 
 ```text
 27
@@ -47,21 +56,29 @@ $3^{3^1}=27 \equiv 27 \pmod{100}$입니다.
 
 ### 예제 2 {file=""}
 
+#### 입력
+
 ```text
 3 3 100
 ```
+
+#### 출력
 
 ```text
 87
 ```
 
-$3 \upuparrows 3=3^{3 \upuparrows 2}=3^{27}=7625597484987 \equiv 87 \pmod{100}$입니다.
+$3 \upuparrows 3=3^{3 \upuparrows 2}=3^{27}=7\,625\,597\,484\,987 \equiv 87 \pmod{100}$입니다.
 
 ### 예제 3 {file=""}
+
+#### 입력
 
 ```text
 3 1000000000 2
 ```
+
+#### 출력
 
 ```text
 1
@@ -71,21 +88,29 @@ $3 \upuparrows n$은 모든 정수 $n \ge 0$에 대해 홀수입니다.
 
 ### 예제 4 {file=""}
 
+#### 입력
+
 ```text
 87654321 0 1234
 ```
+
+#### 출력
 
 ```text
 1
 ```
 
-$87654321 \upuparrows 0=1$입니다.
+$87\,654\,321 \upuparrows 0=1$입니다.
 
 ### 예제 5 {file=""}
+
+#### 입력
 
 ```text
 1777 1855 1000
 ```
+
+#### 출력
 
 ```text
 97
@@ -93,9 +118,13 @@ $87654321 \upuparrows 0=1$입니다.
 
 ### 예제 6 {file=""}
 
+#### 입력
+
 ```text
 17893463 90476513 1458
 ```
+
+#### 출력
 
 ```text
 1091

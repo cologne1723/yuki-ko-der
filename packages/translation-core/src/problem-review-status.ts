@@ -6,6 +6,23 @@ export const problemReviewStatusSchema = z.strictObject({
 });
 export type ProblemReviews = z.infer<typeof problemReviewStatusSchema>;
 export type LegacyProblemStatus = "machine" | "unreviewed" | "approved";
+// Opt-in: translation completion is not review approval; the separate review
+// workflow can still verify intentionally approved documents.
+export function assertUnreviewedTranslation(metadata: {
+  humanReview?: unknown;
+  machineReview?: unknown;
+  reviewStatus?: unknown;
+}): void {
+  if (
+    metadata.reviewStatus !== undefined ||
+    metadata.humanReview !== null ||
+    metadata.machineReview !== "unreviewed"
+  )
+    throw new Error(
+      "번역 전용 검사는 미승인 상태(humanReview: null, machineReview: unreviewed)가 필요합니다. 승인·검토 상태를 임의로 변경하지 마세요.",
+    );
+}
+
 export function problemReviews(
   status: LegacyProblemStatus | ProblemReviews,
 ): ProblemReviews {

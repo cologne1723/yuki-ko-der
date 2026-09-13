@@ -1,0 +1,112 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 8015
+problemId: 652
+sourceTitle: "アンチローリングハッシュ"
+sourceHtmlSha256: "a7fe808a97c962f8f15831e4c30d9183c518cf6cd57bf4d510a55c4d23c8f756"
+humanReview: null
+machineReview: unreviewed
+title: "안티 롤링 해시"
+---
+
+## 이야기
+
+太郎君은 얼마 전, 문자열의 해시값을 얻는 다음과 같은 함수를 구현했습니다.
+
+참고: [라빈-카프 문자열 검색 알고리즘](https://ja.wikipedia.org/wiki/ラビン-カープ文字列検索アルゴリズム)
+
+## 문제 설명
+
+길이가 $n$인 문자열 $S$의 해시값은 다음 식으로 계산됩니다.
+
+$Hash(S)=\sum_{i=0}^{n-1}\ (S_i\ \times\ a^{n-1-i}\ ) \pmod{b}$
+
+여기서 $S_i$는 문자열의 $i$번째 문자의 ASCII 코드 번호를 나타냅니다. 예를 들어 $S = $`"abcz"`라면 $S_0 = 97$, $S_1 = 98$, $S_2 = 99$, $S_3 = 122$입니다.
+
+그러나 太郎君은 보고 따라 하여 구현했기 때문에 $a$와 $b$에 어떤 수를 선택해야 하는지 잘 모릅니다.
+
+그래서 太郎君은 우선 $a$와 $b$를 $1$ 이상 $10^5$ 이하인 정수 중에서 무작위로 선택하기로 한 것 같습니다.
+
+太郎君이 선택한 $a$, $b$가 입력으로 주어집니다. 해시값이 같아지는 $2$개의 문자열 $S$, $T$를 출력하세요.
+
+단, $S$와 $T$는 소문자 알파벳 `'a'`-`'z'`로 구성된 서로 다른 문자열이고, 길이가 같으며, 길이가 $10^6$ 이하여야 합니다.
+
+저지에 사용되는 해시 함수의 구현(C++)은 다음과 같습니다.
+
+```cpp
+unsigned long long get_hash(string s, unsigned long long a, unsigned long long b){
+	unsigned long long hash = 0;
+
+	for(int i = 0; i < s.size(); i++){
+		hash = (hash * a + s[i]) % b;
+	}
+
+	return hash;
+}
+```
+
+## 입력
+
+```text
+$a\ b$
+```
+
+정수 $a$와 $b$가 공백으로 구분되어 주어집니다.
+
+## 제한
+
+- $1 \leq a \leq 10^5$
+- $1 \leq b \leq 10^5$
+
+## 출력
+
+```text
+$S$
+$T$
+```
+
+$1$번째 줄에 문자열 $S$, $2$번째 줄에 문자열 $T$를 출력하세요.
+
+$S$와 $T$는 다음 조건을 만족해야 합니다.
+
+- $Hash(S) = Hash(T)$
+- $1 \leq |S| = |T| \leq 10^6$
+- $S \neq T$
+- $S$, $T$는 소문자 알파벳 `'a'`-`'z'`만으로 구성됩니다.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+3 7
+```
+
+#### 출력
+
+```text
+ulwoorwpxrhrfcckazth
+ulwoarwpxrhrfcckazth
+```
+
+$S$, $T$의 예시입니다.
+
+$2$개의 문자열 모두 해시값이 $4$입니다.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+7 9
+```
+
+#### 출력
+
+```text
+talybdsmdphtmvhutkxb
+talybdsmdphtgvtutkxn
+```

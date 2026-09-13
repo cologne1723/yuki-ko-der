@@ -18,20 +18,136 @@ export function samplePreText(pre: Element): string {
     if (node.nodeType === 1 && (node as Element).tagName === "BR") return "\n";
     return Array.from(node.childNodes).map(text).join("");
   };
-  return text(pre).replace(/\r\n?/g, "\n").replace(/\n$/, "");
+  let payload = text(pre);
+  // Some source tables wrap explicit CODE payloads in decorative $~$ padding
+  // (No. 3237), or indent CODE/BR/CODE lines (No. 2965). Only discard text
+  // outside those explicit payloads when every other node is known layout.
+  if (pre.tagName === "TD") {
+    const nodes = [...pre.childNodes];
+    const codes = nodes.filter(
+      (node) => node.nodeType === 1 && (node as Element).tagName === "CODE",
+    );
+    if (
+      codes.length > 0 &&
+      codes.slice(1).every((code) => {
+        let previous = code.previousSibling;
+        while (previous?.nodeType === 3) previous = previous.previousSibling;
+        return (
+          previous?.nodeType === 1 && (previous as Element).tagName === "BR"
+        );
+      }) &&
+      nodes.every((node) =>
+        node.nodeType === 3
+          ? !node.textContent?.replace(/\$~\$/gu, "").trim()
+          : node.nodeType === 1 &&
+            /^(?:CODE|BR)$/u.test((node as Element).tagName),
+      )
+    )
+      payload = nodes
+        .filter((node) => node.nodeType === 1)
+        .map(text)
+        .join("");
+  }
+  const value = payload.replace(/\r\n?/g, "\n").replace(/\n$/, "");
+  // Bare numeric math in table cells is presentation, unlike literal PRE/CODE
+  // payloads. Never evaluate arbitrary TeX or normalize data whitespace.
+  if (
+    pre.tagName === "TD" &&
+    !pre.querySelector("pre,code") &&
+    /^(?:[?!] )?(?:\$-?\d+\$|-?\d+)(?: (?:\$-?\d+\$|-?\d+))*$/u.test(value)
+  )
+    return value.replace(/\$(-?\d+)\$/gu, "$1");
+  return value;
+}
+
+function tableSampleCells(sample: Element): Set<Element> {
+  const cells = new Set<Element>();
+  for (const table of [
+    ...(sample.matches("table") ? [sample] : []),
+    ...sample.querySelectorAll("table"),
+  ]) {
+    if (table.closest(".sample") !== sample.closest(".sample")) continue;
+    const rows = [...table.querySelectorAll("tr")].filter(
+      (row) => row.closest("table") === table,
+    );
+    // Spanning layouts require explicit support, not guessed column indices.
+    if (
+      rows.some((row) =>
+        [...row.children].some((cell) =>
+          ["colspan", "rowspan"].some(
+            (key) => Number(cell.getAttribute(key) ?? 1) !== 1,
+          ),
+        ),
+      )
+    )
+      continue;
+    const header = rows.find((row) => row.querySelector(":scope > th"));
+    if (!header) continue;
+    const columns = [...header.children].flatMap((cell, index) =>
+      /^(?:(?:Player|플레이어)\s+[A-Z]\s+|(?:Alice|Bob)\s*(?:の|의)\s*|(?:プログラム側の|ジャッジ側の|プログラムによる|ジャッジから与えられる|プログラムからの|プログラムの))?(?:入力|出力|입력|출력|input|output)$/iu.test(
+        (cell.textContent ?? "").replace(/\$~\$/gu, "").trim(),
+      )
+        ? [index]
+        : [],
+    );
+    for (const row of rows.slice(rows.indexOf(header) + 1)) {
+      if (row.children.length !== header.children.length) continue;
+      for (const index of columns) {
+        const cell = row.children[index];
+        if (
+          cell.tagName === "TD" &&
+          (cell.textContent?.trim() || cell.querySelector("pre,code"))
+        )
+          cells.add(cell);
+      }
+    }
+  }
+  return cells;
+}
+
+function sampleNodes(sample: Element, headings = false): Element[] {
+  const cells = tableSampleCells(sample);
+  return [...sample.querySelectorAll(headings ? "h6,pre,td" : "pre,td")].filter(
+    (node) =>
+      node.closest(".sample") === sample &&
+      (cells.has(node) ||
+        (node.tagName !== "TD" && !cells.has(node.closest("td")!))),
+  );
 }
 
 // Headed sample input/output is data; a later unheaded pre may be explanatory
 // prose or a worked trace. Legacy unheaded samples retain the previous behavior.
 export function sampleDataPres(sample: Element): Element[] {
-  const nodes = [...sample.querySelectorAll("h6,pre")].filter(
-    (node) => node.closest(".sample") === sample,
-  );
+  const nodes = sampleNodes(sample, true);
   if (!nodes.some((node) => node.tagName === "H6"))
-    return nodes.filter((node) => node.tagName === "PRE");
+    return nodes.filter((node) => node.tagName !== "H6");
   let pending = false;
+  let inputHeading = false;
+  const outputOnly =
+    [...sample.ownerDocument.querySelectorAll("p")].some(
+      (paragraph) =>
+        /\boutput-only\b/iu.test(paragraph.textContent ?? "") &&
+        /入力は与えられません|입력은 주어지지 않습니다/u.test(
+          paragraph.textContent ?? "",
+        ),
+    ) ||
+    [...sample.ownerDocument.querySelectorAll(".block")].some(
+      (block) =>
+        /^(?:入力|입력)$/u.test(
+          block.querySelector(":scope > h4")?.textContent?.trim() ?? "",
+        ) &&
+        [...block.querySelectorAll(":scope > p")].some((p) =>
+          /^(?:入力は与えられません。|입력은 주어지지 않습니다\.)/u.test(
+            p.textContent?.trim() ?? "",
+          ),
+        ),
+    );
   return nodes.filter((node) => {
+    if (node.tagName === "TD") return true;
     if (node.tagName === "H6") {
+      inputHeading = /^(?:入力|입력|input)$/iu.test(
+        node.textContent?.trim() ?? "",
+      );
       // These are source-observed IO labels, including interactive/multilingual
       // statements. Match heading text only; never normalize the sample bytes.
       pending =
@@ -42,8 +158,134 @@ export function sampleDataPres(sample: Element): Element[] {
     }
     const data = pending;
     pending = false;
+    // Only a literally empty input placeholder in an explicitly input-free
+    // output-only statement is layout. Blank-line data and empty outputs stay.
+    if (outputOnly && inputHeading && node.childNodes.length === 0)
+      return false;
     return data;
   });
+}
+
+// Some source statements use paragraph labels instead of .sample wrappers.
+// Require the explicit sample section, numbered label, and adjacent IO label;
+// do not infer examples from arbitrary PRE elements elsewhere in the statement.
+function paragraphSamples(
+  block: Element,
+): (Omit<Sample, "values"> & { elements: Element[] })[] {
+  if (!block.matches(".block"))
+    return [...block.querySelectorAll(".block")].flatMap(paragraphSamples);
+  if (
+    !/^(?:サンプル|入出力例|出力例)$/u.test(
+      block.querySelector(":scope > h4, :scope > h5")?.textContent?.trim() ??
+        "",
+    )
+  )
+    return [];
+  const result: (Omit<Sample, "values"> & { elements: Element[] })[] = [];
+  const adjacentIO = (container: Element): Element[] =>
+    [...container.querySelectorAll(":scope > pre")].filter((pre) => {
+      const heading = pre.previousElementSibling;
+      return (
+        heading?.matches("h6") &&
+        /^(?:入力|出力)$/u.test(heading.textContent?.trim() ?? "")
+      );
+    });
+  // Observed legacy layouts: an unnumbered h5 sample section, or numbered
+  // my-sample wrappers. Require explicit IO headings, never arbitrary PREs.
+  for (const wrapper of block.querySelectorAll(":scope > .my-sample")) {
+    const name =
+      wrapper.querySelector(":scope > h5")?.textContent?.trim() ?? "";
+    if (!/^サンプル\s*[0-9]+$/u.test(name)) continue;
+    const elements = [
+      ...wrapper.querySelectorAll(":scope > .paragraph"),
+    ].flatMap(adjacentIO);
+    if (elements.length)
+      result.push({
+        name,
+        file: wrapper.getAttribute("data-file") ?? "",
+        elements,
+      });
+  }
+  if (block.querySelector(":scope > h5")?.textContent?.trim() === "サンプル") {
+    const elements = adjacentIO(block);
+    if (elements.length) result.push({ name: "サンプル", file: "", elements });
+  }
+  let current: (typeof result)[number] | undefined;
+  for (const node of block.children) {
+    if (
+      node.matches("p,h5") &&
+      /^サンプル\s*[0-9]+$/u.test(node.textContent?.trim() ?? "")
+    ) {
+      current = { name: node.textContent!.trim(), file: "", elements: [] };
+      result.push(current);
+    } else if (
+      current &&
+      node.matches("pre") &&
+      node.previousElementSibling?.matches("p") &&
+      /^(?:(?:Alice|Bob)の)?(?:入力|出力)$/u.test(
+        node.previousElementSibling.textContent?.trim() ?? "",
+      )
+    ) {
+      current.elements.push(node);
+    } else if (
+      current &&
+      node.matches(".paragraph") &&
+      !node.closest(".sample")
+    ) {
+      for (const pre of node.querySelectorAll(":scope > pre")) {
+        const heading = pre.previousElementSibling;
+        if (
+          heading?.matches("h6") &&
+          /^(?:入力|出力)$/u.test(heading.textContent?.trim() ?? "")
+        )
+          current.elements.push(pre);
+      }
+    }
+  }
+  if (!result.length && !block.querySelector(".sample")) {
+    for (const table of block.querySelectorAll("table")) {
+      if (table.closest(".block") !== block || table.closest("table table"))
+        continue;
+      const elements = [...tableSampleCells(table)];
+      if (elements.length)
+        result.push({ name: "サンプル", file: "", elements });
+    }
+  }
+  // This explicit output-example section may deliberately demonstrate an
+  // invalid answer (No. 3177). Preserve its data without judging correctness.
+  if (
+    !result.length &&
+    !block.querySelector(".sample") &&
+    block.querySelector(":scope > h4")?.textContent?.trim() === "出力例"
+  ) {
+    const elements = [...block.querySelectorAll(":scope > pre")];
+    if (elements.length) result.push({ name: "出力例", file: "", elements });
+  }
+  // No. 5003 labels each interactive output with a text-node turn number.
+  // Require that explicit adjacent label; unrelated worked PREs are not IO.
+  if (
+    !result.length &&
+    !block.querySelector(".sample") &&
+    block.querySelector(":scope > h4")?.textContent?.trim() === "サンプル"
+  ) {
+    const elements = [...block.querySelectorAll(":scope > pre")].filter(
+      (pre) => {
+        let label = "";
+        for (
+          let node = pre.previousSibling;
+          node;
+          node = node.previousSibling
+        ) {
+          if (node.nodeType === 3) label = (node.textContent ?? "") + label;
+          else if (node.nodeType !== 1 || (node as Element).tagName !== "BR")
+            break;
+        }
+        return /ターン[0-9]+:\s*$/u.test(label);
+      },
+    );
+    if (elements.length) result.push({ name: "サンプル", file: "", elements });
+  }
+  return result.filter((sample) => sample.elements.length > 0);
 }
 
 function collectSamples(blocks: Element[], ioOnly = false): Sample[] {
@@ -51,16 +293,26 @@ function collectSamples(blocks: Element[], ioOnly = false): Sample[] {
     [
       ...(block.matches(".sample") ? [block] : []),
       ...block.querySelectorAll(".sample"),
-    ].map((sample) => ({
-      name: sample.querySelector("h5")?.textContent?.trim() ?? "",
-      file: sample.getAttribute("data-file") ?? "",
-      values: (ioOnly
-        ? sampleDataPres(sample)
-        : [...sample.querySelectorAll("pre")]
+    ]
+      // Mobile branding uses .sample too, but has no sample label or data.
+      .filter(
+        (sample) =>
+          sample.hasAttribute("data-file") || sample.querySelector("h5,pre,td"),
       )
-        .filter((pre) => pre.closest(".sample") === sample)
-        .map((pre) => samplePreText(pre)),
-    })),
+      .map((sample) => ({
+        name: sample.querySelector("h5")?.textContent?.trim() ?? "",
+        file: sample.getAttribute("data-file") ?? "",
+        values: (ioOnly ? sampleDataPres(sample) : sampleNodes(sample))
+          .filter((pre) => pre.closest(".sample") === sample)
+          .map((pre) => samplePreText(pre)),
+      }))
+      .concat(
+        paragraphSamples(block).map(({ name, file, elements }) => ({
+          name,
+          file,
+          values: elements.map(samplePreText),
+        })),
+      ),
   );
 }
 
@@ -70,18 +322,82 @@ function collectValues(samples: Sample[]): SampleValue[] {
   );
 }
 
+// A translation may label an originally unheaded alternative output as IO.
+// Accept it only at its original position with unchanged data. Every headed
+// source IO remains mandatory; unheaded worked prose may still be translated.
+function isInlineAlternativeOutput(node: Element): boolean {
+  // No. 3068 explicitly identifies this standalone CODE as another accepted
+  // output. Do not infer IO from arbitrary inline code or worked explanations.
+  const paragraph = node.parentElement;
+  if (
+    node.tagName !== "CODE" ||
+    !node.closest(".sample") ||
+    node.closest("pre,td") ||
+    paragraph?.tagName !== "P" ||
+    paragraph.children.length !== 1
+  )
+    return false;
+  const siblings = [...paragraph.childNodes];
+  const index = siblings.indexOf(node);
+  const text = (nodes: Node[]) =>
+    nodes
+      .map((item) => item.textContent ?? "")
+      .join("")
+      .trim();
+  return (
+    /^このほか[，、,]$/u.test(text(siblings.slice(0, index))) &&
+    /^という出力を行った場合にも正解となります[。．]$/u.test(
+      text(siblings.slice(index + 1)),
+    )
+  );
+}
+
+function matchesPromotedSourceBlocks(
+  sourceBlocks: Element[],
+  translatedValues: SampleValue[],
+): boolean {
+  const required = new Set(sampleDataElements(sourceBlocks));
+  const candidates = sourceBlocks.flatMap((block) =>
+    [...block.querySelectorAll("pre,td,code")].filter(
+      (node) =>
+        required.has(node) ||
+        isInlineAlternativeOutput(node) ||
+        (node.tagName === "PRE" &&
+          node.closest(".sample") &&
+          !required.has(node.closest("td")!)),
+    ),
+  );
+  let positions = new Set([0]);
+  for (const pre of candidates) {
+    const next = required.has(pre) ? new Set<number>() : new Set(positions);
+    const value = samplePreText(pre);
+    for (const position of positions) {
+      if (translatedValues[position]?.value === value) next.add(position + 1);
+    }
+    positions = next;
+    if (!positions.size) return false;
+  }
+  return positions.has(translatedValues.length);
+}
+
 // Publication/runtime digest contract: ordered raw IO, excluding worked prose.
 export function sampleDataElements(blocks: Element[]): Element[] {
   return blocks.flatMap((block) =>
     [
       ...(block.matches(".sample") ? [block] : []),
       ...block.querySelectorAll(".sample"),
-    ].flatMap(sampleDataPres),
+    ]
+      .flatMap(sampleDataPres)
+      .concat(paragraphSamples(block).flatMap((sample) => sample.elements)),
   );
 }
 
 export function sampleDataValues(blocks: Element[]): string[] {
   return sampleDataElements(blocks).map(samplePreText);
+}
+
+export function sampleFileNames(blocks: Element[]): string[] {
+  return collectSamples(blocks).map((sample) => sample.file);
 }
 
 function sampleIdentity(before?: Sample, after?: Sample): string {
@@ -155,6 +471,26 @@ export function sampleWarnings(
   }
   const sourceValues = collectValues(source);
   const translatedValues = collectValues(translated);
+  // Fully unheaded legacy samples may mix submitted code and actual IO.
+  // Labeling only actual IO is safe when every original block, including the
+  // explanatory code, still matches in order. Never allow omission or edits.
+  const legacySamples = sourceBlocks.flatMap((block) => [
+    ...(block.matches(".sample") ? [block] : []),
+    ...block.querySelectorAll(".sample"),
+  ]);
+  if (
+    ioOnly &&
+    legacySamples.length > 0 &&
+    legacySamples.every((sample) => !sample.querySelector("h6"))
+  ) {
+    const before = collectValues(collectSamples(sourceBlocks));
+    const after = collectValues(collectSamples(translatedBlocks));
+    if (
+      before.length === after.length &&
+      before.every((item, index) => item.value === after[index].value)
+    )
+      return [];
+  }
   const warnings: string[] = [];
   for (
     let index = 0;
@@ -200,5 +536,11 @@ export function sampleWarnings(
       );
     }
   }
+  if (
+    ioOnly &&
+    warnings.length &&
+    matchesPromotedSourceBlocks(sourceBlocks, translatedValues)
+  )
+    return [];
   return warnings;
 }

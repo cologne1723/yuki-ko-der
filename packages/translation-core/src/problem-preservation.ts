@@ -1,6 +1,10 @@
 import katex from "katex";
 import delimiterModule from "katex/contrib/auto-render/splitAtDelimiters.ts";
-import { sampleWarnings, sampleDataPres } from "./problem-samples.ts";
+import {
+  sampleWarnings,
+  sampleDataPres,
+  sampleFileNames,
+} from "./problem-samples.ts";
 import { HTMLDomStrings } from "mathjax-full/js/handlers/html/HTMLDomStrings.js";
 import { HTMLAdaptor } from "mathjax-full/js/adaptors/HTMLAdaptor.js";
 import type { browserAdaptor } from "mathjax-full/js/adaptors/browserAdaptor.js";
@@ -9,6 +13,7 @@ import {
   validProblemRenderProfile,
   type ProblemRenderProfile,
 } from "./problem-render-profile.ts";
+import { isLocalProblemImageReference } from "./problem-assets.ts";
 
 // KaTeX ships this TS helper in a CommonJS package. tsx and bundlers expose
 // different default interop; regression tests cover the installed dependency.
@@ -24,6 +29,34 @@ const delimiters = [
   { left: "\\[", right: "\\]", display: true },
   { left: "$", right: "$", display: false },
 ];
+
+function normalizeFormula(tex: string): string {
+  return tex
+    .replace(/\\text\{그\s*외\}/gu, String.raw`\text{otherwise}`)
+    .replace(/\\,/gu, "")
+    .replace(/\s/gu, "");
+}
+
+// Explicit parenthesized radix notation is a digit string, not a decimal
+// integer. Limit this exemption to the base of this exact MathML subscript.
+function hasNonDecimalRadix(number: Element): boolean {
+  let base = number;
+  while (
+    base.parentElement?.localName === "mrow" &&
+    base.parentElement.children.length === 1
+  )
+    base = base.parentElement;
+  const subscript = base.parentElement;
+  if (subscript?.localName !== "msub" || subscript.children[0] !== base)
+    return false;
+  const match = subscript.children[1]?.textContent?.match(
+    /^\(([2-9]|[12][0-9]|3[0-6])\)$/u,
+  );
+  if (!match || Number(match[1]) === 10) return false;
+  return [...(number.textContent ?? "")].every(
+    (digit) => /[0-9]/u.test(digit) && Number(digit) < Number(match[1]),
+  );
+}
 
 function statementRoot(document: Document): HTMLElement {
   const root = (
@@ -185,6 +218,8 @@ export function preservationErrors(
   source: Document,
   translated: Document,
   profile?: ProblemRenderProfile,
+  corrections: readonly SourceFormulaCorrection[] = [],
+  binaryLiteralFormulas: readonly string[] = [],
 ): string[] {
   const errors = sampleWarnings([source.body], [translated.body], "mdx", true);
   // Flag an observed Korean ambiguity; never infer or rewrite the intended scope.
@@ -254,25 +289,55 @@ export function preservationErrors(
     previous = rank;
   }
   const values = (doc: Document, selector: string, attr: string) =>
-    [...doc.querySelectorAll(selector)].map(
-      (node) => node.getAttribute(attr) ?? "",
-    );
+    [...doc.querySelectorAll(selector)].map((node) => {
+      const value = node.getAttribute(attr) ?? "";
+      // Markdown encodes Unicode in absolute HTTP URLs. Compare browser URL
+      // serialization, without decoding reserved separators or relative paths.
+      if (/^https?:\/\//i.test(value)) {
+        try {
+          return new URL(value).href;
+        } catch {
+          return value;
+        }
+      }
+      return value;
+    });
   for (const [selector, attr] of [
-    [".sample", "data-file"],
     ["img", "src"],
     ["a", "href"],
   ]) {
-    if (
-      JSON.stringify(values(source, selector, attr)) !==
-      JSON.stringify(values(translated, selector, attr))
-    )
+    const originalValues = values(source, selector, attr);
+    const translatedValues = values(translated, selector, attr);
+    if (JSON.stringify(originalValues) !== JSON.stringify(translatedValues))
       errors.push(`원문과 ${selector}의 ${attr} 또는 순서가 다릅니다.`);
+  }
+  if (
+    JSON.stringify(sampleFileNames([source.body])) !==
+    JSON.stringify(sampleFileNames([translated.body]))
+  )
+    errors.push("원문과 예제의 data-file 또는 순서가 다릅니다.");
+  for (const image of translated.querySelectorAll("img[src]")) {
+    const src = image.getAttribute("src") ?? "";
+    if (src.startsWith("../images/") && !isLocalProblemImageReference(src))
+      errors.push(`로컬 문제 이미지 경로가 안전하지 않습니다: ${src}`);
   }
   const math = statementMath(translated, profile);
   const formulas = math.map((item) => item.tex);
   // A diagnostic heuristic, not a TeX parser or an automatic repair: KaTeX
   // accepts lost command names as products of letter variables.
   const sourceFormulas = statementFormulas(source, profile);
+  const binaryKey = (formula: string) => formula.replace(/\s/gu, "");
+  const sourceNormalized = sourceFormulas.map(binaryKey);
+  const translatedNormalized = formulas.map(binaryKey);
+  const binaryLiterals = new Set(binaryLiteralFormulas.map(binaryKey));
+  for (const formula of binaryLiterals) {
+    const count = sourceNormalized.filter((item) => item === formula).length;
+    if (count === 0) errors.push("원문 이진 리터럴 근거 불일치: " + formula);
+    else if (
+      translatedNormalized.filter((item) => item === formula).length !== count
+    )
+      errors.push("이진 리터럴 수식이 변경되거나 누락되었습니다: " + formula);
+  }
   const words = (tex: string) => tex.match(/\\[A-Za-z]+|[A-Za-z]+/gu) ?? [];
   const sourceWords = sourceFormulas.flatMap(words);
   const suspectWords = new Set<string>();
@@ -282,7 +347,11 @@ export function preservationErrors(
   const commands = [
     ...new Set(
       sourceWords
-        .filter((word) => word.startsWith("\\") && word.length >= 4)
+        .filter(
+          (word) =>
+            word.startsWith("\\") &&
+            (word.length >= 4 || word === "\\ge" || word === "\\le"),
+        )
         .map((word) => word.slice(1)),
     ),
   ];
@@ -299,7 +368,9 @@ export function preservationErrors(
       if (
         !word.startsWith("\\") &&
         !bareSource.has(word) &&
-        commands.some((command) => word.includes(command))
+        commands.some((command) =>
+          command.length === 2 ? word === command : word.includes(command),
+        )
       )
         suspectWords.add(word);
     }
@@ -321,7 +392,14 @@ export function preservationErrors(
       });
       // Let KaTeX distinguish numeric atoms from commands, identifiers and text.
       for (const number of mathml.querySelectorAll("mn")) {
-        if (/^[1-9]\d{3,}(?:\.\d+)?$/u.test(number.textContent ?? ""))
+        if (
+          /^[1-9]\d{3,}(?:\.\d+)?$/u.test(number.textContent ?? "") &&
+          !hasNonDecimalRadix(number) &&
+          !(
+            binaryLiterals.has(binaryKey(formula)) &&
+            /^[01]+$/u.test(number.textContent ?? "")
+          )
+        )
           errors.push(
             `정수 서식 확인 필요: ${number.textContent}. 수식 안의 정수도 10\\,000처럼 쓰세요. 날짜·식별자이면 예외를 보고하세요.`,
           );
@@ -339,23 +417,50 @@ export function preservationErrors(
       `TeX 역슬래시 누락 의심: ${[...suspectWords].join(", ")}. 원문 수식과 대조하세요. 의도적인 새 변수이면 확인을 요청하세요.`,
     );
   // Matching whole set-bearing formulas prevents unrelated braces masking loss.
-  const normalize = (tex: string) =>
-    tex
-      // Translate this known branch label, not arbitrary text or TeX structure.
-      .replace(/\\text\{그\s*외\}/gu, String.raw`\text{otherwise}`)
-      .replace(/\\,/gu, "")
-      .replace(/\s/gu, "");
+  const normalize = normalizeFormula;
   const available = formulas.map(normalize);
+  for (const correction of corrections) {
+    const count = sourceFormulas.filter(
+      (formula) => normalize(formula) === normalize(correction.before),
+    ).length;
+    if (
+      count !== correction.occurrences ||
+      !Number.isSafeInteger(correction.occurrences) ||
+      correction.occurrences < 1 ||
+      corrections.filter(
+        (other) => normalize(other.before) === normalize(correction.before),
+      ).length !== 1
+    )
+      errors.push(
+        "원문 수식 정정 근거 불일치: " +
+          correction.before +
+          ". 대상 수식과 출현 횟수를 다시 확인하세요.",
+      );
+  }
   for (const formula of sourceFormulas) {
     if (!formula.includes("\\{") && !formula.includes("\\}")) continue;
-    const index = available.indexOf(normalize(formula));
-    if (index < 0)
-      errors.push(
-        `집합 수식 보존 확인 필요: ${formula}. 원문 수식을 유지하세요. 의도적 재구성이면 완료하지 말고 보고하세요.`,
-      );
-    else available.splice(index, 1);
+    const correction = corrections.find(
+      (item) => normalize(item.before) === normalize(formula),
+    );
+    const expected = correction?.after ?? formula;
+    const index = available.indexOf(normalize(expected));
+    if (index < 0) {
+      if (correction)
+        errors.push("근거 있는 원문 정정 보존 확인 필요: " + expected);
+      else
+        errors.push(
+          `집합 수식 보존 확인 필요: ${formula}. 원문 수식을 유지하세요. 의도적 재구성이면 완료하지 말고 보고하세요.`,
+        );
+    } else available.splice(index, 1);
   }
   return errors;
+}
+
+/** Explicit, occurrence-bound correspondence; this does not waive other checks. */
+export interface SourceFormulaCorrection {
+  before: string;
+  after: string;
+  occurrences: number;
 }
 
 /** Full checker: synchronous correspondence checks plus the selected engine. */
@@ -363,8 +468,16 @@ export async function checkProblemPreservation(
   source: Document,
   translated: Document,
   profile?: ProblemRenderProfile,
+  corrections: readonly SourceFormulaCorrection[] = [],
+  binaryLiteralFormulas: readonly string[] = [],
 ): Promise<string[]> {
-  const errors = preservationErrors(source, translated, profile);
+  const errors = preservationErrors(
+    source,
+    translated,
+    profile,
+    corrections,
+    binaryLiteralFormulas,
+  );
   if (profile?.engine !== "mathjax") return errors;
   const [{ JSDOM }, { renderProblemMath }] = await Promise.all([
     import("jsdom"),
@@ -382,7 +495,10 @@ export async function checkProblemPreservation(
     for (const node of dom.window.document.querySelectorAll(
       "mjx-assistive-mml mn",
     )) {
-      if (/^[1-9]\d{3,}(?:\.\d+)?$/u.test(node.textContent ?? ""))
+      if (
+        /^[1-9]\d{3,}(?:\.\d+)?$/u.test(node.textContent ?? "") &&
+        !hasNonDecimalRadix(node)
+      )
         errors.push(
           `정수 서식 확인 필요: ${node.textContent}. 수식 안의 정수도 10\\,000처럼 쓰세요. 날짜·식별자이면 예외를 보고하세요.`,
         );

@@ -164,7 +164,9 @@ declare global {
   async function render(renew: boolean) {
     const current = ++revision;
     const currentProblem = ++problemRevision;
-    const isProblemPage = /^\/problems\/no\/\d+\/?$/u.test(location.pathname);
+    const isProblemPage = /^\/problems\/(?:no\/)?\d+\/?$/u.test(
+      location.pathname,
+    );
     const live = () =>
       current === revision && globallyEnabled && settingsReady && !suspended;
     const problemLive = () => live() && currentProblem === problemRevision;

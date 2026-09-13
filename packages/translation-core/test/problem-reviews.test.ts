@@ -1,4 +1,7 @@
-import { metadataReviewStatus } from "../src/problem-review-status.ts";
+import {
+  metadataReviewStatus,
+  assertUnreviewedTranslation,
+} from "../src/problem-review-status.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
@@ -13,6 +16,24 @@ import { labelPublishedProblem } from "../../../tools/audit/src/problem-publicat
 import { effectiveProblemStatus } from "../src/problem-review-status.ts";
 
 const source = await readFile("problem-translations/ko/problems/1.mdx", "utf8");
+test("translation-only gate requires explicit null/unreviewed and never changes review state", () => {
+  for (const human of [null, "unreviewed", "approved"] as const)
+    for (const machine of ["unreviewed", "approved"] as const) {
+      const mdx = setProblemMarkdownReviews(source, { human, machine });
+      const metadata = parseProblemMarkdown(mdx).metadata;
+      const snapshot = structuredClone(metadata);
+      if (human === null && machine === "unreviewed")
+        assert.doesNotThrow(() => assertUnreviewedTranslation(metadata));
+      else assert.throws(() => assertUnreviewedTranslation(metadata), /미승인/);
+      assert.deepEqual(metadata, snapshot);
+    }
+  assert.throws(
+    () => assertUnreviewedTranslation({ reviewStatus: "unreviewed" }),
+    /미승인/,
+  );
+  assert.throws(() => assertUnreviewedTranslation({}), /미승인/);
+});
+
 for (const human of [null, "unreviewed", "approved"] as const) {
   test(`machine approval retains public notice unless human approves (${human})`, () => {
     const reviews = { human, machine: "approved" as const };

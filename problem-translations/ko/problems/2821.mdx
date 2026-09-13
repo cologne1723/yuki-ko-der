@@ -7,7 +7,7 @@ sourceTitle: "A[i] ← 2A[j] - A[i]"
 sourceHtmlSha256: "3c6b7103f9a945d0d5f5bbe72542f5965e276ed508122d0da8a24f7c17c70bdb"
 humanReview: null
 machineReview: unreviewed
-title: "A[i] ← 2A[j] - A[i]"
+title: '$A[i] \leftarrow 2A[j] - A[i]$'
 ---
 
 ## 문제 설명
@@ -20,11 +20,11 @@ title: "A[i] ← 2A[j] - A[i]"
 
 길이 $k$인 정수열 $B=(B_1,B_2,\dots,B_k)$가 있고, 처음에는 $B=(A_1,A_2,\dots,A_k)$입니다.
 
-다음 연산을 $0$회 이상 원하는 만큼 수행할 수 있습니다.
+다음 연산을 $0$회 이상 **원하는 만큼** 수행할 수 있습니다.
 
-- $1\leq i,j\leq k$를 만족하는 두 정수 $i,j$를 자유롭게 선택하고, $B_i$를 $2B_j-B_i$로 바꿉니다.
+- $1\leq i,j\leq k$를 만족하는 $2$개의 정수 $i,j$를 자유롭게 선택하고, $B_i$를 $2B_j-B_i$로 바꿉니다.
 
-연산을 적절히 수행해 얻을 수 있는 $V_k\coloneqq\max B-\min B$의 최솟값 $V'_k$를 구하세요. 이 최솟값은 반드시 존재합니다.
+연산을 적절히 수행해 얻을 수 있는 $V_k\coloneqq\max B-\min B$의 **최솟값** $V'_k$를 구하세요. 이 최솟값은 반드시 존재합니다.
 
 ## 입력
 
@@ -32,7 +32,7 @@ title: "A[i] ← 2A[j] - A[i]"
 
 ```text
 $N$
-$A_1\ \cdots\ A_N$
+$A_1\ A_2\ \cdots\ A_N$
 ```
 
 $N$은 정수의 개수이고, $A_1,A_2,\dots,A_N$은 정수입니다.

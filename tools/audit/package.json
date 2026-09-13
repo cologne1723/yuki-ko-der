@@ -9,6 +9,7 @@
     "audit:translations": "node --import tsx src/audit-translations.ts",
     "build:problems": "node --import tsx src/build-problem-translations.ts",
     "convert:problem": "node --import tsx src/convert-problem-html-to-mdx.ts",
+    "extract:problem-images": "node --import tsx src/extract-problem-images.ts",
     "validate:problems": "node --import tsx src/validate-problem-translations.ts",
     "lint:problems": "node --import tsx src/lint-problem-html.ts",
     "verify:problems": "node --import tsx src/validate-problem-translations.ts --verify-source",

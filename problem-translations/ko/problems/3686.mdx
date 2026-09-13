@@ -1,0 +1,80 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3686
+problemId: 13772
+sourceTitle: "Coprime Sum"
+sourceHtmlSha256: "1bd6181e2ad3c813e46ddc58aff24015821a2cecf415552c0c1195ee36827ced"
+humanReview: null
+machineReview: unreviewed
+title: "서로소 합"
+---
+
+## 문제 설명
+
+양의 정수 $N$과 $M$이 주어집니다.
+
+$N$ 이하의 양의 정수 $a$와 $M$ 이하의 양의 정수 $b$의 쌍 중 $a$와 $b$가 서로소인 모든 쌍에 대한 $ab$의 합을 $998\,244\,353$으로 나눈 나머지를 구하세요.
+
+## 입력
+
+```text
+$N\ M$
+```
+
+## 제한
+
+- $1\leq N,M\leq 10^7$
+- $N$과 $M$은 정수입니다.
+
+## 출력
+
+답을 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+3 5
+```
+
+#### 출력
+
+```text
+69
+```
+
+$1\cdot1+1\cdot2+1\cdot3+1\cdot4+1\cdot5+2\cdot1+2\cdot3+2\cdot5+3\cdot1+3\cdot2+3\cdot4+3\cdot5=69$입니다.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+31 13
+```
+
+#### 출력
+
+```text
+29391
+```
+
+### 예제 3 {file=""}
+
+#### 입력
+
+```text
+10000000 10000000
+```
+
+#### 출력
+
+```text
+283556728
+```
+
+$998\,244\,353$으로 나눈 나머지를 출력해야 하는 점에 주의하세요.

@@ -1,0 +1,50 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3505
+problemId: 13164
+sourceTitle: "Sum of Prod of Root"
+sourceHtmlSha256: ae2f6b09c6f77cb0207ca777a806561f6e7c70ac296c0445a689f993bf68bbf8
+humanReview: null
+machineReview: unreviewed
+title: "근의 곱의 합"
+---
+
+## 문제 설명
+
+양의 정수 $N$이 주어집니다.
+
+정수 $\displaystyle \sum_{i=1}^N \prod_{k=1}^{\infty} \lfloor \sqrt[k]{i} \rfloor$를 $998\,244\,353$으로 나눈 나머지를 출력하세요.
+
+## 입력
+
+```text
+$N$
+```
+
+## 제한
+
+- $1 \le N \le 10^{18}$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+구하는 정수를 $998\,244\,353$으로 나눈 나머지를 $1$줄에 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+6
+```
+
+#### 출력
+
+```text
+36
+```
+
+$\displaystyle \sum_{i=1}^6 \prod_{k=1}^{\infty} \lfloor \sqrt[k]{i} \rfloor = 1 + 2 + 3 + 8 + 10 + 12 = 36$입니다.

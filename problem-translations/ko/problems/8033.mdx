@@ -1,0 +1,53 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 8033
+problemId: 2225
+sourceTitle: "Test of Russian"
+sourceHtmlSha256: "e28784e63b97a38986122eaa732aca16dd127ea0b96eff97c3b565cd6eaf4c3f"
+humanReview: null
+machineReview: unreviewed
+title: "러시아어 테스트"
+---
+
+## 문제 설명
+
+Алиса를 제외한 사람들 중에는 $N$명이 있으며, 그중 $M$명은 정직하고 나머지 $N-M$명은 거짓말쟁이입니다.
+
+얼마 동안 Алиса는 $X$명과 알게 되었습니다. 알고 있는 사람 중 정직한 사람이 $3$명 이상이라는 사실을 알 수 있는지 판정하세요.
+
+## 입력
+
+```text
+$N\ M\ X$
+```
+
+정수 $N$, $M$, $X$가 이 순서로 공백으로 구분되어 표준 입력으로 주어집니다.
+
+## 제한
+
+- $1 \le N \le 20$
+- $0 \le M \le N$
+- $1 \le X \le N$
+
+## 출력
+
+알고 있는 사람 중 정직한 사람이 $3$명 이상이라는 사실을 알 수 있다면 `YES`를, 확신할 수 없다면 `NO`를 출력하세요.
+
+출력 끝에 줄 바꿈을 넣으세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+12 9 7
+```
+
+#### 출력
+
+```text
+YES
+```

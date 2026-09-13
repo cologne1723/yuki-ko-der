@@ -5,13 +5,14 @@ problemNo: 338
 problemId: 814
 sourceTitle: "アンケート機能"
 sourceHtmlSha256: "a23aef10aeca08e5254a4df021d3995ec9521bce0618855b6d1a0ab1078802d1"
-reviewStatus: unreviewed
+humanReview: null
+machineReview: approved
 title: "설문 기능"
 ---
 
-## 문제
+## 문제 설명
 
-어떤 사이트의 설문 기능으로 `Yes` 또는 `No`를 고르는 2지선다 설문을 실시했더니 한 명 이상이 응답했고, 결과는 `Yes`가 $A$%, `No`가 $B$%였습니다.
+어떤 사이트의 설문 기능으로 `Yes` 또는 `No`를 고르는 $2$지선다 설문을 실시했더니 $1$명 이상이 응답했고, 결과는 `Yes`가 $A$%, `No`가 $B$%였습니다.
 
 단, $A,B$는 소수점 이하를 반올림한 값입니다. 즉 `Yes`, `No`에 투표한 사람 수를 각각 $a,b$명이라 하면, $A,B$는 각각 $\displaystyle\frac{100a}{a+b}$, $\displaystyle\frac{100b}{a+b}$를 소수점 이하 반올림한 값입니다.
 
@@ -20,8 +21,10 @@ title: "설문 기능"
 ## 입력
 
 ```text
-A B
+$A\ B$
 ```
+
+## 제한
 
 - $0\le A\le100$
 - $0\le B\le100$
@@ -29,17 +32,19 @@ A B
 
 ## 출력
 
-조건을 만족하는 $a+b$의 최솟값을 한 줄에 출력하세요. 마지막에 개행하세요.
+조건을 만족하는 $a+b$의 최솟값을 $1$줄에 출력하세요. 마지막에 개행하세요.
 
-## 샘플
+## 예제
 
-### 샘플 1 {file="sample1.in"}
+### 예제 1 {file=""}
+
+#### 입력
 
 ```text
 50 50
 ```
 
-### 샘플 1 {file="sample1.out"}
+#### 출력
 
 ```text
 2
@@ -47,13 +52,15 @@ A B
 
 $a=b=1$일 때 $a+b$가 최소입니다.
 
-### 샘플 2 {file="sample2.in"}
+### 예제 2 {file=""}
+
+#### 입력
 
 ```text
 1 99
 ```
 
-### 샘플 2 {file="sample2.out"}
+#### 출력
 
 ```text
 67
@@ -61,13 +68,15 @@ $a=b=1$일 때 $a+b$가 최소입니다.
 
 $a=1,b=66$일 때입니다.
 
-### 샘플 3 {file="sample3.in"}
+### 예제 3 {file=""}
+
+#### 입력
 
 ```text
 3 98
 ```
 
-### 샘플 3 {file="sample3.out"}
+#### 출력
 
 ```text
 40

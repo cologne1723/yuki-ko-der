@@ -75,7 +75,11 @@ test("translation preview shares extension sanitization while original preview p
     const api = (
       dom.window as unknown as {
         parity: {
-          previewDocument(html: string, inert: boolean): Promise<string>;
+          previewDocument(
+            html: string,
+            inert: boolean,
+            origin?: string,
+          ): Promise<string>;
           sanitizeTranslatedBlocks(blocks: Element[]): HTMLElement[];
         };
       }
@@ -121,6 +125,27 @@ test("translation preview shares extension sanitization while original preview p
       );
     } finally {
       source.window.close();
+    }
+    const local = new JSDOM(
+      await api.previewDocument(
+        '<img src="../images/42/1.svg">',
+        false,
+        "http://preview.test",
+      ),
+    );
+    try {
+      assert.equal(
+        local.window.document.querySelector("img")?.getAttribute("src"),
+        "http://preview.test/problem-images/42/1.svg",
+      );
+      assert.match(
+        local.window.document
+          .querySelector('meta[http-equiv="Content-Security-Policy"]')
+          ?.getAttribute("content") ?? "",
+        /img-src[^;]*http:\/\/preview\.test/u,
+      );
+    } finally {
+      local.window.close();
     }
   } finally {
     dom.window.close();

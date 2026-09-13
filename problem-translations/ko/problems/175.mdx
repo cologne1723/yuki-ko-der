@@ -5,43 +5,58 @@ problemNo: 175
 problemId: 415
 sourceTitle: "simpleDNA"
 sourceHtmlSha256: 8936e9c6e705017481ec6d1c29840eac9990810b04c0e76e2b2893aa11326575
-reviewStatus: unreviewed
+humanReview: null
+machineReview: approved
 title: "simpleDNA"
 ---
 
+## 이야기
+
+A君은 매우 단순한 DNA로 알려진 simpleDNA를 연구하고 있습니다.
+
 ## 문제 설명
 
-A는 매우 단순한 DNA로 알려진 simpleDNA를 연구하고 있습니다. simpleDNA의 특징은 다음과 같습니다.
+simpleDNA의 특징은 다음과 같습니다.
 
 - 일반 DNA와 마찬가지로 분기하지 않는 염기서열을 가집니다.
-- 매우 단순하므로 염기 `A`와 `B` 두 종류로만 이루어집니다.
-- 염기서열의 길이는 최대 30입니다.
-- 염기서열의 길이는 반드시 3의 배수입니다.
+- 매우 단순하므로 염기 `A`와 `B` $2$종류로만 이루어집니다.
+- 염기서열의 길이는 최대 $30$입니다.
+- 염기서열의 길이는 반드시 $3$의 배수입니다.
 
-A는 이러한 simpleDNA 중 염기서열의 끝이 지정된 종결 코돈으로 끝나는 것을 찾고 있습니다. 코돈은 3개의 염기서열 조합입니다. 즉, 마지막 3개의 염기가 종결 코돈으로 지정된 것과 같습니다.
+A君은 이러한 simpleDNA 중 염기서열의 끝이 지정된 종결 코돈으로 끝나는 것을 찾고 있습니다. 코돈은 $3$개의 염기 조합입니다. 즉, 마지막 $3$개의 염기가 종결 코돈으로 지정된 것과 같습니다.
 
 길이 $L$과 종결 코돈 후보가 주어질 때, 조건을 만족하는 simpleDNA의 패턴 수를 구하세요.
+
+일반 DNA에 대한 설명은 아래 문서를 참고하세요.
+
+http://en.wikipedia.org/wiki/DNA
 
 ## 입력
 
 ```text
-L
-N
-S_1 S_2 ... S_N
+$L$
+$N$
+$S_1\ S_2\ \dots\ S_N$
 ```
 
-- $L$은 simpleDNA의 길이이며 $3 \le L \le 30$, 3의 배수입니다.
-- $N$은 종결 코돈 후보의 수이며 $1 \le N \le 8$입니다.
-- $S_i$는 `A`와 `B`로 이루어진 길이 3의 종결 코돈 후보입니다.
+$L$은 simpleDNA의 염기서열 길이이며, $N$은 종결 코돈 후보의 수입니다. $S_i$는 $i$번째 종결 코돈 후보입니다.
+
+## 제한
+
+- $3 \le L \le 30$이며, $L$은 $3$의 배수입니다.
+- $1 \le N \le 8$
+- $S_i$는 `A`와 `B`로 이루어진 길이 $3$의 문자열입니다.
 - 종결 코돈 후보에는 같은 문자열이 중복되지 않습니다.
 
 ## 출력
 
-조건을 만족하는 simpleDNA 염기서열의 패턴 수를 한 줄에 출력하세요.
+조건을 만족하는 simpleDNA 염기서열의 패턴 수를 $1$줄에 출력하세요. 마지막에 줄바꿈을 출력하세요.
 
 ## 예제
 
 ### 예제 1 {file=""}
+
+#### 입력
 
 ```text
 6
@@ -49,13 +64,17 @@ S_1 S_2 ... S_N
 AAB
 ```
 
+#### 출력
+
 ```text
 8
 ```
 
-길이 6이고 마지막이 `AAB`인 simpleDNA는 `AAAAAB`, `AABAAB`, `ABAAAB`, `ABBAAB`, `BAAAAB`, `BABAAB`, `BBAAAB`, `BBBAAB`의 8가지입니다.
+길이 $6$이고 마지막이 `AAB`인 simpleDNA는 `AAAAAB`, `AABAAB`, `ABAAAB`, `ABBAAB`, `BAAAAB`, `BABAAB`, `BBAAAB`, `BBBAAB`의 $8$가지입니다.
 
 ### 예제 2 {file=""}
+
+#### 입력
 
 ```text
 3
@@ -63,19 +82,25 @@ AAB
 AAA BBB BAB
 ```
 
+#### 출력
+
 ```text
 3
 ```
 
-마지막이 `AAA`, `BBB`, `BAB` 중 하나인 길이 3의 서열은 이 3가지뿐입니다.
+마지막이 `AAA`, `BBB`, `BAB` 중 $1$개인 길이 $3$의 서열은 이 $3$가지뿐입니다.
 
 ### 예제 3 {file=""}
+
+#### 입력
 
 ```text
 18
 5
 AAA AAB ABB BAA BBA
 ```
+
+#### 출력
 
 ```text
 163840

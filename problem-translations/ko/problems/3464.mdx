@@ -1,0 +1,86 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3464
+problemId: 12394
+sourceTitle: "Max and Sum on Grid"
+sourceHtmlSha256: 477745b965a148a6bea8735756568f37a1fc5e198614190b21c51edeae4ac00b
+humanReview: null
+machineReview: unreviewed
+title: "격자에서의 최댓값과 합"
+---
+
+## 문제 설명
+
+길이가 $N$인 수열 $A$와 $B$가 주어집니다.
+
+여기서 $N \times N$ 이차원 격자 $S$를 다음과 같이 정의합니다.
+
+- $S_{i,j} = \max(A_i, B_j)$
+
+쿼리가 $Q$개 주어지므로 순서대로 처리하세요. $i$번째 쿼리는 다음과 같습니다.
+
+- $l \ d \ r \ u$: $l \leq x \leq r$, $d \leq y \leq u$를 만족하는 $(x,y)$의 쌍에 대해 $S_{x,y}$의 합을 출력합니다.
+
+## 입력
+
+입력은 다음 형식으로 표준 입력에서 주어집니다.
+
+```text
+$N\ Q$
+$A_1\ A_2\ \cdots\ A_N$
+$B_1\ B_2\ \cdots\ B_N$
+$\text{query}_1$
+$\text{query}_2$
+$\vdots$
+$\text{query}_Q$
+```
+
+각 쿼리는 다음 형식으로 주어집니다.
+
+```text
+$l\ d\ r\ u$
+```
+
+## 제한
+
+- $1 \leq N \leq 20\,000$
+- $1 \leq Q \leq 100\,000$
+- $1 \leq A_i, B_i \leq 100\,000$
+- $1 \leq l \leq r \leq N$
+- $1 \leq d \leq u \leq N$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+$Q$줄에 걸쳐 출력하세요.
+
+$i$번째 줄에는 $i$번째 쿼리에 대한 답을 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+5 4
+8 6 2 4 1
+2 3 5 7 11
+2 3 3 4
+4 2 5 4
+1 1 3 3
+1 1 5 5
+```
+
+#### 출력
+
+```text
+25
+31
+52
+166
+```
+
+예를 들어 $1$번째 쿼리에서는
+$S_{2,3} + S_{2,4} + S_{3,3} + S_{3,4} = \max(A_2, B_3) + \max(A_2, B_4) + \max(A_3, B_3) + \max(A_3, B_4) = 6 + 7 + 5 + 7 = 25$가 됩니다.

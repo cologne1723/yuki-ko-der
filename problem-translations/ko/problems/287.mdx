@@ -5,25 +5,28 @@ problemNo: 287
 problemId: 763
 sourceTitle: "場合の数"
 sourceHtmlSha256: "eff35aabf89a61d6b56d875904e9f79f59c26922492920f1d28c14ff405acf4a"
-reviewStatus: unreviewed
+humanReview: null
+machineReview: approved
 title: "경우의 수"
 ---
 
-## 문제
+## 문제 설명
 
-$n$을 1 이상의 정수라고 합니다.
+$n$을 $1$ 이상의 정수라고 합니다.
 
 $a+b+c+d+e+f+g+h=6n$을 만족하면서 다음 조건도 만족하는 정수 튜플 $(a,b,c,d,e,f,g,h)$의 개수 $G(n)$을 구하세요.
 
-$$0\le a,b,c,d,e,f,g,h\le n$$
+$0\le a,b,c,d,e,f,g,h\le n$
 
 ## 입력
 
 ```text
-n
+$n$
 ```
 
 입력은 정수로 주어집니다.
+
+## 제한
 
 - $1 \le n \le 100$
 
@@ -33,41 +36,47 @@ $G(n)$을 출력하세요.
 
 마지막에 개행을 출력하세요.
 
-## 샘플
+## 예제
 
-### 샘플 1 {file="sample1.in"}
+### 예제 1 {file=""}
+
+#### 입력
 
 ```text
 1
 ```
 
-### 샘플 1 {file="sample1.out"}
+#### 출력
 
 ```text
 28
 ```
 
-0이 2개, 1이 6개이므로 ${}_8\mathrm{C}_2=28$가지입니다.
+$0$이 $2$개, $1$이 $6$개이므로 ${}_8\mathrm{C}_2=28$가지입니다.
 
-### 샘플 2 {file="sample2.in"}
+### 예제 2 {file=""}
+
+#### 입력
 
 ```text
 10
 ```
 
-### 샘플 2 {file="sample2.out"}
+#### 출력
 
 ```text
 796510
 ```
 
-### 샘플 3 {file="sample3.in"}
+### 예제 3 {file=""}
+
+#### 입력
 
 ```text
 100
 ```
 
-### 샘플 3 {file="sample3.out"}
+#### 출력
 
 ```text
 2721355068691

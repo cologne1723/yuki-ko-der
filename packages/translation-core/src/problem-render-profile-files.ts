@@ -39,7 +39,22 @@ function pageEvidence(html: string, sourceUrl: string, problemNo: number) {
   try {
     const document = dom.window.document;
     // API statement fragments are deliberately insufficient evidence.
-    if (!document.querySelector("#content .block"))
+    const content = document.querySelector<HTMLElement>("#content");
+    const problemId = content?.dataset.problemId ?? "";
+    // Unsectioned puzzle statements still have the site's problem identity,
+    // HTML-copy control and matching submission form. Do not accept a bare
+    // fragment or a login page just because it includes renderer scripts.
+    const unsectionedProblem =
+      /^[1-9]\d*$/u.test(problemId) &&
+      content
+        ?.querySelector(":scope > h3")
+        ?.textContent?.trim()
+        .match(/^No\.(\d+)(?:\s|$)/u)?.[1] === String(problemNo) &&
+      content?.querySelector("#copy-problem-html-btn") &&
+      content?.querySelector(
+        `:scope > form[action="/problems/${problemId}/submit"]`,
+      );
+    if (!document.querySelector("#content .block") && !unsectionedProblem)
       throw new Error(`Public problem page statement is missing: ${sourceUrl}`);
     // The public document title identifies No; data-problem-id is an internal ID.
     // Never use editable/translated statement headings to establish this identity.

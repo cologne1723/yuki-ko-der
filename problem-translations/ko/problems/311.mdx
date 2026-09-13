@@ -5,50 +5,55 @@ problemNo: 311
 problemId: 848
 sourceTitle: "z in FizzBuzzString"
 sourceHtmlSha256: "5ec4ae83968ceb3a2b373f199656ffe2bd4fea355e816a6d752856a8901262bd"
-reviewStatus: unreviewed
+humanReview: null
+machineReview: approved
 title: "FizzBuzzString의 z"
 ---
 
-## 문제
+## 문제 설명
 
-1〜$N$까지의 수를 다음과 같이 변환해 이어 붙입니다.
+$1$〜$N$까지의 수를 다음과 같이 변환해 이어 붙입니다.
 
-- 3의 배수이면서 5의 배수: `FizzBuzz`
-- 3의 배수: `Fizz`
-- 5의 배수: `Buzz`
+- $3$의 배수이면서 $5$의 배수: `FizzBuzz`
+- $3$의 배수: `Fizz`
+- $5$의 배수: `Buzz`
 - 그 외: 해당 숫자 자체
 
-이렇게 만든 문자열을 `FizzBuzzString(N)`이라고 합니다. `FizzBuzzString(N)`에 포함된 `z`의 개수를 구하세요.
+이렇게 만든 문자열을 $\operatorname{FizzBuzzString}(N)$이라고 합니다. $\operatorname{FizzBuzzString}(N)$에 포함된 `z`의 개수를 구하세요.
 
-64비트 정수값을 사용하므로 JavaScript로 답안을 작성하기 어려울 수 있습니다. PHP에서는 `/` 대신 `divint` 함수를 사용해야 할 가능성이 높습니다.
+$64$비트 정수값을 사용하므로 JavaScript로 답안을 작성하기 어려울 수 있습니다. PHP에서는 `/` 대신 `intdiv` 함수를 사용해야 할 가능성이 높습니다.
 
 ## 입력
 
 ```text
-N
+$N$
 ```
 
-한 줄에 $N$이 주어집니다.
+$1$줄에 $N$이 주어집니다.
+
+## 제한
 
 - $1 \le N \le 10^{18}$
 
 ## 출력
 
-구한 `z`의 개수를 한 줄에 출력하세요.
+구한 `z`의 개수를 $1$줄에 출력하세요.
 
-## 샘플
+## 예제
 
-### 샘플 1 {file="sample1.in"}
+### 예제 1 {file=""}
+
+#### 입력
 
 ```text
 15
 ```
 
-### 샘플 1 {file="sample1.out"}
+#### 출력
 
 ```text
 16
 ```
 
-`FizzBuzzString(15)`는 `12Fizz4BuzzFizz78FizzBuzz11Fizz1314FizzBuzz`이고, 여기에 포함된 `z`의 개수는 16개입니다.
+$\operatorname{FizzBuzzString}(15)$는 `12Fizz4BuzzFizz78FizzBuzz11Fizz1314FizzBuzz`이고, 여기에 포함된 `z`의 개수는 $16$개입니다.
 

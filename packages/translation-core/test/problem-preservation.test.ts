@@ -10,9 +10,289 @@ import {
   checkProblemPreservation,
 } from "../src/problem-preservation.ts";
 import { SITE_KATEX, SITE_MATHJAX } from "../src/problem-render-profile.ts";
+import {
+  sourceFormulaCorrections,
+  sourceBinaryLiteralFormulas,
+} from "../src/problem-source-corrections-node.ts";
 
 const fixture = readFileSync("problem-translations/ko/problems/1.mdx", "utf8");
 const front = fixture.slice(0, fixture.indexOf("## "));
+
+test("query-subscript and empty-set source corrections cannot waive other formula changes", () => {
+  for (const no of [3553, 3582]) {
+    const original = readFileSync(
+      "data/problems-source/" + no + ".html",
+      "utf8",
+    );
+    const corrections = sourceFormulaCorrections(no, original);
+    assert.equal(corrections.length, no === 3553 ? 1 : 3);
+    assert.deepEqual(sourceFormulaCorrections(no + 1, original), []);
+    assert.deepEqual(sourceFormulaCorrections(no, original + "\n"), []);
+    for (const correction of corrections) {
+      assert.notEqual(correction.before, correction.after);
+      const source = new JSDOM("<p>$" + correction.before + "$</p>");
+      try {
+        for (const [formula, evidence, passes] of [
+          [correction.after, [correction], true],
+          [correction.before, [correction], false],
+          [correction.after, [], false],
+          [correction.after.replaceAll("\\{", "{"), [correction], false],
+          [correction.after + "+1", [correction], false],
+        ] as const) {
+          const target = new JSDOM("<p>$" + formula + "$</p>");
+          try {
+            assert.equal(
+              preservationErrors(
+                source.window.document,
+                target.window.document,
+                SITE_KATEX,
+                evidence,
+              ).length === 0,
+              passes,
+            );
+          } finally {
+            target.window.close();
+          }
+        }
+      } finally {
+        source.window.close();
+      }
+    }
+  }
+});
+
+test("snapshot-bound binary literal formulas preserve digits without exempting other integers", () => {
+  const original = readFileSync("data/problems-source/3009.html", "utf8");
+  const literals = sourceBinaryLiteralFormulas(3009, original);
+  assert.equal(literals.length, 3);
+  assert.deepEqual(sourceBinaryLiteralFormulas(3008, original), []);
+  assert.deepEqual(sourceBinaryLiteralFormulas(3009, original + "\n"), []);
+  const source = new JSDOM(literals.map((f) => "<p>$" + f + "$</p>").join(""));
+  try {
+    for (const [values, extra, evidence, passes] of [
+      [literals, "", literals, true],
+      [literals, "", [], false],
+      [literals, "<p>$1111$</p>", literals, false],
+      [literals, "<p>$N=1000$</p>", literals, false],
+      [literals, "<p>$1111$ $N=1000$</p>", literals, false],
+      [[literals[0], "111", literals[2]], "", literals, false],
+      [
+        [literals[0].replace("1001", "1000"), ...literals.slice(1)],
+        "",
+        literals,
+        false,
+      ],
+      [[literals[0], String.raw`1\,111`, literals[2]], "", literals, false],
+      [literals.slice(0, 2), "", literals, false],
+      [literals, "", [...literals, "101010"], false],
+    ] as const) {
+      const target = new JSDOM(
+        values.map((f) => "<p>$" + f + "$</p>").join("") + extra,
+      );
+      try {
+        assert.equal(
+          preservationErrors(
+            source.window.document,
+            target.window.document,
+            SITE_KATEX,
+            [],
+            evidence,
+          ).length === 0,
+          passes,
+        );
+      } finally {
+        target.window.close();
+      }
+    }
+  } finally {
+    source.window.close();
+  }
+});
+
+test("existing explicit CODE fence preserves Python regex instead of rendering it as TeX", () => {
+  const code = String.raw`pattern = re.compile(r"A\[(\-?\d+)\]$")`;
+  const source = new JSDOM("<pre><code>" + code + "</code></pre>");
+  try {
+    for (const [info, passes] of [
+      ['python html="code"', true],
+      ["python", false],
+    ] as const) {
+      const md =
+        front + "## 문제 설명\n\n" + "```" + info + "\n" + code + "\n```\n";
+      const target = new JSDOM(compileProblemMarkdown(md));
+      try {
+        assert.equal(
+          target.window.document.querySelector("pre")!.textContent,
+          code + "\n",
+        );
+        assert.equal(
+          preservationErrors(
+            source.window.document,
+            target.window.document,
+            SITE_KATEX,
+          ).length === 0,
+          passes,
+        );
+      } finally {
+        target.window.close();
+      }
+    }
+  } finally {
+    source.window.close();
+  }
+});
+
+test("documented set corrections require exact source hash, number and occurrence", () => {
+  const original = readFileSync("data/problems-source/2911.html", "utf8");
+  const corrections = sourceFormulaCorrections(2911, original);
+  assert.equal(corrections.length, 1);
+  assert.deepEqual(sourceFormulaCorrections(2912, original), []);
+  assert.deepEqual(sourceFormulaCorrections(2911, original + "\n"), []);
+  const { before, after } = corrections[0];
+  assert.deepEqual(
+    [2, 3].filter((n) => [1, 2].includes(n)),
+    [2],
+  );
+  const source = new JSDOM("<p>$" + before + "$</p>");
+  try {
+    for (const [formula, correspondence, passes] of [
+      [after, corrections, true],
+      [after, [], false],
+      [before, corrections, false],
+      [after.replace("= \\{2\\}", "= \\{3\\}"), corrections, false],
+      [after.replace("\\cap", "\\cup"), corrections, false],
+      [after.replace("\\{2\\}", "{2}"), corrections, false],
+      [after, [{ ...corrections[0], occurrences: 2 }], false],
+      [after, [corrections[0], corrections[0]], false],
+    ] as const) {
+      const target = new JSDOM("<p>$" + formula + "$</p>");
+      try {
+        assert.equal(
+          preservationErrors(
+            source.window.document,
+            target.window.document,
+            SITE_KATEX,
+            correspondence,
+          ).length === 0,
+          passes,
+        );
+      } finally {
+        target.window.close();
+      }
+    }
+    const missing = new JSDOM("<p>$x$</p>");
+    assert.ok(
+      preservationErrors(
+        missing.window.document,
+        missing.window.document,
+        SITE_KATEX,
+        corrections,
+      ).some((error) => error.includes("정정 근거 불일치")),
+    );
+    missing.window.close();
+    const changed = new JSDOM(
+      "<p>$" +
+        after +
+        '$ $1234$</p><a href="https://example.com/changed">x</a>',
+    );
+    const errors = preservationErrors(
+      source.window.document,
+      changed.window.document,
+      SITE_KATEX,
+      corrections,
+    );
+    assert.ok(errors.some((error) => error.includes("정수 서식")));
+    assert.ok(errors.some((error) => error.includes("href")));
+    changed.window.close();
+  } finally {
+    source.window.close();
+  }
+});
+
+test("mobile sample-class branding does not hide wrapperless h5/h6 examples", () => {
+  const source = new JSDOM(
+    '<div class="block"><div class="sample"><h4>注釈</h4><b>brand</b></div><h4>入力</h4><pre>$N$</pre></div><div class="block"><h4>サンプル</h4><h5>サンプル1</h5><div class="paragraph"><h6>入力</h6><pre>1  2</pre><h6>出力</h6><pre>3</pre><p>説明</p><pre>worked prose</pre></div></div>',
+  );
+  try {
+    for (const [input, output, file, passes] of [
+      ["1  2", "3", "", true],
+      ["1 2", "3", "", false],
+      ["1  2", "4", "", false],
+      ["3", "1  2", "", false],
+      ["1  2", "3", "invented.txt", false],
+    ] as const) {
+      const target = new JSDOM(
+        `<div class="sample" data-file="${file}"><h5>예제 1</h5><h6>입력</h6><pre>${input}</pre><h6>출력</h6><pre>${output}</pre></div>`,
+      );
+      assert.equal(
+        preservationErrors(source.window.document, target.window.document)
+          .length === 0,
+        passes,
+      );
+      target.window.close();
+    }
+  } finally {
+    source.window.close();
+  }
+});
+
+test("resource comparison accepts Unicode URL serialization but not destination changes", () => {
+  const url = "https://example.com/年齢?q=年#計算";
+  const source = new JSDOM(`<a href="${url}">source</a>`);
+  const encoded = new URL(url).href;
+  try {
+    for (const [href, passes] of [
+      [encoded, true],
+      [encoded.replace("q=", "r="), false],
+      [encoded.replace("example.com", "other.example"), false],
+      [encoded.replace("#", "/#"), false],
+      ["https://example.com/a%2Fb", false],
+    ] as const) {
+      const target = new JSDOM(`<a href="${href}">번역</a>`);
+      assert.equal(
+        preservationErrors(source.window.document, target.window.document)
+          .length === 0,
+        passes,
+      );
+      target.window.close();
+    }
+    const a = new JSDOM('<a href="https://example.com/a%2Fb">a</a>');
+    const b = new JSDOM('<a href="https://example.com/a/b">b</a>');
+    assert.ok(preservationErrors(a.window.document, b.window.document).length);
+    a.window.close();
+    b.window.close();
+  } finally {
+    source.window.close();
+  }
+});
+
+test("wrapperless source examples retain sample data and filename checks at document scope", () => {
+  const source = new JSDOM(
+    '<div class="block"><h4>サンプル</h4><p>サンプル1</p><p>Aliceの入力</p><pre>1  2</pre><p>Aliceの出力</p><pre>3</pre></div>',
+  );
+  try {
+    for (const [file, value, ok] of [
+      ["", "1  2", true],
+      ["wrong.txt", "1  2", false],
+      ["", "1 2", false],
+    ] as const) {
+      const translated = new JSDOM(
+        `<div class="block"><div class="sample" data-file="${file}"><h6>입력</h6><pre>${value}</pre><h6>출력</h6><pre>3</pre></div></div>`,
+      );
+      try {
+        assert.equal(
+          preservationErrors(source.window.document, translated.window.document)
+            .length === 0,
+          ok,
+        );
+      } finally {
+        translated.window.close();
+      }
+    }
+  } finally {
+    source.window.close();
+  }
+});
 
 test("translated otherwise label preserves cases without hiding structural loss", () => {
   const tex = String.raw`f(a,b)=\left\{\begin{array}{cc}a\ \&\ b&(p(a)=p(b))\\0&(\text{otherwise})\end{array}\right.`;
@@ -39,6 +319,27 @@ test("translated otherwise label preserves cases without hiding structural loss"
       }
     }
   } finally {
+    source.window.close();
+  }
+});
+
+test("short comparison commands cannot silently become letter products", () => {
+  for (const command of ["ge", "le"]) {
+    const source = new JSDOM(`<p>$i \\${command} 0$</p>`);
+    for (const [tex, expected] of [
+      [`i ${command} 0`, true],
+      [`i \\${command} 0`, false],
+      ["large", false],
+    ] as const) {
+      const target = new JSDOM(`<p>$${tex}$</p>`);
+      assert.equal(
+        preservationErrors(source.window.document, target.window.document).some(
+          (error) => error.includes("역슬래시 누락"),
+        ),
+        expected,
+      );
+      target.window.close();
+    }
     source.window.close();
   }
 });
@@ -155,6 +456,13 @@ test("standalone large integers use thin spaces, without reformatting sample lit
     ["998,244,353", true],
     [String.raw`998\,244\,353`, false],
     ["000002", false],
+    ["1110_{(2)}", false],
+    ["11111_{(2)}", false],
+    ["7654_{(8)}", false],
+    ["1110_{(2)}+1110", true],
+    ["1110_{(10)}", true],
+    ["1234_{(2)}", true],
+    ["1110_i", true],
     ["1,2,3", false],
   ] as const) {
     const dom = new JSDOM(`<p>$${formula}$</p>`);

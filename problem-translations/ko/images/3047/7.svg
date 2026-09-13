@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?><!DOCTYPE svg>
+<svg width='151.66666666666666' height='100.0' viewBox='0 0 455 300'
+    xmlns='http://www.w3.org/2000/svg'>
+    <rect width='455' height='300' fill='#fff'/>
+    <path style='stroke:#000;stroke-width:3' d='M0 60H455M0 120H455M0 180H455M0 240H455'/>
+    <path style='stroke:#000;stroke-width:3;fill:#000' d='M96 60a9 9 0 1 1 18 0a9 9 0 1 1-18 0zm9 0V120m-9 0a9 9 0 1 1 18 0a9 9 0 1 1-18 0zM96 180a9 9 0 1 1 18 0a9 9 0 1 1-18 0zm9 0V240m-9 0a9 9 0 1 1 18 0a9 9 0 1 1-18 0zM201 60a9 9 0 1 1 18 0a9 9 0 1 1-18 0zm9 0V180m-9 0a9 9 0 1 1 18 0a9 9 0 1 1-18 0zM236 120a9 9 0 1 1 18 0a9 9 0 1 1-18 0zm9 0V240m-9 0a9 9 0 1 1 18 0a9 9 0 1 1-18 0zM341 120a9 9 0 1 1 18 0a9 9 0 1 1-18 0zm9 0V180m-9 0a9 9 0 1 1 18 0a9 9 0 1 1-18 0z'/>
+    <path style='stroke:#0a0;stroke-width:3;fill:none' d='
+    M70 50h10l50 60h15l-8-5
+    M70 170h10l50 60h15l-8-5
+    M175 50h10l50 120h50l-8-5
+    M175 110h45l50 120h15l-8-5
+    M315 110h10l50 60h15l-8-5
+    '/>
+    <path style='stroke:#0aa;stroke-width:3;fill:none' d='
+    M70 110h10l50-60h15l-8-5
+    M70 230h10l50-60h15l-8-5
+    M175 170h10l50-120h50l-8-5
+    M175 230h45l50-120h15l-8-5
+    M315 170h10l50-60h15l-8-5
+    '/>
+    <g fill='#a00' font-family='serif' font-size='36' font-weight='900' text-anchor='middle' dominant-baseline='middle'>
+        <text x='60' y='45'>4</text>
+        <text x='60' y='105'>2</text>
+        <text x='60' y='165'>3</text>
+        <text x='60' y='225'>1</text>
+        <text x='160' y='45'>2</text>
+        <text x='160' y='105'>4</text>
+        <text x='160' y='165'>1</text>
+        <text x='160' y='225'>3</text>
+        <text x='300' y='45'>1</text>
+        <text x='300' y='105'>3</text>
+        <text x='300' y='165'>2</text>
+        <text x='300' y='225'>4</text>
+        <text x='405' y='45'>1</text>
+        <text x='405' y='105'>2</text>
+        <text x='405' y='165'>3</text>
+        <text x='405' y='225'>4</text>
+    </g>
+</svg>

@@ -31,12 +31,12 @@ title: "토목 공사"
 
 또한 공사 후에는 다음 조건을 모두 만족해야 합니다.
 
-- $1 \leq i < N$ 및 $1 \leq j \leq N$을 만족하는 임의의 두 정수 $i, j$에 대해, $\displaystyle \left| \frac{H'_{i, j} + H'_{i + 1, j}}{H_{i, j} + H_{i + 1, j}} \right| \leq A_{i, j}$입니다.
-- $1 \leq i \leq N$ 및 $1 \leq j < N$을 만족하는 임의의 두 정수 $i, j$에 대해, $\displaystyle \left| \frac{H'_{i, j} + H'_{i, j + 1}}{H_{i, j} + H_{i, j + 1}} \right| \leq B_{i, j}$입니다.
+- $1 \leq i < N$ 및 $1 \leq j \leq N$을 만족하는 임의의 $2$개의 정수 $i, j$에 대해, $\displaystyle \left| \frac{H'_{i, j} + H'_{i + 1, j}}{H_{i, j} + H_{i + 1, j}} \right| \leq A_{i, j}$입니다.
+- $1 \leq i \leq N$ 및 $1 \leq j < N$을 만족하는 임의의 $2$개의 정수 $i, j$에 대해, $\displaystyle \left| \frac{H'_{i, j} + H'_{i, j + 1}}{H_{i, j} + H_{i, j + 1}} \right| \leq B_{i, j}$입니다.
 
 문제의 제한 아래에서는 적절히 공사를 진행해 항상 위의 조건을 만족시킬 수 있습니다.
 
-이때 $Q$개의 서로 독립적인 질문, 질문 $1, 2, \dots, Q$에 각각 답하세요.
+이때 $Q$개의 서로 독립적인 질문, 질문 $1, 2, \cdots, Q$에 각각 답하세요.
 
 > **질문 $k$**
 >
@@ -51,22 +51,22 @@ title: "토목 공사"
 
 ```text
 $N$
-$H_{1,1}\ H_{1,2}\ \dots\ H_{1,N}$
-$H_{2,1}\ H_{2,2}\ \dots\ H_{2,N}$
+$H_{1,1}\ H_{1,2}\ \cdots\ H_{1,N}$
+$H_{2,1}\ H_{2,2}\ \cdots\ H_{2,N}$
 $\vdots$
-$H_{N,1}\ H_{N,2}\ \dots\ H_{N,N}$
-$X_{1,1}X_{1,2}\dots X_{1,N}$
-$X_{2,1}X_{2,2}\dots X_{2,N}$
+$H_{N,1}\ H_{N,2}\ \cdots\ H_{N,N}$
+$X_{1,1}X_{1,2}\cdots X_{1,N}$
+$X_{2,1}X_{2,2}\cdots X_{2,N}$
 $\vdots$
-$X_{N,1}X_{N,2}\dots X_{N,N}$
-$A_{1,1}\ \enspace A_{1,2}\ \enspace \dots\ \enspace A_{1,N}$
-$A_{2,1}\ \enspace A_{2,2}\ \enspace \dots\ \enspace A_{2,N}$
+$X_{N,1}X_{N,2}\cdots X_{N,N}$
+$A_{1,1}\ \enspace A_{1,2}\ \enspace \cdots\ \enspace A_{1,N}$
+$A_{2,1}\ \enspace A_{2,2}\ \enspace \cdots\ \enspace A_{2,N}$
 $\vdots$
-$A_{N-1,1}\ \enspace A_{N-1,2}\ \enspace \dots\ \enspace A_{N-1,N}$
-$B_{1,1}\ \enspace B_{1,2}\ \enspace \dots\ \enspace B_{1,N-1}$
-$B_{2,1}\ \enspace B_{2,2}\ \enspace \dots\ \enspace B_{2,N-1}$
+$A_{N-1,1}\ \enspace A_{N-1,2}\ \enspace \cdots\ \enspace A_{N-1,N}$
+$B_{1,1}\ \enspace B_{1,2}\ \enspace \cdots\ \enspace B_{1,N-1}$
+$B_{2,1}\ \enspace B_{2,2}\ \enspace \cdots\ \enspace B_{2,N-1}$
 $\vdots$
-$B_{N,1}\ \enspace B_{N,2}\ \enspace \dots\ \enspace B_{N,N-1}$
+$B_{N,1}\ \enspace B_{N,2}\ \enspace \cdots\ \enspace B_{N,N-1}$
 $Q$
 $R_1\ \enspace C_1\ \enspace E_1$
 $R_2\ \enspace C_2\ \enspace E_2$

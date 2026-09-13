@@ -1,0 +1,82 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3670
+problemId: 13830
+sourceTitle: "Fast Knapsack"
+sourceHtmlSha256: 2b8c692a8d2e845d1608f212cf834636a1c4704087c4408ca2f5712ea3c5b26f
+humanReview: null
+machineReview: unreviewed
+title: "빠른 배낭"
+---
+
+## 문제 설명
+
+길이가 $N$인 양의 정수열 $A=(A_1,A_2,\ldots,A_N)$과 양의 정수 $S$가 주어집니다.
+
+집합 $\{1,2,\ldots,N\}$의 부분집합 $U$ 중 $\sum_{i\in U}A_i\leq S$를 만족하는 것들을 생각합니다. 이때 $\sum_{i\in U}A_i$의 최댓값을 구하세요.
+
+$T$개의 테스트 케이스에 답하세요.
+
+## 입력
+
+입력은 다음 형식으로 주어집니다.
+
+```text
+$T$
+$\text{case}_1$
+$\text{case}_2$
+$\vdots$
+$\text{case}_T$
+```
+
+$\text{case}_i$는 다음 형식으로 주어집니다.
+
+```text
+$N\ S$
+$A_1\ A_2\ \cdots\ A_N$
+```
+
+## 제한
+
+- $1\leq T\leq 10^5$
+- $1\leq N\leq 10^5$
+- $1\leq S,A_i\leq 2\times 10^5$
+- 입력은 모두 정수입니다.
+- $1$개 입력 파일에 포함된 $N$의 총합은 $10^5$ 이하입니다.
+
+## 출력
+
+각 테스트 케이스에 대해 답을 $1$줄에 출력하세요.
+
+마지막에 개행을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+5
+5 11
+2 4 5 7 9
+3 4
+5 6 7
+4 20
+2 3 4 5
+5 100000
+99999 99998 50001 50000 49999
+3 10
+6 5 5
+```
+
+#### 출력
+
+```text
+11
+0
+14
+100000
+10
+```

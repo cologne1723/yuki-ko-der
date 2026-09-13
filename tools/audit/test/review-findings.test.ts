@@ -191,6 +191,34 @@ test("clean CI collects profiles before strict publication; both engines and ori
   }
 });
 
+test("publication build resolves images from an arbitrary sourceRoot and inlines exact bytes", async (t) => {
+  const f = await fixture(t);
+  const bytes = Buffer.from("temporary-source-root-image");
+  const customSourceRoot = join(f.root, "custom-translations");
+  const customTranslations = join(customSourceRoot, "ko/problems");
+  await mkdir(join(customSourceRoot, "ko/images/1"), { recursive: true });
+  await mkdir(customTranslations, { recursive: true });
+  await writeFile(join(customSourceRoot, "ko/images/1/1.png"), bytes);
+  await writeFile(
+    join(customTranslations, "1.mdx"),
+    markdown(1).replace(
+      "![diagram](/images/fixture.png)",
+      "![diagram](../images/1/1.png)",
+    ),
+  );
+  await buildProblemTranslations({
+    sourceRoot: customSourceRoot,
+    dataRoot: join(f.root, "temporary-build-data"),
+    outputRoot: f.outputRoot,
+  });
+  const html = await readFile(join(f.outputRoot, "ko/problems/1.html"), "utf8");
+  const document = new JSDOM(html).window.document;
+  assert.equal(
+    document.querySelector<HTMLImageElement>(".problem-statement img")?.src,
+    `data:image/png;base64,${bytes.toString("base64")}`,
+  );
+});
+
 test("GitHub Actions cannot issue live collector requests", async (t) => {
   const f = await fixture(t);
   const previous = process.env.GITHUB_ACTIONS;
@@ -249,6 +277,51 @@ test("all incompatible HTML errors are reported before existing publication is t
     await readFile(join(f.outputRoot, "previous.txt"), "utf8"),
     "preserve me",
   );
+});
+
+test("verified unsectioned puzzle fragments have an empty sample fingerprint, not a missing statement", async (t) => {
+  const f = await fixture(t);
+  const metadata = { No: 1, ProblemId: 11, Title: "Original" };
+  for (const html of [
+    "-",
+    '<img src="data:image/png;base64,YQ==">',
+    "<h3>問題文</h3><pre>encoded puzzle</pre>",
+  ]) {
+    await activateSource(
+      join(f.dataRoot, "problems-source"),
+      metadata,
+      new TextEncoder().encode(html),
+    );
+    assert.equal(
+      await sourceSamplesFingerprint(f.dataRoot, {
+        problemNo: 1,
+        problemId: 11,
+        sourceTitle: "Original",
+        sourceHtmlSha256: sha256(html),
+      }),
+      sha256(JSON.stringify([])),
+    );
+  }
+  for (const html of [
+    " ",
+    "<html><head><title>Login</title></head><body>login</body></html>",
+    "<form>login</form>",
+  ]) {
+    await activateSource(
+      join(f.dataRoot, "problems-source"),
+      metadata,
+      new TextEncoder().encode(html),
+    );
+    await assert.rejects(
+      sourceSamplesFingerprint(f.dataRoot, {
+        problemNo: 1,
+        problemId: 11,
+        sourceTitle: "Original",
+        sourceHtmlSha256: sha256(html),
+      }),
+      /Original statement is missing/,
+    );
+  }
 });
 
 test("setup honors Retry-After and persisted cooldown across invocations", async (t) => {

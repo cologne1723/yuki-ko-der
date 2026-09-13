@@ -75,6 +75,16 @@ export async function sourceSamplesFingerprint(
     // This hash-verified fragment contains only statement content; collect its
     // sample wrappers once, without changing the recorded original bytes.
     if (!blocks.length && body.querySelector(".block")) blocks = [body];
+    // Hash-verified API fragments can consist of a dash, an image, or encoded
+    // puzzle data without section wrappers. They legitimately have no samples.
+    // Do not reinterpret a full site/login page or an empty response as one.
+    if (
+      !blocks.length &&
+      !dom.window.document.head.children.length &&
+      !body.querySelector("#content, nav, script, form") &&
+      (body.textContent?.trim() || body.querySelector("img"))
+    )
+      blocks = [body];
     if (!blocks.length)
       throw new Error(
         `Original statement is missing for problem ${expected.problemNo}`,

@@ -1,0 +1,133 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3542
+problemId: 13256
+sourceTitle: "Progression (Python)"
+sourceHtmlSha256: "660cdf4102906a43230e6cfb17db0f9d2c2df2ee30b1c69c66bf82c3fc22d5e7"
+humanReview: null
+machineReview: unreviewed
+title: "등차수열 (Python)"
+---
+
+## 문제 설명
+
+길이 $N$인 양의 정수 수열 $A=(A_1,A_2,\ldots,A_N)$이 주어집니다.
+
+$A$의 연속 부분열 중 등차수열인 것 가운데 가장 긴 것의 길이를 구하세요.
+
+### 점수
+
+예상 해답의 길이는 $88$바이트입니다.
+
+제출한 소스 코드의 코드 길이가 $x$이고 이 문제의 예상 해답 코드 길이가 $y$일 때, 해당 소스 코드의 점수는 다음과 같이 계산됩니다.
+
+$\max(500-x+y,100)$
+
+이 문제의 점수는 이 문제에 제출된 소스 코드 점수의 최댓값입니다.
+
+### 샘플 프로그램 (Python)
+
+Python으로 작성한 답안 예시를 보여 줍니다. 이 코드를 제출하면 $266$점을 얻을 수 있습니다.
+
+```python
+N = int(input())
+A = list(map(int, input().split()))
+
+ans = 1
+
+for left_idx in range(N - 1):
+  diff = A[left_idx + 1] - A[left_idx]
+  for right_idx in range(left_idx + 1, N):
+    if A[right_idx] - A[right_idx - 1] != diff:
+      break
+    if ans < right_idx - left_idx + 1:
+      ans = right_idx - left_idx + 1
+
+print(ans)
+```
+
+## 입력
+
+```text
+$N$
+$A_1\ A_2\ \ldots\ A_N$
+```
+
+## 제한
+
+- 입력은 모두 정수입니다.
+- $1\leq N\leq 2\,000$
+- $1\leq A_i\leq 10^9$
+
+## 출력
+
+답을 $1$줄에 출력하세요.
+
+마지막 개행이나 공백의 유무는 상관없습니다.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+5
+3 1 4 7 5
+```
+
+#### 출력
+
+```text
+3
+```
+
+$A$의 연속 부분열 $(A_2,A_3,A_4)=(1,4,7)$은 등차수열이고, 그 길이는 $3$입니다.
+
+$A$의 연속 부분열 중 등차수열인 것 가운데 길이가 $3$보다 긴 것은 존재하지 않으므로, $3$을 출력하세요.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+5
+3 1 4 1 5
+```
+
+#### 출력
+
+```text
+2
+```
+
+### 예제 3 {file=""}
+
+#### 입력
+
+```text
+1
+1000000000
+```
+
+#### 출력
+
+```text
+1
+```
+
+### 예제 4 {file=""}
+
+#### 입력
+
+```text
+10
+10 9 8 7 6 5 4 3 2 1
+```
+
+#### 출력
+
+```text
+10
+```

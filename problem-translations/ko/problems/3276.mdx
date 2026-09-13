@@ -14,6 +14,8 @@ title: "더 작은 팝카운트 만들기"
 
 양의 정수 $N$이 주어집니다. $\mathrm{popcount}(N) > \mathrm{popcount}(N+x)$를 만족하는 양의 정수 $x$가 존재하는지 판정하고, 존재한다면 그 최솟값을 구하세요.
 
+$\mathrm{popcount}$란 무엇인가요?
+
 $\mathrm{popcount}(x)$는 $x$를 이진수로 나타냈을 때 등장하는 $1$의 개수를 의미합니다. 예를 들어 $13=1101_{(2)}$이므로 $\mathrm{popcount}(13)=3$입니다.
 
 또한 $T$개의 테스트 케이스가 주어지므로 각각에 대해 답을 구하세요.
@@ -39,8 +41,8 @@ $N$
 
 ## 제한
 
-- $1\le T\le 2\times 10^5$
-- $1\le N<2^{30}$
+- $1 \le T \le 2 \times 10^5$
+- $1 \le N < 2^{30}$
 - 입력은 모두 정수입니다.
 
 ## 출력
@@ -70,10 +72,10 @@ $T$줄 출력하세요. $i$번째 줄에는 $i$번째 테스트 케이스에 대
 
 $1$번째 테스트 케이스를 살펴봅시다.
 
-$x=1$일 때 $\mathrm{popcount}(N)=2\le\mathrm{popcount}(N+x)=2$이므로 조건을 만족하지 않습니다.
+$x=1$일 때 $\mathrm{popcount}(N)=2 \le \mathrm{popcount}(N+x)=2$이므로 조건을 만족하지 않습니다.
 
-$x=2$일 때 $\mathrm{popcount}(N)=2\le\mathrm{popcount}(N+x)=3$이므로 조건을 만족하지 않습니다.
+$x=2$일 때 $\mathrm{popcount}(N)=2 \le \mathrm{popcount}(N+x)=3$이므로 조건을 만족하지 않습니다.
 
-$x=3$일 때 $\mathrm{popcount}(N)=2>\mathrm{popcount}(N+x)=1$이므로 조건을 만족합니다.
+$x=3$일 때 $\mathrm{popcount}(N)=2 > \mathrm{popcount}(N+x)=1$이므로 조건을 만족합니다.
 
 따라서 $x=3$을 출력하세요.

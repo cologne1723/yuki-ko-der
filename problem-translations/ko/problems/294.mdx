@@ -5,75 +5,84 @@ problemNo: 294
 problemId: 743
 sourceTitle: "SuperFizzBuzz"
 sourceHtmlSha256: "d24be6e6df10569b23b4186a2553ffed42a1976dd212e83f426b52efacb4f231"
-reviewStatus: unreviewed
+humanReview: null
+machineReview: approved
 title: "SuperFizzBuzz"
 ---
 
-## 문제
+## 문제 설명
 
-3으로 나누어떨어지는 양의 정수를 `Fizz`, 5로 나누어떨어지는 양의 정수를 `Buzz`라고 합니다.
+$3$으로 나누어떨어지는 양의 정수를 `Fizz`, $5$로 나누어떨어지는 양의 정수를 `Buzz`라고 합니다.
 
-3과 5 모두로 나누어떨어지는 양의 정수를 `FizzBuzz`라고 합니다.
+$3$과 $5$ 모두로 나누어떨어지는 양의 정수를 `FizzBuzz`라고 합니다.
 
-그리고 3과 5 모두로 나누어떨어지면서 숫자 3과 5로만 이루어진 양의 정수를 `SuperFizzBuzz`라고 합니다.
+그리고 $3$과 $5$ 모두로 나누어떨어지면서 숫자 $3$과 $5$로만 이루어진 양의 정수를 `SuperFizzBuzz`라고 합니다.
 
-예를 들어 작은 순서로 첫 번째 SuperFizzBuzz는 555입니다. 555는 3과 5 모두로 나누어떨어지고, 숫자 3과 5 중 5만 사용한 양의 정수입니다.
+예를 들어 작은 순서로 $1$번째 SuperFizzBuzz는 $555$입니다. $555$는 $3$과 $5$ 모두로 나누어떨어지고, 숫자 $3$과 $5$ 중 $5$만 사용한 양의 정수입니다.
 
 작은 순서로 $N$번째 SuperFizzBuzz를 구하세요.
 
 ## 입력
 
 ```text
-N
+$N$
 ```
 
 $N$은 정수입니다.
+
+## 제한
 
 - $1 \le N \le 10^7$
 
 ## 출력
 
-$N$번째 SuperFizzBuzz를 한 줄에 출력하세요.
+$N$번째 SuperFizzBuzz를 $1$줄에 출력하세요.
 
 마지막에 개행을 출력하세요.
 
-## 샘플
+## 예제
 
-### 샘플 1 {file="sample1.in"}
+### 예제 1 {file=""}
+
+#### 입력
 
 ```text
 1
 ```
 
-### 샘플 1 {file="sample1.out"}
+#### 출력
 
 ```text
 555
 ```
 
-첫 번째 SuperFizzBuzz는 555입니다.
+$1$번째 SuperFizzBuzz는 $555$입니다.
 
-### 샘플 2 {file="sample2.in"}
+### 예제 2 {file=""}
+
+#### 입력
 
 ```text
 100
 ```
 
-### 샘플 2 {file="sample2.out"}
+#### 출력
 
 ```text
 335355555
 ```
 
-100번째 SuperFizzBuzz는 335355555입니다.
+$100$번째 SuperFizzBuzz는 $335\,355\,555$입니다.
 
-### 샘플 3 {file="sample3.in"}
+### 예제 3 {file=""}
+
+#### 입력
 
 ```text
 10000000
 ```
 
-### 샘플 3 {file="sample3.out"}
+#### 출력
 
 ```text
 5533533555333355355553555

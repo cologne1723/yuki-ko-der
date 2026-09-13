@@ -136,6 +136,42 @@ test("API fragments, meta-only declarations, and conflicting script engines cann
   }
 });
 
+test("unsectioned public puzzles require the site identity and matching submission controls", async () => {
+  const f = await fixture();
+  try {
+    const base = page("katex", 1).replace(
+      '<div id="content"><div class="block"><p>$x$</p></div></div>',
+      '<div id="content" data-problem-id="11"><h3>No.1 Original</h3><button id="copy-problem-html-btn"></button>STATEMENT<form action="/problems/11/submit"></form></div>',
+    );
+    for (const statement of [
+      "-",
+      '<img src="data:image/png;base64,YQ==">',
+      '<h3 class="shadow">問題文</h3><pre>encoded</pre>',
+    ]) {
+      const record = await writeProblemRenderProfile(
+        f.dataRoot,
+        1,
+        base.replace("STATEMENT", statement),
+      );
+      assert.equal(record.profile.engine, "katex");
+      assert.ok(await readProblemRenderProfileRecord(f.dataRoot, 1));
+    }
+    for (const html of [
+      base.replace('data-problem-id="11"', ""),
+      base.replace('id="copy-problem-html-btn"', ""),
+      base.replace("/problems/11/submit", "/problems/12/submit"),
+      base.replace("<h3>No.1 Original</h3>", "<h3>No.2 Original</h3>"),
+    ]) {
+      await assert.rejects(
+        writeProblemRenderProfile(f.dataRoot, 1, html),
+        /statement is missing/,
+      );
+    }
+  } finally {
+    await f.cleanup();
+  }
+});
+
 test("wrong public problem responses and conflicting identity markers cannot replace saved profile evidence", async () => {
   const f = await fixture();
   try {

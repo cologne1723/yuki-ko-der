@@ -1,0 +1,67 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3466
+problemId: 12941
+sourceTitle: "Mex Ranges"
+sourceHtmlSha256: 4c9c5f9a604556a9a5f5d9675142b449b9500a69d1e50ae85a8456ed13b36b4a
+humanReview: null
+machineReview: unreviewed
+title: "MEX 구간"
+---
+
+## 문제 설명
+
+길이가 $N$인 음이 아닌 정수열 $A$가 주어집니다.
+
+$k=0,1,2,\cdots,N$에 대해 다음 문제를 해결하세요.
+
+- $1 \leq l \leq r \leq N$을 만족하는 정수 쌍 $(l,r)$ 중에서 $\text{mex}(A_l,A_{l+1},\cdots,A_r)=k$가 되는 것의 개수를 구하세요.
+
+여기서 $\text{mex}(x_1,x_2,\cdots,x_p)$는 $x_1,x_2,\cdots,x_p$에 포함되지 않는 가장 작은 음이 아닌 정수로 정의합니다.
+
+## 입력
+
+입력은 다음 형식으로 표준 입력에서 주어집니다.
+
+```text
+$N$
+$A_1\ A_2\ \cdots\ A_N$
+```
+
+- 입력은 모두 정수입니다.
+
+## 제한
+
+- $1 \leq N \leq 2 \times 10^5$
+- $0 \leq A_i \leq 10^9$
+
+## 출력
+
+$N+1$줄을 출력하세요.
+
+$i$번째 줄에는 $k=i-1$일 때의 답을 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+5
+0 3 8 1 2
+```
+
+#### 출력
+
+```text
+10
+3
+1
+0
+1
+0
+```
+
+예를 들어 $k=1$일 때는 $(1,1),(1,2),(1,3)$이 조건을 만족합니다.

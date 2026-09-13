@@ -1,0 +1,46 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 8090
+problemId: 7044
+sourceTitle: "Knapsack Function"
+sourceHtmlSha256: 98675de1c98e8e2ba271b4c940a59050c1a9dfb122654ed54b0e3bafedbc9778
+humanReview: null
+machineReview: unreviewed
+title: "배낭 함수"
+---
+
+## 문제 설명
+
+물품이 $N$개 있습니다. $i$번째 물품($1 \leq i \leq N$)의 가치는 $v_i$, 무게는 $w_i$입니다.
+
+음이 아닌 정수 $W$에 대해 $f(W)$를 다음과 같이 정의합니다.
+
+- 무게의 합이 정확히 $W$가 되도록 몇 개의 물품을 선택할 때, 선택한 물품의 가치 합의 최댓값을 $f(W)$로 합니다. 단, 같은 물품을 여러 번 선택해도 됩니다. 무게의 합이 정확히 $W$가 되도록 물품을 선택할 수 없다면 $f(W)=-1$로 합니다.
+
+함수 $f$가 엄격히 증가하는지, 즉 모든 음이 아닌 정수 $n$에 대해 $f(n) < f(n+1)$이 성립하는지 판정하세요.
+
+## 입력
+
+```text
+$N$
+$v_1\ w_1$
+$v_2\ w_2$
+$\vdots$
+$v_N\ w_N$
+```
+
+## 제한
+
+- 입력은 모두 정수입니다.
+- $1 \leq N \leq 100\,000$
+- $1 \leq v_i \leq 10^9$ ($1 \leq i \leq N$)
+- $1 \leq w_i \leq 10^9$ ($1 \leq i \leq N$)
+
+## 출력
+
+$f$가 엄격히 증가한다면 `Yes`를, 그렇지 않다면 `No`를 출력하세요.
+
+## 예제
+
+샘플은 없습니다.

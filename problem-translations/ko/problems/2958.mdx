@@ -14,11 +14,11 @@ title: "L미노 많이 놓기"
 
 $1\times 1$인 정사각형을 칸이라고 합니다. L미노(L테트로미노)는 $4$개의 칸으로 이루어진 도형이며, 아래 그림과 같은 모양입니다.
 
-![L미노의 모양](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD8AAABeCAYAAACU98wgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAACnSURBVHhe7dkxDsJAEATBPf7/ZzCGN7BI1SWdLEd2BxfNmZnndTa9/2HFHX/5vP3YOXf3Wvzj+yQVrypeVbyqeFXxquJVxauKVxWvKl5VvKp4VfGq4lVN1E3UoOJVxauKVxWvKl5VvKp4VfGq4lXFq4pXFa8qXlW86h8m6jXrE/Xmt7vzquJVxauKVxWvKl5VvKp4VfGq4lXFq4pXFa8qXkXHwxP1zAt4HhOzVY0e8AAAAABJRU5ErkJggg==)
+![L미노의 모양](../images/2958/1.png)
 
-binapくん은 L미노를 $10^{100}$개 가지고 있습니다. 이 중 몇 개를 선택하여, 회전과 뒤집기를 허용했을 때 $N$행 $M$열의 칸으로 이루어진 직사각형 모양을 겹침이나 빈틈 없이 채울 수 있는지 판정하세요.
+binapくん은 L미노를 $10^{100}$개 가지고 있습니다. 이 중 몇 개를 선택하여, **회전이나 뒤집기를 허용하여** $N$행 $M$열의 칸으로 이루어진 직사각형 모양을 겹침이나 빈틈 없이 채울 수 있는지 판정하세요.
 
-가능하다면 그 방법을 하나 제시하세요.
+가능하다면 그중 $1$가지 방법을 제시하세요.
 
 이 문제는 멀티 테스트 케이스입니다. $T$개의 테스트 케이스에 답하세요.
 
@@ -67,7 +67,7 @@ $A_{N1}\ A_{N2}\ \cdots\ A_{NM}$
 
 유효한 채우기 방법이어야 합니다. 즉, 각 $k$($1\leq k\leq K$)에 대해 $A_{ij}=k$인 정수 쌍 $(i,j)$가 정확히 $4$개 존재하고, 그 칸들이 L자 모양(또는 역L자 모양)으로 배열되어 있어야 합니다.
 
-채우는 방법이 여러 가지라면 그중 하나를 출력해도 됩니다.
+채우는 방법이 여러 가지라면 그중 $1$가지 방법을 출력해도 됩니다.
 
 ## 예제
 
@@ -94,9 +94,11 @@ $4$행 $4$열의 칸은 $4$개의 L미노를 사용하여 채울 수 있습니�
 
 출력 예시의 채우기 방법은 아래 그림과 같습니다.
 
-![예제 1의 채우기 방법](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH0AAAB9CAYAAACPgGwlAAAAAXNSR0IArs4c6QAAAw5JREFUeF7t3cFx20AQRFE6Ex0dCyPwzbH55ggYi4/MxC5AZUkR/GYVnhKYYnf/mdklIH673W5/b/4upcC3w/T78+fkQz/eft3uP56b2r/fLlub6YPIPcaBYzrTWwW091bvo9rRZZDe634Kv9xlmM70VgHtvdVbex+3WO29D/x8rjKd6ZkCtveL3gba3jPGPgs5sl2UNjP9grQxnemZAha5i44Wi1zGmEXuVMA1bJ847V17H6TO41K56EhHeh46M72X3JMzywuSZW1HthFtTL+g8ExneqaA7d32noXto5AbuYHmnnu/5nt0tvcetvlDmafpg8+t5FCBS5P+vN8n0r89HrdlbaYPbGf68Ni0pG1ZG+lIbxVYn9OXtC1rI73N+VnNTDfT09gdgUN6Kvl7MaQjPY0d0l3OpIF7iefelxv0sraZ3mfdTF8+NrSkbVkb6UhvFXAj1+r9/7iI9F53M91Mb1PnnO6c3ibuqGam95ojHel96pDea450pPepQ3qvOdKR3qcO6b3mSEd6nzqk95ojHel96pDea470K5Pe503FpQL779OHv+j8vP+ZaP/2+H7xV5WZngbvNWY605leKXCcHLT3Su0vdc4jG9JT5bV3i1wauM/XmpCeCo90pKeBQ/rwNtDlTJ/1m8sZMz2NnZlupqeBM9PN9E3g3Mj1ur+/1mSmp8qb6WZ6Gjgz3UzfBM5M73U30weam+lmeh8723uvOdKR3qcO6b3mSEd6nzqk95ojHel96pDea450pPepQ3qvOdKvTHqfNxWXCpxPw26/bVq+LrysvftFZ6YPkHuJR6CR3jrP9Okypb23cT9/fvL4NxxL4Ze1zfQLBo7pTI8U+LicuW6L1d6jrH2WMdNzyc+fB3NO73V/jVeVtffWeed0R7Y0cdr7NHCObGnaj2L7JZLpTI8U0N619yhqX8rsW6zLmdx1pueSu5zZ3k9Y5PLI77sM05keKWB7t71HUbO9+8Jlu0w5suWo75cppjM9UsBXq9NlCulRzj0uhXSkp7A5p08DN76RS6Om2FyBfzTOHVseLIZ3AAAAAElFTkSuQmCC)
+![예제 1의 채우기 방법](../images/2958/2.png)
 
 L미노는 회전과 뒤집기가 허용됩니다. 다음과 같이 출력해도 정답으로 인정됩니다.
+
+#### 출력
 
 ```text
 4

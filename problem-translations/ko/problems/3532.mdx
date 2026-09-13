@@ -1,0 +1,84 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3532
+problemId: 13130
+sourceTitle: "Non-Fourth-Power Sets"
+sourceHtmlSha256: "1bdb04b45bf2fc38da85eb99dce63b5cd0ec98da6a48f653a780f8ef09cf0b80"
+humanReview: null
+machineReview: unreviewed
+title: "네제곱수가 아닌 집합"
+---
+
+## 문제 설명
+
+이 문제의 실행 시간 제한은 $6$초입니다. 또한 빠른 언어를 사용하는 것을 권장합니다.
+
+다음 조건을 만족하는 양의 정수의 집합 $S$를 **좋은 집합**이라고 합니다.
+
+- 양의 정수 $z$에 대해, 어떤 $x,y\in S$가 존재하여 $\dfrac{z}{\gcd(x,y)}$와 $\dfrac{\operatorname{lcm}(x,y)}{z}$가 서로소인 정수가 되면 $z\in S$입니다.
+- $x,y\in S$일 때, $\dfrac{\operatorname{lcm}(x,y)}{\gcd(x,y)}$는 $1$보다 큰 네제곱수가 아닙니다.
+
+이제 $T$개의 테스트 케이스에 답하세요. 각 테스트 케이스에서 양의 정수 $A,B$가 주어집니다. 다음 조건을 만족하는 좋은 집합들의 집합 $\mathscr{S}$의 개수를 $10^9+7$로 나눈 나머지를 구하세요.
+
+- 모든 $\mathscr{S}$의 원소들의 합집합은 $A^B$의 양의 약수들의 집합과 같습니다.
+- 임의의 $X,Y\in\mathscr{S}$에 대해 다음 조건을 만족합니다.
+  - $\omega(x,y)$를 $\dfrac{\operatorname{lcm}(x,y)}{\gcd(x,y)}$의 서로 다른 소인수의 개수라고 합니다. 임의의 $x,x'\in X$에 대해 $\min_{y\in Y}\omega(x,y)=\min_{y\in Y}\omega(x',y)$입니다.
+
+여기서 $\gcd(x,y)$와 $\operatorname{lcm}(x,y)$는 각각 $x,y$의 최대공약수와 최소공배수를 나타냅니다. 또한 네제곱수란 어떤 정수 $N$이 존재하여 $N^4$으로 나타낼 수 있는 정수를 말합니다.
+
+## 입력
+
+```text
+$T$
+$\mathrm{case}_1$
+$\mathrm{case}_2$
+$\vdots$
+$\mathrm{case}_T$
+```
+
+여기서 $\mathrm{case}_t$는 $t$번째 테스트 케이스이며, 다음 형식으로 주어집니다.
+
+```text
+$A\ B$
+```
+
+## 제한
+
+- 입력은 모두 정수입니다.
+- $1\leq T\leq 10^6$
+- $1\leq A\leq 2\times 10^7$
+- $1\leq B\leq 2\times 10^6$
+
+## 출력
+
+$T$줄에 걸쳐 출력하세요. $t\ (1\leq t\leq T)$번째 줄에는 $t$번째 테스트 케이스에 대한 답을 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+5
+12 1
+20 2
+1 100
+9999 9999
+16777216 2000000
+```
+
+#### 출력
+
+```text
+10
+185
+1
+340129719
+720394457
+```
+
+$1$번째 테스트 케이스에서, 예를 들어 $\mathscr{S}=\{\{1\},\{2\},\{3\},\{4\},\{6\},\{12\}\}$는 조건을 만족하며, 이러한 $\mathscr{S}$는 모두 $10$가지입니다.
+
+답을 $10^9+7$로 나눈 나머지를 출력해야 한다는 점에 주의하세요.

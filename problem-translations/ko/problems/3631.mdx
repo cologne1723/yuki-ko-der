@@ -1,0 +1,74 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3631
+problemId: 13413
+sourceTitle: "Collatz conjecture"
+sourceHtmlSha256: 9c9a269ccbe6f93c621db4ad035c4acb21654bf6b9dc01de0a9fca5dbe13371e
+humanReview: null
+machineReview: unreviewed
+title: "콜라츠 추측"
+---
+
+## 문제 설명
+
+함수 $f(n)$을 다음과 같이 정의합니다.
+
+$f(n) = \begin{cases} n/2 & (n \equiv 0 \pmod{2}) \\ 3n+1 & (n \not\equiv 0 \pmod{2}) \end{cases}$
+
+주어진 양의 정수 $N$을 $n$의 초기값으로 하여, “$n$을 $f(n)$으로 바꾼다”라는 연산을 반복합니다.
+
+이 연산을 $1$회 이상 수행했을 때, 처음으로 값이 $1$이 될 때까지 몇 회의 연산이 필요한지 구하세요.
+
+단, $10^{100}$회 이내의 연산으로 $1$에 도달하지 않는 경우에는 `infinity`를 출력하세요.
+
+## 입력
+
+```text
+$N$
+```
+
+## 제한
+
+- $1 \le N \le 3\,000$
+- $N$은 정수입니다.
+
+## 출력
+
+답을 $1$행에 출력하세요.
+
+마지막에 줄 바꿈을 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+5
+```
+
+#### 출력
+
+```text
+5
+```
+
+$5 \to 16 \to 8 \to 4 \to 2 \to 1$로 변하므로, 적용 횟수는 $5$회입니다.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+10
+```
+
+#### 출력
+
+```text
+6
+```
+
+$10 \to 5 \to 16 \to 8 \to 4 \to 2 \to 1$로 변하므로, 적용 횟수는 $6$회입니다.

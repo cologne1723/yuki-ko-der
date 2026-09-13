@@ -1,0 +1,116 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 8042
+problemId: 2849
+sourceTitle: "本棚"
+sourceHtmlSha256: 9e9bbc874c12b38c33f13505f9720bfa944a34597b318582191122dd702f4cb2
+humanReview: null
+machineReview: unreviewed
+title: "책장"
+---
+
+언어별로 "par"를 설정했습니다. 시간이 있는 사람은 코드를 줄여 보세요. 이 수치를 넘는 답안을 제출해도 문제없이 AC를 받을 수 있습니다.
+
+C++(GCC)는 $150$Byte, C(GCC)는 $120$Byte, Python3은 $55$Byte, Ruby는 $26$Byte, Perl은 $15$Byte, Bash는 $9$Byte, Haskell은 $65$Byte, PHP는 $70$Byte로 설정했습니다. 위 목록에 나오지 않은 언어에는 par를 설정하지 않았습니다.
+
+## 문제 설명
+
+책장에 있는 책을 제목 $S$의 사전순으로 정렬하고, $1$줄에 $1$개씩 출력하세요. 같은 제목의 책이 여러 권 있다면, 해당 책의 $id$인 `iti`, `ni`, `san`, `yon`이 각각 $1$, $2$, $3$, $4$를 나타내므로 이 순서로 정렬하세요.
+
+## 입력
+
+입력은 다음 형식으로 주어집니다.
+
+```text
+$N$
+$S_1\ id_1$
+$S_2\ id_2$
+$\vdots$
+$S_N\ id_N$
+```
+
+$1$번째 줄에 책의 권수 $N$이 주어집니다.
+
+다음 $N$개의 줄에 책의 제목 $S_i$와 해당 책의 식별자 $id_i$가 공백으로 구분되어 주어집니다.
+
+## 제한
+
+- $1 \le N \le 50$
+- $1 \le |S_i| \le 25$ ($1 \le i \le N$)
+- $S_i$는 소문자 알파벳만으로 구성됩니다 ($1 \le i \le N$).
+- $id_i \in \{"iti","ni","san","yon"\} \quad(1 \le i \le N)$
+- $i \ne j$라면 $(S_i,id_i) \ne (S_j,id_j)$입니다 ($1 \le i,j \le N$).
+
+## 출력
+
+제목의 사전순, 그다음 $id$ 순으로 정렬된 책의 **제목과 $id$를** 공백으로 구분하여 $1$줄에 $1$개씩 출력하세요.
+
+마지막에 줄바꿈을 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+3
+c iti
+b iti
+a iti
+```
+
+#### 출력
+
+```text
+a iti
+b iti
+c iti
+```
+
+사전순으로 정렬하면 `a`라는 제목의 책이 가장 앞에 옵니다. 모두 $1$권이었습니다.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+4
+text ni
+text yon
+text san
+text iti
+```
+
+#### 출력
+
+```text
+text iti
+text ni
+text san
+text yon
+```
+
+`text`라는 제목의 책이 $1$권부터 $4$권까지 있었습니다.
+
+### 예제 3 {file=""}
+
+#### 입력
+
+```text
+3
+abc iti
+abcd ni
+abc san
+```
+
+#### 출력
+
+```text
+abc iti
+abc san
+abcd ni
+```
+
+`abc`의 $2$권 대신 `abcd`의 $2$권이 있습니다. 잘못 사 버린 것일까요?

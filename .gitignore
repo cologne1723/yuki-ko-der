@@ -2,6 +2,7 @@ node_modules/
 .pnpm-store/
 /dist/
 /data/
+AGENTS.local.md
 .DS_Store
 *.log
 

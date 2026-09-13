@@ -1,0 +1,32 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 8013
+problemId: 716
+sourceTitle: "Trigger EPIPE"
+sourceHtmlSha256: "fd01ccaad6780e57873e648774b28f1027fcf326805ee35296a2c762be7d53a9"
+humanReview: null
+machineReview: unreviewed
+title: "EPIPE 트리거"
+---
+
+## 문제 설명
+
+이 문제는 리액티브 저지입니다.
+
+저지 코드는 숫자를 계속 전송하므로, 이를 실패시키고 `errno`를 `EPIPE`로 설정할 수 있으면 정답입니다.
+
+## 입력
+
+```text
+$1$
+$2$
+$3$
+$\vdots$
+```
+
+숫자가 줄바꿈으로 구분되어 주어집니다.
+
+## 출력
+
+무엇을 출력해도 괜찮지만, 문제와는 관계가 없습니다.

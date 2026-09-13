@@ -1,0 +1,54 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 8012
+problemId: 732
+sourceTitle: "Catch C code"
+sourceHtmlSha256: "7b7b2717b94b71a451f0d00a7a48fd7698dff96878de187209226c3b95714036"
+humanReview: null
+machineReview: unreviewed
+title: "Catch C 코드"
+---
+
+## 문제 설명
+
+다음과 같은 C 언어 코드가 있습니다.
+
+```text
+#include <stdio.h>
+void catch(){
+	puts("FLAG_***");
+}
+```
+
+이 `catch()`를 호출하는 C++ 프로그램을 ~~출력하세요~~ Text로 제출하세요.
+
+(주의: 대부분의 C 언어 프로그램은 제대로 `include`가 작성되어 있으면 C++로도 컴파일할 수 있습니다. 위에 작성된 프로그램도 함수 이름을 변경하면 C++로 컴파일할 수 있습니다.)
+
+단, 프로그램의 $1$번째 줄이 `//`로 시작하는 경우 $1$번째 줄의 $3$번째 문자 이후는 `g++`에 지정하는 옵션이 됩니다(`g++ prog.cpp catch???.o` 뒤에 추가됩니다).
+
+(단, 보안상의 이유로 배열 형식으로 `g++`을 호출하므로, 인용 부호를 무시한 공백 구분의 간이 파싱이 됩니다.)
+
+150901 수정: `catch.o`라는 파일 이름은 무작위화되도록 변경되었습니다. 저지 코드로부터가 아니면 이 파일 이름을 알 수 없습니다.
+
+## 입력
+
+입력은 주어지지 않습니다.
+
+## 출력
+
+문제의 뜻을 만족하는 C++ 프로그램을 출력하세요.
+
+프로그램을 출력해야 하므로 제출은 Text를 권장합니다. 또한 해당 프로그램은 (`catch()` 함수 이외에는) 일절 출력해서는 안 됩니다.
+
+다음 예를 들 수 있지만, 문제의 뜻을 만족하지 않습니다.
+
+```text
+//-static
+//above will be passed to g++.
+
+#include <stdio.h>
+int main(){
+  //your code goes here
+}
+```

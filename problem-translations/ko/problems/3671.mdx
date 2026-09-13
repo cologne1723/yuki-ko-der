@@ -1,0 +1,120 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3671
+problemId: 13831
+sourceTitle: "Reusable Lazy Segment Tree"
+sourceHtmlSha256: 97bce2744691093e801d2edb4d49db974ec1b9edd6fe218926d4eff72ebd78fc
+humanReview: null
+machineReview: unreviewed
+title: "재사용 가능한 레이지 세그먼트 트리"
+---
+
+**이 문제의 메모리 제한은 일반적인 문제와 다릅니다. 주의하세요.** / **메모리 제한이 평소와 다릅니다.**
+
+**시간 제한이 엄격하므로 빠른 언어를 사용하는 것을 권장합니다.**
+
+## 이야기
+
+?? 「메모리 제한이 엄격한 문제는 쓰레기 문제다」
+
+## 문제 설명
+
+길이가 $N$인 정수열 $A=(A_1,A_2,\ldots,A_N)$이 주어집니다.
+
+또한 길이가 $M$인 정수열 $l=(l_1,l_2,\ldots,l_M)$, $r=(r_1,r_2,\ldots,r_M)$, $x=(x_1,x_2,\ldots,x_M)$, $L=(L_1,L_2,\ldots,L_M)$, $R=(R_1,R_2,\ldots,R_M)$가 주어집니다.
+
+다음 $Q$개의 소문제 $i=1,2,\ldots,Q$를 순서대로 처리하세요. 소문제마다 $A$의 값은 독립적이라는 점에 주의하세요.
+
+### 소문제 $i$
+
+정수 $s_i$, $q_i$가 주어집니다. 처음에 $y=i$로 설정합니다. 다음 $q_i$개의 질의 $j=1,2,\ldots,q_i$를 순서대로 처리하세요.
+
+#### 질의 $j$
+
+- $z=((s_i+j) \bmod M)+1$로 설정합니다.
+- $u=\min(N,\max(1,l_z\oplus y))$, $v=\min(N,\max(1,r_z\oplus y))$, $U=\min(N,\max(1,L_z\oplus y))$, $V=\min(N,\max(1,R_z\oplus y))$로 설정하고, $l'=\min(u,v)$, $r'=\max(u,v)$, $L'=\min(U,V)$, $R'=\max(U,V)$로 설정합니다.
+- $z\bmod 2=0$일 때, $A$의 구간 $[l',r']$에 있는 각각의 값을 $x_z\oplus y$와 비트 논리합한 값으로 바꿉니다.
+- $z\bmod 2=1$일 때, $A$의 구간 $[l',r']$에 있는 각각의 값을 $x_z\oplus y$와 비트 논리곱한 값으로 바꿉니다.
+- $y$를 $A$의 구간 $[L',R']$의 합을 $2^{30}$으로 나눈 나머지로 바꿉니다.
+
+최종적인 $y$의 값을 출력하세요.
+
+여기서 $X\oplus Y$는 $X$와 $Y$의 배타적 논리합을 나타냅니다.
+
+## 입력
+
+입력은 다음 형식으로 표준 입력에서 주어집니다.
+
+```text
+$N\ M$
+$A_1\ A_2\ \ldots\ A_N$
+$l_1\ l_2\ \ldots\ l_M$
+$r_1\ r_2\ \ldots\ r_M$
+$x_1\ x_2\ \ldots\ x_M$
+$L_1\ L_2\ \ldots\ L_M$
+$R_1\ R_2\ \ldots\ R_M$
+$Q$
+$\text{problem}_1$
+$\text{problem}_2$
+$\vdots$
+$\text{problem}_Q$
+```
+
+$\text{problem}_i$는 $i$번째 소문제를 나타내며, 다음 형식으로 주어집니다.
+
+```text
+$s_i\ q_i$
+```
+
+## 제한
+
+- $1\leq N,M,Q\leq 100\,000$
+- $0\leq A_i,x_i<2^{30}$
+- $1\leq l_i,r_i,L_i,R_i\leq N$
+- $1\leq s_i\leq M$
+- $1\leq q_i\leq 1\,000$
+- $1\leq\sum_{i=1}^{Q}q_i\leq 1\,000\,000$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+$Q$줄에 걸쳐 출력하세요.
+
+$i$번째 줄에는 $i$번째 소문제의 답을 출력하세요.
+
+마지막에 줄 바꿈을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+10 8
+3 5 8 13 21 34 55 89 144 233
+1 2 4 6 8 10 3 5
+5 9 7 1 10 4 8 2
+7 15 31 63 127 255 511 1023
+1 3 5 7 9 2 4 6
+10 8 6 4 2 9 7 1
+6
+1 5
+3 6
+5 4
+8 7
+2 8
+6 5
+```
+
+#### 출력
+
+```text
+0
+3274
+1007
+1023
+992
+127
+```

@@ -1220,3 +1220,46 @@ for (const engine of ["katex", "mathjax"] as const) {
     }
   });
 }
+
+for (const withCatalog of [true, false]) {
+  for (const suffix of ["", "/?lang=ja#statement"]) {
+    test(`internal ID route translates by problem number (catalog=${withCatalog}, suffix=${suffix})`, async () => {
+      const f = fixture();
+      try {
+        f.dom.reconfigure({ url: `https://yukicoder.me/problems/18${suffix}` });
+        const result = await f.engine.translateProblem(
+          () => true,
+          withCatalog ? f.catalog() : undefined,
+        );
+        assert.equal(result.status, "applied");
+        if (result.status === "applied")
+          assert.equal((await result.verification)?.status, "verified");
+        assert.ok(
+          f.calls.includes("https://translations.test/ko/problems/1.html"),
+        );
+        assert.ok(
+          !f.calls.includes("https://translations.test/ko/problems/18.html"),
+        );
+        f.engine.restoreProblem();
+        assert.equal(
+          f.dom.window.document.querySelector("#content > h3")?.textContent,
+          "No.1 題名",
+        );
+      } finally {
+        f.close();
+      }
+    });
+  }
+}
+
+test("internal ID route rejects a different page identity", async () => {
+  const f = fixture();
+  try {
+    f.dom.reconfigure({ url: "https://yukicoder.me/problems/19" });
+    const result = await f.engine.translateProblem(() => true, f.catalog());
+    assert.equal(result.status, "failed");
+    assert.equal(f.calls.length, 0);
+  } finally {
+    f.close();
+  }
+});

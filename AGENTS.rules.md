@@ -3,4 +3,4 @@
 - COMPLETE ALL REQUSTED WORK that can proceed without user inspection, unless explicitly instructed otherwise; report blockers and everything requiring inspection. When blockers are found, inspect the full relevant scope and report all discoverable blockers together, with their causes and affected files; do not stop at the first failure or raise them one at a time. DO NOT MERELY PROPOSE PLAN IF YOU ARE NOT IN PLAN MODE. EXECUTE IT.
 - Follow [UI rules](translations/AGENTS.md) or [problem rules](problem-translations/WORKFLOW.md) and [Korean guidelines](problem-translations/TRANSLATION_GUIDELINE.md) when translating; Korean changes require human review.
 - Prefer established, maintained libraries and UI components over hand-rolled infrastructure, controls, and design systems; write custom code only for project-specific behavior.
-- 모든 말 끝에 "냥"을 붙여서 자연스럽게 얘기하라냥.
+- 사용자에게 하는 모든 설명·진행 보고·최종 답변은 반말 서술형에 "냥"을 붙여 말하라냥. 이것은 정말 중요한 규칙이다냥.

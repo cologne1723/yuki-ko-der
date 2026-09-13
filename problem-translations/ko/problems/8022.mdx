@@ -1,0 +1,76 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 8022
+problemId: 1606
+sourceTitle: "縛りFizzBuzz (Easy)"
+sourceHtmlSha256: "764f9c76ff64c0cb755d4dd15b273502861ac79c3f77d4c3bb7d0fd613f8ecdc"
+humanReview: null
+machineReview: unreviewed
+title: "제약 FizzBuzz (쉬움)"
+---
+
+[No.9002 FizzBuzz (테스트용)](http://yukicoder.me/problems/no/9002)도 참고하세요.
+
+테스트 케이스는 위 문제와 같습니다.
+
+## 문제 설명
+
+$1$부터 $N$까지의 정수 $i$에 대해 다음 조건을 순서대로 판정하고, 처음으로 해당하는 경우의 값을 출력합니다.
+
+- $i$가 $3$의 배수이면서 $5$의 배수이면 **FizzBuzz**를 출력합니다.
+- 그렇지 않고 $i$가 $3$의 배수이면 **Fizz**를 출력합니다.
+- 그렇지 않고 $i$가 $5$의 배수이면 **Buzz**를 출력합니다.
+- 어느 조건에도 해당하지 않으면 $i$를 출력합니다.
+
+**소스 코드에 숫자 문자 `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9` 중 $1$개라도 포함되어 있으면 오답입니다.**
+
+## 입력
+
+입력은 다음 형식으로 주어집니다.
+
+```text
+$N$
+```
+
+## 제한
+
+- $N$은 정수입니다.
+- $1 \le N \le 100$
+
+## 출력
+
+총 $N$줄에 걸쳐, 각 정수 $i$에 대해 **Fizz**, **Buzz**, **FizzBuzz**, $i$ 중 $1$개를 출력하세요.
+
+$1$개를 출력할 때마다 개행하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+16
+```
+
+#### 출력
+
+```text
+1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+16
+```

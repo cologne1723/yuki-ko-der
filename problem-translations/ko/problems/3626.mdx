@@ -1,0 +1,112 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3626
+problemId: 13771
+sourceTitle: "Not a Prefix"
+sourceHtmlSha256: "b263b75e32e000b4f7811ec433171eafa6e601390c07a869a66beb5cfb1806e4"
+humanReview: null
+machineReview: unreviewed
+title: "접두사가 아니다"
+---
+
+## 문제 설명
+
+영소문자로 이루어진 비어 있지 않은 문자열이 $N$개 주어집니다. $i$번째($1\leq i\leq N$) 문자열은 $S_i$입니다.
+
+이 문자열 중에서 $M$개를 자유롭게 선택할 수 있습니다. 선택한 문자열을 각각 $T_1,T_2,\cdots,T_M$이라고 합니다.
+
+다음 조건을 모두 만족하는 문자열 $X$가 존재하도록 선택하는 방법이 존재하는지 판정하세요. 그러한 선택 방법이 존재한다면, $X$로 가능한 사전순으로 가장 작은 문자열을 출력하세요.
+
+- $X$는 영소문자로 이루어진 비어 있지 않은 문자열입니다.
+- 모든 $k$($1\leq k\leq M$)에 대해 $X$는 $T_k$의 접두사가 아닙니다.
+- 모든 $k$($1\leq k\leq M$)에 대해 $T_k$는 $X$의 접두사가 아닙니다.
+
+## 입력
+
+입력은 다음 형식으로 주어집니다.
+
+```text
+$N\ M$
+$S_1$
+$S_2$
+$\vdots$
+$S_N$
+```
+
+## 제한
+
+- $N,M$은 정수입니다.
+- $1\leq M\leq N\leq 2\times10^5$
+- $S_i$는 영소문자로 이루어진 비어 있지 않은 문자열입니다.
+- $S_1,S_2,\cdots,S_N$의 길이의 총합은 $5\times10^5$ 이하입니다.
+
+## 출력
+
+조건을 만족하는 선택 방법이 존재한다면 `Yes`, 존재하지 않는다면 `No`를 출력하세요.
+
+존재한다면 줄을 바꾼 뒤 $X$로 가능한 사전순으로 가장 작은 문자열을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+5 2
+apple
+apricot
+banana
+cat
+dog
+```
+
+#### 출력
+
+```text
+Yes
+a
+```
+
+예를 들어 $T_1,T_2$로 `banana`, `cat`을 선택하면 $X=$`a`가 조건을 만족합니다.
+
+### 예제 2 {file="01_sample_02.txt"}
+
+#### 입력
+
+```text
+26 26
+a
+b
+c
+d
+e
+f
+g
+h
+i
+j
+k
+l
+m
+n
+o
+p
+q
+r
+s
+t
+u
+v
+w
+x
+y
+z
+```
+
+#### 출력
+
+```text
+No
+```

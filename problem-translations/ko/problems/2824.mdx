@@ -14,23 +14,23 @@ title: "불을 켜라! (격자판 버전)"
 
 세로와 가로가 각각 $N$칸인, 총 $N^2$칸으로 이루어진 격자가 있습니다.
 
-두 정수 $r$, $c$에 대해 칸 $(r,c)$는 위에서 $r \bmod N$번째 행, 왼쪽에서 $c \bmod N$번째 열의 칸입니다.
+$2$개의 정수 $r$, $c$에 대해 칸 $(r,c)$는 위에서 $r \bmod N$번째 행, 왼쪽에서 $c \bmod N$번째 열의 칸입니다.
 
 여기서 $x \bmod N$은 $x=Nq+r$를 만족하는 정수 $q$가 존재하고, $0 \leq r<N$을 만족하는 유일한 정수 $r$입니다. ($x \in \mathbb{Z}$)
 
-처음에 칸 $(r,c)$ ($0 \leq r,c<N$)은 $S_{r,c}=\texttt{.}$이면 흰색, $S_{r,c}=\texttt{\#}$이면 검은색으로 칠해져 있습니다.
+처음에 칸 $(r,c)$ ($0 \leq r,c<N$)은 $S_{r+1,c+1}=$ `.`이면 **흰색**, $S_{r+1,c+1}=$ `#`이면 **검은색**으로 칠해져 있습니다.
 
-작업과 행동이 각각 $N^2$종류씩 있습니다. 작업 $(r,c)$와 행동 $(r,c)$는 모두 $0 \leq r,c<N$의 범위에서 구별합니다.
+**작업**과 **행동**이 각각 $N^2$종류씩 있습니다. 작업 $(r,c)$와 행동 $(r,c)$는 모두 $0 \leq r,c<N$의 범위에서 구별합니다.
 
-작업 $(r,c)$는 네 칸 $(r,c),(r-1,c),(r,c-1),(r-1,c-1)$의 색을 순서대로 반전합니다. 검은색은 흰색으로, 흰색은 검은색으로 바꿉니다. $N$에 따라 같은 칸의 색이 여러 번 반전될 수 있습니다.
+작업 $(r,c)$는 $4$개의 칸 $(r,c),(r-1,c),(r,c-1),(r-1,c-1)$의 색을 순서대로 반전합니다. **검은색**은 **흰색**으로, **흰색**은 **검은색**으로 바꿉니다. $N$에 따라 같은 칸의 색이 여러 번 반전될 수 있습니다.
 
-행동 $(r,c)$는 작업 $(r,c),(r,0),(0,c)$을 순서대로 수행합니다. $r,c$에 따라 같은 작업이 여러 번 수행될 수 있습니다.
+행동 $(r,c)$는 $3$개의 작업, 작업 $(r,c),(r,0),(0,c)$을 순서대로 수행합니다. $r,c$에 따라 같은 작업이 여러 번 수행될 수 있습니다.
 
-uni くん은 행동을 자유로운 순서로 총 $0$회 이상 $N^2$회 이하 수행할 수 있습니다. 모든 칸을 흰색으로 만들 수 있는지 판정하고, 가능하면 행동 순서 하나를 구하세요.
+uni くん은 **행동**을 자유로운 순서로 총 $0$회 이상 $N^2$회 이하 수행할 수 있습니다. 모든 칸을 **흰색**으로 만들 수 있는지 판정하고, 가능하면 행동 순서 $1$개를 구하세요.
 
 $N=8$인 경우의 예:
 
-![행동에 따라 홀수 번 반전되는 칸](data:image/png;base64,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)
+![행동에 따라 홀수 번 반전되는 칸](../images/2824/1.png)
 
 왼쪽부터 행동 $(4,5)$, $(1,1)$, $(0,5)$에 의해 (홀수 번) 반전되는 칸을 나타냅니다.
 
@@ -50,11 +50,11 @@ $S_{N,1}S_{N,2}\dots S_{N,N}$
 
 - $1 \leq N \leq 10^3$
 - $N$은 정수입니다.
-- $S_{i,j}\in\{$ `.` $,$ `#` $\}\scriptsize\;(1\leq i,j\leq N)$
+- $S_{i,j}\in\{$ `.` , `#` $\}\scriptsize\;(1\leq i,j\leq N)$
 
 ## 출력
 
-목표를 달성할 수 없다면 `-1`을 한 줄에 출력하세요.
+목표를 달성할 수 없다면 $-1$을 $1$줄에 출력하세요.
 
 목표를 달성할 수 있다면 답이 되는 절차의 길이(행동 횟수)를 $T$ ($0 \leq T \leq N^2$)라 합니다. $i$ ($1 \leq i \leq T$)번째 행동이 행동 $(R_i,C_i)$ ($0 \leq R_i,C_i<N$)가 되도록 하는 $T$개의 정수쌍을 $T$와 함께 다음 형식으로 출력하세요.
 
@@ -106,6 +106,7 @@ $R_T\ C_T$
 다음으로 행동 $(4,4)$를 수행하면 격자는 다음과 같이 됩니다.
 
 ```text
+.......
 .......
 .......
 .......

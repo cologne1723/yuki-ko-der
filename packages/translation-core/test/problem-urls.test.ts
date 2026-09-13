@@ -3,6 +3,7 @@ import test from "node:test";
 import { JSDOM } from "jsdom";
 import { resolveProblemUrls } from "../src/problem-urls.ts";
 import { sanitizeTranslatedBlocks } from "../src/problem-rendering.ts";
+import { resolveProblemUrls as resolveUrls } from "../src/problem-urls.ts";
 
 test("SVG data images survive raw and sanitized paths without permitting data navigation or executable attributes", () => {
   const sources = [
@@ -42,6 +43,41 @@ test("SVG data images survive raw and sanitized paths without permitting data na
       );
     }
     assert.equal(sanitized.querySelector("[onerror]"), null);
+  } finally {
+    dom.window.close();
+  }
+});
+
+test("safe local problem images remain local and can be mapped to a preview asset route", () => {
+  const dom = new JSDOM(
+    '<img id="safe" src="../images/42/1.png"><img id="bad" src="../images/42/../secret.png">',
+    { url: "https://yukicoder.me/problems/no/42" },
+  );
+  try {
+    resolveUrls(
+      dom.window.document.body,
+      dom.window.document.URL,
+      "http://review.test/problem-images",
+    );
+    assert.equal(
+      dom.window.document.querySelector("#safe")?.getAttribute("src"),
+      "http://review.test/problem-images/42/1.png",
+    );
+    assert.equal(
+      dom.window.document.querySelector("#bad")?.getAttribute("src"),
+      null,
+    );
+    const hostile = new JSDOM('<img src="../images/42/1.png">');
+    resolveUrls(
+      hostile.window.document.body,
+      hostile.window.document.URL,
+      "javascript:alert(1)",
+    );
+    assert.equal(
+      hostile.window.document.querySelector("img")?.getAttribute("src"),
+      null,
+    );
+    hostile.window.close();
   } finally {
     dom.window.close();
   }

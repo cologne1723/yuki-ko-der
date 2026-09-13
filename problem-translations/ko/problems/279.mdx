@@ -5,55 +5,64 @@ problemNo: 279
 problemId: 531
 sourceTitle: "木の数え上げ"
 sourceHtmlSha256: "7759563729bbceca58ece22024665c0fc100d58a9c1346b92c4217c33c9535f4"
-reviewStatus: unreviewed
+humanReview: null
+machineReview: approved
 title: "나무 세기"
 ---
 
-## 문제
+## 이야기
 
-kamipeipaa 군은 나무를 매우 좋아하지만, 오늘은 문자열을 가지고 놀고 있습니다.
+kamipeipaa君은 나무를 매우 좋아하지만, 오늘은 문자열을 가지고 놀고 있습니다.
+
+## 문제 설명
 
 문자열 $S$를 자유롭게 재배열했을 때 만들 수 있는 부분 문자열 `tree`의 개수의 최댓값을 출력하세요.
 
 ## 입력
 
 ```text
-S
+$S$
 ```
 
-kamipeipaa 군이 가진 문자열 $S$가 한 줄에 주어집니다. $S$는 영문 소문자만으로 이루어져 있습니다.
+kamipeipaa君이 가진 문자열 $S$가 $1$줄에 주어집니다. $S$는 영문 소문자만으로 이루어져 있습니다.
+
+## 제한
 
 - $1 \le |S| \le 10^6$
 
 ## 출력
 
-문자열 $S$를 자유롭게 재배열했을 때 만들 수 있는 부분 문자열 `tree`의 개수의 최댓값을 한 줄에 출력하세요.
+문자열 $S$를 자유롭게 재배열했을 때 만들 수 있는 부분 문자열 `tree`의 개수의 최댓값을 $1$줄에 출력하세요.
 
 마지막에 개행을 출력하세요.
 
-## 샘플
+## 예제
 
-### 샘플 1 {file="sample1.in"}
+### 예제 1 {file=""}
+
+#### 입력
 
 ```text
 takahashikunlovesyukicoder
 ```
 
-### 샘플 1 {file="sample1.out"}
+#### 출력
 
 ```text
 1
 ```
 
-`takahashikunlovesyukicoder`를 재배열하면 `treeakahashikunlovsyukicod`로 만들 수 있고, 이 안에 포함된 `tree` 부분 문자열은 1개입니다.
+`takahashikunlovesyukicoder`를 재배열하면 `treeakahashikunlovsyukicod`로 만들 수 있고, 이 안에 포함된 `tree` 부분 문자열은 $1$개입니다.
 
-### 샘플 2 {file="sample2.in"}
+### 예제 2 {file=""}
+
+#### 입력
 
 ```text
 treapisnotki
 ```
 
-### 샘플 2 {file="sample2.out"}
+#### 출력
 
 ```text
 0
@@ -61,17 +70,19 @@ treapisnotki
 
 어떻게 재배열해도 `tree` 부분 문자열을 만들 수 없습니다.
 
-### 샘플 3 {file="sample3.in"}
+### 예제 3 {file=""}
+
+#### 입력
 
 ```text
 eerteerteerteert
 ```
 
-### 샘플 3 {file="sample3.out"}
+#### 출력
 
 ```text
 4
 ```
 
-`eerteerteerteert`를 재배열하면 `treetreetreetree`로 만들 수 있고, 이 안에 포함된 `tree` 부분 문자열은 4개입니다.
+`eerteerteerteert`를 재배열하면 `treetreetreetree`로 만들 수 있고, 이 안에 포함된 `tree` 부분 문자열은 $4$개입니다.
 

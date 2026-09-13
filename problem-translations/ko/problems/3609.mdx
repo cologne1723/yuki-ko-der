@@ -1,0 +1,82 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3609
+problemId: 13603
+sourceTitle: "Trio Plus"
+sourceHtmlSha256: "28e6d060042833fb744437ee03d6ab270b60dfe0eb9cc2cc3c888164a4687203"
+humanReview: null
+machineReview: unreviewed
+title: "트리오 플러스"
+---
+
+## 문제 설명
+
+양의 정수 $A$, $B$, $C$가 주어집니다. $S=A+B+C$를 계산하고, `A+B+C=` 뒤에 $S$의 값을 이어 붙인 문자열을 출력하세요.
+
+단, $A=B=C=1$일 때는 대신 `A+B+C=Infinity`를 출력하세요.
+
+## 입력
+
+```text
+$A\ B\ C$
+```
+
+입력은 $A$, $B$, $C$가 공백으로 구분되어 주어집니다.
+
+## 제한
+
+- $1\leq A,B,C\leq 100$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+$1$줄에 답을 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+1 2 3
+```
+
+#### 출력
+
+```text
+A+B+C=6
+```
+
+$S=A+B+C=6$이므로 `A+B+C=6`을 출력합니다.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+1 1 1
+```
+
+#### 출력
+
+```text
+A+B+C=Infinity
+```
+
+$A+B+C=3$이지만 $A=B=C=1$이므로 대신 `A+B+C=Infinity`를 출력합니다.
+
+### 예제 3 {file=""}
+
+#### 입력
+
+```text
+16 92 31
+```
+
+#### 출력
+
+```text
+A+B+C=139
+```

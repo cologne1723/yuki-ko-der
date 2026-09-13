@@ -21,7 +21,8 @@ export type ProblemOutcome =
   | { status: "failed"; reason: "network" | "verification"; detail: string };
 export function createProblemEngine(host: Window & typeof globalThis) {
   const { document, Node, location } = host;
-  const PROBLEM_PATH_PATTERN = /^\/problems\/no\/(\d+)\/?$/u;
+  const PROBLEM_PATH_PATTERN =
+    /^\/problems\/(?:(?:no\/(?<problemNo>\d+))|(?<problemId>\d+))\/?$/u;
   const { semanticStatement, canonicalFormula } = createProblemSemantics(Node);
   const {
     parseHtml,
@@ -149,10 +150,30 @@ export function createProblemEngine(host: Window & typeof globalThis) {
         return { status: "unavailable" };
       }
 
-      const problemNo = Number(pathMatch[1]);
-      const expected = catalog?.entries.find(
-        (entry) => entry.problemNo === problemNo,
+      const content = document.querySelector<HTMLElement>(
+        "#content[data-problem-id]",
       );
+      const pageProblemId = content?.dataset.problemId;
+      const routeProblemId = pathMatch.groups?.problemId;
+      if (routeProblemId && Number(routeProblemId) !== Number(pageProblemId)) {
+        throw new ProblemVerificationError(
+          "Problem URL identity differs from the page",
+        );
+      }
+      const expected = catalog?.entries.find((entry) =>
+        routeProblemId
+          ? entry.problemId === Number(routeProblemId)
+          : entry.problemNo === Number(pathMatch.groups?.problemNo),
+      );
+      const problemNo = Number(
+        pathMatch.groups?.problemNo ??
+          expected?.problemNo ??
+          content
+            ?.querySelector(":scope > h3")
+            ?.textContent?.match(/^\s*No\.(\d+)\s/u)?.[1],
+      );
+      if (!Number.isSafeInteger(problemNo) || problemNo < 1)
+        return { status: "unavailable" };
       if (catalog && !expected) {
         session = undefined;
         restoreProblem();
@@ -170,10 +191,6 @@ export function createProblemEngine(host: Window & typeof globalThis) {
         }
         return { status: "unavailable" };
       }
-      const content = document.querySelector<HTMLElement>(
-        "#content[data-problem-id]",
-      );
-      const pageProblemId = content?.dataset.problemId;
       const key = JSON.stringify([baseUrl, problemNo, pageProblemId, expected]);
       if (options.refresh || session?.key !== key) {
         session = undefined;

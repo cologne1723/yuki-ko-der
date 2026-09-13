@@ -12,6 +12,7 @@ import { inputFormatErrors } from "translation-core/problem-input-format";
 import { sampleWarnings } from "translation-core/problem-samples";
 import { parseReviewState } from "translation-core/review-state";
 import { atomicFile, readSourceIndex, sha256 } from "./source-store.ts";
+import { findLocalProblemImages } from "translation-core/problem-assets-node";
 import type {
   OperationContext,
   OperationItem,
@@ -119,6 +120,7 @@ export async function checkProblems(
         id =
           document.querySelector<HTMLElement>("main[data-yukicoder-ko-problem]")
             ?.dataset.problemId ?? "";
+      await findLocalProblemImages(document, context.repositoryRoot, no);
       const translated = parseTranslationDocument(html, no, id, parse);
       if (mode === "validate") {
         const original = index?.problems.find((p) => p.No === no);

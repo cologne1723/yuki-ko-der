@@ -1,0 +1,79 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3568
+problemId: 13219
+sourceTitle: "Range Restriction"
+sourceHtmlSha256: 9a38b1197e335c122148bb7dbf23f78f26dce05ac4fd0aff3f2913482e8d9db8
+humanReview: null
+machineReview: unreviewed
+title: "범위 제한"
+---
+
+## 문제 설명
+
+각 $i=1,\dots,M$에 대해 다음 조건을 만족하는 길이가 $N$인 음이 아닌 정수열 $A=(A_1,A_2,\dots,A_N)$이 존재하는지 판정하세요. 존재한다면 총합이 가장 작은 것을 구하세요.
+
+$A_{x_i}+A_{y_i}\ge v_i \Rightarrow l_i\le A_{z_i}\le r_i$
+
+테스트 케이스가 $T$개 주어지므로, 각각에 대해 답을 구하세요.
+
+## 입력
+
+```text
+$T$
+$\mathrm{case}_1$
+$\mathrm{case}_2$
+$\vdots$
+$\mathrm{case}_T$
+```
+
+각 테스트 케이스는 다음 형식으로 주어집니다.
+
+```text
+$N\ M$
+$x_1\ y_1\ z_1\ v_1\ l_1\ r_1$
+$x_2\ y_2\ z_2\ v_2\ l_2\ r_2$
+$\vdots$
+$x_M\ y_M\ z_M\ v_M\ l_M\ r_M$
+```
+
+## 제한
+
+- $1\le T\le 2\times 10^5$
+- $1\le N,M\le 2\times 10^5$
+- $1\le x_i,y_i,z_i\le N$
+- $0\le v_i,l_i,r_i\le 10^9$
+- 모든 테스트 케이스에 대한 $N$의 합은 $2\times 10^5$ 이하입니다.
+- 모든 테스트 케이스에 대한 $M$의 합은 $2\times 10^5$ 이하입니다.
+
+## 출력
+
+각 테스트 케이스에 대해 조건을 만족하는 정수열이 존재하지 않으면 $-1$을 출력하세요. 존재한다면 총합이 가장 작은 정수열 $A$의 각 원소를 공백으로 구분하여 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+3
+3 3
+1 2 3 0 1 5
+1 3 2 4 2 7
+2 3 1 1 3 4
+1 2
+1 1 1 0 1 1
+1 1 1 0 2 2
+4 1
+1 2 3 3 2 1
+```
+
+#### 출력
+
+```text
+3 2 1
+-1
+0 0 0 0
+```

@@ -11,6 +11,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { cliOptions } from "translation-core/cli-options";
 import { parseProblemCatalog } from "translation-core/problem-catalog";
 import { compileProblemMarkdown } from "translation-core/problem-markdown";
+import { inlineLocalProblemImages } from "translation-core/problem-assets-node";
 import { readProblemTitleCatalog } from "translation-core/problem-title-catalog";
 import { labelPublishedProblem } from "./problem-publication.ts";
 import { sourceSamplesFingerprint } from "./problem-publication-data.ts";
@@ -130,7 +131,20 @@ img { max-width: 100%; }
         unavailableProfiles.push(`${problemNo}: not collected or exported`);
       if (!sourceSamplesSha256) missingSamples.push(problemNo);
       // Run all deterministic publication validation before touching old output.
-      const published = labelPublishedProblem(html, {
+      const materializedDom = new JSDOM(html);
+      let materialized: string;
+      try {
+        await inlineLocalProblemImages(
+          materializedDom.window.document,
+          repositoryRoot,
+          problemNo,
+          { imageRoot: join(sourceRoot, "ko/images") },
+        );
+        materialized = materializedDom.serialize();
+      } finally {
+        materializedDom.window.close();
+      }
+      const published = labelPublishedProblem(materialized, {
         profile,
         sourceUrl: problemPublicSourceUrl(problemNo),
       });

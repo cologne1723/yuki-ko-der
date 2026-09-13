@@ -18,6 +18,7 @@ export async function previewDocument(
   sourceUrl = "https://yukicoder.me/",
   options: PreviewRenderOptions = {},
 ) {
+  const previewOrigin = new URL(origin, location.href).origin;
   const clean = DOMPurify.sanitize(html, {
     WHOLE_DOCUMENT: true,
     ADD_TAGS: ["link"],
@@ -37,7 +38,11 @@ export async function previewDocument(
     const sanitized = sanitizeTranslatedBlocks(blocks, { document, sourceUrl });
     blocks.forEach((block, index) => block.replaceWith(sanitized[index]));
   }
-  resolveProblemUrls(doc.documentElement, sourceUrl);
+  resolveProblemUrls(
+    doc.documentElement,
+    sourceUrl,
+    `${previewOrigin}/problem-images`,
+  );
   for (const link of doc.querySelectorAll<HTMLAnchorElement>("a[href]")) {
     if (link.getAttribute("href")?.startsWith("#")) continue;
     // Navigation stays sandboxed; popups/top navigation are not enabled.
@@ -56,7 +61,7 @@ export async function previewDocument(
   css.dataset.reviewMath = "katex";
   css.textContent = katexCss.replaceAll(
     "url(fonts/",
-    `url(${origin}/katex/fonts/`,
+    `url(${previewOrigin}/katex/fonts/`,
   );
   if (renderProfile?.engine === "katex") doc.head.append(css);
   const style = doc.createElement("style");
@@ -67,12 +72,16 @@ export async function previewDocument(
   policy.httpEquiv = "Content-Security-Policy";
   policy.content = inert
     ? "default-src 'none'; style-src 'unsafe-inline'; font-src data: " +
-      origin +
+      previewOrigin +
+      "; img-src data: " +
+      previewOrigin +
       "; form-action 'none'; base-uri 'none'"
     : "default-src 'none'; style-src 'unsafe-inline' " +
-      origin +
-      " https://yukicoder.me https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://use.fontawesome.com; img-src data: https://yukicoder.me; font-src data: " +
-      origin +
+      previewOrigin +
+      " https://yukicoder.me https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://use.fontawesome.com; img-src data: " +
+      previewOrigin +
+      " https://yukicoder.me; font-src data: " +
+      previewOrigin +
       " https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://use.fontawesome.com; form-action 'none'";
   if (inert) {
     doc.querySelectorAll("a").forEach((a) => a.removeAttribute("href"));
@@ -83,7 +92,7 @@ export async function previewDocument(
     ? renderPreviewInFrame(
         source,
         renderProfile,
-        `${origin}/mathjax/fonts/woff-v2`,
+        `${previewOrigin}/mathjax/fonts/woff-v2`,
         options,
       )
     : source;

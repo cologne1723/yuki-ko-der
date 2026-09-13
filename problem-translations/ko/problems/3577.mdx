@@ -1,0 +1,123 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3577
+problemId: 10522
+sourceTitle: "フェルマー曲線"
+sourceHtmlSha256: "00b61de2357f47ca319c1818c3fce44d7726a959f86fa5ee98cc7c45ca6094f1"
+humanReview: null
+machineReview: unreviewed
+title: "페르마 곡선"
+---
+
+실행 시간 제한은 $4\,000$ms입니다.
+
+## 문제 설명
+
+입력으로 $2$개의 양의 정수 $N$, $B$가 주어집니다.
+
+다음을 만족하는 $B$ 미만의 음이 아닌 정수 순서 있는 세쌍 $(x,y,z)$의 개수를 구하세요.
+
+$
+x^N+y^N \equiv z^N \pmod{B}
+$
+
+### 배경
+
+대수기하를 아는 사람을 위해 배경을 설명합니다. 동차 $N$차 방정식 $x^N+y^N=z^N$은 $\textrm{Spec}(\mathbb{Z}/B\mathbb{Z})$ 위의 $3$차원 아핀 공간 $\mathbb{A}^3_{\mathbb{Z}/B\mathbb{Z}}$ 안의 대수 곡면과 $2$차원 사영 공간 $\mathbb{P}^2_{\mathbb{Z}/B\mathbb{Z}}$ 안의 대수 곡선을 정의합니다. 전자의 대수 곡면과 후자의 대수 곡선을 각각 $S$와 $C$라고 합시다. 이번에 구하는 값은 $S$의 $\mathbb{Z}/B\mathbb{Z}$-유리점 개수 $\# S(\mathbb{Z}/B\mathbb{Z})$와 같습니다. 또한 $C$는 페르마 곡선이라고 하며, 수론기하에서 중요한 연구 대상입니다.
+
+이제 $B$가 소수라고 합시다. 이때 $C$의 $\mathbb{Z}/B\mathbb{Z}$-유리점은 $S$ 안의 원점을 지나는 직선에 정확히 대응하며, $S$ 안의 원점을 지나는 직선에 있는 $\mathbb{Z}/B\mathbb{Z}$-유리점의 개수는 $B$와 같습니다. 따라서 $C$의 $\mathbb{Z}/B\mathbb{Z}$-유리점 개수 $\# C(\mathbb{Z}/B\mathbb{Z})$는 $(B-1)^{-1}(\# S(\mathbb{Z}/B\mathbb{Z})-1)$로 나타낼 수 있으므로, $\# C(\mathbb{Z}/B\mathbb{Z})$를 구하는 것과 $\# S(\mathbb{Z}/B\mathbb{Z})$를 구하는 것은 사실상 동등합니다.
+
+이상으로 이 문제는 $B$가 소수일 때 본질적으로 페르마 곡선의 $\mathbb{Z}/B\mathbb{Z}$-유리점 개수를 세는 문제와 동등합니다.
+
+## 입력
+
+입력은 표준 입력에서 다음 형식으로 $1$줄에 주어집니다.
+
+```text
+$N\ B$
+```
+
+$1$번째 줄에 $N$, $B$가 공백으로 구분되어 주어집니다.
+
+## 제한
+
+- $N$은 $1\leq N\leq 10^{18}$을 만족하는 정수입니다.
+- $B$는 $1\leq B\leq 10^4$를 만족하는 정수입니다.
+
+## 출력
+
+조건을 만족하는 $B$ 미만의 음이 아닌 정수 순서 있는 세쌍 $(x,y,z)$의 개수를 $1$줄에 출력하세요.
+
+마지막에 개행을 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+1 1
+```
+
+#### 출력
+
+```text
+1
+```
+
+$(N,B)=(1,1)$입니다. $B$ 미만의 음이 아닌 정수 순서 있는 세쌍 $(x,y,z)$는 $(0,0,0)$ $1$개뿐이며,
+
+$
+0^N+0^N=0=0^N
+$
+
+입니다.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+1 2
+```
+
+#### 출력
+
+```text
+4
+```
+
+$(N,B)=(1,2)$입니다. $B$ 미만의 음이 아닌 정수 순서 있는 세쌍 $(x,y,z)$는 $(0,0,0)$, $(1,0,0)$, $(0,1,0)$, $(0,0,1)$, $(1,1,0)$, $(1,0,1)$, $(0,1,1)$, $(1,1,1)$뿐이며, 법 $B$에서 다음과 같습니다.
+
+$
+\begin{array}{rcccccl}
+0^N+0^N & = & 0 & \textcolor{blue}{\equiv} & 0 & = & 0^N \\
+1^N+0^N & = & 1 & \textcolor{red}{\not\equiv} & 0 & = & 0^N \\
+0^N+1^N & = & 1 & \textcolor{red}{\not\equiv} & 0 & = & 0^N \\
+1^N+1^N & = & 2 & \textcolor{blue}{\equiv} & 0 & = & 0^N \\
+0^N+0^N & = & 0 & \textcolor{red}{\not\equiv} & 1 & = & 1^N \\
+1^N+0^N & = & 1 & \textcolor{blue}{\equiv} & 1 & = & 1^N \\
+0^N+1^N & = & 1 & \textcolor{blue}{\equiv} & 1 & = & 1^N \\
+1^N+1^N & = & 2 & \textcolor{red}{\not\equiv} & 1 & = & 1^N
+\end{array}
+$
+
+입니다.
+
+### 예제 3 {file=""}
+
+#### 입력
+
+```text
+2 3
+```
+
+#### 출력
+
+```text
+9
+```
+
+$(N,B)=(2,3)$입니다. 조건을 만족하는 $(x,y,z)$는 $9$개입니다.

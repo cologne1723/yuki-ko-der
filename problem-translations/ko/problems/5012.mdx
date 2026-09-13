@@ -1,0 +1,298 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 5012
+problemId: 8926
+sourceTitle: "Better Mo's Algorithm is Needed!! (Execute)"
+sourceHtmlSha256: "3948f675210f07f8fd76316563fd30db61110b73deb08663de638f908a597bff"
+humanReview: null
+machineReview: unreviewed
+title: "더 나은 Mo의 알고리즘이 필요하다!! (실행)"
+---
+
+**이 문제는 어느 정도 경쟁성이 부족한 스코어 문제일 가능성이 있습니다. 부디 너무 진지하게 임하지 마세요.**
+
+동일한 출력 / 제출에 대해서도 점수가 변동하지만, 저지의 부하가 어느 정도 크므로 동일한 제출을 지나치게 반복하지 마세요.
+
+## 문제 설명
+
+**실행 시간 제한이 평소보다 짧은 $500$ms라는 점에 주의하세요.**
+
+**또한, 매우 특수한 채점 방법에도 주의하세요. 스코어 문제이므로 마지막 제출 후 $5$분 동안은 다음 제출을 할 수 없습니다.**
+
+### 배경
+
+다음과 같은 문제가 있습니다. 이 문제는 [정적 구간 역전 수 질의](https://judge.yosupo.jp/problem/static_range_inversions_query)로 잘 알려져 있습니다.
+
+수열 $A=(A_1,A_2,\dots,A_N)$이 주어집니다. 다음 $Q$개의 질의에 답하세요. $i$번째 질의에서는 $l_i,r_i$가 주어지므로, 연속 부분 수열 $(A_{l_i},A_{l_i+1},\dots,A_{r_i})$의 역전 수를 구하세요.
+
+이 원래 문제의 실행 시간 제한은 $2$s입니다.
+
+**物理好きさん은 $(1,2,\dots,Q)$의 순열인 $P$를 잘 정하면 앞에서 설명한 문제를 해결하는 다음 코드 $C$를 작성했습니다.**
+
+```cpp
+#include <bits/stdc++.h>
+#include <sys/time.h>
+
+using namespace std;
+
+long long start_time;
+
+void start_clock(){
+  struct timeval tv;
+  gettimeofday(&tv, NULL);
+  start_time=(tv.tv_sec*1000000+tv.tv_usec);
+}
+
+long long current_clock(){
+  struct timeval tv;
+  gettimeofday(&tv, NULL);
+  long long current_time=(tv.tv_sec*1000000+tv.tv_usec);
+  // cout << current_time-start_time << "(us)\n";
+  return current_time-start_time;
+}
+
+int bit[111111]={0};
+int bsize;
+
+int BIT_sum(int i){
+  int s=0;
+  while(i>0){
+    s+=bit[i];
+    i-=i&(-i);
+  }
+  return s;
+}
+
+void BIT_add(int i,int x){
+  while(i<=bsize){
+    bit[i]+=x;
+    i+=i&(-i);
+  }
+}
+
+int N,Q;
+int A[111111];
+int l[111111],r[111111];
+int P[111111];
+
+int whole=0;
+long long result=0;
+void add(int i,bool isLeft){
+  if(isLeft){
+    result+=BIT_sum(A[i]-1);
+  }
+  else{
+    result+=whole;
+    result-=BIT_sum(A[i]);
+  }
+  BIT_add(A[i],1);
+  whole++;
+}
+
+void rem(int i,bool isLeft){
+  BIT_add(A[i],-1);
+  whole--;
+  if(isLeft){
+    result-=BIT_sum(A[i]-1);
+  }
+  else{
+    result-=whole;
+    result+=BIT_sum(A[i]);
+  }
+}
+
+int cur_l,cur_r;
+
+long long mo_work(int l,int r){
+  while(l < cur_l){cur_l--;add(cur_l,true);}
+  while(cur_r < r){cur_r++;add(cur_r,false);}
+  while(cur_l < l){rem(cur_l,true);cur_l++;}
+  while(r < cur_r){rem(cur_r,false);cur_r--;}
+  return result;
+}
+
+long long output[111111];
+
+int main(){
+  // 入力処理
+  cin >> N >> Q;
+  bsize=N;
+  for(int i=1;i<=N;i++){
+    cin >> A[i];
+  }
+  for(int i=1;i<=Q;i++){
+    cin >> l[i] >> r[i];
+  }
+
+  // 座標圧縮
+  map<int,int> mp;
+  for(int i=1;i<=N;i++){
+    mp[A[i]]=1;
+  }
+  int comp=1;
+  for(auto &nx : mp){
+    nx.second=comp;
+    comp++;
+  }
+  for(int i=1;i<=N;i++){
+    A[i]=mp[A[i]];
+  }
+
+  // 順列 P をうまく定める
+  for(int i=1;i<=Q;i++){
+    P[i] = ( 出力された P_i );
+  }
+
+  // 計時開始
+  start_clock();
+  for(int i=1;i<=Q;i++){
+    if(i==1){
+      cur_l=l[P[i]];
+      cur_r=l[P[i]];
+      add(l[P[i]],true);
+    }
+    output[P[i]]=mo_work(l[P[i]],r[P[i]]);
+
+    if(i%100==0){
+      // TLEノックアウト
+      if(current_clock()>1500000){break;}
+    }
+  }
+
+  // 計時終了
+  long long exe_time=current_clock();
+
+  // 出力
+  for(int i=1;i<=Q;i++){
+    cout << output[i] << "\n";
+  }
+  return 0;
+}
+```
+
+코드 $C$는 다음과 같이 동작합니다.
+
+- 입력을 받습니다.
+- $A$를 좌표 압축합니다.
+- 출력된 순열 $P$를 받습니다.
+- Mo의 알고리즘과 같은 방식으로 구간의 역전 수를 구합니다.
+  - $i$번째에는 $P_i$번째 질의 구간의 답을 구합니다.
+  - 구간의 왼쪽 끝 또는 오른쪽 끝에 점을 $1$개 추가하거나 삭제할 때, Binary Indexed Tree를 이용해 역전 수의 변화를 구합니다.
+  - 이때의 시간 복잡도는 $O(\log N)$입니다.
+- Mo의 알고리즘을 $P$의 정렬이라는 형태로 잘 구현하면 $O(N\sqrt{Q}\log N)$의 시간 복잡도로 만들 수 있습니다.
+
+여러분의 목표는 이 순열 $P$를 잘 정해 物理好きさん의 코드가 가능한 한 빠르게 실행되도록 하는 것입니다.
+
+**단, $P$를 정하는 데 사용할 수 있는 시간은 $500$ms뿐입니다. Mo의 알고리즘의 핵심 부분에 실행 시간 $1\,500$ms를 남겨 $2$s의 실행 시간 제한을 맞춰야 하기 때문입니다.**
+
+더 뛰어난 순열 $P$를 빠르게 찾을 수 있나요?
+
+## 점수
+
+**이 문제에서는 출력된 순열 $P$를 이용해 物理好きさん의 코드 $C$를 실제로 실행한 결과로 점수가 정해집니다.**
+
+이 문제에는 $100$개의 테스트 케이스가 포함됩니다. 코드 $C$가 각 테스트 케이스에 대해 $T$μs의 실행 시간을 필요로 한다고 합시다. 각 테스트 케이스의 점수는 다음과 같이 정해집니다.
+
+- $T\le1.5\times10^6$($1\,500$ms 이하)이면 $10^{16}+(1.5\times10^6-T)$점입니다.
+- 그렇지 않으면 $0$점입니다.
+
+각 제출의 최종 점수는 모든 테스트 케이스의 점수 합입니다. 따라서 점수는 ($1\,500$ms 이내에 AC를 받은 테스트 케이스 수) $\times 10^{16}$과 (AC를 받은 테스트 케이스의 남은 실행 시간 합계(μs))의 합으로 나타낼 수 있습니다.
+
+**실행 시간 $T$는 저지 코드의 변수 `exe_time` 값으로 결정됩니다.** 이는 순열 $P$를 정하는 실행 시간 제한 $500$ms 중 얼마를 사용했는지와는 무관합니다.
+
+**모든 테스트 케이스에서 코드 $C$가 TLE되지 않아 $10^{18}$점 이상을 얻을 수 있는 프로그램이 존재함을 보장합니다.**
+
+## 입력
+
+입력은 정적 구간 역전 수 질의의 입력입니다. 物理好きさん의 코드에도 같은 입력이 주어져 실행됩니다.
+
+```text
+$N\ Q$
+$A_1\ A_2\ \cdots\ A_N$
+$l_1\ r_1$
+$l_2\ r_2$
+$\vdots$
+$l_Q\ r_Q$
+```
+
+$1$번째 줄에 $N,Q$가 공백으로 구분되어 주어집니다. $2$번째 줄에 $A_1,A_2,\dots,A_N$이 공백으로 구분되어 주어집니다. 다음 $Q$개 줄에는 $i$번째 질의를 나타내는 $l_i,r_i$가 공백으로 구분되어 주어집니다.
+
+## 제한
+
+- 입력은 모두 정수입니다.
+- $1\le N,Q\le 100\,000$
+- $0\le A_i\le 1\,000\,000\,000$
+- $1\le l_i\le r_i\le N$
+
+## 입력 생성 방법
+
+입력에는 $100$개의 테스트 케이스가 포함됩니다.
+
+- 처음 $48$개 테스트 케이스는 $N,Q\in\{10\,000,20\,000,50\,000,100\,000\},$ 및 $ST\in\{1,2,3\}$을 만족하는 정수 조합 $(N,Q,ST)$ $48$가지에 대해 각각 $1$개씩 생성됩니다. $A_i$는 $0\le A_i\le 10^9$ 범위에서 서로 독립적인 균등 난수로 생성됩니다.
+- 다음 $30$개 테스트 케이스는 $N=Q=100\,000$으로 고정하고, $A_i$의 종류 수 $k\in\{10,10^2,10^3,10^4,10^5\}$인 케이스를 구간 생성 방법 $ST\in\{1,2,3\}$ 각각에 대해 $2$개씩 생성합니다. 먼저 $A=(0,1,\dots,k-1)$에서 시작해 $0$ 이상 $k-1$ 이하의 균등 난수 $N-k$개를 뒤에 붙인 다음 $A$를 섞습니다. 그 후 같은 값은 같은 값으로, 다른 값은 다른 값으로 유지되도록 각 값을 $0$ 이상 $10^9$ 이하의 균등한 정수로 바꿉니다.
+- 다음 $1$개 테스트 케이스는 아래의 예제 $1$과 같습니다.
+- 다음 $1$개 테스트 케이스는 [공개된 입력](https://drive.google.com/file/d/1UqBzx1DOrBBBAUwTC5Zz-g8qY7oXhjRy/view?usp=share_link)과 같습니다. $N=Q=100\,000,ST=3$으로 생성된 케이스이며, $A_i$는 $0\le A_i\le 10^9$ 범위에서 서로 독립적인 균등 난수로 생성됩니다.
+- 나머지 $20$개 테스트 케이스의 입력 생성 방법은 비밀입니다. **어떤 악의적인 테스트 케이스도 주어질 수 있습니다.** 단, 제너레이터란에 제너레이터가 게시되어 있으므로 콘테스트 종료 후 등에 참고할 수 있습니다.
+
+구간 생성 방법의 상세 내용은 다음과 같습니다.
+
+방법 $1$:
+
+- $x=\mathop{\rm rnd}(1,N)$ 및 $y=\mathop{\rm rnd}(1,N)$으로 생성합니다.
+- $x>y$이면 $x,y$를 교환합니다.
+- 생성되는 구간은 $[x,y]$입니다.
+
+방법 $2$:
+
+- $l=\mathop{\rm rnd}(1,N)$으로 생성합니다.
+- $x=\mathop{\rm rnd}(1,N-l+1)$로 생성하고 $y=x+l-1$로 정합니다.
+- 생성되는 구간은 $[x,y]$입니다.
+
+방법 $3$:
+
+- 각 구간마다 방법 $1$과 방법 $2$ 중 $1$개를 같은 확률로 서로 독립적으로 선택하고, 선택한 방법으로 생성합니다.
+
+## 출력
+
+순열 $P$를 다음 형식으로 출력하세요.
+
+```text
+$P_1\ P_2\ \cdots\ P_Q$
+```
+
+$(1,2,\dots,Q)$의 순열 $P$를 $1$줄에 공백으로 구분하여 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+5 4
+1 0 3 2 2
+1 4
+2 3
+2 5
+1 5
+```
+
+#### 출력
+
+```text
+4 2 1 3
+```
+
+이 출력에 대해 코드 $C$가 $2\,000$μs ($=2$ms)로 실행되면 이 케이스의 점수는 $10^{16}+1\,498\,000$점입니다.
+
+이 출력에 대해 코드 $C$가 $1\,600\,000$μs ($=1\,600$ms)로 실행되거나 코드가 TLE 녹아웃되면 이 케이스의 점수는 $0$점입니다.
+
+참고로 원래 문제의 정답은 다음과 같습니다.
+
+```text
+2
+0
+2
+3
+```

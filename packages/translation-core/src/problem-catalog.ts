@@ -1,15 +1,32 @@
 import { z } from "./validation.ts";
 
-const text = z.string().refine((value) => !!value.trim());
+const text = z.string().min(1);
 const hash = z.string().regex(/^[a-f0-9]{64}$/u);
-export const publishedProblemSchema = z.object({
-  problemNo: z.number().int().min(1),
-  problemId: z.number().int().min(1),
-  source: text,
-  target: text,
-  htmlSha256: hash,
-  sourceSamplesSha256: hash.optional(),
-});
+export const publishedProblemSchema = z
+  .object({
+    problemNo: z.number().int().min(1),
+    problemId: z.number().int().min(1),
+    source: text,
+    target: text,
+    htmlSha256: hash,
+    sourceSamplesSha256: hash.optional(),
+  })
+  .superRefine((entry, ctx) => {
+    // No.8025 (ProblemId 888) deliberately has one ideographic space as its
+    // original title. Preserve that exact puzzle title, not arbitrary blanks.
+    const blankPuzzleTitle =
+      entry.problemNo === 8025 &&
+      entry.problemId === 888 &&
+      entry.source === "\u3000" &&
+      entry.target === "\u3000";
+    for (const field of ["source", "target"] as const)
+      if (!entry[field].trim() && !blankPuzzleTitle)
+        ctx.addIssue({
+          code: "custom",
+          path: [field],
+          message: "Empty problem title",
+        });
+  });
 export const problemCatalogSchema = z
   .object({
     schemaVersion: z.literal(1),

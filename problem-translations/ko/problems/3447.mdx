@@ -1,0 +1,80 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3447
+problemId: 13076
+sourceTitle: "Power Projection(constant)"
+sourceHtmlSha256: f27c2067f73c4909725277b3a052a92ef5165624912813e6bce8d9721e80251d
+humanReview: null
+machineReview: unreviewed
+title: "거듭제곱 투영(상수)"
+---
+
+## 문제 설명
+
+양의 정수 $N$, $A$, $B$가 주어집니다.
+
+$i = 0, 1, \dots, N - 1$에 대해 $AB^{i}$를 구하세요.
+
+## 입력
+
+입력은 다음 형식으로 주어집니다.
+
+```text
+$N\ A\ B$
+```
+
+여기서 $N$, $A$, $B$는 양의 정수입니다.
+
+## 제한
+
+- $1 \leq N \leq 9$
+- $1 \leq A \leq 9$
+- $1 \leq B \leq 9$
+- 입력은 모두 정수입니다.
+
+## 출력
+
+$N$줄에 걸쳐 출력하세요.
+
+$i+1$번째 줄에는 $AB^{i}$를 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+1 6 7
+```
+
+#### 출력
+
+```text
+6
+```
+
+$AB^{0} = 6 \cdot 7^{0} = 6$이므로 $6$을 출력하세요.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+9 2 4
+```
+
+#### 출력
+
+```text
+2
+8
+32
+128
+512
+2048
+8192
+32768
+131072
+```

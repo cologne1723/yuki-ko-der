@@ -25,6 +25,7 @@ import { UiImportStore } from "./ui-imports.ts";
 import { UiReviewStore } from "./ui-review.ts";
 import { uiRoutes } from "./ui-routes.ts";
 import { tagsRoutes } from "./tags-routes.ts";
+import { readLocalProblemImage } from "translation-core/problem-assets-node";
 
 export function createReviewApp(options: {
   repositoryRoot: string;
@@ -147,6 +148,27 @@ export function createReviewApp(options: {
         c.req.param("font"),
       ),
     })(c, next);
+  });
+  app.get("/problem-images/:problemNo/:filename", async (c) => {
+    const problemNo = Number(c.req.param("problemNo"));
+    if (!Number.isSafeInteger(problemNo) || problemNo < 1) return c.notFound();
+    try {
+      const asset = await readLocalProblemImage(
+        options.repositoryRoot,
+        `../images/${problemNo}/${c.req.param("filename")}`,
+        problemNo,
+      );
+      return new Response(Buffer.from(asset.bytes), {
+        headers: {
+          "content-type": asset.mime,
+          "cache-control": "no-store",
+          "x-content-type-options": "nosniff",
+          "content-security-policy": "default-src 'none'; sandbox",
+        },
+      });
+    } catch {
+      return c.notFound();
+    }
   });
   app.notFound((c) => c.json({ error: "Not found" }, 404));
   return routed;

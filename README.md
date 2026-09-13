@@ -66,7 +66,7 @@ pnpm review
 
 저장과 검수 승인은 별개입니다. 새 한국어 번역은 사람이 검수해야 하며, 자동 검사 통과만으로 승인되지 않습니다.
 로컬에서 저장한 문제 번역은 배포가 완료되어야 공개 페이지에 반영됩니다.
-[문제 번역 지침](problem-translations/TRANSLATION_GUIDELINE.md)과 [검수 도구 안내](tools/review/README.md)를 참고하세요.
+[문제 번역 지침](problem-translations/TRANSLATION_GUIDELINE.md), [문제 번역 검토 워크플로](problem-translations/REVIEW_WORKFLOW.md), [검수 도구 안내](tools/review/README.md)를 참고하세요.
 
 ## 개발과 배포
 

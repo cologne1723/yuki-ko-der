@@ -1,0 +1,60 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 8059
+problemId: 3508
+sourceTitle: "tan"
+sourceHtmlSha256: "ff3ab86879a71689e27ed61e9758fa3fdc301fd9de2fced092ecb48400547f4d"
+humanReview: null
+machineReview: unreviewed
+title: "탄젠트"
+---
+
+## 문제 설명
+
+$\tan{x^\text{o}}$는 유리수인가요?
+
+## 입력
+
+```text
+$T$
+$x_{0}$
+$x_{1}$
+$\vdots$
+$x_{T-1}$
+```
+
+$1$번째 줄에 테스트 케이스의 수 $T$가 주어집니다.
+
+각 테스트 케이스에 대해, 도 단위로 나타낸 각도 $x_t$가 $1$줄에 $1$개씩 주어집니다.
+
+## 제한
+
+- $1 \le T \le 90$
+- $0 \le x_t \lt 90$
+- $T$와 $x_t$는 정수입니다.
+
+## 출력
+
+각 테스트 케이스에 대해, $\tan{{x_t}^\text{o}}$가 유리수이면 `Y`, 무리수이면 `N`을 출력하고 개행하세요.
+
+테스트 케이스가 $T$개이면 출력은 $T$줄입니다.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+1
+1
+```
+
+#### 출력
+
+```text
+N
+```
+
+$\tan 1^\text{o}$는 무리수이므로 `N`을 출력하세요.

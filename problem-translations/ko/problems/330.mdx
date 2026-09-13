@@ -5,29 +5,32 @@ problemNo: 330
 problemId: 778
 sourceTitle: "Eigenvalue Decomposition"
 sourceHtmlSha256: "2f3db3af4ee8622a33c2ae2a0c90510fa28ec2ca437db296c428aff4a27b59c1"
-reviewStatus: unreviewed
+humanReview: null
+machineReview: approved
 title: "고유값 분해"
 ---
 
-## 문제
+## 문제 설명
 
 $N\times N$ 정사각 대칭행렬 $A$가 있고, $M$개의 튜플 $(a_k,b_k,c_k)$가 주어집니다.
 
-비대각 성분 $A_{i,j}$($i\ne j$)은 $A_{a_k,b_k}=A_{b_k,a_k}=c_k$이고, 그렇지 않으면 0입니다. 대각 성분 $A_{i,i}$는 각 행의 합이 0, 즉 $\sum_{j=1}^N A_{i,j}=0$이 되도록 정합니다.
+비대각 성분 $A_{i,j}$($i\ne j$)은 $A_{a_k,b_k}=A_{b_k,a_k}=c_k$이고, 그렇지 않으면 $0$입니다. 대각 성분 $A_{i,i}$는 각 행의 합이 $0$, 즉 $\sum_{j=1}^N A_{i,j}=0$이 되도록 정합니다.
 
-행렬 $A$의 $N$개 고유값 중 0인 것의 개수를 구하세요.
+행렬 $A$의 $N$개 고유값 중 $0$인 것의 개수를 구하세요.
 
 ## 입력
 
 ```text
-N M
-a_1 b_1 c_1
-a_2 b_2 c_2
-⋮
-a_M b_M c_M
+$N\ M$
+$a_1\ b_1\ c_1$
+$a_2\ b_2\ c_2$
+$\vdots$
+$a_M\ b_M\ c_M$
 ```
 
-첫째 줄에 $N,M$이 주어집니다. $M\ne0$이면 다음 $M$개의 줄에 $a_i,b_i,c_i$가 주어집니다.
+$1$번째 줄에 $2$개의 정수 $N,M$이 공백으로 구분되어 주어집니다. $M\ne0$이면 $2$번째 줄부터 $M+1$번째 줄까지 각 줄에 $3$개의 정수 $a_i,b_i,c_i$가 공백으로 구분되어 주어집니다.
+
+## 제한
 
 - $1 \le N \le 10^5$
 - $0 \le M \le \min\left(\frac{N(N-1)}2,2\times10^5\right)$
@@ -37,26 +40,30 @@ a_M b_M c_M
 
 ## 출력
 
-행렬 $A$의 고유값 중 0인 것의 개수를 한 줄에 출력하세요.
+행렬 $A$의 고유값 중 $0$인 것의 개수를 $1$줄에 출력하세요.
 
-## 샘플
+## 예제
 
-### 샘플 1 {file="sample1.in"}
+### 예제 1 {file=""}
+
+#### 입력
 
 ```text
 2 1
 1 2 1
 ```
 
-### 샘플 1 {file="sample1.out"}
+#### 출력
 
 ```text
 1
 ```
 
-이 입력의 행렬은 $A=\begin{pmatrix}-1&1\\1&-1\end{pmatrix}$이고 고유값은 $0,-2$이므로 답은 1입니다.
+이 입력의 행렬은 $A=\begin{pmatrix}-1&1\\1&-1\end{pmatrix}$이고 고유값은 $0,-2$이므로 답은 $1$입니다.
 
-### 샘플 2 {file="sample2.in"}
+### 예제 2 {file=""}
+
+#### 입력
 
 ```text
 3 2
@@ -64,15 +71,17 @@ a_M b_M c_M
 2 3 1
 ```
 
-### 샘플 2 {file="sample2.out"}
+#### 출력
 
 ```text
 1
 ```
 
-행렬 $A$의 고유값은 $0,\sqrt3-3,-3-\sqrt3$이므로 답은 1입니다.
+행렬 $A$의 고유값은 $0,\sqrt3-3,-3-\sqrt3$이므로 답은 $1$입니다.
 
-### 샘플 3 {file="sample3.in"}
+### 예제 3 {file=""}
+
+#### 입력
 
 ```text
 4 2
@@ -80,13 +89,15 @@ a_M b_M c_M
 3 4 6
 ```
 
-### 샘플 3 {file="sample3.out"}
+#### 출력
 
 ```text
 2
 ```
 
-### 샘플 4 {file="sample4.in"}
+### 예제 4 {file=""}
+
+#### 입력
 
 ```text
 10 9
@@ -101,19 +112,21 @@ a_M b_M c_M
 1 10 11
 ```
 
-### 샘플 4 {file="sample4.out"}
+#### 출력
 
 ```text
 3
 ```
 
-### 샘플 5 {file="sample5.in"}
+### 예제 5 {file=""}
+
+#### 입력
 
 ```text
 330 0
 ```
 
-### 샘플 5 {file="sample5.out"}
+#### 출력
 
 ```text
 330
