@@ -22,6 +22,8 @@ export function labelPublishedProblem(
     const heading = root?.querySelector("h3");
     if (!root || !heading)
       throw new Error("Problem translation heading is missing");
+    if (root.dataset.visibility === "false")
+      throw new Error("Hidden problem cannot be published");
     verifyProblemRenderMarkup(root);
     const title = (heading.textContent ?? "")
       .replace(/^\[기계 번역\]\s*/u, "")

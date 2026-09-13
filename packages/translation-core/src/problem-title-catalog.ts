@@ -58,6 +58,7 @@ export async function readProblemTitleCatalog(
         sourceTitle: string;
         title: string;
         reviewStatus?: unknown;
+        visibility?: boolean;
       };
       if (match.groups?.format === "mdx") {
         metadata = parseProblemMarkdown(source).metadata;
@@ -73,6 +74,7 @@ export async function readProblemTitleCatalog(
           problemNo: Number(root?.dataset.problemNo),
           problemId: Number(root?.dataset.problemId),
           sourceTitle: root?.dataset.sourceTitle ?? "",
+          visibility: root?.dataset.visibility !== "false",
           title: heading
             .replace(/^\[기계 번역\]\s*/u, "")
             .replace(/^No\.\d+\s*/u, ""),
@@ -109,6 +111,7 @@ export async function readProblemTitleCatalog(
         errors.push(
           `${filename}: source index expects problemNo=${original.No}, problemId=${original.ProblemId}, sourceTitle=${JSON.stringify(original.Title)}; received problemNo=${metadata.problemNo}, problemId=${metadata.problemId}, sourceTitle=${JSON.stringify(metadata.sourceTitle)}`,
         );
+      if (metadata.visibility === false) continue;
       titles.push({
         problemNo: metadata.problemNo,
         problemId: metadata.problemId,

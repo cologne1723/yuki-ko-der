@@ -52,6 +52,37 @@ async function fixture(t: TestContext) {
   return { root, sourceRoot, translations, outputRoot, dataRoot };
 }
 
+test("hidden problems retain source but never publish, including stale output and missing profiles", async (t) => {
+  const f = await fixture(t);
+  for (const no of [1, 2]) {
+    const hidden = markdown(no).replace(
+      "locale: ko",
+      "locale: ko\nvisibility: false",
+    );
+    await writeFile(join(f.translations, `${no}.mdx`), hidden);
+  }
+  await mkdir(join(f.outputRoot, "ko/problems"), { recursive: true });
+  await writeFile(join(f.outputRoot, "ko/problems/1.html"), "old public body");
+  await buildProblemTranslations({ ...f, requireRenderProfiles: true });
+  const catalog = JSON.parse(
+    await readFile(join(f.outputRoot, "ko/problem-catalog.json"), "utf8"),
+  );
+  assert.deepEqual(catalog.entries, []);
+  const landing = await readFile(join(f.outputRoot, "index.html"), "utf8");
+  assert.match(landing, /문제 번역 0개/);
+  assert.doesNotMatch(landing, /ko\/problems\/[12]\.html/);
+  for (const no of [1, 2]) {
+    await assert.rejects(
+      readFile(join(f.outputRoot, `ko/problems/${no}.html`)),
+      { code: "ENOENT" },
+    );
+    assert.match(
+      await readFile(join(f.translations, `${no}.mdx`), "utf8"),
+      /\$x\^2\$/,
+    );
+  }
+});
+
 test("clean CI collects profiles before strict publication; both engines and original-relative resources work", async (t) => {
   const f = await fixture(t);
   await assert.rejects(

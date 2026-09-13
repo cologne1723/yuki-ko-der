@@ -772,6 +772,9 @@ test("late Noty announcements and errors translate through the real shared catal
     doc.body.append(container);
     const cases = [
       ["コンテストが終了しました。", "대회가 종료되었습니다."],
+      ["5分後に問題が公開されます。", "5분 후에 문제가 공개됩니다."],
+      ["12分後に問題が公開されます。", "12분 후에 문제가 공개됩니다."],
+      ["問題が公開されました。", "문제가 공개되었습니다."],
       [
         "入力をクリップボードにコピーしました",
         "입력을 클립보드에 복사했습니다",

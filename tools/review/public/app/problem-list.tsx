@@ -117,7 +117,7 @@ export function Problems() {
               to={`/?problem=${p.problemNo}`}
               active={selected === String(p.problemNo)}
               label={`${p.problemNo}. ${p.koreanTitle || p.japaneseTitle}`}
-              description={p.japaneseTitle}
+              description={`${p.visibility === false ? "[비공개] " : ""}${p.japaneseTitle}`}
               rightSection={
                 <ReviewBadge
                   status={

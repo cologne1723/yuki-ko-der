@@ -18,6 +18,31 @@ import {
 } from "../src/problem-review.ts";
 
 const fixtureRoots: string[] = [];
+test("visibility toggle preserves body and review state, remains in review list and rejects stale writes", async () => {
+  const root = await fixtureRoot();
+  const store = new ProblemReviewStore(root);
+  const before = await store.get(1);
+  const hidden = await store.setVisibility(1, false, before.revision);
+  assert.equal(hidden.visibility, false);
+  assert.equal(
+    hidden.koreanSource.replace("visibility: false\n", ""),
+    before.koreanSource,
+  );
+  assert.equal(hidden.reviewStatus, before.reviewStatus);
+  assert.equal(hidden.machineTranslated, before.machineTranslated);
+  assert.deepEqual(hidden.reviews, before.reviews);
+  assert.equal((await store.list())[0].visibility, false);
+  await assert.rejects(
+    store.setVisibility(1, true, before.revision),
+    /changed on disk/,
+  );
+  const visible = await store.setVisibility(1, true, hidden.revision);
+  assert.equal(visible.visibility, true);
+  assert.equal(
+    visible.koreanSource.replace("visibility: true\n", ""),
+    before.koreanSource,
+  );
+});
 test("review validation rejects an index record with the wrong public number even when ID and title match", async () => {
   const root = await fixtureRoot();
   const current = await new ProblemReviewStore(root).get(1);

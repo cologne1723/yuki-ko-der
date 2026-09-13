@@ -3,6 +3,11 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
+    {
+      "selector": ".next-event-card .nec-link a",
+      "ref": "ui_main_problem_page_arrow"
+    },
+    { "selector": ".next-event-card .nec-type", "ref": "ui_c29c9b963e9570e2" },
     { "selector": ".next-event-card .nec-type", "ref": "ui_c92e1dd79dd57fa1" },
     { "selector": ".next-event-card .nec-type", "ref": "ui_3ae19f4fedaf1daa" },
     {

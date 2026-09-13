@@ -4,6 +4,16 @@ import { JSDOM } from "jsdom";
 import { compileProblemMarkdown } from "translation-core/problem-markdown";
 import { labelPublishedProblem } from "../src/problem-publication.ts";
 
+test("direct publication refuses a hidden problem", () => {
+  assert.throws(
+    () =>
+      labelPublishedProblem(
+        '<main data-yukicoder-ko-problem data-visibility="false"><h3>Hidden</h3><p>Retained body</p></main>',
+      ),
+    /Hidden problem cannot be published/,
+  );
+});
+
 for (const status of ["machine", "unreviewed", "approved"]) {
   test(`published ${status} problem shows the requested review notice`, () => {
     const source = `---

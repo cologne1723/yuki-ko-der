@@ -3,6 +3,14 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
+    {
+      "selector": "#content a[href^='/challenge/new/']",
+      "ref": "ui_3dff5de2ac793a3d"
+    },
+    {
+      "selector": "#content a.stdout-hover-tooltip[href^='/submissions/'][href*='/print/out/']",
+      "ref": "ui_a36d2bc57de4641b"
+    },
     { "selector": "#toplinks a", "ref": "ui_3095ee84eccb93ee" },
     { "selector": "#content h4", "ref": "ui_62b02e04f2a22a74" },
     { "selector": "#content td", "ref": "ui_a477438947fe8cb4", "variant": 0 },

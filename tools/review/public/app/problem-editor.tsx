@@ -12,6 +12,7 @@ import {
   Menu,
   SimpleGrid,
   Stack,
+  Switch,
   Text,
   Title,
 } from "@mantine/core";
@@ -118,21 +119,33 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
     },
   });
   const save = useMutation({
-    mutationFn: async (action: "save" | "approve" | "unapprove") => {
+    mutationFn: async (
+      action: "save" | "approve" | "unapprove" | "visibility",
+    ) => {
       const submittedSource =
         !compiled && editor.current
           ? editor.current.state.doc.toString()
           : currentSource.current;
-      const data = await reviewApi.saveProblem(
-        String(saved.problemNo),
-        { html: submittedSource, revision: saved.revision },
-        action,
-      );
+      const data =
+        action === "visibility"
+          ? await reviewApi.setProblemVisibility(
+              String(saved.problemNo),
+              saved.visibility === false,
+              saved.revision,
+            )
+          : await reviewApi.saveProblem(
+              String(saved.problemNo),
+              { html: submittedSource, revision: saved.revision },
+              action,
+            );
       return { data, submittedSource };
     },
     onSuccess: async ({ data, submittedSource }, action) => {
       notifications.show({
-        message: "저장했습니다. 검수 상태를 확인하세요.",
+        message:
+          action === "visibility"
+            ? "공개 설정을 저장했습니다. 배포 후 반영됩니다."
+            : "저장했습니다. 검수 상태를 확인하세요.",
         color: "teal",
       });
       setSaved(data);
@@ -305,6 +318,23 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
             checked={autoNext}
             onChange={(e) => setAutoNext(e.currentTarget.checked)}
             styles={{ label: { whiteSpace: "nowrap" } }}
+          />
+          <Switch
+            aria-label="번역 공개"
+            label="번역 공개"
+            checked={saved.visibility !== false}
+            disabled={
+              dirty ||
+              save.isPending ||
+              formatting.isPending ||
+              saved.sourceFormat !== "mdx"
+            }
+            onChange={() => save.mutate("visibility")}
+            description={
+              dirty
+                ? "편집 내용을 먼저 저장하세요."
+                : "끄면 다음 배포에서 제외됩니다. 본문과 검수 상태는 유지됩니다."
+            }
           />
           {dirty && <Badge color="orange">저장하지 않음</Badge>}
         </Group>

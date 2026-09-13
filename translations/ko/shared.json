@@ -3,6 +3,8 @@
   "locale": "ko",
   "sourceLocale": "ja",
   "translations": [
+    { "selector": ".noty_body", "ref": "ui_650500384f0e20cb" },
+    { "selector": ".noty_body", "ref": "ui_710a80abb85e7eb5" },
     { "selector": "#toplinks a", "ref": "ui_824c84b4bad7ecca" },
     { "selector": "#toplinks a", "ref": "ui_637343d2d5108708", "variant": 0 },
     { "selector": "#toplinks a", "ref": "ui_2efde06346c1bf97", "variant": 0 },

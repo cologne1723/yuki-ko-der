@@ -11,9 +11,19 @@ import { readProblemTitleCatalog } from "translation-core/problem-title-catalog"
 import { extensionMessageIds } from "../src/extension-message-ids";
 import { buildToolbarIcons } from "./build-toolbar-icons.ts";
 import { tagTranslationsSchema } from "../src/tag-translations.ts";
+import { extensionBuildInfo, buildInfoPage } from "./extension-build-info.ts";
 
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const outputRoot = buildDirectory("extension", "chrome");
+const sourceManifest = JSON.parse(
+  await readFile(join(repositoryRoot, "manifest.json"), "utf8"),
+);
+const packageMetadata = JSON.parse(
+  await readFile(join(repositoryRoot, "package.json"), "utf8"),
+);
+if (sourceManifest.version !== packageMetadata.version)
+  throw new Error("Extension manifest and package versions must match");
+const buildInfo = extensionBuildInfo(repositoryRoot, sourceManifest.version);
 
 await checkCatalog();
 const tagTranslations = tagTranslationsSchema.parse(
@@ -94,6 +104,11 @@ await Promise.all([
 ]);
 
 await buildToolbarIcons(join(outputRoot, "icons"));
+await writeFile(
+  join(outputRoot, "build-info.json"),
+  JSON.stringify(buildInfo, null, 2) + "\n",
+);
+await writeFile(join(outputRoot, "build-info.html"), buildInfoPage(buildInfo));
 const firefoxRoot = buildDirectory("extension", "firefox");
 await copyBuildTree(outputRoot, firefoxRoot);
 for (const browser of ["chrome", "firefox"] as const) {

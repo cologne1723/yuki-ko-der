@@ -73,10 +73,12 @@ img { max-width: 100%; }
 </style>`;
 
   const sourceProblemsByNumber = new Map<number, string>();
+  const visibleNumbers = new Set(problemTitles.map((entry) => entry.problemNo));
   for (const filename of await readdir(sourceProblems)) {
     const match = filename.match(/^(\d+)\.(html|mdx)$/u);
     if (!match) continue;
     const problemNo = Number(match[1]);
+    if (!visibleNumbers.has(problemNo)) continue;
     if (sourceProblemsByNumber.has(problemNo)) {
       throw new Error(`Problem ${problemNo} has both HTML and MDX sources`);
     }

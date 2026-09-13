@@ -1,4 +1,7 @@
-import { setProblemMarkdownReviews } from "translation-core/problem-frontmatter";
+import {
+  setProblemMarkdownReviews,
+  setProblemMarkdownVisibility,
+} from "translation-core/problem-frontmatter";
 import {
   problemReviews,
   type ProblemReviews,
@@ -30,6 +33,7 @@ export interface ProblemSummary {
   koreanTitle: string;
   reviewStatus: ReviewStatus;
   machineTranslated: boolean;
+  visibility?: boolean;
   reviews?: ProblemReviews;
   validationErrors?: string[];
 }
@@ -112,6 +116,40 @@ export class ProblemReviewStore {
   }
   get(no: number) {
     return this.withStoreLock(() => this.repository.get(no));
+  }
+
+  setVisibility(problemNo: number, visibility: boolean, revision: string) {
+    return this.withStoreLock(async () => {
+      const current = await this.repository.get(problemNo);
+      if (current.revision !== revision)
+        throw new ReviewError(
+          "The translation changed on disk; reload before saving",
+          409,
+        );
+      if (current.sourceFormat !== "mdx")
+        throw new ReviewError(
+          "Convert the translation to MDX before changing visibility",
+        );
+      const next = setProblemMarkdownVisibility(
+        current.koreanSource,
+        visibility,
+      );
+      const paths = this.paths(problemNo);
+      const [latest, alternate] = await Promise.all([
+        optionalFile(paths.koreanMdx),
+        optionalFile(paths.koreanHtml),
+      ]);
+      if (
+        latest?.toString() !== current.koreanSource ||
+        alternate !== undefined
+      )
+        throw new ReviewError(
+          "The translation changed on disk; reload before saving",
+          409,
+        );
+      await atomicFile(paths.koreanMdx, next);
+      return this.repository.get(problemNo);
+    });
   }
 
   async save(

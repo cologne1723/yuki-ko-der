@@ -2,7 +2,11 @@
   "manifest_version": 3,
   "minimum_chrome_version": "121",
   "name": "yukicoder 한국어 번역",
-  "version": "0.1.1",
+  "version": "0.1.2",
+  "options_ui": {
+    "page": "build-info.html",
+    "open_in_tab": true
+  },
   "description": "yukicoder의 UI와 지원되는 문제를 한국어로 번역합니다.",
   "permissions": ["storage"],
   "icons": {

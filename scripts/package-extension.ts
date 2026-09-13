@@ -1,4 +1,5 @@
-import { copyFile, mkdir, readFile } from "node:fs/promises";
+import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import { join } from "node:path";
 import { archiveDirectory } from "translation-core/build-files";
 import { buildDirectory } from "translation-core/paths";
@@ -14,7 +15,31 @@ for (const browser of ["chrome", "firefox"]) {
     artifacts,
     `yukicoder-ko-${browser}-${manifest.version}.zip`,
   );
+  const buildInfo = JSON.parse(
+    await readFile(join(directory, "build-info.json"), "utf8"),
+  );
+  if (buildInfo.version !== manifest.version)
+    throw new Error(
+      "Packaged manifest and build information versions differ; rebuild first",
+    );
   await archiveDirectory(directory, archive);
+  await writeFile(
+    archive.replace(/\.zip$/, ".build.json"),
+    JSON.stringify(
+      {
+        ...buildInfo,
+        browser,
+        archiveSha256: createHash("sha256")
+          .update(await readFile(archive))
+          .digest("hex"),
+      },
+      null,
+      2,
+    ) + "\n",
+  );
+  console.log(
+    `Build: ${buildInfo.commit}${buildInfo.dirty ? " + uncommitted changes" : ""}`,
+  );
   console.log(archive);
   if (browser === "chrome" && process.argv.includes("--pages")) {
     const downloads = buildDirectory("problems", "downloads");

@@ -1,4 +1,8 @@
-import { jsonBody, problemSaveSchema } from "./request-schemas.ts";
+import {
+  jsonBody,
+  problemSaveSchema,
+  problemVisibilitySchema,
+} from "./request-schemas.ts";
 
 import { Hono } from "hono";
 
@@ -7,6 +11,20 @@ import { collectReviewProblemProfile } from "./problem-profile-collection.ts";
 
 export function problemsRoutes(store: ProblemReviewStore) {
   return new Hono()
+    .put(
+      "/api/problems/:number/visibility",
+      jsonBody(problemVisibilitySchema),
+      async (c) => {
+        const body = c.req.valid("json");
+        return c.json(
+          await store.setVisibility(
+            Number(c.req.param("number")),
+            body.visibility,
+            body.revision,
+          ),
+        );
+      },
+    )
     .get("/api/problems", async (c) => c.json({ problems: await store.list() }))
     .get("/api/problems/:number", async (c) =>
       c.json(await store.get(Number(c.req.param("number")))),

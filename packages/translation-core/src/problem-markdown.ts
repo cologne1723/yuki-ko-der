@@ -250,9 +250,10 @@ export function compileProblemMarkdown(source: string): string {
   const htmlReviewStatus =
     reviews.human === "approved" ? "approved" : "unreviewed";
   const reviewAttributes =
-    typeof metadataReviewStatus(metadata) === "object"
+    (metadata.visibility === false ? ' data-visibility="false"' : "") +
+    (typeof metadataReviewStatus(metadata) === "object"
       ? ` data-human-review="${reviews.human ?? "pending"}" data-machine-review="${reviews.machine}"`
-      : "";
+      : "");
   const statement = renderStatement(body);
   return `<!doctype html>
 <html lang="ko">

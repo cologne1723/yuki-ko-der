@@ -79,6 +79,22 @@ export function setProblemMarkdownReviewStatus(
   });
 }
 
+export function setProblemMarkdownVisibility(
+  source: string,
+  visibility: boolean,
+): string {
+  const { metadata } = parseProblemMarkdown(source);
+  if (metadata.visibility !== undefined)
+    return replaceFrontmatterField(source, "visibility", String(visibility));
+  const newline = source.startsWith("---\r\n") ? "\r\n" : "\n";
+  const offset = 3 + newline.length;
+  return (
+    source.slice(0, offset) +
+    `visibility: ${visibility}${newline}` +
+    source.slice(offset)
+  );
+}
+
 export function removeProblemMarkdownMachineLabel(source: string): string {
   return parseProblemMarkdown(source).metadata.reviewStatus === "machine"
     ? setProblemMarkdownReviewStatus(source, "unreviewed")

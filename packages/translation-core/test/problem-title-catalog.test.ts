@@ -4,6 +4,10 @@ import { mkdtemp, writeFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { readProblemTitleCatalog } from "../src/problem-title-catalog.ts";
+import {
+  compileProblemMarkdown,
+  parseProblemMarkdown,
+} from "../src/problem-markdown.ts";
 
 const mdx = (no: number, id: number, title = "Source") => `---
 schemaVersion: 1
@@ -20,6 +24,44 @@ title: 번역
 
 본문
 `;
+
+test("visibility defaults to public, preserves hidden bodies, and excludes MDX and HTML titles", async (t) => {
+  const root = await mkdtemp(join(tmpdir(), "title-visibility-"));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const hidden = mdx(2, 20).replace(
+    "locale: ko",
+    "locale: ko\nvisibility: false",
+  );
+  assert.equal(
+    parseProblemMarkdown(hidden).body,
+    parseProblemMarkdown(mdx(2, 20)).body,
+  );
+  assert.match(compileProblemMarkdown(hidden), /본문/);
+  for (const value of ['"false"', "0", "null"])
+    assert.throws(() =>
+      parseProblemMarkdown(
+        hidden.replace("visibility: false", `visibility: ${value}`),
+      ),
+    );
+  await writeFile(join(root, "1.mdx"), mdx(1, 10));
+  await writeFile(join(root, "2.mdx"), hidden);
+  await writeFile(
+    join(root, "3.mdx"),
+    mdx(3, 30).replace("locale: ko", "locale: ko\nvisibility: true"),
+  );
+  await writeFile(
+    join(root, "4.html"),
+    compileProblemMarkdown(
+      hidden
+        .replace("problemNo: 2", "problemNo: 4")
+        .replace("problemId: 20", "problemId: 40"),
+    ),
+  );
+  assert.deepEqual(
+    (await readProblemTitleCatalog(root)).map((p) => p.problemNo),
+    [1, 3],
+  );
+});
 
 test("title catalog distinguishes public numbers from IDs and aggregates every bad file", async (t) => {
   const root = await mkdtemp(join(tmpdir(), "title-identities-"));

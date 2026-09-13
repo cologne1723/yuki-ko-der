@@ -110,6 +110,7 @@ export class ProblemRepository {
           const path = join(this.translationDirectory, filename);
           const source = await readFile(path, "utf8");
           let state: ReturnType<typeof parseReviewState>;
+          let visibility = true;
           let validationErrors: string[] = [];
           if (duplicates.has(problemNo))
             validationErrors.push(
@@ -121,6 +122,7 @@ export class ProblemRepository {
             // A list needs metadata only; get() and the audit validate the body.
             if (extname(path) === ".mdx") {
               const { metadata } = parseProblemMarkdown(source);
+              visibility = metadata.visibility !== false;
               const status = metadataReviewStatus(metadata);
               state = {
                 koreanTitle: metadata.title.trim(),
@@ -141,6 +143,7 @@ export class ProblemRepository {
           }
           return {
             problemNo,
+            visibility,
             japaneseTitle:
               problem?.Title ??
               "Original unavailable — download from Tools and settings",
@@ -226,6 +229,19 @@ export class ProblemRepository {
       ...(renderProfile ? { renderProfile } : {}),
       ...(renderProfileError ? { renderProfileError } : {}),
       koreanSource,
+      visibility:
+        extname(koreanPath) === ".mdx"
+          ? (() => {
+              try {
+                return (
+                  parseProblemMarkdown(koreanSource).metadata.visibility !==
+                  false
+                );
+              } catch {
+                return false;
+              }
+            })()
+          : true,
       koreanHtml,
       sourceFormat: extname(koreanPath) === ".mdx" ? "mdx" : "html",
       revision: sha256(koreanSource),

@@ -20,6 +20,17 @@ async function responseData<T>(
 }
 const requestOptions = (signal?: AbortSignal) => ({ init: { signal } });
 export const reviewApi = {
+  setProblemVisibility: (
+    number: string,
+    visibility: boolean,
+    revision: string,
+  ) =>
+    responseData(
+      api.problems[":number"].visibility.$put({
+        param: { number },
+        json: { visibility, revision },
+      }),
+    ),
   tags: (signal?: AbortSignal) =>
     responseData(api.tags.$get({}, requestOptions(signal))),
   deleteTag: (source: string, revision: string) =>

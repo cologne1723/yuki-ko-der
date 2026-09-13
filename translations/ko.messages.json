@@ -2,6 +2,43 @@
   "$schema": "./messages.schema.json",
   "messages": [
     {
+      "id": "ui_main_problem_page_arrow",
+      "source": "問題ページ →",
+      "target": "문제 페이지 →",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "ui_c29c9b963e9570e2",
+      "source": "次の単発公開",
+      "target": "다음 개별 문제 공개",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "ui_650500384f0e20cb",
+      "source": "{minutes}分後に問題が公開されます。",
+      "target": "{minutes}분 후에 문제가 공개됩니다.",
+      "variables": { "minutes": "\\d+" },
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "ui_710a80abb85e7eb5",
+      "source": "問題が公開されました。",
+      "target": "문제가 공개되었습니다.",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "ui_3dff5de2ac793a3d",
+      "source": "このコードへのチャレンジ（β）",
+      "target": "이 코드에 대한 챌린지(β)",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "ui_076f31875c92a267",
+      "source": "テストケース一括ダウンロード",
+      "target": "테스트 케이스 일괄 다운로드",
+      "reviewStatus": "unreviewed"
+    },
+    {
       "id": "ui_2c5f750653d53ac9",
       "source": "問題の翻訳を読み込めませんでした。",
       "target": "문제 번역을 불러오지 못했습니다.",

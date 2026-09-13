@@ -6,6 +6,10 @@ const text = z.string();
 const target = text.refine((value) => !!value.trim());
 const action = z.enum(["save", "approve", "unapprove"]);
 export const problemSaveSchema = z.looseObject({ html: text, revision: text });
+export const problemVisibilitySchema = z.strictObject({
+  visibility: z.boolean(),
+  revision: text,
+});
 export const settingsSaveSchema = z.looseObject({ dataDirectory: text });
 export const importSelectionSchema = z.looseObject({
   id: text,

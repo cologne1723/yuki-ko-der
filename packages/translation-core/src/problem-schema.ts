@@ -10,6 +10,7 @@ export const metadataSchema = z
     problemId: z.number().int().min(1).max(Number.MAX_SAFE_INTEGER),
     sourceTitle: z.string().min(1),
     title: z.string().min(1),
+    visibility: z.boolean().optional(),
     sourceHtmlSha256: z.string().regex(/^[a-f0-9]{64}$/),
     reviewStatus: z
       .union([

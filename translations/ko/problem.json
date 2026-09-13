@@ -4,6 +4,10 @@
   "sourceLocale": "ja",
   "translations": [
     {
+      "selector": "#content a[href^='/problems/'][href$='/testcase.zip']",
+      "ref": "ui_076f31875c92a267"
+    },
+    {
       "selector": "#toplinks a",
       "ref": "ui_a477438947fe8cb4",
       "variant": 0

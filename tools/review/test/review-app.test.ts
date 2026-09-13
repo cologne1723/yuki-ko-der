@@ -18,6 +18,45 @@ const problems: ProblemReview[] = [1, 2].map((problemNo) => ({
   renderProfile: { engine: "katex", version: "0.17.0" },
   sourceUrl: `https://yukicoder.me/problems/no/${problemNo}`,
 }));
+for (const fails of [false, true])
+  test(`visibility switch persists only metadata and keeps failure state (${fails})`, async (t) => {
+    let current = {
+      ...problems[0],
+      sourceFormat: "mdx" as const,
+      visibility: false,
+    };
+    let request: unknown;
+    const page = reactPage(t, async (path, init) => {
+      if (path.endsWith("/visibility") && init?.method === "PUT") {
+        request = JSON.parse(String(init.body));
+        if (fails)
+          return Response.json(
+            { error: "Visibility conflict" },
+            { status: 409 },
+          );
+        current = { ...current, visibility: true, revision: "r-new" };
+        return Response.json(current);
+      }
+      return Response.json(
+        path === "/api/problems" ? { problems: [current] } : current,
+      );
+    });
+    await page.screen.findByRole("heading", { name: "1. Draft 1" });
+    const toggle = page.screen.getByRole("switch", {
+      name: "번역 공개",
+    }) as HTMLInputElement;
+    assert.equal(toggle.checked, false);
+    await page.user.click(toggle);
+    await page.waitFor(() =>
+      assert.deepEqual(request, { visibility: true, revision: "r1" }),
+    );
+    if (fails) await page.screen.findByText("Visibility conflict");
+    await page.waitFor(() => assert.equal(toggle.checked, !fails));
+    page.edit("unsaved draft");
+    await page.screen.findByText("저장하지 않음");
+    assert.equal(toggle.disabled, true);
+  });
+
 test("initial problem loading does not show an empty list", async (t) => {
   let resolveList!: (response: Response) => void;
   const page = reactPage(t, async (path) =>
