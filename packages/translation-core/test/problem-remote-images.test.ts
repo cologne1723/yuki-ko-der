@@ -1,5 +1,6 @@
+import { sourceCorrectionFixture } from "./source-correction-fixture.ts";
 import assert from "node:assert/strict";
-import { readFile, mkdir, mkdtemp, writeFile, rm } from "node:fs/promises";
+import { mkdir, mkdtemp, writeFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
@@ -13,7 +14,7 @@ import { preservationErrors } from "../src/problem-preservation.ts";
 
 test("recorded remote images preserve pinned bytes and source order", async () => {
   for (const no of [5021, 8018, 8069, 3096]) {
-    const original = await readFile(`data/problems-source/${no}.html`, "utf8");
+    const original = sourceCorrectionFixture(no);
     const before = new JSDOM(original),
       after = new JSDOM(original);
     try {
@@ -64,7 +65,7 @@ test("recorded remote images preserve pinned bytes and source order", async () =
 
 test("changed source and other problems are not waived; URL/count mismatches reject", async () => {
   const no = 5021,
-    original = await readFile(`data/problems-source/${no}.html`, "utf8");
+    original = sourceCorrectionFixture(no);
   for (const [source, problem] of [
     [original + "\n", no],
     [original, 42],
@@ -110,7 +111,7 @@ test("changed source and other problems are not waived; URL/count mismatches rej
 test("changed or missing image bytes fail closed", async () => {
   const root = await mkdtemp(join(tmpdir(), "remote-image-snapshot-"));
   const no = 5021,
-    original = await readFile(`data/problems-source/${no}.html`, "utf8");
+    original = sourceCorrectionFixture(no);
   const dom = new JSDOM(original);
   try {
     await mkdir(join(root, "5021"));

@@ -1,11 +1,11 @@
+import { sourceCorrectionFixture } from "./source-correction-fixture.ts";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import test from "node:test";
 import { JSDOM } from "jsdom";
 import { correctSourceImageMime } from "../src/problem-source-corrections-node.ts";
 
 test("3272 MIME typo correction is source-bound and preserves PNG bytes", () => {
-  const html = readFileSync("data/problems-source/3272.html", "utf8");
+  const html = sourceCorrectionFixture(3272);
   const dom = new JSDOM(html);
   try {
     const images = [...dom.window.document.querySelectorAll("img")];
@@ -36,7 +36,7 @@ test("3272 MIME typo correction is source-bound and preserves PNG bytes", () => 
 });
 
 test("3272 MIME correction refuses missing/duplicate candidates and non-PNG data", () => {
-  const html = readFileSync("data/problems-source/3272.html", "utf8");
+  const html = sourceCorrectionFixture(3272);
   for (const [markup, message] of [
     ["<img>", /count mismatch/],
     [

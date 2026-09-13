@@ -1,3 +1,4 @@
+import { sourceCorrectionFixture } from "./source-correction-fixture.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
@@ -20,10 +21,7 @@ const front = fixture.slice(0, fixture.indexOf("## "));
 
 test("query-subscript and empty-set source corrections cannot waive other formula changes", () => {
   for (const no of [3553, 3582]) {
-    const original = readFileSync(
-      "data/problems-source/" + no + ".html",
-      "utf8",
-    );
+    const original = sourceCorrectionFixture(no);
     const corrections = sourceFormulaCorrections(no, original);
     assert.equal(corrections.length, no === 3553 ? 1 : 3);
     assert.deepEqual(sourceFormulaCorrections(no + 1, original), []);
@@ -62,7 +60,7 @@ test("query-subscript and empty-set source corrections cannot waive other formul
 });
 
 test("snapshot-bound binary literal formulas preserve digits without exempting other integers", () => {
-  const original = readFileSync("data/problems-source/3009.html", "utf8");
+  const original = sourceCorrectionFixture(3009);
   const literals = sourceBinaryLiteralFormulas(3009, original);
   assert.equal(literals.length, 3);
   assert.deepEqual(sourceBinaryLiteralFormulas(3008, original), []);
@@ -143,7 +141,7 @@ test("existing explicit CODE fence preserves Python regex instead of rendering i
 });
 
 test("documented set corrections require exact source hash, number and occurrence", () => {
-  const original = readFileSync("data/problems-source/2911.html", "utf8");
+  const original = sourceCorrectionFixture(2911);
   const corrections = sourceFormulaCorrections(2911, original);
   assert.equal(corrections.length, 1);
   assert.deepEqual(sourceFormulaCorrections(2912, original), []);
