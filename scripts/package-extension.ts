@@ -1,4 +1,4 @@
-import { mkdir, readFile } from "node:fs/promises";
+import { copyFile, mkdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { archiveDirectory } from "translation-core/build-files";
 import { buildDirectory } from "translation-core/paths";
@@ -16,4 +16,11 @@ for (const browser of ["chrome", "firefox"]) {
   );
   await archiveDirectory(directory, archive);
   console.log(archive);
+  if (browser === "chrome" && process.argv.includes("--pages")) {
+    const downloads = buildDirectory("problems", "downloads");
+    await mkdir(downloads, { recursive: true });
+    const download = join(downloads, "yukicoder-ko-chrome.zip");
+    await copyFile(archive, download);
+    console.log(download);
+  }
 }

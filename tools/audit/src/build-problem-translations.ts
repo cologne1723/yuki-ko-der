@@ -245,6 +245,18 @@ ${styles}
 <h1>yukicoder 한국어 문제 번역</h1>
 <p>문제 번역 ${sourceProblemsByNumber.size}개를 제공합니다. 검수 상태는 각 문서에 기록되어 있습니다.</p>
 <p>Firefox와 Chrome 확장 기능이 사용하는 번역 파일입니다. 확장 기능은 번역을 먼저 표시하고 원문 변경 여부를 백그라운드에서 확인합니다.</p>
+<section aria-labelledby="extension-install">
+<h2 id="extension-install">확장 기능 설치</h2>
+<p><a href="https://addons.mozilla.org/en-US/firefox/addon/yuki-ko-der/">Firefox용 확장 설치 (Mozilla Add-ons)</a> · <a href="downloads/yukicoder-ko-chrome.zip" download>Chrome용 ZIP 다운로드</a></p>
+<p>Chrome용 ZIP은 GitHub 로그인이나 로컬 빌드 없이 다운로드할 수 있습니다.</p>
+<ol>
+<li>ZIP을 다운로드하고 계속 보관할 폴더에 압축을 풉니다.</li>
+<li>Chrome 주소창에 <code>chrome://extensions</code>를 입력하고 <strong>개발자 모드</strong>를 켭니다.</li>
+<li><strong>압축해제된 확장 프로그램을 로드합니다</strong>를 누르고 <code>manifest.json</code>이 들어 있는 폴더를 선택합니다. ZIP 파일 자체를 선택하는 방식은 아닙니다.</li>
+<li>확장 기능을 도구 모음에 고정하고 yukicoder 페이지를 새로고침합니다.</li>
+</ol>
+<p>Chrome 확장 업데이트는 새 ZIP을 받아 같은 폴더에 압축을 풀고 확장 관리 화면에서 새로고침합니다. 설치 폴더는 삭제하지 마세요.</p>
+</section>
 <p><a href="https://github.com/cologne1723/yuki-ko-der">소스 코드 및 설치 안내</a> · <a href="README.md">콘텐츠 권리 및 삭제 요청 / コンテンツの権利と削除依頼</a></p>
 <ul>
 ${links}

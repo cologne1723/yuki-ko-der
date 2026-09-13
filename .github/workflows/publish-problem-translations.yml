@@ -7,6 +7,13 @@ on:
       - "problem-translations/**"
       - "packages/translation-core/**"
       - "tools/audit/**"
+      - "src/**"
+      - "scripts/**"
+      - "translations/**"
+      - "icons/**"
+      - "manifest.json"
+      - "tsconfig*.json"
+      - "LICENSE"
       - "package.json"
       - "pnpm-workspace.yaml"
       - "pnpm-lock.yaml"
@@ -44,6 +51,10 @@ jobs:
       # This also applies to invoked scripts: refresh data locally and commit it.
       - name: 문제 Markdown 컴파일
         run: pnpm build:problems --require-render-profiles
+      - name: 확장 기능 빌드
+        run: pnpm build
+      - name: Chrome 다운로드 ZIP 생성
+        run: pnpm package:built --pages
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

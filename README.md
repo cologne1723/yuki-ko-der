@@ -9,7 +9,16 @@
 - 문제 번역을 먼저 표시하고 원문 변경 여부를 백그라운드에서 확인합니다. 변경이 감지되면 안내하며, **원문 보기**로 언제든 돌아갈 수 있습니다.
 - 번역을 불러오는 동안 로딩 안내를 표시하며, 번역이 없거나 번역 파일 검증에 실패하면 일본어 원문을 유지합니다.
 
-## 로컬 설치
+## 설치
+
+- Firefox: [Mozilla Add-ons에서 설치](https://addons.mozilla.org/en-US/firefox/addon/yuki-ko-der/)합니다.
+- Chrome: [Chrome용 ZIP 다운로드](https://cologne1723.github.io/yuki-ko-der/downloads/yukicoder-ko-chrome.zip)를 이용합니다. GitHub 로그인이나 로컬 빌드는 필요하지 않습니다.
+
+Chrome은 ZIP을 계속 보관할 폴더에 압축 해제한 뒤, `chrome://extensions`에서 **개발자 모드**를 켜고 **압축해제된 확장 프로그램을 로드합니다**를 눌러 `manifest.json`이 있는 폴더를 선택합니다. ZIP 자체를 가져오는 방식은 아닙니다. 설치 폴더는 삭제하지 마세요.
+
+Chrome 확장을 업데이트할 때는 새 ZIP을 같은 폴더에 압축 해제하고 확장 관리 화면에서 새로고침합니다.
+
+## 개발용 로컬 설치
 
 Node.js 24와 pnpm 11.21.0이 필요합니다. 저장소를 받은 뒤 다음 명령으로 빌드합니다.
 
@@ -77,7 +86,8 @@ pnpm review
 
 `main`에 배포 대상 변경을 푸시하면 GitHub Actions가 로컬 검증 후 GitHub Pages에 배포합니다.
 [문제 번역 배포 워크플로](https://github.com/cologne1723/yuki-ko-der/actions/workflows/publish-problem-translations.yml)를 직접 실행할 수도 있습니다.
-Pages에는 문제 번역 파일이 배포되며, 검수 편집기는 로컬에서 실행합니다.
+Pages에는 문제 번역 파일과 Chrome 설치용 ZIP이 함께 배포되며, 검수 편집기는 로컬에서 실행합니다.
+Pages 빌드 후 `pnpm build`와 `pnpm package:built --pages`를 실행하면 다운로드 ZIP을 포함할 수 있습니다. 기존 Actions artifact도 유지합니다.
 
 ## 저장소 안내
 

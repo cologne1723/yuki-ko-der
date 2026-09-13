@@ -118,6 +118,30 @@ test("clean CI collects profiles before strict publication; both engines and ori
   const catalog = JSON.parse(
     await readFile(join(f.outputRoot, "ko/problem-catalog.json"), "utf8"),
   );
+  const landing = new JSDOM(
+    await readFile(join(f.outputRoot, "index.html"), "utf8"),
+    { url: "https://example.github.io/project/" },
+  );
+  try {
+    const doc = landing.window.document;
+    assert.ok(
+      doc.querySelector(
+        'a[href="https://addons.mozilla.org/en-US/firefox/addon/yuki-ko-der/"]',
+      ),
+    );
+    const download = doc.querySelector<HTMLAnchorElement>("a[download]");
+    assert.equal(
+      download?.href,
+      "https://example.github.io/project/downloads/yukicoder-ko-chrome.zip",
+    );
+    assert.match(
+      doc.querySelector("#extension-install")?.parentElement?.textContent ?? "",
+      /chrome:\/\/extensions[\s\S]*개발자 모드[\s\S]*manifest\.json/,
+    );
+    assert.ok(doc.querySelector(".content-rights"));
+  } finally {
+    landing.window.close();
+  }
   assert.ok(
     catalog.entries.every(
       (entry: { sourceSamplesSha256?: string }) =>
