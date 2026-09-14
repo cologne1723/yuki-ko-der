@@ -195,10 +195,10 @@ entries:
     note: 사용자가 확인한 표기다. 3525번 문제의 기존 정의에 사용된 번역어를 유지한다.
   - id: pseudo-odd-square-bot
     source: [擬奇平方数大好きbot]
-    preferred: 의사 홀수 제곱수좋아봇
+    preferred: 의사홀수제곱수좋아bot
     forbidden: []
     kind: proper_noun
-    note: 사용자가 확인한 표기다. 3525번 본문 용어 의사 홀수 제곱수를 그대로 이름에 사용한다.
+    note: 사용자가 확인한 표기다. 3525번 봇 이름은 띄어쓰기 없이 의사홀수제곱수좋아bot으로 쓴다. 일반 용어 의사 홀수 제곱수는 띄어쓰기를 유지한다.
   - id: ordered-route
     source: [順路]
     preferred: 순로
@@ -207,7 +207,7 @@ entries:
     note: 사용자가 확인한 표기다. 3523번 본문에서 주어진 순열의 순서를 따르며 그 처음과 끝을 포함하는 경로로 정의한 용어다. 기존 번역어를 유지한다.
   - id: ordered-route-bot
     source: [順路大好きbot]
-    preferred: 순로좋아봇
+    preferred: 순로좋아bot
     forbidden: []
     kind: proper_noun
     note: 사용자가 확인한 표기다. 3523번 본문 용어 순로를 그대로 이름에 사용한다.
@@ -439,3 +439,747 @@ entries:
     forbidden: []
     kind: person_name
     note: 사용자가 확인한 표기다. おじさん 전체를 아저씨로 옮긴다. ハチマキおじ씨처럼 일부만 번역한 표기는 쓰지 않는다.
+  - id: confirmed-remaining-name-1
+    source: [本田]
+    preferred: 혼다
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-2
+    source: [織田]
+    preferred: 오다
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-3
+    source: [サブロー]
+    preferred: 사부로
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-4
+    source: [コバ]
+    preferred: 코바
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-5
+    source: [ルビー]
+    preferred: 루비
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-6
+    source: [宮森あおい]
+    preferred: 미야모리 아오이
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-7
+    source: [コーデリア]
+    preferred: 코델리아
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-8
+    source: [アリス]
+    preferred: 앨리스
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-9
+    source: [宮内れんげ]
+    preferred: 미야우치 렌게
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-10
+    source: [れんちょん]
+    preferred: 렌쵼
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-11
+    source: [ミラー]
+    preferred: 밀러
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-12
+    source: [田中]
+    preferred: 다나카
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-13
+    source: [ゆきうさぎ]
+    preferred: 유키우사기
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-14
+    source: [匿名希望]
+    preferred: 익명희망
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-15
+    source: [ふるいち]
+    preferred: 후루이치
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-16
+    source: [新人]
+    preferred: 신입
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-17
+    source: [アレン]
+    preferred: 앨런
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-18
+    source: [εぷりん]
+    preferred: ε푸린
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-19
+    source: [りあん]
+    preferred: 리안
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-20
+    source: [かど松]
+    preferred: 카도마츠
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-21
+    source: [健太]
+    preferred: 켄타
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-22
+    source: [ステア]
+    preferred: 스테아
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-23
+    source: [ルエル]
+    preferred: 루엘
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-24
+    source: [くしら]
+    preferred: 쿠시라
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-25
+    source: [みどり]
+    preferred: 미도리
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-26
+    source: [みちらから]
+    preferred: 미치라카라
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-27
+    source: [のーと]
+    preferred: 노트
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-28
+    source: [か〇ちゃん]
+    preferred: 카〇쨩
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-29
+    source: [ミンサ]
+    preferred: 민사
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-30
+    source: [く○けんご]
+    preferred: 쿠○켄고
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-31
+    source: [おさかな]
+    preferred: 오사카나
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-32
+    source: [シャキーン]
+    preferred: 샤킨
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-33
+    source: [しょぼん王]
+    preferred: 쇼본왕
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-34
+    source: [こゆき]
+    preferred: 코유키
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-35
+    source: [ループ]
+    preferred: 루프
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-36
+    source: [しき]
+    preferred: 시키
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-37
+    source: [ケロ]
+    preferred: 케로
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-38
+    source: [わいいわいわいナイン]
+    preferred: 와이이와이와이나인
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-39
+    source: [みざー]
+    preferred: 미자
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-40
+    source: [たくみ]
+    preferred: 타쿠미
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-41
+    source: [いつ菌]
+    preferred: 이츠균
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-42
+    source: [ビ太郎]
+    preferred: 비타로
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: confirmed-remaining-name-43
+    source: [ビバ子]
+    preferred: 비바코
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확정한 표기다. 호칭은 씨·군·쨩을 사용하고 가림표는 유지한다.
+  - id: approved-bot-name-1
+    source: [確率的素数判定大好きbot大好きbot]
+    preferred: 확률적소수판정좋아bot좋아bot
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확정한 봇 이름이다. 띄어쓰기를 없애고 bot은 영문으로 유지한다.
+  - id: approved-bot-name-2
+    source: [確率的素数判定大好きbot]
+    preferred: 확률적소수판정좋아bot
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확정한 봇 이름이다. 띄어쓰기를 없애고 bot은 영문으로 유지한다.
+  - id: approved-bot-name-3
+    source: [直進大好きbot]
+    preferred: 직진좋아bot
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확정한 봇 이름이다. 띄어쓰기를 없애고 bot은 영문으로 유지한다.
+  - id: approved-bot-name-4
+    source: [射的大好きbot]
+    preferred: 사격좋아bot
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확정한 봇 이름이다. 띄어쓰기를 없애고 bot은 영문으로 유지한다.
+  - id: approved-bot-name-5
+    source: [格子点大好きbot]
+    preferred: 격자점좋아bot
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확정한 봇 이름이다. 띄어쓰기를 없애고 bot은 영문으로 유지한다.
+  - id: approved-bot-name-6
+    source: [割り算大好きbot]
+    preferred: 나눗셈좋아bot
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확정한 봇 이름이다. 띄어쓰기를 없애고 bot은 영문으로 유지한다.
+  - id: approved-bot-name-7
+    source: [接線大好きbot]
+    preferred: 접선좋아bot
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확정한 봇 이름이다. 띄어쓰기를 없애고 bot은 영문으로 유지한다.
+  - id: approved-bot-name-8
+    source: [冪乗大好きbot]
+    preferred: 거듭제곱좋아bot
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확정한 봇 이름이다. 띄어쓰기를 없애고 bot은 영문으로 유지한다.
+  - id: approved-bot-name-9
+    source: [二進法大好きbot]
+    preferred: 이진법좋아bot
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확정한 봇 이름이다. 띄어쓰기를 없애고 bot은 영문으로 유지한다.
+  - id: approved-place-name-1
+    source: [誓願寺]
+    preferred: 세이간지
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-2
+    source: [京都大学]
+    preferred: 교토대학
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-3
+    source: [1共01]
+    preferred: 1공01
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-4
+    source: [吉田神社]
+    preferred: 요시다 신사
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-5
+    source: [百万遍]
+    preferred: 햐쿠만벤
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-6
+    source: [Yuki王国]
+    preferred: Yuki 왕국
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-7
+    source: [yuki王国]
+    preferred: yuki 왕국
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-8
+    source: [yuki国王]
+    preferred: yuki 국왕
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-9
+    source: [yuki王様]
+    preferred: yuki 임금님
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-10
+    source: [豊橋技術科学大学]
+    preferred: 도요하시 기술과학대학
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-11
+    source: [学習院大学]
+    preferred: 가쿠슈인 대학
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-12
+    source: [大学院大学]
+    preferred: 대학원대학
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-13
+    source: [東大寺学園]
+    preferred: 도다이지 학원
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-14
+    source: [菁々祭]
+    preferred: 세이세이제
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-15
+    source: [青山学院大学青山キャンパス]
+    preferred: 아오야마 가쿠인 대학 아오야마 캠퍼스
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-16
+    source: [第3回緑以下コンテスト]
+    preferred: 제3회 녹색 이하 콘테스트
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-17
+    source: [緑以下コンテスト]
+    preferred: 녹색 이하 콘테스트
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-18
+    source: [緑以下シティ]
+    preferred: 녹색 이하 시티
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-19
+    source: [茨城県立並木中等教育学校]
+    preferred: 이바라키현립 나미키 중등교육학교
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-20
+    source: [茨城県立並木高等学校]
+    preferred: 이바라키현립 나미키 고등학교
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-21
+    source: [国立こゃーそ大学]
+    preferred: 국립 코야소 대학
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-22
+    source: [こゃーそ大学]
+    preferred: 코야소 대학
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-23
+    source: [東北大学]
+    preferred: 도호쿠 대학
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-24
+    source: [Y.Y. 王国]
+    preferred: Y.Y. 왕국
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-25
+    source: [バーチャルこゃーそ学園]
+    preferred: 버추얼 코야소 학원
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-26
+    source: [こゃーそ国立大学]
+    preferred: 코야소 국립대학
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-27
+    source: [こゃーそ]
+    preferred: 코야소
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-28
+    source: [Y鉄道]
+    preferred: Y 철도
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-29
+    source: [TSG 王国]
+    preferred: TSG 왕국
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-30
+    source: [yu23578王国]
+    preferred: yu23578 왕국
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-31
+    source: [東京科学大学デジタル創作同好会]
+    preferred: 도쿄과학대학 디지털 창작 동호회
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-32
+    source: [五月祭]
+    preferred: 고가츠사이
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-33
+    source: [京大時計台前]
+    preferred: 교토대 시계탑 앞
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-34
+    source: [京大]
+    preferred: 교토대
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-35
+    source: [出町柳駅]
+    preferred: 데마치야나기역
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-36
+    source: [kazuppa町]
+    preferred: kazuppa 마을
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-37
+    source: [ばるとーく王国]
+    preferred: 바르토크 왕국
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-38
+    source: [kazuppa国]
+    preferred: kazuppa국
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-39
+    source: [コワスギ高校]
+    preferred: 코와스기 고교
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: approved-place-name-40
+    source: [一般社団法人 情報オリンピック日本委員会]
+    preferred: 일반사단법인 정보올림피아드 일본위원회
+    forbidden: []
+    kind: place_name
+    note: 사용자가 제시한 표기다. 원문 제목·URL·문자열 변환 대상 데이터는 보존한다.
+  - id: remaining-localized-name-1
+    source: [クララーリス]
+    preferred: 쿠라라리스
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-2
+    source: [ちょたクエ]
+    preferred: 쵸타 퀘스트
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-3
+    source: [K氏]
+    preferred: K씨
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-4
+    source: [B師匠]
+    preferred: B 스승님
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-5
+    source: [C師匠]
+    preferred: C 스승님
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-6
+    source: [highlighterはかせ]
+    preferred: highlighter 박사
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-7
+    source: [warabi先生]
+    preferred: warabi 선생님
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-8
+    source: [星の戦士]
+    preferred: 별의 전사
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-9
+    source: [大王]
+    preferred: 대왕
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-10
+    source: [すごすごコーダー]
+    preferred: 스고스고 코더
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-11
+    source: [プ●●●]
+    preferred: 프●●●
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-12
+    source: [ドンレンジャー]
+    preferred: 동레인저
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-13
+    source: [モン〇ト]
+    preferred: 몬〇트
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-14
+    source: [ベイカー]
+    preferred: 베이커
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-15
+    source: [ホワイトタイガー]
+    preferred: 백호
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-16
+    source: [バッチャー]
+    preferred: 배처
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-17
+    source: [ナベアツ数]
+    preferred: 나베아츠 수
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-18
+    source: [サクラックス]
+    preferred: 사쿠락스
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-19
+    source: [chikuwa氏]
+    preferred: chikuwa씨
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-20
+    source: [けものミラクル]
+    preferred: 케모노 미라클
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-21
+    source: [ウミネコ]
+    preferred: 괭이갈매기
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-22
+    source: [カマイルカ]
+    preferred: 낫돌고래
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-23
+    source: [迷宮ゾーン]
+    preferred: 미궁 존
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-24
+    source: [けもコーラス]
+    preferred: 케모 코러스
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-25
+    source: [ミャクミャク]
+    preferred: 먀쿠먀쿠
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-26
+    source: [君に出会える毎日がずっと続くといいな♪]
+    preferred: 너를 만날 수 있는 매일이 계속 이어지면 좋겠어♪
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-27
+    source: [ポケットモンスター]
+    preferred: 포켓몬스터
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-28
+    source: [ダルマッカ]
+    preferred: 달막화
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-29
+    source: [甲]
+    preferred: 갑
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-30
+    source: [乙]
+    preferred: 을
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: remaining-localized-name-31
+    source: [スウケンクエスト]
+    preferred: 스우켄 퀘스트
+    forbidden: []
+    kind: localized_name
+    note: 남은 일본어를 문맥에 맞게 번역하라는 사용자 지시에 따른 표기다. 가림표와 실제 문자열 데이터는 보존한다.
+  - id: warong-pronunciation
+    source: [ワロング]
+    preferred: 와롱
+    forbidden: []
+    kind: localized_name
+    note: 사용자가 명시한 발음 표기다.
