@@ -24,10 +24,10 @@ export function applySavedSource(view: EditorView, source: string) {
     to,
     insert: source.slice(from, end),
   });
-  const scroll = view.scrollSnapshot().map(changes);
+  // CodeMirror maps its own viewport anchor through this change. A snapshot
+  // would queue a later scroll and overwrite any scrolling before measurement.
   view.dispatch({
     changes,
-    effects: scroll ? [scroll] : [],
     annotations: ExternalChange.of(true),
   });
 }

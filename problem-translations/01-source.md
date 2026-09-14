@@ -9,7 +9,7 @@
   방법: 번호 전체 검색 대신 `index.problems.filter(r => Number(r.No) === problemNo)`로 고른다. 결과가 정확히 1개인지 확인하고 그 레코드의 `No`, `ProblemId`, `Title`을 함께 출력한다.
 - 파일명과 URL에는 `No`를, API 식별에는 `ProblemId`를 사용한다.
 - 해당 레코드의 `Title`을 `sourceTitle`에 그대로 복사한다.
-- 미확정 이름을 보고하기 전에 인명·단체명인지 확인한다. `Palindromic Path (Hard)` 같은 일반 문제 제목은 번역 대상이며, glossary에 없다는 이유로 원문 유지 목록에 넣지 않는다.
+- 영어 문제 제목은 원문을 유지한다. `Palindromic Path (Hard)`처럼 일반 용어로 된 제목도 이 원칙을 적용하며, 인명·단체명 미확정 항목으로 분류하지 않는다. 일본어가 섞인 제목은 일본어 부분만 번역한다.
 - 원문 HTML 파일의 SHA-256을 `sourceHtmlSha256`에 기록한다.
 - 공지, 이야기, 예제 설명, 링크, 이미지, 코드, 실제 데이터의 보존 여부를 구분한다.
 - 긴 예제·URL·이미지는 재타이핑하지 않는다. JSDOM으로 원문의 textContent/속성을

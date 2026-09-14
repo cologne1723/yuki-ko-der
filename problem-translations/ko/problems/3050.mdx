@@ -7,23 +7,23 @@ sourceTitle: "Prefix Removal"
 sourceHtmlSha256: "f1b6e2c2bfdfbd2d4c23eec2df30abdc0e810b2a4f18b57af982a611066a2e47"
 humanReview: []
 machineReview: unreviewed
-title: "접두사 제거"
+title: "Prefix Removal"
 ---
 
 ## 문제 설명
 
 양의 정수 $N$, $K$와 길이가 $N$인 정수 수열 $A=(A_1,A_2,\ldots,A_N)$가 주어집니다.
 
-현재 suisen 君의 만족도는 $0$입니다. suisen 君은 앞으로 $i=1,2,\ldots,K$의 순서로 다음을 수행합니다.
+현재 suisen군의 만족도는 $0$입니다. suisen군은 앞으로 $i=1,2,\ldots,K$의 순서로 다음을 수행합니다.
 
 수열 $A$의 길이를 $\lvert A\rvert$라고 할 때,
 
-- $\lvert A\rvert=0$이면 suisen 君의 만족도를 $-10^{100}$으로 설정합니다.
-- $\lvert A\rvert\geq 1$이면 $1\leq p\leq\lvert A\rvert$를 만족하는 정수 $p$를 선택하여 $A$의 앞에서 $p$개의 원소를 제거합니다. 이때 제거한 원소의 합을 $S$라고 하면 suisen 君의 만족도는 $S\times i$만큼 증가합니다.
+- $\lvert A\rvert=0$이면 suisen군의 만족도를 $-10^{100}$으로 설정합니다.
+- $\lvert A\rvert\geq 1$이면 $1\leq p\leq\lvert A\rvert$를 만족하는 정수 $p$를 선택하여 $A$의 앞에서 $p$개의 원소를 제거합니다. 이때 제거한 원소의 합을 $S$라고 하면 suisen군의 만족도는 $S\times i$만큼 증가합니다.
 
-예를 들어 $A=(-3,2,1)$일 때 $p=2$를 선택하면 앞에서부터 원소 $-3,2$가 제거되어 $A=(1)$이 됩니다. 이때 제거한 원소의 합은 $(-3)+2=-1$이므로 suisen 君의 만족도는 $(-1)\times i$만큼 증가합니다.
+예를 들어 $A=(-3,2,1)$일 때 $p=2$를 선택하면 앞에서부터 원소 $-3,2$가 제거되어 $A=(1)$이 됩니다. 이때 제거한 원소의 합은 $(-3)+2=-1$이므로 suisen군의 만족도는 $(-1)\times i$만큼 증가합니다.
 
-모든 작업을 끝낸 후 suisen 君의 만족도의 최댓값을 구하세요.
+모든 작업을 끝낸 후 suisen군의 만족도의 최댓값을 구하세요.
 
 ## 입력
 

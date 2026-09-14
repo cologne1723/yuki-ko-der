@@ -25,12 +25,10 @@ test(
       )
         ? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
         : chromium.executablePath());
-    if (!existsSync(executablePath)) {
-      t.skip(
-        "Install Chromium or set REVIEW_TEST_BROWSER to run layout regression",
-      );
-      return;
-    }
+    assert.ok(
+      existsSync(executablePath),
+      "Install Chromium or set REVIEW_TEST_BROWSER to run layout regression",
+    );
     const bundle = await build({
       plugins: [katexStylePlugin],
       stdin: {

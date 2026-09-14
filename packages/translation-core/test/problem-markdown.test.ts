@@ -53,6 +53,22 @@ test("problem MDX compiles formulas, fences, and component-free samples", async 
   );
 });
 
+test("problem 3679 renders a bold link followed by a Korean particle", async () => {
+  const source = await readFile(
+    "problem-translations/ko/problems/3679.mdx",
+    "utf8",
+  );
+  const document = new JSDOM(compileProblemMarkdown(source)).window.document;
+  const link = document.querySelector(
+    'a[href="https://youtu.be/A1tZhktmxls?t=924"]',
+  );
+
+  assert.ok(link);
+  assert.equal(link.querySelector("strong")?.textContent, "뭔가 커다란 벌레");
+  assert.ok(link.nextSibling?.textContent?.startsWith("는 칸"));
+  assert.doesNotMatch(link.closest("p")?.textContent ?? "", /\*\*/u);
+});
+
 test("problem MDX rejects executable or structural markup", async () => {
   const source = await readFile(
     "problem-translations/ko/problems/1.mdx",

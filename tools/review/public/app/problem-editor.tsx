@@ -25,7 +25,7 @@ import { EditorView } from "codemirror";
 import * as htmlPlugin from "prettier/plugins/html";
 import * as markdownPlugin from "prettier/plugins/markdown";
 import { format } from "prettier/standalone";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { compileProblemMarkdown } from "translation-core/problem-markdown";
 import type { ProblemReview } from "../../src/problem-review.ts";
 import { reviewApi } from "./client.ts";
@@ -123,6 +123,7 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
       });
     },
   });
+  const saveInFlight = useRef(false);
   const save = useMutation({
     mutationFn: async (
       action:
@@ -184,7 +185,20 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
       )
         setAdvance(true);
     },
+    onSettled: () => {
+      saveInFlight.current = false;
+    },
   });
+  const requestSave = useCallback(
+    (action: Parameters<typeof save.mutate>[0]) => {
+      // Query's rendered pending state is asynchronous. Own the request at the
+      // command boundary so another input before that render cannot submit it twice.
+      if (saveInFlight.current || formatting.isPending) return;
+      saveInFlight.current = true;
+      save.mutate(action);
+    },
+    [save.mutate, formatting.isPending],
+  );
   useEffect(() => {
     const handleSave = (event: KeyboardEvent) => {
       if (
@@ -202,7 +216,7 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
         formatting.isPending
       )
         return;
-      save.mutate("save");
+      requestSave("save");
     };
     const documents = [document, japaneseDocument, koreanDocument];
     documents.forEach((doc) =>
@@ -214,7 +228,7 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
       );
     };
   }, [
-    save.mutate,
+    requestSave,
     save.isPending,
     formatting.isPending,
     japaneseDocument,
@@ -284,7 +298,7 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
           <Button
             loading={save.isPending}
             disabled={formatting.isPending}
-            onClick={() => save.mutate("save")}
+            onClick={() => requestSave("save")}
           >
             저장
           </Button>
@@ -293,7 +307,7 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
             disabled={
               save.isPending || formatting.isPending || !reviewerId.trim()
             }
-            onClick={() => save.mutate("approve")}
+            onClick={() => requestSave("approve")}
           >
             검수 승인
           </Button>
@@ -316,13 +330,13 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
             <Menu.Dropdown>
               <Menu.Item
                 disabled={dirty || !reviews.human.includes(reviewerId.trim())}
-                onClick={() => save.mutate("unapprove")}
+                onClick={() => requestSave("unapprove")}
               >
                 내 검수 승인 취소
               </Menu.Item>
               <Menu.Item
                 disabled={dirty || reviews.machine !== "approved"}
-                onClick={() => save.mutate("invalidate-machine")}
+                onClick={() => requestSave("invalidate-machine")}
               >
                 기계 승인 무효화
               </Menu.Item>
@@ -345,7 +359,7 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
               formatting.isPending ||
               saved.sourceFormat !== "mdx"
             }
-            onChange={() => save.mutate("visibility")}
+            onChange={() => requestSave("visibility")}
             description={
               dirty
                 ? "편집 내용을 먼저 저장하세요."

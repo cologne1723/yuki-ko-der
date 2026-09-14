@@ -1,18 +1,18 @@
 version: 1
 locale: ko
 entries:
-  - id: pending-paken
+  - id: paken-club
     source: [パ研]
-    preferred: パ研
+    preferred: 컴퓨터동아리
     forbidden: [파켄, 파研]
     kind: proper_noun
-    note: 미확정 단체명이다. 한국어 독음을 추정하지 말고 원문을 유지하며 완료 보고에서 확인을 요청한다.
-  - id: pending-koboshi
+    note: 사용자가 확정한 단체명 번역이다. パ研은 컴퓨터동아리로 쓴다.
+  - id: koboshi-name
     source: [小星]
-    preferred: 小星
+    preferred: 코보시
     forbidden: [샤오싱]
     kind: proper_noun
-    note: 미확정 인명이다. 한국어 독음을 추정하지 말고 원문을 유지하며 완료 보고에서 확인을 요청한다.
+    note: 사용자가 확인한 독음이다. 小星さん은 코보시씨로 쓴다.
   - id: pill-bug
     source: [ダンゴムシ, Pill Bug]
     preferred: 공벌레
@@ -50,13 +50,392 @@ entries:
     kind: proper_noun
     note: 일본어 고유명사 カドマツ의 표기를 모든 문제에서 통일한다.
   - id: honorific-kun
-    source:
-      - 군
-      - くん
-      - 君
-    preferred: 원문 표기 유지
-    forbidden:
-      - 임의의 이름 번역
-      - 씨로 일괄 치환
+    source: [くん, 君]
+    preferred: 군
+    forbidden: []
     kind: honorific
-    note: 원문에 붙은 인물 호칭과 이름의 표기를 유지한다. 한국어 문장에 맞춘 조사만 조정한다.
+    note: 사용자가 확인한 호칭이다. 이름 뒤에 군을 붙인다. 미확정 이름 자체는 원문을 유지하며, 데이터·코드·URL은 바꾸지 않는다.
+  - id: honorific-chan
+    source: [ちゃん]
+    preferred: 쨩
+    forbidden: []
+    kind: honorific
+    note: 사용자가 확인한 호칭이다. 이름 뒤에 쨩을 붙인다. 미확정 이름 자체는 원문을 유지한다.
+  - id: honorific-san
+    source: [さん]
+    preferred: 씨
+    forbidden: []
+    kind: honorific
+    note: 사용자가 확인한 호칭이다. 이름 뒤에 씨를 붙이고 뒤따르는 조사를 조정한다. 미확정 이름 자체는 원문을 유지한다.
+  - id: iwai-alien-name
+    source: [岩井星人]
+    preferred: 이와이 성인
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 岩井星人さん은 이와이 성인씨로 쓴다. 岩井星(이와이성)과 구분한다.
+  - id: taro-name
+    source: [太郎, たろう]
+    preferred: 타로
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. 太郎君과 太郎くん은 타로군으로 쓴다. ビ太郎 등 다른 이름의 일부에는 적용하지 않는다.
+  - id: takahashi-name
+    source: [高橋, たかはし]
+    preferred: 타카하시
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 高橋君과 高橋くん은 타카하시군으로 쓴다.
+  - id: iwai-planet-name
+    source: [岩井星]
+    preferred: 이와이성
+    forbidden: []
+    kind: place_name
+    note: 사용자가 확인한 표기다. 지명이다. 더 긴 이름 岩井星人에는 적용하지 않으며 이와이 성인으로 구분한다.
+  - id: yuu-name
+    source: [ゆ～]
+    preferred: 유우씨
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. ゆ～さん 전체를 유우씨로 붙여 쓴다. 씨를 중복해서 붙이지 않는다.
+  - id: akane-name
+    source: [茜]
+    preferred: 아카네
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 茜ちゃん은 아카네쨩으로 쓴다.
+  - id: aoi-name
+    source: [葵, あおい]
+    preferred: 아오이
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. 葵ちゃん은 아오이쨩, あおいさん은 아오이씨로 쓴다. 宮森あおい 등 복합 이름의 일부만 치환하지 않는다.
+  - id: yukiko-name
+    source: [ゆきこ, ユキコ]
+    preferred: 유키코
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. ゆきこちゃん은 유키코쨩으로 쓴다. ユキコちゃん도 유키코쨩으로 쓴다.
+  - id: cherry-name
+    source: [チェリー]
+    preferred: 체리
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. チェリーちゃん은 체리쨩으로 쓴다.
+  - id: neguse-name
+    source: [寝癖]
+    preferred: 네구세
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 寝癖くん은 네구세군으로 붙여 쓴다.
+  - id: seiko-school
+    source: [聖光学院]
+    preferred: 세이코학원
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 학교 이름이다.
+  - id: sei-name
+    source: [聖くん, 聖君]
+    preferred: 세이군
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. 聖くん과 聖君 모두 세이군으로 쓴다.
+  - id: physics-lover-name
+    source: [物理好き]
+    preferred: 물리좋아
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 物理好きさん은 물리좋아씨, 物理好き君은 물리좋아군으로 쓴다.
+  - id: ko-name
+    source: [光君, 光くん]
+    preferred: 코군
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. 聖(세이)와 光(코)의 대응을 맞춘다. 이름에 호칭 군을 붙인 표기다. 聖光学院의 일부를 치환하지 않는다.
+  - id: koyant-currency
+    source: [コャント]
+    preferred: 코얀트
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 가상의 통화 단위 이름이다.
+  - id: shiro-name
+    source: [白君, 白くん]
+    preferred: 시로군
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. 白의 독음은 시로이며 호칭을 붙여 시로군으로 쓴다. 일반 색 이름 白에는 적용하지 않는다.
+  - id: giant-rock-alien
+    source: [巨岩石星人]
+    preferred: 거암석 성인
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 岩井星人(이와이 성인)과 구별되는 이름이다.
+  - id: niji-name
+    source: [虹さん]
+    preferred: 니지씨
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. 虹의 독음은 니지이며 호칭을 붙여 니지씨로 쓴다.
+  - id: marine-name
+    source: [茉莉音]
+    preferred: 마리네
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 인명이다.
+  - id: takuya-name
+    source: [赳也]
+    preferred: 타쿠야
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. 赳也君은 타쿠야군으로 쓴다. 사용자가 이번 적용에서 제외한 8046번 문제는 수정하지 않는다.
+  - id: pseudo-odd-square
+    source: [擬奇平方数]
+    preferred: 의사 홀수 제곱수
+    forbidden: []
+    kind: term
+    note: 사용자가 확인한 표기다. 3525번 문제의 기존 정의에 사용된 번역어를 유지한다.
+  - id: pseudo-odd-square-bot
+    source: [擬奇平方数大好きbot]
+    preferred: 의사 홀수 제곱수좋아봇
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 3525번 본문 용어 의사 홀수 제곱수를 그대로 이름에 사용한다.
+  - id: ordered-route
+    source: [順路]
+    preferred: 순로
+    forbidden: []
+    kind: term
+    note: 사용자가 확인한 표기다. 3523번 본문에서 주어진 순열의 순서를 따르며 그 처음과 끝을 포함하는 경로로 정의한 용어다. 기존 번역어를 유지한다.
+  - id: ordered-route-bot
+    source: [順路大好きbot]
+    preferred: 순로좋아봇
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 3523번 본문 용어 순로를 그대로 이름에 사용한다.
+  - id: superb-bird-of-paradise
+    source: [カタカケフウチョウ]
+    preferred: 어깨걸이극락조
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 사용자가 지정한 조류 이름이다. 3407번의 줄임말 カタカケ는 어깨걸이로 쓴다.
+  - id: western-parotia
+    source: [カンザシフウチョウ]
+    preferred: 비녀극락조
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 사용자가 지정한 조류 이름이다. 3407번의 줄임말 カンザシ는 비녀로 쓴다.
+  - id: superb-bird-short-name
+    source: [カタカケ]
+    preferred: 어깨걸이
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 3407번에서 어깨걸이극락조를 줄여 부르는 이름이다.
+  - id: western-parotia-short-name
+    source: [カンザシ]
+    preferred: 비녀
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 3407번에서 비녀극락조를 줄여 부르는 이름이다.
+  - id: dhole-name
+    source: [ドール]
+    preferred: 들개(Dhole)
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 사용자가 괄호 안 영어까지 함께 표기하도록 지정했다. ドールちゃん은 들개(Dhole)쨩으로 쓴다. 영어 문제 제목 Dhole vs Monster는 원문을 유지한다.
+  - id: heart-boiling-stone
+    source: [心の沸騰石]
+    preferred: 마음의 비등석
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 인물의 별명이다.
+  - id: bartok-construction
+    source: [ばるとーく工務店]
+    preferred: 바르토크 건설
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 사용자가 지정한 업체 이름이다.
+  - id: kima-city
+    source: [喜間市]
+    preferred: 키마시
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 사용자가 지정한 도시 이름이다.
+  - id: ehrhart-name
+    source: [エルハート]
+    preferred: 에르하르트
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 3033번의 학술 인명 표기다.
+  - id: cohen-name
+    source: [コーエン]
+    preferred: 코헨
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 3034번에서 코헨-매콜리로 쓴다.
+  - id: macaulay-name
+    source: [マコーレー]
+    preferred: 매콜리
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 3034번의 학술 인명 표기다.
+  - id: stanley-name
+    source: [スタンレー]
+    preferred: 스탠리
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 3034번에서 스탠리-라이스너로 쓴다.
+  - id: reisner-name
+    source: [ライズナー]
+    preferred: 라이스너
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 3034번의 학술 인명 표기다.
+  - id: schnirelmann-name
+    source: [シュニレルマン]
+    preferred: 슈니렐만
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 2973번에서 슈니렐만 적분으로 쓴다.
+  - id: bring-jerrard-form
+    source: [ブリング・ジェラード標準形]
+    preferred: 브링-제라드 표준형
+    forbidden: []
+    kind: term
+    note: 사용자가 확인한 표기다. 사용자가 확인한 학술 명칭이다. 하이픈을 사용한다.
+  - id: iwai-name
+    source: [岩井]
+    preferred: 이와이
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. 이름 岩井의 독립된 표기에 적용한다. 岩井星人과 岩井星는 기존 항목을 따른다.
+  - id: cherry-resort
+    source: [チェリーリゾート]
+    preferred: 체리 리조트
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 3436번 수영복 판매점 이름이다.
+  - id: meguru-name
+    source: [めぐる]
+    preferred: 메구루
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. 인명이다.
+  - id: ruku-name
+    source: [ルク]
+    preferred: 루쿠
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. ルクくん은 루쿠군으로 쓴다.
+  - id: jiro-name
+    source: [二郎, 次郎]
+    preferred: 지로
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. 二郎君과 次郎君은 지로군으로 쓴다.
+  - id: suuken-name
+    source: [すうけん]
+    preferred: 스우켄
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. すうけん君은 스우켄군으로 쓴다.
+  - id: haruku-name
+    source: [はるく]
+    preferred: 하루쿠
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. はるく君은 하루쿠군으로 쓴다.
+  - id: baru-name
+    source: [ばる]
+    preferred: 바루
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. ばる君은 바루군으로 쓴다. ばるとーく 등 더 긴 이름의 일부만 치환하지 않는다.
+  - id: yuti-name
+    source: [ゆーてぃー]
+    preferred: 유티
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. ゆーてぃーさん은 유티씨로 쓴다.
+  - id: nana-name
+    source: [ナナ]
+    preferred: 나나
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. 인명이다.
+  - id: yuki-name
+    source: [ユキ, ゆき]
+    preferred: 유키
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. ユキさん은 유키씨, ゆきちゃん은 유키쨩으로 쓴다. ユキコ・ユキシー・ゆきうさぎ・こゆき 등 더 긴 이름에 부분 적용하지 않는다.
+  - id: yuuki-name
+    source: [ユウキ]
+    preferred: 유우키
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. ユウキさん은 유우키씨로 쓴다.
+  - id: piggy-bank-name
+    source: [貯金箱]
+    preferred: 저금통
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. 貯金箱くん은 저금통군, 貯金箱さん은 저금통씨로 쓴다.
+  - id: kurage-name
+    source: [くらげ]
+    preferred: 쿠라게
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. くらげさん은 쿠라게씨로 쓴다.
+  - id: minahoshi-name
+    source: [みなほし]
+    preferred: 미나호시
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. みなほしちゃん은 미나호시쨩으로 쓴다.
+  - id: yakitori-name
+    source: [やきとり]
+    preferred: 야키토리
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. やきとりくん은 야키토리군으로 쓴다.
+  - id: chawanmushi-name
+    source: [茶碗蒸し]
+    preferred: 차완무시
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. 茶碗蒸しくん과 茶碗蒸し君은 차완무시군으로 쓴다.
+  - id: wando-name
+    source: [わんど]
+    preferred: 완도
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. わんど氏는 완도씨로 쓴다.
+  - id: yukishi-name
+    source: [ユキシー]
+    preferred: 유키시
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. 인명이다.
+  - id: friends-name
+    source: [フレンズ]
+    preferred: 프렌즈
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 캐릭터 집단을 가리키는 이름이다.
+  - id: cerulean-name
+    source: [セルリアン]
+    preferred: 세룰리안
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 작품에 등장하는 이름이다.
+  - id: sextuple-game
+    source: [セクスタプル]
+    preferred: 섹스튜플
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확인한 표기다. 5013·5014번의 게임 이름이다.
+  - id: hachimaki-man
+    source: [ハチマキおじさん]
+    preferred: 하치마키 아저씨
+    forbidden: []
+    kind: person_name
+    note: 사용자가 확인한 표기다. おじさん 전체를 아저씨로 옮긴다. ハチマキおじ씨처럼 일부만 번역한 표기는 쓰지 않는다.

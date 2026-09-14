@@ -27,10 +27,14 @@ failure retains the previous document. Loading, font readiness and rendering sha
 a 15-second deadline. Draft changes, resizing and unmounting cancel obsolete jobs
 and remove their staging frames.
 
-Run the offline native-MathJax browser metrics regression with
-`REVIEW_BROWSER_TESTS=1 node --import tsx --test tools/review/test/preview-browser.test.ts`
+Run the offline browser regressions (source save races, complete review-app save
+outcomes, and native-MathJax metrics) with
+`REVIEW_BROWSER_TESTS=1 node --import tsx --test tools/review/test/*-browser.test.ts`
 from the repository root. Set `REVIEW_TEST_BROWSER` if Chrome/Chromium is elsewhere.
-The ordinary test suite skips this browser-only check unless explicitly enabled.
+The local ordinary test suite skips browser checks unless explicitly enabled.
+The quality CI installs Chromium and enables them for `pnpm check`; an enabled
+check fails if the browser is missing. These checks use offline fixtures and do
+not read or write local translations or call the live site.
 Parity covers the supported sanitized HTML/TeX boundary. Native source MathML/SVG
 can be treated differently by preview DOMPurify and the extension's stricter block
 allowlist; parity for that input markup is not implied.

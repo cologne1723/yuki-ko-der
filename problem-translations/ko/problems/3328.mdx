@@ -7,12 +7,12 @@ sourceTitle: "岩井ツリーグラフ"
 sourceHtmlSha256: "bff04e0d3556c7611993c69dc45e9131506da1e4c189112ed476fbf2916ea9d2"
 humanReview: []
 machineReview: unreviewed
-title: "岩井 트리 그래프"
+title: "이와이 트리 그래프"
 ---
 
 ## 문제 설명
 
-다음 절차로 만들어지는 무향 그래프를 팔의 개수가 $X$, 팔의 길이가 $(Y_1, Y_2, \cdots, Y_X)$인 **岩井 트리 그래프**라고 정의합니다.
+다음 절차로 만들어지는 무향 그래프를 팔의 개수가 $X$, 팔의 길이가 $(Y_1, Y_2, \cdots, Y_X)$인 **이와이 트리 그래프**라고 정의합니다.
 
 또한 $\mathrm{sum}~Y$를 $\displaystyle \sum_{i = 1}^X Y_i$로 정의합니다.
 
@@ -23,7 +23,7 @@ title: "岩井 트리 그래프"
   - 정점 $0$과 정점 $s+1$을 간선으로 연결합니다.
   - $s$에 $Y_i$를 더합니다.
 
-이 岩井 트리 그래프의 정점 $i$와 정점 $j$ 사이의 거리를 $f(i,j)$로 정의합니다.
+이 이와이 트리 그래프의 정점 $i$와 정점 $j$ 사이의 거리를 $f(i,j)$로 정의합니다.
 
 $\displaystyle \sum_{i = 0}^{\mathrm{sum}~Y} \sum_{j = i + 1}^{\mathrm{sum}~Y} f(i,j)$를 $998\,244\,353$으로 나눈 나머지를 구하세요.
 
@@ -65,10 +65,10 @@ $\displaystyle \sum_{i = 0}^{\mathrm{sum}~Y} \sum_{j = i + 1}^{\mathrm{sum}~Y} f
 134
 ```
 
-팔의 개수가 $4$, 팔의 길이가 $(3,1,4,1)$인 岩井 트리 그래프는 다음과 같습니다.
+팔의 개수가 $4$, 팔의 길이가 $(3,1,4,1)$인 이와이 트리 그래프는 다음과 같습니다.
 ![](../images/3328/1.png)
 
-이 岩井 트리 그래프에서 $\displaystyle \sum_{i = 0}^{\mathrm{sum}~Y} \sum_{j = i + 1}^{\mathrm{sum}~Y} f(i,j)$의 값은 $134$입니다.
+이 이와이 트리 그래프에서 $\displaystyle \sum_{i = 0}^{\mathrm{sum}~Y} \sum_{j = i + 1}^{\mathrm{sum}~Y} f(i,j)$의 값은 $134$입니다.
 
 ### 예제 2 {file=""}
 
