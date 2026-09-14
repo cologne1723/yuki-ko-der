@@ -125,9 +125,9 @@ export class ReviewTasks {
         this.history.tasks.set(task.id, task);
         let worker: Worker;
         try {
-          worker = new Worker(new URL("./task-worker.ts", import.meta.url), {
+          worker = new Worker(new URL("./task-worker.mjs", import.meta.url), {
             workerData: { context, input },
-            execArgv: ["--import", "tsx"],
+            execArgv: [],
           });
         } catch (error) {
           task.status = "failed";

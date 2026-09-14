@@ -11,6 +11,7 @@ import {
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { setupData } from "../src/operations/setup.ts";
+import { readProblemRenderProfile } from "translation-core/problem-render-profile-files";
 import {
   activateSource,
   recoverSourceStore,
@@ -19,6 +20,7 @@ import {
 import { problemSelection } from "../src/operations/types.ts";
 const canonical = '<div class="block"><h4>問題</h4><p>original</p></div>';
 const metadata = { No: 1, ProblemId: 18, Title: "題名" };
+const publicPage = `<!doctype html><html><head><title>No.1 Original - yukicoder</title><script src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js"></script></head><body><div id="content">${canonical}</div></body></html>`;
 async function fixture() {
   const root = await mkdtemp(join(tmpdir(), "setup-operation-"));
   const problemRoot = join(root, "problem-translations/ko/problems");
@@ -32,6 +34,12 @@ async function fixture() {
     title = metadata.Title,
     calls = 0;
   const request: typeof fetch = async (url) => {
+    if (String(url) === "https://yukicoder.me/problems/no/1") {
+      calls++;
+      return new Response(publicPage, {
+        headers: { "content-type": "text/html" },
+      });
+    }
     assert.match(
       String(url),
       /^https:\/\/yukicoder\.me\/api\/v1\/problems\/(18|19)(\/html)?$/,
@@ -82,7 +90,11 @@ test("setup checks source identity/title/hash, refreshes mismatches and preserve
       (await setupData(context, "problems")).items[0].status,
       "skipped",
     );
-    assert.equal(f.calls(), 2);
+    assert.equal(f.calls(), 3);
+    assert.deepEqual(await readProblemRenderProfile(f.dataRoot, 1), {
+      engine: "katex",
+      version: "0.17.0",
+    });
     assert.equal((await readdir(join(f.sourceRoot, "revisions/1"))).length, 2);
     assert.equal(await readFile(f.path, "utf8"), f.text);
     f.change(canonical + "changed");
@@ -101,6 +113,78 @@ test("setup checks source identity/title/hash, refreshes mismatches and preserve
         .status,
       "review-required",
     );
+    assert.equal(await readFile(f.path, "utf8"), f.text);
+  } finally {
+    await f.cleanup();
+  }
+});
+
+test("setup preserves downloaded originals on profile failure and resumes only missing profiles", async () => {
+  const f = await fixture();
+  let page = "<html>not a problem page</html>";
+  let profileCalls = 0;
+  const context = {
+    repositoryRoot: f.root,
+    dataRoot: f.dataRoot,
+    request: (async (url, init) => {
+      if (String(url) === "https://yukicoder.me/problems/no/1") {
+        profileCalls++;
+        assert.equal(new Headers(init?.headers).get("accept"), "text/html");
+        return new Response(page, { headers: { "content-type": "text/html" } });
+      }
+      return f.request(url, init);
+    }) as typeof fetch,
+  };
+  let now = Date.now();
+  const options = {
+    now: () => now,
+    sleep: async (milliseconds: number) => {
+      now += milliseconds;
+    },
+  };
+  try {
+    const failed = await setupData(context, "problems", options);
+    assert.equal(failed.items[0].status, "failed");
+    assert.match(failed.items[0].message, /Render profile collection failed/);
+    assert.equal(
+      await readFile(join(f.sourceRoot, "1.html"), "utf8"),
+      canonical,
+    );
+    assert.equal(await readProblemRenderProfile(f.dataRoot, 1), undefined);
+    assert.equal(f.calls(), 2);
+
+    page = publicPage;
+    assert.equal(
+      (await setupData(context, "problems", options)).items[0].status,
+      "saved",
+    );
+    assert.equal(f.calls(), 2);
+    assert.equal(profileCalls, 2);
+    assert.equal(
+      (await readProblemRenderProfile(f.dataRoot, 1))?.engine,
+      "katex",
+    );
+    assert.equal(
+      (await setupData(context, "problems", options)).items[0].status,
+      "skipped",
+    );
+    assert.equal(profileCalls, 2);
+
+    page = publicPage.replace(
+      "katex@0.17.0/dist/katex.min.js",
+      "mathjax@3/es5/tex-mml-chtml.js",
+    );
+    assert.equal(
+      (await setupData({ ...context, refresh: true }, "problems", options))
+        .items[0].status,
+      "saved",
+    );
+    assert.equal(
+      (await readProblemRenderProfile(f.dataRoot, 1))?.engine,
+      "mathjax",
+    );
+    assert.equal(f.calls(), 4);
+    assert.equal(profileCalls, 3);
     assert.equal(await readFile(f.path, "utf8"), f.text);
   } finally {
     await f.cleanup();

@@ -5,7 +5,12 @@ import {
 import { JSDOM } from "jsdom";
 import { mkdir, readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
-import { problemRenderProfileDirectory } from "translation-core/problem-render-profile-files";
+import {
+  problemPublicSourceUrl,
+  problemRenderProfileDirectory,
+  readProblemRenderProfileRecord,
+  writeProblemRenderProfile,
+} from "translation-core/problem-render-profile-files";
 import { pacedDownload, type CollectionOptions } from "./paced-download.ts";
 import { parseProblemMarkdown } from "translation-core/problem-markdown";
 import { parseReviewState } from "translation-core/review-state";
@@ -139,7 +144,10 @@ export async function setupData(
     return await setupDataWithDownload(
       context,
       selection,
-      async (_context, url) => ({ bytes: await request(url), url }),
+      async (_context, url, accept) => ({
+        bytes: await request(url, accept),
+        url,
+      }),
     );
   } finally {
     lock.close();
@@ -152,6 +160,7 @@ async function setupDataWithDownload(
   download: (
     context: OperationContext,
     url: string,
+    accept?: "text/html",
   ) => Promise<{ bytes: Uint8Array; url: string }>,
 ): Promise<OperationResult> {
   const problemsRoot = join(context.dataRoot, "problems-source"),
@@ -163,6 +172,31 @@ async function setupDataWithDownload(
       item.reviewStatus = reviewStatuses.get(item.id);
     items.push(item);
     context.progress?.(item);
+  };
+  const ensureProfile = async (problemNo: number): Promise<boolean> => {
+    try {
+      if (
+        !context.refresh &&
+        (await readProblemRenderProfileRecord(context.dataRoot, problemNo))
+      )
+        return false;
+      const page = await download(
+        context,
+        problemPublicSourceUrl(problemNo),
+        "text/html",
+      );
+      await writeProblemRenderProfile(
+        context.dataRoot,
+        problemNo,
+        new TextDecoder().decode(page.bytes),
+      );
+      return true;
+    } catch (error) {
+      context.signal?.throwIfAborted();
+      throw new Error(`Render profile collection failed: ${String(error)}`, {
+        cause: error,
+      });
+    }
   };
   if (selection !== "pages") {
     await recoverSourceStore(problemsRoot, context.signal);
@@ -183,11 +217,13 @@ async function setupDataWithDownload(
           cached &&
           sha256(cached) === problem.hash
         ) {
+          const collected = await ensureProfile(problem.metadata.No);
           report({
             id,
-            status: "skipped",
-            message:
-              "Saved original matches translation identity, title and hash",
+            status: collected ? "saved" : "skipped",
+            message: collected
+              ? "Saved missing render profile; matching original reused"
+              : "Saved original matches translation identity, title and hash; render profile verified",
           });
           continue;
         }
@@ -226,11 +262,12 @@ async function setupDataWithDownload(
             "Translation changed during refresh; retry with its current metadata",
           );
         await activateSource(problemsRoot, metadata, html, context.signal);
+        await ensureProfile(problem.metadata.No);
         report({
           id,
           status: "saved",
           message:
-            "Saved matching canonical bytes and index; previous revision retained",
+            "Saved matching canonical bytes, index and render profile; previous revision retained",
         });
       } catch (error) {
         context.signal?.throwIfAborted();

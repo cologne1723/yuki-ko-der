@@ -77,6 +77,30 @@ async function terminal(tasks: ReviewTasks, id: string) {
   }
   throw new Error("Worker did not finish");
 }
+test("source download worker loads TypeScript and reports cached pages without network access", async () => {
+  const f = await fixture();
+  try {
+    await mkdir(join(f.root, "tools/audit/src"), { recursive: true });
+    await writeFile(
+      join(f.root, "tools/audit/src/ui-page-sources.json"),
+      JSON.stringify({ home: "/" }),
+    );
+    await mkdir(join(f.dataRoot, "pages"), { recursive: true });
+    await writeFile(join(f.dataRoot, "pages/home.html"), "<html></html>");
+    const response = await f.request("/api/tasks", {
+      operation: "setup",
+      selection: "pages",
+    });
+    assert.equal(response.status, 202);
+    const complete = await terminal(f.tasks, response.body.id);
+    assert.equal(complete.status, "completed", complete.error);
+    assert.equal(complete.result?.operation, "setup");
+    assert.equal(complete.result?.items[0].status, "skipped");
+    assert.equal(complete.progress[0].id, "home");
+  } finally {
+    await f.cleanup();
+  }
+});
 test("real task worker persists progress, rejects simultaneous tasks and detects changed inputs", async () => {
   const f = await fixture();
   try {

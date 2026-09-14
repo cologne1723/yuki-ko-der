@@ -275,7 +275,6 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
       </Group>
       <TextInput
         label="검수자 ID"
-        description="프로젝트 식별자입니다. GitHub 인증이 아니며, 실제 검수한 ID만 기록하세요."
         value={reviewerId}
         onChange={(event) => setReviewerId(event.currentTarget.value)}
         disabled={save.isPending}
@@ -383,10 +382,7 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
             렌더링 프로필 수집 후 다시 시도
           </Button>
           {collectProfile.isPending && (
-            <Text role="status">
-              프로필 수집 중입니다. 서버 요청 간격과 재시도 대기 시간을
-              지킵니다.
-            </Text>
+            <Text role="status">프로필 수집 중입니다.</Text>
           )}
           <Failure error={collectProfile.error} />
         </Stack>
