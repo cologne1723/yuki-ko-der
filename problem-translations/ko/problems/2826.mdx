@@ -31,8 +31,8 @@ title: "Earthwork"
 
 또한 공사 후에는 다음 조건을 모두 만족해야 합니다.
 
-- $1 \leq i < N$ 및 $1 \leq j \leq N$을 만족하는 임의의 $2$개의 정수 $i, j$에 대해, $\displaystyle \left| \frac{H'_{i, j} + H'_{i + 1, j}}{H_{i, j} + H_{i + 1, j}} \right| \leq A_{i, j}$입니다.
-- $1 \leq i \leq N$ 및 $1 \leq j < N$을 만족하는 임의의 $2$개의 정수 $i, j$에 대해, $\displaystyle \left| \frac{H'_{i, j} + H'_{i, j + 1}}{H_{i, j} + H_{i, j + 1}} \right| \leq B_{i, j}$입니다.
+- $1 \leq i < N$ 및 $1 \leq j \leq N$을 만족하는 임의의 $2$개의 정수 $i, j$에 대해, $\displaystyle \left\lvert \frac{H'_{i, j} + H'_{i + 1, j}}{H_{i, j} + H_{i + 1, j}} \right\rvert \leq A_{i, j}$입니다.
+- $1 \leq i \leq N$ 및 $1 \leq j < N$을 만족하는 임의의 $2$개의 정수 $i, j$에 대해, $\displaystyle \left\lvert \frac{H'_{i, j} + H'_{i, j + 1}}{H_{i, j} + H_{i, j + 1}} \right\rvert \leq B_{i, j}$입니다.
 
 문제의 제한 아래에서는 적절히 공사를 진행해 항상 위의 조건을 만족시킬 수 있습니다.
 
@@ -78,13 +78,13 @@ $R_Q\ \enspace C_Q\ \enspace E_Q$
 
 - $2 \leq N \leq 800$
 - $1 \leq Q \leq 10^4$
-- $\left| H_{i, j} \right| < 2^{30}$ ($1 \leq i, j \leq N$)
+- $\left\lvert H_{i, j} \right\rvert < 2^{30}$ ($1 \leq i, j \leq N$)
 - $H_{i, j} + H_{i + 1, j} \neq 0$ ($1 \leq i < N$ 및 $1 \leq j \leq N$)
 - $H_{i, j} + H_{i, j + 1} \neq 0$ ($1 \leq i \leq N$ 및 $1 \leq j < N$)
 - $1 \leq A_{i, j} < 2^{30}$ ($1 \leq i < N$ 및 $1 \leq j \leq N$)
 - $1 \leq B_{i, j} < 2^{30}$ ($1 \leq i \leq N$ 및 $1 \leq j < N$)
 - $1 \leq R_i, C_i \leq N$ ($1 \leq i \leq Q$)
-- $\left| E_i \right| < 2^{60}$ ($1 \leq i \leq Q$)
+- $\left\lvert E_i \right\rvert < 2^{60}$ ($1 \leq i \leq Q$)
 - $X_{i,j}\in\{$ `-` $,$ `+` $,$ `=` $,$ `?` $\}\scriptsize\;(1\leq i,j\leq N)$
 - $N$, $Q$, $H_{i, j}$는 정수입니다 ($1 \leq i, j \leq N$).
 - $A_{i, j}$는 정수입니다 ($1 \leq i < N$ 및 $1 \leq j \leq N$).

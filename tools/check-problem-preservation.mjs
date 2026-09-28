@@ -11,6 +11,7 @@ import {
   sourceFormulaCorrections,
   sourceBinaryLiteralFormulas,
   correctSourceImageMime,
+  sourceImageTranslations,
 } from "translation-core/problem-source-corrections-node";
 import {
   canonicalizeImageDataUris,
@@ -87,6 +88,7 @@ for (const no of numbers) {
       profile,
       sourceFormulaCorrections(Number(no), original),
       sourceBinaryLiteralFormulas(Number(no), original),
+      await sourceImageTranslations(Number(no), original, repositoryRoot),
     );
     errors.push(...formatFenceErrors(body));
     errors.push(...proseQuantityErrors(body));

@@ -12,7 +12,10 @@ export class TranslationMutations {
   private ancestors = new Set<Element>();
   private removed = false;
 
-  constructor(private document: Document) {}
+  constructor(
+    private document: Document,
+    private excludedSelector = "",
+  ) {}
 
   watch(selectors: Iterable<string>, attributes: Iterable<string> = []) {
     for (const name of attributes) this.attributes.add(name);
@@ -59,6 +62,7 @@ export class TranslationMutations {
   }
 
   add(records: MutationRecord[]) {
+    let changed = false;
     for (const record of records) {
       if (
         record.type === "attributes" &&
@@ -70,6 +74,13 @@ export class TranslationMutations {
         record.target.nodeType === 1
           ? (record.target as Element)
           : record.target.parentElement;
+      // A later record may have removed this target before delivery (e.g.
+      // Ace replaces token rows). Its connected parent's removal record is
+      // sufficient; detached targets no longer retain their editor ancestry.
+      if (element && !element.isConnected) continue;
+      if (this.excludedSelector && element?.closest(this.excludedSelector))
+        continue;
+      changed = true;
       for (let ancestor = element; ancestor; ancestor = ancestor.parentElement)
         this.ancestors.add(ancestor);
       if (record.type === "attributes" && element) this.roots.add(element);
@@ -79,6 +90,7 @@ export class TranslationMutations {
           if (node.nodeType === 1) this.roots.add(node as Element);
       }
     }
+    return changed;
   }
 
   take(): { scope: TranslationScope; removed: boolean; changed: boolean } {

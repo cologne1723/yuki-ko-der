@@ -28,14 +28,14 @@ title: "Monotonic Prime Factors"
 
 #### 소인수
 
-$2$ 이상인 정수 $n$의 소인수란 다음 조건을 모두 만족하는 집합 $P = \{P_1, P_2, \cdots, P_{|P|}\}$의 원소를 말합니다.
+$2$ 이상인 정수 $n$의 소인수란 다음 조건을 모두 만족하는 집합 $P = \{P_1, P_2, \cdots, P_{\lvert P\rvert}\}$의 원소를 말합니다.
 
 - $P_i$는 소수입니다.
 - $i \neq j$이면 $P_i \neq P_j$입니다.
-- 다음 조건을 만족하는 길이 $|P|$인 정수열 $E = (E_1, E_2, \cdots, E_{|P|})$가 존재합니다.
+- 다음 조건을 만족하는 길이 $\lvert P\rvert$인 정수열 $E = (E_1, E_2, \cdots, E_{\lvert P\rvert})$가 존재합니다.
 
   - $1 \leq E_i$
-  - $\displaystyle \prod_{i = 1}^{|P|} P_i^{E_i} = n$
+  - $\displaystyle \prod_{i = 1}^{\lvert P\rvert} P_i^{E_i} = n$
 
 이러한 $P$는 유일하게 정해진다는 것을 증명할 수 있습니다.
 

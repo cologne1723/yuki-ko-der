@@ -3,7 +3,7 @@ import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import test from "node:test";
 import { build } from "esbuild";
-import { chromium } from "playwright";
+import { chromium, firefox } from "playwright";
 import type { EditorView } from "codemirror";
 import { setProblemMarkdownReviews } from "translation-core/problem-frontmatter";
 import { compileProblemMarkdown } from "translation-core/problem-markdown";
@@ -12,6 +12,8 @@ import { katexStylePlugin } from "../src/katex-style-plugin.ts";
 
 declare global {
   interface Window {
+    typingFrames: { editor: number; page: number; y: number }[];
+    typingFrame: number;
     problemScrollFixture: {
       view: () => EditorView;
       remember: () => void;
@@ -30,16 +32,17 @@ test(
       );
       return;
     }
+    const browserType =
+      process.env.REVIEW_TEST_ENGINE === "firefox" ? firefox : chromium;
     const executablePath =
       process.env.REVIEW_TEST_BROWSER ??
-      (existsSync(
-        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-      )
+      (browserType === chromium &&
+      existsSync("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
         ? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-        : chromium.executablePath());
+        : browserType.executablePath());
     assert.ok(
       existsSync(executablePath),
-      "Install Chromium or set REVIEW_TEST_BROWSER",
+      "Install the selected Playwright browser or set REVIEW_TEST_BROWSER",
     );
     const bundle = await build({
       plugins: [katexStylePlugin],
@@ -87,10 +90,14 @@ title: Scroll fixture
         (_, i) =>
           `Paragraph ${i}: editable source text that wraps in the source editor.\n\n`,
       ).join("");
-    const browser = await chromium.launch({ executablePath, headless: true });
+    const browser = await browserType.launch({
+      executablePath,
+      headless: true,
+    });
     t.after(() => browser.close());
     for (const width of [900, 1600]) {
       for (const outcome of [
+        "ordinary-typing",
         "normalized",
         "unchanged",
         "failure",
@@ -202,6 +209,78 @@ title: Scroll fixture
                   }),
               );
             await settle();
+            if (outcome === "ordinary-typing") {
+              const record = () =>
+                page.evaluate(() => {
+                  const view = window.problemScrollFixture.view();
+                  const iframe = document.querySelector<HTMLIFrameElement>(
+                    'iframe[title="한국어 번역"]',
+                  );
+                  return {
+                    editor: view.scrollDOM.scrollTop,
+                    page: window.scrollY,
+                    editorY: view.dom.getBoundingClientRect().top,
+                    preview:
+                      iframe?.contentDocument?.documentElement?.scrollTop ?? 0,
+                  };
+                });
+              await page.evaluate(() => {
+                const iframe = document.querySelector<HTMLIFrameElement>(
+                  'iframe[title="한국어 번역"]',
+                )!;
+                iframe.contentDocument!.documentElement.scrollTop = 650;
+              });
+              await settle();
+              const before = await record();
+              const samples = [before];
+              await page.evaluate(() => {
+                window.typingFrames = [];
+                const record = () => {
+                  const view = window.problemScrollFixture.view();
+                  window.typingFrames.push({
+                    editor: view.scrollDOM.scrollTop,
+                    page: window.scrollY,
+                    y: view.dom.getBoundingClientRect().top,
+                  });
+                  window.typingFrame = requestAnimationFrame(record);
+                };
+                record();
+              });
+              for (const character of "abc123가나다") {
+                if (/^[a-z0-9]$/.test(character))
+                  await page.keyboard.press(character);
+                else await page.keyboard.insertText(character);
+                await settle();
+                samples.push(await record());
+              }
+              const frames = await page.evaluate(() => {
+                cancelAnimationFrame(window.typingFrame);
+                return window.typingFrames;
+              });
+
+              assert(
+                frames.every((x) => Math.abs(x.page - before.page) <= 1),
+                "Typing moved page scroll while preview was rendering",
+              );
+              assert(
+                frames.every((x) => Math.abs(x.editor - before.editor) <= 1),
+                "Typing moved source scroll while preview was rendering",
+              );
+              assert.equal(requestCount, 0);
+              assert(
+                samples.every((x) => Math.abs(x.preview - before.preview) <= 1),
+                "Typing moved preview scroll",
+              );
+              assert(
+                samples.every((x) => Math.abs(x.editor - before.editor) <= 1),
+                "Typing moved source scroll",
+              );
+              assert(
+                samples.every((x) => Math.abs(x.page - before.page) <= 1),
+                "Typing moved page scroll",
+              );
+              return;
+            }
             await page.keyboard.insertText("edit");
             await settle();
             const snapshot = () =>

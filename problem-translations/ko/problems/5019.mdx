@@ -84,9 +84,9 @@ $(i,j)$의 칸은 문자 $A_{i,j}$로 나타냅니다. 각 문자의 의미는 �
 - 그 후 가게 수를 $s=\lfloor \max(10,\rm{normal}(50,10))\rfloor$로 정하고, 칸을 균일하게 무작위로 $s$개 선택하여 `@`로 만듭니다.
 - 다음과 같이 폭탄을 $M$개 만듭니다.
   - 폭탄의 세기 $s_i=\rm{rand}(0.2,1)$로 정합니다.
-  - $-20 \leq a_i,b_i \leq 20$을 만족하는 모든 $(a_i,b_i)$에 대해 확률 $(\max(|a_i|,|b_i|) \times s_i+1)^{-1}$로 선택합니다.
+  - $-20 \leq a_i,b_i \leq 20$을 만족하는 모든 $(a_i,b_i)$에 대해 확률 $(\max(\lvert a_i\rvert,\lvert b_i\rvert) \times s_i+1)^{-1}$로 선택합니다.
   - $L_i$를 선택된 정수 쌍의 개수로 하고, $C_i=\lfloor \max(1,\min(4\,000,L_i \times \rm{normal}(1,0.2)))\rfloor$로 정합니다.
-  - 선택된 정수 쌍을 $|a_i|+|b_i|$의 오름차순으로 정렬합니다.
+  - 선택된 정수 쌍을 $\lvert a_i\rvert+\lvert b_i\rvert$의 오름차순으로 정렬합니다.
 
 대회 종료 후 사용된 seed 값이 공개됩니다. (SHA256...`b7384d5a5e0c4a34374b6544b3579f3d9500b2321e4e7d22c92d4db7ba4c5a78`)
 

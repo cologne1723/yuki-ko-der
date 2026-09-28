@@ -1,32 +1,87 @@
 import { verifyProblemRenderMarkup } from "./problem-render-markup.ts";
 
-// Some statements put a sample or a leading Note outside their section blocks.
-// Restrict the leading range to the site's Note heading and prose, so navigation
-// and problem controls before the statement can never become replacement targets.
-export function sourceStatementBlocks(root: Element): Element[] {
-  const blocks = [
-    ...root.querySelectorAll(":scope > .block, :scope > .sample"),
-  ];
-  const leading: Element[] = [];
-  for (
-    let element = blocks[0]?.previousElementSibling;
-    element;
-    element = element.previousElementSibling
-  ) {
-    if (
-      element.matches("h4.shadow") &&
-      element.textContent?.trim() === "Note"
-    ) {
-      return [element, ...leading, ...blocks];
+// Section classes are not statement boundaries: authored HTML also contains
+// introductory prose, bare text, and wrappers alongside direct sample blocks.
+export function sourceStatementNodes(root: Element): ChildNode[] {
+  const children = [...root.childNodes];
+  const element = (node: Node): node is Element => node.nodeType === 1;
+  const section = (node: Node) =>
+    element(node) &&
+    (node.matches(".block, .sample") ||
+      !!node.querySelector(".block, .sample"));
+  let nodes: ChildNode[];
+  if (root.tagName === "BODY") {
+    nodes = children;
+  } else {
+    // The live site puts the API statement between its metadata/navigation and
+    // submission form. Never include those controls, nor the sign-in/social UI.
+    const title = children.findIndex(
+      (node) => element(node) && node.matches("h3"),
+    );
+    const metadata = children.findLastIndex(
+      (node) =>
+        element(node) &&
+        (node.matches(".problem-header-cols") ||
+          !!node.querySelector(
+            "#copy-problem-html-btn, #contest-problem-selector-wrapper",
+          )),
+    );
+    const header = Math.max(title, metadata);
+    const end = children.findIndex(
+      (node, i) =>
+        i > header && element(node) && node.matches('form[action*="/submit"]'),
+    );
+    if (header >= 0 && end > header) {
+      nodes = children.slice(header + 1, end);
+    } else {
+      // Minimal/legacy pages: only accept authored prose and unmarked wrappers.
+      // Rendering staging and unrelated forms cannot supply a section seed.
+      const allowed = (node: ChildNode): boolean =>
+        !element(node) ||
+        node.matches(".block, .sample") ||
+        (node.matches(
+          "div:not([class]):not([id]), div.tex2jax_ignore, div.katex-ignore, div.alert, p, h3, h4, h5, h6, ul, ol, pre, blockquote, table, br, i, b, strong, a, img, hr, font, marquee, details",
+        ) &&
+          !node.hasAttribute("data-yukicoder-ko-render-staging") &&
+          [
+            ...node.querySelectorAll("button, input, select, textarea, form"),
+          ].every(
+            (control) =>
+              control.matches(".copy-sample-input") &&
+              !!control.closest(".sample"),
+          ));
+      const seeds = children.flatMap((node, i) =>
+        allowed(node) && section(node) ? [i] : [],
+      );
+      if (!seeds.length) return [];
+      let start = seeds[0];
+      let stop = seeds[seeds.length - 1] + 1;
+      if (!children.slice(start, stop).every(allowed)) return [];
+      while (start > header + 1 && allowed(children[start - 1])) start--;
+      while (stop < children.length && allowed(children[stop])) stop++;
+      nodes = children.slice(start, stop);
     }
-    if (
-      !element.matches("p, ul, ol, pre, blockquote, table, br") ||
-      element.querySelector("button, input, select, textarea, form")
-    )
-      break;
-    leading.unshift(element);
   }
-  return blocks;
+  if (!nodes.some(section)) return [];
+  // Keep a sole transparent wrapper in place (including its node identity).
+  const substantive = nodes.filter(
+    (node) => element(node) || node.textContent?.trim(),
+  );
+  if (
+    substantive.length === 1 &&
+    element(substantive[0]) &&
+    substantive[0].tagName === "DIV" &&
+    !substantive[0].attributes.length
+  ) {
+    return sourceStatementNodes(substantive[0]);
+  }
+  return nodes;
+}
+
+export function sourceStatementBlocks(root: Element): Element[] {
+  return sourceStatementNodes(root).filter(
+    (node): node is Element => node.nodeType === 1,
+  );
 }
 
 export function parseTranslationDocument(

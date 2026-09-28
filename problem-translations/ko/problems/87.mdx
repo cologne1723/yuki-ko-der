@@ -6,7 +6,7 @@ problemId: 218
 sourceTitle: "Advent Calendar Problem"
 sourceHtmlSha256: 3c61eb00b0bc37c46ac0e30592b1810d86795df97af8224b806399e35ca17445
 humanReview: []
-machineReview: approved
+machineReview: unreviewed
 title: "Advent Calendar Problem"
 ---
 
@@ -48,7 +48,7 @@ Competitive Programming Advent Calendar인데도 다른 분들에 비해 경쟁 
 
 그 문제는 [길의 지름길](http://yukicoder.me/problems/17)입니다.
 
-사실 이 문제의 소재는 공부 모임에서 돌아오는 특급 열차를 놓쳐 신칸센을 타고 중간 역에서 따라잡았던 실제 경험입니다.
+사실 이 문제의 소재는 공부 모임에서 돌아오던 특급 열차에서 내릴 역을 지나치는 실수를 한 뒤, 신칸센을 타고 중간 역에서 따라잡았던 실제 경험입니다.
 
 처음에는 저지 시스템이 전혀 없어서 하나의 테스트 케이스에 대해 ideone에 답을 제출하는 방식이었습니다. 여러분이 아시는 “nmCoder”를 바탕으로 한 형태였습니다. 저도 몇 번 참가했습니다.
 
@@ -118,9 +118,9 @@ yukicoder는 경쟁 프로그래밍 사이트가 아니라 경쟁 프로그래�
 
 다른 사람에게 맡기는 극단적인 이야기이지만, “아무도 반론하지 않으면 일단 옳다고 하자”는 생각도 괜찮지 않을까 합니다. 물론 극단적인 표현이며 일반적으로는 위험한 생각일 수 있습니다.
 
-Writer가 생각한 예상 풀이와 테스트 케이스가 있고 당시 Writer가 옳다고 생각했더라도, 정확한 반론이 있으면 무너집니다. 오히려 반론이 없으면 일단 옳다고 생각해도 되지 않을까 하며, 그런 방침도 괜찮다고 생각합니다.
+출제자가 생각한 예상 풀이와 테스트 케이스가 있고 당시 출제자가 옳다고 생각했더라도, 정확한 반론이 있으면 무너집니다. 오히려 반론이 없으면 일단 옳다고 생각해도 되지 않을까 하며, 그런 방침도 괜찮다고 생각합니다.
 
-누군가 알아차리고 지적해 주면 Writer도 “놓쳤지만 이런 경우도 있었구나”, “이런 지식을 알게 되었구나”처럼 무언가를 얻을 수 있으므로 좋다고 생각합니다.
+누군가 알아차리고 지적해 주면 출제자도 “놓쳤지만 이런 경우도 있었구나”, “이런 지식을 알게 되었구나”처럼 무언가를 얻을 수 있으므로 좋다고 생각합니다.
 
 문제 만들기를 연습하고 싶은 사람에게도 출제한 문제의 예상 풀이 등이 완벽하지 않더라도 풀어 보고 싶은 사람이 있을 것입니다. 누군가 지적해 주어 몰랐던 것을 알게 되는 계기가 된다면 그것으로 충분하다고 생각합니다.
 
@@ -139,14 +139,14 @@ Writer가 생각한 예상 풀이와 테스트 케이스가 있고 당시 Writer
 ## yukicoder의 시스템 구성
 
 - 백엔드 웹 서버: [Go](https://golang.org/)([Revel](http://revel.github.io/index.html) 프레임워크/[mark6](https://github.com/kroton/mark6))
-- 프런트엔드: HTML/CSS/JavaScript(HTML은 [Revel](http://revel.github.io/index.html) 템플릿이며 메타 언어는 사용하지 않음)
+- 프런트엔드: HTML/CSS/JavaScript(HTML은 Revel 템플릿이며 메타 언어는 사용하지 않음)
 - 프런트엔드 라이브러리: [jQuery](http://jquery.com/) / [Twitter Bootstrap](http://getbootstrap.com/2.3.2/) / [noty](http://ned.im/noty/)
 - 저지 서버: [Docker](https://www.docker.com/) / Python / 셸 스크립트
 - 데이터베이스: [MySQL](http://www-jp.mysql.com/)
 - 데이터베이스 관리 소프트웨어: [MySQL Workbench](http://www-jp.mysql.com/products/workbench/)
 - 버전 관리·백업 도구: [Git](http://git-scm.com/)
-- [Git](http://git-scm.com/) 호스팅 사이트: [BitBucket](https://bitbucket.org/)
-- IDE: [IntelliJ IDEA](https://www.jetbrains.com/idea/) + [Go](https://golang.org/) 플러그인
+- Git 호스팅 사이트: [BitBucket](https://bitbucket.org/)
+- IDE: [IntelliJ IDEA](https://www.jetbrains.com/idea/) + Go 플러그인
 - 구문 강조기: [highlightjs](https://highlightjs.org) / [ACE Editor](http://ace.c9.io)
 - 웹 폰트: [M+ OUTLINE FONTS](http://mplus-fonts.sourceforge.jp/mplus-outline-fonts/index.html)
 
@@ -204,7 +204,7 @@ IDE입니다. 경쟁 프로그래밍에도 사용합니다. 무겁기는 하지�
 
 프로그램 코드의 구문 강조기는 [highlightjs](https://highlightjs.org/)입니다. 언어를 자동 판별하는 것이 장점이지만 Python 판별은 불안정한 것 같습니다.
 
-조만간 편집 페이지에서도 사용하는 ACE Editor로 옮길 수도 있습니다.
+조만간 편집 페이지에서도 사용하는 [ACE Editor](http://ace.c9.io)로 옮길 수도 있습니다.
 
 ## 웹 폰트
 
@@ -212,7 +212,7 @@ IDE입니다. 경쟁 프로그래밍에도 사용합니다. 무겁기는 하지�
 
 일본어 웹 폰트는 아직 시기상조인 것 같습니다.
 
-## 웹 폰트 M+ OUTLINE FONTS
+## 웹 폰트 [M+ OUTLINE FONTS](http://mplus-fonts.sourceforge.jp/mplus-outline-fonts/index.html)
 
 최근 유명해진 웹 폰트입니다. 특히 일본어 웹 폰트를 불러오는 속도가 느려 지연 로딩을 사용합니다. 도입하지 않으면 특히 Safari에서 30초 이상 글자가 전혀 표시되지 않았습니다.
 

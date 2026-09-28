@@ -194,7 +194,7 @@ export function createProblemLoader(host: Window & typeof globalThis) {
     if (
       !blocks.some(
         (block) =>
-          block.matches(".block") &&
+          (block.matches(".block") || block.querySelector(".block")) &&
           (block.textContent?.trim() || block.querySelector("img, svg, math")),
       )
     )

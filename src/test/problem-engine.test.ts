@@ -126,6 +126,47 @@ function fixture(options: { samples?: boolean } = {}) {
   return { dom, close, state, engine, saved, calls, catalog };
 }
 
+test("mixed authored HTML replaces and restores every node without replacing site controls", async () => {
+  const f = fixture();
+  try {
+    const doc = f.dom.window.document;
+    const content = doc.querySelector("#content")!;
+    const extra =
+      '<h3>著者の見出し</h3>裸の文章<p>注意書き</p><font size="2"><div class="block">制限です</div></font>';
+    f.state.canonical = extra + source + "末尾の説明";
+    f.state.body = f.state.body.replace(hash(source), hash(f.state.canonical));
+    content.innerHTML =
+      '<h3>No.1 題名</h3><div class="problem-header-cols">metadata</div><div><button id="copy-problem-html-btn">copy</button></div>' +
+      f.state.canonical +
+      '<form action="/problems/18/submit"><input value="keep"></form><p>sign in</p>';
+    const originals = [...content.childNodes];
+    const originalHtml = content.innerHTML;
+    const form = content.querySelector("form");
+    const button = content.querySelector("button");
+    let clicks = 0;
+    button!.addEventListener("click", () => clicks++);
+    for (let i = 0; i < 2; i++) {
+      const result = await f.engine.translateProblem(() => true, f.catalog());
+      assert.equal(result.status, "applied");
+      if (result.status !== "applied") throw Error("not applied");
+      assert.equal((await result.verification)?.status, "verified");
+      assert.doesNotMatch(
+        content.textContent!,
+        /著者|裸の文章|注意書き|制限です|末尾の説明/,
+      );
+      assert.equal(content.querySelector("form"), form);
+      assert.equal(content.querySelector("button"), button);
+      button!.click();
+      assert.equal(clicks, i + 1);
+      f.engine.restoreProblem();
+      assert.equal(content.innerHTML, originalHtml);
+      assert.deepEqual([...content.childNodes], originals);
+    }
+  } finally {
+    f.close();
+  }
+});
+
 test("explicit incompatible markup is rejected even with a matching remote or cached catalog digest", async () => {
   for (const offline of [false, true]) {
     const f = fixture();
@@ -188,6 +229,11 @@ test("problem replacement preserves exact sample copying, independent formulas a
       copied = copy.closest(".sample")!.querySelector("pre")!.textContent!;
     };
     original.querySelector(".sample")!.append(copy);
+    const wrapper = doc.createElement("div");
+    const inner = doc.createElement("div");
+    original.before(wrapper);
+    wrapper.append(inner);
+    inner.append(original);
     assert.equal(
       (await f.engine.translateProblem(() => true, f.catalog())).status,
       "applied",

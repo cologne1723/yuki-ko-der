@@ -708,3 +708,217 @@ test("MathJax numeric advice uses its rendered MathML without counting source co
   source.window.close();
   target.window.close();
 });
+
+test("source powers cannot be evaluated into long decimal prose", () => {
+  for (const [original, changed] of [
+    [String.raw`1 \le D \le 10^8`, String.raw`1 \le D \le 100\,000\,000`],
+    [
+      String.raw`-10^9 \le V \le 10^9`,
+      String.raw`-1\,000\,000\,000 \le V \le 1\,000\,000\,000`,
+    ],
+    [String.raw`10^9+9`, String.raw`1\,000\,000\,009`],
+    [String.raw`10^{18}`, String.raw`1\,000\,000\,000\,000\,000\,000`],
+  ]) {
+    const source = new JSDOM(`<p>$${original}$</p>`);
+    const target = new JSDOM(`<p>$${changed}$</p>`);
+    assert.ok(
+      preservationErrors(source.window.document, target.window.document).some(
+        (e) => e.includes("불필요하게 계산"),
+      ),
+    );
+    assert.deepEqual(
+      preservationErrors(source.window.document, source.window.document),
+      [],
+    );
+    source.window.close();
+    target.window.close();
+  }
+});
+
+test("decimal already in source and literal sample data are not power expansion", () => {
+  for (const [before, after] of [
+    [
+      String.raw`<p>$1000000000=10^9$</p>`,
+      String.raw`<p>$1\,000\,000\,000=10^9$</p>`,
+    ],
+    [
+      String.raw`<p>$10^9$</p><div class="sample"><pre>1000000000</pre></div>`,
+      String.raw`<p>$10^9$</p><div class="sample"><pre>1000000000</pre></div>`,
+    ],
+    [String.raw`<code>10^9</code>`, String.raw`<code>1000000000</code>`],
+  ]) {
+    const source = new JSDOM(before),
+      target = new JSDOM(after);
+    assert.deepEqual(
+      preservationErrors(source.window.document, target.window.document).filter(
+        (e) => e.includes("불필요하게 계산"),
+      ),
+      [],
+    );
+    source.window.close();
+    target.window.close();
+  }
+});
+
+test("single script token grouping is allowed while set data stays protected", () => {
+  const source = new JSDOM(String.raw`<p>$\{A_k\}_{k=0}^\infty$</p>`);
+  const target = new JSDOM(String.raw`<p>$\{A_k\}_{k=0}^{\infty}$</p>`);
+  assert.deepEqual(
+    preservationErrors(source.window.document, target.window.document),
+    [],
+  );
+  target.window.document.querySelector("p")!.textContent =
+    String.raw`$\{A_k\}_{k=1}^{\infty}$`;
+  assert.ok(
+    preservationErrors(source.window.document, target.window.document).some(
+      (e) => e.includes("집합 수식"),
+    ),
+  );
+  source.window.close();
+  target.window.close();
+});
+
+test("No.21 human correction is bound to source content and exact formula", () => {
+  const original = sourceCorrectionFixture(21),
+    corrections = sourceFormulaCorrections(21, original);
+  assert.equal(corrections.length, 1);
+  assert.deepEqual(sourceFormulaCorrections(21, original + "\n"), []);
+  const source = new JSDOM(`<p>$${corrections[0].before}$</p>`),
+    target = new JSDOM(`<p>$${corrections[0].after}$</p>`);
+  assert.deepEqual(
+    preservationErrors(
+      source.window.document,
+      target.window.document,
+      undefined,
+      corrections,
+    ),
+    [],
+  );
+  target.window.document.querySelector("p")!.textContent =
+    String.raw`$\{\{555\},\{21,20\},\{431,301\}\}$`;
+  assert.ok(
+    preservationErrors(
+      source.window.document,
+      target.window.document,
+      undefined,
+      corrections,
+    ).length,
+  );
+  source.window.close();
+  target.window.close();
+});
+
+test("recorded image translations preserve order and do not exempt unknown replacements", () => {
+  const source = new JSDOM('<img src="a.png"><img src="b.png">');
+  const target = new JSDOM('<img src="a-ko.png"><img src="b.png">');
+  const mappings = [{ before: "a.png", after: "a-ko.png" }];
+  assert.deepEqual(
+    preservationErrors(
+      source.window.document,
+      target.window.document,
+      undefined,
+      [],
+      [],
+      mappings,
+    ),
+    [],
+  );
+  target.window.document.body.innerHTML =
+    '<img src="b.png"><img src="a-ko.png">';
+  assert.ok(
+    preservationErrors(
+      source.window.document,
+      target.window.document,
+      undefined,
+      [],
+      [],
+      mappings,
+    ).length,
+  );
+  target.window.document.body.innerHTML =
+    '<img src="unknown.png"><img src="b.png">';
+  assert.ok(
+    preservationErrors(
+      source.window.document,
+      target.window.document,
+      undefined,
+      [],
+      [],
+      mappings,
+    ).length,
+  );
+  assert.deepEqual(
+    preservationErrors(
+      source.window.document,
+      source.window.document,
+      undefined,
+      [],
+      [],
+      mappings,
+    ),
+    [],
+  );
+  source.window.close();
+  target.window.close();
+});
+
+test("numeric power exponents and signs cannot change even without decimal expansion", () => {
+  for (const [before, after] of [
+    ["10^9", "10^8"],
+    ["-10^9", "10^9"],
+    ["10^{-9}", "10^{-8}"],
+    ["10^9+9", "10^9+7"],
+  ]) {
+    const source = new JSDOM(`<p>$${before}$</p>`),
+      target = new JSDOM(`<p>$${after}$</p>`);
+    assert.ok(
+      preservationErrors(source.window.document, target.window.document).some(
+        (e) => e.includes("거듭제곱·연산 표기"),
+      ),
+    );
+    source.window.close();
+    target.window.close();
+  }
+});
+
+test("power comparisons respect TeX command boundaries without optional spaces", () => {
+  const source = new JSDOM(String.raw`<p>$1\leq N\leq 2\times 10^5$</p>`);
+  const target = new JSDOM(String.raw`<p>$1\leq N\leq2\times10^5$</p>`);
+  assert.deepEqual(
+    preservationErrors(source.window.document, target.window.document),
+    [],
+  );
+  target.window.document.querySelector("p")!.textContent =
+    String.raw`$1\leq N\leq2\times10^4$`;
+  assert.ok(
+    preservationErrors(source.window.document, target.window.document).some(
+      (error) => error.includes("거듭제곱·연산 표기"),
+    ),
+  );
+  source.window.close();
+  target.window.close();
+});
+
+test("named single-bar delimiters preserve nested set formulas without hiding content changes", () => {
+  const source = new JSDOM(String.raw`<p>$|\{S\mid |f(S)|=A\}|$</p>`);
+  const target = new JSDOM(
+    String.raw`<p>$\lvert\{S\mid\lvert f(S)\rvert=A\}\rvert$</p>`,
+  );
+  assert.deepEqual(
+    preservationErrors(source.window.document, target.window.document),
+    [],
+  );
+  for (const formula of [
+    String.raw`\lvert\{S\mid\lvert f(S)\rvert=B\}\rvert`,
+    String.raw`\lVert\{S\mid\lvert f(S)\rvert=A\}\rVert`,
+  ]) {
+    target.window.document.querySelector("p")!.textContent = `$${formula}$`;
+    assert.ok(
+      preservationErrors(source.window.document, target.window.document).some(
+        (error) => error.includes("집합 수식"),
+      ),
+    );
+  }
+  source.window.close();
+  target.window.close();
+});

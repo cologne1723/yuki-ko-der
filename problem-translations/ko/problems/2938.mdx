@@ -14,7 +14,7 @@ title: "Sigma Sigma Distance Distance Problem"
 
 길이 $N$인 정수열 $A_1, A_2, \dots, A_N$이 주어집니다.
 
-$\displaystyle\sum_{i=1}^{N}\displaystyle\sum_{j=1}^{N} \left|i-j\right| \times \left|A_i-A_j\right|$을 구하세요.
+$\displaystyle\sum_{i=1}^{N}\displaystyle\sum_{j=1}^{N} \left\lvert i-j\right\rvert \times \left\lvert A_i-A_j\right\rvert$을 구하세요.
 
 ## 입력
 
@@ -45,7 +45,7 @@ evil 케이스에 도전하지 않는 사람은 입력이 일반 제한을 만�
 
 ## 출력
 
-$\displaystyle\sum_{i=1}^{N}\displaystyle\sum_{j=1}^{N} \left|i-j\right| \times \left|A_i-A_j\right|$을 $1$줄에 출력하고, 마지막에 개행을 출력하세요.
+$\displaystyle\sum_{i=1}^{N}\displaystyle\sum_{j=1}^{N} \left\lvert i-j\right\rvert \times \left\lvert A_i-A_j\right\rvert$을 $1$줄에 출력하고, 마지막에 개행을 출력하세요.
 
 ## 예제
 
@@ -64,15 +64,15 @@ $\displaystyle\sum_{i=1}^{N}\displaystyle\sum_{j=1}^{N} \left|i-j\right| \times 
 2
 ```
 
-각 $(i,j)$에 대한 $(|i-j| \times |A_i-A_j|)$는 다음과 같습니다.
+각 $(i,j)$에 대한 $(\lvert i-j\rvert \times \lvert A_i-A_j\rvert)$는 다음과 같습니다.
 
-$(1,1)=|1-1|\times |A_1-A_1|=0$
+$(1,1)=\lvert 1-1\rvert\times \lvert A_1-A_1\rvert=0$
 
-$(1,2)=|1-2|\times |A_1-A_2|=1$
+$(1,2)=\lvert 1-2\rvert\times \lvert A_1-A_2\rvert=1$
 
-$(2,1)=|2-1|\times |A_2-A_1|=1$
+$(2,1)=\lvert 2-1\rvert\times \lvert A_2-A_1\rvert=1$
 
-$(2,2)=|2-2|\times |A_2-A_2|=0$
+$(2,2)=\lvert 2-2\rvert\times \lvert A_2-A_2\rvert=0$
 
 따라서 답은 $0+1+1+0=2$입니다.
 

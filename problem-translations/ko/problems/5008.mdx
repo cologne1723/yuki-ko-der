@@ -129,9 +129,9 @@ $N$개보다 많은 줄을 출력한 경우 처음 $N$개 줄만 사용하여 �
 $2K$장의 사진 각각에 대해 다음과 같이 사진의 원점수 $R$을 정합니다. 각 사진에서 $i$번째 이산 진자의 좌표를 $X_i$라고 합니다.
 
 - 대립 사진의 경우:
-  $R:=\operatorname{round}\left(\dfrac{2\times10^7}{N(N-1)}\times\sum_{i=1}^{N-1}\sum_{k=i+1}^{N}\dfrac{|X_i-X_k|}{B_i+B_k}\right)$
+  $R:=\operatorname{round}\left(\dfrac{2\times10^7}{N(N-1)}\times\sum_{i=1}^{N-1}\sum_{k=i+1}^{N}\dfrac{\lvert X_i-X_k\rvert}{B_i+B_k}\right)$
 - 협력 사진의 경우:
-  $R:=\operatorname{round}\left(\dfrac{10^7}{\sqrt{\left(\dfrac{1}{20}\max_{1\leq i<k\leq N}|X_i-X_k|\right)+1}}\right)$
+  $R:=\operatorname{round}\left(\dfrac{10^7}{\sqrt{\left(\dfrac{1}{20}\max_{1\leq i<k\leq N}\lvert X_i-X_k\rvert\right)+1}}\right)$
 
 대립 사진 $K$장의 원점수 평균을 $S_{\rm confrontation}$, 협력 사진 $K$장의 원점수 평균을 $S_{\rm cooperation}$이라고 할 때, $2$개의 평균은 각각 반올림하여 정수로 만들고, 이 테스트 케이스의 점수는 $S_{\rm confrontation}\times S_{\rm cooperation}$입니다.
 

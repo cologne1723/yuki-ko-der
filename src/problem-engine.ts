@@ -1,5 +1,8 @@
 import type { ProblemCatalog } from "translation-core/problem-catalog";
-import { sourceStatementBlocks } from "translation-core/problem-document";
+import {
+  sourceStatementBlocks,
+  sourceStatementNodes,
+} from "translation-core/problem-document";
 import { detectProblemRenderProfile } from "translation-core/problem-render-profile";
 import {
   createProblemLoader,
@@ -279,7 +282,10 @@ export function createProblemEngine(host: Window & typeof globalThis) {
       )
         return { status: "cancelled" };
       const liveTitle = currentContent.querySelector(":scope > h3");
-      const liveBlocks = sourceStatementBlocks(currentContent);
+      const liveNodes = sourceStatementNodes(currentContent);
+      const liveBlocks = liveNodes.filter(
+        (node): node is Element => node.nodeType === 1,
+      );
       if (!liveTitle || liveBlocks.length === 0)
         throw new ProblemVerificationError(
           "Problem page structure is unavailable",
@@ -289,7 +295,7 @@ export function createProblemEngine(host: Window & typeof globalThis) {
         apply = await prepareReplacement(
           translation,
           liveTitle,
-          liveBlocks,
+          liveNodes,
           canonicalBlocks ?? liveBlocks,
           {
             profile,

@@ -14,7 +14,7 @@ title: "LCM+ELEMENT=SUM"
 
 이 문제는 **output-only** 문제입니다. 입력은 주어지지 않습니다.
 
-다음 조건을 만족하는 정수열 $A=(A_1,A_2,\cdots,A_{|A|})$을 $1$개 구성하세요.
+다음 조건을 만족하는 정수열 $A=(A_1,A_2,\cdots,A_{\lvert A\rvert})$을 $1$개 구성하세요.
 
 ## 입력
 
@@ -25,8 +25,8 @@ title: "LCM+ELEMENT=SUM"
 - 길이가 $10$ 이상 $100\,000$ 이하입니다.
 - $A$에 포함된 값은 모두 $1$ 이상 $100\,000$ 이하입니다.
 - $A$에 포함된 값은 서로 다릅니다.
-- 어떤 정수 $K$($1\leq K\leq |A|$)가 존재하여
-  $\mathrm{lcm}(A_1,A_2,\cdots,A_{|A|})+A_K=\sum_{i=1}^{|A|}A_i$를 만족합니다.
+- 어떤 정수 $K$($1\leq K\leq \lvert A\rvert$)가 존재하여
+  $\mathrm{lcm}(A_1,A_2,\cdots,A_{\lvert A\rvert})+A_K=\sum_{i=1}^{\lvert A\rvert}A_i$를 만족합니다.
 
 $\mathrm{lcm}(x_1,x_2,\cdots,x_k)$는 $x_1,x_2,\cdots,x_k$의 최소공배수를 나타냅니다.
 
@@ -34,11 +34,11 @@ $\mathrm{lcm}(x_1,x_2,\cdots,x_k)$는 $x_1,x_2,\cdots,x_k$의 최소공배수를
 
 ## 출력
 
-조건을 만족하는 $A=(A_1,A_2,\cdots,A_{|A|})$를 다음 형식으로 출력하세요.
+조건을 만족하는 $A=(A_1,A_2,\cdots,A_{\lvert A\rvert})$를 다음 형식으로 출력하세요.
 
 ```text
-$|A|$
-$A_1\ A_2\ \cdots\ A_{|A|}$
+$\lvert A\rvert$
+$A_1\ A_2\ \cdots\ A_{\lvert A\rvert}$
 ```
 
 마지막에 개행을 출력하세요.

@@ -28,10 +28,10 @@ title: "Lexicographically Smallest and Largest Subarray"
 
 답이 여러 개라면 그중 어느 것을 출력해도 정답으로 인정됩니다.
 
-수열 $S=(S_1,S_2,\dots,S_{|S|})$가 수열 $T=(T_1,T_2,\dots,T_{|T|})$보다 **사전순으로 작다**는 것은 다음 $2$가지 중 $1$가지가 성립한다는 뜻입니다. 여기서 $|S|$, $|T|$는 각각 $S$, $T$의 길이입니다.
+수열 $S=(S_1,S_2,\dots,S_{\lvert S\rvert})$가 수열 $T=(T_1,T_2,\dots,T_{\lvert T\rvert})$보다 **사전순으로 작다**는 것은 다음 $2$가지 중 $1$가지가 성립한다는 뜻입니다. 여기서 $\lvert S\rvert$, $\lvert T\rvert$는 각각 $S$, $T$의 길이입니다.
 
-1. $|S|<|T|$이고 $(S_1,S_2,\dots,S_{|S|})=(T_1,T_2,\dots,T_{|S|})$입니다.
-2. $1\le i\le\min(|S|,|T|)$인 정수 $i$가 존재하고, 다음 $2$가지 조건이 모두 성립합니다.
+1. $\lvert S\rvert<\lvert T\rvert$이고 $(S_1,S_2,\dots,S_{\lvert S\rvert})=(T_1,T_2,\dots,T_{\lvert S\rvert})$입니다.
+2. $1\le i\le\min(\lvert S\rvert,\lvert T\rvert)$인 정수 $i$가 존재하고, 다음 $2$가지 조건이 모두 성립합니다.
    - $(S_1,S_2,\dots,S_{i-1})=(T_1,T_2,\dots,T_{i-1})$입니다.
    - $S_i$가 수로서 $T_i$보다 작습니다.
 

@@ -2,6 +2,7 @@ import { TagTranslator, type TagTranslation } from "./tag-translations.ts";
 declare const __YUKICODER_TAG_TRANSLATIONS__: TagTranslation[];
 import {
   applyTranslations,
+  excludingTranslationScope,
   TranslationHistory,
   type TranslationScope,
 } from "translation-core/fixed-translations";
@@ -95,7 +96,11 @@ declare global {
     };
   }
   const { notify } = notices;
-  const mutations = new TranslationMutations(document);
+  // Include the submission's source container before Ace initializes, as well
+  // as dynamically created Ace editors. Modal controls remain translatable.
+  const editorSelector =
+    ".ace_editor, #content[data-submission-id] #code, #modal_code_editor";
+  const mutations = new TranslationMutations(document, editorSelector);
   mutations.watch(
     [...problemTitleSelectors, "#content a[href]", "#tags_tbody"],
     ["value"],
@@ -114,7 +119,10 @@ declare global {
         titleHistory.restoreDetached();
       }
       if (!full && !pending.changed) return;
-      const scope = full ? document : pending.scope;
+      const scope = excludingTranslationScope(
+        full ? document : pending.scope,
+        editorSelector,
+      );
       if (entries) applyTranslations(document, entries, history, scope);
       tagTranslator.apply(document, history, scope);
       if (titlesReady)
@@ -131,7 +139,7 @@ declare global {
     mutations.take();
   }
   const observer = new MutationObserver((records) => {
-    mutations.add(records);
+    if (!mutations.add(records)) return;
     if (scheduled !== undefined || !globallyEnabled || suspended) return;
     // Yield to the browser and combine mutations from the same task.
     scheduled = setTimeout(() => {
@@ -181,6 +189,9 @@ declare global {
     history.restore();
     notices.clear();
     if (!live()) return;
+    const showTranslation = () => {
+      void render(false);
+    };
     const showOriginal = () => {
       problemRevision++;
       checkProblem = undefined;
@@ -190,9 +201,7 @@ declare global {
       restorePageTitle();
       notices.notifyText("source", "");
       notices.notifyText("problem", "일본어 원문입니다");
-      notices.setOriginalAction(() => {
-        void render(false);
-      }, "한국어 번역 보기");
+      notices.setOriginalAction(showTranslation, "한국어 번역 보기");
     };
     if (isProblemPage) {
       notices.setOriginalAction(showOriginal);
@@ -265,7 +274,12 @@ declare global {
             if (!attemptLive()) return;
             if (outcome?.status !== "applied") {
               restorePageTitle();
-              notices.setOriginalAction(undefined);
+              if (
+                outcome?.status === "failed" &&
+                outcome.reason === "verification"
+              )
+                notices.setOriginalAction(showTranslation, "한국어 번역 보기");
+              else notices.setOriginalAction(undefined);
               notices.notifyText("problem", "");
             }
             if (outcome?.status === "failed") {

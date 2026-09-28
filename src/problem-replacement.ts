@@ -1,4 +1,5 @@
 import { prepareTranslatedBlocks } from "translation-core/problem-rendering";
+import { sourceStatementNodes } from "translation-core/problem-document";
 import {
   sampleWarnings,
   sampleDataValues,
@@ -15,7 +16,7 @@ export function createProblemReplacement(
   async function prepareReplacement(
     translation: { title: Element; blocks: Element[] },
     liveTitle: Element,
-    liveBlocks: Element[],
+    liveNodes: ChildNode[],
     canonicalBlocks: Element[],
     options: {
       profile?: ProblemRenderProfile;
@@ -51,7 +52,10 @@ export function createProblemReplacement(
         renderHost: liveTitle.parentElement ?? undefined,
       },
     );
-    const anchors = liveBlocks.map(() =>
+    const liveBlocks = liveNodes.filter(
+      (node): node is Element => node.nodeType === 1,
+    );
+    const anchors = liveNodes.map(() =>
       document.createComment("yukicoder-ko-original"),
     );
     const movedControls: {
@@ -64,6 +68,7 @@ export function createProblemReplacement(
     const originalTitle = [...liveTitle.childNodes];
     const translatedTitle = [...importedTitle.childNodes];
     const originalParent = liveTitle.parentNode;
+    const statementParent = liveNodes[0]?.parentNode;
     const originalValues = sampleDataElements(liveBlocks);
     const translatedValues = sampleDataElements(importedBlocks);
     const controls = liveBlocks
@@ -91,9 +96,12 @@ export function createProblemReplacement(
       if (
         !liveTitle.isConnected ||
         !parent ||
+        parent !== originalParent ||
+        !statementParent ||
+        !parent.contains(statementParent) ||
         !liveBlocks.length ||
-        liveBlocks.some(
-          (block) => !block.isConnected || block.parentNode !== parent,
+        liveNodes.some(
+          (block) => !block.isConnected || block.parentNode !== statementParent,
         )
       )
         throw new Error(
@@ -102,7 +110,7 @@ export function createProblemReplacement(
       try {
         applying = true;
         liveTitle.replaceChildren(...translatedTitle);
-        liveBlocks.forEach((block, index) => block.replaceWith(anchors[index]));
+        liveNodes.forEach((block, index) => block.replaceWith(anchors[index]));
         anchors[0].before(...importedBlocks);
         for (const { control, translated, parent, nextSibling } of controls) {
           movedControls.push({
@@ -127,19 +135,22 @@ export function createProblemReplacement(
     };
     const ownsBlocks = () =>
       anchors.every(
-        (anchor) => anchor.isConnected && anchor.parentNode === originalParent,
+        (anchor) => anchor.isConnected && anchor.parentNode === statementParent,
       ) &&
       importedBlocks.every(
-        (block) => block.isConnected && block.parentNode === originalParent,
+        (block) => block.isConnected && block.parentNode === statementParent,
       ) &&
-      [...(originalParent?.childNodes ?? [])]
-        .filter(
-          (node) => node.nodeType === 1 && (node as Element).matches(".block"),
-        )
-        .every((node) => importedBlocks.includes(node as HTMLElement));
+      !!statementParent &&
+      sourceStatementNodes(statementParent as Element).every(
+        (node) =>
+          anchors.includes(node as Comment) ||
+          importedBlocks.includes(node as HTMLElement),
+      );
     apply.isActive = () =>
       liveTitle.isConnected &&
       liveTitle.parentNode === originalParent &&
+      !!statementParent &&
+      !!originalParent?.contains(statementParent) &&
       ownsBlocks() &&
       translatedTitle.length === liveTitle.childNodes.length &&
       translatedTitle.every((node, i) => liveTitle.childNodes[i] === node);
@@ -162,7 +173,7 @@ export function createProblemReplacement(
       importedBlocks.forEach((block) => block.remove());
       anchors.forEach((anchor, index) => {
         if (anchor.parentNode) {
-          if (restoreBlocks) anchor.replaceWith(liveBlocks[index]);
+          if (restoreBlocks) anchor.replaceWith(liveNodes[index]);
           else anchor.remove();
         }
       });

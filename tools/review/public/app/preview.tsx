@@ -130,7 +130,11 @@ export function Preview({
     };
   };
   return (
-    <Paper withBorder radius="md" style={{ overflow: "hidden" }}>
+    <Paper
+      withBorder
+      radius="md"
+      style={{ overflow: "hidden", position: "relative" }}
+    >
       <Stack gap={0} aria-busy={pending}>
         {showHeading && (
           <Text fw={600} p="sm" bg="gray.0">
@@ -138,7 +142,18 @@ export function Preview({
           </Text>
         )}
         {pending && (
-          <Text role="status" p="sm">
+          <Text
+            role="status"
+            p="xs"
+            bg="white"
+            style={{
+              position: "absolute",
+              right: 8,
+              bottom: 8,
+              zIndex: 1,
+              pointerEvents: "none",
+            }}
+          >
             미리보기 렌더링 중…
           </Text>
         )}

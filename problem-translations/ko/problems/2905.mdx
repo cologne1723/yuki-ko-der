@@ -21,16 +21,16 @@ title: "Nabeatsu Integration"
 함수 $f(x)\ (x\in [0,1))$를 다음과 같이 정의합니다.
 
 - $x$의 소수점 이하에 $S$가 나타나지 않으면 $f(x)=0$입니다.
-- $x$의 소수점 이하에서 $S$가 처음 나타나는 위치가 소수점 이하 $i$번째 자리부터 $(i+|S|-1)$번째 자리까지라면 $f(x)=i$입니다.
+- $x$의 소수점 이하에서 $S$가 처음 나타나는 위치가 소수점 이하 $i$번째 자리부터 $(i+\lvert S\rvert-1)$번째 자리까지라면 $f(x)=i$입니다.
 
 엄밀하게는 함수 $f(x)$를 구간 $[0,1)$에서 다음과 같이 정의합니다.
 
-- $S$의 $i$번째 문자 $(1\leq i\leq |S|)$를 $S_i$라 하고, $N=\sum_{i=1}^{|S|} S_i 10^{|S|-i}$라 합니다.
+- $S$의 $i$번째 문자 $(1\leq i\leq \lvert S\rvert)$를 $S_i$라 하고, $N=\sum_{i=1}^{\lvert S\rvert} S_i 10^{\lvert S\rvert-i}$라 합니다.
 - 집합열 $I$를 다음과 같이 정의합니다.
 
-  $I_1=[N/10^{|S|},(N+1)/10^{|S|})$,
+  $I_1=[N/10^{\lvert S\rvert},(N+1)/10^{\lvert S\rvert})$,
 
-  $I_{i+1}=\bigcup_{k=0}^{10^i-1} [k/10^i+N/10^{|S|+i},k/10^i+(N+1)/10^{|S|+i})\setminus \bigcup_{k=1}^{i} I_k\ (i\geq 1)$
+  $I_{i+1}=\bigcup_{k=0}^{10^i-1} [k/10^i+N/10^{\lvert S\rvert+i},k/10^i+(N+1)/10^{\lvert S\rvert+i})\setminus \bigcup_{k=1}^{i} I_k\ (i\geq 1)$
 
   이때 $I$를 이루는 집합들은 서로 겹치지 않습니다.
 - $f(x)$를 다음과 같이 정의합니다.
@@ -54,7 +54,7 @@ $S$
 ## 제한
 
 - $S$는 숫자로 이루어진 문자열입니다.
-- $1\leq |S|\leq 1\,000\,000$
+- $1\leq \lvert S\rvert\leq 1\,000\,000$
 
 ## 출력
 

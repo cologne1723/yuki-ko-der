@@ -21,3 +21,153 @@ title: "[Cherry Anniversary] 한겨울에 피는 26그루의 벚나무"
 ## 출력
 
 가능하면 최대 에너지 합을, 불가능하면 `-1`을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="1_Sample_1.txt"}
+
+#### 입력
+
+```text
+1 1 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+1 2 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+4
+ABE 1 2 -1
+ABC 2 3 -1
+ABD 1 3 -10
+CD 2 3 100
+```
+
+#### 출력
+
+```text
+88
+```
+
+다음과 같이 능력을 사용하면 모든 벚나무의 꽃을 색 $3$으로 만들 수 있습니다. 능력 $S$로 꽃의 색을 $A$에서 $B$로 바꾸는 것을 $A\xrightarrow{[S]}B$로 나타냅니다.
+
+- 벚나무 `A`: $1\xrightarrow{[{\rm ABD}]}3$
+- 벚나무 `B`: $1\xrightarrow{[{\rm ABE}]}2\xrightarrow{[{\rm ABC}]}3$
+- 벚나무 `C`: $2\xrightarrow{[{\rm CD}]}3$
+- 벚나무 `D`, $\dots$, 벚나무 `Z`: 아무것도 하지 않습니다.
+
+이때 얻는 에너지는 $\underbrace{(-10)}_{{\rm A}}+\underbrace{(-1-1)}_{{\rm B}}+\underbrace{(100)}_{{\rm C}}+\underbrace{(0)}_{{\rm D}}+\dots+\underbrace{(0)}_{{\rm Z}}=88$입니다. 모든 벚나무의 꽃을 같은 색으로 만들면서 $88$보다 많은 에너지를 얻을 수는 없으므로 답은 $88$입니다.
+
+다음과 같은 능력 사용은 불가능합니다.
+
+- 벚나무 `A`가 처음에 $[{\rm ABC}]$를 사용하기: 처음에는 색 $2$도 색 $3$도 아니므로 사용할 수 없습니다.
+- 벚나무 `D`가 $[{\rm ABE}]$를 사용하기: `ABE`에 `D`가 포함되지 않으므로 사용할 수 없습니다.
+- 벚나무 `A`가 $1\xrightarrow{[{\rm ABE}]}2\xrightarrow{[{\rm ABC}]}3$으로 바꾸기: $K_{{\rm A}}=1$이므로 능력을 $2$번 사용할 수 없습니다.
+
+### 예제 2 {file="1_Sample_2.txt"}
+
+#### 입력
+
+```text
+1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+0
+```
+
+#### 출력
+
+```text
+Impossible
+```
+
+$26$그루의 벚나무의 꽃 색이 서로 다른데 능력을 사용할 수 없으므로, 꽃 색을 같게 만들 수 없습니다.
+
+### 예제 3 {file="1_Sample_3.txt"}
+
+#### 입력
+
+```text
+2 1 1 4 4 4 2 1 5 6 1 15 7 9 4 2 1 13 13 1 9 3 11 16 2 1
+24 24 23 22 23 26 24 21 24 26 23 20 22 21 22 18 23 19 23 20 19 22 23 20 21 16
+37
+FAULT 1 2 -10
+FALLINLOVE 2 3 -3
+DOUBT 3 4 -8
+PLASTIC 4 5 100
+SUBWAY 5 6 -85
+BUDDY 6 7 12
+BLUEMOON 7 8 0
+BAN 8 9 -1
+ANSWER 9 10 77
+LOVE 10 11 4
+LAUNDRY 11 12 5
+MICROSCOPE 12 13 74
+NOTLONELY 13 14 -4
+ANTHEM 14 15 6
+STRAYBULLET 1 15 9
+DEADEND 4 6 46
+SONIA 3 7 35
+JAMAICA 8 10 -3
+ONWAY 4 13 -4
+SILENT 5 10 -4
+NERVOUS 9 11 1
+ABCDEFGHIJKLMNOPQRSTUVWXYZ 1 2 4
+ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 3 7
+ABCDEFGHIJKLMNOPQRSTUVWXYZ 3 4 -4
+ABCDEFGHIJKLMNOPQRSTUVWXYZ 4 5 5
+ABCDEFGHIJKLMNOPQRSTUVWXYZ 5 6 10
+ABCDEFGHIJKLMNOPQRSTUVWXYZ 6 7 53
+ABCDEFGHIJKLMNOPQRSTUVWXYZ 7 8 31
+ABCDEFGHIJKLMNOPQRSTUVWXYZ 8 9 10
+ABCDEFGHIJKLMNOPQRSTUVWXYZ 9 10 -46
+ABCDEFGHIJKLMNOPQRSTUVWXYZ 10 11 46
+ABCDEFGHIJKLMNOPQRSTUVWXYZ 11 12 5
+ABCDEFGHIJKLMNOPQRSTUVWXYZ 12 13 13
+ABCDEFGHIJKLMNOPQRSTUVWXYZ 13 14 64
+ABCDEFGHIJKLMNOPQRSTUVWXYZ 14 15 19
+ABCDEFGHIJKLMNOPQRSTUVWXYZ 15 16 0
+ABCDEFGHIJKLMNOPQRSTUVWXYZ 16 1 31
+```
+
+#### 출력
+
+```text
+35282
+```
+
+### 예제 4 {file="1_Sample_4.txt"}
+
+#### 입력
+
+```text
+2 4 2 15 4 11 6 1 5 6 15 15 7 11 6 12 14 15 13 11 9 4 13 16 4 3
+104 1007 1114 1023 215 1129 707 507 1112 516 727 129 417 418 1012 1219 629 323 1021 829 112 1013 505 710 102 928
+26
+A 2 10 1
+B 4 10 1
+C 2 10 1
+D 15 10 1
+E 4 10 1
+F 11 10 1
+G 6 10 1
+H 1 10 1
+I 5 10 1
+J 6 10 1
+K 15 10 1
+L 15 10 1
+M 7 10 1
+N 11 10 1
+O 6 10 1
+P 12 10 1
+Q 14 10 1
+R 15 10 1
+S 13 10 1
+T 11 10 1
+U 9 10 1
+V 4 10 1
+W 13 10 1
+X 16 10 1
+Y 4 10 1
+Z 3 10 1
+```
+
+#### 출력
+
+```text
+17518
+```

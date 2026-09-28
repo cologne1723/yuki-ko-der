@@ -5,8 +5,8 @@ problemNo: 60
 problemId: 123
 sourceTitle: "魔法少女"
 sourceHtmlSha256: 9c5afbb3a8d19857f2d482ca093cf00db5056223bcc21f66049bf35fc11f2039
-humanReview: []
-machineReview: approved
+humanReview: [ cologne ]
+machineReview: unreviewed
 title: "마법소녀"
 ---
 
@@ -37,18 +37,24 @@ $\vdots$
 $AX_K\ AY_K\ W_K\ H_K\ D_K$
 ```
 
-$N$은 적의 수이고 $K$는 Madoka의 공격 횟수입니다. 모든 값은 정수이며 각 줄의 값은 공백으로 구분되어 주어집니다.
-각 적의 위치는 $(X_i,Y_i)$이고 체력은 $HP_i$입니다. 적들의 좌표는 서로 다릅니다.
-$j$번째 공격은 $AX_j \le X \le AX_j+W_j$와 $AY_j \le Y \le AY_j+H_j$를 모두 만족하는 위치의 적에게 $D_j$만큼 피해를 줍니다. 같은 공격이 여러 번 주어질 수도 있습니다.
+$N$은 적의 수이고 $K$는 Madoka의 공격 횟수입니다. 각 줄의 값은 공백으로 구분되어 주어집니다.
+각 적의 위치는 $(X_i,Y_i)$이고 체력은 $HP_i$입니다.
+$j$번째 공격은 $AX_j \le X \le AX_j+W_j$와 $AY_j \le Y \le AY_j+H_j$를 모두 만족하는 위치의 적에게 $D_j$만큼 피해를 줍니다.
 
 ## 제한
 
+- 입력으로 주어지는 모든 수는 정수입니다.
+- 적들의 좌표는 서로 다릅니다.
 - $1 \le N,K \le 100\,000$
 - $-500 \le X_i,Y_i \le 500$ $(1 \le i \le N)$
 - $1 \le HP_i \le 10\,000$ $(1 \le i \le N)$
 - $-500 \le AX_j,AY_j \le 500$ $(1 \le j \le K)$
 - $1 \le W_j,H_j \le 500$ $(1 \le j \le K)$
 - $1 \le D_j \le 10\,000$ $(1 \le j \le K)$
+
+---
+
+같은 공격이 여러 번 주어질 수도 있습니다.
 
 ## 출력
 

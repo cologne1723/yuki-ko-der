@@ -14,9 +14,9 @@ title: "삼차 함수의 절댓값"
 
 $L \leq R$를 만족하는 $6$개의 정수 $C_0, C_1, C_2, C_3, L, R$가 주어집니다.
 
-$L \leq x \leq R$를 만족하는 모든 실수 $x$에 대한 $|C_0 + C_1 x + C_2 x^2 + C_3 x^3|$의 최솟값
+$L \leq x \leq R$를 만족하는 모든 실수 $x$에 대한 $\lvert C_0 + C_1 x + C_2 x^2 + C_3 x^3\rvert$의 최솟값
 
-$\min_{L \leq x \leq R} |C_0 + C_1 x + C_2 x^2 + C_3 x^3|$
+$\min_{L \leq x \leq R} \lvert C_0 + C_1 x + C_2 x^2 + C_3 x^3\rvert$
 
 을 구하세요. 단, 최솟값이 존재한다는 것은 증명할 수 있습니다.
 
@@ -41,9 +41,9 @@ $1$번째 줄에 $C_0, C_1, C_2, C_3$가 공백으로 구분되어 주어집니�
 
 ## 출력
 
-$L \leq x \leq R$를 만족하는 모든 실수 $x$에 대한 $|C_0 + C_1 x + C_2 x^2 + C_3 x^3|$의 최솟값
+$L \leq x \leq R$를 만족하는 모든 실수 $x$에 대한 $\lvert C_0 + C_1 x + C_2 x^2 + C_3 x^3\rvert$의 최솟값
 
-$\min_{L \leq x \leq R} |C_0 + C_1 x + C_2 x^2 + C_3 x^3|$
+$\min_{L \leq x \leq R} \lvert C_0 + C_1 x + C_2 x^2 + C_3 x^3\rvert$
 
 을 $1$줄에 출력하세요.
 
@@ -72,9 +72,9 @@ $\min_{L \leq x \leq R} |C_0 + C_1 x + C_2 x^2 + C_3 x^3|$
 0.000000
 ```
 
-$f(x) = C_0 + C_1 x + C_2 x^2 + C_3 x^3 = 0 + 0x + 0x^2 + 0x^3$로 둡니다. $|f(x)|$는 구간 $[L,R] = [0,0]$에서 $0$이라는 값만 가지므로,
+$f(x) = C_0 + C_1 x + C_2 x^2 + C_3 x^3 = 0 + 0x + 0x^2 + 0x^3$로 둡니다. $\lvert f(x)\rvert$는 구간 $[L,R] = [0,0]$에서 $0$이라는 값만 가지므로,
 
-$\min_{L \leq x \leq R} |f(x)| = 0$
+$\min_{L \leq x \leq R} \lvert f(x)\rvert = 0$
 
 입니다.
 
@@ -93,9 +93,9 @@ $\min_{L \leq x \leq R} |f(x)| = 0$
 1.000000
 ```
 
-$f(x) = C_0 + C_1 x + C_2 x^2 + C_3 x^3 = -x$로 둡니다. $|f(x)| = |x|$는 구간 $[L,R] = [1,2]$에서 $x$와 같고 엄격하게 증가하므로,
+$f(x) = C_0 + C_1 x + C_2 x^2 + C_3 x^3 = -x$로 둡니다. $\lvert f(x)\rvert = \lvert x\rvert$는 구간 $[L,R] = [1,2]$에서 $x$와 같고 엄격하게 증가하므로,
 
-$\min_{L \leq x \leq R} |f(x)| = |f(L)| = 1$
+$\min_{L \leq x \leq R} \lvert f(x)\rvert = \lvert f(L)\rvert = 1$
 
 입니다.
 
@@ -114,9 +114,9 @@ $\min_{L \leq x \leq R} |f(x)| = |f(L)| = 1$
 1.000000
 ```
 
-$f(x) = C_0 + C_1 x + C_2 x^2 + C_3 x^3 = 1+x^2$로 둡니다. $|f(x)| = 1+x^2$는 구간 $[L,R] = [-1,1]$에서 아래로 볼록하고 $x = 0$일 때 최솟값을 가지므로,
+$f(x) = C_0 + C_1 x + C_2 x^2 + C_3 x^3 = 1+x^2$로 둡니다. $\lvert f(x)\rvert = 1+x^2$는 구간 $[L,R] = [-1,1]$에서 아래로 볼록하고 $x = 0$일 때 최솟값을 가지므로,
 
-$\min_{L \leq x \leq R} |f(x)| = |f(0)| = 1$
+$\min_{L \leq x \leq R} \lvert f(x)\rvert = \lvert f(0)\rvert = 1$
 
 입니다.
 
@@ -135,8 +135,8 @@ $\min_{L \leq x \leq R} |f(x)| = |f(0)| = 1$
 0.000000
 ```
 
-$f(x) = C_0 + C_1 x + C_2 x^2 + C_3 x^3 = x^3$로 둡니다. $|f(x)| = |x^3|$는 구간 $[L,R] = [-1,2]$에 영점(방정식 $|f(x)| = 0$의 해) $x = 0$을 가지므로,
+$f(x) = C_0 + C_1 x + C_2 x^2 + C_3 x^3 = x^3$로 둡니다. $\lvert f(x)\rvert = \lvert x^3\rvert$는 구간 $[L,R] = [-1,2]$에 영점(방정식 $\lvert f(x)\rvert = 0$의 해) $x = 0$을 가지므로,
 
-$\min_{L \leq x \leq R} |f(x)| = 0$
+$\min_{L \leq x \leq R} \lvert f(x)\rvert = 0$
 
 입니다.

@@ -6,6 +6,77 @@ const titles = [
   { problemNo: 1, problemId: 18, source: "題名", target: "제목" },
 ];
 const code = await bundle("src/content.ts", titles);
+test("submission editors stay untouched and do not trigger rescans while surrounding UI translates", async () => {
+  const { dom, close } = page(
+    '<main id="content" data-submission-id="1184874"><div id="code">source</div><button>source</button></main><div id="source_code_modal"><div id="modal_code_editor">source</div><button>source</button></div>',
+    "https://yukicoder.me/submissions/1184874",
+  );
+  let changed!: Change;
+  Object.assign(dom.window, {
+    chrome: {
+      runtime: {
+        getURL: (p: string) => p,
+        sendMessage: async () => statusCatalog("제목"),
+      },
+      storage: {
+        local: { get: async () => ({}) },
+        onChanged: {
+          addListener: (fn: Change) => {
+            changed = fn;
+          },
+        },
+      },
+    },
+    fetch: async () =>
+      Response.json({
+        translations: [
+          { selector: "div, button", source: "source", target: "target" },
+        ],
+      }),
+  });
+  try {
+    dom.window.eval(code);
+    await settle();
+    const doc = dom.window.document;
+    const editor = doc.querySelector("#code")!;
+    const modal = doc.querySelector("#modal_code_editor")!;
+    assert.equal(editor.textContent, "source");
+    assert.equal(modal.textContent, "source");
+    assert.deepEqual(
+      [...doc.querySelectorAll("button")].map((e) => e.textContent),
+      ["target", "target"],
+    );
+    let queries = 0;
+    const query = doc.querySelectorAll.bind(doc);
+    doc.querySelectorAll = ((selector: string) => {
+      queries++;
+      return query(selector);
+    }) as typeof doc.querySelectorAll;
+    editor.className = "ace_editor ace_focus";
+    editor.innerHTML = '<div class="ace_line">source</div>';
+    modal.textContent = "changed code";
+    await settle();
+    assert.equal(queries, 0);
+    assert.equal(editor.textContent, "source");
+    const ui = doc.createElement("button");
+    ui.textContent = "source";
+    doc.querySelector("#source_code_modal")!.append(ui);
+    const dynamic = doc.createElement("div");
+    dynamic.className = "ace_editor";
+    dynamic.innerHTML = "<div>source</div>";
+    doc.querySelector("#content")!.append(dynamic);
+    await settle();
+    assert.equal(ui.textContent, "target");
+    assert.equal(dynamic.textContent, "source");
+    changed({ translationEnabled: { newValue: false } }, "local");
+    await settle();
+    assert.equal(ui.textContent, "source");
+    assert.equal(editor.textContent, "source");
+    assert.equal(modal.textContent, "changed code");
+  } finally {
+    close();
+  }
+});
 test("dynamic contest problem options translate titles and preserve selection, values and restoration", async () => {
   const { dom, close } = page('<body><main id="content"></main></body>');
   let changed!: Change;
@@ -283,10 +354,11 @@ test("settings failure preserves Japanese, offers retry, and cannot overwrite a 
   }
 });
 
-test("page-load catalog removals override bundled titles and verification failures have a brief notice", async () => {
+test("page-load catalog removals override bundled titles and verification failures keep translation access", async () => {
   const { dom, close } = page(
     '<body><div id="content"><h3>No.1 題名</h3><a href="/problems/no/1">題名</a></div></body>',
   );
+  let translationAttempts = 0;
   Object.assign(dom.window, {
     chrome: {
       runtime: {
@@ -300,11 +372,16 @@ test("page-load catalog removals override bundled titles and verification failur
     fetch: async () => Response.json({ translations: [] }),
     yukicoderProblemTranslations: {
       restoreProblem() {},
-      translateProblem: async () => ({
-        status: "failed",
-        reason: "verification",
-        detail: "Sample changed",
-      }),
+      translateProblem: async () => {
+        translationAttempts++;
+        return translationAttempts === 1
+          ? {
+              status: "failed",
+              reason: "verification",
+              detail: "Sample changed",
+            }
+          : { status: "applied" };
+      },
     },
   });
   try {
@@ -313,8 +390,19 @@ test("page-load catalog removals override bundled titles and verification failur
     assert.equal(dom.window.document.querySelector("a")!.textContent, "題名");
     const notice = dom.window.document.querySelector("#yukicoder-ko-status")!;
     assert.match(notice.textContent!, /원문을 표시/);
-    assert.equal(notice.querySelector("button"), null);
+    assert.equal(
+      notice.querySelector("button")?.textContent,
+      "한국어 번역 보기",
+    );
     assert.doesNotMatch(notice.textContent!, /Sample changed/);
+    notice.querySelector<HTMLButtonElement>("button")!.click();
+    await settle();
+    assert.equal(translationAttempts, 2);
+    assert.equal(
+      dom.window.document.querySelector("#yukicoder-ko-status")!.firstChild
+        ?.textContent,
+      "한국어 번역본 입니다.",
+    );
   } finally {
     close();
   }
@@ -839,7 +927,7 @@ for (const state of [
   "throw",
   "cancelled",
 ]) {
-  test(`unapplied problem ${state} removes redundant original action`, async () => {
+  test(`unapplied problem ${state} keeps only the relevant action`, async () => {
     const { dom, close } = page(
       '<main id="content"><h3>No.1 題名</h3><nav><a href="/problems/no/1">No.1 題名</a></nav><p id="original-body">Japanese</p></main>',
     );
@@ -867,10 +955,14 @@ for (const state of [
       await settle();
       const notice = dom.window.document.querySelector("#yukicoder-ko-status");
       const buttons = [...(notice?.querySelectorAll("button") ?? [])];
-      assert.ok(buttons.every((b) => b.textContent !== "원문 보기"));
+      if (state === "verification")
+        assert.ok(buttons.some((b) => b.textContent === "한국어 번역 보기"));
+      else assert.ok(buttons.every((b) => b.textContent !== "원문 보기"));
       assert.equal(
         buttons.length,
-        state === "network" || state === "throw" ? 1 : 0,
+        state === "network" || state === "throw" || state === "verification"
+          ? 1
+          : 0,
       );
       assert.doesNotMatch(notice?.textContent ?? "", /불러오고 있습니다/);
       if (state === "unavailable")

@@ -5,8 +5,8 @@ problemNo: 61
 problemId: 113
 sourceTitle: "リベリオン"
 sourceHtmlSha256: 4e72178c19f4ac58eb2c12476424aee3fe3a775c7e09f7d4f464b65f6350f7b4
-humanReview: []
-machineReview: approved
+humanReview: [ cologne ]
+machineReview: unreviewed
 title: "리벨리온"
 ---
 
@@ -26,7 +26,6 @@ Mami와 총알의 크기는 무시합니다. Homura는 자신의 총알에 맞�
 
 ## 입력
 
-입력은 다음 형식으로 주어집니다. $1$번째 줄에 질의 수 $Q$가 주어지고, 이어지는 $Q$개 줄에 각 질의가 주어집니다. 본문에서 사용하는 $W$, $H$, $D$, $M_x$, $M_y$, $H_x$, $H_y$, $V_x$, $V_y$는 각 질의의 값이며, $i$번째 질의의 값은 각각 $W_i$, $H_i$, $D_i$, $M_{x_i}$, $M_{y_i}$, $H_{x_i}$, $H_{y_i}$, $V_{x_i}$, $V_{y_i}$로 나타냅니다. 여기서 $1 \le i \le Q$입니다.
 
 ```text
 $Q$
@@ -36,17 +35,18 @@ $\vdots$
 $W_Q\ H_Q\ D_Q\ M_{x_Q}\ M_{y_Q}\ H_{x_Q}\ H_{y_Q}\ V_{x_Q}\ V_{y_Q}$
 ```
 
-모든 값은 정수이며, 각 질의의 값은 공백으로 구분되어 주어집니다.
+첫 번째 줄에 쿼리의 수 $Q$가 주어지고, 다음 $Q$개의 줄에 각 쿼리가 주어집니다.
 
 ## 제한
 
+- 입력으로 주어지는 모든 수는 정수입니다.
 - $1 \le Q \le 10\,000$
 - $2 \le W,H \le 15$
-- $1 \le D \le 100\,000\,000$
+- $1 \le D \le 10^8$
 - $0 < M_x,H_x < W$
 - $0 < M_y,H_y < H$
 - $-15 \le V_x,V_y \le 15$
-- Mami와 Homura의 위치는 서로 다릅니다.
+- $(M_x, M_y) \ne (H_x, H_y)$
 - $(V_x,V_y) \ne (0,0)$
 
 

@@ -73,6 +73,44 @@ test("initial problem loading does not show an empty list", async (t) => {
   assert.equal(page.screen.queryByText("문제가 없습니다."), null);
 });
 
+test("problem URL opens the pagination page containing the selected problem", async (t) => {
+  const items = Array.from({ length: 25 }, (_, i) => ({
+    ...problems[0],
+    problemNo: i + 1,
+    koreanTitle: `Draft ${i + 1}`,
+  }));
+  const page = reactPage(
+    t,
+    async (path) =>
+      Response.json(
+        path === "/api/problems"
+          ? { problems: items }
+          : items[Number(path.split("/").at(-1)) - 1],
+      ),
+    "/?problem=13",
+  );
+  await page.screen.findByRole("heading", { name: "13. Draft 13" });
+  await page.waitFor(() => {
+    const navigation = page.dom.window.document.getElementById(
+      "review-problem-navigation",
+    )!;
+    assert.ok(navigation.querySelector('a[href="/?problem=13"]'));
+    assert.equal(navigation.querySelector('a[href="/?problem=1"]'), null);
+  });
+});
+
+test("source editor highlights trailing whitespace", async (t) => {
+  const problem = {
+    ...problems[0],
+    koreanSource: "<p>Trailing spaces</p>  ",
+  };
+  const page = reactPage(t, async (path) =>
+    Response.json(path === "/api/problems" ? { problems: [problem] } : problem),
+  );
+  await page.screen.findByRole("heading", { name: "1. Draft 1" });
+  assert.ok(page.dom.window.document.querySelector(".cm-trailingSpace"));
+});
+
 test("problem list failures remain visible with navigation collapsed and can retry", async (t) => {
   let failed = true;
   const page = reactPage(t, async (path) =>
@@ -1370,6 +1408,7 @@ for (const succeeds of [false, true])
       page.screen.getByRole("button", { name: "검수 승인", exact: true }),
     );
     assert.ok(page.screen.getByRole("heading", { name: "1. Draft 1" }));
+    await page.waitFor(() => assert.equal(typeof finish, "function"));
     items[0] = {
       ...items[0],
       reviewStatus: succeeds ? "approved" : "unreviewed",
@@ -1542,4 +1581,169 @@ test("problem review filters expose all six independent human and machine combin
       /Unsaved filter draft/,
     );
   }
+});
+
+test("a keystroke between a React commit and passive effects cannot replay an older draft", async (t) => {
+  const page = reactPage(t, async (path) =>
+    Response.json(path === "/api/problems" ? { problems } : problems[0]),
+  );
+  await page.screen.findByRole("heading", { name: "1. Draft 1" });
+  const view = page.editorView();
+  assert.equal(view.state.doc.toString(), problems[0].koreanSource);
+  const documents = page.editDuringNextCommit("B");
+  page.edit("A");
+  await page.waitFor(() => assert.ok(documents.includes("BA")));
+  // @uiw's typing latch defers a queued value for 200 timer ticks. Let it
+  // expire after the newer React render has already caught up with the editor.
+  await new Promise((resolve) => setTimeout(resolve, 1500));
+  assert.equal(view.state.doc.toString(), "BA");
+  assert.equal(view.state.selection.main.head, 1);
+});
+
+test("explicit formatting and compiled preview switching retain the live source", async (t) => {
+  const source = await readFile(
+    "problem-translations/ko/problems/1.mdx",
+    "utf8",
+  );
+  const prefix = source.slice(0, source.indexOf("## "));
+  const problem = {
+    ...problems[0],
+    sourceFormat: "mdx",
+    koreanSource: prefix + "## 문제\n\n원래 설명",
+  };
+  const page = reactPage(t, async (path) =>
+    Response.json(path === "/api/problems" ? { problems: [problem] } : problem),
+  );
+  await page.screen.findByRole("heading", { name: "1. Draft 1" });
+  const view = page.editorView();
+  const draft = prefix + "## 문제\n\n새 설명";
+  page.edit(draft);
+  await page.user.click(
+    page.screen.getByRole("button", { name: "편집 도구 및 검사" }),
+  );
+  await page.user.click(
+    await page.screen.findByRole("button", { name: "컴파일된 HTML 보기" }),
+  );
+  await page.waitFor(() =>
+    assert.match(view.state.doc.toString(), /<p>새 설명<\/p>/),
+  );
+  await page.user.click(page.screen.getByRole("button", { name: "소스 편집" }));
+  assert.equal(view.state.doc.toString(), draft);
+  await page.user.click(page.screen.getByRole("button", { name: "서식 정리" }));
+  await page.waitFor(() =>
+    assert.equal(view.state.doc.toString(), draft + "\n"),
+  );
+  assert.equal(page.editorView(), view);
+});
+
+test("approval distinguishes its saved snapshot from edits made while the request is pending", async (t) => {
+  let finish!: (response: Response) => void;
+  let submitted = "";
+  let current = { ...problems[0], machineTranslated: false };
+  const page = reactPage(t, async (path, init) => {
+    if (path.endsWith("/approve") && init?.method === "POST") {
+      submitted = JSON.parse(String(init.body)).html;
+      return new Promise<Response>((resolve) => {
+        finish = resolve;
+      });
+    }
+    return Response.json(
+      path === "/api/problems" ? { problems: [current, problems[1]] } : current,
+    );
+  });
+  await page.screen.findByRole("heading", { name: "1. Draft 1" });
+  await page.user.type(
+    page.screen.getByRole("textbox", { name: "검수자 ID" }),
+    "tester",
+  );
+  await page.user.click(
+    page.screen.getByRole("checkbox", {
+      name: "검수 승인 후 자동으로 다음으로 넘어가기",
+    }),
+  );
+  const approved = "<p>승인 요청 시점의 문장</p>";
+  const latest = "<p>승인 요청 뒤에 계속 수정한 문장</p>";
+  page.edit(approved);
+  await page.user.click(
+    page.screen.getByRole("button", { name: "검수 승인", exact: true }),
+  );
+  await page.waitFor(() => assert.equal(submitted, approved));
+  page.edit(latest);
+  current = {
+    ...current,
+    koreanSource: approved,
+    koreanHtml: approved,
+    revision: "r2",
+    reviewStatus: "approved",
+  };
+  finish(Response.json(current));
+  await page.waitFor(() =>
+    assert.equal(
+      page.screen
+        .getByText(
+          "저장된 내용만 승인되었습니다. 현재 수정 내용은 아직 저장·승인되지 않았습니다.",
+        )
+        .getAttribute("aria-hidden"),
+      "false",
+    ),
+  );
+  assert.ok(page.screen.getByText("초안 · 미검수"));
+  assert.equal(page.editorView().state.doc.toString(), latest);
+  assert.equal(current.koreanSource, approved);
+  assert.ok(page.screen.getByText("저장하지 않음"));
+  assert.ok(page.screen.getByRole("heading", { name: "1. Draft 1" }));
+});
+
+test("approval includes a native edit made before clicking even when the editor has not observed it yet", async (t) => {
+  let submitted: string | undefined;
+  let finish!: (response: Response) => void;
+  const page = reactPage(t, async (path, init) => {
+    if (path.endsWith("/approve") && init?.method === "POST") {
+      submitted = JSON.parse(String(init.body)).html;
+      return new Promise<Response>((resolve) => {
+        finish = resolve;
+      });
+    }
+    return Response.json(path === "/api/problems" ? { problems } : problems[0]);
+  });
+  await page.screen.findByRole("heading", { name: "1. Draft 1" });
+  await page.user.type(
+    page.screen.getByRole("textbox", { name: "검수자 ID" }),
+    "tester",
+  );
+  page.edit("before");
+  const view = page.editorView();
+  await page.waitFor(() => assert.equal(view.state.doc.toString(), "before"));
+  view.focus();
+  await new Promise((resolve) => setTimeout(resolve, 50));
+  page.holdEditorMutations();
+  const text = view.contentDOM.querySelector(".cm-line")!.firstChild!;
+  text.nodeValue = "before 추가 입력";
+  page.dom.window.getSelection()!.collapse(text, text.nodeValue!.length);
+  // No await here: the DOM visibly contains the edit, but MutationObserver
+  // delivery has not yet updated EditorState when the approve handler starts.
+  assert.equal(view.state.doc.toString(), "before");
+  page.fireEvent.click(
+    page.screen.getByRole("button", { name: "검수 승인", exact: true }),
+  );
+  await page.waitFor(() => assert.equal(submitted, "before 추가 입력"));
+  const later = view.contentDOM.querySelector(".cm-line")!.firstChild!;
+  later.nodeValue = "before 추가 입력 응답 전 입력";
+  page.dom.window.getSelection()!.collapse(later, later.nodeValue!.length);
+  finish(
+    Response.json({
+      ...problems[0],
+      koreanSource: "<!-- approved -->\n" + submitted,
+      machineTranslated: false,
+      revision: "r2",
+      reviewStatus: "approved",
+    }),
+  );
+  await page.waitFor(() =>
+    assert.equal(
+      page.screen.getByRole("button", { name: "저장", exact: true }).disabled,
+      false,
+    ),
+  );
+  assert.equal(view.state.doc.toString(), "before 추가 입력 응답 전 입력");
 });

@@ -5,7 +5,7 @@ problemNo: 62
 problemId: 132
 sourceTitle: "リベリオン(Extra)"
 sourceHtmlSha256: 3073aa99f7b1e5b5cca2ffa73656dc6c5d777f71f5762415b6f68124df3db74e
-humanReview: []
+humanReview: [ cologne ]
 machineReview: approved
 title: "리벨리온 (Extra)"
 ---
@@ -28,29 +28,26 @@ Mami와 총알의 크기는 무시합니다. Homura는 자신의 총알에 맞�
 
 ## 입력
 
-$1$번째 줄에 질의 수 $Q$가 주어집니다. 이어지는 $Q$개 줄에 각 질의가 주어집니다. 입력은 다음 형식입니다.
-
-본문에서 사용하는 $W,H,D,M_x,M_y,H_x,H_y,V_x,V_y$는 $i$번째 질의에서 각각 $W_i,H_i,D_i,M_{xi},M_{yi},H_{xi},H_{yi},V_{xi},V_{yi}$로 나타냅니다.
-
 ```text
 $Q$
-$W_1\ H_1\ D_1\ M_{x1}\ M_{y1}\ H_{x1}\ H_{y1}\ V_{x1}\ V_{y1}$
-$W_2\ H_2\ D_2\ M_{x2}\ M_{y2}\ H_{x2}\ H_{y2}\ V_{x2}\ V_{y2}$
+$W_1\ H_1\ D_1\ M_{x_1}\ M_{y_1}\ H_{x_1}\ H_{y_1}\ V_{x_1}\ V_{y_1}$
+$W_2\ H_2\ D_2\ M_{x_2}\ M_{y_2}\ H_{x_2}\ H_{y_2}\ V_{x_2}\ V_{y_2}$
 $\vdots$
-$W_Q\ H_Q\ D_Q\ M_{xQ}\ M_{yQ}\ H_{xQ}\ H_{yQ}\ V_{xQ}\ V_{yQ}$
+$W_Q\ H_Q\ D_Q\ M_{x_Q}\ M_{y_Q}\ H_{x_Q}\ H_{y_Q}\ V_{x_Q}\ V_{y_Q}$
 ```
 
-모든 값은 정수이며, 각 질의의 값은 공백으로 구분되어 주어집니다.
+첫 번째 줄에 쿼리의 수 $Q$가 주어지고, 다음 $Q$개의 줄에 각 쿼리가 주어집니다.
 
 ## 제한
 
+- 입력으로 주어지는 모든 수는 정수입니다.
 - $1 \le Q \le 10\,000$
-- $2 \le W,H \le 1\,000\,000\,000$
-- $1 \le D \le 1\,000\,000\,000$
+- $2 \le W,H \le 10^9$
+- $1 \le D \le 10^9$
 - $0 < M_x,H_x < W$
 - $0 < M_y,H_y < H$
-- $-1\,000\,000\,000 \le V_x,V_y \le 1\,000\,000\,000$
-- Mami와 Homura의 위치는 서로 다릅니다.
+- $-10^9 \le V_x,V_y \le 10^9$
+- $(M_x, M_y) \ne (H_x, H_y)$
 - $(V_x,V_y) \ne (0,0)$
 
 

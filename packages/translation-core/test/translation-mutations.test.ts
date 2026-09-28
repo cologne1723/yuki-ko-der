@@ -4,6 +4,37 @@ import { JSDOM } from "jsdom";
 import { applyTranslations } from "../src/fixed-translations.ts";
 import { TranslationMutations } from "../src/translation-mutations.ts";
 
+test("excluded editor mutations do not create pending translation work", () => {
+  const dom = new JSDOM(
+    '<main><div class="ace_editor"><span>code</span></div><button>outside</button></main>',
+  );
+  const doc = dom.window.document;
+  const mutations = new TranslationMutations(doc, ".ace_editor");
+  mutations.watch(["div", "span", "button"]);
+  const observer = new dom.window.MutationObserver(() => {});
+  observer.observe(doc, mutations.options);
+  try {
+    const editor = doc.querySelector(".ace_editor")!;
+    editor.firstChild!.textContent = "changed code";
+    editor.classList.add("ace_focus");
+    editor.innerHTML = "<div><span>new code</span></div>";
+    assert.equal(mutations.add(observer.takeRecords()), false);
+    assert.equal(mutations.take().changed, false);
+    editor.firstChild!.textContent = "another code change";
+    doc.querySelector("button")!.textContent = "new UI";
+    assert.equal(mutations.add(observer.takeRecords()), true);
+    const pending = mutations.take();
+    assert.equal(pending.changed, true);
+    assert.deepEqual(
+      [...pending.scope.querySelectorAll("button")],
+      [doc.querySelector("button")],
+    );
+  } finally {
+    observer.disconnect();
+    dom.window.close();
+  }
+});
+
 test("unrelated attributes do not schedule work and text updates stay subtree-scoped", () => {
   const dom = new JSDOM("<main><p>old</p></main><aside><p>source</p></aside>");
   const doc = dom.window.document;

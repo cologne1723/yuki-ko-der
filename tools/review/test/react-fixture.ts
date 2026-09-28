@@ -10,7 +10,7 @@ const bundle = await build({
     resolveDir: process.cwd() + "/tools/review",
     loader: "tsx",
     contents: `
-import React from 'react';
+import React, { Profiler } from 'react';
 import { act, configure, render, screen, fireEvent, waitFor, within, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MantineProvider } from '@mantine/core';
@@ -28,13 +28,19 @@ import { EditorView } from 'codemirror';
 export { screen, fireEvent, waitFor, within };
 // Shared runners can take more than one second to complete real disk-backed UI requests.
 configure({asyncUtilTimeout:10_000});
-let client, router;
+let client, router, nextCommit;
+export function editDuringNextCommit(text) {
+ const documents = [];
+ nextCommit = () => { const view=editorView(); const pos=view.state.selection.main.head; view.dispatch({changes:{from:pos,insert:text},selection:{anchor:pos+text.length}}); documents.push(view.state.doc.toString()); };
+ return documents;
+}
+function committed() { const callback=nextCommit; nextCommit=undefined; callback?.(); }
 export function cachedUi(){return client.getQueryData(["/api/ui"]);}
 function Ui(){const [params]=useSearchParams();return params.get("view")==="imports"?<Imports/>:<Glossary/>;}
 export function mount(path, kind) {
  client = new QueryClient({defaultOptions:{queries:{retry:false,...(kind==="ui"?{staleTime:15000,gcTime:Infinity,refetchOnWindowFocus:false}:{gcTime:0})},mutations:{retry:false}}});
  router = createMemoryRouter([{element:kind==='shell'?<Shell/>:<><div id="review-problem-navigation"/><Outlet/></>,children:[{path:'/',element:<Problems/>},{path:'/ui',element:kind==='ui'?<Ui/>:kind==='imports'?<Imports/>:<Glossary/>},{path:'/tools',element:<Tools/>},{path:'/tags',element:<Tags/>},{path:'/preview',element:<Comparison japanese="<p>Original</p>" korean="<p>Translation</p>"/>}]}],{initialEntries:[path]});
- render(<MantineProvider env="test"><ModalsProvider><QueryClientProvider client={client}><RouterProvider router={router}/></QueryClientProvider></ModalsProvider></MantineProvider>);
+ render(<Profiler id="review" onRender={committed}><MantineProvider env="test"><ModalsProvider><QueryClientProvider client={client}><RouterProvider router={router}/></QueryClientProvider></ModalsProvider></MantineProvider></Profiler>);
  return userEvent.setup({document});
 }
 export function edit(source){const view=EditorView.findFromDOM(document.querySelector('.cm-editor'));view.dispatch({changes:{from:0,to:view.state.doc.length,insert:source}});}
@@ -66,6 +72,32 @@ export function reactPage(
     pretendToBeVisual: true,
   });
   const w = dom.window;
+  // Force delayed delivery without faking document changes: CodeMirror can
+  // still drain the real records via takeRecords during its measurement pass.
+  let holdEditorMutations = false;
+  const NativeMutationObserver = w.MutationObserver;
+  w.MutationObserver = class extends NativeMutationObserver {
+    private editor = false;
+    private held: MutationRecord[] = [];
+    constructor(callback: MutationCallback) {
+      super((records, observer) => {
+        if (holdEditorMutations && this.editor) this.held.push(...records);
+        else callback(records, observer);
+      });
+    }
+    observe(target: Node, options?: MutationObserverInit) {
+      this.editor =
+        target instanceof w.Element && target.matches(".cm-content");
+      super.observe(target, options);
+    }
+    takeRecords() {
+      return [...this.held.splice(0), ...super.takeRecords()];
+    }
+    disconnect() {
+      this.held.length = 0;
+      super.disconnect();
+    }
+  };
   installStagingSrcdoc(dom);
   const channels = new Set<MessageChannel>();
   Object.assign(w, {
@@ -119,14 +151,23 @@ export function reactPage(
       channel.port2.close();
     }
   });
-  return { dom, user, ...fixture } as {
+  return {
+    dom,
+    user,
+    holdEditorMutations: () => {
+      holdEditorMutations = true;
+    },
+    ...fixture,
+  } as {
     dom: JSDOM;
     user: any;
+    holdEditorMutations: () => void;
     screen: any;
     within: any;
     fireEvent: any;
     waitFor: (f: () => unknown) => Promise<void>;
     edit: (s: string) => void;
+    editDuringNextCommit: (s: string) => string[];
     editorView: () => import("codemirror").EditorView;
     navigate: (s: string) => Promise<void>;
     cachedUi: () => { pages: unknown[] };

@@ -20,11 +20,11 @@ $N$개의 톱니바퀴로 감속 장치를 만들려고 합니다.
 
 서로 맞물린 $2$개의 톱니바퀴 $a,b$의 톱니 수를 각각 $z_a,z_b$라고 하고, $a$를 $\theta_a$만큼 회전했을 때 $b$가 회전한 각도를 $\theta_b$라고 하면
 
-$|\theta_b|=\frac{|\theta_a|z_a}{z_b}$
+$\lvert\theta_b\rvert=\frac{\lvert\theta_a\rvert z_a}{z_b}$
 
 입니다. 입력인 $i$번째 톱니바퀴를 $\theta_i$만큼 회전시켰을 때 출력인 $j$번째 톱니바퀴가 $\theta_j$만큼 회전한다면 감속비 $gr$은
 
-$gr=\frac{|\theta_i|}{|\theta_j|}$
+$gr=\frac{\lvert\theta_i\rvert}{\lvert\theta_j\rvert}$
 
 로 나타냅니다.
 
@@ -63,7 +63,7 @@ $1$번째 줄에 일렬로 놓인 톱니바퀴의 수 $N$이 주어집니다. $2
 2/1
 ```
 
-$|\theta_2|=\frac{20|\theta_1|}{40}$입니다. 따라서 $gr=\frac{|\theta_1|}{|\theta_2|}$이므로 감속비는 $2$입니다. `20/10`이나 `40/20`도 정답입니다.
+$\lvert\theta_2\rvert=\frac{20\lvert\theta_1\rvert}{40}$입니다. 따라서 $gr=\frac{\lvert\theta_1\rvert}{\lvert\theta_2\rvert}$이므로 감속비는 $2$입니다. `20/10`이나 `40/20`도 정답입니다.
 
 ### 예제 2 {file=""}
 
@@ -80,7 +80,7 @@ $|\theta_2|=\frac{20|\theta_1|}{40}$입니다. 따라서 $gr=\frac{|\theta_1|}{|
 1/1
 ```
 
-$|\theta_2|$와 $|\theta_3|$가 모두 $|\theta_1|$과 일치하므로 감속비는 $1$입니다. `10/10`, `20/20`, `100/100`도 정답입니다.
+$\lvert\theta_2\rvert$와 $\lvert\theta_3\rvert$가 모두 $\lvert\theta_1\rvert$과 일치하므로 감속비는 $1$입니다. `10/10`, `20/20`, `100/100`도 정답입니다.
 
 ### 예제 3 {file=""}
 

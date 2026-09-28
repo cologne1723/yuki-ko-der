@@ -198,82 +198,31 @@ test("output template guard excludes literal samples, code, and prose-only outpu
   after.window.close();
 });
 
-test("prose quantity gate rejects repeated ordinal and count omissions", () => {
+test("human-edited Korean quantities stay concise without digit coercion", () => {
   for (const phrase of [
     "첫째 줄",
-    "두 번째 줄",
+    "둘째 줄",
     "한 번",
-    "두 수열",
+    "둘 다",
     "하나 이상",
     "중 하나를",
-    "둘 다",
-    "한 예",
-    "세 구간",
-    "한 장",
-    "한 글자",
+    "두 정수",
+    "한 면",
+    "세 명령",
+    "여섯 개",
+    "첫 번째",
     "한 걸음",
   ])
-    assert.equal(
-      proseQuantityErrors(`## 입력\n\n${phrase}입니다.`).length,
-      1,
+    assert.deepEqual(
+      proseQuantityErrors(`## 입력\n\n${phrase}입니다.`),
+      [],
       phrase,
     );
   assert.deepEqual(
     proseQuantityErrors(
-      "## 입력\n\n$1$번째 줄에 $2$개의 수열이 주어집니다. 모두 정수이며 두려움은 없습니다. 하나님이라는 이름.\n",
+      "수행한 방법. 모두 정수입니다. **한 면**만 굽습니다. [두 번째 줄](https://example.com).",
     ),
     [],
-  );
-});
-
-test("reopened translations' noun quantities cannot silently pass", () => {
-  for (const phrase of [
-    "두 정수",
-    "한 방향으로",
-    "한 방법에는",
-    "두 다중집합의",
-    "두 이동 방법",
-    "한 칸의",
-    "한 공원에",
-  ])
-    assert.equal(proseQuantityErrors(phrase).length, 1, phrase);
-  assert.deepEqual(
-    proseQuantityErrors(
-      "수행한 방법. 가능한 한 빨리. 모두 정수입니다. 한 칸타타. 한 방법론. 두 정수론. $1$칸. $2$개의 정수.\n\n" +
-        String.fromCharCode(96) +
-        "한 칸" +
-        String.fromCharCode(96),
-    ),
-    [],
-  );
-});
-
-test("face quantities are checked without matching interview or area words", () => {
-  assert.equal(
-    proseQuantityErrors("한 면만 굽고 두 면을 비교합니다.").length,
-    2,
-  );
-  assert.equal(proseQuantityErrors("**한 면**만 굽습니다.").length, 1);
-  assert.deepEqual(
-    proseQuantityErrors(
-      "$1$개의 면만 굽습니다. 수행한 면접과 계산한 면적. 한 면접관. 한 면적값.\n\n`한 면`\n\n```text\n한 면\n```",
-    ),
-    [],
-  );
-});
-
-test("prose quantity gate excludes literal code, samples, URLs and image attributes", () => {
-  assert.deepEqual(
-    proseQuantityErrors(
-      '### 예제 1 {file=""}\n\n```text\n첫째 줄\n하나\n```\n\n`두 번째` [링크](https://example.com/하나) ![한 줄](image.png)\n',
-    ),
-    [],
-  );
-  assert.equal(
-    proseQuantityErrors(
-      '### 예제 1 {file=""}\n\n> 첫 번째 계산입니다.\n\n[두 번째 줄](https://example.com)\n',
-    ).length,
-    2,
   );
 });
 

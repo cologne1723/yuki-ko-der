@@ -131,20 +131,14 @@ function missingMathFormatErrors(
     : [];
 }
 
-// Deliberately narrow: reject recurring, unambiguous prose quantities, not
-// every Korean word containing a numeral syllable (e.g. 모두, 두려움).
+// Korean quantity words are valid prose. Only explicit digit formatting belongs
+// here; preserving the quantity and logical scope requires source comparison.
 export function proseQuantityErrors(body: string): string[] {
   const errors: string[] = [];
   for (const token of new MarkdownIt().parse(body, {})) {
     if (token.type !== "inline") continue;
     for (const child of token.children ?? []) {
       if (child.type !== "text") continue;
-      const quantities =
-        /(?<![가-힣])(?:첫째|둘째|셋째|넷째|(?:첫|두|세|네) 번째|(?:한|두|세|네|다섯|여섯) (?:번|줄|개|명|자리|입력|파일|예|변|대|수열|조건|구간|장|글자|걸음|(?:정수|방향|방법|다중집합|이동|칸|공원)(?=$|[\s.,!?]|으로|이라|부터|까지|[만을은는에의이가와과도])|면(?=$|[\s.,!?]|으로|이라|[만을은에의이과]))|둘 다|하나(?=씩|를|만|의|로|$|[\s.,!?]))/gu;
-      for (const match of child.content.matchAll(quantities))
-        errors.push(
-          `본문 수량·순번을 수식으로 쓰세요 (본문 ${1 + (token.map?.[0] ?? 0)}행): ${match[0]}`,
-        );
       // A case reference in prose is not an example heading or literal IO.
       for (const match of child.content
         .replace(/\$[^$\n]*\$/g, "")

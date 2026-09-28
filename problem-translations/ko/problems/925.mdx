@@ -29,7 +29,7 @@ title: "키즈나 Extra"
 - $1\ X\ Y$: 쿼리 1입니다. 원소 $A_X$의 값을 $Y$로 변경하세요.
 - $2\ L\ R$: 쿼리 2입니다. 다음 함수 $f$의 최솟값을 구하세요.
 
-  $f(x) = \sum_{k = L}^{R} |x - A_k|$
+  $f(x) = \sum_{k = L}^{R} \lvert x - A_k\rvert$
 
 입력은 인코딩되어 주어집니다. 자세한 내용은 「디코딩 방법」을 참조하세요.
 
@@ -114,7 +114,7 @@ $2 \; L \; R$
 3
 ```
 
-$\mathrm{query}_1$에서는 $f(x) = |x-1| + |x-2| + |x-3| + |x-4| + |x-5|$입니다. $x = 3$일 때 최솟값 $f(x) = 6$을 달성합니다.
+$\mathrm{query}_1$에서는 $f(x) = \lvert x-1\rvert + \lvert x-2\rvert + \lvert x-3\rvert + \lvert x-4\rvert + \lvert x-5\rvert$입니다. $x = 3$일 때 최솟값 $f(x) = 6$을 달성합니다.
 
 $\mathrm{query}_3$에서는 수열이 $A = \{1, 2, 5, 4, 5\}$가 됩니다.
 

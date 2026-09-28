@@ -1,0 +1,91 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3714
+problemId: 12412
+sourceTitle: "Prefix Team Name"
+sourceHtmlSha256: 1db0f9b71965df3c5fe9b62247edb47fe45abde48c8091d6e525edda7a3817a7
+humanReview: []
+machineReview: unreviewed
+title: "Prefix Team Name"
+---
+
+## 문제 설명
+
+선수 $3$명이 팀을 만들었습니다. 각 선수의 사용자 이름은 $X,Y,Z$입니다.
+
+다음 방법으로 팀 이름을 만들려고 합니다.
+
+- 각 선수의 사용자 이름에서 길이가 $1$ 이상인 접두사를 각각 자유롭게 고른 뒤, 원하는 순서로 이어 붙입니다.
+
+팀 이름으로 가능한 문자열의 개수를 구하세요.
+
+## 입력
+
+표준 입력으로 다음 형식의 입력이 주어집니다.
+
+```text
+$X$
+$Y$
+$Z$
+```
+
+## 제한
+
+- $X,Y,Z$는 영어 소문자로 이루어진 길이 $1$ 이상 $50$ 이하의 문자열입니다.
+
+## 출력
+
+팀 이름으로 가능한 문자열의 개수를 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+ab
+a
+b
+```
+
+#### 출력
+
+```text
+8
+```
+
+`aab`, `aba`, `baa`, `abab`, `abba`, `aabb`, `baba`, `baab`의 $8$가지입니다.
+
+### 예제 2 {file="01_sample_02.txt"}
+
+#### 입력
+
+```text
+yuusaan
+loop
+cafe
+```
+
+#### 출력
+
+```text
+672
+```
+
+### 예제 3 {file="01_sample_03.txt"}
+
+#### 입력
+
+```text
+missisippi
+miss
+m
+```
+
+#### 출력
+
+```text
+163
+```

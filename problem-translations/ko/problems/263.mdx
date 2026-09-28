@@ -17,8 +17,8 @@ title: "Common Palindromes Extra"
 
 문자열 $S,T$가 주어질 때 다음 조건을 모두 만족하는 순서 있는 튜플 $(i,j,k,l)$의 개수를 구하세요. 문자열 $U$의 $x$번째 문자부터 $y$번째 문자까지의 연속 부분 문자열을 $U[x,y]$로 나타냅니다.
 
-- $1 \leq i \leq j \leq |S|$
-- $1 \leq k \leq l \leq |T|$
+- $1 \leq i \leq j \leq \lvert S\rvert$
+- $1 \leq k \leq l \leq \lvert T\rvert$
 - $S[i,j]=T[k,l]$
 - $S[i,j]$는 회문입니다.
 
@@ -31,8 +31,8 @@ $T$
 
 ## 제한
 
-- $1 \leq |S| \leq 500\,000$
-- $1 \leq |T| \leq 500\,000$
+- $1 \leq \lvert S\rvert \leq 500\,000$
+- $1 \leq \lvert T\rvert \leq 500\,000$
 - $S,T$는 영대문자(`A`〜`Z`)만으로 이루어집니다.
 - 위 제약에 따라 답은 항상 $10^{18}$ 이하임이 보장됩니다.
 - 원문 공개 코드를 그대로 복사해 맞히지 못하도록 제약이 다소 강하게 설정되어 있습니다.

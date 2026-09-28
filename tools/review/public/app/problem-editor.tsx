@@ -20,7 +20,6 @@ import {
 import { useDebouncedValue, useLocalStorage } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import CodeMirror from "@uiw/react-codemirror";
 import { EditorView } from "codemirror";
 import * as htmlPlugin from "prettier/plugins/html";
 import * as markdownPlugin from "prettier/plugins/markdown";
@@ -29,7 +28,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { compileProblemMarkdown } from "translation-core/problem-markdown";
 import type { ProblemReview } from "../../src/problem-review.ts";
 import { reviewApi } from "./client.ts";
-import { applySavedSource } from "./editor-source.ts";
+import { SourceEditor } from "./source-editor.tsx";
+import { applySavedSource, readEditorSource } from "./editor-source.ts";
 import { Preview } from "./preview.tsx";
 import { Failure, ReviewBadge, UnsavedGuard, useApi } from "./shared.tsx";
 import { QuickTasks } from "./tasks.tsx";
@@ -52,7 +52,10 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
   const [saved, setSaved] = useState(initial);
   const [source, setSource] = useState(initial.koreanSource);
   const currentSource = useRef(source);
-  currentSource.current = source;
+  const updateDraft = useCallback((next: string) => {
+    currentSource.current = next;
+    setSource(next);
+  }, []);
   const editor = useRef<EditorView | null>(null);
   const [compiled, setCompiled] = useState(false);
   const [japaneseDocument, setJapaneseDocument] = useState<Document | null>(
@@ -84,6 +87,10 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
     if (preview.html !== undefined) lastValidHtml.current = preview.html;
   }, [preview.html]);
   const previewHtml = preview.html ?? lastValidHtml.current;
+  useEffect(() => {
+    if (compiled && editor.current)
+      applySavedSource(editor.current, previewHtml);
+  }, [compiled, previewHtml]);
   const dirty = source !== saved.koreanSource;
   const reviews =
     saved.reviews ??
@@ -100,12 +107,19 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
   const next =
     candidates.find((p) => p.problemNo > saved.problemNo) ?? candidates[0];
   const formatting = useMutation({
-    mutationFn: () =>
-      format(source, {
+    mutationFn: async () => {
+      const submittedSource = currentSource.current;
+      const formatted = await format(submittedSource, {
         parser: saved.sourceFormat === "mdx" ? "mdx" : "html",
         plugins: [markdownPlugin, htmlPlugin],
-      }),
-    onSuccess: setSource,
+      });
+      return { submittedSource, formatted };
+    },
+    onSuccess: ({ submittedSource, formatted }) => {
+      if (currentSource.current !== submittedSource) return;
+      if (editor.current) applySavedSource(editor.current, formatted);
+      updateDraft(formatted);
+    },
   });
   const collectProfile = useMutation({
     mutationFn: () => reviewApi.collectProblemProfile(String(saved.problemNo)),
@@ -131,7 +145,7 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
     ) => {
       const submittedSource =
         !compiled && editor.current
-          ? editor.current.state.doc.toString()
+          ? await readEditorSource(editor.current)
           : currentSource.current;
       const data =
         action === "visibility"
@@ -158,6 +172,12 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
       return { data, submittedSource };
     },
     onSuccess: async ({ data, submittedSource }, action) => {
+      // Flush input that arrived before this response too, before deciding
+      // whether applying the returned source would overwrite a newer edit.
+      const latestSource =
+        !compiled && editor.current
+          ? await readEditorSource(editor.current)
+          : currentSource.current;
       notifications.show({
         message:
           action === "visibility"
@@ -167,14 +187,13 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
       });
       setSaved(data);
       // Keep anything typed while the request was in flight as an unsaved draft.
-      const latestSource =
-        !compiled && editor.current
-          ? editor.current.state.doc.toString()
-          : currentSource.current;
-      if (latestSource === submittedSource) {
+      if (
+        latestSource === submittedSource &&
+        currentSource.current === submittedSource
+      ) {
         if (editor.current && !compiled)
           applySavedSource(editor.current, data.koreanSource);
-        setSource(data.koreanSource);
+        updateDraft(data.koreanSource);
       }
       client.setQueryData([`/api/problems/${data.problemNo}`], data);
       await client.invalidateQueries({ queryKey: ["/api/problems"] });
@@ -248,12 +267,28 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
   useEffect(() => {
     if (initial === observed.current || save.isPending || formatting.isPending)
       return;
-    if (initial.revision === saved.revision || !dirty) {
+    // A native edit can precede this render's dirty state. Check the live draft
+    // before applying a query response, rather than overwriting that edit.
+    const clean = currentSource.current === saved.koreanSource;
+    if (initial.revision === saved.revision || clean) {
       observed.current = initial;
       setSaved(initial);
-      if (!dirty) setSource(initial.koreanSource);
+      if (clean) {
+        if (editor.current && !compiled)
+          applySavedSource(editor.current, initial.koreanSource);
+        updateDraft(initial.koreanSource);
+      }
     }
-  }, [initial, saved.revision, dirty, save.isPending, formatting.isPending]);
+  }, [
+    initial,
+    saved.revision,
+    saved.koreanSource,
+    dirty,
+    save.isPending,
+    formatting.isPending,
+    compiled,
+    updateDraft,
+  ]);
   return (
     <Stack gap="xs" style={{ minWidth: 0 }}>
       <UnsavedGuard
@@ -269,17 +304,19 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
             status={
               saved.validationErrors?.length
                 ? "invalid"
-                : !reviews.human.length && reviews.machine === "approved"
-                  ? "기계 승인"
-                  : saved.reviewStatus === "approved"
-                    ? "approved"
-                    : saved.machineTranslated
-                      ? "machine"
-                      : "unreviewed"
+                : dirty && reviews.human.length
+                  ? "draft"
+                  : !reviews.human.length && reviews.machine === "approved"
+                    ? "기계 승인"
+                    : saved.reviewStatus === "approved"
+                      ? "approved"
+                      : saved.machineTranslated
+                        ? "machine"
+                        : "unreviewed"
             }
           />
           <Badge color={reviews.human.length ? "teal" : "gray"}>
-            사람 검수:{" "}
+            {dirty ? "저장본 사람 검수" : "사람 검수"}:{" "}
             {reviews.human.length ? reviews.human.join(", ") : "미검수"}
           </Badge>
           <Badge color={reviews.machine === "approved" ? "blue" : "gray"}>
@@ -287,6 +324,18 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
           </Badge>
         </Group>
       </Group>
+      <Text
+        role={dirty && reviews.human.length > 0 ? "status" : undefined}
+        aria-hidden={!(dirty && reviews.human.length > 0)}
+        size="sm"
+        c="orange"
+        style={{
+          visibility: dirty && reviews.human.length > 0 ? "visible" : "hidden",
+        }}
+      >
+        저장된 내용만 승인되었습니다. 현재 수정 내용은 아직 저장·승인되지
+        않았습니다.
+      </Text>
       <TextInput
         label="검수자 ID"
         value={reviewerId}
@@ -425,16 +474,16 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
         />
         <Stack gap="xs" style={{ minWidth: 0 }}>
           <Text fw={600}>번역 소스</Text>
-          <CodeMirror
-            value={compiled ? previewHtml : source}
+          <SourceEditor
+            initialSource={initial.koreanSource}
             editable={!compiled && !formatting.isPending}
             onCreateEditor={(view) => {
               editor.current = view;
             }}
             height="72vh"
             extensions={extensions}
-            onChange={setSource}
-            aria-label="번역 소스"
+            onChange={updateDraft}
+            label="번역 소스"
           />
         </Stack>
       </SimpleGrid>
@@ -456,7 +505,15 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
                 {saved.sourceFormat === "mdx" && (
                   <Button
                     variant="subtle"
-                    onClick={() => setCompiled(!compiled)}
+                    disabled={formatting.isPending}
+                    onClick={() => {
+                      if (editor.current)
+                        applySavedSource(
+                          editor.current,
+                          compiled ? currentSource.current : previewHtml,
+                        );
+                      setCompiled(!compiled);
+                    }}
                   >
                     {compiled ? "소스 편집" : "컴파일된 HTML 보기"}
                   </Button>

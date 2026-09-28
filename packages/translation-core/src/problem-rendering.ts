@@ -61,6 +61,12 @@ export function sanitizeTranslatedBlocks(
         }
       }
     }
+    // Translated diagrams may have higher resolution than the source assets.
+    // Preserve their aspect ratio without overflowing the statement column.
+    for (const image of imported.querySelectorAll("img")) {
+      image.style.maxWidth = "100%";
+      image.style.height = "auto";
+    }
     resolveProblemUrls(imported, options.sourceUrl ?? document.URL);
     return imported;
   });

@@ -1,0 +1,77 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3718
+problemId: 14043
+sourceTitle: "XOR Escape"
+sourceHtmlSha256: eeea3802fa271e254ebbefc895deeb73c69831b473dc6e2eba63b724df8cac41
+humanReview: []
+machineReview: unreviewed
+title: "XOR Escape"
+---
+
+## 문제 설명
+
+양의 정수 $N$과 $A\oplus B\oplus C=0$을 만족하는 양의 정수 $A,B,C$가 주어집니다. 변수 $x$가 있으며 처음에는 $x=N$입니다.
+
+다음 연산을 원하는 횟수만큼 할 수 있을 때, 가능한 연산 횟수의 최댓값을 구하세요.
+
+- $y\lt x$와 $x\oplus y\notin\{A,B,C\}$를 모두 만족하는 음이 아닌 정수 $y$를 하나 골라 $x$를 $y$로 바꿉니다.
+
+$\oplus$는 비트 단위 $\mathrm{XOR}$를 뜻합니다.
+
+### 비트 단위 $\mathrm{XOR}$의 정의
+
+음이 아닌 정수 $X,Y$의 비트 단위 $\mathrm{XOR}$인 $X\oplus Y$는 다음과 같이 정의합니다.
+
+- $X\oplus Y$의 이진 표현에서 $2^k$ $(k\ge 0)$ 자리의 숫자는 $X,Y$의 이진 표현에서 해당 자리의 숫자 중 정확히 하나만 $1$이면 $1$, 그렇지 않으면 $0$입니다.
+
+## 입력
+
+표준 입력으로 다음 형식의 입력이 주어집니다.
+
+```text
+$N\ A\ B\ C$
+```
+
+## 제한
+
+- 입력으로 주어지는 모든 수는 정수입니다.
+- $1\le N,A,B,C\le 10^{18}$
+- $A\oplus B\oplus C=0$
+
+## 출력
+
+답을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+10 1 2 3
+```
+
+#### 출력
+
+```text
+2
+```
+
+예를 들어 $x$를 $10\to7\to3$으로 바꾸면 $2$번 연산할 수 있습니다.
+
+### 예제 2 {file="02_sample_02.txt"}
+
+#### 입력
+
+```text
+20 10 13 7
+```
+
+#### 출력
+
+```text
+17
+```

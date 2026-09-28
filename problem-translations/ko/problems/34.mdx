@@ -5,8 +5,8 @@ problemNo: 34
 problemId: 15
 sourceTitle: "砂漠の行商人"
 sourceHtmlSha256: 3ca0052fb6df10f65db71912106def303ef711609543c4d7145d7ea32ce12929
-humanReview: []
-machineReview: approved
+humanReview: [ cologne ]
+machineReview: unreviewed
 title: "사막의 행상인"
 ---
 
@@ -30,16 +30,14 @@ $\vdots$
 $L_{1N}\ L_{2N}\ L_{3N}\ \dots\ L_{NN}$
 ```
 
-첫째 줄에 사막 한 변의 길이 $N$, 체력 $V$, 초기 위치 $(S_X,S_Y)$, 다음 마을의 위치 $(G_X,G_Y)$를 나타내는 정수들이 공백으로 구분되어 주어집니다.
-이후 $N$개의 줄에 각 장소의 사막 레벨 $L_{XY}$가 한 줄에 $N$개씩 공백으로 구분되어 주어집니다.
-초기 위치와 다음 마을의 위치는 같지 않습니다.
-
 ## 제한
 
+- 입력으로 주어지는 모든 수는 정수입니다.
 - $3 \le N \le 100$
 - $1 \le V \le 10\,000$
 - $1 \le S_X,S_Y,G_X,G_Y \le N$
 - $0 \le L_{XY} \le 9$ $(1 \le X,Y \le N)$
+- $(S_X, S_Y) \ne (G_X, G_Y)$
 
 ## 출력
 

@@ -15,6 +15,7 @@ import {
   compileProblemMarkdown,
   parseProblemMarkdown,
 } from "translation-core/problem-markdown";
+import { setProblemMarkdownReviews } from "translation-core/problem-frontmatter";
 async function fixture() {
   const root = await mkdtemp(join(tmpdir(), "review-task-"));
   await mkdir(join(root, "problem-translations/ko/problems"), {
@@ -249,9 +250,10 @@ test("explicit conversion preserves approval and unsupported or ambiguous previe
   try {
     const path = join(f.root, "problem-translations/ko/problems/1.html");
     const mdxPath = join(f.root, "problem-translations/ko/problems/1.mdx");
-    const approved = f.source
-      .replace("reviewStatus: unreviewed", "reviewStatus: approved")
-      .replace("reviewStatus: machine", "reviewStatus: approved");
+    const approved = setProblemMarkdownReviews(f.source, {
+      human: ["cologne"],
+      machine: "approved",
+    });
     await writeFile(path, compileProblemMarkdown(approved));
     await rm(mdxPath);
     assert.equal(

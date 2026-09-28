@@ -13,6 +13,20 @@ export interface TranslationScope {
   querySelectorAll<E extends Element = Element>(selector: string): Iterable<E>;
 }
 
+// Exclude site-owned editors from both initial and incremental UI translation.
+export function excludingTranslationScope(
+  scope: TranslationScope,
+  selector: string,
+): TranslationScope {
+  return {
+    querySelectorAll<E extends Element = Element>(query: string): E[] {
+      return [...scope.querySelectorAll<E>(query)].filter(
+        (element) => !element.closest(selector),
+      );
+    },
+  };
+}
+
 // Keep the original nodes and values, including site-owned event handlers.
 export class TranslationHistory {
   private changes = new Map<

@@ -224,6 +224,49 @@ test("explicit unnumbered and my-sample layouts preserve IO without traces", () 
   }
 });
 
+test("nested unnumbered output-only sample sections deduplicate overlapping roots", () => {
+  const document = new JSDOM(
+    '<div class="block"><h4>ビジュアライザ</h4><p>unrelated prose</p>' +
+      '<pre>not sample data</pre><div class="block"><h4>サンプル</h4>' +
+      '<div class="paragraph"><h6>出力</h6><pre>2\n#.\n##\n.#\n.#\n##\n##</pre>' +
+      "<p>説明</p><pre>worked trace</pre></div></div></div>",
+  ).window.document;
+  const outer = document.querySelector(".block")!;
+  const nested = outer.querySelector(":scope > .block")!;
+  const overlappingRoots = [...document.querySelectorAll(".block")];
+  const expected = ["2\n#.\n##\n.#\n.#\n##\n##"];
+
+  assert.deepEqual(sampleDataValues([outer]), expected);
+  assert.deepEqual(sampleDataValues([nested]), expected);
+  assert.deepEqual(sampleDataValues(overlappingRoots), expected);
+
+  const translated = blocks(
+    '<div class="block sample"><h6>출력</h6><pre>2\n#.\n##\n.#\n.#\n##\n##</pre></div>',
+  );
+  assert.deepEqual(
+    sampleWarnings(overlappingRoots, translated, "mdx", true),
+    [],
+  );
+  const changed = blocks(
+    '<div class="block sample"><h6>출력</h6><pre>2\n#.\n##\n##\n.#\n##\n##</pre></div>',
+  );
+  assert.ok(sampleWarnings(overlappingRoots, changed, "mdx", true).length);
+});
+
+test("formatting LF after BR in TD inline CODE is collapsed, PRE bytes stay intact", () => {
+  const source = blocks(
+    '<div class="block"><h4>サンプル</h4><table><tr><th>出力</th></tr>' +
+      "<tr><td><code>!<br />\n2 4<br />\n1 3</code></td></tr>" +
+      "<tr><td><code>first</code><br />\n<code>second</code></td></tr>" +
+      "<tr><td><pre>first\n\nlast</pre></td></tr></table></div>",
+  );
+  assert.deepEqual(sampleDataValues(source), [
+    "!\n2 4\n1 3",
+    "first\nsecond",
+    "first\n\nlast",
+  ]);
+});
+
 test("wrapperless interactive tables decode numeric math presentation, not literal code", () => {
   const original = blocks(
     '<div class="block"><h4>サンプル</h4><table><tr><th>入力</th><th>出力</th><th>説明</th></tr><tr><td>2</td><td></td><td>$T=2$</td></tr><tr><td></td><td>? $1$ $2$ $2$</td><td>question</td></tr><tr><td>$4$</td><td></td><td>response</td></tr><tr><td></td><td><code>! $3$</code></td><td>literal dollars</td></tr></table></div>',

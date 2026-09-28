@@ -31,10 +31,69 @@ const delimiters = [
 ];
 
 function normalizeFormula(tex: string): string {
-  return tex
-    .replace(/\\text\{그\s*외\}/gu, String.raw`\text{otherwise}`)
-    .replace(/\\,/gu, "")
-    .replace(/\s/gu, "");
+  return (
+    tex
+      .replace(/\\text\{그\s*외\}/gu, String.raw`\text{otherwise}`)
+      // Named single-bar delimiters preserve absolute values/cardinalities.
+      .replace(/\\(?:lvert|rvert)(?![A-Za-z])/gu, "|")
+      // Bracing one existing script token does not change the expression.
+      .replace(/([_^])\s*(\\[A-Za-z]+|[A-Za-z0-9])/gu, "$1{$2}")
+      .replace(/\\,/gu, "")
+      .replace(/\s/gu, "")
+  );
+}
+
+// Detect evaluated numeric powers, not arbitrary algebraic equivalence. Samples
+// and code are excluded; a decimal already written in the source is legitimate.
+function expandedPowerErrors(source: Document, translated: Document): string[] {
+  const text = (document: Document) => {
+    const root = statementRoot(document);
+    root
+      .querySelectorAll("code, script, style, .tex2jax_ignore")
+      .forEach((node) => node.remove());
+    return (
+      (root.textContent ?? "")
+        .replace(/\\,/gu, "")
+        // TeX control words terminate before digits even without a space.
+        .replace(/\\[A-Za-z]+/gu, " ")
+    );
+  };
+  const before = text(source),
+    after = text(translated);
+  const numbers = (value: string) =>
+    new Set(value.match(/(?<![\w.])\d+(?![\w.])/gu) ?? []);
+  const originalNumbers = numbers(before),
+    translatedNumbers = numbers(after);
+  const errors = new Set<string>();
+  const pattern =
+    /(?<![\w.])([1-9]\d{0,9})\s*\^\s*(?:\{\s*([+-]?\d{1,3})\s*\}|(\d{1,3}))(?:\s*([+-])\s*(\d{1,20}))?/gu;
+  const key = (text: string, match: RegExpExecArray) =>
+    [
+      text.slice(0, match.index).trimEnd().endsWith("-") ? "-" : "",
+      match[1],
+      Number(match[2] ?? match[3]),
+      match[4] ?? "",
+      match[5] ?? "",
+    ].join("|");
+  const translatedPowers = new Set(
+    [...after.matchAll(pattern)].map((match) => key(after, match)),
+  );
+  for (const match of before.matchAll(pattern)) {
+    if (!translatedPowers.has(key(before, match)))
+      errors.add(
+        `원문 거듭제곱·연산 표기가 누락되거나 변경되었습니다: ${match[0]}. 밑·지수·부호·연산을 원문과 대조하세요.`,
+      );
+    const exponent = Number(match[2] ?? match[3]);
+    if (exponent < 0 || exponent > 100) continue;
+    let value = BigInt(match[1]) ** BigInt(exponent);
+    if (match[4]) value += (match[4] === "+" ? 1n : -1n) * BigInt(match[5]);
+    const decimal = value.toString();
+    if (translatedNumbers.has(decimal) && !originalNumbers.has(decimal))
+      errors.add(
+        `원문 수식을 불필요하게 계산해 썼습니다: ${match[0]} → ${decimal}. 원문의 거듭제곱·연산 표기를 복원하세요.`,
+      );
+  }
+  return [...errors];
 }
 
 // Explicit parenthesized radix notation is a digit string, not a decimal
@@ -220,6 +279,7 @@ export function preservationErrors(
   profile?: ProblemRenderProfile,
   corrections: readonly SourceFormulaCorrection[] = [],
   binaryLiteralFormulas: readonly string[] = [],
+  imageTranslations: readonly { before: string; after: string }[] = [],
 ): string[] {
   const errors = sampleWarnings([source.body], [translated.body], "mdx", true);
   // Flag an observed Korean ambiguity; never infer or rewrite the intended scope.
@@ -307,7 +367,12 @@ export function preservationErrors(
     ["a", "href"],
   ]) {
     const originalValues = values(source, selector, attr);
-    const translatedValues = values(translated, selector, attr);
+    const translatedValues = values(translated, selector, attr).map((value) =>
+      selector === "img"
+        ? (imageTranslations.find((item) => item.after === value)?.before ??
+          value)
+        : value,
+    );
     if (JSON.stringify(originalValues) !== JSON.stringify(translatedValues))
       errors.push(`원문과 ${selector}의 ${attr} 또는 순서가 다릅니다.`);
   }
@@ -326,6 +391,7 @@ export function preservationErrors(
   // A diagnostic heuristic, not a TeX parser or an automatic repair: KaTeX
   // accepts lost command names as products of letter variables.
   const sourceFormulas = statementFormulas(source, profile);
+  errors.push(...expandedPowerErrors(source, translated));
   const binaryKey = (formula: string) => formula.replace(/\s/gu, "");
   const sourceNormalized = sourceFormulas.map(binaryKey);
   const translatedNormalized = formulas.map(binaryKey);
@@ -470,6 +536,7 @@ export async function checkProblemPreservation(
   profile?: ProblemRenderProfile,
   corrections: readonly SourceFormulaCorrection[] = [],
   binaryLiteralFormulas: readonly string[] = [],
+  imageTranslations: readonly { before: string; after: string }[] = [],
 ): Promise<string[]> {
   const errors = preservationErrors(
     source,
@@ -477,6 +544,7 @@ export async function checkProblemPreservation(
     profile,
     corrections,
     binaryLiteralFormulas,
+    imageTranslations,
   );
   if (profile?.engine !== "mathjax") return errors;
   const [{ JSDOM }, { renderProblemMath }] = await Promise.all([

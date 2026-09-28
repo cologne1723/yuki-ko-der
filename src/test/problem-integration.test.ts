@@ -241,6 +241,50 @@ function observerFixture(engine: "katex" | "mathjax" = "katex") {
 }
 
 for (const engine of ["katex", "mathjax"] as const) {
+  test(`${engine} wrapped statement translates, survives wrapper replacement and restores original nodes`, async () => {
+    const f = observerFixture(engine);
+    try {
+      const doc = f.dom.window.document;
+      const content = doc.querySelector("#content")!;
+      const wrapper = doc.createElement("div");
+      const inner = doc.createElement("div");
+      const original = content.querySelector(".block")!;
+      original.before(wrapper);
+      wrapper.append(inner);
+      inner.append(original);
+      await f.start();
+      assert.equal(f.state.bodyCalls, 1);
+      assert.match(inner.textContent!, /Translated body/);
+      const first = f.state.outcomes[0];
+      assert.equal(
+        first.status === "applied" && (await first.verification)?.status,
+        "verified",
+      );
+      f.click("원문 보기");
+      await flushPage();
+      assert.equal(inner.firstElementChild, original);
+      f.click("한국어 번역 보기");
+      await flushPage();
+      const replacement = doc.createElement("div");
+      replacement.innerHTML = observerSource;
+      const replacementSource = replacement.firstElementChild;
+      wrapper.replaceWith(replacement);
+      await flushPage();
+      assert.equal(f.state.bodyCalls, 3);
+      assert.match(replacement.textContent!, /Translated body/);
+      f.click("원문 보기");
+      await flushPage();
+      assert.equal(replacement.firstElementChild, replacementSource);
+      assert.equal(doc.querySelectorAll(".block").length, 1);
+      assert.equal(
+        f.state.requests.filter((path) => path.includes("translations.test"))
+          .length,
+        1,
+      );
+    } finally {
+      f.close();
+    }
+  });
   for (const replacement of ["block", "container"] as const) {
     test(`${engine} observer coalesces ${replacement} replacements without resetting UI or refetching resources`, async () => {
       const f = observerFixture(engine);

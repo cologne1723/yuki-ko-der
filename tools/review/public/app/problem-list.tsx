@@ -58,10 +58,16 @@ export function Problems() {
   });
   const selected =
     params.get("problem") ?? String(query.data?.problems[0]?.problemNo ?? "");
+  const selectedIndex = list.findIndex(
+    (problem) => String(problem.problemNo) === selected,
+  );
   useEffect(() => {
     if (!params.has("problem") && selected)
       setParams({ problem: selected }, { replace: true });
   }, [params, selected, setParams]);
+  useEffect(() => {
+    if (selectedIndex >= 0) setPage(Math.floor(selectedIndex / 12) + 1);
+  }, [selectedIndex]);
   const problemNavigation = (
     <Stack aria-label="문제 목록">
       <Text fw={600}>문제 목록</Text>

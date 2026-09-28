@@ -1,0 +1,73 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3717
+problemId: 13940
+sourceTitle: "GCD LCM GCD"
+sourceHtmlSha256: aafe83215759cb1a0ecc49a901f3264aeacaa0348667cb56cf80090433e6304b
+humanReview: []
+machineReview: unreviewed
+title: "GCD LCM GCD"
+---
+
+## 문제 설명
+
+양의 정수 $N,K$와 길이 $N$의 양의 정수 수열 $A=(A_1,A_2,\ldots,A_N)$이 주어집니다.
+
+$1,2,\ldots,N$의 순열 $P=(P_1,P_2,\ldots,P_N)$에 대해 정수 $B(P)$를 다음과 같이 정의합니다.
+
+$B(P)=\mathop{\mathrm{lcm}}\limits_{1\le i\le N-K+1}\gcd(A_{P_i},A_{P_{i+1}},\ldots,A_{P_{i+K-1}})$
+
+$1,2,\ldots,N$의 모든 순열 $P$에 대한 $B(P)$의 최대공약수를 $998\,244\,353$으로 나눈 나머지를 구하세요.
+
+## 입력
+
+표준 입력으로 다음 형식의 입력이 주어집니다.
+
+```text
+$N\ K$
+$A_1\ A_2\ \ldots\ A_N$
+```
+
+## 제한
+
+- 입력으로 주어지는 모든 수는 정수입니다.
+- $2\le N\le 2\times 10^5$
+- $1\le K\le N$
+- $1\le A_i\le 10^6$ $(1\le i\le N)$
+
+## 출력
+
+답을 출력하세요.
+
+## 예제
+
+### 예제 1 {file="01_sample_01.txt"}
+
+#### 입력
+
+```text
+4 2
+2 4 6 9
+```
+
+#### 출력
+
+```text
+2
+```
+
+### 예제 2 {file="02_sample_02.txt"}
+
+#### 입력
+
+```text
+5 5
+12 18 30 42 66
+```
+
+#### 출력
+
+```text
+6
+```

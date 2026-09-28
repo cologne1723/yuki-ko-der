@@ -1,5 +1,60 @@
 import { createHash } from "node:crypto";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import type { SourceFormulaCorrection } from "./problem-preservation.ts";
+
+// Human-translated No.30 diagrams: all product numbers, edge directions and
+// quantities were compared with the originals. Only these exact assets qualify.
+export async function sourceImageTranslations(
+  problemNo: number,
+  originalHtml: string,
+  repositoryRoot: string,
+) {
+  if (
+    problemNo !== 30 ||
+    createHash("sha256").update(originalHtml).digest("hex") !==
+      "75fa9a579e9c9347f0199fac039305712fce7666cc3ebaf42e3250689469824b"
+  )
+    return [];
+  const hashes = [
+    [
+      "edeedb16c55632d8b0d4a13b37d976e5fbf0ccf6908fa059588e70c7d74862bb",
+      "aa73e68c4b3033870289d223f8907dce52e400c46dab91410efbe7958b94add6",
+    ],
+    [
+      "3ab81b6c18b1ce99abba42f2764db5b1b03d9f39b971180e01babf86e66f4651",
+      "3b21cbd22d166a324f017a55484e6b3d1c26dfa349ec216ce883789e78c45862",
+    ],
+    [
+      "6c1153a4294a57532588f2ce7665d8c36a9b6dd04331e1d5da01ccbf459a3410",
+      "0529b1e7becf6086b0c1cbeb4a976e81dc84f3e8d5531a68839473df952343c1",
+    ],
+  ];
+  return Promise.all(
+    hashes.map(async (pair, index) => {
+      const bytes = await Promise.all(
+        ["", "-ko"].map((suffix) =>
+          readFile(
+            join(
+              repositoryRoot,
+              "problem-translations/ko/images/30",
+              `${index + 1}${suffix}.png`,
+            ),
+          ),
+        ),
+      );
+      for (let i = 0; i < 2; i++)
+        if (createHash("sha256").update(bytes[i]).digest("hex") !== pair[i])
+          throw new Error(
+            `No.30 translated image ${index + 1}: recorded image hash mismatch`,
+          );
+      return {
+        before: "data:image/png;base64," + bytes[0].toString("base64"),
+        after: "data:image/png;base64," + bytes[1].toString("base64"),
+      };
+    }),
+  );
+}
 
 // No.3272's second IMG contains the literal typo "imrage/png".
 // Restrict correction to the saved source hash and verify the PNG signature;
@@ -40,6 +95,20 @@ const records: readonly {
   formulas?: readonly SourceFormulaCorrection[];
   binaryLiteralFormulas?: readonly string[];
 }[] = [
+  {
+    problemNo: 21,
+    sourceHtmlSha256:
+      "d177a980de4d3fe58ec48145e5da0e367ed6976ba220692e43ec4a32740700de",
+    reason:
+      "Example 1 input contains 432, not 433; the following mean (432+301)/2=366.5 independently confirms the human-approved correction.",
+    formulas: [
+      {
+        before: String.raw`\{\{555\}, \{21,20\}, \{433,301\}\}`,
+        after: String.raw`\{\{555\},\{21,20\},\{432,301\}\}`,
+        occurrences: 1,
+      },
+    ],
+  },
   {
     problemNo: 2911,
     sourceHtmlSha256:

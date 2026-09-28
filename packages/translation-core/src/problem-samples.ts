@@ -24,6 +24,22 @@ export function samplePreText(pre: Element): string {
   // outside those explicit payloads when every other node is known layout.
   if (pre.tagName === "TD") {
     const nodes = [...pre.childNodes];
+    const inlineCodeText = (code: Element): string => {
+      let followsBreak = false;
+      return [...code.childNodes]
+        .map((node) => {
+          if (node.nodeType === 1 && (node as Element).tagName === "BR") {
+            followsBreak = true;
+            return "\n";
+          }
+          let value = text(node);
+          if (followsBreak && (node.nodeType === 3 || node.nodeType === 4))
+            value = value.replace(/^\r?\n/u, "");
+          followsBreak = false;
+          return value;
+        })
+        .join("");
+    };
     const codes = nodes.filter(
       (node) => node.nodeType === 1 && (node as Element).tagName === "CODE",
     );
@@ -45,7 +61,11 @@ export function samplePreText(pre: Element): string {
     )
       payload = nodes
         .filter((node) => node.nodeType === 1)
-        .map(text)
+        .map((node) =>
+          (node as Element).tagName === "CODE"
+            ? inlineCodeText(node as Element)
+            : text(node),
+        )
         .join("");
   }
   const value = payload.replace(/\r\n?/g, "\n").replace(/\n$/, "");
@@ -172,15 +192,18 @@ export function sampleDataPres(sample: Element): Element[] {
 function paragraphSamples(
   block: Element,
 ): (Omit<Sample, "values"> & { elements: Element[] })[] {
-  if (!block.matches(".block"))
-    return [...block.querySelectorAll(".block")].flatMap(paragraphSamples);
-  if (
-    !/^(?:サンプル|入出力例|出力例)$/u.test(
-      block.querySelector(":scope > h4, :scope > h5")?.textContent?.trim() ??
-        "",
-    )
-  )
-    return [];
+  const sections = block.matches(".block")
+    ? [block, ...block.querySelectorAll(".block")]
+    : [...block.querySelectorAll(".block")];
+  return sections.flatMap(paragraphSampleSection);
+}
+
+function paragraphSampleSection(
+  block: Element,
+): (Omit<Sample, "values"> & { elements: Element[] })[] {
+  const heading =
+    block.querySelector(":scope > h4, :scope > h5")?.textContent?.trim() ?? "";
+  if (!/^(?:サンプル|入出力例|出力例)$/u.test(heading)) return [];
   const result: (Omit<Sample, "values"> & { elements: Element[] })[] = [];
   const adjacentIO = (container: Element): Element[] =>
     [...container.querySelectorAll(":scope > pre")].filter((pre) => {
@@ -208,6 +231,14 @@ function paragraphSamples(
   }
   if (block.querySelector(":scope > h5")?.textContent?.trim() === "サンプル") {
     const elements = adjacentIO(block);
+    if (elements.length) result.push({ name: "サンプル", file: "", elements });
+  }
+  // Some sources put a single output-only example in a nested h4 sample block
+  // and use a paragraph container for its labeled data, without .sample.
+  if (block.querySelector(":scope > h4")?.textContent?.trim() === "サンプル") {
+    const elements = [...block.querySelectorAll(":scope > .paragraph")].flatMap(
+      adjacentIO,
+    );
     if (elements.length) result.push({ name: "サンプル", file: "", elements });
   }
   let current: (typeof result)[number] | undefined;
@@ -289,8 +320,10 @@ function paragraphSamples(
 }
 
 function collectSamples(blocks: Element[], ioOnly = false): Sample[] {
-  return blocks.flatMap((block) =>
-    [
+  const samples: Sample[] = [];
+  const seen = new Set<Element>();
+  for (const block of blocks) {
+    const wrapped = [
       ...(block.matches(".sample") ? [block] : []),
       ...block.querySelectorAll(".sample"),
     ]
@@ -302,18 +335,23 @@ function collectSamples(blocks: Element[], ioOnly = false): Sample[] {
       .map((sample) => ({
         name: sample.querySelector("h5")?.textContent?.trim() ?? "",
         file: sample.getAttribute("data-file") ?? "",
-        values: (ioOnly ? sampleDataPres(sample) : sampleNodes(sample))
-          .filter((pre) => pre.closest(".sample") === sample)
-          .map((pre) => samplePreText(pre)),
-      }))
-      .concat(
-        paragraphSamples(block).map(({ name, file, elements }) => ({
-          name,
-          file,
-          values: elements.map(samplePreText),
-        })),
-      ),
-  );
+        elements: (ioOnly
+          ? sampleDataPres(sample)
+          : sampleNodes(sample)
+        ).filter((pre) => pre.closest(".sample") === sample),
+      }));
+    for (const sample of wrapped.concat(paragraphSamples(block))) {
+      const elements = sample.elements.filter((element) => !seen.has(element));
+      if (!elements.length) continue;
+      elements.forEach((element) => seen.add(element));
+      samples.push({
+        name: sample.name,
+        file: sample.file,
+        values: elements.map(samplePreText),
+      });
+    }
+  }
+  return samples;
 }
 
 function collectValues(samples: Sample[]): SampleValue[] {
@@ -382,14 +420,17 @@ function matchesPromotedSourceBlocks(
 
 // Publication/runtime digest contract: ordered raw IO, excluding worked prose.
 export function sampleDataElements(blocks: Element[]): Element[] {
-  return blocks.flatMap((block) =>
-    [
+  const elements = new Set<Element>();
+  for (const block of blocks) {
+    for (const element of [
       ...(block.matches(".sample") ? [block] : []),
       ...block.querySelectorAll(".sample"),
     ]
       .flatMap(sampleDataPres)
-      .concat(paragraphSamples(block).flatMap((sample) => sample.elements)),
-  );
+      .concat(paragraphSamples(block).flatMap((sample) => sample.elements)))
+      elements.add(element);
+  }
+  return [...elements];
 }
 
 export function sampleDataValues(blocks: Element[]): string[] {

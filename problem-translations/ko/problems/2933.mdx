@@ -18,9 +18,9 @@ $Q$개의 질의를 순서대로 처리하세요. 각 질의는 다음 $3$개 �
 
 - $1\ l\ r\ x$: $S[l:r]$의 각 문자에 $\mathrm{ROT}\ x$를 적용합니다.
 - $2\ l\ r\ x$: $T[l:r]$의 각 문자에 $\mathrm{ROT}\ x$를 적용합니다.
-- $3\ p$: $S[p:|S|]$가 $T[p:|T|]$보다 사전순으로 크면 `Greater`, 같으면 `Equals`, 작으면 `Lesser`를 출력합니다.
+- $3\ p$: $S[p:\lvert S\rvert]$가 $T[p:\lvert T\rvert]$보다 사전순으로 크면 `Greater`, 같으면 `Equals`, 작으면 `Lesser`를 출력합니다.
 
-문자열 $X$와 정수 $l,r$이 $1 \le l \le r \le |X|$를 만족할 때, $X[l:r]$은 $X$의 $l$번째 문자부터 $r$번째 문자까지의 부분 문자열을 의미합니다.
+문자열 $X$와 정수 $l,r$이 $1 \le l \le r \le \lvert X\rvert$를 만족할 때, $X[l:r]$은 $X$의 $l$번째 문자부터 $r$번째 문자까지의 부분 문자열을 의미합니다.
 
 문자 $\alpha$에 $\mathrm{ROT}\ x$를 적용하는 것은 $\alpha$를 알파벳 순서에서 $x$개 뒤의 영소문자로 바꾸는 것을 의미합니다.
 단, 알파벳 순서에서 `z`의 $1$개 뒤 영소문자는 `a`입니다.
@@ -57,10 +57,10 @@ $3\ p$
 
 - $1 \le Q \le 2 \times 10^5$
 - $S$와 $T$는 영소문자로 이루어진 길이 $1$ 이상 $2 \times 10^5$ 이하의 문자열입니다.
-- $1\ l\ r\ x$ 형식의 질의에 대해 $1 \le l \le r \le |S|$입니다.
-- $2\ l\ r\ x$ 형식의 질의에 대해 $1 \le l \le r \le |T|$입니다.
+- $1\ l\ r\ x$ 형식의 질의에 대해 $1 \le l \le r \le \lvert S\rvert$입니다.
+- $2\ l\ r\ x$ 형식의 질의에 대해 $1 \le l \le r \le \lvert T\rvert$입니다.
 - $0 \le x \le 25$
-- $1 \le p \le \min\{|S|,|T|\}$
+- $1 \le p \le \min\{\lvert S\rvert,\lvert T\rvert\}$
 - $Q,l,r,x,p$는 정수입니다.
 
 ## 출력

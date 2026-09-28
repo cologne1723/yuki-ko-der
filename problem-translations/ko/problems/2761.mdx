@@ -38,3 +38,131 @@ query_Q
 
 2번 질의의 답을 순서대로 출력하세요.
 
+실행 시간 제한 때문에 사용하는 처리계에 따라 의도한 풀이로도 AC를 받지 못할 수 있습니다. 특히 Python 사용자는 PyPy3를 선택하는 것을 권장합니다.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+4 3 3
+aaa
+aba
+bbb
+ccc
+2 aa
+1 2 b a
+2 aa
+```
+
+#### 출력
+
+```text
+1
+2
+```
+
+처음에는 $S=(\mathrm{aaa},\mathrm{aba},\mathrm{bbb},\mathrm{ccc})$입니다.
+
+- 첫 번째 질의: `aa`를 접두사로 가지는 문자열은 $S_1$의 $1$개입니다.
+- 두 번째 질의: $S=(\mathrm{aaa},\mathrm{aaa},\mathrm{bab},\mathrm{ccc})$로 바뀝니다.
+- 세 번째 질의: `aa`를 접두사로 가지는 문자열은 $S_1,S_2$의 $2$개입니다.
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+10 4 10        
+jgda
+urom
+fczy
+qnkk
+byvw
+mjgi
+xuru
+ifcg
+tqns
+ebye
+1 2 q j
+2 fc
+1 4 m k
+2 tj
+2 t
+2 qnk
+1 3 v y
+2 j
+2 ebye
+2 eby
+```
+
+#### 출력
+
+```text
+1
+1
+1
+1
+1
+1
+1
+```
+
+### 예제 3 {file=""}
+
+#### 입력
+
+```text
+12 6 20
+hyllru
+hyalzk
+hysuka
+hetwxb
+hetwxb
+hysuka
+hysuka
+hytebn
+hetgxn
+hetekv
+wqmhgk
+hywdtu
+2 hywdt
+2 wqmhgk
+1 1 w h
+1 6 k n
+2 hetgx
+1 2 e y
+2 h
+2 hyalz
+1 4 g w
+2 h
+2 hytekv
+2 h
+2 h
+1 5 x k
+2 hyt
+1 4 u e
+1 2 y q
+2 hqllru
+2 hqalz
+1 5 z t
+```
+
+#### 출력
+
+```text
+1
+1
+1
+12
+1
+12
+1
+12
+12
+5
+1
+1
+```
