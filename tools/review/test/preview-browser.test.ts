@@ -19,12 +19,7 @@ test(
       return;
     }
     const executablePath =
-      process.env.REVIEW_TEST_BROWSER ??
-      (existsSync(
-        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-      )
-        ? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-        : chromium.executablePath());
+      process.env.REVIEW_TEST_BROWSER ?? chromium.executablePath();
     assert.ok(
       existsSync(executablePath),
       "Install Chromium or set REVIEW_TEST_BROWSER to run layout regression",

@@ -24,7 +24,7 @@ declare global {
 
 test(
   "the review app preserves source identity, cursor and scroll across save outcomes",
-  { timeout: 60000 },
+  { timeout: 180000 },
   async (t) => {
     if (process.env.REVIEW_BROWSER_TESTS !== "1") {
       t.skip(
@@ -35,11 +35,7 @@ test(
     const browserType =
       process.env.REVIEW_TEST_ENGINE === "firefox" ? firefox : chromium;
     const executablePath =
-      process.env.REVIEW_TEST_BROWSER ??
-      (browserType === chromium &&
-      existsSync("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
-        ? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-        : browserType.executablePath());
+      process.env.REVIEW_TEST_BROWSER ?? browserType.executablePath();
     assert.ok(
       existsSync(executablePath),
       "Install the selected Playwright browser or set REVIEW_TEST_BROWSER",
@@ -104,11 +100,18 @@ title: Scroll fixture
         "typing",
         "scrolling",
       ] as const) {
-        await t.test(`${width}px / ${outcome}`, async () => {
+        const name = `${width}px / ${outcome}`;
+        await t.test(name, { timeout: 30000 }, async () => {
           const page = await browser.newPage({
             viewport: { width, height: 900 },
           });
           try {
+            if (process.env.REVIEW_TEST_CPU_RATE && browserType === chromium) {
+              const session = await page.context().newCDPSession(page);
+              await session.send("Emulation.setCPUThrottlingRate", {
+                rate: Number(process.env.REVIEW_TEST_CPU_RATE),
+              });
+            }
             await page.addInitScript("window.__name = (target) => target;");
             let problem: ProblemReview = {
               problemNo: 1,
@@ -208,7 +211,32 @@ title: Scroll fixture
                     requestAnimationFrame(next);
                   }),
               );
-            await settle();
+            const previewReady = async () => {
+              const current = await page.evaluate(() =>
+                window.problemScrollFixture.view().state.doc.toString(),
+              );
+              // Compilation is debounced and iframe navigation is asynchronous.
+              // Main-page animation frames alone do not imply the new preview
+              // has loaded (particularly on a busy CI runner).
+              await page.waitForFunction((expectedHtml) => {
+                const iframe = document.querySelector<HTMLIFrameElement>(
+                  'iframe[title="한국어 번역"]',
+                );
+                const doc = iframe?.contentDocument;
+                const expected = new DOMParser().parseFromString(
+                  expectedHtml,
+                  "text/html",
+                );
+                return (
+                  doc?.readyState === "complete" &&
+                  iframe?.closest('[aria-busy="true"]') === null &&
+                  doc.querySelector(".problem-statement")?.textContent ===
+                    expected.querySelector(".problem-statement")?.textContent
+                );
+              }, compileProblemMarkdown(current));
+              await settle();
+            };
+            await previewReady();
             if (outcome === "ordinary-typing") {
               const record = () =>
                 page.evaluate(() => {
@@ -232,6 +260,11 @@ title: Scroll fixture
               });
               await settle();
               const before = await record();
+              assert.equal(
+                before.preview,
+                650,
+                "Preview must be scrolled before typing",
+              );
               const samples = [before];
               await page.evaluate(() => {
                 window.typingFrames = [];
@@ -250,7 +283,7 @@ title: Scroll fixture
                 if (/^[a-z0-9]$/.test(character))
                   await page.keyboard.press(character);
                 else await page.keyboard.insertText(character);
-                await settle();
+                await previewReady();
                 samples.push(await record());
               }
               const frames = await page.evaluate(() => {
@@ -269,7 +302,7 @@ title: Scroll fixture
               assert.equal(requestCount, 0);
               assert(
                 samples.every((x) => Math.abs(x.preview - before.preview) <= 1),
-                "Typing moved preview scroll",
+                `Typing moved preview scroll: ${JSON.stringify(samples)}`,
               );
               assert(
                 samples.every((x) => Math.abs(x.editor - before.editor) <= 1),
