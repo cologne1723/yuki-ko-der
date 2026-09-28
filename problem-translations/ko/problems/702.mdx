@@ -19,7 +19,7 @@ title: "중앙값을 구하라 LIMITED"
 ## 입력
 
 ~~~text
-seed
+$seed$
 ~~~
 
 - $\lvert a\rvert=10000001$ (1000만 1개)
@@ -29,7 +29,7 @@ seed
 
 uint32_t는 32비트 부호 없는 정수형입니다.
 
-~~~cpp
+~~~cpp html="code"
 uint32_t x = 0, y = 1, z = 2, w = 3;
 uint32_t generate() { 
     uint32_t t = (x^(x<<11));
