@@ -14,6 +14,75 @@ title: "Balanced Majority"
 
 짝수 $N$장의 카드가 쌓여 있습니다. 전체의 정확히 절반인 $N/2$장이 앞면입니다. 연속한 $N/2$장 이상 $N$장 미만의 카드 묶음 중 앞면과 뒷면의 수가 같은 것을 하나 찾아야 합니다. 이러한 묶음은 항상 존재합니다.
 
+<details>
+<summary>입출력 코드 예시 (C++ / Python / C, 클릭하여 펼치기)</summary>
+
+#### C++
+
+<pre><code class="language-cpp">
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main() {
+    //入力
+    int N; cin &gt;&gt; N;
+&#32;&#32;&#32;&#32;
+    //質問
+    int K = N,S;
+    cout &lt;&lt; "? " &lt;&lt; K &lt;&lt; endl;
+    cin &gt;&gt; S;
+&#32;&#32;&#32;&#32;
+    //回答
+    int L = 1,R = N;
+    cout &lt;&lt; "! " &lt;&lt; L &lt;&lt; " " &lt;&lt; R &lt;&lt; endl;
+}
+</code></pre>
+
+#### Python
+
+<pre><code class="language-python">
+import sys
+
+##入力
+N = int(input())
+
+##質問
+K = N
+print("? {}".format(K))
+sys.stdout.flush()
+S = int(input())
+
+##回答
+L = 1; R = N
+print("! {} {}".format(L,R))
+sys.stdout.flush()
+</code></pre>
+
+#### C
+
+<pre><code class="language-c">
+#include &lt;stdio.h&gt;
+
+int main(){
+    //入力
+    int N;
+    scanf("%d", &amp;N);
+&#9;
+    //質問
+    int K = N,S;
+    printf("? %d\n", K);
+    fflush(stdout);
+    scanf("%d", &amp;S);
+&#9;
+    //回答
+    int L = 1,R = N;
+    printf("! %d %d\n", L, R);
+    fflush(stdout);
+}
+</code></pre>
+
+</details>
+
 ## 질문
 
 $1\le K\le N$인 정수 $K$를 골라 덱 위에서 $K$번째 카드까지의 앞면 카드 수를 질문할 수 있습니다. 질문은 20회 이하로 할 수 있습니다.

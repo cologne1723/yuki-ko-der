@@ -12,6 +12,13 @@ title: "Cycle Maze"
 
 $H\times W$ 격자에 $0$부터 $9$까지의 숫자가 쓰여 있습니다. 매 턴 모든 칸의 숫자를 $(현재 값-1)\bmod(A_{i,j}+1)$로 바꾼 뒤, 숫자가 1 이상인 인접 칸 또는 현재 칸으로 이동합니다. 시작점에서 목표점에 $T$턴 미만으로 도달할 수 있는지 판정하세요.
 
+<details>
+<summary>$A\ \mathrm{mod}\ B$란?</summary>
+
+정수 $A,B$에 대해 $A\ \mathrm{mod}\ B$는 $A$를 $B$로 나눈 나머지를 뜻합니다. 일반적으로 $\lfloor A/B\rfloor=q$, $A\ \mathrm{mod}\ B=r$로 두면 $A=Bq+r$로 나타낼 수 있습니다. 여기서 $r$은 $0\le r<B$인 범위에서 유일하게 정해지므로 나머지는 음이 아닌 정수입니다.
+
+</details>
+
 ## 조건
 
 - $1\le H,W\le200$, $H\times W>1$, $1\le T\le600$
@@ -29,4 +36,3 @@ $A_{H,1}$ $\cdots$ $A_{H,W}$
 ## 출력
 
 도달 가능하면 `Yes`, 불가능하면 `No`를 출력하세요.
-

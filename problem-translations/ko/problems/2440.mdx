@@ -14,6 +14,25 @@ $Q$개의 쿼리에서 $N_i,D_i,M_i,S_i$가 주어집니다. $1\le n\le N_i$이�
 
 $$\left\lfloor\frac n{D_i}\right\rfloor=\left\lfloor\frac{M_i n}{2^{S_i}}\right\rfloor$$
 
+<details>
+<summary>$\lfloor\cdot\rfloor$ 기호와 $C_i$의 수학적 정의 및 설명 (클릭하여 펼치고 접기)</summary>
+
+- $\lfloor\cdot\rfloor$ 기호의 수학적 정의 및 설명
+  - $\lfloor x\rfloor$는 실수 $x$에 대해 $x$를 넘지 않는 가장 큰 정수를 반환하는 함수이며, $\lfloor x\rfloor=\max\{n\in\mathbb{Z}\mid n\leq x\}$로 정의합니다.
+  - $\mathbb{Z}$는 정수 전체의 집합을 뜻합니다.
+  - $n\in\mathbb{Z}$는 $n$이 정수 전체의 집합에 속한다는 뜻, 즉 $n$이 정수라는 뜻입니다.
+  - $\{n\in\mathbb{Z}\mid n\leq x\}$는 $x$ 이하의 정수로 이루어진 집합을 뜻합니다.
+  - $\max\{n\in\mathbb{Z}\mid n\leq x\}$는 $x$ 이하의 정수로 이루어진 집합에서 가장 큰 원소, 즉 $x$를 넘지 않는 가장 큰 정수를 뜻합니다.
+  - $\displaystyle\left\lfloor\frac{n}{D_i}\right\rfloor$는 $\displaystyle\frac{n}{D_i}$를 넘지 않는 가장 큰 정수를 뜻합니다.
+  - $\displaystyle\left\lfloor\frac{M_i\times n}{2^{S_i}}\right\rfloor$는 $\displaystyle\frac{M_i\times n}{2^{S_i}}$를 넘지 않는 가장 큰 정수를 뜻합니다.
+- $C_i$의 수학적 정의 및 설명
+  - $\displaystyle C_i = \#\left\{n\in\mathbb{Z}\ \middle|\ 1\leq n\leq N_i,\ \left\lfloor\frac{n}{D_i}\right\rfloor=\left\lfloor\frac{M_i\times n}{2^{S_i}}\right\rfloor\right\}\quad(1\leq i\leq Q)$
+  - $\displaystyle\left\{n\in\mathbb{Z}\ \middle|\ 1\leq n\leq N_i,\ \left\lfloor\frac{n}{D_i}\right\rfloor=\left\lfloor\frac{M_i\times n}{2^{S_i}}\right\rfloor\right\}$는 $1\leq n\leq N_i$이고 $\displaystyle\left\lfloor\frac{n}{D_i}\right\rfloor=\left\lfloor\frac{M_i\times n}{2^{S_i}}\right\rfloor$인 정수 $n$의 집합을 뜻합니다.
+  - $\displaystyle\#\left\{n\in\mathbb{Z}\ \middle|\ 1\leq n\leq N_i,\ \left\lfloor\frac{n}{D_i}\right\rfloor=\left\lfloor\frac{M_i\times n}{2^{S_i}}\right\rfloor\right\}$는 $1\leq n\leq N_i$이고 $\displaystyle\left\lfloor\frac{n}{D_i}\right\rfloor=\left\lfloor\frac{M_i\times n}{2^{S_i}}\right\rfloor$인 정수 $n$의 집합의 원소 개수를 뜻합니다.
+  - 유한집합 $A$의 원소 개수는 $n(A)$나 $|A|$로 쓰기도 하지만, 문자 $n$이나 기호 $|$가 중복되므로 여기서는 $\#A$라는 표기를 사용합니다.
+
+</details>
+
 ## 입력
 
 문제의 제한을 만족하는 $Q$개의 쿼리가 주어집니다.

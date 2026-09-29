@@ -17,6 +17,54 @@ title: "Christmas Eve (Heuristic ver.)"
 - $N=500$, $300\le K\le400$
 - 모든 폭과 높이는 $1$ 이상 $10000$ 이하입니다.
 
+<details>
+<summary>입력 생성기 코드 (Python)</summary>
+
+<pre><code>import random
+
+def high(wide):
+    return max(1,min(10000,int(random.gauss(wide,500))))
+N=500
+K=random.randint(300,400)
+a=[]
+b=[]
+c=[]
+d=[]
+e=[]
+f=[]
+for i in range(K):
+    wide=[max(1,min(10000,int(random.gauss(5000,1600)))) for i in range(4)]
+    while len(set(wide))!=4:
+        wide=[max(1,min(10000,int(random.gauss(5000,1600)))) for i in range(4)]
+    wide.sort()
+    e.append(wide[0])
+    c.append(wide[3])
+    c.append(wide[2])
+    a.append(wide[1])
+for i in range(N-K):
+    e.append(max(1,min(10000,int(random.gauss(5000,1600)))))
+    c.append(max(1,min(10000,int(random.gauss(5000,1600)))))
+    c.append(max(1,min(10000,int(random.gauss(5000,1600)))))
+    a.append(max(1,min(10000,int(random.gauss(5000,1600)))))
+random.shuffle(a)
+random.shuffle(c)
+random.shuffle(e)
+for i in range(N):
+    b.append(high(a[i]))
+    f.append(high(e[i]))
+    d.append(high(c[i*2]))
+    d.append(high(c[i*2+1]))
+print(N,K)
+print(*a)
+print(*b)
+print(*c)
+print(*d)
+print(*e)
+print(*f)
+</code></pre>
+
+</details>
+
 ## 입력
 
 ```text

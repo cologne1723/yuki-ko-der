@@ -12,6 +12,17 @@ title: "Xor Sum Hoge"
 
 조건 $A_1+\cdots+A_N=B$ 및 $A_1\oplus\cdots\oplus A_N=C$를 만족하는 길이 $N$의 비음이 아닌 정수열의 개수를 구하라냥.
 
+<details>
+<summary>비트별 배타적 논리합이란?</summary>
+
+비음이 아닌 정수 $X,Y$의 비트별 배타적 논리합 $X\oplus Y$를 다음과 같이 정의합니다.
+
+- $X\oplus Y$를 이진수로 나타냈을 때 $2^k$의 자리($0\leq k$)는, $X,Y$를 이진수로 나타냈을 때 해당 자리의 숫자가 서로 다르면 $1$, 같으면 $0$입니다.
+
+예를 들어 $3\oplus5=6$입니다. (이진수로 나타내면 $011\oplus101=110$입니다.)
+
+</details>
+
 ## 조건
 
 - $1\le N\le6\times10^4$

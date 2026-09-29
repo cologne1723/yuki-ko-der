@@ -955,9 +955,14 @@ for (const state of [
       await settle();
       const notice = dom.window.document.querySelector("#yukicoder-ko-status");
       const buttons = [...(notice?.querySelectorAll("button") ?? [])];
-      if (state === "verification")
+      if (state === "verification") {
         assert.ok(buttons.some((b) => b.textContent === "한국어 번역 보기"));
-      else assert.ok(buttons.every((b) => b.textContent !== "원문 보기"));
+        assert.equal(
+          notice!.firstChild?.textContent,
+          "문제 번역을 검증하지 못해 원문을 표시합니다.",
+        );
+      }
+      assert.ok(buttons.every((b) => b.textContent !== "원문 보기"));
       assert.equal(
         buttons.length,
         state === "network" || state === "throw" || state === "verification"

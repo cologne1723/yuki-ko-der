@@ -12,6 +12,23 @@ title: 행렬 거듭제곱
 
 정수 계수 $2\times2$ 정사각행렬 $M$이 주어집니다. 행렬 곱셈의 정의에 따라 $M^3$을 계산하세요.
 
+<details>
+<summary>행렬의 곱셈을 모르는 사람을 위한 설명 (눌러서 펼치기)</summary>
+
+정수 계수 $2$차 정사각 행렬은 대략 정수를 $2$행 $2$열로 배열한 데이터입니다. 예를 들어 $\begin{pmatrix}1&2\\3&4\end{pmatrix}$는 정수 계수 $2$차 정사각 행렬입니다.
+
+정수 계수 $2$차 정사각 행렬 $A,B$를 다음과 같이 나타내겠습니다. 여기서 $a,b,c,d,e,f,g,h$는 정수입니다.
+
+$A=\begin{pmatrix}\textcolor{red}{a}&\textcolor{red}{b}\\\textcolor{blue}{c}&\textcolor{blue}{d}\end{pmatrix},\quad B=\begin{pmatrix}\textcolor{magenta}{e}&\textcolor{purple}{f}\\\textcolor{magenta}{g}&\textcolor{purple}{h}\end{pmatrix}$
+
+두 행렬의 곱 $AB$는 다음과 같이 정의됩니다.
+
+$AB=\begin{pmatrix}\textcolor{red}{a}\textcolor{magenta}{e}+\textcolor{red}{b}\textcolor{magenta}{g}&\textcolor{red}{a}\textcolor{purple}{f}+\textcolor{red}{b}\textcolor{purple}{h}\\\textcolor{blue}{c}\textcolor{magenta}{e}+\textcolor{blue}{d}\textcolor{magenta}{g}&\textcolor{blue}{c}\textcolor{purple}{f}+\textcolor{blue}{d}\textcolor{purple}{h}\end{pmatrix}$
+
+실수의 곱셈을 이용해 실수의 양의 정수 거듭제곱을 정의하듯, 행렬의 곱셈을 이용해 행렬의 양의 정수 거듭제곱도 정의합니다. 구체적으로 $M^2$는 $M$과 $M$ 자신의 곱 $MM$이고, $M^3$은 $M^2$와 $M$의 곱 $M^2M$입니다. 이 정의에 따라 $M^3$을 구하세요.
+
+</details>
+
 ## 입력
 
 ```text

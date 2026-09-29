@@ -20,6 +20,10 @@
     "typescript": "^5.9.0"
   },
   "exports": {
+    "./problem-html-validation": {
+      "browser": "./src/problem-html-validation.ts",
+      "default": "./src/problem-html-validation-node.ts"
+    },
     "./*": "./src/*.ts"
   },
   "dependencies": {

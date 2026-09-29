@@ -12,6 +12,15 @@ title: "AND Set"
 
 처음에 빈 집합 $S$가 있다냥. 쿼리 1은 $x$를 추가하고, 쿼리 2는 $x$를 삭제하며, 쿼리 3은 현재 집합에 포함된 모든 원소의 비트 AND를 출력한다냥. 빈 집합의 AND는 $-1$이다냥.
 
+<details>
+<summary>비트 AND란? (클릭하여 펼치기)</summary>
+
+두 비음이 아닌 정수 $X,Y$의 비트 AND는 $2$진 표현의 각 자리에서 두 수 모두 $1$인 경우에만 $1$, 그렇지 않으면 $0$이 되는 수입니다. 예를 들어 $3\ \mathrm{AND}\ 5=1$입니다 ($011\ \mathrm{AND}\ 101=001$).
+
+$k$개의 비음이 아닌 정수 $p_1,p_2,\dots,p_k$의 비트 AND는 $((p_1\ \mathrm{AND}\ p_2)\ \mathrm{AND}\ p_3)\ \mathrm{AND}\cdots\ \mathrm{AND}\ p_k$로 정의합니다. 이 값은 $p_1,p_2,\dots,p_k$의 순서와 무관함을 증명할 수 있습니다.
+
+</details>
+
 ## 조건
 
 - $1\le Q\le4\times10^5$

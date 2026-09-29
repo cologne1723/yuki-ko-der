@@ -20,7 +20,8 @@ LCP array에 대해 공부하던 중, 문자열 `mississippi`가 자신의 이�
 
 ## 문제 설명
 
-### 배경
+<details>
+<summary>LCP array란</summary>
 
 길이 $N$인 문자열 $S$의 $N$개 접미사를 사전순으로 정렬한 배열을 $S$의 suffix array라고 합니다.
 
@@ -29,6 +30,8 @@ $i=1,2,\dots,N-1$에 대해, $S$의 suffix array에서 $i$번째 원소와 $i+1$
 예를 들어, $S=$`abba`의 $4$개 접미사는 `abba`, `bba`, `ba`, `a`입니다. 이를 사전순으로 정렬하면 [`a`, `abba`, `ba`, `bba`]가 됩니다.
 
 서로 이웃한 원소끼리의 최장 공통 접두사의 길이는 $1$, $0$, $1$이므로 문자열 `abba`의 LCP array는 $[1,0,1]$입니다.
+
+</details>
 
 양의 정수 $N$이 주어집니다. `a` 또는 `b`로만 이루어진 길이 $N$의 문자열 중 LCP array의 원소 합이 최대가 되는 것을 구성하세요.
 

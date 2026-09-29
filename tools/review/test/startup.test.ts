@@ -5,6 +5,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { runInNewContext } from "node:vm";
 import { build } from "esbuild";
+import { JSDOM } from "jsdom";
 import { repositoryRoot } from "translation-core/paths";
 import { createReviewApp } from "../src/review-server.ts";
 
@@ -142,4 +143,27 @@ test("built browser compiler works with dynamic code generation disabled", async
     { contextCodeGeneration: { strings: false, wasm: false } },
   );
   assert.match(context.result, /data-yukicoder-ko-problem/);
+  const dom = new JSDOM("");
+  try {
+    const browserContext = { ...context, window: dom.window };
+    browserContext.source = source.replace(
+      "## 문제 설명",
+      "## 문제 설명\n\n<details><summary>힌트</summary><p>설명</p></details>",
+    );
+    const run = () =>
+      runInNewContext(
+        result.outputFiles[0].text + "\nresult = compile(source)",
+        browserContext,
+        { contextCodeGeneration: { strings: false, wasm: false } },
+      );
+    run();
+    assert.match(browserContext.result, /<details>/);
+    browserContext.source = source.replace(
+      "## 문제 설명",
+      '<!-- heading -->\n## 문제 설명\n\n<img src="x" onerror="alert(1)">',
+    );
+    assert.throws(run, /Unsupported or executable HTML/);
+  } finally {
+    dom.window.close();
+  }
 });

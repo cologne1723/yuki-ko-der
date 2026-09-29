@@ -27,13 +27,16 @@ $N \times N$ 격자가 주어집니다. 위에서 $i$번째, 왼쪽에서 $j$번
 2. **쓰기**: `W` — 현재 칸이 $(i,j)$일 때, $A_{i,j}$를 $A_{i,j} \mathbin{\oplus} s$로 바꿉니다.
 3. **복사**: `C` — 현재 칸이 $(i,j)$일 때, $s$를 $s \mathbin{\oplus} A_{i,j}$로 바꿉니다.
 
-### 비트 단위 XOR이란
+<details>
+<summary>비트 단위 XOR이란?</summary>
 
 음이 아닌 정수 $A$, $B$의 비트 단위 XOR $A \mathbin{\oplus} B$는 다음과 같이 정의됩니다.
 
 - $A \mathbin{\oplus} B$를 이진 표기로 나타냈을 때 $2^k$ ($k \geq 0$)의 자리 숫자는, $A$, $B$를 이진 표기로 나타냈을 때 해당 자리의 숫자 중 정확히 $1$개만 $1$이면 $1$이고, 그렇지 않으면 $0$입니다.
 
 예를 들어, $3 \mathbin{\oplus} 5 = 6$입니다. (이진 표기로 나타내면 $011 \mathbin{\oplus} 101 = 110$입니다.)
+
+</details>
 
 ## 입력
 

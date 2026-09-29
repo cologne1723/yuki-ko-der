@@ -17,12 +17,12 @@ export function sanitizeTranslatedBlocks(
 ): HTMLElement[] {
   const document = options.document ?? globalThis.document;
   const allowedTags = new Set(
-    "DIV P SPAN BR WBR HR H1 H2 H3 H4 H5 H6 PRE CODE BLOCKQUOTE UL OL LI TABLE THEAD TBODY TFOOT TR TD TH CAPTION A IMG STRONG B EM I U S DEL SUP SUB RUBY RT RP DETAILS SUMMARY".split(
+    "DIV P SPAN BR WBR HR H1 H2 H3 H4 H5 H6 PRE CODE BLOCKQUOTE UL OL LI TABLE THEAD TBODY TFOOT TR TD TH CAPTION A IMG STRONG B EM I U S DEL SUP SUB RUBY RT RP DETAILS SUMMARY FONT".split(
       " ",
     ),
   );
   const allowedAttributes = new Set(
-    "class id data-file href src alt title width height colspan rowspan start type open".split(
+    "class id data-file href src alt title width height colspan rowspan start type open color".split(
       " ",
     ),
   );

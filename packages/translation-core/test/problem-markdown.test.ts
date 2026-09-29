@@ -6,6 +6,7 @@ import { strict as assert } from "node:assert";
 import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 import { JSDOM } from "jsdom";
+import { sanitizeTranslatedBlocks } from "../src/problem-rendering.ts";
 import {
   compileProblemMarkdown,
   parseProblemMarkdown,
@@ -69,7 +70,7 @@ test("problem 3679 renders a bold link followed by a Korean particle", async () 
   assert.doesNotMatch(link.closest("p")?.textContent ?? "", /\*\*/u);
 });
 
-test("problem MDX rejects executable or structural markup", async () => {
+test("problem MDX rejects executable markup and custom components", async () => {
   const source = await readFile(
     "problem-translations/ko/problems/1.mdx",
     "utf8",
@@ -77,9 +78,12 @@ test("problem MDX rejects executable or structural markup", async () => {
   assert.throws(
     () =>
       compileProblemMarkdown(
-        source.replace("## 문제 설명", "## 문제 설명\n\n<div>"),
+        source.replace(
+          "## 문제 설명",
+          "## 문제 설명\n\n<script>alert(1)</script>",
+        ),
       ),
-    /native Markdown/u,
+    /Unsupported or executable HTML/u,
   );
   assert.throws(
     () =>
@@ -93,7 +97,7 @@ test("problem MDX rejects executable or structural markup", async () => {
       compileProblemMarkdown(
         source.replace("## 문제 설명", "## 문제 설명\n\n<Widget>"),
       ),
-    /native Markdown|Unsupported/u,
+    /Unsupported/u,
   );
 });
 
@@ -216,6 +220,178 @@ title: Fixture
 ---
 
 `;
+
+test("HTML fallback preserves nested disclosures, Markdown content and following sections", () => {
+  const dom = new JSDOM(
+    compileProblemMarkdown(`${fixtureHeader}## 문제 설명
+
+<details>
+<summary>접기 표시</summary>
+
+**강조**와 $N_i$ 설명
+
+- 항목
+
+![그림](https://example.com/image.png)
+
+<details open>
+<summary>내부 설명</summary>
+
+~~~text
+1 2
+~~~
+
+</details>
+
+</details>
+
+<table><tr><td colspan="2">병합 셀</td></tr></table>
+
+밑줄 <u>설명</u><br>다음 줄
+
+## 입력
+
+다음 절
+`),
+  );
+  const doc = dom.window.document;
+  const details = doc.querySelector("details")!;
+  assert.equal(details.open, false);
+  assert.equal(details.querySelector("summary")!.textContent, "접기 표시");
+  assert.equal(details.querySelector("strong")!.textContent, "강조");
+  assert.match(details.querySelector("p")!.textContent!, /\$N_i\$/u);
+  assert.equal(details.querySelector("li")!.textContent!.trim(), "항목");
+  assert.ok(details.querySelector("img"));
+  assert.equal(details.querySelector("details")!.open, true);
+  details.querySelector("summary")!.click();
+  assert.equal(details.open, true);
+  details.querySelector("summary")!.click();
+  assert.equal(details.open, false);
+  assert.equal(details.querySelector("details")!.open, true);
+  assert.equal(details.querySelector("pre")!.textContent, "1 2\n");
+  assert.equal(doc.querySelector("td")!.colSpan, 2);
+  assert.equal(doc.querySelector("u")!.textContent, "설명");
+  assert.equal(doc.querySelectorAll(".block").length, 2);
+  assert.equal(doc.querySelectorAll(".block")[1].closest("details"), null);
+  dom.window.close();
+});
+
+test("HTML fallback rejects event handlers and executable URLs", () => {
+  for (const html of [
+    '<details ontoggle="alert(1)"><summary>설명</summary></details>',
+    '<img src="x" onerror="alert(1)">',
+    '<a href="javascript:alert(1)">링크</a>',
+  ]) {
+    assert.throws(
+      () => compileProblemMarkdown(`${fixtureHeader}## 설명\n\n${html}\n`),
+      /Unsupported or executable HTML/u,
+    );
+  }
+});
+
+test("disclosure hints preserve source font color through display sanitization", () => {
+  const dom = new JSDOM(
+    compileProblemMarkdown(`${fixtureHeader}## 설명
+
+<details>
+<summary>숨겨진 힌트</summary>
+
+<font color="white">선택하면 읽을 수 있는 힌트</font>
+
+</details>
+`),
+  );
+  const doc = dom.window.document;
+  const [block] = sanitizeTranslatedBlocks([doc.querySelector(".block")!], {
+    document: doc,
+  });
+  assert.equal(block.querySelector("font")!.getAttribute("color"), "white");
+  const details = block.querySelector("details")!;
+  details.querySelector("summary")!.click();
+  assert.equal(details.open, true);
+  details.querySelector("summary")!.click();
+  assert.equal(details.open, false);
+  dom.window.close();
+});
+
+test("disclosures before sections support lists and internal headings without swallowing later sections", () => {
+  const dom = new JSDOM(
+    compileProblemMarkdown(`${fixtureHeader}공지
+
+<details>
+<summary>정의</summary>
+
+## 내부 제목
+
+- 첫 조건
+- 둘째 조건
+
+</details>
+
+## 문제 설명
+
+본문
+
+<details>
+<summary>추가 설명</summary>
+
+## 내부 제목
+
+접힌 설명
+
+</details>
+
+## 입력
+
+입력 설명
+`),
+  );
+  const doc = dom.window.document;
+  assert.equal(doc.querySelectorAll(".block").length, 2);
+  assert.equal(doc.querySelectorAll("details h2").length, 2);
+  assert.equal(
+    doc.querySelectorAll(".problem-statement > details li").length,
+    2,
+  );
+  assert.equal(doc.querySelectorAll(".block")[1].closest("details"), null);
+  dom.window.close();
+});
+
+test("headings inside sample disclosures do not close the surrounding sample", () => {
+  const dom = new JSDOM(
+    compileProblemMarkdown(`${fixtureHeader}## 예제
+
+### 예제 1 {file="sample.txt"}
+
+<details>
+<summary>풀이</summary>
+
+### 첫 단계
+
+#### 세부 설명
+
+접힌 내용
+
+</details>
+
+계속되는 예제 설명
+
+### 예제 2 {file="next.txt"}
+
+다음 예제
+`),
+  );
+  const samples = dom.window.document.querySelectorAll(".sample");
+  assert.equal(samples.length, 2);
+  assert.equal(samples[0].querySelector("details h3")?.textContent, "첫 단계");
+  assert.equal(
+    samples[0].querySelector("details h4")?.textContent,
+    "세부 설명",
+  );
+  assert.match(samples[0].textContent!, /계속되는 예제 설명/u);
+  assert.equal(samples[1].closest("details"), null);
+  dom.window.close();
+});
 
 test("blockquote notices preserve nested content before the first section", () => {
   const doc = new JSDOM(

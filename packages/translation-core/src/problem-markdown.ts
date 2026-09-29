@@ -4,6 +4,7 @@ import {
 } from "./problem-review-status.ts";
 import MarkdownIt from "markdown-it";
 import container from "markdown-it-container";
+import { validateStaticHtml } from "translation-core/problem-html-validation";
 import { parseProblemMarkdown } from "./problem-frontmatter.ts";
 import { PROBLEM_RENDER_MARKUP_VERSION } from "./problem-render-markup.ts";
 type Token = ReturnType<ReturnType<typeof MarkdownIt>["parse"]>[number];
@@ -139,25 +140,28 @@ markdown.inline.ruler.before("escape", "problem_tex", (state, silent) => {
 });
 markdown.renderer.rules.problem_tex = (tokens, index) =>
   escapeHtml(tokens[index].content);
-function validateTokens(tokens: Token[]): void {
+function validateTokens(tokens: Token[]): boolean {
+  let hasHtml = false;
   for (const token of tokens) {
     if (token.type === "html_block" || token.type === "html_inline")
-      throw new Error("Problem MDX must use native Markdown instead of HTML");
+      hasHtml = true;
     if (
       token.type === "inline" &&
       /^\s*(?:import|export)\b/u.test(token.content)
     )
       throw new Error("Problem MDX may not import, export, or execute code");
-    if (token.children) validateTokens(token.children);
+    if (token.children) hasHtml = validateTokens(token.children) || hasHtml;
   }
+  return hasHtml;
 }
 function renderStatement(body: string): string {
   const environment = {};
   const tokens = markdown.parse(body, environment);
-  validateTokens(tokens);
+  const hasHtml = validateTokens(tokens);
   let result = "";
   let section = false;
   let sample = false;
+  let disclosureDepth = 0;
   let lastType = "";
   const closeSample = () => {
     if (sample)
@@ -166,10 +170,19 @@ function renderStatement(body: string): string {
   };
   for (let i = 0; i < tokens.length; i++) {
     const token = tokens[i];
+    if (token.type === "html_block") {
+      for (const tag of token.content.match(/<\/?details\b[^>]*>/giu) ?? []) {
+        disclosureDepth += /^<\//u.test(tag) ? -1 : 1;
+      }
+      result += token.content;
+      lastType = token.type;
+      continue;
+    }
     if (
       token.type === "heading_open" &&
       token.level === 0 &&
-      token.tag === "h2"
+      token.tag === "h2" &&
+      disclosureDepth === 0
     ) {
       closeSample();
       if (section) result += "</div>\n";
@@ -181,7 +194,7 @@ function renderStatement(body: string): string {
       i += 2;
       continue;
     }
-    if (!section) {
+    if (!section && disclosureDepth === 0) {
       if (
         !["paragraph_open", "blockquote_open"].includes(token.type) ||
         token.level !== 0
@@ -202,7 +215,8 @@ function renderStatement(body: string): string {
     if (
       token.type === "heading_open" &&
       token.level === 0 &&
-      token.tag === "h3"
+      token.tag === "h3" &&
+      disclosureDepth === 0
     ) {
       const match = tokens[i + 1].content.match(
         /^(.+?)\s+\{file=("(?:[^"\\]|\\.)*")\}\s*$/u,
@@ -217,6 +231,7 @@ function renderStatement(body: string): string {
     }
     if (
       sample &&
+      disclosureDepth === 0 &&
       (token.type === "heading_open" || token.type === "heading_close") &&
       token.tag === "h4"
     )
@@ -240,7 +255,9 @@ function renderStatement(body: string): string {
   closeSample();
   if (!section)
     throw new Error("Problem Markdown body must contain only ## sections");
-  return result + "</div>\n";
+  result += "</div>\n";
+  if (hasHtml) validateStaticHtml(result);
+  return result;
 }
 export function compileProblemMarkdown(source: string): string {
   const { metadata, body } = parseProblemMarkdown(source);

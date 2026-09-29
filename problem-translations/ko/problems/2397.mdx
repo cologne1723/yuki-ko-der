@@ -12,6 +12,22 @@ title: "ω의 거듭제곱"
 
 주어진 재귀적 정의로 자연수 $n$을 집합 $f(n)$으로 변환합니다. 입력된 비음이 아닌 정수 $N,M$에 대해 $f(N)\in f(M)$인지 판정하세요. 두 수는 2진수로 주어집니다.
 
+<details>
+<summary>계산 예시 (클릭하여 펼치기)</summary>
+
+예를 들어 $f(0),f(1),f(3)$은 다음과 같이 구할 수 있습니다.
+
+$$
+\displaystyle
+\begin{array}{rcl}
+\displaystyle f(0) &\displaystyle = &\displaystyle \{\} \\
+\displaystyle f(1) &\displaystyle = &\displaystyle f((2 \times 0 + 1)2^0) = f(0) + \omega^{f(0)} \times 1 = \{\} + \omega^{\{\}} \times 1 = \{\} \cup \{\{\}\} = \{\{\}\} \\
+\displaystyle f(3) &\displaystyle = &\displaystyle f((2 \times 1 + 1)2^0) = f(1) + \omega^{f(0)} \times 1 = \{\{\}\} + \omega^{\{\}} \times 1 = \{\{\}\} \cup \{\{\{\}\}\} = \{\{\},\{\{\}\}\}
+\end{array}
+$$
+
+</details>
+
 ## 조건
 
 - $N,M<2^{10^5}$

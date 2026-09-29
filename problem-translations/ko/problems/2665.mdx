@@ -12,6 +12,25 @@ title: "Minimize Inversions of Deque"
 
 순열 $P$를 순서대로 덱의 앞 또는 뒤에 추가합니다. 모든 추가가 끝난 뒤 덱의 전도 수 최솟값과, 그중 사전순으로 가장 작은 덱을 구하세요.
 
+<details>
+<summary>전도 수의 정의</summary>
+
+수열 $X=(X_1,X_2,\ldots,X_m)$의 전도 수는 $1\le i<j\le m$이고 $X_i>X_j$인 정수 쌍 $(i,j)$의 개수입니다.
+
+</details>
+
+<details>
+<summary>사전순의 정의</summary>
+
+서로 다른 수열 $X=(X_1,X_2,\ldots,X_m)$, $Y=(Y_1,Y_2,\ldots,Y_m)$에 대해, 다음 두 조건을 만족하는 유일한 위치 $i\in\{1,2,\ldots,m\}$가 있습니다.
+
+- 모든 양의 정수 $j<i$에 대해 $X_j=Y_j$입니다.
+- $X_i\ne Y_i$입니다.
+
+이 위치에서 $X_i<Y_i$일 때, 그리고 그때에만 $X$는 $Y$보다 사전순으로 작다고 합니다.
+
+</details>
+
 ## 조건
 
 - $1\le T\le2\times10^5$
@@ -27,4 +46,3 @@ $n$ $P_1$ $P_2$ $\cdots$ $P_n$
 ## 출력
 
 각 테스트 케이스에 대해 최소 전도 수와 해당 덱을 출력하세요.
-

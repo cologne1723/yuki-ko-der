@@ -12,6 +12,20 @@ title: "Restricted Permutation"
 
 길이 $N$의 순열 $P$에 대해 $f(P)$를 $P$보다 사전순으로 앞선 순열의 개수라 합니다. $P_K=X$인 모든 순열에 대한 $f(P)$의 합을 $998244353$으로 나눈 나머지를 구하세요.
 
+<details>
+<summary>▶ 길이 $N$의 순열이란</summary>
+
+$(1,2,\ldots,N)$을 재배열한 것을 말합니다.
+
+</details>
+
+<details>
+<summary>▶ 사전순으로 앞선다는 뜻</summary>
+
+길이 $N$인 순열 $P,Q$에 대해, $P_i\ne Q_i$인 $i$가 하나 이상 있다고 합시다. 그런 $i$ 중 가장 작은 것을 $j$라 할 때 $P_j<Q_j$이면 $P$가 $Q$보다 사전순으로 앞선다고 합니다.
+
+</details>
+
 ## 입력
 
 ```text

@@ -34,7 +34,8 @@ title: "Permutation Puzzle"
 - 열을 $1$개 선택하고, 그 열에 적힌 순열의 수에 따라 행렬의 열 위치를 재배열합니다.
 - 행을 $1$개 선택하고, 그 행에 적힌 순열의 수에 따라 행렬의 행 위치를 재배열합니다.
 
-재배열은 다음 의사 코드와 같습니다.
+<details>
+<summary>정렬의 의사 코드 (클릭하여 펼치기)</summary>
 
 ```text
 # A, B, S, T ... 行列
@@ -69,6 +70,8 @@ function reorder_rows_by_row_perm(S, Y)
             S <- reorder_rows_by_row_perm(S, Y)
     B <- S
 ```
+
+</details>
 
 연산의 예를 보겠습니다. $N=4$, $K=3$이라고 하겠습니다.
 

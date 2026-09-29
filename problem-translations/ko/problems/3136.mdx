@@ -66,12 +66,14 @@ function FizzBuzzString16(n) {
 
 참고로 의사 코드 이외에도 `FizzBuzz16`과 `FizzBuzzString16`의 정의에 해당하는 코드를 준비했습니다.
 
-```cpp
-#include <sstream>
+<details>
+<summary>C++</summary>
+
+<pre><code>#include &lt;sstream&gt;
 
 std::string to_hex_string(int64_t i) {
     std::stringstream s;
-    s << std::uppercase << std::hex << i;
+    s &lt;&lt; std::uppercase &lt;&lt; std::hex &lt;&lt; i;
     return s.str();
 }
 
@@ -89,15 +91,19 @@ std::string FizzBuzz16(int64_t i) {
 
 std::string FizzBuzzString16(int64_t n) {
     std::string s = "";
-    for (int64_t i = 1; i <= n; i++) {
+    for (int64_t i = 1; i &lt;= n; i++) {
         s += FizzBuzz16(i);
     }
     return s;
 }
-```
+</code></pre>
 
-```python
-def FizzBuzz16(i):
+</details>
+
+<details>
+<summary>Python</summary>
+
+<pre><code>def FizzBuzz16(i):
     if i % 15 == 0:
         return "FizzBuzz"
     elif i % 3 == 0:
@@ -112,10 +118,14 @@ def FizzBuzzString16(n):
     for i in range(1,n+1):
         s += FizzBuzz16(i)
     return s
-```
+</code></pre>
 
-```java
-String FizzBuzz16(long i) {
+</details>
+
+<details>
+<summary>Java</summary>
+
+<pre><code>String FizzBuzz16(long i) {
     if (i % 15L == 0L) {
         return "FizzBuzz";
     } else if (i % 3L == 0L) {
@@ -126,15 +136,17 @@ String FizzBuzz16(long i) {
         return String.format("%X", i);
     }
 }
- 
+&#32;
 String FizzBuzzString16(long n) {
     String s = "";
-    for (long i = 1L; i <= n; i++) {
+    for (long i = 1L; i &lt;= n; i++) {
         s += FizzBuzz16(i);
     }
     return s;
 }
-```
+</code></pre>
+
+</details>
 
 ## 입력
 

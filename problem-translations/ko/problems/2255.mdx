@@ -14,6 +14,27 @@ title: "Determinant Sum"
 
 ## 조건
 
+<details>
+<summary>행렬식이란? (클릭하면 펼쳐집니다)</summary>
+
+$N$은 양의 정수라고 합니다. $(1,2,\cdots,N)$의 순열 $\sigma=(\sigma_1,\sigma_2,\cdots,\sigma_N)$에 대해, $\sigma$의 전도 수는 $1\le i<j\le N$이며 $\sigma_i>\sigma_j$인 정수 쌍 $(i,j)$의 개수입니다.
+
+$S_N$을 $(1,2,\cdots,N)$의 모든 순열의 집합이라 하고, $\sigma\in S_N$에 대해 순열의 부호 $\mathrm{sgn}\,\sigma$를 전도 수가 짝수이면 $1$, 홀수이면 $-1$로 정의합니다.
+
+실수로 이루어진 $N$차 정방행렬 $A=(A_{i,j})$에 대해 **행렬식** $\det A$를 다음과 같이 정의합니다.
+
+$\det A = \sum_{\sigma \in S_N} \left\{(\mathrm{sgn} ~ \sigma) \prod_{i=1}^N A_{i, \sigma_i}\right \}$.
+
+여기서 $\sum_{\sigma\in S_N}$은 $(1,2,\cdots,N)$의 모든 순열 $\sigma$에 대한 합이고, $\prod_{i=1}^N x_i$는 $x_1\times x_2\times\cdots\times x_N$을 뜻합니다. 여기서는 행렬식을 이렇게 정의했지만 일반적인 설명과 다를 수 있습니다. 다만 이 정의는 다른 행렬식 정의와 동치입니다.
+
+예를 들어 $A=\begin{pmatrix}1&2\\3&4\end{pmatrix}$이면 $\mathrm{sgn}((1,2))=1$, $\mathrm{sgn}((2,1))=-1$이므로 $\det A=1\times4-2\times3=-2$입니다.
+
+$N=3$이고 $B=\begin{pmatrix}11&12&13\\21&22&23\\31&32&33\end{pmatrix}$이면
+
+$\det B=11\times22\times33-11\times23\times32-12\times21\times33+12\times23\times31+13\times21\times32-13\times22\times31=0$
+
+</details>
+
 원문 조건을 따른다냥.
 
 ## 입력
