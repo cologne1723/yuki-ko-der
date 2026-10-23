@@ -1,6 +1,30 @@
 version: 1
 locale: ko
 entries:
+  - id: yachiyo-name
+    source: [ヤチヨ]
+    preferred: 야치요
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확정한 이름 표기다.
+  - id: kaguya-name
+    source: [かぐや]
+    preferred: 카구야
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확정한 이름 표기다.
+  - id: iroha-name
+    source: [いろは]
+    preferred: 이로하
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확정한 이름 표기다.
+  - id: tsukuyomi-space
+    source: [ツクヨミ]
+    preferred: 츠쿠요미
+    forbidden: []
+    kind: proper_noun
+    note: 사용자가 확정한 가상 공간 이름 표기다.
   - id: paken-club
     source: [パ研]
     preferred: 컴퓨터동아리
