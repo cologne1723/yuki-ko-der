@@ -240,6 +240,39 @@ function observerFixture(engine: "katex" | "mathjax" = "katex") {
   };
 }
 
+test("translation view after unavailable verification reuses the failure until retry is clicked", async () => {
+  const f = observerFixture();
+  f.state.offline = true;
+  try {
+    await f.start();
+    const doc = f.dom.window.document;
+    const notice = () =>
+      doc.querySelector("#yukicoder-ko-status")!.textContent!;
+    assert.match(notice(), /확인하지 못했습니다/);
+    const requests = f.state.requests.length;
+    for (let i = 0; i < 2; i++) {
+      f.click("원문 보기");
+      await flushPage();
+      f.click("한국어 번역 보기");
+      await flushPage();
+      assert.match(
+        doc.querySelector(".block")!.textContent!,
+        /Translated body/,
+      );
+      assert.match(notice(), /확인하지 못했습니다/);
+      assert.equal(f.state.requests.length, requests);
+    }
+    f.state.offline = false;
+    f.click("다시 시도");
+    await flushPage();
+    assert.equal(f.state.sourceRetries, 1);
+    assert.equal(f.state.requests.length, requests + 2);
+    assert.match(notice(), /한국어 번역본 입니다/);
+  } finally {
+    f.close();
+  }
+});
+
 for (const engine of ["katex", "mathjax"] as const) {
   test(`${engine} wrapped statement translates, survives wrapper replacement and restores original nodes`, async () => {
     const f = observerFixture(engine);
@@ -440,7 +473,7 @@ test("automatic reapplication shares pending source verification and handles sta
   }
 });
 
-test("body replacement recovers a cancelled source-only retry without leaving stale warnings", async () => {
+test("body replacement preserves unavailable verification after a cancelled retry until retried again", async () => {
   const f = observerFixture();
   f.state.offline = true;
   try {
@@ -456,6 +489,17 @@ test("body replacement recovers a cancelled source-only retry without leaving st
     await flushPage();
     assert.equal(f.state.bodyCalls, 2);
     assert.equal(f.state.sourceRetries, 1);
+    assert.equal(
+      f.state.requests.filter((path) => path.includes("/api/")).length,
+      2,
+    );
+    assert.match(
+      doc.querySelector("#yukicoder-ko-status")!.textContent!,
+      /확인하지 못했습니다/,
+    );
+    f.click("다시 시도");
+    await flushPage();
+    assert.equal(f.state.sourceRetries, 2);
     assert.equal(
       f.state.requests.filter((path) => path.includes("translations.test"))
         .length,

@@ -6,8 +6,50 @@ import { convertProblemHtmlToMarkdown } from "../src/convert-problem-html-to-mdx
 import { compileProblemMarkdown } from "translation-core/problem-markdown";
 import { conversionSemantics } from "../src/problem-conversion-rules.ts";
 import { labelPublishedProblem } from "../src/problem-publication.ts";
+import {
+  sampleDataValues,
+  sampleFileNames,
+} from "translation-core/problem-samples";
 const wrap = (content: string) =>
   `<!doctype html><title>[기계 번역] No.1 Fixture</title><main data-yukicoder-ko-problem data-schema-version="1" data-locale="ko" data-problem-no="1" data-problem-id="17" data-source-title="Fixture" data-source-html-sha256="${"a".repeat(64)}" data-review-status="unreviewed"><h3>[기계 번역] No.1 Fixture</h3><div class="problem-statement"><div class="block"><h4>Statement</h4>${content}</div></div></main>`;
+test("direct statement samples retain IO and filenames through MDX", () => {
+  const html = wrap("<p>Body</p>").replace(
+    "</div></div></main>",
+    '</div><div class="sample" data-file="case.txt"><h5>Example</h5><h6>Input</h6><pre>1</pre><h6>Output</h6><pre>2</pre></div></div></main>',
+  );
+  const markdown = convertProblemHtmlToMarkdown(html);
+  const dom = new JSDOM(compileProblemMarkdown(markdown));
+  try {
+    const statement = dom.window.document.querySelector(".problem-statement")!;
+    assert.deepEqual(sampleDataValues([statement]), ["1", "2"]);
+    assert.deepEqual(sampleFileNames([statement]), ["case.txt"]);
+    assert.match(markdown, /### Example \{file="case.txt"\}/);
+  } finally {
+    dom.window.close();
+  }
+});
+
+test("conversion retains prose outside section blocks and rejects unwrapped prose", () => {
+  const html = wrap("<p>Body</p>")
+    .replace(
+      '<div class="problem-statement">',
+      '<div class="problem-statement"><p>Important introduction</p>',
+    )
+    .replace(
+      "</div></div></main>",
+      "</div><p>Important ending</p></div></main>",
+    );
+  const compiled = compileProblemMarkdown(convertProblemHtmlToMarkdown(html));
+  assert.match(compiled, /Important introduction/);
+  assert.match(compiled, /Important ending/);
+  assert.throws(
+    () =>
+      convertProblemHtmlToMarkdown(
+        html.replace("<p>Important introduction</p>", "Unwrapped introduction"),
+      ),
+    /Unsupported unwrapped statement prose/,
+  );
+});
 test("conversion and publication reject explicit incompatible markup without stamping unknown HTML", () => {
   const html = wrap("<pre><code>$literal$</code></pre>");
   for (const version of ["1", "3"]) {
@@ -38,6 +80,22 @@ test("conversion and publication reject explicit incompatible markup without sta
     "$literal$",
   );
 });
+test("sample conversion retains explanations outside and between paragraph wrappers", () => {
+  const html = wrap(
+    '<div class="sample" data-file=""><h5>Example</h5><p>Before input</p><div class="paragraph"><h6>Input</h6><pre>1</pre></div><p>Between input and output</p><div class="paragraph"><h6>Output</h6><pre>2</pre></div><p>After output</p></div>',
+  );
+  const compiled = compileProblemMarkdown(convertProblemHtmlToMarkdown(html));
+  const doc = new JSDOM(compiled).window.document;
+  assert.deepEqual(
+    [...doc.querySelectorAll(".sample p")].map((p) => p.textContent),
+    ["Before input", "Between input and output", "After output"],
+  );
+  assert.deepEqual(
+    [...doc.querySelectorAll(".sample pre")].map((p) => p.textContent),
+    ["1", "2"],
+  );
+});
+
 test("legacy conversion retains supported semantics and exact sample whitespace", () => {
   const html = wrap(
     '<p>Value x<sup>2</sup> and a<sub>i</sub>, formula $N_i$. <a href="https://yukicoder.me/">Source</a><img src="data:image/png;base64,AAAA" alt="diagram"></p><table><tr><th>A</th><th>B</th></tr><tr><td>0</td><td>1</td></tr></table><div class="sample" data-file="a.txt"><h5>Sample</h5><div class="paragraph"><h6>Input</h6><pre><code>\n\n#### literal\n1 \n</code></pre><h6>Output</h6><pre>2\n</pre></div></div>',

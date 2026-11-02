@@ -126,6 +126,222 @@ function fixture(options: { samples?: boolean } = {}) {
   return { dom, close, state, engine, saved, calls, catalog };
 }
 
+test("restoring after a site notice is added retains the original statement and notice", async () => {
+  const f = fixture();
+  try {
+    const content = f.dom.window.document.querySelector("#content")!;
+    const original = content.querySelector(".block")!;
+    const outcome = await f.engine.translateProblem(() => true, f.catalog());
+    assert.equal(outcome.status, "applied");
+    if (outcome.status === "applied") await outcome.verification;
+    content.insertAdjacentHTML("beforeend", "<p>New site notice</p>");
+    f.engine.restoreProblem();
+    assert.equal(original.isConnected, true);
+    assert.match(content.textContent!, /New site notice/);
+    assert.equal(content.querySelectorAll(".block").length, 1);
+  } finally {
+    f.close();
+  }
+});
+
+for (const codeFirst of [false, true]) {
+  test(`copy controls survive IO headings added to unheaded samples (code first: ${codeFirst})`, async () => {
+    const f = fixture();
+    try {
+      const samples = [1, 2]
+        .map(
+          (n) =>
+            `<div class="sample">${codeFirst ? `<pre>explanation${n}</pre>` : ""}<pre>input${n}</pre><pre>output${n}</pre>${codeFirst ? "" : `<pre>explanation${n}</pre>`}<button class="copy-sample-input">copy</button></div>`,
+        )
+        .join("");
+      f.state.canonical = `<div class="block"><h4>説明</h4>${samples}</div>`;
+      const target = samples
+        .replace(/<button.*?<\/button>/gu, "")
+        .replace(/<pre>input/gu, "<h6>입력</h6><pre>input")
+        .replace(/<pre>output/gu, "<h6>출력</h6><pre>output");
+      f.state.body = f.state.body
+        .replace(hash(source), hash(f.state.canonical))
+        .replace(/<div class="sample">.*?<\/div>/su, target);
+      const content = f.dom.window.document.querySelector("#content")!;
+      content.innerHTML = "<h3>No.1 題名</h3>" + f.state.canonical;
+      const originalNodes = [...content.childNodes];
+      const controls = [...content.querySelectorAll(".copy-sample-input")];
+      const copied: string[] = [];
+      controls.forEach((button) =>
+        button.addEventListener("click", () =>
+          copied.push(
+            button.closest(".sample")!.querySelector("pre")!.textContent!,
+          ),
+        ),
+      );
+      const result = await f.engine.translateProblem(() => true, f.catalog());
+      assert.equal(result.status, "applied", JSON.stringify(result));
+      controls.forEach((button) => (button as HTMLElement).click());
+      assert.deepEqual(
+        copied,
+        codeFirst ? ["explanation1", "explanation2"] : ["input1", "input2"],
+      );
+      assert.match(content.textContent!, /explanation1/);
+      assert.match(content.textContent!, /explanation2/);
+      f.engine.restoreProblem();
+      assert.deepEqual([...content.childNodes], originalNodes);
+    } finally {
+      f.close();
+    }
+  });
+}
+
+test("published samples accept an alternative output explicitly permitted by the canonical source", async () => {
+  const f = fixture();
+  try {
+    f.state.canonical =
+      '<div class="block"><h4>説明</h4><div class="sample"><h6>入力</h6><pre>input</pre><h6>出力</h6><pre>1 1 3 3</pre><p>このほか，<code>0 3 2 3</code> という出力を行った場合にも正解となります．</p></div></div>';
+    f.state.body = f.state.body
+      .replace(hash(source), hash(f.state.canonical))
+      .replace(
+        /<div class="sample">.*?<\/div>/su,
+        '<div class="sample"><h6>입력</h6><pre>input</pre><h6>출력</h6><pre>1 1 3 3</pre><h6>출력</h6><pre>0 3 2 3</pre></div>',
+      );
+    const outcome = await f.engine.translateProblem(() => true, f.catalog());
+    assert.equal(outcome.status, "applied", JSON.stringify(outcome));
+    if (outcome.status === "applied")
+      assert.equal((await outcome.verification)?.status, "verified");
+    assert.equal(
+      f.dom.window.document.querySelectorAll(".sample pre").length,
+      3,
+    );
+  } finally {
+    f.close();
+  }
+});
+
+test("offline evidence for promoted outputs displays the translation and preserves every copy input", async () => {
+  const f = fixture();
+  try {
+    const sample1 =
+      '<div class="sample"><h5>例1</h5><h6>入力</h6><pre>input1</pre><h6>出力</h6><pre>output1</pre><p>このほか，<code>input2</code> という出力を行った場合にも正解となります．</p><button class="copy-sample-input">copy1</button></div>';
+    const sample2 =
+      '<div class="sample"><h5>例2</h5><h6>入力</h6><pre>input2</pre><h6>出力</h6><pre>output2</pre><button class="copy-sample-input">copy2</button></div>';
+    f.state.canonical = `<div class="block"><h4>説明</h4>${sample1}${sample2}</div>`;
+    const translation = f.state.canonical
+      .replace(/<button.*?<\/button>/gu, "")
+      .replace(
+        "<p>このほか，<code>input2</code> という出力を行った場合にも正解となります．</p>",
+        "<h6>출력</h6><pre>input2</pre>",
+      );
+    f.state.body = f.state.body
+      .replace(hash(source), hash(f.state.canonical))
+      .replace(
+        source
+          .replace("<h4>説明</h4><p>$N$</p>", "<h4>설명</h4><p>$M^2$</p>")
+          .replace("<h5>例</h5>", "<h5>예제</h5>"),
+        translation,
+      );
+    assert.ok(f.state.body.includes("copy1") === false);
+    assert.ok(f.state.body.includes("output2"));
+    const doc = f.dom.window.document;
+    const content = doc.querySelector("#content")!;
+    content.innerHTML = "<h3>No.1 題名</h3>" + f.state.canonical;
+    const originals = [...content.childNodes];
+    const request = f.dom.window.fetch;
+    f.dom.window.fetch = (url, options) => {
+      if (String(url).includes("/api/"))
+        return Promise.reject(new Error("offline"));
+      return request(url, options);
+    };
+    const catalog = f.catalog();
+    const evidence = {
+      ...catalog,
+      entries: catalog.entries.map((entry) => ({
+        ...entry,
+        translationSamplesSha256: hash(
+          JSON.stringify(["input1", "output1", "input2", "input2", "output2"]),
+        ),
+      })),
+    };
+    for (let i = 0; i < 2; i++) {
+      if (i === 1)
+        content.querySelector("pre")!.innerHTML =
+          "<mjx-container>rendered input</mjx-container>";
+      const selectedEvidence =
+        i === 0
+          ? evidence
+          : {
+              ...evidence,
+              entries: evidence.entries.map((entry) => ({
+                ...entry,
+                sourceSampleIndices: [0, 1, 3, 4],
+              })),
+            };
+      const outcome = await f.engine.translateProblem(
+        () => true,
+        selectedEvidence,
+      );
+      assert.equal(outcome.status, "applied", JSON.stringify(outcome));
+      if (outcome.status === "applied")
+        assert.equal((await outcome.verification)?.status, "unavailable");
+      const copyInputs = [
+        ...content.querySelectorAll(".copy-sample-input"),
+      ].map((button) => button.closest(".sample")!.querySelector("pre")!);
+      assert.deepEqual(
+        copyInputs.map((pre) => pre.textContent),
+        ["input1", "input2"],
+      );
+      assert.equal(copyInputs[1], content.querySelectorAll("pre")[3]);
+      f.engine.restoreProblem();
+      assert.deepEqual([...content.childNodes], originals);
+    }
+  } finally {
+    f.close();
+  }
+});
+
+test("published sample mismatch still rejects output absent from the canonical source", async () => {
+  const f = fixture();
+  try {
+    f.state.body = translated("corrupted input\n");
+    const outcome = await f.engine.translateProblem(() => true, f.catalog());
+    assert.equal(outcome.status, "failed");
+    assert.equal(
+      f.dom.window.document.querySelector(".sample pre")!.textContent,
+      "1  2\n",
+    );
+  } finally {
+    f.close();
+  }
+});
+
+test("verified bare and image puzzle statements translate and restore their exact nodes", async () => {
+  for (const statement of [
+    "-",
+    '<img src="data:image/png;base64,YQ==">',
+    "<h3>問題文</h3><pre>encoded</pre>",
+  ]) {
+    const f = fixture({ samples: false });
+    try {
+      f.state.body = f.state.body.replace(
+        hash(f.state.canonical),
+        hash(statement),
+      );
+      f.state.canonical = statement;
+      const content = f.dom.window.document.querySelector("#content")!;
+      content.innerHTML =
+        '<h3>No.1 題名</h3><button id="copy-problem-html-btn">copy</button>' +
+        statement +
+        '<form action="/problems/18/submit"><input value="keep"></form>';
+      const nodes = [...content.childNodes];
+      const result = await f.engine.translateProblem(() => true, f.catalog());
+      assert.equal(result.status, "applied", JSON.stringify(result));
+      if (result.status === "applied")
+        assert.equal((await result.verification)?.status, "verified");
+      f.engine.restoreProblem();
+      assert.deepEqual([...content.childNodes], nodes);
+    } finally {
+      f.close();
+    }
+  }
+});
+
 test("mixed authored HTML replaces and restores every node without replacing site controls", async () => {
   const f = fixture();
   try {
@@ -888,7 +1104,7 @@ for (const invalid of ["metadata", "body"]) {
 }
 
 for (const toggle of [false, true]) {
-  test(`failed verification is retried by the next translation ${toggle ? "after restoration" : "while applied"}`, async () => {
+  test(`failed verification is reused ${toggle ? "after restoration" : "while applied"} until explicitly retried`, async () => {
     const f = fixture({ samples: false });
     const request = f.dom.window.fetch;
     let offline = true;
@@ -906,7 +1122,19 @@ for (const toggle of [false, true]) {
       const block = f.dom.window.document.querySelector(".block");
       if (toggle) f.engine.restoreProblem();
       offline = false;
-      const recovered = await f.engine.translateProblem();
+      const repeated = await f.engine.translateProblem();
+      assert.equal(
+        repeated.status === "applied" && (await repeated.verification)?.status,
+        "unavailable",
+      );
+      assert.equal(f.calls.filter((url) => url.endsWith("/html")).length, 1);
+      assert.equal(
+        f.dom.window.document.querySelector(".block h4")!.textContent,
+        "설명",
+      );
+      const recovered = await f.engine.translateProblem(() => true, undefined, {
+        retryVerification: true,
+      });
       assert.equal(
         recovered.status === "applied" &&
           (await recovered.verification)?.status,

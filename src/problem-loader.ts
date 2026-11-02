@@ -1,5 +1,5 @@
 import type { PublishedProblem } from "translation-core/problem-catalog";
-import { sourceStatementBlocks } from "translation-core/problem-document";
+import { sourceStatementNodes } from "translation-core/problem-document";
 import { parseTranslationDocument as parseDocument } from "translation-core/problem-document";
 import { fetchBuffered } from "translation-core/request";
 import { sha256Hex as hashBytes } from "translation-core/sha256";
@@ -185,18 +185,25 @@ export function createProblemLoader(host: Window & typeof globalThis) {
       metadata.ProblemId < 1 ||
       !("Title" in metadata) ||
       typeof metadata.Title !== "string" ||
-      !metadata.Title.trim()
+      (!metadata.Title.trim() &&
+        !(
+          metadata.No === 8025 &&
+          metadata.ProblemId === 888 &&
+          metadata.Title === "\u3000"
+        ))
     )
       throw new Error("Canonical problem metadata is unavailable");
 
     const html = new TextDecoder("utf-8", { fatal: true }).decode(htmlBytes);
-    const blocks = sourceStatementBlocks(parseHtml(html).body);
+    const sourceDocument = parseHtml(html);
+    const blocks = sourceStatementNodes(sourceDocument.body);
+    const htmlHash = await sha256Hex(htmlBytes);
+    // Bare puzzle fragments have no structural signature. Accept their exact
+    // recorded bytes, but do not mistake an arbitrary HTTP 200 error for a change.
     if (
-      !blocks.some(
-        (block) =>
-          (block.matches(".block") || block.querySelector(".block")) &&
-          (block.textContent?.trim() || block.querySelector("img, svg, math")),
-      )
+      !blocks.length ||
+      (!sourceDocument.body.querySelector(".block") &&
+        htmlHash !== sourceHtmlSha256)
     )
       throw new Error("Canonical problem statement is unavailable");
 
@@ -212,7 +219,7 @@ export function createProblemLoader(host: Window & typeof globalThis) {
         html,
       );
     }
-    if ((await sha256Hex(htmlBytes)) !== sourceHtmlSha256) {
+    if (htmlHash !== sourceHtmlSha256) {
       throw new ProblemVerificationError(
         "Canonical problem statement changed",
         html,

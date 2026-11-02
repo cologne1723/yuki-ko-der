@@ -4,6 +4,7 @@ interface Sample {
   name: string;
   file: string;
   values: string[];
+  elements: Element[];
 }
 
 interface SampleValue {
@@ -348,6 +349,7 @@ function collectSamples(blocks: Element[], ioOnly = false): Sample[] {
         name: sample.name,
         file: sample.file,
         values: elements.map(samplePreText),
+        elements,
       });
     }
   }
@@ -394,6 +396,13 @@ function matchesPromotedSourceBlocks(
   sourceBlocks: Element[],
   translatedValues: SampleValue[],
 ): boolean {
+  return promotedSourceMapping(sourceBlocks, translatedValues) !== undefined;
+}
+
+function promotedSourceMapping(
+  sourceBlocks: Element[],
+  translatedValues: { value: string }[],
+): Map<Element, number> | undefined {
   const required = new Set(sampleDataElements(sourceBlocks));
   const candidates = sourceBlocks.flatMap((block) =>
     [...block.querySelectorAll("pre,td,code")].filter(
@@ -405,17 +414,51 @@ function matchesPromotedSourceBlocks(
           !required.has(node.closest("td")!)),
     ),
   );
-  let positions = new Set([0]);
+  let positions = new Map<number, Map<Element, number>>([[0, new Map()]]);
   for (const pre of candidates) {
-    const next = required.has(pre) ? new Set<number>() : new Set(positions);
+    const next = required.has(pre)
+      ? new Map<number, Map<Element, number>>()
+      : new Map(positions);
     const value = samplePreText(pre);
-    for (const position of positions) {
-      if (translatedValues[position]?.value === value) next.add(position + 1);
+    for (const [position, mapping] of positions) {
+      if (translatedValues[position]?.value === value) {
+        const matched = new Map(mapping);
+        if (required.has(pre)) matched.set(pre, position);
+        next.set(position + 1, matched);
+      }
     }
     positions = next;
-    if (!positions.size) return false;
+    if (!positions.size) return undefined;
   }
-  return positions.has(translatedValues.length);
+  return positions.get(translatedValues.length);
+}
+
+/** Retain the actual required-IO alignment when optional outputs are promoted. */
+export function sampleDataCorrespondence(
+  sourceBlocks: Element[],
+  translatedBlocks: Element[],
+): Map<Element, number> | undefined {
+  const source = sampleDataElements(sourceBlocks);
+  const translated = sampleDataValues(translatedBlocks);
+  if (
+    source.length === translated.length &&
+    source.every((element, i) => samplePreText(element) === translated[i])
+  )
+    return new Map(source.map((element, i) => [element, i]));
+  const legacy = legacySampleCorrespondence(sourceBlocks, translatedBlocks);
+  if (legacy) {
+    const target = sampleDataElements(translatedBlocks);
+    return new Map(
+      [...legacy].flatMap(([before, after]) => {
+        const index = target.indexOf(after);
+        return index < 0 ? [] : [[before, index] as const];
+      }),
+    );
+  }
+  return promotedSourceMapping(
+    sourceBlocks,
+    translated.map((value) => ({ value })),
+  );
 }
 
 // Publication/runtime digest contract: ordered raw IO, excluding worked prose.
@@ -439,6 +482,34 @@ export function sampleDataValues(blocks: Element[]): string[] {
 
 export function sampleFileNames(blocks: Element[]): string[] {
   return collectSamples(blocks).map((sample) => sample.file);
+}
+
+// Unheaded legacy samples can gain IO headings only if every raw payload,
+// including explanatory code, survives in order. Share this proof with mapping.
+export function legacySampleCorrespondence(
+  sourceBlocks: Element[],
+  translatedBlocks: Element[],
+): Map<Element, Element> | undefined {
+  const samples = sourceBlocks.flatMap((block) => [
+    ...(block.matches(".sample") ? [block] : []),
+    ...block.querySelectorAll(".sample"),
+  ]);
+  if (!samples.length || samples.some((sample) => sample.querySelector("h6")))
+    return undefined;
+  const before = collectSamples(sourceBlocks).flatMap(
+    (sample) => sample.elements,
+  );
+  const after = collectSamples(translatedBlocks).flatMap(
+    (sample) => sample.elements,
+  );
+  if (
+    before.length !== after.length ||
+    before.some(
+      (element, i) => samplePreText(element) !== samplePreText(after[i]),
+    )
+  )
+    return undefined;
+  return new Map(before.map((element, i) => [element, after[i]]));
 }
 
 function sampleIdentity(before?: Sample, after?: Sample): string {
@@ -515,23 +586,8 @@ export function sampleWarnings(
   // Fully unheaded legacy samples may mix submitted code and actual IO.
   // Labeling only actual IO is safe when every original block, including the
   // explanatory code, still matches in order. Never allow omission or edits.
-  const legacySamples = sourceBlocks.flatMap((block) => [
-    ...(block.matches(".sample") ? [block] : []),
-    ...block.querySelectorAll(".sample"),
-  ]);
-  if (
-    ioOnly &&
-    legacySamples.length > 0 &&
-    legacySamples.every((sample) => !sample.querySelector("h6"))
-  ) {
-    const before = collectValues(collectSamples(sourceBlocks));
-    const after = collectValues(collectSamples(translatedBlocks));
-    if (
-      before.length === after.length &&
-      before.every((item, index) => item.value === after[index].value)
-    )
-      return [];
-  }
+  if (ioOnly && legacySampleCorrespondence(sourceBlocks, translatedBlocks))
+    return [];
   const warnings: string[] = [];
   for (
     let index = 0;

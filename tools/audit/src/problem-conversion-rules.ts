@@ -238,10 +238,13 @@ export function conversionSemantics(element: Element): unknown {
 
 export function sampleMarkdown(sample: Element): string {
   const heading = sample.querySelector(":scope > h5")?.textContent?.trim();
-  const paragraph = sample.querySelector(":scope > .paragraph");
-  if (!heading || !paragraph) throw new Error("Sample structure is invalid");
-  const content = paragraph.cloneNode(true) as Element;
-  for (const label of content.querySelectorAll(":scope > h6")) {
+  if (!heading) throw new Error("Sample structure is invalid");
+  const content = sample.cloneNode(true) as Element;
+  content.querySelector(":scope > h5")!.remove();
+  content.removeAttribute("class");
+  for (const label of content.querySelectorAll(
+    ":scope > h6, :scope > .paragraph > h6",
+  )) {
     const heading = content.ownerDocument.createElement("h4");
     heading.append(...label.childNodes);
     label.replaceWith(heading);

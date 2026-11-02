@@ -6,6 +6,60 @@ const titles = [
   { problemNo: 1, problemId: 18, source: "題名", target: "제목" },
 ];
 const code = await bundle("src/content.ts", titles);
+for (const insertion of ["text", "paragraph", "empty-text"] as const) {
+  test(`late ${insertion} statement triggers one new translation attempt`, async () => {
+    const { dom, close } = page(
+      '<main id="content" data-problem-id="18"><h3>No.1 題名</h3><form action="/problems/18/submit"></form></main>',
+      "https://yukicoder.me/problems/no/1",
+    );
+    let attempts = 0;
+    Object.assign(dom.window, {
+      yukicoderProblemTranslations: {
+        restoreProblem() {},
+        translateProblem: async () => {
+          attempts++;
+          return { status: "unavailable" };
+        },
+      },
+      chrome: {
+        runtime: {
+          getURL: (p: string) => p,
+          sendMessage: async () => statusCatalog("제목"),
+        },
+        storage: { local: { get: async () => ({}) } },
+      },
+      fetch: async () => Response.json({ translations: [] }),
+    });
+    try {
+      const doc = dom.window.document;
+      const marker = doc.querySelector("form")!;
+      const node =
+        insertion === "paragraph"
+          ? doc.createElement("p")
+          : doc.createTextNode("");
+      if (insertion === "empty-text") marker.before(node);
+      dom.window.eval(code);
+      await settle();
+      assert.equal(attempts, 1);
+      node.textContent = "Original puzzle";
+      if (insertion !== "empty-text") marker.before(node);
+      await settle();
+      assert.equal(attempts, 2);
+      marker.before(
+        doc.createComment("unrelated anchor"),
+        doc.createTextNode("\n  "),
+      );
+      await settle();
+      assert.equal(
+        attempts,
+        2,
+        "comments and whitespace must not trigger retries",
+      );
+    } finally {
+      close();
+    }
+  });
+}
 test("submission editors stay untouched and do not trigger rescans while surrounding UI translates", async () => {
   const { dom, close } = page(
     '<main id="content" data-submission-id="1184874"><div id="code">source</div><button>source</button></main><div id="source_code_modal"><div id="modal_code_editor">source</div><button>source</button></div>',

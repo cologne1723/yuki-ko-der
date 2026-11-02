@@ -12,13 +12,16 @@ import {
   writeProblemRenderProfile,
 } from "translation-core/problem-render-profile-files";
 import { pacedDownload, type CollectionOptions } from "./paced-download.ts";
+import {
+  recordSourceDownload,
+  finishSourceDownload,
+} from "./source-downloads.ts";
 import { parseProblemMarkdown } from "translation-core/problem-markdown";
 import { parseReviewState } from "translation-core/review-state";
 import {
   activateSource,
   atomicFile,
   optionalFile,
-  preserveSource,
   readSourceIndex,
   recoverSourceStore,
   sha256,
@@ -238,11 +241,22 @@ async function setupDataWithDownload(
         )
           throw new Error("Canonical metadata identity mismatch");
         const html = (await download(context, `${url}/html`)).bytes;
-        const revisionPath = await preserveSource(problemsRoot, metadata, html);
+        const revisionPath = await recordSourceDownload(
+          problemsRoot,
+          metadata,
+          html,
+          [problem.hash],
+        );
         if (
           !same(metadata, problem.metadata) ||
           sha256(html) !== problem.hash
         ) {
+          await finishSourceDownload(
+            problemsRoot,
+            metadata.No,
+            sha256(html),
+            "review-required",
+          );
           report({
             id,
             status: "review-required",
@@ -262,6 +276,12 @@ async function setupDataWithDownload(
             "Translation changed during refresh; retry with its current metadata",
           );
         await activateSource(problemsRoot, metadata, html, context.signal);
+        await finishSourceDownload(
+          problemsRoot,
+          metadata.No,
+          sha256(html),
+          "applied",
+        );
         await ensureProfile(problem.metadata.No);
         report({
           id,

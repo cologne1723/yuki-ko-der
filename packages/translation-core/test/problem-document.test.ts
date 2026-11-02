@@ -7,6 +7,25 @@ import {
 } from "../src/problem-document.ts";
 import { sampleDataValues } from "../src/problem-samples.ts";
 
+test("unsectioned live statements require a matching submission boundary", () => {
+  const dom = new JSDOM(
+    '<main id="content" data-problem-id="18"><h3>No.1 Title</h3><button id="copy-problem-html-btn">copy</button>-<form action="/problems/18/submit"><input></form><p>Sign in</p></main>',
+  );
+  try {
+    const root = dom.window.document.querySelector("main")!;
+    assert.deepEqual(
+      sourceStatementNodes(root).map((node) => node.textContent),
+      ["-"],
+    );
+    root.querySelector("form")!.setAttribute("action", "/problems/19/submit");
+    assert.deepEqual(sourceStatementNodes(root), []);
+    root.querySelector("form")!.remove();
+    assert.deepEqual(sourceStatementNodes(root), []);
+  } finally {
+    dom.window.close();
+  }
+});
+
 test("plain statement wrappers retain Note and samples while ignoring controls and staging", () => {
   const dom = new JSDOM(`<main>
     <form><div class="block">control</div></form>

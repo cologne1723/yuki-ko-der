@@ -4,6 +4,7 @@ import {
   sourceStatementNodes,
 } from "translation-core/problem-document";
 import { detectProblemRenderProfile } from "translation-core/problem-render-profile";
+import { sampleDataValues } from "translation-core/problem-samples";
 import {
   createProblemLoader,
   ProblemVerificationError,
@@ -47,6 +48,7 @@ export function createProblemEngine(host: Window & typeof globalThis) {
     isCurrent: () => boolean;
     translation: Promise<Translation>;
     verification?: Promise<CanonicalResult>;
+    verificationUnavailable?: boolean;
   };
   type Replacement = Awaited<ReturnType<typeof prepareReplacement>>;
   let session: Session | undefined;
@@ -62,8 +64,12 @@ export function createProblemEngine(host: Window & typeof globalThis) {
   function verifySource(
     resource: Session,
     translation: NonNullable<Translation>,
+    retry = false,
   ) {
-    if (resource.verification) return resource.verification;
+    // View changes reuse failures too; only an explicit retry starts a new request.
+    if (resource.verification && !(retry && resource.verificationUnavailable))
+      return resource.verification;
+    resource.verificationUnavailable = false;
     const request = (async (): Promise<CanonicalResult> => {
       try {
         // Only validated API identity and raw bytes establish source changes.
@@ -85,8 +91,8 @@ export function createProblemEngine(host: Window & typeof globalThis) {
     })();
     resource.verification = request;
     void request.then((result) => {
-      if (result.status === "unavailable" && resource.verification === request)
-        resource.verification = undefined;
+      if (resource.verification === request)
+        resource.verificationUnavailable = result.status === "unavailable";
     });
     return request;
   }
@@ -96,6 +102,7 @@ export function createProblemEngine(host: Window & typeof globalThis) {
     translation: NonNullable<Translation>,
     apply: Replacement,
     shouldApply: () => boolean,
+    retryVerification = false,
   ): ProblemOutcome {
     const isApplied = () =>
       session === resource &&
@@ -105,7 +112,7 @@ export function createProblemEngine(host: Window & typeof globalThis) {
     return {
       status: "applied",
       isApplied,
-      verification: verifySource(resource, translation).then(
+      verification: verifySource(resource, translation, retryVerification).then(
         (result): SourceVerification => {
           if (!shouldApply() || !isApplied()) return { status: "cancelled" };
           return { status: result.status, detail: result.detail };
@@ -141,7 +148,7 @@ export function createProblemEngine(host: Window & typeof globalThis) {
         !shouldApply()
       )
         return { status: "cancelled" };
-      return appliedOutcome(resource, translation, apply, shouldApply);
+      return appliedOutcome(resource, translation, apply, shouldApply, true);
     }
     let current = ++applicationRevision;
     const live = () => current === applicationRevision && shouldApply();
@@ -246,7 +253,18 @@ export function createProblemEngine(host: Window & typeof globalThis) {
         );
       const profile = detectProblemRenderProfile(document);
       if (!profile) throw new Error("Problem render settings are unavailable");
-      const sourceSamplesSha256 = expected?.sourceSamplesSha256;
+      let sourceSamplesSha256 =
+        expected?.translationSamplesSha256 ?? expected?.sourceSamplesSha256;
+      // The source digest covers required IO, while translations can promote
+      // explicitly permitted alternative outputs. Validate those against the
+      // canonical source instead of treating every digest mismatch as corruption.
+      const sampleDigestMismatch =
+        sourceSamplesSha256 &&
+        (await sha256Hex(
+          new TextEncoder().encode(
+            JSON.stringify(sampleDataValues(translation.blocks)),
+          ),
+        )) !== sourceSamplesSha256;
       const hasSamples = (blocks: Element[]) =>
         blocks.some(
           (block) => block.matches(".sample") || block.querySelector(".sample"),
@@ -256,8 +274,9 @@ export function createProblemEngine(host: Window & typeof globalThis) {
         document.querySelector("#content[data-problem-id]")!,
       );
       if (
-        !sourceSamplesSha256 &&
-        (hasSamples(translation.blocks) || hasSamples(pageBlocks))
+        sampleDigestMismatch ||
+        (!sourceSamplesSha256 &&
+          (hasSamples(translation.blocks) || hasSamples(pageBlocks)))
       ) {
         const result = await verifySource(resource, translation);
         if (!live() || session !== resource || !resource.isCurrent())
@@ -269,6 +288,7 @@ export function createProblemEngine(host: Window & typeof globalThis) {
         canonicalBlocks = sourceStatementBlocks(
           parseHtml(result.sourceHtml).body,
         );
+        sourceSamplesSha256 = undefined;
       }
       // The site can rebuild the statement while the download is in flight.
       // Re-read the live nodes and identity instead of modifying detached ones.
@@ -286,7 +306,7 @@ export function createProblemEngine(host: Window & typeof globalThis) {
       const liveBlocks = liveNodes.filter(
         (node): node is Element => node.nodeType === 1,
       );
-      if (!liveTitle || liveBlocks.length === 0)
+      if (!liveTitle || liveNodes.length === 0)
         throw new ProblemVerificationError(
           "Problem page structure is unavailable",
         );
@@ -305,6 +325,11 @@ export function createProblemEngine(host: Window & typeof globalThis) {
               "mathjax/fonts/woff-v2",
             ),
             sourceSamplesSha256,
+            sourceSampleIndices:
+              expected?.translationSamplesSha256 &&
+              sourceSamplesSha256 === expected.translationSamplesSha256
+                ? expected.sourceSampleIndices
+                : undefined,
           },
         );
       } catch (error) {

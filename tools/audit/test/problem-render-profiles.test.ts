@@ -25,6 +25,7 @@ import {
   retryAfterMilliseconds,
 } from "../src/operations/problem-render-profiles.ts";
 import { activateSource, sha256 } from "../src/operations/source-store.ts";
+import { recordSourceDownload } from "../src/operations/source-downloads.ts";
 import { sourceSamplesFingerprint } from "../src/problem-publication-data.ts";
 import { labelPublishedProblem } from "../src/problem-publication.ts";
 import { collectRemainingOriginals } from "../src/operations/remaining-originals.ts";
@@ -415,6 +416,11 @@ test("remaining-original chain covers newly added translations and untranslated 
   try {
     const root = join(f.dataRoot, "problems-source");
     const refreshedSince = new Date(Date.now() - 1000).toISOString();
+    await recordSourceDownload(
+      root,
+      { No: 1, ProblemId: 11, Title: "Original" },
+      Buffer.from(source),
+    );
     await activateSource(
       root,
       { No: 1, ProblemId: 11, Title: "Original" },

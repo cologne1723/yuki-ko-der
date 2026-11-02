@@ -10,7 +10,10 @@ import { buildProblemTranslations } from "../src/build-problem-translations.ts";
 import { collectProblemRenderProfiles } from "../src/operations/problem-render-profiles.ts";
 import { setupData } from "../src/operations/setup.ts";
 import { pacedDownload } from "../src/operations/paced-download.ts";
-import { sourceSamplesFingerprint } from "../src/problem-publication-data.ts";
+import {
+  sourceSamplesFingerprint,
+  validatedTranslationSamplesFingerprint,
+} from "../src/problem-publication-data.ts";
 import { checkProblems } from "../src/operations/problems.ts";
 import { activateSource, sha256 } from "../src/operations/source-store.ts";
 
@@ -51,6 +54,76 @@ async function fixture(t: TestContext) {
     await writeFile(join(translations, `${no}.mdx`), markdown(no));
   return { root, sourceRoot, translations, outputRoot, dataRoot };
 }
+
+test("publication binds offline translated sample evidence to source revision and exact IO", async (t) => {
+  const f = await fixture(t);
+  const canonical =
+    '<div class="block"><div class="sample"><h6>入力</h6><pre>1</pre><h6>出力</h6><pre>2</pre><p>このほか，<code>3</code> という出力を行った場合にも正解となります．</p></div></div>';
+  const html = `<title>No.1 Fixture</title><main data-yukicoder-ko-problem data-schema-version="1" data-locale="ko" data-problem-no="1" data-problem-id="11" data-source-title="Original" data-source-html-sha256="${sha256(canonical)}" data-review-status="unreviewed"><h3>No.1 Fixture</h3><div class="problem-statement"><div class="block"><h4>Statement</h4><div class="sample"><h6>Input</h6><pre>1</pre><h6>Output</h6><pre>2</pre><h6>Output</h6><pre>3</pre></div></div></div></main>`;
+  await rm(join(f.translations, "1.mdx"));
+  await rm(join(f.translations, "2.mdx"));
+  await writeFile(join(f.translations, "1.html"), html);
+  const root = join(f.dataRoot, "problems-source");
+  await mkdir(root, { recursive: true });
+  await writeFile(join(root, "1.html"), canonical);
+  const expected = {
+    problemNo: 1,
+    problemId: 11,
+    sourceTitle: "Original",
+    sourceHtmlSha256: sha256(canonical),
+  };
+  const digest = sha256(JSON.stringify(["1", "2", "3"]));
+  assert.equal(
+    await validatedTranslationSamplesFingerprint(f.dataRoot, expected, html),
+    digest,
+  );
+  assert.equal(
+    await validatedTranslationSamplesFingerprint(
+      f.dataRoot,
+      expected,
+      html.replace("<pre>3</pre>", "<pre>wrong</pre>"),
+    ),
+    undefined,
+  );
+  await buildProblemTranslations(f);
+  const catalog = async () =>
+    JSON.parse(
+      await readFile(join(f.outputRoot, "ko/problem-catalog.json"), "utf8"),
+    );
+  assert.equal((await catalog()).entries[0].translationSamplesSha256, digest);
+  assert.deepEqual((await catalog()).entries[0].sourceSampleIndices, [0, 1]);
+  await writeFile(
+    join(f.sourceRoot, "publication-data.json"),
+    JSON.stringify({
+      schemaVersion: 1,
+      entries: [
+        {
+          problemNo: 1,
+          sourceHtmlSha256: sha256(canonical),
+          sourceSamplesSha256: sha256(JSON.stringify(["1", "2"])),
+          translationSamplesSha256: digest,
+          sourceSampleIndices: [0, 1],
+          pageHtmlSha256: "a".repeat(64),
+          profile: { engine: "katex", version: "0.17.0" },
+        },
+      ],
+    }),
+  );
+  await rm(f.dataRoot, { recursive: true });
+  await buildProblemTranslations(f);
+  assert.equal((await catalog()).entries[0].translationSamplesSha256, digest);
+  assert.deepEqual((await catalog()).entries[0].sourceSampleIndices, [0, 1]);
+  await writeFile(
+    join(f.translations, "1.html"),
+    html.replace("<pre>3</pre>", "<pre>wrong</pre>"),
+  );
+  await buildProblemTranslations(f);
+  assert.equal(
+    (await catalog()).entries[0].translationSamplesSha256,
+    undefined,
+  );
+  assert.equal((await catalog()).entries[0].sourceSampleIndices, undefined);
+});
 
 test("hidden problems retain source but never publish, including stale output and missing profiles", async (t) => {
   const f = await fixture(t);

@@ -4,7 +4,7 @@ import {
   type UseCodeMirror,
 } from "@uiw/react-codemirror";
 import { EditorState } from "@codemirror/state";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 // CodeMirror owns the live document. Feeding React's copy back through `value`
 // lets a delayed passive effect queue an older draft in @uiw's typing latch.
@@ -21,9 +21,13 @@ export function SourceEditor({
   const [initialState] = useState(() => ({
     json: EditorState.create({ doc: initialSource }).toJSON(),
   }));
+  const extensions = useMemo(
+    () => [highlightTrailingWhitespace(), ...(options.extensions ?? [])],
+    [options.extensions],
+  );
   const { setContainer } = useCodeMirror({
     ...options,
-    extensions: [highlightTrailingWhitespace(), ...(options.extensions ?? [])],
+    extensions,
     initialState,
   });
   return <div ref={setContainer} aria-label={label} />;

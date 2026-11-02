@@ -5,6 +5,8 @@ import {
   sampleDataValues,
   sampleDataElements,
   sampleDataPres,
+  sampleDataCorrespondence,
+  legacySampleCorrespondence,
 } from "translation-core/problem-samples";
 import { sha256Hex } from "translation-core/sha256";
 import type { ProblemRenderProfile } from "translation-core/problem-render-profile";
@@ -23,6 +25,7 @@ export function createProblemReplacement(
       sourceUrl?: string;
       fontUrl?: string;
       sourceSamplesSha256?: string;
+      sourceSampleIndices?: number[];
     } = {},
   ) {
     if (options.sourceSamplesSha256) {
@@ -71,13 +74,31 @@ export function createProblemReplacement(
     const statementParent = liveNodes[0]?.parentNode;
     const originalValues = sampleDataElements(liveBlocks);
     const translatedValues = sampleDataElements(importedBlocks);
+    const canonicalValues = sampleDataElements(canonicalBlocks);
+    const correspondence = sampleDataCorrespondence(
+      canonicalBlocks,
+      translation.blocks,
+    );
+    const legacyCorrespondence = legacySampleCorrespondence(
+      liveBlocks,
+      importedBlocks,
+    );
     const controls = liveBlocks
       .flatMap((block) => [...block.querySelectorAll(".copy-sample-input")])
       .map((control) => {
         const sample = control.closest(".sample");
         const input = sample ? sampleDataPres(sample)[0] : undefined;
+        const sourceIndex = input ? originalValues.indexOf(input) : -1;
+        const targetIndex =
+          (options.sourceSampleIndices?.length === originalValues.length
+            ? options.sourceSampleIndices[sourceIndex]
+            : undefined) ??
+          correspondence?.get(canonicalValues[sourceIndex]) ??
+          (originalValues.length === translatedValues.length
+            ? sourceIndex
+            : -1);
         const translated = input
-          ? translatedValues[originalValues.indexOf(input)]
+          ? (translatedValues[targetIndex] ?? legacyCorrespondence?.get(input))
           : undefined;
         if (!translated || !control.parentNode)
           throw new Error("Sample copy input is unavailable");
@@ -99,7 +120,7 @@ export function createProblemReplacement(
         parent !== originalParent ||
         !statementParent ||
         !parent.contains(statementParent) ||
-        !liveBlocks.length ||
+        !liveNodes.length ||
         liveNodes.some(
           (block) => !block.isConnected || block.parentNode !== statementParent,
         )
@@ -133,13 +154,15 @@ export function createProblemReplacement(
         applying = false;
       }
     };
-    const ownsBlocks = () =>
+    const ownsInsertedBlocks = () =>
       anchors.every(
         (anchor) => anchor.isConnected && anchor.parentNode === statementParent,
       ) &&
       importedBlocks.every(
         (block) => block.isConnected && block.parentNode === statementParent,
-      ) &&
+      );
+    const ownsBlocks = () =>
+      ownsInsertedBlocks() &&
       !!statementParent &&
       sourceStatementNodes(statementParent as Element).every(
         (node) =>
@@ -155,7 +178,8 @@ export function createProblemReplacement(
       translatedTitle.length === liveTitle.childNodes.length &&
       translatedTitle.every((node, i) => liveTitle.childNodes[i] === node);
     apply.restore = () => {
-      const restoreBlocks = applying || ownsBlocks();
+      // Added siblings invalidate reapplication, but do not discard our originals.
+      const restoreBlocks = applying || ownsInsertedBlocks();
       for (const { control, parent, nextSibling } of movedControls.splice(0)) {
         parent.insertBefore(
           control,

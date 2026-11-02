@@ -190,6 +190,38 @@ for (const fails of [false, true])
       /Draft 2/,
     );
   });
+test("navigation protects native input before CodeMirror delivers its DOM mutations", async (t) => {
+  const page = reactPage(t, async (path) =>
+    Response.json(
+      path === "/api/problems"
+        ? { problems }
+        : problems[Number(path.split("/").at(-1)) - 1],
+    ),
+  );
+  await page.screen.findByRole("heading", { name: "1. Draft 1" });
+  const view = page.editorView();
+  view.focus();
+  await new Promise((resolve) => setTimeout(resolve, 50));
+  page.holdEditorMutations();
+  const line = view.contentDOM.querySelector(".cm-line")!;
+  line.textContent = "pending native draft";
+  const text = line.firstChild!;
+  assert.ok(text.nodeValue !== null);
+  page.dom.window.getSelection()!.collapse(text, text.nodeValue.length);
+  assert.equal(view.state.doc.toString(), problems[0].koreanSource);
+  await page.navigate("/?problem=2");
+  assert.ok(
+    view.dom.isConnected,
+    "navigation must be blocked before the editor is unmounted",
+  );
+  await page.screen.findByRole("dialog");
+  await page.user.click(page.screen.getByRole("button", { name: "계속 편집" }));
+  await page.waitFor(() =>
+    assert.equal(view.state.doc.toString(), "pending native draft"),
+  );
+  assert.equal(page.editorView(), view);
+});
+
 for (const modifier of ["ctrlKey", "metaKey"])
   test(`${modifier}+S saves the current source and prevents browser saving`, async (t) => {
     const requests: any[] = [];
@@ -1632,6 +1664,45 @@ test("explicit formatting and compiled preview switching retain the live source"
   await page.user.click(page.screen.getByRole("button", { name: "서식 정리" }));
   await page.waitFor(() =>
     assert.equal(view.state.doc.toString(), draft + "\n"),
+  );
+  assert.equal(page.editorView(), view);
+});
+
+test("compiled view flushes pending native input and restores the exact draft", async (t) => {
+  const source = await readFile(
+    "problem-translations/ko/problems/1.mdx",
+    "utf8",
+  );
+  const draft = source.slice(0, source.indexOf("## ")) + "## 문제\n\nBefore";
+  const problem = { ...problems[0], sourceFormat: "mdx", koreanSource: draft };
+  const page = reactPage(t, async (path) =>
+    Response.json(path === "/api/problems" ? { problems: [problem] } : problem),
+  );
+  await page.screen.findByRole("heading", { name: "1. Draft 1" });
+  await page.user.click(
+    page.screen.getByRole("button", { name: "편집 도구 및 검사" }),
+  );
+  const button = await page.screen.findByRole("button", {
+    name: "컴파일된 HTML 보기",
+  });
+  const view = page.editorView();
+  view.focus();
+  await new Promise((resolve) => setTimeout(resolve, 50));
+  page.holdEditorMutations();
+  const text = [...view.contentDOM.querySelectorAll(".cm-line")].at(
+    -1,
+  )!.firstChild!;
+  text.nodeValue = "Before pending input";
+  page.dom.window.getSelection()!.collapse(text, text.nodeValue.length);
+  assert.equal(view.state.doc.toString(), draft);
+  page.fireEvent.click(button);
+  page.fireEvent.click(button);
+  await page.waitFor(() =>
+    assert.match(view.state.doc.toString(), /<p>Before pending input<\/p>/),
+  );
+  await page.user.click(page.screen.getByRole("button", { name: "소스 편집" }));
+  await page.waitFor(() =>
+    assert.equal(view.state.doc.toString(), draft + " pending input"),
   );
   assert.equal(page.editorView(), view);
 });

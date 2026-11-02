@@ -3,6 +3,42 @@ import test from "node:test";
 import { JSDOM } from "jsdom";
 import { serializeSanitized } from "../src/sanitize.ts";
 
+test("redacts submission code before Ace initializes while retaining problem examples", async () => {
+  const dom = new JSDOM(
+    '<main id="content" data-submission-id="123"><h3>Submission</h3><pre id="code">private-submission-marker</pre></main><div class="block"><pre>public-example</pre></div>',
+  );
+  try {
+    const original = dom.window.document.documentElement.outerHTML;
+    const snapshot = await serializeSanitized(dom.window.document);
+    assert.doesNotMatch(snapshot.html, /private-submission-marker/);
+    assert.equal(snapshot.clone.querySelector("#code"), null);
+    assert.match(snapshot.html, /Submission/);
+    assert.match(snapshot.html, /public-example/);
+    assert.equal(dom.window.document.documentElement.outerHTML, original);
+  } finally {
+    dom.window.close();
+  }
+});
+
+test("removes Ace buffers and unopened code editor dialogs from snapshots", async () => {
+  const dom = new JSDOM(
+    '<button>Run</button><div class="ace_editor"><div class="ace_text-layer">private-buffer</div></div><div id="modal_code_editor">private-dialog</div>',
+  );
+  try {
+    const original = dom.window.document.documentElement.outerHTML;
+    const snapshot = await serializeSanitized(dom.window.document);
+    assert.doesNotMatch(snapshot.html, /private-buffer|private-dialog/);
+    assert.doesNotMatch(
+      snapshot.clone.documentElement.textContent!,
+      /private-buffer|private-dialog/,
+    );
+    assert.match(snapshot.html, /Run/);
+    assert.equal(dom.window.document.documentElement.outerHTML, original);
+  } finally {
+    dom.window.close();
+  }
+});
+
 test("sanitizes executable and secret content without touching the live DOM", async () => {
   const dom = new JSDOM(
     `<main onclick="bad()"><script>alert(1)</script><iframe src="https://secret.example"></iframe><input name="password" value="do-not-save"><button title="日本語">日本語</button></main>`,

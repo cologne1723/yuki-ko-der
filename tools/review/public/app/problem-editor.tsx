@@ -58,11 +58,13 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
   }, []);
   const editor = useRef<EditorView | null>(null);
   const [compiled, setCompiled] = useState(false);
+  const switchingCompiled = useRef(false);
   const [japaneseDocument, setJapaneseDocument] = useState<Document | null>(
     null,
   );
   const [koreanDocument, setKoreanDocument] = useState<Document | null>(null);
   const [debounced] = useDebouncedValue(source, 180);
+  const previewSource = compiled ? source : debounced;
   const extensions = useMemo(
     () => [
       saved.sourceFormat === "mdx" && !compiled ? markdown() : html(),
@@ -75,13 +77,13 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
       return {
         html:
           saved.sourceFormat === "mdx"
-            ? compileProblemMarkdown(debounced)
-            : debounced,
+            ? compileProblemMarkdown(previewSource)
+            : previewSource,
       };
     } catch (error) {
       return { html: undefined, error };
     }
-  }, [debounced, saved.sourceFormat]);
+  }, [previewSource, saved.sourceFormat]);
   const lastValidHtml = useRef(initial.koreanHtml);
   useEffect(() => {
     if (preview.html !== undefined) lastValidHtml.current = preview.html;
@@ -294,6 +296,14 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
       <UnsavedGuard
         dirty={dirty}
         pending={save.isPending || formatting.isPending}
+        checkDirty={async () => {
+          const draft =
+            !compiled && editor.current
+              ? await readEditorSource(editor.current)
+              : currentSource.current;
+          updateDraft(draft);
+          return draft !== saved.koreanSource;
+        }}
       />
       <Group justify="space-between">
         <Title order={2}>
@@ -506,13 +516,28 @@ export function ProblemEditor({ initial }: { initial: ProblemReview }) {
                   <Button
                     variant="subtle"
                     disabled={formatting.isPending}
-                    onClick={() => {
-                      if (editor.current)
-                        applySavedSource(
-                          editor.current,
-                          compiled ? currentSource.current : previewHtml,
-                        );
-                      setCompiled(!compiled);
+                    onClick={async () => {
+                      const view = editor.current;
+                      if (!view || switchingCompiled.current) return;
+                      switchingCompiled.current = true;
+                      try {
+                        let next = currentSource.current;
+                        if (!compiled) {
+                          const draft = await readEditorSource(view);
+                          if (editor.current !== view || !view.dom.isConnected)
+                            return;
+                          updateDraft(draft);
+                          try {
+                            next = compileProblemMarkdown(draft);
+                          } catch {
+                            next = previewHtml;
+                          }
+                        }
+                        applySavedSource(view, next);
+                        setCompiled(!compiled);
+                      } finally {
+                        switchingCompiled.current = false;
+                      }
                     }}
                   >
                     {compiled ? "소스 편집" : "컴파일된 HTML 보기"}

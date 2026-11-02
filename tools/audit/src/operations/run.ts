@@ -3,7 +3,7 @@ import {
   metadataReviewStatus,
 } from "translation-core/problem-review-status";
 import { readFile, readdir } from "node:fs/promises";
-import { basename, join } from "node:path";
+import { join } from "node:path";
 import { checkCatalog, readCatalog } from "translation-core/catalog-files";
 import { parseProblemMarkdown } from "translation-core/problem-markdown";
 import { convertProblemHtmlToMarkdown } from "../convert-problem-html-to-mdx.ts";
@@ -37,6 +37,7 @@ export async function inputRevision(
   if (input.operation === "convert-problem" && input.html !== undefined)
     return sha256(JSON.stringify(input));
   const paths: string[] = [];
+  const selected = new Set<number>();
   const problemOperation = [
     "setup",
     "audit-problems",
@@ -60,8 +61,31 @@ export async function inputRevision(
       if (
         /^\d+\.(html|mdx)$/.test(file) &&
         (!problems || problems.includes(parseInt(file)))
-      )
+      ) {
+        selected.add(parseInt(file));
         paths.push(join(directory, file));
+        if (
+          ["audit-problems", "validate-problems", "verify-problems"].includes(
+            input.operation,
+          )
+        ) {
+          const images = join(
+            context.repositoryRoot,
+            "problem-translations/ko/images",
+            String(parseInt(file)),
+          );
+          let names: string[];
+          try {
+            names = await readdir(images);
+          } catch (error) {
+            if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+            names = [];
+          }
+          for (const name of names)
+            if (/\.(?:gif|jpe?g|png|svg|webp)$/iu.test(name))
+              paths.push(join(images, name));
+        }
+      }
   }
   if (
     !problemOperation ||
@@ -74,7 +98,6 @@ export async function inputRevision(
   }
   if (["audit-problems", "validate-problems"].includes(input.operation)) {
     const directory = join(context.dataRoot, "problems-source");
-    const selected = paths.map((path) => parseInt(basename(path)));
     paths.push(join(directory, "index.json"));
     if (input.operation === "audit-problems")
       for (const no of selected) paths.push(join(directory, `${no}.html`));

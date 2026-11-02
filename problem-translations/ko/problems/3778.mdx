@@ -1,0 +1,80 @@
+---
+schemaVersion: 1
+locale: ko
+problemNo: 3778
+problemId: 14196
+sourceTitle: "pow2!!pow2!!pow2!!"
+sourceHtmlSha256: "09577675b77e81e44bbeb3811148bab3b3dfe87f9029b53383c06c1c4924366b"
+humanReview: []
+machineReview: unreviewed
+title: "pow2!!pow2!!pow2!!"
+---
+
+## 문제 설명
+
+양의 정수 $N$이 주어집니다. $N$의 자릿수를 $M$이라고 합니다.
+
+처음에 $ans=N$으로 두고, 다음 연산을 $M-1$번 반복하세요.
+
+- $ans$를 $ans\times 10^M+N$으로 바꿉니다.
+
+연산을 마친 뒤의 $ans$를 출력하세요.
+
+## 입력
+
+```text
+$N$
+```
+
+## 제한
+
+- $N$은 정수입니다.
+- $1\le N<10^{100}$
+
+## 출력
+
+연산을 마친 뒤의 $ans$를 출력하세요. 마지막에 줄바꿈을 출력하세요.
+
+## 예제
+
+### 예제 1 {file=""}
+
+#### 입력
+
+```text
+1
+```
+
+#### 출력
+
+```text
+1
+```
+
+### 예제 2 {file=""}
+
+#### 입력
+
+```text
+12
+```
+
+#### 출력
+
+```text
+1212
+```
+
+### 예제 3 {file=""}
+
+#### 입력
+
+```text
+123
+```
+
+#### 출력
+
+```text
+123123123
+```

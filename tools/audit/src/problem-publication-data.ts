@@ -2,7 +2,12 @@ import { JSDOM } from "jsdom";
 import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { sourceStatementBlocks } from "translation-core/problem-document";
-import { sampleDataValues } from "translation-core/problem-samples";
+import {
+  sampleDataValues,
+  sampleWarnings,
+  sampleDataCorrespondence,
+  sampleDataElements,
+} from "translation-core/problem-samples";
 import { sha256Hex } from "translation-core/sha256";
 
 export interface TranslationSourceRevision {
@@ -10,6 +15,50 @@ export interface TranslationSourceRevision {
   problemId: number;
   sourceTitle: string;
   sourceHtmlSha256: string;
+}
+
+/** Evidence for the translated IO is issued only against its recorded original. */
+export async function validatedTranslationSamplesFingerprint(
+  dataRoot: string,
+  expected: TranslationSourceRevision,
+  translation: string,
+): Promise<string | undefined> {
+  return (await validatedTranslationSamples(dataRoot, expected, translation))
+    ?.sha256;
+}
+
+export async function validatedTranslationSamples(
+  dataRoot: string,
+  expected: TranslationSourceRevision,
+  translation: string,
+): Promise<{ sha256: string; sourceSampleIndices?: number[] } | undefined> {
+  const original = await matchingTranslationSource(dataRoot, expected);
+  if (original === undefined) return undefined;
+  const sourceDom = new JSDOM(original);
+  const targetDom = new JSDOM(translation);
+  try {
+    const source = sourceStatementBlocks(sourceDom.window.document.body);
+    const target = [
+      ...targetDom.window.document.querySelectorAll(
+        "main > .problem-statement > *",
+      ),
+    ];
+    if (sampleWarnings(source, target, undefined, true).length)
+      return undefined;
+    const mapping = sampleDataCorrespondence(source, target);
+    const indices = sampleDataElements(source).map((element) =>
+      mapping?.get(element),
+    );
+    return {
+      sha256: await sha256Hex(JSON.stringify(sampleDataValues(target))),
+      ...(indices.every((index): index is number => index !== undefined)
+        ? { sourceSampleIndices: indices }
+        : {}),
+    };
+  } finally {
+    sourceDom.window.close();
+    targetDom.window.close();
+  }
 }
 
 /** Read only the original revision named by the translation, never latest-by-date. */

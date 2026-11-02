@@ -8,7 +8,7 @@ import {
 } from "translation-core/fixed-translations";
 import { TranslationMutations } from "translation-core/translation-mutations";
 import { type ProblemCatalog } from "translation-core/problem-catalog";
-import { sourceStatementBlocks } from "translation-core/problem-document";
+import { sourceStatementNodes } from "translation-core/problem-document";
 import { createContentNotices } from "./content-notices.ts";
 import { createContentResources } from "./content-resources.ts";
 import type { CatalogResult } from "./problem-catalog";
@@ -226,13 +226,20 @@ declare global {
         let applying = false;
         let generation = 0;
         let applied: Extract<ProblemOutcome, { status: "applied" }> | undefined;
-        let attemptedTargets: Element[] = [];
+        let attemptedTargets: Node[] = [];
         const targets = () => {
           const content = document.querySelector("#content[data-problem-id]");
           const title = content?.querySelector(":scope > h3");
-          const blocks = content ? sourceStatementBlocks(content) : [];
-          return content && title && blocks.length
-            ? [content, title, ...blocks]
+          // Replacement anchors and formatting whitespace are not new content.
+          const nodes = content
+            ? sourceStatementNodes(content).filter(
+                (node) =>
+                  node.nodeType === 1 ||
+                  (node.nodeType === 3 && Boolean(node.textContent?.trim())),
+              )
+            : [];
+          return content && title && nodes.length
+            ? [content, title, ...nodes]
             : [];
         };
         const check = () => {

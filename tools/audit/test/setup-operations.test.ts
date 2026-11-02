@@ -9,13 +9,16 @@ import {
   writeFile,
 } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { basename, join } from "node:path";
 import { setupData } from "../src/operations/setup.ts";
+import { collectRemainingOriginals } from "../src/operations/remaining-originals.ts";
+import { recordSourceDownload } from "../src/operations/source-downloads.ts";
 import { readProblemRenderProfile } from "translation-core/problem-render-profile-files";
 import {
   activateSource,
   recoverSourceStore,
   sha256,
+  preserveSource,
 } from "../src/operations/source-store.ts";
 import { problemSelection } from "../src/operations/types.ts";
 const canonical = '<div class="block"><h4>問題</h4><p>original</p></div>';
@@ -65,6 +68,111 @@ async function fixture() {
   };
 }
 
+test("setup rejects HTTP 200 error bodies and resume refetches legacy error receipts", async () => {
+  const f = await fixture();
+  try {
+    await activateSource(f.sourceRoot, metadata, Buffer.from(canonical));
+    let clock = Date.now();
+    const options = {
+      refreshedSince: new Date(clock - 1000).toISOString(),
+      now: () => clock,
+      sleep: async (ms: number) => {
+        clock += ms;
+      },
+    };
+    const context = {
+      repositoryRoot: f.root,
+      dataRoot: f.dataRoot,
+      request: f.request,
+      refresh: true,
+    };
+    f.change("Internal server error");
+    assert.equal(
+      (await setupData(context, "problems", options)).items[0].status,
+      "failed",
+    );
+    await assert.rejects(readFile(join(f.sourceRoot, "downloads/1.json")), {
+      code: "ENOENT",
+    });
+    assert.equal(
+      await readFile(join(f.sourceRoot, "1.html"), "utf8"),
+      canonical,
+    );
+    f.change(canonical);
+    const before = f.calls();
+    assert.equal(
+      (await collectRemainingOriginals(context, options)).items[0].status,
+      "saved",
+    );
+    assert.equal(f.calls() - before, 2);
+
+    // Emulate a receipt written by the old implementation, including valid hashes.
+    const bad = Buffer.from("Internal server error");
+    const path = await preserveSource(f.sourceRoot, metadata, bad);
+    const receiptPath = join(f.sourceRoot, "downloads/1.json");
+    const receipt = JSON.parse(await readFile(receiptPath, "utf8"));
+    await writeFile(
+      receiptPath,
+      JSON.stringify({
+        ...receipt,
+        revision: basename(path, ".json"),
+        htmlSha256: sha256(bad),
+        state: "review-required",
+      }),
+    );
+    const beforeRecovery = f.calls();
+    assert.equal(
+      (await collectRemainingOriginals(context, options)).items[0].status,
+      "saved",
+    );
+    assert.equal(f.calls() - beforeRecovery, 2);
+    assert.equal(
+      await readFile(join(f.sourceRoot, "1.html"), "utf8"),
+      canonical,
+    );
+    await assert.rejects(
+      recordSourceDownload(f.sourceRoot, metadata, bad),
+      /unexpected canonical/,
+    );
+  } finally {
+    await f.cleanup();
+  }
+});
+
+test("setup and resume accept a bare puzzle only with its recorded source hash", async () => {
+  const f = await fixture();
+  try {
+    await writeFile(f.path, f.text.replace(sha256(canonical), sha256("-")));
+    f.change("-");
+    let clock = Date.now();
+    const options = {
+      refreshedSince: new Date(clock - 1000).toISOString(),
+      now: () => clock,
+      sleep: async (ms: number) => {
+        clock += ms;
+      },
+    };
+    const context = {
+      repositoryRoot: f.root,
+      dataRoot: f.dataRoot,
+      request: f.request,
+    };
+    assert.equal(
+      (await setupData(context, "problems", options)).items[0].status,
+      "saved",
+    );
+    const calls = f.calls();
+    assert.equal(
+      (await collectRemainingOriginals(context, options)).items[0].status,
+      "skipped",
+    );
+    assert.equal(f.calls(), calls);
+    assert.equal(await readFile(join(f.sourceRoot, "1.html"), "utf8"), "-");
+  } finally {
+    await f.cleanup();
+  }
+});
+
 test("setup checks source identity/title/hash, refreshes mismatches and preserves revisions and translations", async () => {
   const f = await fixture();
   try {
@@ -91,6 +199,11 @@ test("setup checks source identity/title/hash, refreshes mismatches and preserve
       "skipped",
     );
     assert.equal(f.calls(), 3);
+    assert.equal(
+      JSON.parse(await readFile(join(f.sourceRoot, "downloads/1.json"), "utf8"))
+        .state,
+      "applied",
+    );
     assert.deepEqual(await readProblemRenderProfile(f.dataRoot, 1), {
       engine: "katex",
       version: "0.17.0",
@@ -108,6 +221,11 @@ test("setup checks source identity/title/hash, refreshes mismatches and preserve
       canonical,
     );
     f.change(canonical, "new title");
+    assert.equal(
+      JSON.parse(await readFile(join(f.sourceRoot, "downloads/1.json"), "utf8"))
+        .state,
+      "review-required",
+    );
     assert.equal(
       (await setupData({ ...context, refresh: true }, "problems")).items[0]
         .status,

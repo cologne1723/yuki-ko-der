@@ -14,7 +14,12 @@ import { compileProblemMarkdown } from "translation-core/problem-markdown";
 import { inlineLocalProblemImages } from "translation-core/problem-assets-node";
 import { readProblemTitleCatalog } from "translation-core/problem-title-catalog";
 import { labelPublishedProblem } from "./problem-publication.ts";
-import { sourceSamplesFingerprint } from "./problem-publication-data.ts";
+import {
+  sourceSamplesFingerprint,
+  validatedTranslationSamples,
+} from "./problem-publication-data.ts";
+import { sampleDataValues } from "translation-core/problem-samples";
+import { sha256Hex } from "translation-core/sha256";
 import {
   problemPublicSourceUrl,
   readProblemRenderProfile,
@@ -91,6 +96,8 @@ img { max-width: 100%; }
     {
       html: string;
       sourceSamplesSha256?: string;
+      translationSamplesSha256?: string;
+      sourceSampleIndices?: number[];
     }
   >();
   const blockers: string[] = [];
@@ -109,6 +116,8 @@ img { max-width: 100%; }
       }
       const dom = new JSDOM(html);
       let sourceSamplesSha256: string | undefined;
+      let translationSamplesSha256: string | undefined;
+      let sourceSampleIndices: number[] | undefined;
       try {
         const metadata = dom.window.document.querySelector<HTMLElement>(
           "main[data-yukicoder-ko-problem]",
@@ -119,13 +128,40 @@ img { max-width: 100%; }
             "Offline publication data names a different source revision; re-export locally",
           );
         profile ??= saved?.profile;
-        sourceSamplesSha256 = await sourceSamplesFingerprint(dataRoot, {
+        const sourceRevision = {
           problemNo,
           problemId: Number(metadata?.problemId),
           sourceTitle: metadata?.sourceTitle ?? "",
           sourceHtmlSha256: metadata?.sourceHtmlSha256 ?? "",
-        });
+        };
+        sourceSamplesSha256 = await sourceSamplesFingerprint(
+          dataRoot,
+          sourceRevision,
+        );
         sourceSamplesSha256 ??= saved?.sourceSamplesSha256;
+        const evidence = await validatedTranslationSamples(
+          dataRoot,
+          sourceRevision,
+          html,
+        );
+        translationSamplesSha256 = evidence?.sha256;
+        sourceSampleIndices = evidence?.sourceSampleIndices;
+        const targetDigest = await sha256Hex(
+          JSON.stringify(
+            sampleDataValues([
+              ...dom.window.document.querySelectorAll(
+                "main > .problem-statement > *",
+              ),
+            ]),
+          ),
+        );
+        if (
+          !translationSamplesSha256 &&
+          saved?.translationSamplesSha256 === targetDigest
+        ) {
+          translationSamplesSha256 = saved.translationSamplesSha256;
+          sourceSampleIndices = saved.sourceSampleIndices;
+        }
       } finally {
         dom.window.close();
       }
@@ -153,6 +189,8 @@ img { max-width: 100%; }
       prepared.set(problemNo, {
         html: published,
         sourceSamplesSha256,
+        translationSamplesSha256,
+        sourceSampleIndices,
       });
     } catch (error) {
       blockers.push(`${problemNo}: ${String(error)}`);
@@ -219,6 +257,14 @@ img { max-width: 100%; }
   const entries = problemTitles.map((entry) => ({
     ...entry,
     htmlSha256: hashes.get(entry.problemNo)!,
+    ...(prepared.get(entry.problemNo)?.translationSamplesSha256
+      ? {
+          translationSamplesSha256: prepared.get(entry.problemNo)!
+            .translationSamplesSha256,
+          sourceSampleIndices: prepared.get(entry.problemNo)!
+            .sourceSampleIndices,
+        }
+      : {}),
     ...(prepared.get(entry.problemNo)?.sourceSamplesSha256
       ? {
           sourceSamplesSha256: prepared.get(entry.problemNo)!

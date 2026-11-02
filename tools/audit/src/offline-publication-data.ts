@@ -10,6 +10,8 @@ export const offlinePublicationSchema = z.object({
       problemNo: z.number().int().positive(),
       sourceHtmlSha256: hash,
       sourceSamplesSha256: hash,
+      translationSamplesSha256: hash.optional(),
+      sourceSampleIndices: z.array(z.number().int().nonnegative()).optional(),
       pageHtmlSha256: hash,
       profile: z
         .object({ engine: z.enum(["katex", "mathjax"]), version: z.string() })

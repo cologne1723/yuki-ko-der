@@ -59,6 +59,18 @@ export function sanitizeClone(document: Document): {
   for (const [index, element] of elements.entries()) {
     if (!element.isConnected) continue;
     const original = originalElements[index]!;
+    // Remove submission code both before and after Ace initializes, including
+    // buffers outside its hidden textarea, before serialization or extraction.
+    if (
+      element.matches(
+        ".ace_editor, #modal_code_editor, #content[data-submission-id] #code",
+      )
+    ) {
+      element.remove();
+      redaction.removedElements += 1;
+      redaction.redactedFields += 1;
+      continue;
+    }
     element.setAttribute("data-collector-node", String(index));
     const tag = element.tagName.toLowerCase();
     const secretField = ["name", "id", "autocomplete"].some((name) =>

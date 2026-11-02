@@ -10,6 +10,8 @@ export const publishedProblemSchema = z
     target: text,
     htmlSha256: hash,
     sourceSamplesSha256: hash.optional(),
+    translationSamplesSha256: hash.optional(),
+    sourceSampleIndices: z.array(z.number().int().nonnegative()).optional(),
   })
   .superRefine((entry, ctx) => {
     // No.8025 (ProblemId 888) deliberately has one ideographic space as its
@@ -50,7 +52,10 @@ export const problemCatalogSchema = z
 export type PublishedProblem = z.infer<typeof publishedProblemSchema>;
 export type ProblemTitleTranslation = Omit<
   PublishedProblem,
-  "htmlSha256" | "sourceSamplesSha256"
+  | "htmlSha256"
+  | "sourceSamplesSha256"
+  | "translationSamplesSha256"
+  | "sourceSampleIndices"
 >;
 export type ProblemCatalog = z.infer<typeof problemCatalogSchema>;
 export function parseProblemCatalog(value: unknown): ProblemCatalog {

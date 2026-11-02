@@ -1,63 +1,27 @@
-import { JSDOM } from "jsdom";
-import { mkdir, readFile, readdir, stat } from "node:fs/promises";
+import { mkdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { problemRenderProfileDirectory } from "translation-core/problem-render-profile-files";
-import { sourceStatementBlocks } from "translation-core/problem-document";
 import { expectedProblems } from "./setup.ts";
 import {
   activateSource,
   atomicFile,
-  preserveSource,
   readSourceIndex,
+  recoverSourceStore,
+  optionalFile,
   sha256,
   type SourceMetadata,
 } from "./source-store.ts";
 import { pacedDownload, type CollectionOptions } from "./paced-download.ts";
+import {
+  recordSourceDownload,
+  readSourceDownload,
+  finishSourceDownload,
+} from "./source-downloads.ts";
 import type {
   OperationContext,
   OperationItem,
   OperationResult,
 } from "./types.ts";
-
-/** A verified revision written during the preceding refresh proves this original was collected. */
-async function refreshedRevision(
-  root: string,
-  metadata: SourceMetadata,
-  since: number,
-) {
-  const directory = join(root, "revisions", String(metadata.No));
-  let files: string[];
-  try {
-    files = await readdir(directory);
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code === "ENOENT") return undefined;
-    throw error;
-  }
-  const recent: { path: string; modified: number }[] = [];
-  for (const file of files) {
-    if (!/^[a-f0-9]{64}\.json$/u.test(file)) continue;
-    const path = join(directory, file),
-      modified = (await stat(path)).mtimeMs;
-    if (modified >= since) recent.push({ path, modified });
-  }
-  for (const { path } of recent.sort((a, b) => b.modified - a.modified)) {
-    const revision = JSON.parse(await readFile(path, "utf8"));
-    if (
-      revision.metadata?.No !== metadata.No ||
-      revision.metadata?.ProblemId !== metadata.ProblemId ||
-      typeof revision.html !== "string"
-    )
-      continue;
-    if (sha256(Buffer.from(revision.html, "base64")) !== revision.htmlSha256)
-      throw new Error(`Refreshed original evidence hash mismatch: ${path}`);
-    return {
-      path,
-      hash: revision.htmlSha256 as string,
-      title: revision.metadata.Title as string,
-    };
-  }
-  return undefined;
-}
 
 /** Refresh the full saved corpus plus translations added since the previous job started. */
 export async function collectRemainingOriginals(
@@ -86,12 +50,14 @@ export async function collectRemainingOriginals(
       join(directory, ".request-state.json"),
       options,
     );
+    await recoverSourceStore(sourceRoot, context.signal);
     const expected = new Map(
       (await expectedProblems(context)).map((p) => [p.metadata.No, p]),
     );
-    const targets = new Map(
+    const savedTargets = new Map(
       (await readSourceIndex(sourceRoot)).problems.map((p) => [p.No, p]),
     );
+    const targets = new Map(savedTargets);
     for (const [no, problem] of expected)
       if (!targets.has(no)) targets.set(no, problem.metadata);
     const items: OperationItem[] = [];
@@ -127,19 +93,62 @@ export async function collectRemainingOriginals(
           throw new Error(
             "Saved corpus and translation disagree on problem identity",
           );
-        const fresh = await refreshedRevision(sourceRoot, previous, since);
+        const active = await optionalFile(join(sourceRoot, `${no}.html`));
+        const knownHashes = [
+          ...(translated ? [translated.hash] : []),
+          ...(active ? [sha256(active)] : []),
+        ];
+        const fresh = await readSourceDownload(
+          sourceRoot,
+          previous,
+          since,
+          knownHashes,
+        );
         if (fresh) {
           const changed =
             translated &&
             (fresh.hash !== translated.hash ||
               fresh.title !== translated.metadata.Title);
+          const needsActivation =
+            !changed &&
+            (!savedTargets.has(no) ||
+              !active ||
+              sha256(active) !== fresh.hash ||
+              previous.Title !== fresh.title);
+          if (needsActivation) {
+            if (
+              translated &&
+              sha256(await readFile(translated.file)) !== translated.revision
+            )
+              throw new Error(
+                "Translation changed during refresh; retry with current metadata",
+              );
+            await activateSource(
+              sourceRoot,
+              fresh.metadata,
+              fresh.bytes,
+              context.signal,
+            );
+          }
+          await finishSourceDownload(
+            sourceRoot,
+            no,
+            fresh.hash,
+            changed ? "review-required" : "applied",
+          );
           item = {
             id: String(no),
-            status: changed ? "review-required" : "skipped",
+            status: changed
+              ? "review-required"
+              : needsActivation
+                ? "saved"
+                : "skipped",
             message: changed
               ? "Collected original differs from translation; preserved revision requires review"
-              : "Verified original revision was already collected during this refresh",
-            details: fresh,
+              : needsActivation
+                ? "Activated previously collected original revision"
+                : "Verified original revision was already collected during this refresh",
+            details: { path: fresh.path, hash: fresh.hash, title: fresh.title },
           };
         } else {
           const url = `https://yukicoder.me/api/v1/problems/${previous.ProblemId}`;
@@ -153,28 +162,19 @@ export async function collectRemainingOriginals(
           )
             throw new Error("Canonical metadata identity mismatch");
           const bytes = await download(`${url}/html`);
-          const dom = new JSDOM(new TextDecoder().decode(bytes));
-          try {
-            if (
-              !sourceStatementBlocks(dom.window.document.body).some((block) =>
-                block.matches(".block"),
-              )
-            )
-              throw new Error("Empty or unexpected canonical statement HTML");
-          } finally {
-            dom.window.close();
-          }
-          const revisionPath = await preserveSource(
+          const hash = sha256(bytes);
+          const revisionPath = await recordSourceDownload(
             sourceRoot,
             metadata,
             bytes,
+            knownHashes,
           );
-          const hash = sha256(bytes);
           if (
             translated &&
             (hash !== translated.hash ||
               metadata.Title !== translated.metadata.Title)
           ) {
+            await finishSourceDownload(sourceRoot, no, hash, "review-required");
             item = {
               id: String(no),
               status: "review-required",
@@ -195,6 +195,7 @@ export async function collectRemainingOriginals(
                 "Translation changed during refresh; downloaded revision retained, retry with current metadata",
               );
             await activateSource(sourceRoot, metadata, bytes, context.signal);
+            await finishSourceDownload(sourceRoot, no, hash, "applied");
             item = {
               id: String(no),
               status: "saved",

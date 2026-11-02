@@ -55,19 +55,27 @@ export function convertProblemHtmlToMarkdown(html: string): string {
       `title: ${JSON.stringify(title)}`,
       "---",
     ];
-    const sections = [...blocks].map((block) => {
+    const statement = root.querySelector(":scope > .problem-statement")!;
+    if (
+      [...statement.childNodes].some(
+        (node) => node.nodeType === 3 && node.textContent?.trim(),
+      )
+    )
+      throw new Error("Unsupported unwrapped statement prose");
+    const sections = [...statement.children].map((block) => {
+      if (block.matches(".sample")) return sampleMarkdown(block);
+      if (!block.matches(".block")) return renderContent(block);
       if (
         [...block.childNodes].some(
           (node) => node.nodeType === 3 && node.textContent?.trim(),
         )
       )
         throw new Error("Unsupported unwrapped section prose");
-      const sectionTitle = block
-        .querySelector(":scope > h4")
-        ?.textContent?.trim();
+      const sectionHeading = block.querySelector(":scope > h4");
+      const sectionTitle = sectionHeading?.textContent?.trim();
       if (!sectionTitle) throw new Error("Problem section title is missing");
       const body = [...block.children]
-        .filter((child) => child.tagName !== "H4")
+        .filter((child) => child !== sectionHeading)
         .map((child) =>
           child.matches(".sample")
             ? sampleMarkdown(child)
@@ -82,13 +90,10 @@ export function convertProblemHtmlToMarkdown(html: string): string {
       const compiledDom = new JSDOM(compiled);
       try {
         const compiledDocument = compiledDom.window.document;
-        const sourceBlocks = [
-          ...root.querySelectorAll(":scope > .problem-statement > .block"),
-        ];
+        const sourceBlocks = [...statement.children];
         const compiledBlocks = [
-          ...compiledDocument.querySelectorAll(
-            "main > .problem-statement > .block",
-          ),
+          ...compiledDocument.querySelector("main > .problem-statement")!
+            .children,
         ];
         const warnings = sampleWarnings(sourceBlocks, compiledBlocks, "mdx");
         if (warnings.length)

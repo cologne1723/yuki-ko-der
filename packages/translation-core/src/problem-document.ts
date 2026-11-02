@@ -10,8 +10,14 @@ export function sourceStatementNodes(root: Element): ChildNode[] {
     (node.matches(".block, .sample") ||
       !!node.querySelector(".block, .sample"));
   let nodes: ChildNode[];
+  let boundedStatement = false;
   if (root.tagName === "BODY") {
     nodes = children;
+    boundedStatement =
+      !root.ownerDocument.head.children.length &&
+      !root.querySelector(
+        "#content, nav, script, form, input, button, textarea, select",
+      );
   } else {
     // The live site puts the API statement between its metadata/navigation and
     // submission form. Never include those controls, nor the sign-in/social UI.
@@ -22,6 +28,9 @@ export function sourceStatementNodes(root: Element): ChildNode[] {
       (node) =>
         element(node) &&
         (node.matches(".problem-header-cols") ||
+          node.matches(
+            "#copy-problem-html-btn, #contest-problem-selector-wrapper",
+          ) ||
           !!node.querySelector(
             "#copy-problem-html-btn, #contest-problem-selector-wrapper",
           )),
@@ -33,6 +42,12 @@ export function sourceStatementNodes(root: Element): ChildNode[] {
     );
     if (header >= 0 && end > header) {
       nodes = children.slice(header + 1, end);
+      const id = root.getAttribute("data-problem-id");
+      boundedStatement =
+        !!id &&
+        /^[1-9]\d*$/u.test(id) &&
+        (children[end] as Element).getAttribute("action") ===
+          `/problems/${id}/submit`;
     } else {
       // Minimal/legacy pages: only accept authored prose and unmarked wrappers.
       // Rendering staging and unrelated forms cannot supply a section seed.
@@ -62,7 +77,16 @@ export function sourceStatementNodes(root: Element): ChildNode[] {
       nodes = children.slice(start, stop);
     }
   }
-  if (!nodes.some(section)) return [];
+  if (!nodes.some(section) && !boundedStatement) return [];
+  if (
+    !nodes.some(
+      (node) =>
+        node.textContent?.trim() ||
+        (element(node) &&
+          (node.matches("img,svg,math") || node.querySelector("img,svg,math"))),
+    )
+  )
+    return [];
   // Keep a sole transparent wrapper in place (including its node identity).
   const substantive = nodes.filter(
     (node) => element(node) || node.textContent?.trim(),
@@ -71,7 +95,8 @@ export function sourceStatementNodes(root: Element): ChildNode[] {
     substantive.length === 1 &&
     element(substantive[0]) &&
     substantive[0].tagName === "DIV" &&
-    !substantive[0].attributes.length
+    !substantive[0].attributes.length &&
+    section(substantive[0])
   ) {
     return sourceStatementNodes(substantive[0]);
   }
