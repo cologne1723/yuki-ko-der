@@ -98,7 +98,10 @@ export function sourceStatementNodes(root: Element): ChildNode[] {
     !substantive[0].attributes.length &&
     section(substantive[0])
   ) {
-    return sourceStatementNodes(substantive[0]);
+    const unwrapped = sourceStatementNodes(substantive[0]);
+    // The outer boundary already identified this as statement content. An
+    // unfamiliar authored child must not make the entire wrapper disappear.
+    return unwrapped.length ? unwrapped : nodes;
   }
   return nodes;
 }

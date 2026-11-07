@@ -43,8 +43,11 @@ export async function validatedTranslationSamples(
         "main > .problem-statement > *",
       ),
     ];
-    if (sampleWarnings(source, target, undefined, true).length)
-      return undefined;
+    const warnings = sampleWarnings(source, target, undefined, true);
+    if (warnings.length)
+      throw new Error(
+        `Sample verification failed for problem ${expected.problemNo}:\n${warnings.join("\n")}`,
+      );
     const mapping = sampleDataCorrespondence(source, target);
     const indices = sampleDataElements(source).map((element) =>
       mapping?.get(element),

@@ -162,6 +162,14 @@ img { max-width: 100%; }
           translationSamplesSha256 = saved.translationSamplesSha256;
           sourceSampleIndices = saved.sourceSampleIndices;
         }
+        if (
+          !translationSamplesSha256 &&
+          sourceSamplesSha256 &&
+          sourceSamplesSha256 !== targetDigest
+        )
+          throw new Error(
+            "Translated samples differ from the source digest and have no validated evidence",
+          );
       } finally {
         dom.window.close();
       }

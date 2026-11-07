@@ -126,6 +126,28 @@ function fixture(options: { samples?: boolean } = {}) {
   return { dom, close, state, engine, saved, calls, catalog };
 }
 
+for (const canonical of [
+  `<div><div>${source}<subtask></subtask><div class="block">Tail</div></div></div>`,
+  '<div class="block"><h4>サンプル</h4><p>入力が与えられます。</p><pre>1  2\n</pre><p>出力したとします。</p><pre>3\n</pre></div>',
+]) {
+  test(`applies and restores authored source layout: ${canonical.slice(0, 45)}`, async () => {
+    const f = fixture();
+    try {
+      f.state.canonical = canonical;
+      f.state.body = f.state.body.replace(hash(source), hash(canonical));
+      const content = f.dom.window.document.querySelector("#content")!;
+      content.querySelector(".block")!.outerHTML = canonical;
+      const original = content.innerHTML;
+      const outcome = await f.engine.translateProblem(() => true, f.catalog());
+      assert.equal(outcome.status, "applied");
+      f.engine.restoreProblem();
+      assert.equal(content.innerHTML, original);
+    } finally {
+      f.close();
+    }
+  });
+}
+
 test("restoring after a site notice is added retains the original statement and notice", async () => {
   const f = fixture();
   try {

@@ -38,6 +38,22 @@ $x^2$
 [related](/problems/no/3)
 
 ![diagram](/images/fixture.png)
+
+## Samples
+
+### Sample 1 {file=""}
+
+#### Input
+
+\`\`\`text
+1
+\`\`\`
+
+#### Output
+
+\`\`\`text
+2
+\`\`\`
 `;
 async function fixture(t: TestContext) {
   await mkdir(stray, { recursive: true });
@@ -77,13 +93,13 @@ test("publication binds offline translated sample evidence to source revision an
     await validatedTranslationSamplesFingerprint(f.dataRoot, expected, html),
     digest,
   );
-  assert.equal(
-    await validatedTranslationSamplesFingerprint(
+  await assert.rejects(
+    validatedTranslationSamplesFingerprint(
       f.dataRoot,
       expected,
       html.replace("<pre>3</pre>", "<pre>wrong</pre>"),
     ),
-    undefined,
+    /Sample verification failed/,
   );
   await buildProblemTranslations(f);
   const catalog = async () =>
@@ -92,6 +108,16 @@ test("publication binds offline translated sample evidence to source revision an
     );
   assert.equal((await catalog()).entries[0].translationSamplesSha256, digest);
   assert.deepEqual((await catalog()).entries[0].sourceSampleIndices, [0, 1]);
+  await writeFile(
+    join(f.translations, "1.html"),
+    html.replace("<pre>1</pre>", "<pre>wrong</pre>"),
+  );
+  await assert.rejects(
+    buildProblemTranslations(f),
+    /Sample verification failed/,
+  );
+  assert.equal((await catalog()).entries[0].translationSamplesSha256, digest);
+  await writeFile(join(f.translations, "1.html"), html);
   await writeFile(
     join(f.sourceRoot, "publication-data.json"),
     JSON.stringify({
@@ -117,12 +143,8 @@ test("publication binds offline translated sample evidence to source revision an
     join(f.translations, "1.html"),
     html.replace("<pre>3</pre>", "<pre>wrong</pre>"),
   );
-  await buildProblemTranslations(f);
-  assert.equal(
-    (await catalog()).entries[0].translationSamplesSha256,
-    undefined,
-  );
-  assert.equal((await catalog()).entries[0].sourceSampleIndices, undefined);
+  await assert.rejects(buildProblemTranslations(f), /no validated evidence/);
+  assert.equal((await catalog()).entries[0].translationSamplesSha256, digest);
 });
 
 test("hidden problems retain source but never publish, including stale output and missing profiles", async (t) => {

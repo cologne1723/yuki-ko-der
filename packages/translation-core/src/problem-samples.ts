@@ -204,7 +204,7 @@ function paragraphSampleSection(
 ): (Omit<Sample, "values"> & { elements: Element[] })[] {
   const heading =
     block.querySelector(":scope > h4, :scope > h5")?.textContent?.trim() ?? "";
-  if (!/^(?:サンプル|入出力例|出力例)$/u.test(heading)) return [];
+  if (!/^(?:サンプル|応答サンプル|入出力例|出力例)$/u.test(heading)) return [];
   const result: (Omit<Sample, "values"> & { elements: Element[] })[] = [];
   const adjacentIO = (container: Element): Element[] =>
     [...container.querySelectorAll(":scope > pre")].filter((pre) => {
@@ -316,6 +316,37 @@ function paragraphSampleSection(
       },
     );
     if (elements.length) result.push({ name: "サンプル", file: "", elements });
+  }
+  // Interactive transcripts can label IO with prose immediately before PRE.
+  // Require an explicit sample section and an input/output verb on each block;
+  // arbitrary worked code elsewhere is not sample data.
+  if (!result.length && !block.querySelector(".sample")) {
+    const elements = [...block.querySelectorAll(":scope > pre")].filter(
+      (pre) => {
+        const label = pre.previousElementSibling;
+        let precedingText = "";
+        for (
+          let node = pre.previousSibling;
+          node;
+          node = node.previousSibling
+        ) {
+          if (node.nodeType === 3)
+            precedingText = (node.textContent ?? "") + precedingText;
+          else if (node.nodeType !== 1 || (node as Element).tagName !== "BR")
+            break;
+        }
+        return (
+          /(?:入力|出力)のサンプルは以下である。\s*$/u.test(precedingText) ||
+          (heading === "応答サンプル" &&
+            /(?:質問クエリとして、|応答として)\s*$/u.test(precedingText)) ||
+          (label?.matches("p") &&
+            /(?:入力が与えられます|出力したとします)。$/u.test(
+              label.textContent?.trim() ?? "",
+            ))
+        );
+      },
+    );
+    if (elements.length) result.push({ name: heading, file: "", elements });
   }
   return result.filter((sample) => sample.elements.length > 0);
 }

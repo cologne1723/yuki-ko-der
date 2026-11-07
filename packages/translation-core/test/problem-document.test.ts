@@ -7,6 +7,22 @@ import {
 } from "../src/problem-document.ts";
 import { sampleDataValues } from "../src/problem-samples.ts";
 
+test("nested statement wrappers retain unknown authored elements and samples", () => {
+  const dom = new JSDOM(
+    '<main data-problem-id="18"><h3>Title</h3><div><div><div class="block">Statement</div><subtask></subtask><div class="block sample"><h6>入力</h6><pre>1</pre></div></div></div><form action="/problems/18/submit"></form><p>Sign in</p></main>',
+  );
+  try {
+    const root = dom.window.document.querySelector("main")!;
+    const nodes = sourceStatementBlocks(root);
+    assert.ok(nodes.length);
+    assert.ok(nodes.some((node) => node.querySelector("subtask")));
+    assert.deepEqual(sampleDataValues(nodes), ["1"]);
+    assert.ok(nodes.every((node) => !node.textContent?.includes("Sign in")));
+  } finally {
+    dom.window.close();
+  }
+});
+
 test("unsectioned live statements require a matching submission boundary", () => {
   const dom = new JSDOM(
     '<main id="content" data-problem-id="18"><h3>No.1 Title</h3><button id="copy-problem-html-btn">copy</button>-<form action="/problems/18/submit"><input></form><p>Sign in</p></main>',

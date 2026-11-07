@@ -122,10 +122,43 @@ test("bare originals require recorded bytes and cannot be overwritten by an HTTP
       (await collectRemainingOriginals(context, options)).items[0].status,
       "saved",
     );
+    response = "<p>Updated puzzle</p>";
+    assert.equal(
+      (await collectRemainingOriginals(context, options)).items[0].status,
+      "review-required",
+    );
+    assert.equal(await readFile(join(sources, "1.html"), "utf8"), "-");
+    const receipt = JSON.parse(
+      await readFile(join(sources, "downloads/1.json"), "utf8"),
+    );
+    assert.equal(receipt.reviewCandidate, true);
+    assert.equal(receipt.state, "review-required");
+    const revision = JSON.parse(
+      await readFile(
+        join(sources, "revisions/1", `${receipt.revision}.json`),
+        "utf8",
+      ),
+    );
+    assert.equal(Buffer.from(revision.html, "base64").toString(), response);
+    assert.equal(
+      (
+        await collectRemainingOriginals(
+          {
+            ...context,
+            request: async () => {
+              throw new Error("must resume without network");
+            },
+          },
+          { ...options, refreshedSince: new Date(0).toISOString() },
+        )
+      ).items[0].status,
+      "review-required",
+    );
+    assert.equal(await readFile(join(sources, "1.html"), "utf8"), "-");
     response = "Internal server error";
     assert.equal(
       (await collectRemainingOriginals(context, options)).items[0].status,
-      "failed",
+      "review-required",
     );
     assert.equal(await readFile(join(sources, "1.html"), "utf8"), "-");
   } finally {

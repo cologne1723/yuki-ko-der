@@ -21,6 +21,7 @@ const receiptSchema = z.object({
   problemId: z.number().int().positive(),
   revision: hash,
   htmlSha256: hash,
+  reviewCandidate: z.boolean().optional(),
 });
 const receiptPath = (root: string, no: number) =>
   join(root, "downloads", `${no}.json`);
@@ -39,6 +40,28 @@ function validStatement(bytes: Uint8Array, knownHashes: readonly string[]) {
   }
 }
 
+function bareCandidate(bytes: Uint8Array) {
+  const dom = new JSDOM(new TextDecoder().decode(bytes));
+  try {
+    return (
+      !dom.window.document.head.children.length &&
+      !dom.window.document.body.querySelector(
+        "#content, nav, script, form, input, button, textarea, select",
+      ) &&
+      sourceStatementNodes(dom.window.document.body).length > 0
+    );
+  } finally {
+    dom.window.close();
+  }
+}
+
+export function sourceDownloadNeedsReview(
+  bytes: Uint8Array,
+  knownHashes: readonly string[],
+) {
+  return !validStatement(bytes, knownHashes);
+}
+
 // Call under the collector lock, after validating the complete API response.
 // Backups and activateSource never update this independent download receipt.
 export async function recordSourceDownload(
@@ -47,7 +70,8 @@ export async function recordSourceDownload(
   bytes: Uint8Array,
   knownHashes: readonly string[] = [],
 ) {
-  if (!validStatement(bytes, knownHashes))
+  const reviewCandidate = sourceDownloadNeedsReview(bytes, knownHashes);
+  if (reviewCandidate && !(knownHashes.length && bareCandidate(bytes)))
     throw new Error("Empty or unexpected canonical statement HTML");
   const path = await preserveSource(root, metadata, bytes);
   const receipt = receiptSchema.parse({
@@ -59,6 +83,7 @@ export async function recordSourceDownload(
     problemId: metadata.ProblemId,
     revision: basename(path, ".json"),
     htmlSha256: sha256(bytes),
+    ...(reviewCandidate ? { reviewCandidate: true } : {}),
   });
   await mkdir(join(root, "downloads"), { recursive: true });
   await atomicFile(
@@ -105,8 +130,11 @@ export async function readSourceDownload(
     throw new Error(`Downloaded original evidence hash mismatch: ${path}`);
   // Older versions could record HTTP 200 error bodies. Re-fetch these instead
   // of treating them as completed downloads for the rest of the refresh.
-  if (!validStatement(bytes, knownHashes)) return undefined;
+  const requiresReview = sourceDownloadNeedsReview(bytes, knownHashes);
+  if (requiresReview && !(receipt.reviewCandidate && bareCandidate(bytes)))
+    return undefined;
   return {
+    requiresReview,
     path,
     hash: receipt.htmlSha256,
     title: revision.metadata.Title as string,

@@ -68,7 +68,7 @@ async function fixture() {
   };
 }
 
-test("setup rejects HTTP 200 error bodies and resume refetches legacy error receipts", async () => {
+test("setup quarantines ambiguous HTTP 200 bodies and resume refetches legacy error receipts", async () => {
   const f = await fixture();
   try {
     await activateSource(f.sourceRoot, metadata, Buffer.from(canonical));
@@ -89,11 +89,14 @@ test("setup rejects HTTP 200 error bodies and resume refetches legacy error rece
     f.change("Internal server error");
     assert.equal(
       (await setupData(context, "problems", options)).items[0].status,
-      "failed",
+      "review-required",
     );
-    await assert.rejects(readFile(join(f.sourceRoot, "downloads/1.json")), {
-      code: "ENOENT",
-    });
+    assert.equal(
+      JSON.parse(await readFile(join(f.sourceRoot, "downloads/1.json"), "utf8"))
+        .reviewCandidate,
+      true,
+    );
+    await rm(join(f.sourceRoot, "downloads/1.json"));
     assert.equal(
       await readFile(join(f.sourceRoot, "1.html"), "utf8"),
       canonical,
@@ -167,6 +170,19 @@ test("setup and resume accept a bare puzzle only with its recorded source hash",
       "skipped",
     );
     assert.equal(f.calls(), calls);
+    assert.equal(await readFile(join(f.sourceRoot, "1.html"), "utf8"), "-");
+    f.change("<p>Updated puzzle</p>");
+    assert.equal(
+      (await setupData({ ...context, refresh: true }, "problems", options))
+        .items[0].status,
+      "review-required",
+    );
+    const afterUpdate = f.calls();
+    assert.equal(
+      (await collectRemainingOriginals(context, options)).items[0].status,
+      "review-required",
+    );
+    assert.equal(f.calls(), afterUpdate);
     assert.equal(await readFile(join(f.sourceRoot, "1.html"), "utf8"), "-");
   } finally {
     await f.cleanup();

@@ -3,6 +3,44 @@ import test from "node:test";
 import { JSDOM } from "jsdom";
 import { sampleWarnings, sampleDataValues } from "../src/problem-samples.ts";
 
+test("bare interactive sample labels exclude hidden setup values", () => {
+  const game = blocks(
+    '<div class="block"><h4>サンプル</h4>入力のサンプルは以下である。<pre>21 3\n2</pre>出力のサンプルは以下である。<pre>0\n4</pre><p>Explanation</p><pre>not IO</pre></div>',
+  );
+  assert.deepEqual(sampleDataValues(game), ["21 3\n2", "0\n4"]);
+  const response = blocks(
+    '<div class="block"><h4>応答サンプル</h4><p>Hidden values</p><pre>1 3 5 7</pre>このときの質問クエリとして、<pre>1 2 3 5</pre><ul><li>Explanation</li></ul>と判定され、応答として<pre>1 2</pre>が返される。</div>',
+  );
+  const translated = blocks(
+    '<div class="block sample"><h6>출력</h6><pre>1 2 3 5</pre><h6>입력</h6><pre>1 2</pre></div>',
+  );
+  assert.deepEqual(sampleDataValues(response), ["1 2 3 5", "1 2"]);
+  assert.deepEqual(sampleWarnings(response, translated, "mdx", true), []);
+  translated[0].querySelector("pre")!.textContent = "changed";
+  assert.ok(sampleWarnings(response, translated, "mdx", true).length);
+});
+
+test("prose-labeled interactive transcripts preserve IO without admitting worked code", () => {
+  const source = blocks(
+    '<div class="block"><h4>サンプル</h4><p>両プロセスには次のような入力が与えられます。</p><pre><code>1\n</code></pre><p>プロセスが次のように出力したとします。</p><pre><code>7\n</code></pre><p>Explanation</p><pre>worked code</pre></div>',
+  );
+  const target = (value: string) =>
+    blocks(
+      `<div class="block sample"><h6>입력</h6><pre>1</pre><h6>출력</h6><pre>${value}</pre></div>`,
+    );
+  assert.deepEqual(sampleDataValues(source), ["1", "7"]);
+  assert.deepEqual(sampleWarnings(source, target("7"), "mdx", true), []);
+  assert.ok(sampleWarnings(source, target("8"), "mdx", true).length);
+  assert.deepEqual(
+    sampleDataValues(
+      blocks(
+        '<div class="block"><h4>説明</h4><p>入力が与えられます。</p><pre>unrelated</pre></div>',
+      ),
+    ),
+    [],
+  );
+});
+
 test("nested canonical sample wrappers count each code block once", () => {
   const original = blocks(
     '<div class="block"><div class="sample"><pre>first input</pre><pre>first output</pre><div class="sample"><pre>second input</pre><pre>second output</pre></div></div></div>',

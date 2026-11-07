@@ -16,6 +16,7 @@ import {
   recordSourceDownload,
   readSourceDownload,
   finishSourceDownload,
+  sourceDownloadNeedsReview,
 } from "./source-downloads.ts";
 import type {
   OperationContext,
@@ -106,9 +107,10 @@ export async function collectRemainingOriginals(
         );
         if (fresh) {
           const changed =
-            translated &&
-            (fresh.hash !== translated.hash ||
-              fresh.title !== translated.metadata.Title);
+            fresh.requiresReview ||
+            (translated &&
+              (fresh.hash !== translated.hash ||
+                fresh.title !== translated.metadata.Title));
           const needsActivation =
             !changed &&
             (!savedTargets.has(no) ||
@@ -144,7 +146,7 @@ export async function collectRemainingOriginals(
                 ? "saved"
                 : "skipped",
             message: changed
-              ? "Collected original differs from translation; preserved revision requires review"
+              ? "Collected original requires review; preserved separately without replacing active data"
               : needsActivation
                 ? "Activated previously collected original revision"
                 : "Verified original revision was already collected during this refresh",
@@ -170,20 +172,21 @@ export async function collectRemainingOriginals(
             knownHashes,
           );
           if (
-            translated &&
-            (hash !== translated.hash ||
-              metadata.Title !== translated.metadata.Title)
+            sourceDownloadNeedsReview(bytes, knownHashes) ||
+            (translated &&
+              (hash !== translated.hash ||
+                metadata.Title !== translated.metadata.Title))
           ) {
             await finishSourceDownload(sourceRoot, no, hash, "review-required");
             item = {
               id: String(no),
               status: "review-required",
               message:
-                "Upstream differs from translation; retained revision without replacing its active original",
+                "Downloaded original requires review; retained revision without replacing its active original",
               details: {
                 revisionPath,
                 sourceHash: hash,
-                expectedHash: translated.hash,
+                expectedHash: translated?.hash,
               },
             };
           } else {
